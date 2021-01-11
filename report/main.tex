@@ -1,0 +1,161 @@
+\documentclass[a4paper,twoside]{article}
+\usepackage[T1]{fontenc}
+\usepackage[bahasa]{babel}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{float}
+\usepackage[cm]{fullpage}
+\pagestyle{myheadings}
+\usepackage{etoolbox}
+\usepackage{setspace} 
+\usepackage{lipsum} 
+\setlength{\headsep}{30pt}
+\usepackage[inner=2cm,outer=2.5cm,top=2.5cm,bottom=2cm]{geometry} %margin
+% \pagestyle{empty}
+
+\makeatletter
+\renewcommand{\@maketitle} {\begin{center} {\LARGE \textbf{ \textsc{\@title}} \par} \bigskip {\large \textbf{\textsc{\@author}} }\end{center} }
+\renewcommand{\thispagestyle}[1]{}
+\markright{\textbf{\textsc{Laporan Perkembangan Pengerjaan Skripsi\textemdash Sem. Genap 2015/2016}}}
+
+\onehalfspacing
+ 
+\begin{document}
+
+\title{\@judultopik}
+\author{\nama \textendash \@npm} 
+
+%ISILAH DATA BERIKUT INI:
+\newcommand{\nama}{Cristopher}
+\newcommand{\@npm}{2017730017}
+\newcommand{\tanggal}{12/01/2021} %Tanggal pembuatan dokumen
+\newcommand{\@judultopik}{Identifikasi Pergerakan Kolektif Pada Data Pejalan Kaki} % Judul/topik anda
+\newcommand{\kodetopik}{TAB0901}
+\newcommand{\jumpemb}{2} % Jumlah pembimbing, 1 atau 2
+\newcommand{\pembA}{Lionov Wiratma}
+\newcommand{\pembB}{-}
+\newcommand{\semesterPertama}{40 - Genap 15/16} % semester pertama kali topik diambil, angka 1 dimulai dari sem Ganjil 96/97
+\newcommand{\lamaSkripsi}{1} % Jumlah semester untuk mengerjakan skripsi s.d. dokumen ini dibuat
+\newcommand{\kulPertama}{Skripsi 1} % Kuliah dimana topik ini diambil pertama kali
+\newcommand{\tipePR}{B} % tipe progress report :
+% A : dokumen pendukung untuk pengambilan ke-2 di Skripsi 1
+% B : dokumen untuk reviewer pada presentasi dan review Skripsi 1
+% C : dokumen pendukung untuk pengambilan ke-2 di Skripsi 2
+
+% Dokumen hasil template ini harus dicetak bolak-balik !!!!
+
+\maketitle
+
+\pagenumbering{arabic}
+
+\section{Data Skripsi} %TIDAK PERLU MENGUBAH BAGIAN INI !!!
+Pembimbing utama/tunggal: {\bf \pembA}\\
+Pembimbing pendamping: {\bf \pembB}\\
+Kode Topik : {\bf \kodetopik}\\
+Topik ini sudah dikerjakan selama : {\bf \lamaSkripsi} semester\\
+Pengambilan pertama kali topik ini pada : Semester {\bf \semesterPertama} \\
+Pengambilan pertama kali topik ini di kuliah : {\bf \kulPertama} \\
+Tipe Laporan : {\bf \tipePR} -
+\ifdefstring{\tipePR}{A}{
+			Dokumen pendukung untuk {\BF pengambilan ke-2 di Skripsi 1} }
+		{
+		\ifdefstring{\tipePR}{B} {
+				Dokumen untuk reviewer pada presentasi dan {\bf review Skripsi 1}}
+			{	Dokumen pendukung untuk {\bf pengambilan ke-2 di Skripsi 2}}
+		}
+		
+\section{Latar Belakang}
+
+\section{Rumusan Masalah}
+
+\section{Tujuan}
+
+
+\section{Detail Perkembangan Pengerjaan Skripsi}
+Detail bagian pekerjaan skripsi sesuai dengan rencan kerja/laporan perkembangan terkahir :
+	\begin{enumerate}
+		\item \textbf{Melakukan survei ke Museum Geologi Bandung untuk mendapatkan denah serta mengetahui perilaku pengunjung museum secara umum (arah perjalanan, kecepatan, lama melihat objek, dll).}\\
+		{\bf Status :} Ada sejak rencana kerja skripsi.\\
+		{\bf Hasil :} Survei sudah dilakukan sebanyak 3x pada tanggal X, Y dan Z. Pada kunjungan pertama, diperhaitkan denah museum dan dibuat sketsa berdasarkan pengamatan. Pada kunjunga kedua, bertemu dengan bagian humas museum dan berhasil mendapatkan denah serta melakukan wawancara. Hasil wawancara sudah dibuat dan ada softcopy-nya. Pada kunjungan ketiga, secara khusus dilihat perilaku pengunjung. Masih direncakanan 2x kunjungan lagi. Bukti-bukti kunjungan dapat dilihat di lampiran
+		
+		\item \textbf{Melakukan analisis pada hasil survei terhadap pergerakan pengunjung di museum dan membuat rancangan denah di komputer yang dilengkapi dengan penghalang dan objek di museum.}\\
+		{\bf Status :} Ada sejak rencana kerja skripsi.\\
+		{\bf Hasil :}
+
+		\item \textbf{Melakukan studi literatur mengenai sifat kolektif suatu kerumunan, teknik {\it social force model} dan teknik {\it flow tiles}}\\
+		{\bf Status :} Ada sejak rencana kerja skripsi.\\
+		{\bf Hasil :}
+
+		\item \textbf{Mempelajari bahasa pemrograman C++ dan cara menggunakan framework OpenSteer}\\
+		{\bf Status :} Ada sejak rencana kerja skripsi.\\
+		{\bf Hasil :}
+
+		\item \textbf{Merancang pergerakan kerumunan di dalam museum menggunakan teknik {\it social force model} dan {\it flow tiles} serta menggunakan teknik lainnya seperti konsep pathway dan waypoints. Selain itu, dirancang pula adanya waktu tunggu (pada saat pengunjung melihat objek di museum) dan cara pembuatan jalur bagi setiap individu pengunjung}\\
+		{\bf Status :} Ada sejak rencana kerja skripsi.\\
+		{\bf Hasil :}
+
+		\item \textbf{Melakukan analisa dan merancang struktur data yang cocok untuk menyimpan penghalang (obstacle)}\\
+		{\bf Status :} dihapuskan/tidak dikerjakan \\
+		{\bf Hasil :} berdasarkan analisis singkat, tidak dilakukan analisis lebih jauh karena tidak diperlukan struktur data baru, karena sudah disediakan oleh OpenSteer versi terbaru
+
+		\item \textbf{Mengimplementasikan keseluruhan algoritma dan struktur data yang dirancang, dengan menggunakan framework OpenSteer} \\
+		{\bf Status :} Ada sejak rencana kerja skripsi.\\
+		{\bf Hasil :}
+
+		\item \textbf{Melakukan pengujian (dan eksperimen) yang melibatkan responde untuk menilai hasil simulasi secara kualitatif}\\
+		{\bf Status :} Ada sejak rencana kerja skripsi.\\
+		{\bf Hasil :}
+
+		\item \textbf{Menulis dokumen skripsi}\\
+		{\bf Status :} Ada sejak rencana kerja skripsi.\\
+		{\bf Hasil :} \lipsum[1]
+		
+		\item \textbf{Mempelajari cara menggunakan fitur manipulasi obstacle yang disediakan oleh framework Opensteer versi terbaru}\\
+		{\bf Status :} baru ditambahkan pada semester ini\\
+		{\bf Hasil :} baru direncanakan karena framework Opensteer versi paling akhir baru selesai diinstall dan dilihat-lihat bagian contoh-contoh simulasinya
+		
+
+	\end{enumerate}
+
+\section{Pencapaian Rencana Kerja}
+Langkah-langkah kerja yang berhasil diselesaikan dalam Skripsi 1 ini adalah sebagai berikut:
+\begin{enumerate}
+\item
+\item
+\item
+\end{enumerate}
+
+
+
+\section{Kendala yang Dihadapi}
+%TULISKAN BAGIAN INI JIKA DOKUMEN ANDA TIPE A ATAU C
+Kendala - kendala yang dihadapi selama mengerjakan skripsi :
+\begin{itemize}
+	\item Terlalu banyak melakukan prokrastinasi
+	\item Terlalu banyak godaan berupa hiburan (game, film, dll)
+	\item Koneksi internet yang kurang stabil sehingga sering menyebabkan koneksi ke Overleaf terputus yang menyebabkan beberapa usaha terbuang sia-sia
+\end{itemize}
+
+\vspace{1cm}
+\centering Bandung, \tanggal\\
+\vspace{2cm} \nama \\ 
+\vspace{1cm}
+
+Menyetujui, \\
+\ifdefstring{\jumpemb}{2}{
+\vspace{1.5cm}
+\begin{centering} Menyetujui,\\ \end{centering} \vspace{0.75cm}
+\begin{minipage}[b]{0.45\linewidth}
+% \centering Bandung, \makebox[0.5cm]{\hrulefill}/\makebox[0.5cm]{\hrulefill}/2013 \\
+\vspace{2cm} Nama: \pembA \\ Pembimbing Utama
+\end{minipage} \hspace{0.5cm}
+\begin{minipage}[b]{0.45\linewidth}
+% \centering Bandung, \makebox[0.5cm]{\hrulefill}/\makebox[0.5cm]{\hrulefill}/2013\\
+\vspace{2cm} Nama: \pembB \\ Pembimbing Pendamping
+\end{minipage}
+\vspace{0.5cm}
+}{
+% \centering Bandung, \makebox[0.5cm]{\hrulefill}/\makebox[0.5cm]{\hrulefill}/2013\\
+\vspace{2cm} Nama: \pembA \\ Pembimbing Tunggal
+}
+\end{document}
