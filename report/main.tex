@@ -3,12 +3,16 @@
 \usepackage[bahasa]{babel}
 \usepackage{graphicx}
 \usepackage{graphics}
+\usepackage{amsfonts}
 \usepackage{float}
 \usepackage[cm]{fullpage}
 \pagestyle{myheadings}
 \usepackage{etoolbox}
 \usepackage{setspace} 
 \usepackage{lipsum} 
+\usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{enumitem}
 \setlength{\headsep}{30pt}
 \usepackage[inner=2cm,outer=2.5cm,top=2.5cm,bottom=2cm]{geometry} %margin
 % \pagestyle{empty}
@@ -16,7 +20,7 @@
 \makeatletter
 \renewcommand{\@maketitle} {\begin{center} {\LARGE \textbf{ \textsc{\@title}} \par} \bigskip {\large \textbf{\textsc{\@author}} }\end{center} }
 \renewcommand{\thispagestyle}[1]{}
-\markright{\textbf{\textsc{Laporan Perkembangan Pengerjaan Skripsi\textemdash Sem. Genap 2015/2016}}}
+\markright{\textbf{\textsc{Laporan Perkembangan Pengerjaan Skripsi\textemdash Sem. Ganjil 2020/2021}}}
 
 \onehalfspacing
  
@@ -30,11 +34,11 @@
 \newcommand{\@npm}{2017730017}
 \newcommand{\tanggal}{12/01/2021} %Tanggal pembuatan dokumen
 \newcommand{\@judultopik}{Identifikasi Pergerakan Kolektif Pada Data Pejalan Kaki} % Judul/topik anda
-\newcommand{\kodetopik}{TAB0901}
-\newcommand{\jumpemb}{2} % Jumlah pembimbing, 1 atau 2
+\newcommand{\kodetopik}{LNV4902}
+\newcommand{\jumpemb}{1} % Jumlah pembimbing, 1 atau 2
 \newcommand{\pembA}{Lionov Wiratma}
 \newcommand{\pembB}{-}
-\newcommand{\semesterPertama}{40 - Genap 15/16} % semester pertama kali topik diambil, angka 1 dimulai dari sem Ganjil 96/97
+\newcommand{\semesterPertama}{49 - Ganjil 20/21} % semester pertama kali topik diambil, angka 1 dimulai dari sem Ganjil 96/97
 \newcommand{\lamaSkripsi}{1} % Jumlah semester untuk mengerjakan skripsi s.d. dokumen ini dibuat
 \newcommand{\kulPertama}{Skripsi 1} % Kuliah dimana topik ini diambil pertama kali
 \newcommand{\tipePR}{B} % tipe progress report :
@@ -66,66 +70,145 @@ Tipe Laporan : {\bf \tipePR} -
 		
 \section{Latar Belakang}
 
+Bergerak merupakan sebuah aktivitas yang selalu kita temui setiap saat. Segala sesuatu yang ada di sekitar kita selalu bergerak untuk mencapai tujuan tertentu. Manusia selalu bergerak untuk melakukan aktivitas sehari-hari. Berbagai jenis hewan melakukan migrasi untuk mencari lingkungan baru yang lebih mampu untuk menunjang kehidupan. Tanaman dapat bergerak melalui fototropisme yang menyebabkan tanaman bertumbuh mengikuti arah sinar matahari. Bahkan, bumi selalu berputar mengelilingi porosnya yang menyebabkan pergantian hari. Dapat dikatakan bahwa bergerak merupakan aktivitas yang tak dapat dilepaskan dari kehidupan sehari-hari. Hal tersebut menumbuhkan rasa ketertarikan manusia untuk mengumpulkan, menyelidiki, serta mempelajari segala aspek mengenai pergerakan. Sayangnya, sedikitnya sumber dan cara mendapatkan data menghambat penelitian mengenai pergerakan di masa lalu.
+
+\iffalse
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth, height=5cm]{Gambar/bergerak.jpg}
+        \caption{Manusia bergerak untuk memenuhi kebutuhan sehari-hari\protect\footnotemark}
+        \label{bab1:manusia}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth, height=5cm]{Gambar/sunflower.jpg}
+        \caption{Bunga matahari bertumbuh mengikuti arah sinar matahari\protect\footnotemark}
+        \label{bab1:sunflower}
+    \end{subfigure}
+    \caption[Aktivitas pergerakan]{
+    Aktivitas pergerakan yang dilakukan oleh berbagai entitas di sekitar kita}
+    \label{bab1:pergerakan}
+\end{figure}
+
+\footnotetext{Alvin Mamudov,  2017, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/FlLHbmF3AHc}.}
+
+\footnotetext{Lisa Pellegrini, 2016, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/XCvy_eufErI}.}
+
+\fi
+
+Seiring berjalannya waktu, kemunculan teknologi modern seperti \textit{Geographic Information System} (GIS) menyebabkan data pergerakan yang bersumber dari berbagai entitas menjadi semakin banyak dan semakin mudah didapatkan. Hal tersebut memicu kembalinya pertumbuhan minat penelitian mengenai pergerakan oleh berbagai peneliti dalam berbagai bidang. Terdapat banyak hal menarik yang dapat dimanfaatkan melalui analisis terhadap data pergerakan. Salah satu contoh nyata dari pemanfaatan analisis data pergerakan adalah analisis pergerakan bebek domestik, di mana melalui data pergerakan bebek, virolog dapat mengidentifikasi daerah-daerah yang memiliki risiko persebaran flu burung yang tinggi.
+
+Dalam sebuah pergerakan, setiap entitas yang bergerak memiliki lintasan. Lintasan merupakan jalur yang dilalui oleh entitas selama melakukan pergerakan dalam rentang waktu tertentu. Data mengenai lintasan yang ditempuh oleh entitas yang bergerak bersifat kontinu. Data lintasan dapat diperoleh melalui berbagai cara, di mana hal tersebut ditentukan oleh tipe entitas, lingkungan tempat terjadinya pergerakan, teknologi yang digunakan, dan lain sebagainya. Sekarang ini, data mengenai lintasan biasanya diperoleh melalui sistem modern seperti sistem Argos-Doppler dan \textit{global positioning system} (GPS) yang lazim ditemukan pada telepon pintar, di mana keduanya sama-sama memanfaatkan teknologi satelit. Kedua sistem tersebut memiliki beberapa kelebihan dibandingkan penggunaan cara-cara tradisional seperti memiliki akurasi yang jauh lebih baik, mampu memperoleh lebih banyak data lintasan dari berbagai entitas sekaligus, dapat dikustomisasi sesuai kebutuhan, dan masih banyak lagi.
+
+Sayangnya, perkembangan teknologi tetap tidak mampu untuk merekam data lintasan secara sempurna. Hal tersebut menyebabkan data lintasan yang diperoleh tidak bersifat kontinu seperti yang diharapkan, melainkan bersifat diskrit. Berdasarkan sifat tersebut, data lintasan yang diperoleh akan direpresentasikan sebagai catatan posisi dari entitas yang bergerak yang diurutkan berdasarkan titik waktu. Secara formal, lintasan merupakan kumpulan dari pasangan posisi-waktu $(p_0, t_0), (p_1, t_1), \ldots, (p_x, t_x)$, di mana $p_i$ merupakan posisi entitas yang relatif terhadap ruang gerak entitas pada titik waktu $t_i$. Pada umumnya, entitas akan bergerak dalam sebuah ruang \textit{euclidean} dua dimensi atau tiga dimensi yang masing-masing dapat direpresentasikan sebagai 
+$\mathbb{R}^2$ dan $\mathbb{R}^3$.
+
+Setiap lintasan memiliki atribut-atribut dengan nilai tertentu sebagai karakteristik yang membedakan satu lintasan dengan lintasan lain. Atribut-atribut tersebut kemudian dapat diolah menjadi ukuran lintasan yang memiliki kegunaan yang lebih spesifik. Analisis terhadap data pergerakan selalu memanfaatkan setidaknya salah satu ukuran yang terdapat pada data lintasan. Sebagai contoh, kecepatan dapat digunakan untuk mengukur pengaruh angin pada pergerakan burung.
+
+Terdapat berbagai jenis analisis yang dapat dilakukan pada data pergerakan seperti segmentasi lintasan, pengukuran kemiripan lintasan, \textit{clustering} pada entitas yang bergerak, dan identifikasi pola pergerakan kolektif yang menjadi fokus utama pada skripsi ini. Tujuan dari analisis pola pergerakan kolektif adalah mengidentifikasi kelompok pergerakan yang terbentuk dari entitas-entitas yang bergerak bersama dalam rentang waktu yang cukup lama. Analisis pola pergerakan kolektif memiliki pemanfaatan dalam berbagai bidang. Sebagai contoh, identifikasi pola pergerakan kolektif dapat dimanfaatkan pada bidang keamanan untuk mengidentifikasi pergerakan mencurigakan dari sekelompok orang.
+
+\iffalse
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[h]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=4.5cm]{Gambar/army.jpg}
+        \caption{Kumpulan tentara bergerak bersama membentuk sebuah regu\protect\footnotemark}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=4.5cm]{Gambar/wildebeest.jpg}
+        \caption{Kawanan \textit{wildebeest} membentuk \textit{herd} untuk melakukan migrasi musiman\protect\footnotemark}
+    \end{subfigure}
+    \caption[Pergerakan kolektif dunia nyata]{Pergerakan kolektif yang sering kita temui di dunia nyata}
+    \label{bab1:collective-movement}
+\end{figure}
+
+\footnotetext{Damon On Road, \textit{C\'{e}r\'{e}monie militaire du Man\`{e}ge militaire du Qu\'{e}bec}, 2020, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/nmePDwaW9I8}}
+
+\footnotetext{Jorge Tung, \textit{Great wildebeest migration crossing Mara river at Serengeti National Park --- Tanzania}, 2019, diakses pada tanggal 23 Desember 2020, \url{https://unsplash.com/photos/1pZJqQlgpsY}}
+
+\fi
+
+Ada berbagai macam definisi formal yang sudah dibuat untuk mengidentifikasi pola pergerakan kolektif seperti \textit{flock}, \textit{convoy}, \textit{group}, dan masih banyak lagi. Seluruh definisi formal tersebut bergantung pada \textit{size}, kedekatan spasial, dan durasi temporal untuk melakukan identifikasi pergerakan kolektif pada sekelompok entitas yang bergerak bersama. \textit{Size} menentukan jumlah anggota minimum yang harus tergabung dalam sebuah pergerakan kolektif. Kedekatan spasial menentukan batas maksimum jarak antar anggota kelompok. Durasi temporal menentukan durasi minimum pergerakan bersama dari seluruh anggota pergerakan kolektif.
+
+Namun, seluruh definisi formal yang ada tidak mampu melakukan identifikasi yang akurat pada beberapa kasus nyata yang lazim terjadi pada di dunia nyata. Sebagai contoh pada kasus di mana terdapat dua buah entitas bergerak yang memiliki jarak yang cukup dekat dalam waktu yang cukup lama namun berlawanan arah, definisi formal yang hanya memanfaatkan ukuran spasial dapat melakukan kesalahan identifikasi di mana kedua entitas yang bergerak berlawanan arah akan membentuk sebuah pergerakan kolektif. Contoh kasus lain yang tidak dapat diidentifikasi dengan akurat oleh definisi formal yang ada adalah pada sebuah kasus di mana terdapat sebuah entitas yang bergerak lebih cepat meninggalkan entitas lain dan kemudian menunggu entitas lain menyusul untuk bergerak bersama pada kecepatan yang sama, definisi formal yang hanya mengandalkan ukuran spasial dan temporal akan gagal mengidentifikasi pola pergerakan kolektif yang dibentuk oleh kedua entitas tersebut. Hal tersebut disebabkan oleh perbedaan jarak yang terus bertambah karena perbedaan kecepatan entitas, sehingga syarat durasi yang mengharuskan anggota pergerakan kolektif untuk memiliki jarak yang cukup dekat selama rentang waktu tertentu tidak terpenuhi. Keterbatasan-keterbatasan tersebut mendorong perlunya perluasan ukuran lintasan yang digunakan dalam proses identifikasi terhadap sebuah pola pergerakan kolektif serta pembuatan definisi formal pergerakan kolektif baru yang mampu digunakan pada kasus-kasus identifikasi yang lebih luas. 
+
+Pada skripsi ini, akan dibuat sebuah definisi formal pergerakan kolektif baru yang akan memperluas ukuran-ukuran penentu yang digunakan untuk mengidentifikasi pola pergerakan kolektif. Setelah definisi formal selesai dibuat, definisi tersebut akan diuji efektivitasnya melalui sebuah eksperimen dengan mengidentifikasi pola pergerakan kolektif yang sesuai dengan definisi tersebut pada data pejalan kaki di dunia nyata yang tersedia melalui sumber data publik di internet. Hasil identifikasi dari definisi tersebut kemudian akan dibandingkan dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia yang diikutsertakan pada data lintasan. Untuk memenuhi kebutuhan tersebut, sebuah algoritma akan dikembangkan untuk mengidentifikasi pergerakan kolektif yang sesuai dengan definisi pergerakan kolektif yang telah dibuat. Algoritma tersebut kemudian akan diimplementasikan menjadi sebuah perangkat lunak menggunakan bahasa pemrograman C++.
+
 \section{Rumusan Masalah}
+
+Berdasarkan uraian pada bagian sebelumnya, berikut merupakan masalah-masalah yang hendak diselesaikan oleh skripsi ini:
+
+\begin{itemize}[noitemsep, nolistsep]
+    \item Apa saja ukuran-ukuran yang terdapat dalam data lintasan yang bisa digunakan untuk membuat sebuah definisi pergerakan kolektif?
+    \item Bagaimana cara membuat definisi pergerakan kolektif yang memanfaatkan ukuran-ukuran yang terdapat dalam data lintasan?
+    \item Bagaimana cara membuat algoritma untuk mengidentifikasi pola pergerakan kolektif yang sesuai dengan definisi formal baru yang telah dibuat?
+\end{itemize}
 
 \section{Tujuan}
 
+Tujuan yang hendak dicapai oleh skripsi ini adalah:
+
+\begin{itemize}[nolistsep, noitemsep]
+    \item Menentukan ukuran-ukuran lintasan yang dapat digunakan untuk membuat sebuah definisi pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
+    \item Membuat definisi pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
+    \item Membuat algoritma yang dapat mengidentifikasi kelompok pergerakan kolektif yang sesuai dengan definisi formal yang telah dibuat pada sebuah data pejalan kaki di dunia nyata.
+\end{itemize}
 
 \section{Detail Perkembangan Pengerjaan Skripsi}
 Detail bagian pekerjaan skripsi sesuai dengan rencan kerja/laporan perkembangan terkahir :
 	\begin{enumerate}
-		\item \textbf{Melakukan survei ke Museum Geologi Bandung untuk mendapatkan denah serta mengetahui perilaku pengunjung museum secara umum (arah perjalanan, kecepatan, lama melihat objek, dll).}\\
+		\item \textbf{Melakukan studi literatur mengenai ukuran-ukuran serta algoritma yang dapat digunakan untuk mengatasi masalah arah dan kecepatan pada sebuah lintasan.} \\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :} Survei sudah dilakukan sebanyak 3x pada tanggal X, Y dan Z. Pada kunjungan pertama, diperhaitkan denah museum dan dibuat sketsa berdasarkan pengamatan. Pada kunjunga kedua, bertemu dengan bagian humas museum dan berhasil mendapatkan denah serta melakukan wawancara. Hasil wawancara sudah dibuat dan ada softcopy-nya. Pada kunjungan ketiga, secara khusus dilihat perilaku pengunjung. Masih direncakanan 2x kunjungan lagi. Bukti-bukti kunjungan dapat dilihat di lampiran
+		{\bf Hasil :} \\
 		
-		\item \textbf{Melakukan analisis pada hasil survei terhadap pergerakan pengunjung di museum dan membuat rancangan denah di komputer yang dilengkapi dengan penghalang dan objek di museum.}\\
+		\item \textbf{Melakukan studi literatur mengenai definisi pola pergerakan kolektif yang sudah ada, serta mengidentifikasi kekurangan-kekurangan yang terdapat pada definisi tersebut.}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
 		{\bf Hasil :}
 
-		\item \textbf{Melakukan studi literatur mengenai sifat kolektif suatu kerumunan, teknik {\it social force model} dan teknik {\it flow tiles}}\\
+		\item \textbf{Membuat definisi pergerakan kolektif baru yang tidak hanya bergantung pada ukuran jarak, waktu, dan \textit{size}, serta mampu menangani masalah perbedaan arah dan kecepatan lintasan}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
 		{\bf Hasil :}
 
-		\item \textbf{Mempelajari bahasa pemrograman C++ dan cara menggunakan framework OpenSteer}\\
+		\item \textbf{Membuat algoritma yang mampu mengidentifikasi pola pergerakan kolektif berdasarkan definisi baru yang sudah dibuat}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
 		{\bf Hasil :}
 
-		\item \textbf{Merancang pergerakan kerumunan di dalam museum menggunakan teknik {\it social force model} dan {\it flow tiles} serta menggunakan teknik lainnya seperti konsep pathway dan waypoints. Selain itu, dirancang pula adanya waktu tunggu (pada saat pengunjung melihat objek di museum) dan cara pembuatan jalur bagi setiap individu pengunjung}\\
+		\item \textbf{Menulis draft dokumen skripsi untuk bab pendahuluan, studi literatur, dan analisis}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
 		{\bf Hasil :}
 
-		\item \textbf{Melakukan analisa dan merancang struktur data yang cocok untuk menyimpan penghalang (obstacle)}\\
+		\item \textbf{Mencari data lintasan pejalan kaki di dunia nyata}\\
 		{\bf Status :} dihapuskan/tidak dikerjakan \\
 		{\bf Hasil :} berdasarkan analisis singkat, tidak dilakukan analisis lebih jauh karena tidak diperlukan struktur data baru, karena sudah disediakan oleh OpenSteer versi terbaru
 
-		\item \textbf{Mengimplementasikan keseluruhan algoritma dan struktur data yang dirancang, dengan menggunakan framework OpenSteer} \\
+		\item \textbf{Mengimplementasikan algoritma identifikasi pergerakan kolektif yang sudah dibuat menjadi kode perangkat lunak} \\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
 		{\bf Hasil :}
 
-		\item \textbf{Melakukan pengujian (dan eksperimen) yang melibatkan responde untuk menilai hasil simulasi secara kualitatif}\\
+		\item \textbf{Melakukan eksperimen dan membandingkan hasil identifikasi pergerakan kolektif yang dilakukan oleh perangkat lunak dengan hasil pengelompokkan yang dilakukan oleh manusia}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
 		{\bf Hasil :}
 
 		\item \textbf{Menulis dokumen skripsi}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
 		{\bf Hasil :} \lipsum[1]
-		
-		\item \textbf{Mempelajari cara menggunakan fitur manipulasi obstacle yang disediakan oleh framework Opensteer versi terbaru}\\
-		{\bf Status :} baru ditambahkan pada semester ini\\
-		{\bf Hasil :} baru direncanakan karena framework Opensteer versi paling akhir baru selesai diinstall dan dilihat-lihat bagian contoh-contoh simulasinya
-		
-
 	\end{enumerate}
 
 \section{Pencapaian Rencana Kerja}
 Langkah-langkah kerja yang berhasil diselesaikan dalam Skripsi 1 ini adalah sebagai berikut:
 \begin{enumerate}
-\item
-\item
-\item
+\item Melakukan studi literatur mengenai parameter-parameter yang dapat digunakan untuk mengatasi masalah arah dan kecepatan pada sebuah lintasan.
+\item Melakukan studi literatur mengenai definisi pola pergerakan kolektif yang sudah ada, serta mengidentifikasi kekurangan yang terdapat pada definisi tersebut.
+\item Membuat definisi pergerakan kolektif baru yang tidak hanya bergantung pada ukuran jarak, waktu, dan \textit{size}, serta mampu menangani masalah perbedaan arah dan kecepatan lintasan.
+\item Membuat algoritma yang mampu mengidentifikasi pola pergerakan kolektif berdasarkan definisi baru yang sudah dibuat.
+\item Menulis draft dokumen skripsi untuk bab pendahuluan, studi literatur, dan analisis.
 \end{enumerate}
 
-
+\iffalse 
 
 \section{Kendala yang Dihadapi}
 %TULISKAN BAGIAN INI JIKA DOKUMEN ANDA TIPE A ATAU C
@@ -135,6 +218,8 @@ Kendala - kendala yang dihadapi selama mengerjakan skripsi :
 	\item Terlalu banyak godaan berupa hiburan (game, film, dll)
 	\item Koneksi internet yang kurang stabil sehingga sering menyebabkan koneksi ke Overleaf terputus yang menyebabkan beberapa usaha terbuang sia-sia
 \end{itemize}
+
+\fi
 
 \vspace{1cm}
 \centering Bandung, \tanggal\\
