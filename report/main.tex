@@ -10,8 +10,8 @@
 \usepackage{etoolbox}
 \usepackage{setspace} 
 \usepackage{lipsum} 
-\usepackage{hyperref}
 \usepackage{subcaption}
+\usepackage{amsmath}
 \usepackage{enumitem}
 \setlength{\headsep}{30pt}
 \usepackage[inner=2cm,outer=2.5cm,top=2.5cm,bottom=2cm]{geometry} %margin
@@ -161,25 +161,30 @@ Tujuan yang hendak dicapai oleh skripsi ini adalah:
 \section{Detail Perkembangan Pengerjaan Skripsi}
 Detail bagian pekerjaan skripsi sesuai dengan rencana kerja / laporan perkembangan terakhir:
 	\begin{enumerate}
-		\item \textbf{Melakukan studi literatur mengenai ukuran-ukuran serta algoritma yang dapat digunakan untuk mengatasi masalah arah dan kecepatan pada sebuah lintasan.} \\
+		\item \textbf{Melakukan studi literatur mengenai ukuran-ukuran serta algoritma yang dapat digunakan untuk mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan pada sebuah lintasan.} \\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :} \\
+		{\bf Hasil :} Berdasarkan hasil studi literatur yang telah dilakukan, masalah identifikasi pada kasus perbedaan arah dapat diselesaikan dengan menghitung perbedaan arah antara dua buah lintasan untuk menentukan kedekatan spasial dari dua buah lintasan. Dua buah lintasan dikatakan dekat secara spasial apabila memiliki perbedaan arah yang lebih kecil dibandingkan nilai tertentu. Perbedaan arah dapat diukur menggunakan ukuran arah lintasan secara langsung atau menggunakan perhitungan tertentu seperti \textit{cosine similarity}.
+		
+		Masalah identifikasi pada kasus perbedaan kecepatan dapat diselesaikan dengan menggunakan algoritma \textit{dynamic time warping} (DTW) untuk mengukur kedekatan spasial antara dua buah lintasan. Algoritma \textit{dynamic time warping} merupakan sebuah algoritma yang dapat mengukur kemiripan antara dua buah data yang mengandung informasi waktu. Keunggulan dari algoritma \textit{dynamic time warping} adalah algoritma tersebut dapat mengukur kemiripan dua buah data yang memiliki kecepatan yang variatif dengan akurat.
+		\\
 		
 		\item \textbf{Melakukan studi literatur mengenai definisi pola pergerakan kolektif yang sudah ada, serta mengidentifikasi kekurangan-kekurangan yang terdapat pada definisi tersebut.}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+		{\bf Hasil :} Terdapat beberapa definisi formal pergerakan kolektif yang sudah dibuat sebelumnya seperti \textit{flock}, \textit{convoy}, \textit{group}, \textit{swarm}, \textit{herd}, dan masih banyak lagi. Setiap definisi tersebut memiliki beberapa perbedaan pada aspek dan prinsip yang digunakan untuk mengidentifikasi pergerakan kolektif seperti \textit{flock} yang mengukur kedekatan spasial menggunakan sebuah cakram \textit{disc}, \textit{group} yang memperbolehkan adanya entitas perantara dalam pengukuran kedekatan spasial, \textit{swarm} yang mengukur durasi pergerakan bersama secara kumulatif, dan masih banyak perbedaan aspek lainnya. Namun, seluruh definisi formal pergerakan kolektif yang telah dipelajari akan mengalami masalah identifikasi pada kasus perbedaan arah dan kecepatan seperti yang sudah dibahas pada latar belakang masalah. \\
 
 		\item \textbf{Membuat definisi pergerakan kolektif baru yang tidak hanya bergantung pada ukuran jarak, waktu, dan \textit{size}, serta mampu menangani masalah perbedaan arah dan kecepatan lintasan}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+		{\bf Hasil :} Setelah mempertimbangkan segala aspek mengenai definisi pergerakan kolektif dan menggabungkannya dengan upaya penyelesaian masalah identifikasi pada kasus perbedaan arah dan kecepatan, dapat dibuat sebuah definisi pergerakan kolektif baru bernama <<nama>> yang secara formal dapat dinyatakan sebagai:
+		
+		\noindent \textbf{<<nama>>($m$, $k$, $r$, $\vartheta$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$, interval waktu minimum selama $k$ satuan waktu, jarak maksimum antara entitas sepanjang $r$ satuan panjang, dan nilai kemiripan sudut minimum sebesar $\vartheta$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$. Sebuah <<nama>> pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung satu sama lain selama interval waktu $I$ secara konsekutif. \\
 
 		\item \textbf{Membuat algoritma yang mampu mengidentifikasi pola pergerakan kolektif berdasarkan definisi baru yang sudah dibuat}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
 		{\bf Hasil :}
 
-		\item \textbf{Menulis draft dokumen skripsi untuk bab pendahuluan, studi literatur, dan analisis}\\
+		\item \textbf{Menulis draf dokumen skripsi untuk bab pendahuluan, studi literatur, dan analisis}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+		{\bf Hasil :} Seluruh draf dokumen skripsi yang sudah direncanakan untuk dibuat sudah selesai ditulis dan diserahkan kepada dosen pembimbing untuk ditinjau kembali.
 
 		\item \textbf{Mencari data lintasan pejalan kaki di dunia nyata}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi \\
@@ -187,21 +192,21 @@ Detail bagian pekerjaan skripsi sesuai dengan rencana kerja / laporan perkembang
 
 		\item \textbf{Mengimplementasikan algoritma identifikasi pergerakan kolektif yang sudah dibuat menjadi kode perangkat lunak} \\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+		{\bf Hasil :} Belum dikerjakan. \\
 
 		\item \textbf{Melakukan eksperimen dan membandingkan hasil identifikasi pergerakan kolektif yang dilakukan oleh perangkat lunak dengan hasil pengelompokkan yang dilakukan oleh manusia}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+		{\bf Hasil :} Belum dikerjakan. \\
 
 		\item \textbf{Menulis dokumen skripsi}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :} \lipsum[1]
+		{\bf Hasil :} Sedang dikerjakan.
 	\end{enumerate}
 
 \section{Pencapaian Rencana Kerja}
 Langkah-langkah kerja yang berhasil diselesaikan dalam Skripsi 1 ini adalah sebagai berikut:
 \begin{enumerate}
-\item Melakukan studi literatur mengenai parameter-parameter yang dapat digunakan untuk mengatasi masalah arah dan kecepatan pada sebuah lintasan.
+\item Melakukan studi literatur mengenai ukuran-ukuran serta algoritma yang dapat digunakan untuk mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan pada sebuah lintasan.
 \item Melakukan studi literatur mengenai definisi pola pergerakan kolektif yang sudah ada, serta mengidentifikasi kekurangan yang terdapat pada definisi tersebut.
 \item Membuat definisi pergerakan kolektif baru yang tidak hanya bergantung pada ukuran jarak, waktu, dan \textit{size}, serta mampu menangani masalah perbedaan arah dan kecepatan lintasan.
 \item Membuat algoritma yang mampu mengidentifikasi pola pergerakan kolektif berdasarkan definisi baru yang sudah dibuat.
