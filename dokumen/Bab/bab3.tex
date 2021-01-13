@@ -36,7 +36,7 @@ Dalam sebuah kasus yang ditunjukkan melalui gambar \ref{bab3:masalah-arah}, dibe
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.65\textwidth]{Gambar/bab3:beda-arah.pdf}
+    \includegraphics[width=0.535\textwidth]{Gambar/bab3:beda-arah.pdf}
     \caption[Kasus perbedaan arah]{Upaya identifikasi pergerakan kolektif oleh definisi formal yang telah dibuat sebelumnya dapat menyebabkan entitas berwarna biru tergabung dalam pergerakan kolektif entitas-entitas berwarna merah, walaupun terdapat perbedaan arah yang besar antara kedua lintasan.}
     \label{bab3:masalah-arah}
 \end{figure}
@@ -47,8 +47,8 @@ Masalah tersebut dapat diselesaikan dengan memanfaatkan ukuran arah yang terdapa
 
 \begin{figure}
     \centering
-    \includegraphics[height=8.5cm]{Gambar/bab3:beda-arah-lokal.pdf}
-    \caption{Pada kasus di mana $m = 2$ dan $k = 3$, menghitung arah secara global dapat menyebabkan pergerakan kolektif tidak terbentuk sama sekali karena perbedaan arah akhir yang terlalu ekstrim}
+    \includegraphics[height=9.5cm]{Gambar/bab3:beda-arah-lokal.pdf}
+    \caption{Pada kasus di mana $m = 2$ dan $k = 3$, menghitung arah secara global dapat menyebabkan pergerakan kolektif tidak terbentuk sama sekali karena perbedaan arah akhir yang terlalu ekstrim (ditunjukkan melalui garis putus-putus hijau)}
     \label{bab3:beda-arah-lokal}
 \end{figure}
 
@@ -78,8 +78,8 @@ Dalam sebuah kasus yang digambarkan melalui gambar \ref{bab3:masalah-kecepatan},
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.8\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
-    \caption{Perbedaan kecepatan entitas berwarna biru dapat berujung pada perbedaan jarak yang jauh sehingga pergerakan kolektif tidak terbentuk, walaupun entitas tersebut hanya memiliki perbedaan jarak yang jauh dengan entitas lain selama beberapa saat}
+    \includegraphics[width=0.75\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
+    \caption{Pada kasus di mana $m = 3$ dan $t = 3$, perbedaan kecepatan entitas berwarna biru dapat berujung pada perbedaan jarak yang jauh dengan entitas-entitas merah sehingga pergerakan kolektif tidak terbentuk, walaupun entitas tersebut hanya memiliki perbedaan jarak yang jauh dengan entitas lain selama beberapa saat}
     \label{bab3:masalah-kecepatan}
 \end{figure}
     
@@ -89,7 +89,7 @@ Masalah tersebut dapat diatasi dengan menggunakan algoritma \textit{dynamic time
 
 \section{Definisi Pergerakan Kolektif Baru}
 
-Berdasarkan pembahasan pada subbab \ref{sec:collective-movement}, terdapat 3 aspek penting yang harus dipertimbangkan dalam membuat sebuah definisi pergerakan kolektif:
+Berdasarkan pembahasan mengenai pergerakan kolektif pada subbab \ref{sec:collective-movement}, terdapat 3 aspek penting yang harus dipertimbangkan dalam membuat sebuah definisi pergerakan kolektif:
 
 \begin{enumerate}
     \item \textbf{\textit{Size}} --- Berapa jumlah entitas minimum yang tergabung dalam sebuah himpunan entitas bergerak agar dapat dianggap sebagai sebuah pergerakan kolektif?
@@ -97,93 +97,92 @@ Berdasarkan pembahasan pada subbab \ref{sec:collective-movement}, terdapat 3 asp
     \item \textbf{Durasi Temporal} --- Berapa durasi waktu minimum pergerakan bersama terjadi agar dapat dianggap sebagai sebuah pergerakan kolektif?
 \end{enumerate}
 
-Pada umumnya, \textit{size} dan durasi temporal merupakan sebuah parameter masukan yang ditentukan oleh peneliti sebelum proses identifikasi pergerakan kolektif dilakukan, sehingga sebuah definisi pergerakan kolektif yang sama dapat menghasilkan hasil identifikasi yang berbeda-beda yang dipengaruhi oleh ukuran \textit{size} dan durasi temporal yang sebelumnya telah ditetapkan. Penentuan kedekatan spasial antara dua buah entitas yang bergerak dapat diukur melalui kemiripan lintasan dari kedua entitas tersebut. Entitas bergerak yang dianggap dekat secara spasial dengan entitas bergerak lain tentunya akan memiliki lintasan yang mirip satu sama lain. Oleh karena itu, pengukuran kemiripan lintasan menjadi faktor penting dalam proses identifikasi pergerakan kolektif.
+Seluruh aspek yang telah disebutkan di atas merupakan sebuah parameter masukan yang ditentukan oleh peneliti sebelum proses identifikasi pergerakan kolektif dilakukan, sehingga sebuah definisi pergerakan kolektif yang sama dapat menghasilkan hasil identifikasi yang berbeda-beda yang dipengaruhi oleh parameter-parameter yang dimasukkan. 
+Dengan mempertimbangkan aspek-aspek di atas, dapat dibuat sebuah definisi pergerakan kolektif baru bernama \pergerakankolektif yang secara formal dinyatakan sebagai:
 
-Melalui masalah-masalah yang terdapat pada definisi pergerakan kolektif sebelumnya serta usulan penyelesaian untuk masalah-masalah tersebut, dapat didefinisikan bahwa \textbf{suatu entitas bergerak $a$ akan memiliki lintasan yang mirip dengan entitas bergerak $b$ apabila nilai \textit{cosine similarity} dari dua lintasan tersebut lebih besar atau sama dengan $\vartheta$ dan jarak \textit{dynamic time warping} dari dua lintasan tersebut lebih kecil atau sama dengan $r$}.
+\noindent \textbf{\pergerakankolektif($m$, $k$, $r$, $\vartheta$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$ buah entitas di mana $k \in [2, |\mathcal{X}|]$, interval waktu minimum selama $k$ satuan waktu di mana $k \geq 2$, jarak maksimum antara entitas sepanjang $r$ satuan panjang di mana $r \in \mathbb{R}^+$, dan nilai kemiripan sudut minimum sebesar $\vartheta$ di mana $\vartheta \in [-1, 1]$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$. Sebuah rombongan pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung satu sama lain selama interval waktu $I$ secara konsekutif. 
 
-Definisi kemiripan lintasan tersebut akan digabungkan dengan aspek \textit{size} dan durasi temporal untuk membentuk sebuah definisi formal pergerakan kolektif baru bernama \pergerakankolektif yang secara formal dinyatakan sebagai:
+\section{Algoritma Identifikasi Rombongan}
+\label{sec:algoritma}
+    
+Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$ buah entitas, interval waktu minimum selama $k$ satuan waktu, jarak \textit{dynamic time warping} maksimum sepanjang $r$ satuan panjang, dan nilai \textit{cosine similarity} minimum sebesar $\vartheta$. Himpunan rombongan yang terbentuk dalam himpunan entitas $\mathcal{X}$ dapat dicari menggunakan algoritma berikut:
 
-\textbf{\cristopher{nama}(m, t, d, $\theta$)} Dalam sekelompok entitas $\mathcal{X}$ yang memiliki lintasan pada dimensi $\mathbb{R}^2$, entitas $a$ dan $b$ dalam $\mathcal{X}$ dikatakan terhubung pada interval waktu $\mathcal{I}$ kedua entitas tersebut memiliki lintasan yang mirip pada interval waktu $\mathcal{I}$. Dua buah lintasan dikatakan mirip pada interval waktu $\mathcal{I}$ apabila jarak antar kedua lintasan yang diukur menggunakan \textit{dynamic time warping} selama interval waktu $\mathcal{I}$ lebih kecil atau sama dengan $d$ \lionov{$\alpha$? $a$ kan si entitas?} \cristopher{sorry, ini salah ketik, kudunya $d$} dan nilai \textit{cosine similarity} dari kedua lintasan selama interval waktu $\mathcal{I}$ lebih besar atau sama dengan $\theta$.\lionov{perbedaan arah ini harus dirinci, kemaren yang diliatnya cm dari $n$ posisi terakhr?}
-\lionov{maksudnya mirip pada \sout{titik} waktu $t_x$ teh gimana? ato maksudnya mirip pada interval waktu tertentu? Kalo suatu waktu tertentu aja kan dia cuma punya satu posisi dan gak ada lintasan?}
-\lionov{mungkin jangan pake istilah ``terhubung'' tapi ``mirip''? atau yg lain? Jadi nanti menghitung kemiripannya dengan DTW} \cristopher{entitasnya terhubung karena lintasannya mirip ko, rasanya lebih masuk akal?}
-\lionov{gak yakin, tapi ok lah}
-Sekelompok entitas $\mathcal{X}$ dapat dikatakan membentuk sebuah \cristopher{nama} pada interval waktu $\mathcal{I}$ apabila kelompok tersebut memenuhi 3 syarat berikut:
+\begin{algorithm}[h]
+    \caption{Algoritma Identifikasi Rombongan}
+    \SetKwInput{KwInput}{Input}                % Set the Input
+    \SetKwInput{KwOutput}{Output}              % set the Output
+    \DontPrintSemicolon
+    
+    \SetKwFunction{Kolektif}{FindKolektif}
+ 
+    \SetKwProg{Fn}{Function}{:}{}
+  
+    \KwInput{
+        \begin{itemize}
+            \item Himpunan entitas bergerak $\mathcal{X}$
+            \item Jumlah entitas minimum $m$
+            \item Interval waktu minimum $k$
+            \item Jarak \textit{dynamic time warping} maksimum antar entitas $r$
+            \item Nilai \textit{cosine similarity} minimum $\vartheta$
+        \end{itemize}
+    }
+    \KwOutput{Sebuah \textit{array} yang menyimpan himpunan dari himpunan rombongan yang teridentifikasi untuk setiap interval waktu yang memungkinkan}
+    
+    \Fn{\Kolektif{$\mathcal{X}, m, k, r, \vartheta$}}{
+        $result \gets []$ \\
+        
+        \For{$(start, end)$ in each consecutive time intervals}{
+            $collectiveMovements \gets Set()$ \\
+            
+            \For{each entity $a$ in $\mathcal{X}$}{
+                $entitySet \gets [a]$ \\
+                \For{each entity $b$ in $\mathcal{X}$}{
+                    $isSimilar \gets TRUE$ \\
+                    
+                    \For{each entity $c$ in $entitySet$}{
+                        $cSub \gets c[start \dots end]$ \\
+                        $bSub \gets b[start \dots end]$ \\
+                    
+                        \If{$c \neq b$ AND $(DTWDistance(cSub, bSub) > r$ OR $CosineSimilarity(cSub, bSub) < \vartheta)$}{
+                            $isSimilar \gets FALSE$
+                        }
+                    }
+                    
+                    \If{$isSimilar\;is\;equal\;to\;TRUE$}{
+                        $Insert\;b\;to\;entitySet$
+                    }
+                    
+                }
+                
+                \If{$length(entities) \geq m$}{
+                    $Insert\;entitySet\;into\;collectiveMovement$
+                }
+            }
+        }
+    }
+    \KwRet{$result$}
+    
+    \label{bab3:algoritma-identifikasi}
+\end{algorithm}
 
-\begin{enumerate}[nolistsep, noitemsep]
-    \item Terdapat minimal $m$ entitas yang tergabung dalam \cristopher{nama},
-    \item Interval waktu $\mathcal{I}$ memiliki durasi waktu minimal selama $t$ secara konsekutif, \lionov{konsekutifnya di sini}
-    \item Seluruh entitas yang tergabung dalam \cristopher{nama} terhubung satu sama lain selama interval waktu $\mathcal{I}$ secara konsekutif.
+\noindent Berikut merupakan uraian dari langkah-langkah yang dikerjakan oleh algoritma tersebut:
+
+\begin{enumerate}
+    \item Inisialisasi sebuah \textit{array} $\mathcal{R}$ yang akan menyimpan himpunan \pergerakankolektif yang teridentifikasi untuk setiap interval waktu $I$.
+    \item Untuk setiap interval waktu $I$ yang berdurasi $k$ satuan waktu:
+    
+    \begin{enumerate}
+        \item Inisialiasi sebuah himpunan $\mathcal{T}$ yang akan menyimpan himpunan rombongan yang teridentifikasi pada interval waktu $I$.  
+        \item Inisialisasi sebuah \textit{array} $\mathcal{S}$ untuk setiap entitas $a$ yang terdapat pada $\mathcal{X}$. Pada awalnya, himpunan $\mathcal{S}$ hanya akan beranggotakan entitas $a$.
+        \item Hitung jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} dari setiap anggota himpunan $S$ dan setiap entitas lain pada himpunan $\mathcal{X}$ pada interval waktu $I$. Tambahkan setiap entitas yang memiliki jarak \textit{dynamic time warping} dengan setiap anggota himpunan $S$ yang lebih kecil sama dengan $r$ dan nilai \textit{cosine similiarity} dengan setiap anggota himpunan $S$ yang lebih besar sama dengan $\vartheta$ pada himpunan $S$.
+        \item Tambahkan himpunan $\mathcal{S}$ pada \textit{array} $\mathcal{T}$ apabila jumlah anggota himpunan $\mathcal{S}$ lebih besar atau sama dengan $m$.
+        \item Tambahkan \textit{array} $\mathcal{T}$ pada \textit{array} $\mathcal{R}$.
+    \end{enumerate}
+    \item Kembalikan \textit{array} $\mathcal{R}$ sebagai hasil. Pada titik ini, $\mathcal{R}$ akan berisi himpunan rombongan yang terbentuk pada setiap interval waktu $I$ yang berdurasi selama $k$ satuan waktu.
 \end{enumerate}
 
-
-\section{Algoritma Identifikasi \pergerakankolektif}
-    
 \iffalse
 
-Untuk menyelesaikan kedua masalah di atas, penelitian ini berupaya untuk memperluas \cristopher{extends it? mungkin gitu kata-katanya} definisi pergerakan kolektif yang sudah ada dengan memanfaatkan parameter-parameter yang dimiliki oleh lintasan dalam upaya identifikasi pola pergerakan kolektif.
-
-\cristopher{Mungkin subsection buat bahas penyelesaian masalah 1?}
-\lionov{Subsection buat bahas dua masalah itu aja, jangan satu satu} \cristopher{ga kepanjangan ko?}
-
-\iffalse Berdasarkan cara manusia mengidentifikasi pergerakan kolektif, sebuah entitas akan tergabung dalam suatu kelompok pergerakan kolektif apabila entitas tersebut memiliki pola lintasan yang mirip dengan anggota-anggota dari kelompok pergerakan kolektif tersebut \lionov{klaim ini perlu hati2, soalnya menurut gua, manusia mengidentifikasi kelompok bukan dari pola lintasan, kayaknya cuma jarak, seperti yang elu tulis di akhir} \cristopher{Ini delete ajah sih, terlalu bertele-tele juga}\fi Berdasarkan berbagai definisi formal mengenai pola pergerakan kolektif yang sudah ada, sebuah entitas dikatakan tergabung dalam sebuah kelompok pergerakan kolektif apabila entitas tersebut memiliki perbedaan jarak yang minimal dengan entitas lain selama durasi interval waktu tertentu. Konsep tersebut tentunya sangat efektif digunakan pada sebagian besar kasus pergerakan kolektif, mengingat manusia sendiri melakukan pengelompokkan pergerakan kolektif berdasarkan jarak antar anggota dan durasi pergerakan bersama.
-
-\lionov{Keliatannya gini, jadi setau gua, yg definisi2 yg lama itu gak memperhitungkan kemiripan lintasan. Trajectory similarity itu ada kajian tersendiri dan setau gua belon ada yg pake itu buat grup. 
-Memang similarity itu biasanya diukur dari jaraknya, tapi ngukur jarak belon tentu ngukur similarity. Lagipula biasanya kedekatan jarak entitas itu diukurnya per satuan waktu, kalo similarity dari interval. \newline
-Nah, jadi kan ini kerangka tulisannya: latar belakang-masalah-usulan solusi. Mending di latar belakang pas ngebahas si tiga parameter da definisi2 laen, jangan singgung dulu soal kemiripan lintasan. Setelah ngebahas masalah-masalah, baru nanti di bagian usulan solusi (bikin definisi baru), elu bilang, bahwa akan pake ``kemiripan lintasan''}
-\cristopher{tapi di skripsi ini ngitungnya pake si 'trajectory similarity' kan ya? soalnya kan plannya pake DTW, yang dihitung per interval}
-
-Namun, upaya identifikasi pergerakan kolektif yang hanya bergantung pada tiga \iffalse \lionov{tiga?} \cristopher{fixed} \fi parameter tersebut dapat menimbulkan kesalahan identifikasi pada kasus \iffalse \sout{-kasus} \fi di mana terdapat sebuah yang entitas bergerak berpapasan dengan pergerakan kolektif lain yang bergerak berlawanan arah dalam jarak yang dekat dan waktu yang lama. Sebagai contoh dalam sebuah kasus yang digambarkan melalui gambar 1, terdapat dua buah kelompok pergerakan kolektif $A$ dan $B$ yang masing-masing anggotanya memiliki perbedaan arah lintasan sebesar 180 derajat. Salah satu entitas yang merupakan anggota dari kelompok $A$, yaitu $a$, bergerak berhimpitan dengan dua buah anggota dari anggota dari kelompok $B$ dalam waktu yang cukup lama dan dalam jarak yang cukup dekat sehingga seiring berjalannya waktu, entitas $a$ akan dikelompokkan sebagai anggota dari dua kelompok $A$ dan $B$ \iffalse \lionov{Mungkin bikin konvensi, nyebut entitas pake huruf kecil, nyebut kelompok pake huruf besar} \cristopher{ok deh, tapi perlu ditulis secara eksplisit ga ko?} .\fi Hasil identifikasi tersebut tentunya bertentangan dengan cara manusia melakukan identifikasi terhadap entitas $a$, di mana entitas $a$ tetap hanya akan tergabung dengan kelompok pergerakan kolektif $A$ karena terdapat perbedaan arah yang besar di antara kedua pergerakan kolektif tersebut.
-
-Berdasarkan penyelesaian di atas, dapat diambil simpulan sementara bahwa suatu entitas akan tergabung sebagai anggota dalam sebuah kelompok pergerakan kolektif apabila perbedaan arah lintasan entitas tersebut dengan masing-masing anggota pergerakan kolektif kurang lebih atau sama dengan $\vartheta$. \iffalse \cristopher{kata-katanya gimana ya? maksudnya 'nih ada theorem baru'} \lionov{ah langsung aja tulis kalo mau, teorema 1, gak usah pake pengantar lagi} \cristopher{solved} \fi
-
-\iffalse \lionov{kalo di sini mau ngomong tentang sudut, di penjelasan sebelumnya elu harus singgung sih, misalnya di gambar 1, ada perbedaan sudut sekian} \cristopher{solved} \fi
-
-Sayangnya, pemanfaatan parameter arah saja tidak cukup untuk mengatasi kebanyakan kasus perbedaan arah yang umum terjadi di dunia nyata. Sebagai contoh dalam sebuah kasus yang digambarkan melalui gambar 2, terdapat dua buah entitas $a$ dan $b$ yang pada awalnya bergerak menuju arah yang sama dalam jarak yang cukup dekat dan durasi yang cukup lama. Setelah beberapa saat, kedua entitas tersebut memutuskan untuk berpisah dan bergerak menuju arah yang berbeda jauh. Apabila perbedaan parameter arah dihitung secara global --- dimana perbedaan arah lintasan dari dua buah entitas diukur dengan membandingkan kedua arah lintasan entitas tersebut pada akhir pergerakan ---, maka kedua entitas tersebut tidak membentuk pergerakan kolektif sama sekali yang disebabkan oleh perbedaan arah yang drastis. Hasil identifikasi tersebut tentunya bertentangan dengan hasil identifikasi yang dilakukan oleh manusia, di mana kedua entitas tersebut pernah membentuk sebuah kelompok pergerakan kolektif sebelum kedua entitas tersebut memutuskan untuk berpisah dan bergerak menuju arah yang berbeda jauh.
-
-Masalah di atas dapat diselesaikan dengan menghitung perbedaan arah lintasan secara lokal, yaitu dengan menghitung perbedaan arah lintasan dari dua buah entitas untuk setiap interval waktu minimum untuk membuat sebuah kelompok pergerakan kolektif. Perbedaan arah pada sebuah interval waktu kemudian akan dihitung dengan membandingkan posisi akhir dari kedua entitas pada titik waktu terakhir dari interval tersebut. Pada contoh kasus yang digambarkan melalui gambar 2, apabila interval waktu minimum untuk membentuk pergerakan kolektif adalah sebanyak tiga interval waktu, maka kedua entitas tersebut akan membentuk pergerakan kolektif pada interval waktu $t_1$ -- $t_3$ dan $t_2$ -- $t_4$. Hasil identifikasi tersebut tentunya sesuai dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia. 
-
-Berdasarkan hasil tersebut, maka simpulan sebelumnya perlu dipertajam menjadi: Suatu entitas akan tergabung dalam sebuah kelompok pergerakan kolektif apabila perbedaan arah lintasan entitas tersebut dengan anggota-anggota pergerakan kolektif tidak melebihi $\vartheta$ yang dihitung pada setiap interval waktu minimum untuk membentuk pergerakan kolektif. 
-
-Untuk selanjutnya dalam skripsi ini, yang dimaksud dengan perbedaan arah entitas adalah perbedaan arah entitas yang dihitung secara lokal.
-
-\lionov{mungkin penulisannya kurang detail bahwa arah yg dimaksud adalah ``lokal'', arah lintasan ini lebih terasa global gak sih? Bisa juga sih elu tulis pas ngejelasin arah ``untuk selanjutnya dalam skripsi ini, yang dimaksud dengan arah adalah arah lokal''}
-\cristopher{di gambarnya kudunya belom muncul simbol matematika, karena belum masuk ke definisi formalnya, tapi mening diapain ya ko?}
-\lionov{definisi formal dulu aja, nanti gambar ditaro setelah itu?}
-
-Salah satu cara yang dapat digunakan untuk mengukur perbedaan arah antar dua buah vektor \iffalse \lionov{kalo elu tau beberapa, mending dibilang, tapi kalo gak tau, bilang aja "salah satu cara", takut ditanya sama penguji :D} \cristopher{done} \fi. Pada skripsi ini, perbedaan arah lintasan yang dimiliki dua buah entitas akan diukur menggunakan \textit{cosine similarity} yang dapat dihitung dengan:
-
-\begin{equation}
-    \cos ({\bf t},{\bf e})= {{\bf t} {\bf e} \over \|{\bf t}\| \|{\bf e}\|} = \frac{ \sum_{i=1}^{n}{{\bf t}_i{\bf e}_i} }{ \sqrt{\sum_{i=1}^{n}{({\bf t}_i)^2}} \sqrt{\sum_{i=1}^{n}{({\bf e}_i)^2}} }
-\end{equation}
-
-Semakin tinggi nilai \textit{cosine similarity} dari dua lintasan yang diuji, maka sudut antar dua lintasan tersebut semakin kecil yang berarti dua lintasan tersebut akan semakin mirip. Pada skripsi ini, \textit{cosine similarity} akan digunakan sebagai ukuran nilai perbedaan arah lintasan dari dua buah entitas yang bergerak.
-
-\cristopher{Mungkin subsection buat bahas masalah 2?}
-
-
-
-Terdapat dua pendekatan yang dapat digunakan untuk mengatasi masalah tersebut:
-
-\begin{enumerate}[noitemsep, nolistsep]
-    \item Menambahkan parameter kecepatan rata-rata entitas sebagai salah satu parameter penentu dalam proses identifikasi pola pergerakan kolektif.
-    \item Menggunakan teknik atau algoritma pengukuran kemiripan lintasan yang mampu menangani kasus perbedaan kecepatan antar entitas.
-\end{enumerate}
-
-\cristopher{Erm, mening gimana ya ko? keknya pilihan satu udah cukup baik sih, tapi gimana kalo emang perbedaan kecepatannya fluktuatif (nambah ngurang dalam intensitas yang tinggi)?}
-
-\cristopher{Karena kalo pake (1) ajah bisa, saya kan ga perlu jelasin DTW okawokokaw}
-\lionov{kalo kecepatan doang harus dipikirin lagi sih. rata-rata kecepatan kan rentan outlier jg ya. Harus dipikirin lagi kalo mau kecepatan, mau gimana dipakenya.} \cristopher{hmm, kalo gitu mening play safe dengan DTW ajah gitu ya? Kalo DTW udah proven soalnya}
-
-Pada skripsi ini, cara kedua akan dipilih sebagai upaya penyelesaian terhadap masalah perbedaan kecepatan dari entitas yang bergerak. Salah satu algoritma yang dapat digunakan untuk mengukur kemiripan lintasan dari entitas yang bergerak adalah \textit{dynamic time warping}.
-
-\subsubsection*{Dynamic Time Warping}
-
-\textit{Dynamic time warping} merupakan sebuah algoritma yang bertujuan untuk menemukan keselarasan optimal antar dua buah deret waktu. Algoritma \textit{dynamic time warping} sudah diaplikasikan sejak tahun 1970 dalam berbagai bidang seperti pengenalan suara, identifikasi tanda tangan, \textit{computer vision}, dan masih banyak lagi. Tujuan utama dari algoritma \textit{dynamic time warping} adalah meminimalkan efek pergeseran dan distorsi seiring berjalannya waktu 
-
-\cristopher{refnya bookmark dulu}
-
-\cristopher{Subsection: definisar i pola pergerakan kolektif baru}
-
-Berdasarkan upaya identifikasi pola pergerakan kolektif yang sudah dibuat dan \cristopher{theorem} yang sudah disebutkan pada subbab sebelumnya, penelitian ini mengusulkan sebuah definisi pola pergerakan kolektif baru yaitu \cristopher{nama} yang secara formal dapat didefinisikan sebagai berikut:
+Algoritma tersebut memiliki kompleksitas waktu sebesar $O(n^4k^2)$ di mana $n$ merupakan jumlah entitas yang terdapat pada $\mathcal{X}$. Hal tersebut dapat dilihat pada baris 12 dari algoritma identifikasi. Pada titik tersebut, algoritma identifikasi memiliki kompleksitas sebesar $O(n^4)$ dan fungsi $DTWDistance$ memiliki kompleksitas sebesar $O(t^2)$ seperti yang sudah dibahas melalui subbab \ref{sec:dtw}. Sedangkan kompleksitas tempat yang dimiliki oleh algoritma tersebut adalah sebesar $O(n\;i)$ di mana $i$ merupakan jum. Hal tersebut dapat dihitung melalui perkalian antara jumlah interval waktu yang mungkin sebesar
 
 \fi
