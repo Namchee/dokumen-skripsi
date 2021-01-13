@@ -12,6 +12,7 @@
 \usepackage{lipsum} 
 \usepackage{subcaption}
 \usepackage{amsmath}
+\usepackage{hyperref}
 \usepackage{enumitem}
 \setlength{\headsep}{30pt}
 \usepackage[inner=2cm,outer=2.5cm,top=2.5cm,bottom=2cm]{geometry} %margin
@@ -33,7 +34,7 @@
 \newcommand{\nama}{Cristopher}
 \newcommand{\@npm}{2017730017}
 \newcommand{\tanggal}{12/01/2021} %Tanggal pembuatan dokumen
-\newcommand{\@judultopik}{Identifikasi Pergerakan Kolektif Pada Data Pejalan Kaki} % Judul/topik anda
+\newcommand{\@judultopik}{Identifikasi Rombongan Pada Data Pejalan Kaki} % Judul/topik anda
 \newcommand{\kodetopik}{LNV4902}
 \newcommand{\jumpemb}{1} % Jumlah pembimbing, 1 atau 2
 \newcommand{\pembA}{Lionov Wiratma}
@@ -108,7 +109,7 @@ Setiap lintasan memiliki atribut-atribut dengan nilai tertentu sebagai karakteri
 
 Terdapat berbagai jenis analisis yang dapat dilakukan pada data pergerakan seperti segmentasi lintasan, pengukuran kemiripan lintasan, \textit{clustering} pada entitas yang bergerak, dan identifikasi pola pergerakan kolektif yang menjadi fokus utama pada skripsi ini. Tujuan dari analisis pola pergerakan kolektif adalah mengidentifikasi kelompok pergerakan yang terbentuk dari entitas-entitas yang bergerak bersama dalam rentang waktu yang cukup lama. Analisis pola pergerakan kolektif memiliki pemanfaatan dalam berbagai bidang. Sebagai contoh, identifikasi pola pergerakan kolektif dapat dimanfaatkan pada bidang keamanan untuk mengidentifikasi pergerakan mencurigakan dari sekelompok orang.
 
-\iffalse
+\iffalse 
 
 \begin{figure}[h]
     \centering
@@ -152,7 +153,7 @@ Berdasarkan uraian pada bagian sebelumnya, berikut merupakan masalah-masalah yan
 
 Tujuan yang hendak dicapai oleh skripsi ini adalah:
 
-\begin{itemize}[nolistsep, noitemsep]
+\begin{itemize}[noitemsep, nolistsep]
     \item Menentukan ukuran-ukuran lintasan yang dapat digunakan untuk membuat sebuah definisi pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
     \item Membuat definisi pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
     \item Membuat algoritma yang dapat mengidentifikasi kelompok pergerakan kolektif yang sesuai dengan definisi formal yang telah dibuat pada sebuah data pejalan kaki di dunia nyata.
@@ -160,13 +161,12 @@ Tujuan yang hendak dicapai oleh skripsi ini adalah:
 
 \section{Detail Perkembangan Pengerjaan Skripsi}
 Detail bagian pekerjaan skripsi sesuai dengan rencana kerja / laporan perkembangan terakhir:
-	\begin{enumerate}
+	\begin{enumerate}[noitemsep, nolistsep]
 		\item \textbf{Melakukan studi literatur mengenai ukuran-ukuran serta algoritma yang dapat digunakan untuk mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan pada sebuah lintasan.} \\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
 		{\bf Hasil :} Berdasarkan hasil studi literatur yang telah dilakukan, masalah identifikasi pada kasus perbedaan arah dapat diselesaikan dengan menghitung perbedaan arah antara dua buah lintasan untuk menentukan kedekatan spasial dari dua buah lintasan. Dua buah lintasan dikatakan dekat secara spasial apabila memiliki perbedaan arah yang lebih kecil dibandingkan nilai tertentu. Perbedaan arah dapat diukur menggunakan ukuran arah lintasan secara langsung atau menggunakan perhitungan tertentu seperti \textit{cosine similarity}.
 		
-		Masalah identifikasi pada kasus perbedaan kecepatan dapat diselesaikan dengan menggunakan algoritma \textit{dynamic time warping} (DTW) untuk mengukur kedekatan spasial antara dua buah lintasan. Algoritma \textit{dynamic time warping} merupakan sebuah algoritma yang dapat mengukur kemiripan antara dua buah data yang mengandung informasi waktu. Keunggulan dari algoritma \textit{dynamic time warping} adalah algoritma tersebut dapat mengukur kemiripan dua buah data yang memiliki kecepatan yang variatif dengan akurat.
-		\\
+		Masalah identifikasi pada kasus perbedaan kecepatan dapat diselesaikan dengan menggunakan algoritma \textit{dynamic time warping} (DTW) untuk mengukur kedekatan spasial antara dua buah lintasan. Algoritma \textit{dynamic time warping} merupakan sebuah algoritma yang dapat mengukur kemiripan antara dua buah data yang mengandung informasi waktu. Keunggulan dari algoritma \textit{dynamic time warping} adalah algoritma tersebut dapat mengukur kemiripan dua buah data yang memiliki kecepatan yang variatif dengan akurat. \\
 		
 		\item \textbf{Melakukan studi literatur mengenai definisi pola pergerakan kolektif yang sudah ada, serta mengidentifikasi kekurangan-kekurangan yang terdapat pada definisi tersebut.}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
@@ -174,13 +174,27 @@ Detail bagian pekerjaan skripsi sesuai dengan rencana kerja / laporan perkembang
 
 		\item \textbf{Membuat definisi pergerakan kolektif baru yang tidak hanya bergantung pada ukuran jarak, waktu, dan \textit{size}, serta mampu menangani masalah perbedaan arah dan kecepatan lintasan}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :} Setelah mempertimbangkan segala aspek mengenai definisi pergerakan kolektif dan menggabungkannya dengan upaya penyelesaian masalah identifikasi pada kasus perbedaan arah dan kecepatan, dapat dibuat sebuah definisi pergerakan kolektif baru bernama <<nama>> yang secara formal dapat dinyatakan sebagai:
+		{\bf Hasil :} Setelah mempertimbangkan segala aspek mengenai definisi pergerakan kolektif dan menggabungkannya dengan upaya penyelesaian masalah identifikasi pada kasus perbedaan arah dan kecepatan, dapat dibuat sebuah definisi pergerakan kolektif baru bernama rombongan yang secara formal dapat dinyatakan sebagai:
 		
-		\noindent \textbf{<<nama>>($m$, $k$, $r$, $\vartheta$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$, interval waktu minimum selama $k$ satuan waktu, jarak maksimum antara entitas sepanjang $r$ satuan panjang, dan nilai kemiripan sudut minimum sebesar $\vartheta$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$. Sebuah <<nama>> pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung satu sama lain selama interval waktu $I$ secara konsekutif. \\
+		\noindent \textbf{rombongan($m$, $k$, $r$, $\vartheta$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$, interval waktu minimum selama $k$ satuan waktu, jarak maksimum antara entitas sepanjang $r$ satuan panjang, dan nilai kemiripan sudut minimum sebesar $\vartheta$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$. Sebuah rombongan pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung satu sama lain selama interval waktu $I$ secara konsekutif. \\
 
 		\item \textbf{Membuat algoritma yang mampu mengidentifikasi pola pergerakan kolektif berdasarkan definisi baru yang sudah dibuat}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+		{\bf Hasil :} Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$ buah entitas, interval waktu minimum selama $k$ satuan waktu, jarak \textit{dynamic time warping} maksimum sepanjang $r$ satuan panjang, dan nilai \textit{cosine similarity} minimum sebesar $\vartheta$. Himpunan rombongan yang terbentuk dalam himpunan entitas $\mathcal{X}$ dapat dicari menggunakan langkah-langkah berikut:
+		
+		\begin{enumerate}[noitemsep, nolistsep]
+            \item Inisialisasi sebuah \textit{array} $\mathcal{R}$ yang akan menyimpan himpunan rombongan yang teridentifikasi untuk setiap interval waktu $I$.
+            \item Untuk setiap interval waktu $I$ yang berdurasi $k$ satuan waktu:
+    
+            \begin{enumerate}[noitemsep, nolistsep]
+                \item Inisialiasi sebuah himpunan $\mathcal{T}$ yang akan menyimpan himpunan rombongan yang teridentifikasi pada interval waktu $I$.  
+                \item Inisialisasi sebuah \textit{array} $\mathcal{S}$ untuk setiap entitas $a$ yang terdapat pada $\mathcal{X}$. Pada awalnya, himpunan $\mathcal{S}$ hanya akan beranggotakan entitas $a$.
+                \item Hitung jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} dari setiap anggota himpunan $S$ dan setiap entitas lain pada himpunan $\mathcal{X}$ pada interval waktu $I$. Tambahkan setiap entitas yang memiliki jarak \textit{dynamic time warping} dengan setiap anggota himpunan $S$ yang lebih kecil sama dengan $r$ dan nilai \textit{cosine similiarity} dengan setiap anggota himpunan $S$ yang lebih besar sama dengan $\vartheta$ pada himpunan $S$.
+                \item Tambahkan himpunan $\mathcal{S}$ pada \textit{array} $\mathcal{T}$ apabila jumlah anggota himpunan $\mathcal{S}$ lebih besar atau sama dengan $m$.
+                \item Tambahkan \textit{array} $\mathcal{T}$ pada \textit{array} $\mathcal{R}$.
+            \end{enumerate}
+            \item Kembalikan \textit{array} $\mathcal{R}$ sebagai hasil. Pada titik ini, $\mathcal{R}$ akan berisi himpunan rombongan yang terbentuk pada setiap interval waktu $I$ yang berdurasi selama $k$ satuan waktu.
+        \end{enumerate}
 
 		\item \textbf{Menulis draf dokumen skripsi untuk bab pendahuluan, studi literatur, dan analisis}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
@@ -204,13 +218,15 @@ Detail bagian pekerjaan skripsi sesuai dengan rencana kerja / laporan perkembang
 	\end{enumerate}
 
 \section{Pencapaian Rencana Kerja}
+
 Langkah-langkah kerja yang berhasil diselesaikan dalam Skripsi 1 ini adalah sebagai berikut:
-\begin{enumerate}
-\item Melakukan studi literatur mengenai ukuran-ukuran serta algoritma yang dapat digunakan untuk mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan pada sebuah lintasan.
-\item Melakukan studi literatur mengenai definisi pola pergerakan kolektif yang sudah ada, serta mengidentifikasi kekurangan yang terdapat pada definisi tersebut.
-\item Membuat definisi pergerakan kolektif baru yang tidak hanya bergantung pada ukuran jarak, waktu, dan \textit{size}, serta mampu menangani masalah perbedaan arah dan kecepatan lintasan.
-\item Membuat algoritma yang mampu mengidentifikasi pola pergerakan kolektif berdasarkan definisi baru yang sudah dibuat.
-\item Menulis draft dokumen skripsi untuk bab pendahuluan, studi literatur, dan analisis.
+
+\begin{enumerate}[noitemsep, nolistsep]
+    \item Melakukan studi literatur mengenai ukuran-ukuran serta algoritma yang dapat digunakan untuk mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan pada sebuah lintasan.
+    \item Melakukan studi literatur mengenai definisi pola pergerakan kolektif yang sudah ada, serta mengidentifikasi kekurangan yang terdapat pada definisi tersebut.
+    \item Membuat definisi pergerakan kolektif baru yang tidak hanya bergantung pada ukuran jarak, waktu, dan \textit{size}, serta mampu menangani masalah perbedaan arah dan kecepatan lintasan.
+    \item Membuat algoritma yang mampu mengidentifikasi pola pergerakan kolektif berdasarkan definisi baru yang sudah dibuat.
+    \item Menulis draft dokumen skripsi untuk bab pendahuluan, studi literatur, dan analisis.
 \end{enumerate}
 
 \iffalse 
@@ -230,6 +246,8 @@ Kendala - kendala yang dihadapi selama mengerjakan skripsi :
 \centering Bandung, \tanggal\\
 \vspace{2cm} \nama \\ 
 \vspace{1cm}
+
+\newpage
 
 Menyetujui, \\
 \ifdefstring{\jumpemb}{2}{
