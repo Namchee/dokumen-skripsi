@@ -98,9 +98,9 @@ Berdasarkan pembahasan mengenai pergerakan kolektif pada subbab \ref{sec:collect
 \end{enumerate}
 
 Seluruh aspek yang telah disebutkan di atas merupakan sebuah parameter masukan yang ditentukan oleh peneliti sebelum proses identifikasi pergerakan kolektif dilakukan, sehingga sebuah definisi pergerakan kolektif yang sama dapat menghasilkan hasil identifikasi yang berbeda-beda yang dipengaruhi oleh parameter-parameter yang dimasukkan. 
-Dengan mempertimbangkan aspek-aspek di atas, dapat dibuat sebuah definisi pergerakan kolektif baru bernama \pergerakankolektif yang secara formal dinyatakan sebagai:
+Dengan mempertimbangkan aspek-aspek di atas, dapat dibuat sebuah definisi pergerakan kolektif baru bernama rombongan yang secara formal dinyatakan sebagai:
 
-\noindent \textbf{\pergerakankolektif($m$, $k$, $r$, $\vartheta$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$ buah entitas di mana $k \in [2, |\mathcal{X}|]$, interval waktu minimum selama $k$ satuan waktu di mana $k \geq 2$, jarak maksimum antara entitas sepanjang $r$ satuan panjang di mana $r \in \mathbb{R}^+$, dan nilai kemiripan sudut minimum sebesar $\vartheta$ di mana $\vartheta \in [-1, 1]$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$. Sebuah rombongan pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung satu sama lain selama interval waktu $I$ secara konsekutif. 
+\noindent \textbf{\pergerakankolektif($m$, $k$, $r$, $\vartheta$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$ yang memiliki jumlah entitas sebanyak $n$, jumlah entitas minimum sebanyak $m$ buah entitas di mana $k \in [2, n]$, interval waktu minimum selama $k$ satuan waktu di mana $k \geq 2$, jarak maksimum antara entitas sepanjang $r$ satuan panjang di mana $r \in \mathbb{R}^+$, dan nilai kemiripan sudut minimum sebesar $\vartheta$ di mana $\vartheta \in [-1, 1]$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$. Sebuah rombongan pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung satu sama lain selama interval waktu $I$ secara konsekutif. 
 
 \section{Algoritma Identifikasi Rombongan}
 \label{sec:algoritma}
@@ -149,7 +149,7 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
                     }
                     
                     \If{$isSimilar\;is\;equal\;to\;TRUE$}{
-                        $Insert\;b\;to\;entitySet$
+                        $Insert\;b\;into\;entitySet$
                     }
                     
                 }
@@ -168,8 +168,9 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
 \noindent Berikut merupakan uraian dari langkah-langkah yang dikerjakan oleh algoritma tersebut:
 
 \begin{enumerate}
-    \item Inisialisasi sebuah \textit{array} $\mathcal{R}$ yang akan menyimpan himpunan \pergerakankolektif yang teridentifikasi untuk setiap interval waktu $I$.
-    \item Untuk setiap interval waktu $I$ yang berdurasi $k$ satuan waktu:
+    \item Inisialisasi sebuah \textit{array} $\mathcal{R}$ yang akan menyimpan himpunan rombongan yang teridentifikasi untuk setiap interval waktu $I$.
+    \item Cari setiap interval waktu konsekutif $I$ sepanjang $k$ satuan waktu yang dapat dibentuk. Interval-interval waktu konsekutif dapat dicari menggunakan teknik \textit{sliding window} \cite{ralf:03:sliding-window}. Sebagai contoh, pada himpunan entitas $\mathcal{X}$ sepanjang $5$ satuan waktu dan $k = 3$, maka interval waktu $I$ yang mungkin adalah $[1, 3]$, $[2, 4]$, dan $[3, 5]$.
+    \item Untuk setiap interval waktu konsekutif $I$ yang berdurasi $k$ satuan waktu:
     
     \begin{enumerate}
         \item Inisialiasi sebuah himpunan $\mathcal{T}$ yang akan menyimpan himpunan rombongan yang teridentifikasi pada interval waktu $I$.  
@@ -181,8 +182,12 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \item Kembalikan \textit{array} $\mathcal{R}$ sebagai hasil. Pada titik ini, $\mathcal{R}$ akan berisi himpunan rombongan yang terbentuk pada setiap interval waktu $I$ yang berdurasi selama $k$ satuan waktu.
 \end{enumerate}
 
-\iffalse
+Algoritma di atas memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. Nilai tersebut didapatkan melalui perhitungan berikut:
 
-Algoritma tersebut memiliki kompleksitas waktu sebesar $O(n^4k^2)$ di mana $n$ merupakan jumlah entitas yang terdapat pada $\mathcal{X}$. Hal tersebut dapat dilihat pada baris 12 dari algoritma identifikasi. Pada titik tersebut, algoritma identifikasi memiliki kompleksitas sebesar $O(n^4)$ dan fungsi $DTWDistance$ memiliki kompleksitas sebesar $O(t^2)$ seperti yang sudah dibahas melalui subbab \ref{sec:dtw}. Sedangkan kompleksitas tempat yang dimiliki oleh algoritma tersebut adalah sebesar $O(n\;i)$ di mana $i$ merupakan jum. Hal tersebut dapat dihitung melalui perkalian antara jumlah interval waktu yang mungkin sebesar
-
-\fi
+\begin{enumerate}
+    \item Pada baris $3$, algoritma akan memiliki kompleksitas waktu sebesar $O(t - k)$ di mana nilai tersebut diperoleh dengan menghitung jumlah interval waktu konsekutif yang mungkin dibuat. Jumlah interval waktu konsekutif yang dapat dibuat merupakan selisih dari panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$ dan durasi waktu konsekutif minimum untuk membentuk sebuah rombongan.
+    \item Pada baris $5$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{X}$ yang memiliki kompleksitas sebesar $O(n)$.
+    \item Pada baris $7$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^2)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{X}$ yang memiliki kompleksitas sebesar $O(n)$.
+    \item Pada baris $9$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^3)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{S}$ yang memiliki kompleksitas sebesar $O(n)$.
+    \item Pada baris $12$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ yang disebabkan oleh perhitungan algoritma \textit{dynamic time warping} yang memiliki kompleksitas waktu sebesar $O(k^2)$. Kompleksitas tersebut didapatkan dari hasil perkalian panjang dua lintasan yang dihitung yang masing-masing sebesar $k$. Pada titik ini, algoritma identifikasi akan memiliki nilai kompleksitas tertinggi selama algoritma dijalankan.
+\end{enumerate}
