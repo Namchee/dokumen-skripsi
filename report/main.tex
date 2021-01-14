@@ -34,7 +34,7 @@
 \newcommand{\nama}{Cristopher}
 \newcommand{\@npm}{2017730017}
 \newcommand{\tanggal}{12/01/2021} %Tanggal pembuatan dokumen
-\newcommand{\@judultopik}{Identifikasi Rombongan Pada Data Pejalan Kaki} % Judul/topik anda
+\newcommand{\@judultopik}{Identifikasi Pola Rombongan Pada Data Pejalan Kaki} % Judul/topik anda
 \newcommand{\kodetopik}{LNV4902}
 \newcommand{\jumpemb}{1} % Jumlah pembimbing, 1 atau 2
 \newcommand{\pembA}{Lionov Wiratma}
@@ -184,9 +184,10 @@ Detail bagian pekerjaan skripsi sesuai dengan rencana kerja / laporan perkembang
 		
 		\begin{enumerate}[noitemsep, nolistsep]
             \item Inisialisasi sebuah \textit{array} $\mathcal{R}$ yang akan menyimpan himpunan rombongan yang teridentifikasi untuk setiap interval waktu $I$.
-            \item Untuk setiap interval waktu $I$ yang berdurasi $k$ satuan waktu:
+            \item Cari setiap interval waktu konsekutif $I$ sepanjang $k$ satuan waktu yang dapat dibentuk. Interval-interval waktu konsekutif dapat dicari menggunakan teknik \textit{sliding window}. Sebagai contoh, pada himpunan entitas $\mathcal{X}$ sepanjang $5$ satuan waktu dan $k = 3$, maka interval waktu $I$ yang mungkin adalah $[1, 2, 3]$, $[2, 3, 4]$, dan $[3, 4, 5]$.
+            \item Untuk setiap interval waktu konsekutif $I$ yang berdurasi $k$ satuan waktu:
     
-            \begin{enumerate}[noitemsep, nolistsep]
+            \begin{enumerate}
                 \item Inisialiasi sebuah himpunan $\mathcal{T}$ yang akan menyimpan himpunan rombongan yang teridentifikasi pada interval waktu $I$.  
                 \item Inisialisasi sebuah \textit{array} $\mathcal{S}$ untuk setiap entitas $a$ yang terdapat pada $\mathcal{X}$. Pada awalnya, himpunan $\mathcal{S}$ hanya akan beranggotakan entitas $a$.
                 \item Hitung jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} dari setiap anggota himpunan $S$ dan setiap entitas lain pada himpunan $\mathcal{X}$ pada interval waktu $I$. Tambahkan setiap entitas yang memiliki jarak \textit{dynamic time warping} dengan setiap anggota himpunan $S$ yang lebih kecil sama dengan $r$ dan nilai \textit{cosine similiarity} dengan setiap anggota himpunan $S$ yang lebih besar sama dengan $\vartheta$ pada himpunan $S$.
@@ -195,6 +196,8 @@ Detail bagian pekerjaan skripsi sesuai dengan rencana kerja / laporan perkembang
             \end{enumerate}
             \item Kembalikan \textit{array} $\mathcal{R}$ sebagai hasil. Pada titik ini, $\mathcal{R}$ akan berisi himpunan rombongan yang terbentuk pada setiap interval waktu $I$ yang berdurasi selama $k$ satuan waktu.
         \end{enumerate}
+
+        Algoritma di atas memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. \\
 
 		\item \textbf{Menulis draf dokumen skripsi untuk bab pendahuluan, studi literatur, dan analisis}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
@@ -242,12 +245,12 @@ Kendala - kendala yang dihadapi selama mengerjakan skripsi :
 
 \fi
 
+\newpage
+
 \vspace{1cm}
 \centering Bandung, \tanggal\\
 \vspace{2cm} \nama \\ 
 \vspace{1cm}
-
-\newpage
 
 Menyetujui, \\
 \ifdefstring{\jumpemb}{2}{
@@ -267,3 +270,4 @@ Menyetujui, \\
 \vspace{2cm} Nama: \pembA \\ Pembimbing Tunggal
 }
 \end{document}
+
