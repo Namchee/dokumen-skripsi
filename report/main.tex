@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{graphics}
 \usepackage{amsfonts}
+\usepackage{amsmath}
 \usepackage{float}
 \usepackage[cm]{fullpage}
 \pagestyle{myheadings}
@@ -14,6 +15,9 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[linesnumbered, ruled]{algorithm2e}
 \setlength{\headsep}{30pt}
 \usepackage[inner=2cm,outer=2.5cm,top=2.5cm,bottom=2cm]{geometry} %margin
 % \pagestyle{empty}
@@ -78,13 +82,13 @@ Bergerak merupakan sebuah aktivitas yang selalu kita temui setiap saat. Segala s
 \begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[width=\textwidth, height=5cm]{Gambar/bergerak.jpg}
-        \caption{Manusia bergerak untuk memenuhi kebutuhan sehari-hari\protect\footnotemark}
+        \includegraphics[width=\textwidth, height=4.5cm]{Gambar/bab1:manusia.jpg}
+        \caption{Manusia bergerak untuk memenuhi kebutuhan sehari-hari}
         \label{bab1:manusia}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[width=\textwidth, height=5cm]{Gambar/sunflower.jpg}
-        \caption{Bunga matahari bertumbuh mengikuti arah sinar matahari\protect\footnotemark}
+        \includegraphics[width=\textwidth, height=4.5cm]{Gambar/bab1:sunflower.jpg}
+        \caption{Bunga matahari bertumbuh mengikuti arah sinar matahari}
         \label{bab1:sunflower}
     \end{subfigure}
     \caption[Aktivitas pergerakan]{
@@ -92,48 +96,65 @@ Bergerak merupakan sebuah aktivitas yang selalu kita temui setiap saat. Segala s
     \label{bab1:pergerakan}
 \end{figure}
 
-\footnotetext{Alvin Mamudov,  2017, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/FlLHbmF3AHc}.}
+\addtocounter{footnote}{-2} %3=n
 
-\footnotetext{Lisa Pellegrini, 2016, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/XCvy_eufErI}.}
+\stepcounter{footnote}\footnotetext{Alvin Mamudov, 2017, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/FlLHbmF3AHc}.}
+
+\stepcounter{footnote}\footnotetext{Lisa Pellegrini, 2016, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/XCvy_eufErI}.}
 
 \fi
 
-Seiring berjalannya waktu, kemunculan teknologi modern seperti \textit{Geographic Information System} (GIS) menyebabkan data pergerakan yang bersumber dari berbagai entitas menjadi semakin banyak dan semakin mudah didapatkan. Hal tersebut memicu kembalinya pertumbuhan minat penelitian mengenai pergerakan oleh berbagai peneliti dalam berbagai bidang. Terdapat banyak hal menarik yang dapat dimanfaatkan melalui analisis terhadap data pergerakan. Salah satu contoh nyata dari pemanfaatan analisis data pergerakan adalah analisis pergerakan bebek domestik, di mana melalui data pergerakan bebek, virolog dapat mengidentifikasi daerah-daerah yang memiliki risiko persebaran flu burung yang tinggi.
+Seiring berjalannya waktu, kemunculan teknologi modern seperti \textit{Geographic Information System} (GIS) menyebabkan data pergerakan yang bersumber dari berbagai entitas menjadi semakin banyak dan semakin mudah didapatkan. Hal tersebut memicu kembalinya pertumbuhan minat penelitian mengenai pergerakan oleh berbagai peneliti dalam berbagai bidang. Terdapat banyak hal menarik yang dapat dimanfaatkan melalui analisis terhadap data pergerakan. Salah satu contoh nyata dari pemanfaatan analisis data pergerakan adalah analisis pergerakan bebek domestik, di mana melalui data pergerakan bebek, virolog dapat mengidentifikasi daerah-daerah yang memiliki risiko persebaran flu burung yang tinggi\footnote{Prosser, D. J., Palm, E. C., Takekawa, J. Y., Zhao, D., Xiao, X., Li, P., Liu, Y., dan Newman,S. H. (2016) Movement analysis of free-grazing domestic ducks in poyang lake, china: a disease connection.Int. J. Geogr. Inf. Sci.,30, 869–880}.
 
-Dalam sebuah pergerakan, setiap entitas yang bergerak memiliki lintasan. Lintasan merupakan jalur yang dilalui oleh entitas selama melakukan pergerakan dalam rentang waktu tertentu. Data mengenai lintasan yang ditempuh oleh entitas yang bergerak bersifat kontinu. Data lintasan dapat diperoleh melalui berbagai cara, di mana hal tersebut ditentukan oleh tipe entitas, lingkungan tempat terjadinya pergerakan, teknologi yang digunakan, dan lain sebagainya. Sekarang ini, data mengenai lintasan biasanya diperoleh melalui sistem modern seperti sistem Argos-Doppler dan \textit{global positioning system} (GPS) yang lazim ditemukan pada telepon pintar, di mana keduanya sama-sama memanfaatkan teknologi satelit. Kedua sistem tersebut memiliki beberapa kelebihan dibandingkan penggunaan cara-cara tradisional seperti memiliki akurasi yang jauh lebih baik, mampu memperoleh lebih banyak data lintasan dari berbagai entitas sekaligus, dapat dikustomisasi sesuai kebutuhan, dan masih banyak lagi.
+Dalam sebuah pergerakan, setiap entitas yang bergerak memiliki lintasan. Lintasan merupakan jalur yang dilalui oleh entitas selama melakukan pergerakan dalam rentang waktu tertentu. Data mengenai lintasan yang ditempuh oleh entitas yang bergerak bersifat kontinu. Data lintasan dapat diperoleh melalui berbagai cara, di mana hal tersebut ditentukan oleh tipe entitas, lingkungan tempat terjadinya pergerakan, teknologi yang digunakan, dan lain sebagainya\footnote{Wiratma, L. (2019) Computations and Measures of Collective Movement Patterns Based on Trajectory Data. Disertasi. Utrecht University, Netherlands, Netherlands}. Sekarang ini, data mengenai lintasan biasanya diperoleh melalui sistem modern seperti sistem Argos-Doppler dan \textit{global positioning system} (GPS) yang lazim ditemukan pada telepon pintar, di mana keduanya sama-sama memanfaatkan teknologi satelit\footnote{Carter, D., Bennett, K., Embling, C., Hosegood, P., dan Russell, D. (2016) Navigating uncertain waters: A critical review of inferring foraging behaviour from location and dive data in pinnipeds. Movement Ecology, 4}. Kedua sistem tersebut memiliki beberapa kelebihan dibandingkan penggunaan cara-cara tradisional seperti memiliki akurasi yang jauh lebih baik, mampu memperoleh lebih banyak data lintasan dari berbagai entitas sekaligus, dapat dikustomisasi sesuai kebutuhan, dan masih banyak lagi.
+
+\iffalse
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Gambar/bab1:sumber-data.png}
+    \caption[Teknologi pengambilan data lintasan]{Pengambilan data lintasan melalui pemanfaatan teknologi modern. Kiri ke kanan: Sistem Argos-Doppler, \textit{Global positioning system} (GPS)}
+    \label{bab1:sumber-data}
+\end{figure}
+
+\footcite{carter:argos}
+
+\fi
 
 Sayangnya, perkembangan teknologi tetap tidak mampu untuk merekam data lintasan secara sempurna. Hal tersebut menyebabkan data lintasan yang diperoleh tidak bersifat kontinu seperti yang diharapkan, melainkan bersifat diskrit. Berdasarkan sifat tersebut, data lintasan yang diperoleh akan direpresentasikan sebagai catatan posisi dari entitas yang bergerak yang diurutkan berdasarkan titik waktu. Secara formal, lintasan merupakan kumpulan dari pasangan posisi-waktu $(p_0, t_0), (p_1, t_1), \ldots, (p_x, t_x)$, di mana $p_i$ merupakan posisi entitas yang relatif terhadap ruang gerak entitas pada titik waktu $t_i$. Pada umumnya, entitas akan bergerak dalam sebuah ruang \textit{euclidean} dua dimensi atau tiga dimensi yang masing-masing dapat direpresentasikan sebagai 
 $\mathbb{R}^2$ dan $\mathbb{R}^3$.
 
-Setiap lintasan memiliki atribut-atribut dengan nilai tertentu sebagai karakteristik yang membedakan satu lintasan dengan lintasan lain. Atribut-atribut tersebut kemudian dapat diolah menjadi ukuran lintasan yang memiliki kegunaan yang lebih spesifik. Analisis terhadap data pergerakan selalu memanfaatkan setidaknya salah satu ukuran yang terdapat pada data lintasan. Sebagai contoh, kecepatan dapat digunakan untuk mengukur pengaruh angin pada pergerakan burung.
+Setiap lintasan memiliki atribut-atribut dengan nilai tertentu sebagai karakteristik yang membedakan satu lintasan dengan lintasan lain. Atribut-atribut tersebut kemudian dapat diolah menjadi ukuran lintasan yang memiliki kegunaan yang lebih spesifik. Analisis terhadap data pergerakan selalu memanfaatkan setidaknya salah satu ukuran yang terdapat pada data lintasan. Sebagai contoh, kecepatan dapat digunakan untuk mengukur pengaruh angin pada pergerakan burung\footnote{Safi, K., Kranstauber, B., Weinzierl, R., Griffin, L., Rees, E., Cabot, D., Cruz, S., Proaño,C., Takekawa, J., Newman, S., Waldenström, J., Bengtsson, D., Kays, R., Wikelski, M., dan Bohrer, G. (2013) Flying with the wind: Scale dependency of speed and direction measurements in modelling wind support in avian flight.Movement Ecology,1}.
 
-Terdapat berbagai jenis analisis yang dapat dilakukan pada data pergerakan seperti segmentasi lintasan, pengukuran kemiripan lintasan, \textit{clustering} pada entitas yang bergerak, dan identifikasi pola pergerakan kolektif yang menjadi fokus utama pada skripsi ini. Tujuan dari analisis pola pergerakan kolektif adalah mengidentifikasi kelompok pergerakan yang terbentuk dari entitas-entitas yang bergerak bersama dalam rentang waktu yang cukup lama. Analisis pola pergerakan kolektif memiliki pemanfaatan dalam berbagai bidang. Sebagai contoh, identifikasi pola pergerakan kolektif dapat dimanfaatkan pada bidang keamanan untuk mengidentifikasi pergerakan mencurigakan dari sekelompok orang.
+Terdapat berbagai jenis analisis yang dapat dilakukan pada data pergerakan seperti segmentasi lintasan\footnote{Mann, R., Jepson, A. D., dan El-Maraghi, T. (2002) Trajectory segmentation using dynamic programming. Proceedings of the 16 Th International Conference on Pattern Recognition (ICPR’02) Volume 1 - Volume 1, USA, August ICPR ’02 10331. IEEE Computer Society}, pengukuran kemiripan lintasan\footnote{M\"{u}ller, M. (2007) Dynamic time warping. Information Retrieval for Music and Motion,2,69–84}, \textit{clustering} pada entitas yang bergerak\footnote{Lee, J.-G., Han, J., Li, X., dan Gonzalez, H. (2008) Traclass: Trajectory classification using hierarchical region-based and trajectory-based clustering.Proc. VLDB Endow.,1, 1081–1094.}, dan identifikasi pola pergerakan kolektif yang menjadi fokus utama pada skripsi ini. Tujuan dari analisis pola pergerakan kolektif adalah mengidentifikasi kelompok pergerakan yang terbentuk dari entitas-entitas yang bergerak bersama dalam rentang waktu yang cukup lama. Analisis pola pergerakan kolektif memiliki pemanfaatan dalam berbagai bidang. Sebagai contoh, identifikasi pola pergerakan kolektif dapat dimanfaatkan pada bidang keamanan untuk mengidentifikasi pergerakan mencurigakan dari sekelompok orang\footnote{Makris, D. dan Ellis, T. (2002) Path detection in video surveillance. Image Vis. Comput.,20,895–903}.
 
-\iffalse 
+\iffalse
 
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
-    \begin{subfigure}[h]{0.45\textwidth}
+    \begin{subfigure}[h]{0.475\textwidth}
         \centering
-        \includegraphics[width=\textwidth, height=4.5cm]{Gambar/army.jpg}
-        \caption{Kumpulan tentara bergerak bersama membentuk sebuah regu\protect\footnotemark}
+        \includegraphics[width=\textwidth, height=4.75cm]{Gambar/bab1:army.jpg}
+        \caption{Kumpulan tentara bergerak bersama membentuk sebuah regu}
     \end{subfigure}
-    \begin{subfigure}[h]{0.45\textwidth}
+    \begin{subfigure}[h]{0.475\textwidth}
         \centering
-        \includegraphics[width=\textwidth, height=4.5cm]{Gambar/wildebeest.jpg}
-        \caption{Kawanan \textit{wildebeest} membentuk \textit{herd} untuk melakukan migrasi musiman\protect\footnotemark}
+        \includegraphics[width=\textwidth, height=4.75cm]{Gambar/bab1:wildebeest.jpg}
+        \caption{Kawanan \textit{wildebeest} membentuk \textit{herd} untuk melakukan migrasi musiman}
     \end{subfigure}
     \caption[Pergerakan kolektif dunia nyata]{Pergerakan kolektif yang sering kita temui di dunia nyata}
     \label{bab1:collective-movement}
 \end{figure}
 
-\footnotetext{Damon On Road, \textit{C\'{e}r\'{e}monie militaire du Man\`{e}ge militaire du Qu\'{e}bec}, 2020, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/nmePDwaW9I8}}
+\addtocounter{footnote}{-1} %3=n
 
-\footnotetext{Jorge Tung, \textit{Great wildebeest migration crossing Mara river at Serengeti National Park --- Tanzania}, 2019, diakses pada tanggal 23 Desember 2020, \url{https://unsplash.com/photos/1pZJqQlgpsY}}
+\stepcounter{footnote}\footnotetext{Damon On Road, \textit{C\'{e}r\'{e}monie militaire du Man\`{e}ge militaire du Qu\'{e}bec}, 2020, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/nmePDwaW9I8}}
+
+\stepcounter{footnote}\footnotetext{Jorge Tung, \textit{Great wildebeest migration crossing Mara river at Serengeti National Park}, 2019, diakses pada tanggal 23 Desember 2020, \url{https://unsplash.com/photos/1pZJqQlgpsY}}
 
 \fi
 
-Ada berbagai macam definisi formal yang sudah dibuat untuk mengidentifikasi pola pergerakan kolektif seperti \textit{flock}, \textit{convoy}, \textit{group}, dan masih banyak lagi. Seluruh definisi formal tersebut bergantung pada \textit{size}, kedekatan spasial, dan durasi temporal untuk melakukan identifikasi pergerakan kolektif pada sekelompok entitas yang bergerak bersama. \textit{Size} menentukan jumlah anggota minimum yang harus tergabung dalam sebuah pergerakan kolektif. Kedekatan spasial menentukan batas maksimum jarak antar anggota kelompok. Durasi temporal menentukan durasi minimum pergerakan bersama dari seluruh anggota pergerakan kolektif.
+Ada berbagai macam definisi formal yang sudah dibuat untuk mengidentifikasi pola pergerakan kolektif seperti \textit{flock}\footnote{Cao, Y., Zhu, J., dan Gao, F. (2016) An algorithm for mining moving flock patterns from pedestrian trajectories.Web Technologies and Application, New York, 09, pp. 310–321. Springer}, \textit{convoy}\footnote{Jeung, H., Yiu, M. L., Zhou, X., Jensen, C. S., dan Shen, H. T. (2010) Discovery of convoys in trajectory databases.CoRR,abs/1002.0963}, \textit{group}\footnote{Buchin, K., Buchin, M., Kreveld, M., Speckmann, B., dan Staals, F. (2013) Trajectory grouping structure. Algorithm and Data Structure, New York, 03, pp. 219–230. Springer}, dan masih banyak lagi. Seluruh definisi formal tersebut bergantung pada \textit{size}, kedekatan spasial, dan durasi temporal untuk melakukan identifikasi pergerakan kolektif pada sekelompok entitas yang bergerak bersama. \textit{Size} menentukan jumlah anggota minimum yang harus tergabung dalam sebuah pergerakan kolektif. Kedekatan spasial menentukan batas maksimum jarak antar anggota kelompok. Durasi temporal menentukan durasi minimum pergerakan bersama dari seluruh anggota pergerakan kolektif.
 
 Namun, seluruh definisi formal yang ada tidak mampu melakukan identifikasi yang akurat pada beberapa kasus nyata yang lazim terjadi pada di dunia nyata. Sebagai contoh pada kasus di mana terdapat dua buah entitas bergerak yang memiliki jarak yang cukup dekat dalam waktu yang cukup lama namun berlawanan arah, definisi formal yang hanya memanfaatkan ukuran spasial dapat melakukan kesalahan identifikasi di mana kedua entitas yang bergerak berlawanan arah akan membentuk sebuah pergerakan kolektif. Contoh kasus lain yang tidak dapat diidentifikasi dengan akurat oleh definisi formal yang ada adalah pada sebuah kasus di mana terdapat sebuah entitas yang bergerak lebih cepat meninggalkan entitas lain dan kemudian menunggu entitas lain menyusul untuk bergerak bersama pada kecepatan yang sama, definisi formal yang hanya mengandalkan ukuran spasial dan temporal akan gagal mengidentifikasi pola pergerakan kolektif yang dibentuk oleh kedua entitas tersebut. Hal tersebut disebabkan oleh perbedaan jarak yang terus bertambah karena perbedaan kecepatan entitas, sehingga syarat durasi yang mengharuskan anggota pergerakan kolektif untuk memiliki jarak yang cukup dekat selama rentang waktu tertentu tidak terpenuhi. Keterbatasan-keterbatasan tersebut mendorong perlunya perluasan ukuran lintasan yang digunakan dalam proses identifikasi terhadap sebuah pola pergerakan kolektif serta pembuatan definisi formal pergerakan kolektif baru yang mampu digunakan pada kasus-kasus identifikasi yang lebih luas. 
 
@@ -160,6 +181,641 @@ Tujuan yang hendak dicapai oleh skripsi ini adalah:
 \end{itemize}
 
 \section{Detail Perkembangan Pengerjaan Skripsi}
+
+\subsection{Lintasan}
+
+Data pergerakan dari sebuah entitas yang bergerak selalu dideskripsikan sebagai lintasan. Lintasan merupakan sebuah jalur yang dilalui oleh entitas yang bergerak pada ruang gerak selama rentang waktu tertentu\footnote{Wiratma, L. (2019) Computations and Measures of Collective Movement Patterns Based on Trajectory Data. Disertasi. Utrecht University, Netherlands, Netherlands}. Secara formal, lintasan didefinisikan sebagai kumpulan dari pasangan posisi-waktu $\tau = (p_0, t_0), \ldots, (p_x, t_x)$ yang diurutkan berdasarkan waktu secara menaik. $p_i$ merupakan posisi entitas pada waktu $t_i$, di mana $i, t_i \in \mathbb{N}$ dan $t_0, t_1, \ldots, t_i$ merupakan titik-titik waktu yang konsekutif. Nilai $p_i$ dipengaruhi oleh dimensi dari ruang gerak entitas. Sebagai contoh pada data lintasan untuk ruang gerak dua dimensi, $p_i$ akan bernilai $(x_i, y_i)$ yang menunjukkan posisi entitas relatif terhadap dua sumbu $x$ dan $y$, di mana $x_i, y_i \in \mathbb{R}$. Panjang lintasan merupakan jumlah dari kumpulan posisi-waktu yang tercatat dalam data sebuah lintasan. Sebuah lintasan dapat dibagi-bagi menjadi lintasan-lintasan turunan yang memiliki panjang yang lebih pendek. Hal terserbut bertujuan untuk menyederhanakan proses analisis data lintasan.
+
+\subsubsection{Pemodelan Lintasan}
+
+Lintasan dapat dimodelkan dalam dua bentuk model, yaitu model abstrak dan model data \footnote{Ibid.}. Dalam pemodelan lintasan menggunakan model abstak, lintasan direpresentasikan sebagai sebuah garis tidak putus-putus yang menunjukkan pergerakan entitas. Secara formal, model abstrak dari sebuah lintasan merupakan fungsi yang memetakan waktu pada lokasi ruang tempat entitas bergerak. Dengan kata lain, penggunaan model abstrak akan menghasilkan data lintasan yang bersifat kontinu. Keunggulan dari model abstrak adalah lokasi dari entitas yang bergerak selalu dapat diketahui pada titik waktu manapun. 
+
+Sayangnya seperti yang sudah di bahas pada bab sebelumnya, keterbatasan dalam teknologi untuk mendapatkan data lintasan menyebabkan data lintasan harus dimodelkan dalam bentuk diskrit. Keterbatasan tersebut memicu dibuatnya bentuk pemodelan baru untuk data lintasan, yaitu model data. Dalam pemodelan lintasan menggunakan model data, lintasan digambarkan sebagai rangkaian lokasi yang berhasil tercatat tempat entitas yang bergerak berada pada ruang gerak entitas yang diurutkan berdasarkan waktu. Pada model data, akurasi sensor dan frekuensi pengambilan sampel menjadi penentu kualitas data lintasan. Gambar \ref{bab2:pemodelan-lintasan} menunjukkan kedua bentuk pemodelan lintasan.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:model-abstrak.pdf}
+        \caption{Model Abstrak. Lintasan digambarkan sebagai sebuah garis tidak putus-putus yang menunjukkan pergerakan entitas}
+        \label{bab2:model-abstrak}
+    \end{subfigure} \hspace{1cm}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:model-data.pdf}
+        \caption{Model Data. Lintasan digambarkan sebagai rangkaian posisi entitas yang terurut berdasarkan waktu secara menaik}
+    \end{subfigure}
+    \caption{Bentuk-bentuk pemodelan lintasan}
+    \label{bab2:pemodelan-lintasan}
+\end{figure}
+
+\subsubsection{Ruang Gerak Lintasan}
+
+Seperti yang sudah dibahas pada bagian sebelumnya, dimensi dari ruang gerak entitas akan mempengaruhi nilai posisi yang disimpan dalam data lintasan. Dimensi dari ruang gerak entitas dipengaruhi dari jenis entitas yang pergerakannya diamati dan tujuan dari analisis data lintasan. Sebagai contoh, pada analisis terhadap pergerakan pejalan kaki pada trotoar jalan raya, posisi pejalan kaki terhadap sumbu $z$ tidak terlalu penting dalam proses analisis data lintasan dan dapat diabaikan selama proses analisis data lintasan. Namun pada kasus lain seperti analisis terhadap pergerakan kumpulan ikan di laut, posisi ikan terhadap sumbu $z$ menjadi penting karena posisi ikan terhadap sumbu $z$ menunjukkan kedalaman posisi ikan terhadap permukaan laut. Gambar \ref{bab2:ruang-gerak} menunjukkan dua buah dimensi ruang gerak entitas yang umum digunakan.
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}[h]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:dua-dimensi.pdf}
+        \caption{Ruang \textit{euclidean} dua dimensi}
+        \label{bab2:dua-dimensi}
+    \end{subfigure} \hspace{2cm}
+    \begin{subfigure}[h]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:tiga-dimensi.pdf}
+        \caption{Ruang \textit{euclidean} tiga dimensi}
+        \label{bab2:tiga-dimensi}
+    \end{subfigure}
+    \caption{Dimensi ruang gerak lintasan}
+    \label{bab2:ruang-gerak}
+\end{figure}
+
+\subsubsection{Interpolasi Lintasan}
+
+Keterbatasan teknologi yang digunakan untuk memperoleh data lintasan menyebabkan data lintasan yang awalnya diharapkan bersifat kontinu berubah menjadi data yang bersifat diskrit. Perubahan sifat tersebut menyebabkan menurunnya akurasi data lintasan yang diperoleh. Penurunan akurasi ditandai oleh menurunnya jumlah sampel posisi-waktu pada data lintasan. Untuk menangani masalah sifat data lintasan yang tidak sesuai harapan, umumnya proses analisis hanya dilakukan sebatas pada titik-titik lokasi yang berhasil tercatat oleh sensor\footnote{Ibid.}. Keunggulan dari cara tersebut adalah analisis yang dilakukan dapat berlangsung lebih cepat dan sederhana. Namun cara tersebut dapat menghasilkan hasil analisis yang keliru apabila diimplementasikan pada data lintasan yang memiliki jumlah sampel yang sedikit.
+
+Untuk menangani data lintasan dengan jumlah sampel yang sedikit, data lintasan dapat diinterpolasi untuk mengetahui posisi dan waktu antara sampel posisi-waktu yang tersedia. Terdapat beberapa jenis interpolasi yang umum digunakan untuk menginterpolasi data lintasan seperti interpolasi linear\footnote{Ibid.} dan interpolasi menggunakan kurva \textit{curvilinear}\footnote{Tremblay, Y., Shaffer, S. A., Fowler, S. L., Kuhn, C. E., McDonald, B. I., Weise, M. J., Bost,C.-A., Weimerskirch, H., Crocker, D. E., Goebel, M. E., dan Costa, D. P. (2006) Interpolation of animal tracking data in a fluid environment.Journal of Experimental Biology,209, 128–140}. Gambar \ref{bab2:interpolasi-lintasan} menunjukkan pengaplikasian interpolasi linear untuk meningkatkan akurasi pada sebuah data lintasan.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Gambar/bab2:interpolasi-lintasan.pdf}
+    \caption[Interpolasi lintasan]{Upaya interpolasi linear pada sebuah data lintasan. Kurva abu-abu menunjukkan bentuk lintasan yang sesungguhnya. Titik-titik merah merupakan hasil dari interpolasi linear pada lintasan. Titik-titik hasil interpolasi kemudian dihubungkan dan membentuk lintasan yang semirip mungkin dengan lintasan sesungguhnya}
+    \label{bab2:interpolasi-lintasan}
+\end{figure}
+
+\subsection{Sumber Data Lintasan}
+
+Pergerakan sudah menjadi bahan penelitian menarik sejak kemunculan pertama dari komputasi geometri pada tahun 1975\footnote{Shamos, M. I. (1975) Geometric complexity. Proceedings of the Seventh Annual ACM Symposium on Theory of Computing, New York, NY, USA, May STOC ’75 224–233. Association for Computing Machinery}. Data mengenai pergerakan dapat bersumber dari entitas manapun yang dapat bergerak seperti binatang, kendaraan, bahkan manusia. Karena banyaknya variansi tersebut, terdapat banyak teknik dan alat yang dapat digunakan untuk memperoleh data pergerakan sesuai dengan kasus pergerakan yang diamati.
+
+Terdapat beberapa cara untuk memperoleh data pergerakan entitas tanpa melibatkan teknologi modern. Keunggulan dari cara-cara tersebut adalah tidak melibatkan sumber tenaga apapun selain tenaga manusia. Namun, cara-cara tersebut akan menghasilkan akurasi data pergerakan yang lebih rendah dibandingkan cara-cara yang melibatkan teknologi modern dan hanya dapat diaplikasikan pada pergerakan entitas tertentu saja. Contoh-contoh cara untuk memperoleh data lintasan tanpa melibatkan teknologi modern adalah dengan mengikuti jejak entitas secara manual\footnote{Stickel, L. F. (1950) Populations and home range relationships of the box turtle, terrapene c.carolina (linnaeus).Ecological Monographs,20, 351–378} dan mengikatkan sebuah penanda pada entitas yang bergerak\footnote{van Velden, J. L., Altwegg, R., Shaw, K., dan Ryan, P. G. (2017) Movement patterns and survival estimates of blue cranes in the western cape.Ostrich,88, 33–43}.
+
+Perkembangan teknologi mendorong pemanfaatan teknologi modern untuk memperoleh data pergerakan yang lebih akurat dibandingkan cara-cara sebelumnya. Saat ini, teknologi satelit menjadi teknologi yang paling sering digunakan untuk memperoleh data pergerakan, seperti sistem Argos-Doppler dan \textit{global positioning system} (GPS) yang lebih populer. Pada sistem Argos-Doppler, pemancar sinyal akan dibawa oleh entitas yang bergerak, sebaliknya pada GPS entitas akan membawa penerima sinyal.
+
+Selain mengamati pergerakan entitas secara langsung, data pergerakan juga dapat diperoleh melalui pemodelan pada entitas yang bergerak\footnote{Wiratma, L. (2019) Computations and Measures of Collective Movement Patterns Based on Trajectory Data. Disertasi. Utrecht University, Netherlands, Netherlands}. Berdasarkan model tersebut, pergerakan entitas dapat disimulasikan menggunakan sebuah program komputer. Kelebihan dari cara ini adalah para peneliti dapat mengatur faktor-faktor penting yang nantinya ada dalam data pergerakan yang diperoleh seperti lingkungan tempat terjadinya pergerakan, jumlah entitas yang bergerak, ukuran-ukuran yang terdapat dalam data pergerakan seperti kecepatan dan arah, dan lain sebagainya. 
+
+Pengambilan sampel data pergerakan entitas merupakan bagian dari \textit{Geometric Computation System} (GIS), sebuah sistem informasi berbasis komputer yang bertujuan untuk meningkatkan efisiensi dan efektivitas dari segala objek dan kejadian yang terjadi pada ruang geografis dengan mengumpulkan, menyimpan, memproses, menganalisis, serta memvisualisasikan informasi geografis yang diperoleh\footnote{Longley, P. A., Goodchild, M. F., Maguire, D. J., dan Rhind, D. W. (2015) Geographic Information Science and Systems, 4th edition. Wiley Publishing, Hoboken, New Jersey}.
+
+\subsection{Ukuran Lintasan}
+
+Setiap lintasan memiliki atribut-atribut dengan nilai-nilai tertentu yang membedakan sebuah lintasan dengan lintasan-lintasan lainnya. Atribut lintasan dicatat untuk setiap titik waktu yang memungkinkan, sehingga atribut merupakan informasi yang dinamis pada sebuah data lintasan. Salah satu contoh dari atribut yang terdapat pada data lintasan adalah kecepatan, di mana atribut tersebut menunjukkan besar perpindahan tempat yang dilakukan entitas per satuan waktu.
+
+Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat mengolah atribut-atribut tersebut menjadi ukuran lintasan yang memiliki tujuan yang lebih spesifik dibandingkan atribut lintasan. Dapat dikatakan bahwa ukuran lintasan merupakan turunan dari atribut lintasan. Salah satu contoh dari ukuran lintasan yang umum digunakan adalah kecepatan rata-rata, di mana ukuran tersebut merupakan turunan langsung dari atribut kecepatan yang ada pada data lintasan. Dalam merepresentasikan ukuran lintasan, model abstrak lebih sering digunakan daripada model data karena model abstrak lebih sederhana dan memiliki representasi yang lebih bebas dibandingkan model data\footnote{Wiratma, L. (2019) Computations and Measures of Collective Movement Patterns Based on Trajectory Data. Disertasi. Utrecht University, Netherlands, Netherlands}. Nantinya, segala ukuran yang direpresentasikan menggunakan model abstrak dapat diubah dalam bentuk yang sesuai dengan model data. Ukuran lintasan dapat dibagi menjadi dua kategori, yaitu ukuran yang terdapat pada satu lintasan dan ukuran yang terdapat pada kumpulan lintasan. Berikut merupakan beberapa contoh ukuran yang terdapat dalam data lintasan.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|m{4cm}|l|p{8cm}|} 
+        \hline
+        \multirow{5}{*}{
+            \includegraphics{Gambar/bab2:arah.pdf}
+        } & Nama & Arah \\ 
+        \cline{2-3}
+        & Deskripsi & Arah lintasan yang dihitung dari posisi awal dan posisi akhir entitas                    \\ 
+        \cline{2-3}
+        & Satuan & radian                    \\ 
+        \cline{2-3}
+        & Rentang Nilai & $[0, 2\pi]$                    \\ 
+        \cline{2-3}
+        & Ukuran Untuk & Satu lintasan                    \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|m{4cm}|l|p{8cm}|} 
+        \hline
+        \multirow{5}{*}{
+            \includegraphics{Gambar/bab2:durasi.pdf}
+        } & Nama & Durasi \\ 
+        \cline{2-3}
+        & Deskripsi & Lamanya pergerakan dalam satuan waktu                    \\ 
+        \cline{2-3}
+        & Satuan & detik                    \\ 
+        \cline{2-3}
+        & Rentang Nilai & $[0, \infty]$                    \\ 
+        \cline{2-3}
+        & Ukuran Untuk & Satu lintasan                    \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|m{4cm}|l|p{8cm}|} 
+        \hline
+        \multirow{5}{*}{
+            \includegraphics{Gambar/bab2:kecepatan.pdf}
+        } & Nama & Kecepatan \\ 
+        \cline{2-3}
+        & Deskripsi & Perpindahan tempat yang dilakukan oleh entitas per satuan waktu                    \\ 
+        \cline{2-3}
+        & Satuan & meter per detik                   \\ 
+        \cline{2-3}
+        & Rentang Nilai & $[0, \infty]$                    \\ 
+        \cline{2-3}
+        & Ukuran Untuk & Satu lintasan                    \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|m{4cm}|l|p{8cm}|} 
+        \hline
+        \multirow{5}{*}{
+            \includegraphics{Gambar/bab2:kemiripan.pdf}
+        } & Nama & Kemiripan \\ 
+        \cline{2-3}
+        & Deskripsi & Kemiripan antar lintasan yang dihitung berdasarkan jarak rata-rata lintasan                     \\ 
+        \cline{2-3}
+        & Satuan & meter                   \\ 
+        \cline{2-3}
+        & Rentang Nilai & $[0, \infty]$                    \\ 
+        \cline{2-3}
+        & Ukuran Untuk & Satu lintasan                    \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|m{4cm}|l|p{8cm}|} 
+        \hline
+        \multirow{5}{*}{
+            \includegraphics{Gambar/bab2:jumlah.pdf}
+        } & Nama & Jumlah \\ 
+        \cline{2-3}
+        & Deskripsi & Jumlah entitas yang membentuk kumpulan entitas                     \\ 
+        \cline{2-3}
+        & Satuan & -                   \\ 
+        \cline{2-3}
+        & Rentang Nilai & $[2, \infty]$                    \\ 
+        \cline{2-3}
+        & Ukuran Untuk & Kumpulan lintasan                    \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Kemiripan Lintasan}
+
+Salah satu bagian penting dari kegiatan analisis data lintasan adalah pengukuran kemiripan antar lintasan. Pengukuran kemiripan lintasan bertujuan untuk menentukan apakah dua buah lintasan memiliki tingkat kemiripan tertentu. Menurut Wiratma (2019:12), kemiripan lintasan dapat diukur melalui berbagai kriteria seperti lokasi-lokasi yang dikunjungi, kecepatan rata-rata yang mirip, jarak antar entitas, dan kriteria-kriteria lainnya. Biasanya, pengukuran kemiripan lintasan digunakan untuk mendahului proses-proses analisis lintasan lainnya, seperti \textit{clustering} dan identifikasi pola pergerakan kolektif yang menjadi fokus pada skripsi ini. Selain sebagai sebuah bentuk \textit{preprocessing} pada dua buah lintasan, pengukuran kemiripan lintasan juga dapat digunakan untuk mencari lintasan turunan yang mirip dengan lintasan turunan lain dalam satu lintasan utama yang sama.
+
+Salah satu algoritma yang paling sering digunakan untuk mengukur kemiripan antara dua buah lintasan adalah jarak \textit{euclidean}\footnote{Bashir, F. I., Khokhar, A. A., dan Schonfeld, D. (2003) Segmented trajectory based indexing and retrieval of video data.Proceedings 2003 International Conference on Image Processing(Cat. No.03CH37429), New York, September, pp. II–623. IEEE}. Jarak \textit{euclidean} $d$ dari dua buah lintasan $X$ dan $Y$ yang masing-masing berdimensi $n$ dengan jumlah posisi yang tercatat pada kedua lintasan sebanyak $L$ dapat dinyatakan sebagai:
+
+\begin{equation}
+    d(X, Y) = \sum_{i=0}^{L} \sqrt{\sum_{j=0}^{n}(x_j - y_j)^2}
+    \label{bab2:euclidean-distance}
+\end{equation}
+
+Pada lintasan yang hanya memiliki satu dimensi, jarak \textit{euclidean} dapat dihitung sebagai akumulasi selisih dari setiap posisi yang tercatat pada kedua lintasan. Jarak \textit{euclidean} dari dua buah lintasan berdimensi satu dapat dinyatakan sebagai:
+
+\begin{equation}
+    d(X, Y) = \sum_{i = 1}^{L} |x_i - y_i|
+\end{equation}
+
+Untuk selanjutnya, jarak \textit{euclidean} antara dua buah entitas $a$ dan $b$ pada titik waktu $t$ akan dinyatakan sebagai $d\textsubscript{ab}(t)$. Selain jarak \textit{euclidean}, terdapat algoritma lain yang dapat digunakan untuk menghitung kemiripan lintasan seperti jarak Hausdorff\footnote{Rote, G. (1991) Computing the minimum hausdorff distance between two point sets on a lineunder translation.Inf. Process. Lett.,38, 123–127}, jarak Fr\'{e}chet\footnote{Alt, H. dan Godau, M. (1995) Computing the fr\'{e}chet distance between two polygonal curves. International Journal of Computational Geometry \& Applications,05, 75–91}, dan jarak \textit{dynamic time warping} (DTW)\footnote{M\"{u}ller, M. (2007) Dynamic time warping. Information Retrieval for Music and Motion,2,69–84} yang akan menjadi fokus utama dalam skripsi ini. Seluruh algoritma pengukuran kemiripan yang telah disebutkan memanfaatkan jarak \textit{euclidean} dalam proses penghitungan kemiripan lintasan.
+
+\subsection{\textit{Dynamic Time Warping}}
+
+\textit{Dynamic time warping} (DTW) merupakan sebuah algoritma yang dapat digunakan mengukur kemiripan atau jarak antara dua buah data yang mengandung informasi waktu. Algoritma \textit{dynamic time warping} pertama kali dipopulerkan pada tahun 1970-an melalui penggunaan algoritma tersebut pada aplikasi pengenalan suara\footnote{Myers, C., Rabiner, L., dan Rosenberg, A. (1980) Performance tradeoffs in dynamic time warping algorithms for isolated word recognition.IEEE Transactions on Acoustics, Speech,and Signal Processing,28, 623–635}. Selain digunakan untuk mengenali pola suara, algoritma \textit{dynamic time warping} juga dimanfaatkan pada bidang-bidang lain seperti pengenalan pola tulisan dan tanda tangan\footnote{Efrat, A., Fan, Q., dan Venkatasubramanian, S. (2007) Curve matching, time warping, and light fields: New algorithms for computing similarity between curves.Journal of Mathematical Imaging and Vision,27, 203–216}, pengenalan gerakan\footnote{Corradini, A. (2001) Dynamic time warping for off-line recognition of a small gesture vocabulary.Proceedings IEEE ICCV Workshop on Recognition, Analysis, and Tracking of Faces and Gestures in Real-Time Systems, New York, 02, pp. 82 – 89. IEEE.}, dan bidang \textit{computer vision}\footnote{M\"{u}ller, M. (2007) Dtw-based motion comparison and retrieval.Information Retrieval for Musicand Motion,1, 211–226}. 
+
+Terdapat dua keunggulan yang dimiliki oleh algoritma \textit{dynamic time warping} dibandingkan dengan cara-cara penghitungan kemiripan lintasan lainnya:
+
+\begin{enumerate}[noitemsep, nolistsep]
+    \item Algoritma \textit{dynamic time warping} mampu mengukur kemiripan lintasan antara dua buah lintasan yang memiliki panjang durasi waktu yang berbeda.
+    \item Algoritma \textit{dynamic time warping} mampu mengukur kemiripan lintasan antara dua buah entitas yang memiliki kecepatan yang bervariasi atau mengalami perubahan kecepatan dengan frekuensi tertentu selama proses pencatatan data lintasan.
+\end{enumerate}
+
+Dua keunggulan tersebut diperoleh dari cara perbandingan data lintasan pada algoritma \textit{dynamic time warping} yang dilakukan secara non-linear, di mana posisi entitas $a$ pada titik waktu $t_x$ dapat dipasangkan dengan posisi entitas $b$ pada titik waktu lain selain $t_x$. Perbandingan tersebut sangat berbeda dengan cara-cara penghitungan kemiripan lintasan lainnya yang dilakukan secara linear untuk setiap titik waktu yang tercatat, di mana posisi entitas $a$ pada titik waktu $t_x$ akan selalu dipasangkan dengan posisi entitas $b$ pada titik waktu $t_x$. Gambar \ref{bab2:dtw-euclidean} menunjukkan perbandingan data lintasan secara non-linear yang dilakukan oleh algoritma \textit{dynamic time warping} dan perbandingan data lintasan secara linear yang dilakukan pada perhitungan jarak \textit{euclidean}.
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}[h]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:euclidean.pdf}
+        \caption{Penghitungan kemiripan linear menggunakan jarak \textit{euclidean} (linear)}
+        \label{bab2:euclidean}
+    \end{subfigure} \hspace{10pt}
+    \begin{subfigure}[h]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:dtw.pdf}
+        \caption{Penghitungan kemiripan non-linear menggunakan algoritma \textit{dynamic time warping}}
+        \label{bab2:dtw}
+    \end{subfigure}
+    \caption{Perbandingan penghitungan kemiripan menggunakan jarak \textit{euclidean} dan algoritma \textit{dynamic time warping}}
+    \label{bab2:dtw-euclidean}
+\end{figure}
+
+\subsubsection{\textit{Warping Path}}
+
+Algoritma \textit{dynamic time warping} menghitung kemiripan dua buah lintasan dengan cara mencari seluruh \textit{warping path} dari dua lintasan tersebut. Secara formal, \textit{warping path} berdimensi $(N \times M)$ dari dua buah lintasan merupakan rangkaian $p = (p_1, p_2, \ldots, p_\ell)$ dengan $p_\ell = (x_\ell, y_\ell) \in [1 : N] \times [1 : M]\;untuk\;\ell \in [1 : L]$ yang memenuhi tiga syarat berikut:
+
+\begin{enumerate}[noitemsep, nolistsep]
+    \item \textit{Boundary}: $p_1 = (1, 1)$ dan $p_x = (N, M)$.
+    \item Monotonik: $x_1 \leq x_2 \leq x_3 \leq \ldots < x_n$ dan $y_1 \leq y_2 \leq y_3 \leq \ldots, y_m$.
+    \item \textit{Step size}: $p\textsubscript{(l + 1)} - p_l = {(1, 0), (0, 1), (1, 1)}\;untuk\; l \in [1 : L - 1]$.
+\end{enumerate}
+
+\textit{Warping path} $p = (p_1, p_2, \ldots, p_L)$ untuk dua buah lintasan $X = (x_1, x_2, \ldots, x_N)$ dan $Y = (y_1, y_2, \ldots, y_M)$ dinyatakan dengan memasangkan elemen $x_\ell$ dari lintasan $X$ dengan elemen $y_\ell$ dari lintasan $Y$. Syarat \textit{boundary} mengharuskan elemen pertama dari lintasan $X$ dipasangkan dengan elemen pertama dari lintasan $Y$, begitu juga dengan elemen terakhir dari lintasan $X$ harus dipasangkan dengan elemen terakhir dari lintasan $Y$. Dengan kata lain, kondisi tersebut berlaku untuk seluruh elemen pada lintasan $X$ dan $Y$. Syarat monotonik mengharuskan elemen-elemen pada lintasan diurutkan menaik secara inklusif. Syarat \textit{step size} mengharuskan terjadinya kontinuitas pada pemasangan elemen, tidak ada elemen dari lintasan $X$ dan $Y$ yang tidak digunakan dan tidak ada pasangan duplikat dari seluruh pemasangan elemen dari lintasan $X$ dan $Y$. Gambar \ref{bab2:dtw-requirements} menunjukkan syarat-syarat dari \textit{warping path} antara dua buah lintasan.
+
+\begin{figure}[b]
+    \centering
+    \begin{subfigure}[h]{0.225\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:valid.pdf}
+        \caption{Jalur kesejajaran yang valid}
+        \label{bab2:valid}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.225\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:boundary.pdf}
+        \caption{Pelanggaran syarat \textit{boundary}, $p_1 \neq (1, 1)$.}
+        \label{bab2:boundary}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.225\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:monotonicity.pdf}
+        \caption{Pelanggaran syarat monotonik, $x_3 < x_4$.}
+        \label{bab2:monotonicity}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.225\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:step-size.pdf}
+        \caption{Pelanggaran syarat \textit{step-size}, $y_6$ dilewatkan.}
+        \label{bab2:step-size}
+    \end{subfigure}
+    \caption[Syarat-syarat \textit{warping path}]{Syarat-syarat \textit{warping path} dari dua buah lintasan}
+    \label{bab2:dtw-requirements}
+\end{figure}
+
+\newpage
+
+Jarak total $c_p$ dari sebuah \textit{warping path} yang valid merupakan akumulasi perbedaan jarak dari setiap pasang titik yang terdapat dalam \textit{warping path}. Secara formal, $c_p$ dapat dinyatakan sebagai:
+
+\begin{equation}
+    c_p(X, Y) = \sum_{\ell = 1}^{L} d(x_\ell, y_\ell)
+    \label{bab2:warping-path-length}
+\end{equation}
+
+\textit{Warping path} optimal antara dua buah lintasan merupakan \textit{warping path} $p^*$ yang memiliki jarak terkecil di antara semua \textit{warping path} yang valid. Jarak \textit{dynamic time warping} $DTW(X, Y)$ antara dua buah lintasan $X$ dan $Y$ merupakan jarak total dari \textit{warping path} $p^*$. Secara formal, jarak \textit{dynamic time warping} dari dua buah lintasan $X$ dan $Y$ dapat dinyatakan sebagai:
+
+\vspace{-10pt}
+
+\begin{align*}
+    DTW(X, Y) & = c\textsubscript{$p*$}(X, Y) \\
+    & = min\{c_p(X, Y)\;|\;p\;adalah\;warping\;path\;dari\;lintasan\;(X, Y)\}
+\end{align*}
+
+\subsubsection{Implementasi Algoritma \textit{Dynamic Time Warping}}
+
+Karena proses perhitungan jarak total \textit{warping path} memiliki properti \textit{optimal substructure}, algoritma \textit{dynamic time warping} biasanya diimplementasikan menggunakan prinsip \textit{dynamic time warping} untuk meningkatkan efisiensi algoritma pada proses perhitungan jarak total \textit{warping path}. Berikut merupakan implementasi sederhana dari algoritma \textit{dynamic time warping}:
+
+\begin{algorithm}
+    \caption{Algoritma \textit{Dynamic Time Warping}}
+    \SetKwInput{KwInput}{Input}                % Set the Input
+    \SetKwInput{KwOutput}{Output}              % set the Output
+    \DontPrintSemicolon
+    \SetKwFunction{DTW}{DTWDistance}
+ 
+    \SetKwProg{Fn}{Function}{:}{}
+  
+    \KwInput{Dua buah lintasan $X$ dan $Y$ yang terdiri atas pasangan $(posisi, waktu)$}
+    \KwOutput{Sebuah bilangan \textit{real} yang merupakan jarak \textit{dynamic time warping} dari lintasan $X$ dan $Y$}
+    
+    \Fn{\DTW{$X, Y$}}{
+        $n \gets length(X)$ \\
+        $m \gets length(Y)$ \\
+        $DTW \gets array [0 \dots n, 0 \dots m]$ \\
+        \For{$i \gets 0$ \KwTo{n}}{
+            \For{$j \gets 0$ \KwTo{m}}{
+                $DTW[i, j] \gets \infty$
+            }
+        }
+        $DTW[0, 0] \gets 0$ \\
+        \For{$i \gets 1$ \KwTo{n}}{
+            \For{$j \gets 1$ \KwTo{m}}{
+                $cost \gets d(x_i, y_i)$ \\
+                $DTW[i, j] \gets cost + \min(DTW[i - 1, j], DTW[i, j - 1], DTW[i - 1, j - 1])$
+            }
+        }
+        \KwRet{$DTW[n, m]$}
+    }
+    \label{bab2:dtw-pseudocode}
+\end{algorithm}
+
+Pada implementasi di atas, algoritma \textit{dynamic time warping} memiliki kompleksitas waktu dan tempat sebesar $O(MN)$, di mana $M$ merupakan jumlah posisi yang tercatat pada lintasan $X$ dan $N$ merupakan jumlah posisi yang tercatat pada lintasan $Y$. Selain implementasi di atas, terdapat beberapa variasi implementasi untuk algoritma \textit{dynamic time warping} seperti PrunedDTW\footnote{Silva, D. F. dan Batista, G. E. A. P. A. (2016) Speeding up all-pairwise dynamic time warping matrix calculation. Bagian dari Venkatasubramanian, S. C. dan Jr., W. M. (ed.), Proceedings of the 2016 SIAM International Conference on Data Mining, Miami, Florida, USA, May 5-7,2016, USA, March, pp. 837–845. SIAM}, SparseDTW \footnote{Al-Naymat, G., Chawla, S., dan Taheri, J. (2012) Sparsedtw: A novel approach to speed up dynamic time warping.CoRR,abs/1201.2969}, FastDTW\footnote{Salvador, S. dan Chan, P. (2007) Toward accurate dynamic time warping in linear time and space.Intell. Data Anal.,11, 561–580}, dan berbagai variasi implementasi lainnya.
+
+\subsubsection{Contoh Perhitungan \textit{Dynamic Time Warping}}
+
+Diberikan dua buah lintasan berdimensi satu $X = ((3, 0), (1, 1), (2, 2), (2, 3), (1, 4))$ dan $Y = ((2, 0), (0, 1), (0, 2), (3, 3), (3, 4), (1, 5), (0, 6))$ di mana elemen dari masing-masing lintasan merupakan sebuah pasangan $(posisi, waktu)$. Langkah pertama yang harus dilakukan untuk mencari jarak \textit{dynamic time warping} dari kedua lintasan tersebut adalah menemukan seluruh \textit{warping path} yang valid untuk kedua lintasan tersebut. Gambar \ref{bab2:contoh-dtw} menunjukkan dua buah contoh \textit{warping path} yang valid untuk kedua lintasan tersebut.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.225\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:contoh-dtw.pdf}
+        \caption{Salah satu \textit{warping path} yang valid untuk lintasan $X$ dan $Y$. $c_p = 8$}
+        \label{bab2:warping-path}
+    \end{subfigure} \hspace{1cm}
+    \begin{subfigure}{0.225\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab2:contoh-dtw-optimal.pdf}
+        \caption{\textit{Warping path} yang optimal untuk lintasan $X$ dan $Y$. $c_p = 6$}
+        \label{bab2:warping-path-optimal}
+    \end{subfigure}
+    \caption{Contoh jalur kesejajaran yang valid untuk lintasan $X$ dan $Y$}
+    \label{bab2:contoh-dtw}
+\end{figure}
+
+Setelah seluruh \textit{warping path} yang valid untuk kedua lintasan tersebut berhasil ditemukan, langkah selanjutnya yang perlu dilakukan adalah mencari jarak total untuk seluruh \textit{warping path} yang ditemukan, yang dapat dicari menggunakan rumus \ref{bab2:warping-path-length}. Berdasarkan rumus tersebut, maka jarak total untuk \textit{warping path} yang ditunjukkan melalui gambar \ref{bab2:warping-path} dapat dihitung sebagai:
+
+\vspace{-7.5pt}
+
+\begin{align*}
+    c_p(X, Y) & = \sum_{\ell = 1}^{L} |x_\ell - y_\ell| \\
+    & = |3 - 2| + |1 - 0| + |2 - 0| + |2 - 3| + |1 - 3| + |1 - 1| + |1 - 0| \\
+    & = 1 + 1 + 2 + 1 + 2 + 0 + 1 \\
+    & = 8
+\end{align*}
+
+Menggunakan cara yang sama, jarak total dari \textit{warping path} yang ditunjukkan melalui gambar \ref{bab2:warping-path-optimal} adalah sebesar $6$ satuan jarak. Setelah seluruh jarak \textit{warping path} yang valid berhasil dihitung, langkah terakhir yang perlu dilakukan untuk menghitung jarak \textit{dynamic time warping} dari kedua lintasan adalah mencari \textit{warping path} yang optimal, yaitu \textit{warping path} yang memiliki jarak total yang paling minimum. \textit{Warping path} yang optimal untuk kedua lintasan tersebut ditunjukkan melalui gambar \ref{bab2:warping-path-optimal}. Berdasarkan informasi tersebut, dapat disimpulkan bahwa jarak \textit{dynamic time warping} dari dua buah lintasan $X$ dan $Y$ adalah sebesar $6$ satuan jarak.
+
+
+\section{Pergerakan Kolektif}
+\label{sec:collective-movement}
+
+Pergerakan kolektif merupakan sebuah keadaan di mana terdapat dua atau lebih entitas yang bergerak bersama selama kurun waktu tertentu\footnote{Wiratma, L. (2019) Computations and Measures of Collective Movement Patterns Based on Trajectory Data. Disertasi. Utrecht University, Netherlands, Netherlands}. Identifikasi pergerakan kolektif cukup mirip dengan kegiatan \textit{clustering} lintasan namun pada \textit{clustering}, sebuah lintasan akan diproses secara keseluruhan tanpa dibagi-bagi menjadi lintasan-lintasan turunan yang lebih kecil sedangkan pada identifikasi pergerakan kolektif, lintasan dapat dibagi-bagi menjadi lintasan turunan yang lebih kecil sehingga sebuah entitas dapat tergabung pada lebih dari satu kelompok setiap waktu\footnote{Ibid.}.
+
+Identifikasi terhadap pola pergerakan kolektif dapat diaplikasikan pada berbagai bidang seperti pada bidang ilmu ternak, peneliti dapat melakukan identifikasi pergerakan kolektif pada ayam-ayam yang terinfeksi bakteri \textit{Campylobacter} yang menyebabkan keracunan makanan pada manusia\footnote{Colles, F., Cain, R., Nickson, T., Smith, A., Roberts, S., Maiden, M., Lunn, D., dan Dawkins, M.(2016) Monitoring chicken flock behavior provides early warning of infection by human pathogen campylobacter.Proceedings of the Royal Society B: Biological Sciences,283, 20152323}. Pada bidang keamanan, identifikasi pola pergerakan kolektif dapat dimanfaatkan untuk mendeteksi gerak-gerik mencurigakan pada sekelompok orang yang terekam pada kamera pengawas\footnote{Makris, D. dan Ellis, T. (2002) Path detection in video surveillance.Image Vis. Comput.,20,895–903}. Pada contoh aplikasi tersebut, identifikasi pergerakan kolektif memunculkan informasi baru yang berguna untuk lebih memahami pergerakan yang dilakukan oleh entitas.
+
+Terdapat beberapa aspek penting dalam identifikasi pola pergerakan kolektif:
+
+\begin{itemize}[noitemsep, nolistsep]
+    \item \textbf{Sifat Data Lintasan}
+    
+    Seperti yang sudah dibahas pada bagian sebelumnya, data lintasan dapat bersifat diskrit dan kontinu. Pada data lintasan yang bersifat diskrit, waktu terbentuknya pergerakan kolektif dan waktu berakhirnya pergerakan kolektif juga harus bersifat diskrit dan terdapat pada titik-titik waktu yang tercatat pada data lintasan.
+    
+    Pada data lintasan yang bersifat kontinu, waktu terbentuknya pergerakan kolektif, waktu berakhirnya pergerakan kolektif, serta posisi entitas dapat diestimasi di antara posisi-posisi yang diketahui menggunakan interpolasi lintasan. Sehingga, kelompok pergerakan kolektif yang sama dapat memiliki durasi yang lebih lama dibandingkan pada hasil proses identifikasi menggunakan data yang bersifat diskrit\footnote{Wiratma, L. (2019) Computations and Measures of Collective Movement Patterns Based on Trajectory Data. Disertasi. Utrecht University, Netherlands, Netherlands}.
+    \item \textbf{Kedekatan Spasial}
+    
+    Atribut spasial menyatakan lokasi entitas yang bergerak relatif terhadap ruang gerak entitas. Biasanya, manusia akan menganggap dua buah entitas bergerak bersama apabila kedua entitas tersebut dekat secara spasial. Salah satu cara sederhana yang sering digunakan untuk mengukur kedekatan spasial dari dua buah entitas adalah dengan menetapkan sebuah konstanta $\varepsilon > 0$ \iffalse \lionov{pake varepsilon ($\varepsilon$)} \fi sebagai batas jarak maksimum antara kedua entitas supaya dapat dikatakan dekat secara spasial. Cara tersebut dapat diperluas untuk dapat digunakan pada identifikasi pergerakan kolektif, misalnya dengan mengharuskan setiap pasang anggota pergerakan kolektif untuk memiliki jarak di bawah $\varepsilon$ setiap waktu.
+    
+    Selain menggunakan sebuah konstanta yang menyatakan jarak maksimum, terdapat cara-cara lain untuk menentukan kedekatan dua buah entitas seperti menggunakan sebuah cakram dengan radius $\epsilon$ di mana seluruh anggota pergerakan kolektif harus masuk dalam diameter dari cakram tersebut\footnote{Gudmundsson, J. dan van Kreveld, M. (2006) Computing longest duration flocks in trajectory data.Proceedings of the 14th Annual ACM International Symposium on Advances in Geographic Information Systems, New York, NY, USA, November GIS ’06 35–42. Association for Computing Machinery}. Jarak maksimum juga dapat dihitung secara relatif, di mana terdapat entitas lain dapat digunakan sebagai perantara dari dua buah entitas yang dikatakan dekat. Sebagai contoh, dua entitas $a$ dan $b$ dikatakan dekat pada titik waktu $t$ apabila terdapat sebuah entitas $c$ di mana $d\textsubscript{ac}(t) \leq \varepsilon$ dan $d\textsubscript{bc}(t) \leq \varepsilon$ walaupun $d\textsubscript{ab}(t) > \varepsilon$. \iffalse \lionov{harus didefinisikan dulu sebelumnya kalo $d_{ac}(t)$ itu menyatakan jarak $a$ dan $c$ pada waktu $t$} \cristopher{udah di bagian \ref{sec:kemiripan} ko} \fi Gambar \ref{bab2:spasial} menunjukkan cara-cara untuk menentukan kedekatan spasial antar entitas.
+    
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[h]{0.25\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Gambar/bab2:spatial-euclidean.pdf}
+            \caption{Jarak \textit{euclidean}}
+        \end{subfigure} \hspace{0.75cm}
+        \begin{subfigure}[h]{0.25\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Gambar/bab2:disc.pdf}
+            \caption{Cakram \textit{(disc)}}
+        \end{subfigure} \hspace{0.75cm}
+        \begin{subfigure}[h]{0.25\textwidth}
+            \centering
+            \includegraphics[height=3.5cm]{Gambar/bab2:intermediate.pdf}
+            \caption{Entitas perantara}
+        \end{subfigure}
+        \caption[Pengukuran kedekatan spasial]{Berbagai macam cara pengukuran kedekatan spasial}
+        \label{bab2:spasial}
+    \end{figure}
+    \item \textbf{\textit{Size}} \iffalse \lionov{kayaknya ini jangan pake ``ukuran'', nanti sama dengan measure, pake {\it size} ato langung aja jumlah minimumentitas } \fi
+    
+    \textit{Size} menyatakan jumlah entitas minimum yang bergerak bersama agar entitas-entitas tersebut dapat diidentifikasi sebagai sebuah pergerakan kolektif. Walaupun dua buah entitas dapat membentuk sebuah pergerakan kolektif, namun jumlah entitas minimum untuk membentuk sebuah pergerakan kolektif dapat disesuaikan oleh peneliti berdasarkan tujuan dan kebutuhan penelitian\footnote{Wiratma, L. (2019) Computations and Measures of Collective Movement Patterns Based on Trajectory Data. Disertasi. Utrecht University, Netherlands, Netherlands}. Selain jumlah entitas, peneliti juga harus mempertimbangkan apakah satu entitas dapat tergabung dalam lebih dari satu pergerakan kolektif atau tidak.
+    
+    \item \textbf{Durasi Temporal}
+    
+    Durasi temporal menyatakan waktu minimum pergerakan bersama yang dilakukan oleh kumpulan entitas agar dapat dikategorikan sebagai pergerakan kolektif. Salah satu hal yang patut diperhatikan dari atribut temporal adalah sifat kontinuitas dari pergerakan bersama.
+    
+    Sifat kontinuitas yang kaku, di mana syarat temporal harus dihitung secara konsekutif, dapat menyebabkan kesalahan identifikasi pola pergerakan kolektif pada kasus di mana ada anggota pergerakan yang secara sementara memisahkan diri untuk bergabung kembali setelah beberapa saat\footnote{Ibid.}. Untuk mengatasi masalah tersebut, sifat kontinuitas harus dilonggarkan sehingga syarat temporal dapat dipenuhi secara kumulatif. Sifat kontinuitas tersebut dapat menghasilkan definisi pergerakan kolektif yang lebih kuat, fleksibel, dan dapat mencakup lebih banyak variasi kasus identifikasi pergerakan kolektif.
+\end{itemize}
+
+Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kolektif menjadi topik penelitian yang hangat pada bidang komputasi geometri. Hal tersebut memunculkan berbagai definisi formal untuk sebuah pola pergerakan kolektif seperti:
+
+\begin{itemize}[noitemsep, nolistsep]
+    \item \textbf{Flock}
+    
+    Diberikan sebuah himpunan lintasan dari $n$ buah entitas yang masing-masing terdiri dari $\gamma$ segmen garis, jumlah entitas minimum $m$, interval waktu minimum $k$, dan jarak maksimum antar entitas $r$. Sebuah \textit{flock} pada interval waktu konsekutif $I\;(I \geq k)$ merupakan sebuah pergerakan kolektif yang terdiri dari setidaknya $m$ buah entitas dan untuk setiap satuan waktu pada interval waktu $I$, terdapat sebuah cakram (\textit{disc}) dengan radius $r$ di mana seluruh entitas memiliki jarak kurang dari $r$ ke titik pusat cakram\footnote{Gudmundsson, J. dan van Kreveld, M. (2006) Computing longest duration flocks in trajectory data.Proceedings of the 14th Annual ACM International Symposium on Advances in Geographic Information Systems, New York, NY, USA, November GIS ’06 35–42. Association for Computing Machinery}. Gambar \ref{bab2:flock} menunjukkan pemodelan sederhana dari sebuah \textit{flock}.
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Gambar/bab2:flock.pdf}
+        \caption[Sebuah \textit{flock}]{Entitas-entitas berwarna biru yang membentuk sebuah \textit{flock} dengan $m = 3$ dan $k = 3$. Lingkaran kuning menunjukkan cakram yang memiliki radius $r$ yang berisi seluruh anggota \textit{flock}}
+        \label{bab2:flock}
+    \end{figure}
+    
+    \begin{figure}[t]
+        \centering
+        \includegraphics[width=0.75\textwidth]{Gambar/bab2:group.pdf}
+        \caption[Sebuah \textit{group}]{Entitas-entitas berwarna merah yang membentuk sebuah \textit{group} dengan $m = 3$ dan $k = 3$. Salah satu entitas merah yang terletak di paling bawah terhubung secara relatif dengan entitas-entitas merah lainnya melalui entitas biru.}
+        \label{bab2:group}
+    \end{figure}
+    
+    \item \textbf{Group}
+    
+    Diberikan sebuah himpunan entitas $\mathcal{X}$, jumlah entitas minimum $m$, interval waktu minimum $k$, dan jarak maksimum antar entitas $r$. Sebuah \textit{group} merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang terbentuk pada interval waktu $I$ dan memenuhi syarat-syarat berikut:
+    
+    \begin{enumerate}[noitemsep, nolistsep]
+        \item Sub-himpunan $\mathcal{G}$ terdiri dari setidaknya $m$ buah entitas.
+        \item Interval waktu $I$ memiliki durasi minimal selama $k$.
+        \item Setiap pasang entitas $x, y$ di mana $x, y \in \mathcal{G}$ secara relatif pada $\mathcal{X}$ untuk setiap satuan waktu pada interval waktu $I$ dengan jarak maksimum antar entitas adalah sepanjang $r$.
+    \end{enumerate}
+    
+    Gambar \ref{bab2:group} menunjukkan sebuah pemodelan sederhana dari sebuah \textit{group}.
+\end{itemize}
+
+Selain kedua definisi di atas, terdapat definisi-definisi lain seperti \textit{convoy}\footnote{Jeung, H., Yiu, M. L., Zhou, X., Jensen, C. S., dan Shen, H. T. (2010) Discovery of convoys in trajectory databases.CoRR,abs/1002.0963}, \textit{herd}\footnote{Huang, Y., Chen, C., dan Dong, P. (2008) Modeling herds and their evolvements from trajectory data.Geographic Information Science, Berlin, 09, pp. 90–105. Springer}, \textit{swarm}\footnote{Li, Z., Ding, B., Han, J., dan Kays, R. (2010) Swarm: Mining relaxed temporal moving object clusters.Proc. VLDB Endow.,3, 723–734}, \textit{gathering}\footnote{Zheng, K., Zheng, Y., Yuan, N., Shang, S., dan Zhou, X. (2014) Online discovery of gathering patterns over trajectories.Knowledge and Data Engineering, IEEE Transactions on,26,1974–1988}, dan masih banyak definisi formal lainnya. Seluruh definisi formal yang sudah dibuat selalu bergantung pada setidaknya tiga ukuran lintasan: \textit{size}, kedekatan spasial, dan parameter temporal. Walaupun kebanyak definisi formal yang sudah dibuat untuk data lintasan yang bersifat diskrit, terdapat definisi formal pergerakan kolektif yang dapat menangani data lintasan yang bersifat kontinu seperti \textit{group}\footnote{Buchin, K., Buchin, M., Kreveld, M., Speckmann, B., dan Staals, F. (2013) Trajectory grouping structure.Algorithm and Data Structure, New York, 03, pp. 219–230. Springer}.
+
+\subsection{Masalah Definisi Pergerakan Kolektif Sebelumnya}
+
+Seperti yang sudah dibahas pada bab sebelumnya, identifikasi pola pergerakan kolektif merupakan salah satu bagian penting dari analisis terhadap data lintasan. Secara informal, pergerakan kolektif merupakan sebuah keadaan di mana terdapat dua atau lebih entitas yang bergerak bersama selama kurun waktu tertentu. Dalam sebuah pergerakan kolektif, sebuah entitas dapat dikatakan bergerak bersama apabila lintasan yang ditempuh oleh entitas tersebut memiliki lintasan yang mirip dengan anggota-anggota lain yang tergabung dalam pergerakan kolektif tersebut.
+
+Telah terdapat berbagai macam definisi formal yang dapat digunakan untuk mendeskripsikan pola pergerakan kolektif seperti \textit{flock}\footnote{Cao, Y., Zhu, J., dan Gao, F. (2016) An algorithm for mining moving flock patterns from pedestrian trajectories.Web Technologies and Application, New York, 09, pp. 310–321. Springer}, \textit{convoy}\footnote{Jeung, H., Yiu, M. L., Zhou, X., Jensen, C. S., dan Shen, H. T. (2010) Discovery of convoys in trajectory databases.CoRR,abs/1002.0963}, \textit{swarm}\footnote{Li, Z., Ding, B., Han, J., dan Kays, R. (2010) Swarm: Mining relaxed temporal moving object clusters.Proc. VLDB Endow.,3, 723–734}, \textit{group}\footnote{Buchin, K., Buchin, M., Kreveld, M., Speckmann, B., dan Staals, F. (2013) Trajectory grouping structure.Algorithm and Data Structure, New York, 03, pp. 219–230. Springer}, dan masih banyak lagi. Seluruh definisi-definisi formal tersebut bergantung pada setidaknya pada tiga ukuran lintasan berikut untuk mengidentifikasi pergerakan kolektif:
+
+\begin{itemize}[noitemsep, nolistsep]
+    \item \textbf{\textit{Size}}
+    
+    Jumlah entitas minimum yang harus bergerak bersama selama rentang waktu tertentu sehingga dapat teridentifikasi sebagai sebuah pergerakan kolektif.
+    
+    \item \textbf{Kedekatan Spasial}
+    
+    Batas jarak maksimum antara entitas-entitas yang bergerak agar dapat dianggap bergerak bersama. Ukuran ini sangat bergantung pada dimensi ruang gerak entitas.
+    
+    \item \textbf{Durasi Temporal}
+    
+    Durasi waktu minimum di mana entitas-entitas yang dianggap bergerak bersama harus dekat secara spasial sepanjang durasi waktu tersebut. 
+\end{itemize}
+
+Namun, definisi-definisi formal yang sudah dibuat memiliki
+kesulitan dalam menghasilkan identifikasi pergerakan kolektif yang akurat pada dua kasus yang cukup lazim terjadi pada data lintasan dari dunia nyata. Hal tersebut mendorong perlunya pembuatan sebuah definisi formal pergerakan kolektif baru yang mampu mengatasi masalah-masalah yang terdapat pada definisi pergerakan kolektif sebelumnya. Kedua kasus tersebut beserta solusi yang diambil untuk mengatasi masalah akan dibahas melalui subbab berikut.
+
+\subsubsection{Perbedaan Arah}
+
+Berdasarkan syarat-syarat terjadinya pergerakan kolektif, sebuah entitas akan tergabung dalam suatu kelompok pergerakan kolektif apabila entitas tersebut memiliki lintasan yang mirip dengan anggota-anggota lain dari kelompok pergerakan kolektif tersebut selama kurun waktu tertentu. Terdapat banyak cara yang dapat digunakan untuk mengukur kemiripan sebuah lintasan dengan lintasan. Seluruh ukuran kemiripan tersebut menggunakan jarak sebagai penentu utama kemiripan lintasan. Dengan kata lain, sebuah entitas dikatakan tergabung dalam sebuah kelompok pergerakan kolektif apabila entitas tersebut memiliki perbedaan jarak yang minimal dengan entitas lain yang merupakan anggota dari pergerakan kolektif selama durasi interval waktu tertentu. Konsep tersebut sesuai dengan cara manusia mengidentifikasi pergerakan bersama pada sebuah data, di mana pergerakan bersama akan terjadi apabila anggota-anggotanya memiliki jarak yang cukup dekat selama durasi waktu yang cukup lama.
+
+Namun, upaya identifikasi pergerakan kolektif yang hanya bergantung pada tiga ukuran lintasan yang telah disebutkan di atas dapat menimbulkan kesalahan identifikasi pada kasus di mana terdapat sebuah yang entitas bergerak berpapasan dengan entitas-entitas lainnya yang bergerak berlawanan arah dalam jarak yang cukup dekat dan durasi waktu yang cukup lama. Pergerakan tersebut dapat menyebabkan entitas yang bergerak berpapasan membentuk atau tergabung dalam sebuah pergerakan kolektif.
+    
+Dalam sebuah kasus yang ditunjukkan melalui gambar \ref{bab3:masalah-arah}, diberikan himpunan entitas yang bergerak $\mathcal{X}$ yang terdiri dari 4 buah entitas, jumlah entitas minimum $m$ sebanyak $3$ entitas, durasi waktu minimum $I$ selama $3$ satuan waktu, dan jarak antar entitas sepanjang $r$ satuan jarak. Pada himpunan $\mathcal{X}$, telah terdapat sebuah pergerakan kolektif $A$ di mana para anggotanya ditunjukkan sebagai entitas berwarna merah. Selain entitas-entitas yang tergabung dalam pergerakan kolektif, terdapat sebuah entitas $b$ yang ditunjukkan sebagai entitas berwarna biru. Entitas $b$ bergerak berpapasan dengan anggota-anggota dari pergerakan kolektif $A$ dalam jarak yang cukup dekat dan durasi waktu yang cukup lama. Berdasarkan fakta tersebut, definisi formal pergerakan kolektif yang telah dibuat sebelumnya akan mengidentifikasi entitas $b$ sebagai anggota dari pergerakan kolektif $A$. Hasil identifikasi tersebut tentunya bertentangan dengan hasil identifikasi yang dilakukan oleh manusia, di mana entitas berwarna biru tidak akan tergabung sebagai anggota pergerakan kolektif $A$ karena memiliki perbedaan arah yang besar dengan anggota-anggota dari pergerakan kolektif $A$.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Gambar/bab3:beda-arah.pdf}
+    \caption[Kasus perbedaan arah]{Upaya identifikasi pergerakan kolektif oleh definisi formal yang telah dibuat sebelumnya dapat menyebabkan entitas berwarna biru tergabung dalam pergerakan kolektif entitas-entitas berwarna merah, walaupun terdapat perbedaan arah yang besar antara kedua lintasan.}
+    \label{bab3:masalah-arah}
+\end{figure}
+
+Melalui analisis singkat terhadap masalah tersebut, tampaknya masalah perbedaan arah dapat diselesaikan dengan mudah melalui pengurangan jarak maksimum $r$ atau menambah durasi interval waktu $I$. Namun, kedua upaya penyelesaian tersebut akan mempengaruhi proses identifikasi pergerakan kolektif secara keseluruhan. Mengurangi jarak maksimum antar entitas atau menambah durasi interval waktu dapat menyebabkan sebuah pergerakan bersama yang sebelumnya dianggap sebagai sebuah pergerakan kolektif menjadi sebuah pergerakan bersama biasa karena jarak antar entitas yang terlalu jauh atau durasi waktu yang tidak cukup lama. Oleh karena itu, penyelesaian masalah identifikasi pergerakan kolektif pada kasus perbedaan arah menuntut pemanfaatan ukuran lintasan lainnya yang belum pernah digunakan sebelumnya.
+    
+Masalah tersebut dapat diselesaikan dengan memanfaatkan ukuran arah yang terdapat pada data lintasan sebagai ukuran tambahan dalam proses identifikasi pergerakan kolektif. Pada contoh kasus yang digambarkan melalui gambar \ref{bab3:masalah-arah}, entitas $b$ yang ditunjukkan sebagai entitas berwarna biru memiliki perbedaan arah lintasan sebesar 180 derajat dengan seluruh entitas yang tergabung sebagai anggota dari pergerakan kolektif $A$ yang ditunjukkan sebagai entitas-entitas berwarna merah. Perbedaan arah yang sangat besar menyebabkan entitas $b$ tidak akan tergabung sebagai anggota dari pergerakan kolektif $A$ walaupun entitas $b$ walaupun entitas $b$ memiliki jarak yang cukup dekat dengan seluruh anggota pergerakan kolektif $A$ dalam durasi waktu yang cukup lama. Berdasarkan upaya penyelesaian masalah tersebut, dapat dibuat simpulan sementara bahwa \textbf{suatu entitas akan tergabung sebagai anggota dalam sebuah kelompok pergerakan kolektif apabila perbedaan arah lintasan entitas tersebut dengan masing-masing anggota pergerakan kolektif kurang lebih atau sama dengan $\vartheta$}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[height=10cm]{Gambar/bab3:beda-arah-lokal.pdf}
+    \caption{Pada kasus di mana $m = 2$ dan $k = 3$, menghitung arah secara global dapat menyebabkan pergerakan kolektif tidak terbentuk sama sekali karena perbedaan arah akhir yang terlalu ekstrim (ditunjukkan melalui garis putus-putus hijau)}
+    \label{bab3:beda-arah-lokal}
+\end{figure}
+
+Hal penting yang tidak boleh dilupakan ketika menggunakan arah lintasan adalah cara menghitung arah dari sebuah lintasan. Secara umum, terdapat dua cara pandang untuk menghitung arah lintasan. Cara pandang pertama adalah dengan memandang arah lintasan secara global. Dalam cara pandang global, arah lintasan akan dihitung berdasarkan perbedaan arah pada awal dan akhir pergerakan entitas. Cara pandang tersebut dapat bermasalah ketika digunakan untuk mengukur kemiripan lintasan pada dua lintasan yang memiliki perbedaan arah akhir yang drastis. Dalam sebuah kasus yang ditunjukkan melalui gambar \ref{bab3:beda-arah-lokal}, diberikan dua buah entitas bergerak $a$ yang ditunjukkan sebagai entitas berwarna merah dan $b$ yang ditunjukkan sebagai entitas berwarna biru, jumlah entitas minimum $m$ sebanyak $2$, dan durasi waktu minimum $I$ selama $3$ satuan waktu. Apabila arah lintasan dipandang secara global, maka entitas $a$ dan entitas $b$ tidak dapat membentuk sebuah pergerakan kolektif karena memiliki perbedaan arah yang ekstrim. Hasil identifikasi tersebut bertentangan dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia, di mana entitas $a$ dan $b$ membentuk sebuah pergerakan kolektif selama rentang waktu $t_1$ -- $t_3$.
+
+Masalah tersebut dapat diselesaikan dengan menggunakan cara pandang kedua, yaitu dengan memandang arah lintasan secara lokal. Dalam cara pandang lokal, perbedaan arah antara dua buah lintasan perbedaan dihitung pada setiap durasi waktu minimum $I$. Sebagai contoh pada kasus di mana panjang lintasan yang tercatat adalah sebesar $8$ dan durasi waktu minimum $I$ adalah sepanjang $3$ satuan waktu, maka perbedaan arah akan dihitung pada interval waktu $(t_1 - t_3), (t_2 - t_4), \ldots, (t_6 - t_8)$. Dalam kasus perbedaan arah yang ditunjukkan melalui gambar \ref{bab3:beda-arah-lokal}, cara pandang lokal menyebabkan entitas $a$ dan $b$ membentuk pergerakan kolektif pada interval waktu $t_1$ -- $t_3$, sesuai dengan hasil identifikasi yang dilakukan oleh manusia.
+
+Berdasarkan hasil pengamatan tersebut, maka simpulan sebelumnya dapat dipertajam menjadi: \textbf{suatu entitas akan tergabung dalam sebuah kelompok pergerakan kolektif apabila perbedaan arah lintasan entitas tersebut dengan anggota-anggota pergerakan kolektif tidak melebihi $\vartheta$ yang dihitung pada setiap interval waktu minimum untuk membentuk sebuah pergerakan kolektif}.
+
+Salah satu cara yang dapat digunakan untuk mengukur perbedaan arah antar dua buah lintasan adalah menggunakan \textit{cosine similarity} yang dapat dinyatakan sebagai:
+
+\begin{equation}
+    \cos (X, Y)= \frac{x \cdot y}{\|x\| \|y\|} = \frac{ \sum_{i=1}^{n}{x_i y_i}}{ \sqrt{\sum_{i=1}^{n}{(x_i)^2}} \sqrt{\sum_{i=1}^{n}{( y_i)^2}} }
+    \label{bab3:cosine-similarity}
+\end{equation}
+
+Nilai \textit{cosine similarity} memiliki rentang nilai $[-1, 1]$, di mana \textit{cosine similarity} yang bernilai $-1$ menandakan bahwa kedua lintasan memiliki arah lintasan yang bertolak belakang dan \textit{cosine similarity} yang bernilai $1$ menandakan bahwa kedua lintasan memiliki arah lintasan yang sama persis. Penggunaan \textit{cosine similarity} sebagai ukuran perbedaan arah lintasan akan mempertajam simpulan sebelumnya menjadi: \textbf{suatu entitas akan tergabung dalam sebuah kelompok pergerakan kolektif apabila nilai \textit{cosine similarity} dari entitas tersebut dengan setiap anggota pergerakan kolektif lebih besar atau sama dengan $\vartheta$ yang dihitung pada setiap interval waktu minimum untuk membentuk sebuah pergerakan kolektif}.
+
+\subsection{Perbedaan Kecepatan}
+
+Kemiripan lintasan merupakan salah satu faktor penentu utama dalam identifikasi pergerakan kolektif. Berdasarkan cara-cara penentuan kemiripan lintasan yang sudah dibahas pada subbab sebelumnya, sebuah entitas akan memiliki lintasan yang mirip dengan entitas lain apabila memiliki jarak yang dianggap cukup dekat dalam durasi interval waktu minimal tertentu. Definisi tersebut sudah cukup baik bila digunakan untuk mengidentifikasi pergerakan kolektif pada sebagian besar kasus pergerakan yang terjadi di dunia nyata.
+
+Sayangnya, definisi kemiripan tersebut belum cukup baik apabila digunakan untuk mengidentifikasi pergerakan kolektif di mana terdapat sebuah entitas yang memiliki perbedaan kecepatan dengan entitas bergerak lainnya. Perbedaan kecepatan tersebut dapat menyebabkan entitas yang bergerak lebih cepat atau lambat memiliki perbedaan jarak yang terlalu besar dengan entitas bergerak lainnya, sehingga entitas tersebut dianggap tidak bergerak bersamaan dengan entitas lain. Hal tersebut menjadi penting dalam proses identifikasi pergerakan kolektif, mengingat definisi pergerakan kolektif selalu memiliki syarat jumlah entitas minimum agar sekumpulan entitas dapat dianggap sebagai sebuah pergerakan kolektif.
+    
+Dalam sebuah kasus yang digambarkan melalui gambar \ref{bab3:masalah-kecepatan}, diberikan sebuah pergerakan kolektif $\mathcal{X}$ yang terdiri dari $3$ anggota $a$, $b$, dan $c$ yang masing-masing digambarkan dengan warna biru, kuning, dan merah, jumlah entitas minimum $m$ sebanyak $3$ entitas, dan durasi waktu minimum selama $3$ satuan waktu. Entitas $a$ dan $b$ bergerak bersama dengan kecepatan yang konstan sejak semula, sedangkan entitas $c$ bergerak lebih cepat dan meninggalkan kedua entitas tersebut sampai pada titik tertentu. Entitas $c$ kemudian berhenti dan menunggu kedua entitas tersebut untuk menyusul pada suatu titik. Setelah kedua entitas tersebut berhasil menyusul, ketiga entitas tersebut melanjutkan bergerak bersama pada kecepatan yang konstan. Pada kasus tersebut, perbedaan kecepatan antara entitas $c$ dan dua entitas lainnya tentunya akan menyebabkan bertambahnya perbedaan jarak antar entitas, di mana hal tersebut dapat menyebabkan entitas $c$ tidak memenuhi syarat perbedaan jarak dan durasi waktu minimum agar teridentifikasi sebagai anggota suatu pergerakan kolektif. Hasil identifikasi tersebut tidak sesuai dengan hasil identifikasi yang dilakukan oleh manusia, di mana entitas $c$ tetap akan tergabung dalam kelompok pergerakan kolektif bersama entitas $a$ dan $b$, walaupun memiliki entitas $c$ memiliki perbedaan jarak yang cukup jauh dengan entitas $a$ dan $b$ selama beberapa saat.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
+    \caption{Pada kasus di mana $m = 3$ dan $t = 3$, perbedaan kecepatan entitas berwarna biru dapat berujung pada perbedaan jarak yang jauh dengan entitas-entitas merah sehingga pergerakan kolektif tidak terbentuk, walaupun entitas tersebut hanya memiliki perbedaan jarak yang jauh dengan entitas lain selama beberapa saat}
+    \label{bab3:masalah-kecepatan}
+\end{figure}
+    
+Melalui analisis singkat terhadap masalah tersebut, tampaknya masalah perbedaan kecepatan dapat diselesaikan dengan menambah jarak maksimum antar entitas sehingga perbedaan jarak antar entitas yang disebabkan oleh perbedaan kecepatan tidak mempengaruhi proses identifikasi pergerakan kolektif. Namun solusi tersebut dapat menghasilkan hasil identifikasi yang sama sekali tidak sesuai dengan definisi pergerakan bersama pada umumnya, di mana entitas-entitas yang bergerak bersama memiliki jarak yang berdekatan. Di sisi lain, kasus perbedaan kecepatan tidak dapat ditangani dengan baik oleh ukuran-ukuran yang biasanya terdapat dalam data lintasan. Oleh karena itu, penyelesaian masalah identifikasi pergerakan kolektif pada kasus perbedaan kecepatan menuntut penggunaan cara penghitungan kemiripan lintasan baru yang belum pernah digunakan oleh definisi pergerakan kolektif sebelumnya.
+
+Masalah tersebut dapat diatasi dengan menggunakan algoritma \textit{dynamic time warping} untuk mengukur kemiripan antara dua buah lintasan. Seperti yang udah dibahas sebelumnya, algoritma \textit{dynamic time warping} dapat digunakan untuk menghitung kemiripan lintasan dua buah entitas yangmemiliki kecepatan yang bervariasi atau mengalami perubahan kecepatan dengan frekuensi tertentu selama proses pencatatan data lintasan. Pada skripsi ini, algoritma \textit{dynamic time warping} akan digunakan untuk mengukur kemiripan dua buah lintasan pada setiap interval waktu minimum untuk membentuk sebuah pergerakan kolektif. Berdasarkan upaya penyelesaian tersebut, dapat diambil simpulan bahwa \textbf{suatu lintasan dari entitas yang bergerak akan dianggap mirip dengan lintasan dari entitas bergerak lainnya pada interval waktu $I$ apabila jarak \textit{dynamic time warping} antara kedua lintasan tersebut lebih kecil atau sama dengan $r$ yang dihitung selama periode waktu $I$}. 
+
+\subsection{Definisi Pergerakan Kolektif Baru}
+
+Berdasarkan pembahasan mengenai pergerakan kolektif pada subbab sebelumnya, terdapat 3 aspek penting yang harus dipertimbangkan dalam membuat sebuah definisi pergerakan kolektif:
+
+\begin{enumerate}[noitemsep, nolistsep]
+    \item \textbf{\textit{Size}} --- Berapa jumlah entitas minimum yang tergabung dalam sebuah himpunan entitas bergerak agar dapat dianggap sebagai sebuah pergerakan kolektif?
+    \item \textbf{Kedekatan Spasial} --- Bagaimana cara mengukur kedekatan spasial antara dua buah entitas yang bergerak?
+    \item \textbf{Durasi Temporal} --- Berapa durasi waktu minimum pergerakan bersama terjadi agar dapat dianggap sebagai sebuah pergerakan kolektif?
+\end{enumerate}
+
+Seluruh aspek yang telah disebutkan di atas merupakan sebuah parameter masukan yang ditentukan oleh peneliti sebelum proses identifikasi pergerakan kolektif dilakukan, sehingga sebuah definisi pergerakan kolektif yang sama dapat menghasilkan hasil identifikasi yang berbeda-beda yang dipengaruhi oleh parameter-parameter yang dimasukkan. 
+Dengan mempertimbangkan aspek-aspek di atas, dapat dibuat sebuah definisi pergerakan kolektif baru bernama rombongan yang secara formal dinyatakan sebagai:
+
+\noindent \textbf{rombongan($m$, $k$, $r$, $\vartheta$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$ yang memiliki jumlah entitas sebanyak $n$, jumlah entitas minimum sebanyak $m$ buah entitas di mana $k \in [2, n]$, interval waktu minimum selama $k$ satuan waktu di mana $k \geq 2$, jarak maksimum antara anggota-anggota rombongan sepanjang $r$ satuan panjang di mana $r \in \mathbb{R}^+$, dan nilai kemiripan sudut minimum sebesar $\vartheta$ di mana $\vartheta \in [-1, 1]$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$. Sebuah rombongan pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung satu sama lain selama interval waktu $I$ secara konsekutif. 
+
+\subsection{Algoritma Identifikasi Rombongan}
+
+Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$ buah entitas, interval waktu minimum selama $k$ satuan waktu, jarak \textit{dynamic time warping} maksimum sepanjang $r$ satuan panjang, dan nilai \textit{cosine similarity} minimum sebesar $\vartheta$. Himpunan rombongan yang terbentuk dalam himpunan entitas $\mathcal{X}$ dapat dicari menggunakan langkah-langkah berikut:
+
+\begin{enumerate}[noitemsep, nolistsep]
+    \item Inisialisasi sebuah \textit{array} $\mathcal{R}$ yang akan menyimpan himpunan rombongan yang teridentifikasi untuk setiap interval waktu $I$.
+    \item Cari setiap interval waktu konsekutif $I$ sepanjang $k$ satuan waktu yang dapat dibentuk. Interval-interval waktu konsekutif dapat dicari menggunakan teknik \textit{sliding window}\footnote{Mundani, R., Frisch, J., Varduhn, V., dan Rank, E. (2015) A sliding window technique for interactive high-performance computing scenarios.Adv. Eng. Softw.,84, 21–30}. Sebagai contoh, pada himpunan entitas $\mathcal{X}$ sepanjang $5$ satuan waktu dan $k = 3$, maka interval waktu $I$ yang mungkin adalah $[1, 2, 3]$, $[2, 3, 4]$, dan $[3, 4, 5]$.
+    \item Untuk setiap interval waktu konsekutif $I$ yang berdurasi $k$ satuan waktu:
+    
+    \begin{enumerate}[noitemsep, nolistsep]
+        \item Inisialiasi sebuah himpunan $\mathcal{T}$ yang akan menyimpan himpunan rombongan yang teridentifikasi pada interval waktu $I$.  
+        \item Inisialisasi sebuah \textit{array} $\mathcal{S}$ untuk setiap entitas $a$ yang terdapat pada $\mathcal{X}$. Pada awalnya, himpunan $\mathcal{S}$ hanya akan beranggotakan entitas $a$.
+        \item Hitung jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} dari setiap anggota himpunan $S$ dan setiap entitas lain pada himpunan $\mathcal{X}$ pada interval waktu $I$. Tambahkan setiap entitas yang memiliki jarak \textit{dynamic time warping} dengan setiap anggota himpunan $S$ yang lebih kecil sama dengan $r$ dan nilai \textit{cosine similiarity} dengan setiap anggota himpunan $S$ yang lebih besar sama dengan $\vartheta$ pada himpunan $S$.
+        \item Tambahkan himpunan $\mathcal{S}$ pada \textit{array} $\mathcal{T}$ apabila jumlah anggota himpunan $\mathcal{S}$ lebih besar atau sama dengan $m$.
+        \item Tambahkan \textit{array} $\mathcal{T}$ pada \textit{array} $\mathcal{R}$.
+    \end{enumerate}
+    \item Kembalikan \textit{array} $\mathcal{R}$ sebagai hasil. Pada titik ini, $\mathcal{R}$ akan berisi himpunan rombongan yang terbentuk pada setiap interval waktu $I$ yang berdurasi selama $k$ satuan waktu.
+\end{enumerate}
+
+\begin{algorithm}[h]
+    \caption{Algoritma Identifikasi Rombongan}
+    \SetKwInput{KwInput}{Input}                % Set the Input
+    \SetKwInput{KwOutput}{Output}              % set the Output
+    \DontPrintSemicolon
+    
+    \SetKwFunction{Kolektif}{FindKolektif}
+ 
+    \SetKwProg{Fn}{Function}{:}{}
+  
+    \KwInput{
+        \begin{itemize}[noitemsep, nolistsep]
+            \item Himpunan entitas bergerak $\mathcal{X}$
+            \item Jumlah entitas minimum $m$
+            \item Interval waktu minimum $k$
+            \item Jarak \textit{dynamic time warping} maksimum antar entitas $r$
+            \item Nilai \textit{cosine similarity} minimum $\vartheta$
+        \end{itemize}
+    }
+    \KwOutput{Sebuah \textit{array} yang menyimpan himpunan dari himpunan rombongan yang teridentifikasi untuk setiap interval waktu yang memungkinkan}
+    
+    \Fn{\Kolektif{$\mathcal{X}, m, k, r, \vartheta$}}{
+        $result \gets []$ \\
+        
+        \For{$(start, end)$ in each consecutive time intervals}{
+            $collectiveMovements \gets Set()$ \\
+            
+            \For{each entity $a$ in $\mathcal{X}$}{
+                $entitySet \gets [a]$ \\
+                \For{each entity $b$ in $\mathcal{X}$}{
+                    $isSimilar \gets TRUE$ \\
+                    
+                    \For{each entity $c$ in $entitySet$}{
+                        $cSub \gets c[start \dots end]$ \\
+                        $bSub \gets b[start \dots end]$ \\
+                    
+                        \If{$c \neq b$ AND $(DTWDistance(cSub, bSub) > r$ OR $CosineSimilarity(cSub, bSub) < \vartheta)$}{
+                            $isSimilar \gets FALSE$
+                        }
+                    }
+                    
+                    \If{$isSimilar\;is\;equal\;to\;TRUE$}{
+                        $Insert\;b\;into\;entitySet$
+                    }
+                }
+                
+                \If{$length(entities) \geq m$}{
+                    $Insert\;entitySet\;into\;collectiveMovement$
+                }
+            }
+        }
+    }
+    \KwRet{$result$}
+    
+    \label{bab3:algoritma-identifikasi}
+\end{algorithm}
+
+Secara formal, langkah-langkah tersebut dapat ditulis menjadi algoritma \ref{bab3:algoritma-identifikasi}. Algoritma identifikasi rombongan memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. Nilai tersebut didapatkan melalui perhitungan berikut:
+
+\begin{enumerate}[noitemsep, nolistsep]
+    \item Pada baris $3$, algoritma akan memiliki kompleksitas waktu sebesar $O(t - k)$ di mana nilai tersebut diperoleh dengan menghitung jumlah interval waktu konsekutif yang mungkin dibuat. Jumlah interval waktu konsekutif yang dapat dibuat merupakan selisih dari panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$ dan durasi waktu konsekutif minimum untuk membentuk sebuah rombongan.
+    \item Pada baris $5$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{X}$ yang memiliki kompleksitas sebesar $O(n)$.
+    \item Pada baris $7$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^2)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{X}$ yang memiliki kompleksitas sebesar $O(n)$.
+    \item Pada baris $9$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^3)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{S}$ yang memiliki kompleksitas sebesar $O(n)$.
+    \item Pada baris $12$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ yang disebabkan oleh perhitungan algoritma \textit{dynamic time warping} yang memiliki kompleksitas waktu sebesar $O(k^2)$. Kompleksitas tersebut didapatkan dari hasil perkalian panjang dua lintasan yang dihitung yang masing-masing sebesar $k$. Pada titik ini, algoritma identifikasi akan memiliki nilai kompleksitas tertinggi selama algoritma dijalankan.
+\end{enumerate}
+
+\iffalse
+
 Detail bagian pekerjaan skripsi sesuai dengan rencana kerja / laporan perkembangan terakhir:
 	\begin{enumerate}[noitemsep, nolistsep]
 		\item \textbf{Melakukan studi literatur mengenai ukuran-ukuran serta algoritma yang dapat digunakan untuk mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan pada sebuah lintasan.} \\
@@ -187,7 +843,7 @@ Detail bagian pekerjaan skripsi sesuai dengan rencana kerja / laporan perkembang
             \item Cari setiap interval waktu konsekutif $I$ sepanjang $k$ satuan waktu yang dapat dibentuk. Interval-interval waktu konsekutif dapat dicari menggunakan teknik \textit{sliding window}. Sebagai contoh, pada himpunan entitas $\mathcal{X}$ sepanjang $5$ satuan waktu dan $k = 3$, maka interval waktu $I$ yang mungkin adalah $[1, 2, 3]$, $[2, 3, 4]$, dan $[3, 4, 5]$.
             \item Untuk setiap interval waktu konsekutif $I$ yang berdurasi $k$ satuan waktu:
     
-            \begin{enumerate}
+            \begin{enumerate}[noitemsep, nolistsep]
                 \item Inisialiasi sebuah himpunan $\mathcal{T}$ yang akan menyimpan himpunan rombongan yang teridentifikasi pada interval waktu $I$.  
                 \item Inisialisasi sebuah \textit{array} $\mathcal{S}$ untuk setiap entitas $a$ yang terdapat pada $\mathcal{X}$. Pada awalnya, himpunan $\mathcal{S}$ hanya akan beranggotakan entitas $a$.
                 \item Hitung jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} dari setiap anggota himpunan $S$ dan setiap entitas lain pada himpunan $\mathcal{X}$ pada interval waktu $I$. Tambahkan setiap entitas yang memiliki jarak \textit{dynamic time warping} dengan setiap anggota himpunan $S$ yang lebih kecil sama dengan $r$ dan nilai \textit{cosine similiarity} dengan setiap anggota himpunan $S$ yang lebih besar sama dengan $\vartheta$ pada himpunan $S$.
@@ -219,6 +875,8 @@ Detail bagian pekerjaan skripsi sesuai dengan rencana kerja / laporan perkembang
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
 		{\bf Hasil :} Sedang dikerjakan.
 	\end{enumerate}
+	
+\fi
 
 \section{Pencapaian Rencana Kerja}
 
@@ -245,12 +903,14 @@ Kendala - kendala yang dihadapi selama mengerjakan skripsi :
 
 \fi
 
-\newpage
-
 \vspace{1cm}
 \centering Bandung, \tanggal\\
-\vspace{2cm} \nama \\ 
+\vspace{0.5cm}
+\includegraphics[]{Gambar/cristopher.pdf} \\
+\nama \\ 
 \vspace{1cm}
+
+\newpage
 
 Menyetujui, \\
 \ifdefstring{\jumpemb}{2}{
@@ -267,7 +927,8 @@ Menyetujui, \\
 \vspace{0.5cm}
 }{
 % \centering Bandung, \makebox[0.5cm]{\hrulefill}/\makebox[0.5cm]{\hrulefill}/2013\\
-\vspace{2cm} Nama: \pembA \\ Pembimbing Tunggal
+\vspace{0.5cm}
+\includegraphics[]{Gambar/lionov.pdf} \\
+Nama: \pembA \\ Pembimbing Tunggal
 }
 \end{document}
-
