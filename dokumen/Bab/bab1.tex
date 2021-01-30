@@ -5,19 +5,19 @@
 \section{Latar Belakang}
 \label{sec:label}
 
-Bergerak merupakan sebuah aktivitas yang selalu kita temui setiap saat. Berdasarkan Kamus Besar Bahasa Indonesia, bergerak merupakan sebuah kegiatan berpindah dari tempat atau kedudukan semula menuju tempat atau kedudukan lain \footnote{Badan Pengembangan dan Pembinaan Bahasa Kementrian Pendidikan dan Kebudayan, \textit{Bergerak}, diakses pada tanggal 23 Desember 2020, \url{https://kbbi.kemdikbud.go.id/entri/bergerak}.}. Segala sesuatu yang ada di sekitar kita selalu bergerak untuk mencapai tujuan tertentu. Manusia selalu bergerak untuk melakukan aktivitas sehari-hari. Berbagai jenis hewan melakukan migrasi untuk mencari lingkungan baru yang lebih mampu untuk menunjang kehidupan. Tanaman dapat bergerak melalui fototropisme yang menyebabkan tanaman bertumbuh mengikuti arah sinar matahari. Bahkan, bumi selalu berputar mengelilingi porosnya yang menyebabkan pergantian hari. Dapat dikatakan bahwa bergerak merupakan aktivitas yang tak dapat dilepaskan dari kehidupan sehari-hari. Hal tersebut menumbuhkan rasa ketertarikan manusia untuk mengumpulkan, menyelidiki, serta mempelajari segala aspek mengenai pergerakan. Sayangnya, sedikitnya sumber dan cara mendapatkan data menghambat penelitian mengenai pergerakan di masa lalu.
+Bergerak merupakan sebuah aktivitas yang selalu kita temui setiap saat. Berdasarkan Kamus Besar Bahasa Indonesia, bergerak merupakan sebuah kegiatan berpindah dari tempat atau kedudukan semula menuju tempat atau kedudukan lain\footnote{Badan Pengembangan dan Pembinaan Bahasa Kementrian Pendidikan dan Kebudayan, \textit{Bergerak}, diakses pada tanggal 23 Desember 2020, \url{https://kbbi.kemdikbud.go.id/entri/bergerak}.}. Segala sesuatu yang ada di sekitar kita selalu bergerak untuk mencapai tujuan tertentu. Manusia selalu bergerak untuk melakukan aktivitas sehari-hari. Berbagai jenis hewan melakukan migrasi untuk mencari lingkungan baru yang lebih mampu untuk menunjang kehidupan. Tanaman dapat bergerak melalui fototropisme yang menyebabkan tanaman bertumbuh mengikuti arah sinar matahari. Bahkan, bumi selalu berputar mengelilingi porosnya yang menyebabkan pergantian hari. Dapat dikatakan bahwa bergerak merupakan aktivitas yang tak dapat dilepaskan dari kehidupan sehari-hari. Hal tersebut menumbuhkan rasa ketertarikan manusia untuk mengumpulkan, menyelidiki, serta mempelajari segala aspek mengenai pergerakan. Sayangnya, sedikitnya sumber dan cara mendapatkan data menghambat penelitian mengenai pergerakan di masa lalu.
 
 \begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth, height=4.5cm]{Gambar/bab1:manusia.jpg}
-        \caption{Manusia bergerak untuk memenuhi kebutuhan sehari-hari}
+        \caption{Manusia bergerak untuk memenuhi kebutuhan sehari-hari\protect\footnotemark}
         \label{bab1:manusia}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth, height=4.5cm]{Gambar/bab1:sunflower.jpg}
-        \caption{Bunga matahari bertumbuh mengikuti arah sinar matahari}
-        \label{bab1:wildebeest}
+        \caption{Bunga matahari bertumbuh mengikuti arah sinar matahari\protect\footnotemark}
+        \label{bab1:sunflower}
     \end{subfigure}
     \caption[Aktivitas pergerakan]{
     Aktivitas pergerakan yang dilakukan oleh berbagai entitas di sekitar kita}
@@ -35,11 +35,11 @@ Dalam sebuah pergerakan, setiap entitas yang bergerak memiliki lintasan. Lintasa
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{Gambar/bab1:sumber-data.png}
-    \caption[Teknologi pengambilan data lintasan]{Pengambilan data lintasan melalui pemanfaatan teknologi modern \cite{carter:argos}. Kiri ke kanan: Sistem Argos-Doppler, \textit{Global positioning system} (GPS)}
+    \caption[Teknologi pengambilan data lintasan]{Pengambilan data lintasan melalui pemanfaatan teknologi modern. Kiri ke kanan: Sistem Argos-Doppler, \textit{Global positioning system} (GPS)}
     \label{bab1:sumber-data}
 \end{figure}
 
-Sayangnya, perkembangan teknologi tetap tidak mampu untuk merekam data lintasan secara sempurna. Hal tersebut menyebabkan data lintasan yang diperoleh tidak bersifat kontinu seperti yang diharapkan, melainkan bersifat diskrit. Berdasarkan sifat tersebut, data lintasan yang diperoleh akan direpresentasikan sebagai catatan posisi dari entitas yang bergerak yang diurutkan berdasarkan titik waktu. Secara formal, lintasan merupakan kumpulan dari pasangan posisi-waktu $(p_0, t_0), (p_1, t_1), \ldots, (p_x, t_x)$, di mana $p_i$ merupakan posisi entitas yang relatif terhadap ruang gerak entitas pada titik waktu $t_i$. Pada umumnya, entitas akan bergerak dalam sebuah ruang dua dimensi atau tiga dimensi yang masing-masing dapat direpresentasikan sebagai 
+Sayangnya, perkembangan teknologi tetap tidak mampu untuk merekam data lintasan secara sempurna. Hal tersebut menyebabkan data lintasan yang diperoleh tidak bersifat kontinu seperti yang diharapkan, melainkan bersifat diskrit. Berdasarkan sifat tersebut, data lintasan yang diperoleh akan direpresentasikan sebagai catatan posisi dari entitas yang bergerak yang diurutkan berdasarkan titik waktu. Secara formal, lintasan merupakan himpunan dari pasangan posisi-waktu $(p_0, t_0), (p_1, t_1), \ldots, (p_x, t_x)$, di mana $p_i$ merupakan posisi entitas yang relatif terhadap ruang gerak entitas pada titik waktu $t_i$. Pada umumnya, entitas akan bergerak dalam sebuah ruang \textit{euclidean} dua dimensi atau tiga dimensi yang masing-masing dapat direpresentasikan sebagai 
 $\mathbb{R}^2$ dan $\mathbb{R}^3$. \iffalse \lionov{disebut di sini bahwa ruang gerak biasanya R2 atau R3}. \fi
 
 Setiap lintasan memiliki atribut-atribut dengan nilai tertentu sebagai karakteristik yang membedakan satu lintasan dengan lintasan lain. Atribut-atribut tersebut kemudian dapat diolah menjadi ukuran lintasan yang memiliki kegunaan yang lebih spesifik. Analisis terhadap data pergerakan selalu memanfaatkan setidaknya salah satu ukuran yang terdapat pada data lintasan. Sebagai contoh, kecepatan dapat digunakan untuk mengukur pengaruh angin pada pergerakan burung \cite{safi:speed}.
@@ -59,15 +59,16 @@ Terdapat berbagai jenis analisis yang dapat dilakukan pada data pergerakan seper
     \begin{subfigure}[h]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth, height=4.5cm]{Gambar/bab1:army.jpg}
-        \caption{Kumpulan tentara bergerak bersama membentuk sebuah regu}
+        \caption{Kumpulan tentara bergerak bersama membentuk sebuah regu\protect\footnotemark}
     \end{subfigure}
     \begin{subfigure}[h]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth, height=4.5cm]{Gambar/bab1:wildebeest.jpg}
-        \caption{Kawanan \textit{wildebeest} bergerak bersama untuk melakukan migrasi musiman}
+        \caption{Kawanan \textit{wildebeest} bergerak bersama untuk melakukan migrasi musiman\protect\footnotemark}
+        \label{bab1:wildebeest}
     \end{subfigure}
     \caption[Pergerakan kolektif dunia nyata]{Pergerakan kolektif yang sering kita temui di dunia nyata}
-    \label{fig:my_label}
+    \label{bab1:collective-movement}
 \end{figure}
 
 \footnotetext{Damon On Road, \textit{C\'{e}r\'{e}monie militaire du Man\`{e}ge militaire du Qu\'{e}bec}, 2020, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/nmePDwaW9I8}}
@@ -95,11 +96,13 @@ Berdasarkan uraian pada bagian sebelumnya, berikut merupakan masalah-masalah yan
 \lionov{masalah pertama itu ukuran apa saja yang bisa digunakan, kedua bagaimana membuat model pergerakan kolektif yang memanfaatkan ukuran lintasan, yang ketiga bagaimana membuat algoritmanya. Soalnya yang poin 2 dan 3 kan gak dilakukan, elu gak ngebahas berbagai definisi formal, ukuran, teknik, dan algoritma (karena pertanyaannya ``apa aja''}
 
 \fi
-\begin{itemize}
+\begin{enumerate}
     \item Apa saja ukuran-ukuran yang terdapat dalam data lintasan yang bisa digunakan untuk membuat sebuah definisi pergerakan kolektif?
     \item Bagaimana cara membuat definisi pergerakan kolektif yang memanfaatkan ukuran-ukuran yang terdapat dalam data lintasan?
-    \item Bagaimana cara membuat algoritma untuk mengidentifikasi pola pergerakan kolektif yang sesuai dengan definisi formal baru yang telah dibuat?
-\end{itemize}
+    \item Bagaimana cara membuat algoritma untuk mengidentifikasi pergerakan kolektif berdasarkan definisi pergerakan kolektif yang dibuat?
+    \item Bagaimana cara mengimplementasikan algoritma untuk mengidentifikasi pergerakan kolektif berdasarkan definisi pergerakan kolektif yang dibuat?
+    \item Seberapa efektifkah definisi formal pergerakan kolektif yang dibuat dalam mengidentifikasi pergerakan-pergerakan kolektif dalam data pejalan kaki di dunia nyata?
+\end{enumerate}
 
 \section{Tujuan}
 \label{sec:tujuan}  
@@ -111,11 +114,13 @@ Berdasarkan masalah-masalah yang telah dirumuskan pada bagian sebelumnya, maka s
 \lionov{``mengetahui'' jangan jadi tujuan, tapi jadi gini aja, pertama menentukan atau membuat ukuran yang baru yang akan digunakan, kedua membuat pemodelan yang baru, ketiga membuat algoritma}
 
 \fi
-\begin{itemize}
-    \item Menentukan ukuran-ukuran lintasan yang akan digunakan untuk membuat sebuah definisi pola pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
+\begin{enumerate}
+    \item Menentukan ukuran-ukuran lintasan yang dapat digunakan untuk membuat sebuah definisi pola pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
     \item Membuat definisi pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
     \item Membuat algoritma yang dapat mengidentifikasi kelompok pergerakan kolektif yang sesuai dengan definisi formal yang telah dibuat pada sebuah data pejalan kaki di dunia nyata.
-\end{itemize}
+    \item Melakukan implementasi terhadap algoritma identifikasi pergerakan kolektif berdasarkan definisi baru yang dibuat.
+    \item Mengukur efektivitas dan ketepatan dari definisi pergerakan kolektif yang dibuat dalam mengidentifikasi pergerakan-pergerakan kolektif dalam data pejalan kaki di dunia nyata.
+\end{enumerate}
 
 \section{Batasan Masalah}
 \label{sec:batasan}
@@ -146,8 +151,31 @@ Metodologi penelitian yang akan digunakan dalam skripsi ini adalah sebagai berik
 
 \section{Sistematika Pembahasan}
 \label{sec:sispem}
+
+Skripsi ini akan ditulis dalam enam bab yang masing-masing akan berisi:
+
+\begin{enumerate}
+    \item Bab 1 Pendahuluan
+    
+    Bab 1 akan berisi pembahasan mengenai latar belakang tentang pergerakan, lintasan, pergerakan kolektif, serta masalah-masalah yang terdapat pada definisi-definisi pergerakan kolektif sebelumnya. Bab ini juga membahas rumusan masalah, tujuan yang hendak dicapai, batasan masalah, metodologi penelititan, serta sistematika penulisan dari skripsi ini.
+    
+    \item Bab 2 Dasar Teori
+    
+    Bab 2 akan berisi dasar teori mengenai lintasan, sumber data lintasan, ukuran yang terdapat pada lintasan, penghitungan kemiripan lintasan, algoritma \textit{dynamic time warping} yang dapat digunakan untuk mengukur kemiripan antara dua buah lintasan, serta pergerakan kolektif secara umum. Pada bab ini juga akan dibahas secara singkat mengenai definisi pergerakan kolektif yang sudah ada.
+    
+    \item Bab 3 Analisis
+    
+    Bab 3 akan berisi pembahasan mengenai masalah-masalah yang terdapat pada definisi-definisi formal pergerakan kolektif yang sudah ada serta cara untuk mengatasi masalah-masalah tersebut. Selain itu, bab ini juga akan membahas mengenai definisi formal pergerakan kolektif baru yang dibuat dan algoritma yang dapat digunakan untuk mengidentifikasi pergerakan kolektif berdasarkan definisi tersebut.
+    
+    \item Bab 4
+\end{enumerate}
+
+\iffalse
+
 Rencananya Bab 2 akan berisi petunjuk penggunaan template dan dasar-dasar \LaTeX.
 Mungkin bab 3,4,5 dapt diisi oleh ketiga jurusan, misalnya peraturan dasar skripsi atau pedoman penulisan, tentu jika berkenan.
 Bab 6 akan diisi dengan kesimpulan, bahwa membuat template ini ternyata sungguh menghabiskan banyak waktu.
 
 \dtext{10}
+
+\fi
