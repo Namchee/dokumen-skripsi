@@ -22,13 +22,12 @@ Telah terdapat berbagai macam definisi formal yang dapat digunakan untuk mendesk
     Durasi waktu minimum di mana entitas-entitas yang dianggap bergerak bersama harus dekat secara spasial sepanjang durasi waktu tersebut. 
 \end{itemize}
 
-Namun, definisi-definisi formal yang sudah dibuat memiliki
-kesulitan dalam menghasilkan identifikasi pergerakan kolektif yang akurat pada dua kasus yang cukup lazim terjadi pada data lintasan dari dunia nyata. Hal tersebut mendorong perlunya pembuatan sebuah definisi formal pergerakan kolektif baru yang mampu mengatasi masalah-masalah yang terdapat pada definisi pergerakan kolektif sebelumnya. Kedua kasus tersebut beserta solusi yang diambil untuk mengatasi masalah akan dibahas melalui subbab berikut.
+Namun, definisi-definisi formal pergerakan kolektif yang sudah ada dapat menghasilkan hasil identifikasi pergerakan kolektif yang keliru atau kurang akurat pada dua kasus pergerakan yang lazim terjadi di dunia nyata. Hal tersebut mendorong perlunya pembuatan sebuah definisi formal pergerakan kolektif baru yang mampu mengatasi masalah-masalah yang terdapat pada definisi pergerakan kolektif sebelumnya. Kedua kasus tersebut beserta solusi yang diambil untuk mengatasi masalah akan dibahas melalui subbab berikut.
 
 \subsection{Perbedaan Arah}
 \label{subsec:beda-arah}
     
-Berdasarkan syarat-syarat terjadinya pergerakan kolektif, sebuah entitas akan tergabung dalam suatu kelompok pergerakan kolektif apabila entitas tersebut memiliki lintasan yang mirip dengan anggota-anggota lain dari kelompok pergerakan kolektif tersebut selama kurun waktu tertentu. Terdapat banyak cara yang dapat digunakan untuk mengukur kemiripan sebuah lintasan dengan lintasan lain, seperti yang sudah disinggung pada subbab \ref{sec:kemiripan}. Seluruh ukuran kemiripan tersebut menggunakan jarak sebagai penentu utama kemiripan lintasan. Dengan kata lain, sebuah entitas dikatakan tergabung dalam sebuah kelompok pergerakan kolektif apabila entitas tersebut memiliki perbedaan jarak yang minimal dengan entitas lain yang merupakan anggota dari pergerakan kolektif selama durasi interval waktu tertentu. Konsep tersebut sesuai dengan cara manusia mengidentifikasi pergerakan bersama pada sebuah data, di mana pergerakan bersama akan terjadi apabila anggota-anggotanya memiliki jarak yang cukup dekat selama durasi waktu yang cukup lama.
+Berdasarkan syarat-syarat terjadinya pergerakan kolektif, sebuah entitas akan tergabung dalam suatu kelompok pergerakan kolektif apabila entitas tersebut dapat dikatakan dekat secara spasial dengan anggota-anggota dari pergerakan kolektif selama kurun waktu tertentu. Konsep tersebut sesuai dengan cara manusia mengidentifikasi pergerakan bersama pada sebuah data, di mana pergerakan bersama akan terjadi apabila terdapat sejumlah entitas di dalam pergerakan kolektif di mana anggota-anggotanya memiliki jarak yang cukup dekat selama durasi waktu yang cukup lama.
 
 Namun, upaya identifikasi pergerakan kolektif yang hanya bergantung pada tiga ukuran lintasan yang telah disebutkan di atas dapat menimbulkan kesalahan identifikasi pada kasus di mana terdapat sebuah yang entitas bergerak berpapasan dengan entitas-entitas lainnya yang bergerak berlawanan arah dalam jarak yang cukup dekat dan durasi waktu yang cukup lama. Pergerakan tersebut dapat menyebabkan entitas yang bergerak berpapasan membentuk atau tergabung dalam sebuah pergerakan kolektif.
     
@@ -37,7 +36,7 @@ Dalam sebuah kasus yang ditunjukkan melalui gambar \ref{bab3:masalah-arah}, dibe
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.535\textwidth]{Gambar/bab3:beda-arah.pdf}
-    \caption[Kasus perbedaan arah]{Upaya identifikasi pergerakan kolektif oleh definisi formal yang telah dibuat sebelumnya dapat menyebabkan entitas berwarna biru tergabung dalam pergerakan kolektif entitas-entitas berwarna merah, walaupun terdapat perbedaan arah yang besar antara kedua lintasan.}
+    \caption[Masalah identifikasi pada kasus perbedaan arah]{Upaya identifikasi pergerakan kolektif oleh definisi formal yang telah dibuat sebelumnya dapat menyebabkan entitas berwarna biru tergabung dalam pergerakan kolektif entitas-entitas berwarna merah, walaupun terdapat perbedaan arah yang besar antara kedua lintasan.}
     \label{bab3:masalah-arah}
 \end{figure}
     
@@ -48,7 +47,7 @@ Masalah tersebut dapat diselesaikan dengan memanfaatkan ukuran arah yang terdapa
 \begin{figure}
     \centering
     \includegraphics[height=9.5cm]{Gambar/bab3:beda-arah-lokal.pdf}
-    \caption{Pada kasus di mana $m = 2$ dan $k = 3$, menghitung arah secara global dapat menyebabkan pergerakan kolektif tidak terbentuk sama sekali karena perbedaan arah akhir yang terlalu ekstrim (ditunjukkan melalui garis putus-putus hijau)}
+    \caption[Masalah identifikasi pada penghitungan arah secara global]{Pada kasus di mana $m = 2$ dan $k = 3$, menghitung arah secara global dapat menyebabkan pergerakan kolektif tidak terbentuk sama sekali karena perbedaan arah akhir yang terlalu ekstrim (ditunjukkan melalui garis putus-putus hijau)}
     \label{bab3:beda-arah-lokal}
 \end{figure}
 
@@ -79,7 +78,7 @@ Dalam sebuah kasus yang digambarkan melalui gambar \ref{bab3:masalah-kecepatan},
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.75\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
-    \caption{Pada kasus di mana $m = 3$ dan $t = 3$, perbedaan kecepatan entitas berwarna biru dapat berujung pada perbedaan jarak yang jauh dengan entitas-entitas merah sehingga pergerakan kolektif tidak terbentuk, walaupun entitas tersebut hanya memiliki perbedaan jarak yang jauh dengan entitas lain selama beberapa saat}
+    \caption[Masalah identifikasi pada kasus perbedaan kecepatan]{Pada kasus di mana $m = 3$ dan $t = 3$, perbedaan kecepatan entitas berwarna biru dapat berujung pada perbedaan jarak yang jauh dengan entitas-entitas merah sehingga pergerakan kolektif tidak terbentuk, walaupun entitas tersebut hanya memiliki perbedaan jarak yang jauh dengan entitas lain selama beberapa saat}
     \label{bab3:masalah-kecepatan}
 \end{figure}
     
@@ -100,7 +99,7 @@ Berdasarkan pembahasan mengenai pergerakan kolektif pada subbab \ref{sec:collect
 Seluruh aspek yang telah disebutkan di atas merupakan sebuah parameter masukan yang ditentukan oleh peneliti sebelum proses identifikasi pergerakan kolektif dilakukan, sehingga sebuah definisi pergerakan kolektif yang sama dapat menghasilkan hasil identifikasi yang berbeda-beda yang dipengaruhi oleh parameter-parameter yang dimasukkan. 
 Dengan mempertimbangkan aspek-aspek di atas, dapat dibuat sebuah definisi pergerakan kolektif baru bernama rombongan yang secara formal dinyatakan sebagai:
 
-\noindent \textbf{\pergerakankolektif($m$, $k$, $r$, $\vartheta$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$ yang memiliki jumlah entitas sebanyak $n$, jumlah entitas minimum sebanyak $m$ buah entitas di mana $k \in [2, n]$, interval waktu minimum selama $k$ satuan waktu di mana $k \geq 2$, jarak maksimum antara entitas sepanjang $r$ satuan panjang di mana $r \in \mathbb{R}^+$, dan nilai kemiripan sudut minimum sebesar $\vartheta$ di mana $\vartheta \in [-1, 1]$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$. Sebuah rombongan pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung satu sama lain selama interval waktu $I$ secara konsekutif. 
+\noindent \textbf{\pergerakankolektif($m$, $k$, $r$, $\vartheta$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$ yang memiliki jumlah entitas sebanyak $n$, jumlah entitas minimum sebanyak $m$ buah entitas di mana $k \in [2, n]$, interval waktu minimum selama $k$ satuan waktu di mana $k \geq 2$, jarak maksimum antar entitas sepanjang $r$ satuan panjang di mana $r \in \mathbb{R}^+$, dan nilai kemiripan sudut minimum sebesar $\vartheta$ di mana $\vartheta \in [-1, 1]$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$. Sebuah rombongan pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung satu sama lain selama interval waktu $I$ secara konsekutif.
 
 \section{Algoritma Identifikasi Rombongan}
 \label{sec:algoritma}
@@ -158,6 +157,7 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
                     $Insert\;entitySet\;into\;collectiveMovement$
                 }
             }
+            $Insert\;collectiveMovements\;into\;result$
         }
     }
     \KwRet{$result$}
@@ -169,7 +169,7 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
 
 \begin{enumerate}
     \item Inisialisasi sebuah \textit{array} $\mathcal{R}$ yang akan menyimpan himpunan rombongan yang teridentifikasi untuk setiap interval waktu $I$.
-    \item Cari setiap interval waktu konsekutif $I$ sepanjang $k$ satuan waktu yang dapat dibentuk. Interval-interval waktu konsekutif dapat dicari menggunakan teknik \textit{sliding window} \cite{ralf:03:sliding-window}. Sebagai contoh, pada himpunan entitas $\mathcal{X}$ sepanjang $5$ satuan waktu dan $k = 3$, maka interval waktu $I$ yang mungkin adalah $[1, 3]$, $[2, 4]$, dan $[3, 5]$.
+    \item Cari setiap interval waktu konsekutif $I$ sepanjang $k$ satuan waktu yang dapat dibentuk. Interval-interval waktu konsekutif dapat dicari menggunakan teknik \textit{sliding window} \cite{ralf:03:sliding-window}. Sebagai contoh, pada himpunan entitas $\mathcal{X}$ sepanjang $5$ satuan waktu dan $k = 3$, maka interval waktu $I$ yang mungkin adalah $[1, 2, 3]$, $[2, 3, 4]$, dan $[3, 4, 5]$.
     \item Untuk setiap interval waktu konsekutif $I$ yang berdurasi $k$ satuan waktu:
     
     \begin{enumerate}
@@ -182,7 +182,7 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \item Kembalikan \textit{array} $\mathcal{R}$ sebagai hasil. Pada titik ini, $\mathcal{R}$ akan berisi himpunan rombongan yang terbentuk pada setiap interval waktu $I$ yang berdurasi selama $k$ satuan waktu.
 \end{enumerate}
 
-Algoritma di atas memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. Nilai tersebut didapatkan melalui perhitungan berikut:
+Algoritma identifikasi memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. Nilai tersebut didapatkan melalui perhitungan berikut:
 
 \begin{enumerate}
     \item Pada baris $3$, algoritma akan memiliki kompleksitas waktu sebesar $O(t - k)$ di mana nilai tersebut diperoleh dengan menghitung jumlah interval waktu konsekutif yang mungkin dibuat. Jumlah interval waktu konsekutif yang dapat dibuat merupakan selisih dari panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$ dan durasi waktu konsekutif minimum untuk membentuk sebuah rombongan.
