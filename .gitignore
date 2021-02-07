@@ -1,9 +1,10 @@
 # Ignore the build and lib dirs
-program/build
 program/lib/*
 
 # Ignore any executables
 program/bin/*
+.vscode
+build
 
 # Ignore Mac specific files
 .DS_Store
