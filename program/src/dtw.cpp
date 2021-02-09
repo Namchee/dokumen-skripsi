@@ -10,7 +10,7 @@
  */
 double calculateCost(std::vector<int> &a, std::vector<int> &b) {
     if (a.size() != b.size()) {
-        throw std::length_error("Trajectories must reside in the same dimensional space.");
+        throw std::length_error("Both trajectories must reside in the same dimensional space.");
     }
 
     double distance = 0;
@@ -33,16 +33,17 @@ double calculateDTWDistance(std::vector<std::vector<int> > &a, std::vector<std::
     // fill the DTW array with infinities
     for (int i = 0; i < (int)a.size(); i++) {
         for (int j = 0; j < (int)b.size(); j++) {
-            dtw[i][j] = std::numeric_limits<int>::max();
+            dtw[i][j] = std::numeric_limits<double>::max();
         }
     }
 
     // Pair the first point of `a` with the first point of `b`
     dtw[0][0] = 0;
 
-    for (int i = 1; i < (int)a.size(); i++) {
-        for (int j = 1; j < (int)b.size(); j++) {
+    for (int i = 0; i < (int)a.size(); i++) {
+        for (int j = 0; j < (int)b.size(); j++) {
             double cost = calculateCost(a[i], b[i]);
+            double min = 
 
             dtw[i][j] = cost + std::min(
                 dtw[i - 1][j],
@@ -54,5 +55,13 @@ double calculateDTWDistance(std::vector<std::vector<int> > &a, std::vector<std::
         }
     }
 
-    return dtw[a.size()][b.size()];
+    for (int i = 0; i < (int)a.size(); i++) {
+        for (int j = 0; j < (int)b.size(); j++) {
+            printf("%.1lf ", dtw[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    return dtw[a.size() - 1][b.size() - 1];
 }

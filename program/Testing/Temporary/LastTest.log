@@ -1,0 +1,19 @@
+Start testing: Feb 09 20:31 WIB
+----------------------------------------------------------
+1/1 Testing: dtw
+1/1 Test: dtw
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-dtw"
+Directory: /media/namchee/Shared Disk/OS/skripsi/program
+"dtw" start time: Feb 09 20:31 WIB
+Output:
+----------------------------------------------------------
+test-dtw: /media/namchee/Shared Disk/OS/skripsi/program/test/test-dtw.cpp:27: int main(): Assertion `range == 6.0f' failed.
+<end of output>
+Test time =   0.15 sec
+----------------------------------------------------------
+Test Failed.
+"dtw" end time: Feb 09 20:31 WIB
+"dtw" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Feb 09 20:31 WIB
