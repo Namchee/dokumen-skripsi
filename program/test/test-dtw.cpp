@@ -6,13 +6,13 @@
 
 // Sample test case, stolen from internet
 void should_pass() {
-    std::vector<std::vector<int> > a = {
+    std::vector<std::vector<double> > a = {
         { 1 },
         { 2 },
         { 3 },
     };
 
-    std::vector<std::vector<int> > b = {
+    std::vector<std::vector<double> > b = {
         { 2 },
         { 2 },
         { 2 },
@@ -27,7 +27,7 @@ void should_pass() {
 
 // Another sample test case, stolen from internet
 void should_also_pass() {
-    std::vector<std::vector<int> > a = {
+    std::vector<std::vector<double> > a = {
         { 3 },
         { 1 },
         { 2 },
@@ -35,7 +35,7 @@ void should_also_pass() {
         { 1 }
     };
 
-    std::vector<std::vector<int> > b = {
+    std::vector<std::vector<double> > b = {
         { 2 },
         { 0 },
         { 0 },
@@ -52,13 +52,13 @@ void should_also_pass() {
 
 // Input order shouldn't matter
 void should_pass_as_input_order_does_not_matter() {
-    std::vector<std::vector<int> > b = {
+    std::vector<std::vector<double> > b = {
         { 1 },
         { 2 },
         { 3 },
     };
 
-    std::vector<std::vector<int> > a = {
+    std::vector<std::vector<double> > a = {
         { 2 },
         { 2 },
         { 2 },
@@ -73,31 +73,35 @@ void should_pass_as_input_order_does_not_matter() {
 
 // Throw length_error when dimension is not same
 void should_throw_error_when_dimension_is_not_same() {
-    std::vector<std::vector<int> > a = {
+    std::vector<std::vector<double> > a = {
         { 1 }
     };
 
-    std::vector<std::vector<int> > b = {
+    std::vector<std::vector<double> > b = {
         { 1, 2 }
     };
 
     try {
         calculateDTWDistance(a, b);
-    } catch(std::length_error const &err) {
+
+        throw std::logic_error("Should throw an error as trajectories reside in different movement dimension.");
+    } catch(std::invalid_argument const &err) {
         assert(err.what() == std::string("Both trajectories must reside in the same dimensional space."));
     }
 }
 
 void should_throw_error_when_trajectory_is_empty() {
-    std::vector<std::vector<int> > a = {};
+    std::vector<std::vector<double> > a = {};
 
-    std::vector<std::vector<int> > b = {
+    std::vector<std::vector<double> > b = {
         { 1, 2 }
     };
 
     try {
         calculateDTWDistance(a, b);
-    } catch(std::length_error const &err) {
+
+        throw std::logic_error("Should throw an error as trajectory `a` is empty");
+    } catch(std::invalid_argument const &err) {
         assert(err.what() == std::string("Both trajectories must not be empty."));
     }
 }

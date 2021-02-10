@@ -8,9 +8,9 @@
  * Calculate the euclidean distance between two points in
  * n-dimensional space.
  */
-double calculateCost(std::vector<int> &a, std::vector<int> &b) {
+double calculateCost(std::vector<double> &a, std::vector<double> &b) {
     if (a.size() != b.size()) {
-        throw std::length_error("Both trajectories must reside in the same dimensional space.");
+        throw std::invalid_argument("Both trajectories must reside in the same dimensional space.");
     }
 
     double distance = 0.0f;
@@ -26,9 +26,9 @@ double calculateCost(std::vector<int> &a, std::vector<int> &b) {
  * Calculate dynamic time warping distance between two distinct
  * trajectories.
  */
-double calculateDTWDistance(std::vector<std::vector<int> > &a, std::vector<std::vector<int> > &b) {
+double calculateDTWDistance(std::vector<std::vector<double> > &a, std::vector<std::vector<double> > &b) {
     if (a.size() == 0 || b.size() == 0) {
-        throw std::length_error("Both trajectories must not be empty.");
+        throw std::invalid_argument("Both trajectories must not be empty.");
     }
 
     // create a 2-dimensional array to store the DTW distances
