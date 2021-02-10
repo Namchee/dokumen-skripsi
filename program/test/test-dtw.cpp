@@ -1,15 +1,38 @@
 #include "dtw.h"
 #include <vector>
 #include <cassert>
+#include <stdexcept>
 #include <iostream>
 
-int main() {
+// Sample test case, stolen from internet
+void should_pass() {
+    std::vector<std::vector<int> > a = {
+        { 1 },
+        { 2 },
+        { 3 },
+    };
+
+    std::vector<std::vector<int> > b = {
+        { 2 },
+        { 2 },
+        { 2 },
+        { 3 },
+        { 4 }
+    };
+
+    double range = calculateDTWDistance(a, b);
+
+    assert(range == 2.0f);
+}
+
+// Another sample test case, stolen from internet
+void should_also_pass() {
     std::vector<std::vector<int> > a = {
         { 3 },
         { 1 },
         { 2 },
         { 2 },
-        { 1 },
+        { 1 }
     };
 
     std::vector<std::vector<int> > b = {
@@ -19,12 +42,72 @@ int main() {
         { 3 },
         { 3 },
         { 1 },
-        { 0 },
+        { 0 }
     };
 
     double range = calculateDTWDistance(a, b);
 
     assert(range == 6.0f);
+}
+
+// Input order shouldn't matter
+void should_pass_as_input_order_does_not_matter() {
+    std::vector<std::vector<int> > b = {
+        { 1 },
+        { 2 },
+        { 3 },
+    };
+
+    std::vector<std::vector<int> > a = {
+        { 2 },
+        { 2 },
+        { 2 },
+        { 3 },
+        { 4 }
+    };
+
+    double range = calculateDTWDistance(a, b);
+
+    assert(range == 2.0f);
+}
+
+// Throw length_error when dimension is not same
+void should_throw_error_when_dimension_is_not_same() {
+    std::vector<std::vector<int> > a = {
+        { 1 }
+    };
+
+    std::vector<std::vector<int> > b = {
+        { 1, 2 }
+    };
+
+    try {
+        calculateDTWDistance(a, b);
+    } catch(std::length_error const &err) {
+        assert(err.what() == std::string("Both trajectories must reside in the same dimensional space."));
+    }
+}
+
+void should_throw_error_when_trajectory_is_empty() {
+    std::vector<std::vector<int> > a = {};
+
+    std::vector<std::vector<int> > b = {
+        { 1, 2 }
+    };
+
+    try {
+        calculateDTWDistance(a, b);
+    } catch(std::length_error const &err) {
+        assert(err.what() == std::string("Both trajectories must not be empty."));
+    }
+}
+
+int main() {
+    should_pass();
+    should_also_pass();
+    should_pass_as_input_order_does_not_matter();
+    should_throw_error_when_dimension_is_not_same();
+    should_throw_error_when_trajectory_is_empty();
 
     return 0;
 }

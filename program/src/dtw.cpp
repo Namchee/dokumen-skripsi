@@ -13,9 +13,9 @@ double calculateCost(std::vector<int> &a, std::vector<int> &b) {
         throw std::length_error("Both trajectories must reside in the same dimensional space.");
     }
 
-    double distance = 0;
+    double distance = 0.0f;
 
-    for (int it = 0; it < (int)a.size(); it++) {
+    for (unsigned int it = 0; it < a.size(); it++) {
         distance += pow(a[it] - b[it], 2);
     }
 
@@ -27,41 +27,43 @@ double calculateCost(std::vector<int> &a, std::vector<int> &b) {
  * trajectories.
  */
 double calculateDTWDistance(std::vector<std::vector<int> > &a, std::vector<std::vector<int> > &b) {
-    // create a 2-dimensional array to store the DTW distances
-    double dtw[a.size()][b.size()];
+    if (a.size() == 0 || b.size() == 0) {
+        throw std::length_error("Both trajectories must not be empty.");
+    }
 
-    // fill the DTW array with infinities
-    for (int i = 0; i < (int)a.size(); i++) {
-        for (int j = 0; j < (int)b.size(); j++) {
-            dtw[i][j] = std::numeric_limits<double>::max();
-        }
+    // create a 2-dimensional array to store the DTW distances
+    int x_lim = a.size() + 1;
+    int y_lim = b.size() + 1;
+    double dtw[x_lim][y_lim];
+
+    // initialize all illegal first pairings with infinity
+    for (unsigned int i = 0; i < x_lim; i++) {
+        dtw[i][0] = std::numeric_limits<double>::max();        
+    }
+
+    for (unsigned int i = 0; i < y_lim; i++) {
+        dtw[0][i] = std::numeric_limits<double>::max();
     }
 
     // Pair the first point of `a` with the first point of `b`
     dtw[0][0] = 0;
 
-    for (int i = 0; i < (int)a.size(); i++) {
-        for (int j = 0; j < (int)b.size(); j++) {
-            double cost = calculateCost(a[i], b[i]);
-            double min = 
+    // Calculate DTW distance
+    for (unsigned int i = 1; i < x_lim; i++) {
+        for (unsigned int j = 1; j < y_lim; j++) {
+            double cost = calculateCost(a[i - 1], b[j - 1]);
 
-            dtw[i][j] = cost + std::min(
+            double min = std::min(
                 dtw[i - 1][j],
                 std::min(
                     dtw[i][j - 1],
                     dtw[i - 1][j - 1]
                 )
             );
+
+            dtw[i][j] = cost + min;
         }
     }
 
-    for (int i = 0; i < (int)a.size(); i++) {
-        for (int j = 0; j < (int)b.size(); j++) {
-            printf("%.1lf ", dtw[i][j]);
-        }
-
-        printf("\n");
-    }
-
-    return dtw[a.size() - 1][b.size() - 1];
+    return dtw[a.size()][b.size()];
 }
