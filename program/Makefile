@@ -223,6 +223,66 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/reader.o: src/reader.cpp.o
+
+.PHONY : src/reader.o
+
+# target to build an object file
+src/reader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/reader.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/reader.cpp.o
+.PHONY : src/reader.cpp.o
+
+src/reader.i: src/reader.cpp.i
+
+.PHONY : src/reader.i
+
+# target to preprocess a source file
+src/reader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/reader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/reader.cpp.i
+.PHONY : src/reader.cpp.i
+
+src/reader.s: src/reader.cpp.s
+
+.PHONY : src/reader.s
+
+# target to generate assembly for a file
+src/reader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/reader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/reader.cpp.s
+.PHONY : src/reader.cpp.s
+
+src/rombongan.o: src/rombongan.cpp.o
+
+.PHONY : src/rombongan.o
+
+# target to build an object file
+src/rombongan.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/rombongan.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/rombongan.cpp.o
+.PHONY : src/rombongan.cpp.o
+
+src/rombongan.i: src/rombongan.cpp.i
+
+.PHONY : src/rombongan.i
+
+# target to preprocess a source file
+src/rombongan.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/rombongan.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/rombongan.cpp.i
+.PHONY : src/rombongan.cpp.i
+
+src/rombongan.s: src/rombongan.cpp.s
+
+.PHONY : src/rombongan.s
+
+# target to generate assembly for a file
+src/rombongan.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/rombongan.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/rombongan.cpp.s
+.PHONY : src/rombongan.cpp.s
+
 test/test-dtw.o: test/test-dtw.cpp.o
 
 .PHONY : test/test-dtw.o
@@ -267,6 +327,12 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/reader.o"
+	@echo "... src/reader.i"
+	@echo "... src/reader.s"
+	@echo "... src/rombongan.o"
+	@echo "... src/rombongan.i"
+	@echo "... src/rombongan.s"
 	@echo "... test/test-dtw.o"
 	@echo "... test/test-dtw.i"
 	@echo "... test/test-dtw.s"

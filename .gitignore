@@ -1,9 +1,11 @@
 # Ignore the build and lib dirs
-program/lib/*
+program/lib
+program/build
 program/CMakeFiles
+program/Testing
 
 # Ignore any executables
-program/bin/*
+program/bin
 .vscode
 build
 

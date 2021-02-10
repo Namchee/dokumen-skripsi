@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories(./include ./src ./test)
 
-set(SOURCES ${SOURCE_DIR}/dtw.cpp ${SOURCE_DIR}/dtw.h)
+set(SOURCES ${SOURCE_DIR}/dtw.cpp ${SOURCE_DIR}/dtw.h ${SOURCE_DIR}/reader.cpp ${SOURCE_DIR}/reader.h ${SOURCE_DIR}/rombongan.cpp ./include/rombongan.h ./include/entity.h)
 
 add_executable(main ${SOURCE_DIR}/main.cpp ${SOURCES})
 add_executable(test-dtw ${TEST_DIR}/test-dtw.cpp ${SOURCES})
