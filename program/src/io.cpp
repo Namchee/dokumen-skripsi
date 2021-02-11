@@ -12,11 +12,11 @@
  * 
  * @return list of parsed arguments.
  */
-Options parseArguments(int argc, char *argv[]) {
+Parameters parseArguments(int argc, char *argv[]) {
     argparse::ArgumentParser program("rombongan");
 
     program.add_argument("data")
-        .help("Nama berkas dari sumber data yang ingin digunakan")
+        .help("Nama berkas text dari sumber data yang ingin digunakan")
         .required();
 
     program.add_argument("entity_count")
@@ -40,12 +40,8 @@ Options parseArguments(int argc, char *argv[]) {
         .action([](const std::string &value) { return std::stod(value); });
 
     program.add_argument("-p", "--path")
-        .help("Direktori sumber data lintasan, relatif dari direktori saat ini")
-        .default_value("./../data")
-        .action([](const std::string &value) {
-            return std::filesystem::current_path().string() + value;
-        }
-    );
+        .help("Absolute path menuju direktori sumber data lintasan.")
+        .default_value(std::string("./../data"));
 
     try {
         program.parse_args(argc, argv);
@@ -82,11 +78,14 @@ Options parseArguments(int argc, char *argv[]) {
 
     auto path = program.get<std::string>("--path");
 
-    return {
-        data,
-        entity_count,
-        time_interval,
-        range,
-        cosine_similarity
-    };
+    Parameters p;
+
+    p.source = data;
+    p.entity_count = entity_count;
+    p.time_interval = time_interval;
+    p.range = range;
+    p.cosine_similarity = cosine_similarity;
+    p.path = path;
+
+    return p;
 }

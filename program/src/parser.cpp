@@ -14,7 +14,7 @@
  * @param name Name of the file to be read from
  * @return List of moving entities with their trajectories
  */
-std::vector<Entity> readMovementData(std::string name, std::string path) {
+std::vector<Entity>& readMovementData(std::string name, std::string path) {
     std::ifstream file;
     std::string line;
 

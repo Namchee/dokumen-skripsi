@@ -1,18 +1,122 @@
-Start testing: Feb 10 19:37 WIB
+Start testing: Feb 11 20:08 WIB
 ----------------------------------------------------------
-1/1 Testing: dtw
-1/1 Test: dtw
+1/7 Testing: DTWAlgorithm
+1/7 Test: DTWAlgorithm
 Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-dtw"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"dtw" start time: Feb 10 19:37 WIB
+"DTWAlgorithm" start time: Feb 11 20:08 WIB
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"dtw" end time: Feb 10 19:37 WIB
-"dtw" time elapsed: 00:00:00
+"DTWAlgorithm" end time: Feb 11 20:08 WIB
+"DTWAlgorithm" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Feb 10 19:37 WIB
+2/7 Testing: IO
+2/7 Test: IO
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io" "seq_eth" "3" "10" "0.15" "1.0"
+Directory: /media/namchee/Shared Disk/OS/skripsi/program
+"IO" start time: Feb 11 20:08 WIB
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"IO" end time: Feb 11 20:08 WIB
+"IO" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/7 Testing: IOPath
+3/7 Test: IOPath
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io-path" "seq_eth" "3" "10" "0.15" "1.0" "-p=abc"
+Directory: /media/namchee/Shared Disk/OS/skripsi/program
+"IOPath" start time: Feb 11 20:08 WIB
+Output:
+----------------------------------------------------------
+Unknown argument
+Usage: rombongan [options] data entity_count time_interval range cosine_similarity 
+
+Positional arguments:
+data              	Nama berkas text dari sumber data yang ingin digunakan [required]
+entity_count      	Jumlah entitas minimum anggota rombongan [required]
+time_interval     	Interval waktu minimum pergerakan bersama secara konsekutif [required]
+range             	Jarak dynamic time warping maksimum antar anggota rombongan [required]
+cosine_similarity 	Nilai cosine similarity minimum antar anggota rombongan [required]
+
+Optional arguments:
+-h --help         	shows help message and exits
+-v --version      	prints version information and exits
+-p --path         	Absolute path menuju direktori sumber data lintasan. [default: "./../data"]
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"IOPath" end time: Feb 11 20:08 WIB
+"IOPath" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/7 Testing: IOExceptionMinimumEntity
+4/7 Test: IOExceptionMinimumEntity
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io-exception-minimum-entity" "seq_eth" "1" "2" "3.0" "1.0"
+Directory: /media/namchee/Shared Disk/OS/skripsi/program
+"IOExceptionMinimumEntity" start time: Feb 11 20:08 WIB
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"IOExceptionMinimumEntity" end time: Feb 11 20:08 WIB
+"IOExceptionMinimumEntity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/7 Testing: IOExceptionMinimumInterval
+5/7 Test: IOExceptionMinimumInterval
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io-exception-minimum-interval" "seq_eth" "2" "1" "3.0" "1.0"
+Directory: /media/namchee/Shared Disk/OS/skripsi/program
+"IOExceptionMinimumInterval" start time: Feb 11 20:08 WIB
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"IOExceptionMinimumInterval" end time: Feb 11 20:08 WIB
+"IOExceptionMinimumInterval" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/7 Testing: IOExceptionMaximumRange
+6/7 Test: IOExceptionMaximumRange
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io-exception-maximum-range" "seq_eth" "2" "2" "-3.0" "1.0"
+Directory: /media/namchee/Shared Disk/OS/skripsi/program
+"IOExceptionMaximumRange" start time: Feb 11 20:08 WIB
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"IOExceptionMaximumRange" end time: Feb 11 20:08 WIB
+"IOExceptionMaximumRange" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/7 Testing: IOExceptionCosineSimilarity
+7/7 Test: IOExceptionCosineSimilarity
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io-exception-cosine-similarity" "seq_eth" "2" "2" "3.0" "1.1"
+Directory: /media/namchee/Shared Disk/OS/skripsi/program
+"IOExceptionCosineSimilarity" start time: Feb 11 20:08 WIB
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"IOExceptionCosineSimilarity" end time: Feb 11 20:08 WIB
+"IOExceptionCosineSimilarity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Feb 11 20:08 WIB

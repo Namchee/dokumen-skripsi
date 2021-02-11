@@ -7,7 +7,7 @@
 /**
  * Parameters to be used when identifying rombongan from trajectory data.
  */
-struct Options {
+struct Parameters {
     std::string source;
     int entity_count;
     int time_interval;
@@ -16,6 +16,6 @@ struct Options {
     std::string path;
 };
 
-Options parseArguments(int argc, char *argv[]);
+Parameters parseArguments(int argc, char *argv[]);
 
 #endif
