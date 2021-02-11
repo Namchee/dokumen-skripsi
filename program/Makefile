@@ -242,35 +242,35 @@ src/dtw.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/dtw.cpp.s
 .PHONY : src/dtw.cpp.s
 
-src/input.o: src/input.cpp.o
+src/io.o: src/io.cpp.o
 
-.PHONY : src/input.o
+.PHONY : src/io.o
 
 # target to build an object file
-src/input.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/input.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/input.cpp.o
-.PHONY : src/input.cpp.o
+src/io.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/io.cpp.o
+.PHONY : src/io.cpp.o
 
-src/input.i: src/input.cpp.i
+src/io.i: src/io.cpp.i
 
-.PHONY : src/input.i
+.PHONY : src/io.i
 
 # target to preprocess a source file
-src/input.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/input.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/input.cpp.i
-.PHONY : src/input.cpp.i
+src/io.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/io.cpp.i
+.PHONY : src/io.cpp.i
 
-src/input.s: src/input.cpp.s
+src/io.s: src/io.cpp.s
 
-.PHONY : src/input.s
+.PHONY : src/io.s
 
 # target to generate assembly for a file
-src/input.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/input.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/input.cpp.s
-.PHONY : src/input.cpp.s
+src/io.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/io.cpp.s
+.PHONY : src/io.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -299,35 +299,35 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/reader.o: src/reader.cpp.o
+src/parser.o: src/parser.cpp.o
 
-.PHONY : src/reader.o
+.PHONY : src/parser.o
 
 # target to build an object file
-src/reader.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/reader.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/reader.cpp.o
-.PHONY : src/reader.cpp.o
+src/parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parser.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/parser.cpp.o
+.PHONY : src/parser.cpp.o
 
-src/reader.i: src/reader.cpp.i
+src/parser.i: src/parser.cpp.i
 
-.PHONY : src/reader.i
+.PHONY : src/parser.i
 
 # target to preprocess a source file
-src/reader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/reader.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/reader.cpp.i
-.PHONY : src/reader.cpp.i
+src/parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/parser.cpp.i
+.PHONY : src/parser.cpp.i
 
-src/reader.s: src/reader.cpp.s
+src/parser.s: src/parser.cpp.s
 
-.PHONY : src/reader.s
+.PHONY : src/parser.s
 
 # target to generate assembly for a file
-src/reader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/reader.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/reader.cpp.s
-.PHONY : src/reader.cpp.s
+src/parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/parser.cpp.s
+.PHONY : src/parser.cpp.s
 
 src/rombongan.o: src/rombongan.cpp.o
 
@@ -404,15 +404,15 @@ help:
 	@echo "... src/dtw.o"
 	@echo "... src/dtw.i"
 	@echo "... src/dtw.s"
-	@echo "... src/input.o"
-	@echo "... src/input.i"
-	@echo "... src/input.s"
+	@echo "... src/io.o"
+	@echo "... src/io.i"
+	@echo "... src/io.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/reader.o"
-	@echo "... src/reader.i"
-	@echo "... src/reader.s"
+	@echo "... src/parser.o"
+	@echo "... src/parser.i"
+	@echo "... src/parser.s"
 	@echo "... src/rombongan.o"
 	@echo "... src/rombongan.i"
 	@echo "... src/rombongan.s"

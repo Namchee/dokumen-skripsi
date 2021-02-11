@@ -1,5 +1,5 @@
-#ifndef input
-#define input
+#ifndef io
+#define io
 
 #include <argparse/argparse.hpp>
 #include <string>

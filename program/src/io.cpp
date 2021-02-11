@@ -1,4 +1,4 @@
-#include "input.h"
+#include "io.h"
 #include <iostream>
 #include <filesystem>
 #include <stdexcept>
@@ -39,7 +39,7 @@ Options parseArguments(int argc, char *argv[]) {
         .required()
         .action([](const std::string &value) { return std::stod(value); });
 
-    program.add_argument("path")
+    program.add_argument("-p", "--path")
         .help("Direktori sumber data lintasan, relatif dari direktori saat ini")
         .default_value("./../data")
         .action([](const std::string &value) {
@@ -80,14 +80,13 @@ Options parseArguments(int argc, char *argv[]) {
         throw std::invalid_argument("Nilai cosine similarity yang valid berkisar antara [-1, 1].");
     }
 
-    auto path = program.get<std::string>("path");
+    auto path = program.get<std::string>("--path");
 
     return {
         data,
         entity_count,
         time_interval,
         range,
-        cosine_similarity,
-        path
+        cosine_similarity
     };
 }

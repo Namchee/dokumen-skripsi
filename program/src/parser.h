@@ -1,5 +1,5 @@
-#ifndef reader
-#define reader
+#ifndef parser
+#define parser
 
 #include "entity.h"
 #include <vector>
