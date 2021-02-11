@@ -55,25 +55,33 @@ Parameters parseArguments(int argc, char *argv[]) {
     auto entity_count = program.get<int>("entity_count");
 
     if (entity_count < 2) {
-        throw std::invalid_argument("Jumlah entitas minimum harus lebih besar dari 1.");
+        throw std::invalid_argument(
+            "Jumlah entitas minimum harus lebih besar dari 1."
+        );
     }
 
     auto time_interval = program.get<int>("time_interval");
 
     if (time_interval < 2) {
-        throw std::invalid_argument("Durasi pergerakan bersama harus lebih besar dari 1.");
+        throw std::invalid_argument(
+            "Durasi pergerakan bersama harus lebih besar dari 1."
+        );
     }
 
     auto range = program.get<double>("range");
 
     if (range <= 0.0f) {
-        throw std::invalid_argument("Jarak entitas maksimum harus merupakan bilangan positif.");
+        throw std::invalid_argument(
+            "Jarak entitas maksimum harus merupakan bilangan positif."
+        );
     }
 
     auto cosine_similarity = program.get<double>("cosine_similarity");
 
     if (cosine_similarity < -1.0f || cosine_similarity > 1.0f) {
-        throw std::invalid_argument("Nilai cosine similarity yang valid berkisar antara [-1, 1].");
+        throw std::invalid_argument(
+            "Nilai cosine similarity yang valid berkisar antara [-1, 1]."
+        );
     }
 
     auto path = program.get<std::string>("--path");

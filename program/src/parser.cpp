@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <unordered_set>
 #include <map>
 #include <stdexcept>
 
@@ -31,35 +32,51 @@ std::vector<Entity>& readMovementData(std::string name, std::string path) {
         throw std::invalid_argument("File doesn't exist!");
     }
 
-    std::map<int, std::map<double, std::vector<double> > > data_map;
+    std::unordered_set<int> id_frame;
+    std::unordered_set<int> id_list;
+
+    std::map<double, std::map<int, std::vector<double> > > data_map;
+    std::map<int, std::vector<std::vector<double> > > trajectory_map;
 
     while (std::getline(file, line)) {
         std::stringstream line_stream(line);
 
         line_stream >> frame_time >> id >> x_pos;
 
+        id_list.insert(id);
+
         line_stream.ignore();
 
         line_stream >> y_pos;
 
-        data_map[id][frame_time] = { x_pos, y_pos }; 
+        data_map[frame_time][id] = { x_pos, y_pos }; 
     }
 
     file.close();
 
-    std::vector<Entity> result;
-
-    for (auto const& entry: data_map) {
-        int id = entry.first;
-        std::map<double, std::vector<double> > frame_position = entry.second;
-
-        std::vector<std::vector<double> > trajectory;
-
-        for (auto const& position: frame_position) {
-            trajectory.push_back(position.second);
+    for (auto const& [_, position]: data_map) {
+        for (auto const& [id, plane]: position) {
+            trajectory_map[id].push_back(plane);
+            id_frame.insert(id);
         }
 
-        result.push_back({ id, trajectory });
+        for (auto id: id_list) {
+            if (id_frame.find(id) == id_frame.end()) {
+                trajectory_map[id].push_back(
+                    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() }
+                );
+            }
+        }
+
+        id_frame.clear();
+    }
+
+    std::vector<Entity> result;
+
+    for (auto const& [id, trajectory]: trajectory_map) {
+        result.push_back(
+            { id, trajectory }
+        );
     }
 
     return result;
