@@ -202,7 +202,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=rombongan-algorithm
+CMAKE_PROJECT_NAME:STATIC=rombongan
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION:STATIC=1.0
@@ -350,6 +350,12 @@ rombongan-algoritm_BINARY_DIR:STATIC=/media/namchee/Shared Disk/OS/skripsi/progr
 
 //Value Computed by CMake
 rombongan-algoritm_SOURCE_DIR:STATIC=/media/namchee/Shared Disk/OS/skripsi/program
+
+//Value Computed by CMake
+rombongan_BINARY_DIR:STATIC=/media/namchee/Shared Disk/OS/skripsi/program
+
+//Value Computed by CMake
+rombongan_SOURCE_DIR:STATIC=/media/namchee/Shared Disk/OS/skripsi/program
 
 
 ########################
