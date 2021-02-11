@@ -14,14 +14,14 @@
  * @param name Name of the file to be read from
  * @return List of moving entities with their trajectories
  */
-std::vector<Entity> readMovementData(std::string name, std::string path = "./../data") {
+std::vector<Entity> readMovementData(std::string name, std::string path) {
     std::ifstream file;
     std::string line;
 
     double frame_time;
     double id, x_pos, y_pos;
 
-    std::string filepath = path + "/" + name + ".txt"
+    std::string filepath = path + "/" + name + ".txt";
 
     std::cout << "Attempting to read data from: " << filepath << "\n"; 
 

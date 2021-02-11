@@ -4,6 +4,6 @@
 #include <vector>
 #include <unordered_set>
 
-std::vector<std::unordered_set<int> > identifyRombongan();
+std::vector<std::vector<std::unordered_set<int> > > identifyRombongan();
 
 #endif

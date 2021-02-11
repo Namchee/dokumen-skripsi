@@ -1,18 +1,18 @@
-Start testing: Feb 10 09:49 WIB
+Start testing: Feb 10 19:37 WIB
 ----------------------------------------------------------
 1/1 Testing: dtw
 1/1 Test: dtw
 Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-dtw"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"dtw" start time: Feb 10 09:49 WIB
+"dtw" start time: Feb 10 19:37 WIB
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"dtw" end time: Feb 10 09:49 WIB
+"dtw" end time: Feb 10 19:37 WIB
 "dtw" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Feb 10 09:49 WIB
+End testing: Feb 10 19:37 WIB
