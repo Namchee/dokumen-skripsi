@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <unordered_set>
+#include <unordered_map>
 #include <map>
 #include <stdexcept>
 
@@ -35,8 +36,8 @@ std::vector<Entity>& readMovementData(std::string name, std::string path) {
     std::unordered_set<int> id_frame;
     std::unordered_set<int> id_list;
 
-    std::map<double, std::map<int, std::vector<double> > > data_map;
-    std::map<int, std::vector<std::vector<double> > > trajectory_map;
+    std::map<double, std::unordered_map<int, std::vector<double> > > data_map;
+    std::unordered_map<int, std::vector<std::vector<double> > > trajectory_map;
 
     while (std::getline(file, line)) {
         std::stringstream line_stream(line);
