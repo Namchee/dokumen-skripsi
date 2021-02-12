@@ -40,8 +40,13 @@ Parameters parseArguments(int argc, char *argv[]) {
         .action([](const std::string &value) { return std::stod(value); });
 
     program.add_argument("-p", "--path")
-        .help("Absolute path menuju direktori sumber data lintasan.")
-        .default_value(std::string("./../data"));
+        .help("Direktori sumber data lintasan. Relatif terhadap direktori saat ini.")
+        .default_value(
+            (std::filesystem::current_path() / ".." / "/data").string()
+        )
+        .action([](const std::string &value) {
+            return std::filesystem::current_path().string() + value;
+        });
 
     try {
         program.parse_args(argc, argv);
