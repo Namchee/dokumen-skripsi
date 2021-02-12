@@ -1,6 +1,7 @@
-#include "dtw.h"
+#include "similarity.h"
 #include "entity.h"
 #include <vector>
+#include <set>
 #include <unordered_set>
 
 /**
@@ -24,7 +25,8 @@ std::vector<std::vector<std::unordered_set<int> > > identifyRombongan(
         std::vector<std::unordered_set<int> > rombongan;
 
         for (Entity curr: entities) {
-            std::unordered_set<Entity> group{ curr };
+            std::set<Entity> group;
+            group.insert(curr);
 
             for (Entity other: entities) {
                 // only calculate when other is not the same entity as

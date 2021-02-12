@@ -75,16 +75,16 @@ CMAKE_BINARY_DIR = "/media/namchee/Shared Disk/OS/skripsi/program"
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/cmake/775/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/snap/cmake/775/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
 
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
 
-.PHONY : rebuild_cache/fast
+.PHONY : edit_cache/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
@@ -98,16 +98,16 @@ install/strip/fast: preinstall/fast
 	/snap/cmake/775/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/snap/cmake/775/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/snap/cmake/775/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
 
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
 
-.PHONY : edit_cache/fast
+.PHONY : rebuild_cache/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -226,43 +226,17 @@ test-io-exception-maximum-range/fast:
 .PHONY : test-io-exception-maximum-range/fast
 
 #=============================================================================
-# Target rules for targets named test-dtw
+# Target rules for targets named test-similarity
 
 # Build rule for target.
-test-dtw: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-dtw
-.PHONY : test-dtw
+test-similarity: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-similarity
+.PHONY : test-similarity
 
 # fast build rule for target.
-test-dtw/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/build
-.PHONY : test-dtw/fast
-
-#=============================================================================
-# Target rules for targets named main
-
-# Build rule for target.
-main: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
-.PHONY : main
-
-# fast build rule for target.
-main/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-.PHONY : main/fast
-
-#=============================================================================
-# Target rules for targets named test-io-exception-minimum-entity
-
-# Build rule for target.
-test-io-exception-minimum-entity: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-io-exception-minimum-entity
-.PHONY : test-io-exception-minimum-entity
-
-# fast build rule for target.
-test-io-exception-minimum-entity/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/build
-.PHONY : test-io-exception-minimum-entity/fast
+test-similarity/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-similarity.dir/build.make CMakeFiles/test-similarity.dir/build
+.PHONY : test-similarity/fast
 
 #=============================================================================
 # Target rules for targets named test-io
@@ -291,6 +265,32 @@ test-io-exception-minimum-interval/fast:
 .PHONY : test-io-exception-minimum-interval/fast
 
 #=============================================================================
+# Target rules for targets named main
+
+# Build rule for target.
+main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
+.PHONY : main
+
+# fast build rule for target.
+main/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
+
+#=============================================================================
+# Target rules for targets named test-io-exception-minimum-entity
+
+# Build rule for target.
+test-io-exception-minimum-entity: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-io-exception-minimum-entity
+.PHONY : test-io-exception-minimum-entity
+
+# fast build rule for target.
+test-io-exception-minimum-entity/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/build
+.PHONY : test-io-exception-minimum-entity/fast
+
+#=============================================================================
 # Target rules for targets named test-io-path
 
 # Build rule for target.
@@ -303,36 +303,6 @@ test-io-path/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/build
 .PHONY : test-io-path/fast
 
-src/dtw.o: src/dtw.cpp.o
-
-.PHONY : src/dtw.o
-
-# target to build an object file
-src/dtw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/dtw.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/dtw.cpp.o
-.PHONY : src/dtw.cpp.o
-
-src/dtw.i: src/dtw.cpp.i
-
-.PHONY : src/dtw.i
-
-# target to preprocess a source file
-src/dtw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/dtw.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/dtw.cpp.i
-.PHONY : src/dtw.cpp.i
-
-src/dtw.s: src/dtw.cpp.s
-
-.PHONY : src/dtw.s
-
-# target to generate assembly for a file
-src/dtw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/src/dtw.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/dtw.cpp.s
-.PHONY : src/dtw.cpp.s
-
 src/io.o: src/io.cpp.o
 
 .PHONY : src/io.o
@@ -341,10 +311,10 @@ src/io.o: src/io.cpp.o
 src/io.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-cosine-similarity.dir/build.make CMakeFiles/test-io-exception-cosine-similarity.dir/src/io.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-maximum-range.dir/build.make CMakeFiles/test-io-exception-maximum-range.dir/src/io.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/src/io.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/src/io.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-interval.dir/build.make CMakeFiles/test-io-exception-minimum-interval.dir/src/io.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/src/io.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/src/io.cpp.o
 .PHONY : src/io.cpp.o
 
@@ -356,10 +326,10 @@ src/io.i: src/io.cpp.i
 src/io.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-cosine-similarity.dir/build.make CMakeFiles/test-io-exception-cosine-similarity.dir/src/io.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-maximum-range.dir/build.make CMakeFiles/test-io-exception-maximum-range.dir/src/io.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/src/io.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/src/io.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-interval.dir/build.make CMakeFiles/test-io-exception-minimum-interval.dir/src/io.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/src/io.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/src/io.cpp.i
 .PHONY : src/io.cpp.i
 
@@ -371,10 +341,10 @@ src/io.s: src/io.cpp.s
 src/io.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-cosine-similarity.dir/build.make CMakeFiles/test-io-exception-cosine-similarity.dir/src/io.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-maximum-range.dir/build.make CMakeFiles/test-io-exception-maximum-range.dir/src/io.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/src/io.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/src/io.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-interval.dir/build.make CMakeFiles/test-io-exception-minimum-interval.dir/src/io.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/src/io.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/src/io.cpp.s
 .PHONY : src/io.cpp.s
 
@@ -461,6 +431,36 @@ src/rombongan.s: src/rombongan.cpp.s
 src/rombongan.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/rombongan.cpp.s
 .PHONY : src/rombongan.cpp.s
+
+src/similarity.o: src/similarity.cpp.o
+
+.PHONY : src/similarity.o
+
+# target to build an object file
+src/similarity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-similarity.dir/build.make CMakeFiles/test-similarity.dir/src/similarity.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/similarity.cpp.o
+.PHONY : src/similarity.cpp.o
+
+src/similarity.i: src/similarity.cpp.i
+
+.PHONY : src/similarity.i
+
+# target to preprocess a source file
+src/similarity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-similarity.dir/build.make CMakeFiles/test-similarity.dir/src/similarity.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/similarity.cpp.i
+.PHONY : src/similarity.cpp.i
+
+src/similarity.s: src/similarity.cpp.s
+
+.PHONY : src/similarity.s
+
+# target to generate assembly for a file
+src/similarity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-similarity.dir/build.make CMakeFiles/test-similarity.dir/src/similarity.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/similarity.cpp.s
+.PHONY : src/similarity.cpp.s
 
 test/io/test-io-exception-cosine-similarity.o: test/io/test-io-exception-cosine-similarity.cpp.o
 
@@ -624,33 +624,6 @@ test/io/test-io.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/test/io/test-io.cpp.s
 .PHONY : test/io/test-io.cpp.s
 
-test/test-dtw.o: test/test-dtw.cpp.o
-
-.PHONY : test/test-dtw.o
-
-# target to build an object file
-test/test-dtw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/test/test-dtw.cpp.o
-.PHONY : test/test-dtw.cpp.o
-
-test/test-dtw.i: test/test-dtw.cpp.i
-
-.PHONY : test/test-dtw.i
-
-# target to preprocess a source file
-test/test-dtw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/test/test-dtw.cpp.i
-.PHONY : test/test-dtw.cpp.i
-
-test/test-dtw.s: test/test-dtw.cpp.s
-
-.PHONY : test/test-dtw.s
-
-# target to generate assembly for a file
-test/test-dtw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/test/test-dtw.cpp.s
-.PHONY : test/test-dtw.cpp.s
-
 test/test-parser.o: test/test-parser.cpp.o
 
 .PHONY : test/test-parser.o
@@ -678,6 +651,33 @@ test/test-parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/test/test-parser.cpp.s
 .PHONY : test/test-parser.cpp.s
 
+test/test-similarity.o: test/test-similarity.cpp.o
+
+.PHONY : test/test-similarity.o
+
+# target to build an object file
+test/test-similarity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-similarity.dir/build.make CMakeFiles/test-similarity.dir/test/test-similarity.cpp.o
+.PHONY : test/test-similarity.cpp.o
+
+test/test-similarity.i: test/test-similarity.cpp.i
+
+.PHONY : test/test-similarity.i
+
+# target to preprocess a source file
+test/test-similarity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-similarity.dir/build.make CMakeFiles/test-similarity.dir/test/test-similarity.cpp.i
+.PHONY : test/test-similarity.cpp.i
+
+test/test-similarity.s: test/test-similarity.cpp.s
+
+.PHONY : test/test-similarity.s
+
+# target to generate assembly for a file
+test/test-similarity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-similarity.dir/build.make CMakeFiles/test-similarity.dir/test/test-similarity.cpp.s
+.PHONY : test/test-similarity.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -692,7 +692,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... main"
-	@echo "... test-dtw"
 	@echo "... test-io"
 	@echo "... test-io-exception-cosine-similarity"
 	@echo "... test-io-exception-maximum-range"
@@ -700,9 +699,7 @@ help:
 	@echo "... test-io-exception-minimum-interval"
 	@echo "... test-io-path"
 	@echo "... test-parser"
-	@echo "... src/dtw.o"
-	@echo "... src/dtw.i"
-	@echo "... src/dtw.s"
+	@echo "... test-similarity"
 	@echo "... src/io.o"
 	@echo "... src/io.i"
 	@echo "... src/io.s"
@@ -715,6 +712,9 @@ help:
 	@echo "... src/rombongan.o"
 	@echo "... src/rombongan.i"
 	@echo "... src/rombongan.s"
+	@echo "... src/similarity.o"
+	@echo "... src/similarity.i"
+	@echo "... src/similarity.s"
 	@echo "... test/io/test-io-exception-cosine-similarity.o"
 	@echo "... test/io/test-io-exception-cosine-similarity.i"
 	@echo "... test/io/test-io-exception-cosine-similarity.s"
@@ -733,12 +733,12 @@ help:
 	@echo "... test/io/test-io.o"
 	@echo "... test/io/test-io.i"
 	@echo "... test/io/test-io.s"
-	@echo "... test/test-dtw.o"
-	@echo "... test/test-dtw.i"
-	@echo "... test/test-dtw.s"
 	@echo "... test/test-parser.o"
 	@echo "... test/test-parser.i"
 	@echo "... test/test-parser.s"
+	@echo "... test/test-similarity.o"
+	@echo "... test/test-similarity.i"
+	@echo "... test/test-similarity.s"
 .PHONY : help
 
 

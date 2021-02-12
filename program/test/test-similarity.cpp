@@ -106,17 +106,49 @@ void dtw_should_throw_error_when_trajectory_is_empty() {
     }
 }
 
+void cosine_should_return_correct_value() {
+    std::vector<double> a = { 3, 2, 0, 5 };
+    std::vector<double> b = { 1, 0, 0, 0 };
+
+    double cosine_similarity = calculateCosineSimilarity(a, b);
+
+    assert(abs(cosine_similarity - 0.49) < 1e-9); 
+}
+
+void cosine_should_throw_an_error_when_dimension_is_not_same() {
+    std::vector<double> a = { 3 };
+    std::vector<double> b = { 3, 1 };
+
+    try {
+        calculateCosineSimilarity(a, b);
+
+        throw std::logic_error(
+            "Should throw an error as vectors does not reside in the same dimensional space."
+        );
+    } catch(std::invalid_argument const &err) {
+        assert(
+            err.what() == std::string("Both vector must reside in the same dimensional space.")
+        );
+    }
+}
+
 int main(int argc, char *argv[]) {
     if (argc == 0) {
         throw std::invalid_argument("This test file requires an argument.");
     }
 
-    
-    dtw_should_return_correct_value();
-    dtw_should_also_return_correct_value();
-    dtw_should_return_correct_value_as_input_order_does_not_matter();
-    dtw_should_throw_error_when_dimension_is_not_same();
-    dtw_should_throw_error_when_trajectory_is_empty();
+    std::string cmd(argv[1]);
+
+    if (cmd == "dtw") {
+        dtw_should_return_correct_value();
+        dtw_should_also_return_correct_value();
+        dtw_should_return_correct_value_as_input_order_does_not_matter();
+        dtw_should_throw_error_when_dimension_is_not_same();
+        dtw_should_throw_error_when_trajectory_is_empty();
+    } else {
+        cosine_should_return_correct_value();
+        cosine_should_throw_an_error_when_dimension_is_not_same();
+    }
 
     return 0;
 }
