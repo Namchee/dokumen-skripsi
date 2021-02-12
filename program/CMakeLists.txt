@@ -13,10 +13,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories(./include ./src ./test ./libs/argparse/include)
 
-set(SOURCES ${SOURCE_DIR}/dtw.cpp ${SOURCE_DIR}/dtw.h ${SOURCE_DIR}/parser.cpp ${SOURCE_DIR}/parser.h ${SOURCE_DIR}/rombongan.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp ./include/rombongan.h ./include/entity.h)
+set(SOURCES ${SOURCE_DIR}/similarity.cpp ${SOURCE_DIR}/similarity.h ${SOURCE_DIR}/parser.cpp ${SOURCE_DIR}/parser.h ${SOURCE_DIR}/rombongan.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp ./include/rombongan.h ./include/entity.h)
 
 add_executable(main ${SOURCE_DIR}/main.cpp ${SOURCES})
-add_executable(test-dtw ${TEST_DIR}/test-dtw.cpp ${SOURCE_DIR}/dtw.h ${SOURCE_DIR}/dtw.cpp)
+add_executable(test-similarity ${TEST_DIR}/test-similarity.cpp ${SOURCE_DIR}/similarity.h ${SOURCE_DIR}/similarity.cpp)
 add_executable(test-io ${TEST_DIR}/io/test-io.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp)
 add_executable(test-io-path ${TEST_DIR}/io/test-io-path.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp)
 add_executable(test-io-exception-minimum-entity ${TEST_DIR}/io/test-io-exception-minimum-entity.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp)
@@ -31,7 +31,8 @@ target_link_libraries(main argparse)
 enable_testing()
 
 # unit test for dynamic time warping algorithm
-add_test(NAME DTWAlgorithm COMMAND test-dtw)
+add_test(NAME DTWAlgorithm COMMAND test-similarity dtw)
+add_test(NAME CosineSimilarity COMMAND test-similarity cosine)
 add_test(NAME IO COMMAND test-io seq_eth 3 10 0.15 1.0)
 add_test(NAME IOPath COMMAND test-io-path seq_eth 3 10 0.15 1.0 -p=abc)
 add_test(NAME IOExceptionMinimumEntity COMMAND test-io-exception-minimum-entity seq_eth 1 2 3.0 1.0)

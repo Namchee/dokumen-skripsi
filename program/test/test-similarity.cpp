@@ -1,11 +1,11 @@
-#include "dtw.h"
+#include "similarity.h"
 #include <vector>
 #include <cassert>
 #include <stdexcept>
 #include <iostream>
 
 // Sample test case, stolen from internet
-void should_return_correct_vaue() {
+void dtw_should_return_correct_value() {
     std::vector<std::vector<double> > a = {
         { 1 },
         { 2 },
@@ -26,7 +26,7 @@ void should_return_correct_vaue() {
 }
 
 // Another sample test case, stolen from internet
-void should_also_return_correct_value() {
+void dtw_should_also_return_correct_value() {
     std::vector<std::vector<double> > a = {
         { 3 },
         { 1 },
@@ -51,7 +51,7 @@ void should_also_return_correct_value() {
 }
 
 // Input order shouldn't matter
-void should_return_correct_value_as_input_order_does_not_matter() {
+void dtw_should_return_correct_value_as_input_order_does_not_matter() {
     std::vector<std::vector<double> > b = {
         { 1 },
         { 2 },
@@ -72,7 +72,7 @@ void should_return_correct_value_as_input_order_does_not_matter() {
 }
 
 // Throw length_error when dimension is not same
-void should_throw_error_when_dimension_is_not_same() {
+void dtw_should_throw_error_when_dimension_is_not_same() {
     std::vector<std::vector<double> > a = {
         { 1 }
     };
@@ -90,7 +90,7 @@ void should_throw_error_when_dimension_is_not_same() {
     }
 }
 
-void should_throw_error_when_trajectory_is_empty() {
+void dtw_should_throw_error_when_trajectory_is_empty() {
     std::vector<std::vector<double> > a = {};
 
     std::vector<std::vector<double> > b = {
@@ -106,12 +106,17 @@ void should_throw_error_when_trajectory_is_empty() {
     }
 }
 
-int main() {
-    should_return_correct_vaue();
-    should_also_return_correct_value();
-    should_return_correct_value_as_input_order_does_not_matter();
-    should_throw_error_when_dimension_is_not_same();
-    should_throw_error_when_trajectory_is_empty();
+int main(int argc, char *argv[]) {
+    if (argc == 0) {
+        throw std::invalid_argument("This test file requires an argument.");
+    }
+
+    
+    dtw_should_return_correct_value();
+    dtw_should_also_return_correct_value();
+    dtw_should_return_correct_value_as_input_order_does_not_matter();
+    dtw_should_throw_error_when_dimension_is_not_same();
+    dtw_should_throw_error_when_trajectory_is_empty();
 
     return 0;
 }
