@@ -16,4 +16,11 @@ struct Entity {
     }
 };
 
+class EntityHasher {
+public:
+    size_t operator()(const Entity &e) const {
+        return e.id;
+    }
+};
+
 #endif
