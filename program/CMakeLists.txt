@@ -23,6 +23,7 @@ add_executable(test-io-exception-minimum-entity ${TEST_DIR}/io/test-io-exception
 add_executable(test-io-exception-minimum-interval ${TEST_DIR}/io/test-io-exception-minimum-interval.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp)
 add_executable(test-io-exception-maximum-range ${TEST_DIR}/io/test-io-exception-maximum-range.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp)
 add_executable(test-io-exception-cosine-similarity ${TEST_DIR}/io/test-io-exception-cosine-similarity.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp)
+add_executable(test-parser ${TEST_DIR}/test-parser.cpp ${SOURCE_DIR}/parser.cpp ${SOURCE_DIR}/parser.h ./include/entity.h)
 
 add_subdirectory(./libs/argparse)
 target_link_libraries(main argparse)
@@ -37,3 +38,4 @@ add_test(NAME IOExceptionMinimumEntity COMMAND test-io-exception-minimum-entity 
 add_test(NAME IOExceptionMinimumInterval COMMAND test-io-exception-minimum-interval seq_eth 2 1 3.0 1.0)
 add_test(NAME IOExceptionMaximumRange COMMAND test-io-exception-maximum-range seq_eth 2 2 -3.0 1.0)
 add_test(NAME IOExceptionCosineSimilarity COMMAND test-io-exception-cosine-similarity seq_eth 2 2 3.0 1.1)
+add_test(NAME Parser COMMAND test-parser)

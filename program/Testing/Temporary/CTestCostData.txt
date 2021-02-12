@@ -1,10 +1,11 @@
 dtw 10 0.000286249
-DTWAlgorithm 15 0.000184492
-IO 7 0.00025098
+DTWAlgorithm 20 0.000554437
+IO 12 0.00119634
 IOException 1 0.00338353
-IOPath 6 0.000543582
-IOExceptionMinimumEntity 6 0.000282461
-IOExceptionMinimumInterval 4 0.000460497
-IOExceptionMaximumRange 3 0.00075688
-IOExceptionCosineSimilarity 3 0.00065536
+IOPath 11 0.00121087
+IOExceptionMinimumEntity 11 0.00127917
+IOExceptionMinimumInterval 9 0.00142164
+IOExceptionMaximumRange 8 0.00109004
+IOExceptionCosineSimilarity 8 0.00111778
+Parser 3 0.001002
 ---

@@ -187,6 +187,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named test-parser
+
+# Build rule for target.
+test-parser: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-parser
+.PHONY : test-parser
+
+# fast build rule for target.
+test-parser/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/build
+.PHONY : test-parser/fast
+
+#=============================================================================
 # Target rules for targets named test-io-exception-cosine-similarity
 
 # Build rule for target.
@@ -398,6 +411,7 @@ src/parser.o: src/parser.cpp.o
 
 # target to build an object file
 src/parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/src/parser.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parser.cpp.o
 .PHONY : src/parser.cpp.o
 
@@ -407,6 +421,7 @@ src/parser.i: src/parser.cpp.i
 
 # target to preprocess a source file
 src/parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/src/parser.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parser.cpp.i
 .PHONY : src/parser.cpp.i
 
@@ -416,6 +431,7 @@ src/parser.s: src/parser.cpp.s
 
 # target to generate assembly for a file
 src/parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/src/parser.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parser.cpp.s
 .PHONY : src/parser.cpp.s
 
@@ -635,6 +651,33 @@ test/test-dtw.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-dtw.dir/build.make CMakeFiles/test-dtw.dir/test/test-dtw.cpp.s
 .PHONY : test/test-dtw.cpp.s
 
+test/test-parser.o: test/test-parser.cpp.o
+
+.PHONY : test/test-parser.o
+
+# target to build an object file
+test/test-parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/test/test-parser.cpp.o
+.PHONY : test/test-parser.cpp.o
+
+test/test-parser.i: test/test-parser.cpp.i
+
+.PHONY : test/test-parser.i
+
+# target to preprocess a source file
+test/test-parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/test/test-parser.cpp.i
+.PHONY : test/test-parser.cpp.i
+
+test/test-parser.s: test/test-parser.cpp.s
+
+.PHONY : test/test-parser.s
+
+# target to generate assembly for a file
+test/test-parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/test/test-parser.cpp.s
+.PHONY : test/test-parser.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -656,6 +699,7 @@ help:
 	@echo "... test-io-exception-minimum-entity"
 	@echo "... test-io-exception-minimum-interval"
 	@echo "... test-io-path"
+	@echo "... test-parser"
 	@echo "... src/dtw.o"
 	@echo "... src/dtw.i"
 	@echo "... src/dtw.s"
@@ -692,6 +736,9 @@ help:
 	@echo "... test/test-dtw.o"
 	@echo "... test/test-dtw.i"
 	@echo "... test/test-dtw.s"
+	@echo "... test/test-parser.o"
+	@echo "... test/test-parser.i"
+	@echo "... test/test-parser.s"
 .PHONY : help
 
 

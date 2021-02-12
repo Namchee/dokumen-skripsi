@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <unordered_set>
 #include <unordered_map>
 #include <map>
@@ -16,12 +17,11 @@
  * @param name Name of the file to be read from
  * @return List of moving entities with their trajectories
  */
-std::vector<Entity>& readMovementData(std::string name, std::string path) {
+std::vector<Entity> parseMovementData(const std::string& name, const std::string& path) {
     std::ifstream file;
     std::string line;
 
-    double frame_time;
-    double id, x_pos, y_pos;
+    double frame_time, id, x_pos, y_pos;
 
     std::string filepath = path + "/" + name + ".txt";
 
@@ -40,15 +40,11 @@ std::vector<Entity>& readMovementData(std::string name, std::string path) {
     std::unordered_map<int, std::vector<std::vector<double> > > trajectory_map;
 
     while (std::getline(file, line)) {
-        std::stringstream line_stream(line);
+        std::istringstream line_stream(line);
 
-        line_stream >> frame_time >> id >> x_pos;
+        line_stream >> frame_time >> id >> x_pos >> y_pos >> y_pos;
 
         id_list.insert(id);
-
-        line_stream.ignore();
-
-        line_stream >> y_pos;
 
         data_map[frame_time][id] = { x_pos, y_pos }; 
     }
