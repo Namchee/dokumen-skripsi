@@ -41,12 +41,12 @@ std::vector<std::vector<std::unordered_set<int> > > identifyRombongan(
 
                         std::vector<std::vector<double> > sub_a = std::vector<std::vector<double> >(
                             in_group.trajectories.begin() + start,
-                            in_group.trajectories.begin() + end
+                            in_group.trajectories.begin() + end + 1
                         );
 
                         std::vector<std::vector<double> > sub_b = std::vector<std::vector<double> >(
                             other.trajectories.begin() + start,
-                            other.trajectories.begin() + end  
+                            other.trajectories.begin() + end + 1
                         );
 
                         std::vector<double> vec_a, vec_b;
