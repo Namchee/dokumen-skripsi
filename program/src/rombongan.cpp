@@ -17,6 +17,7 @@ std::vector<std::vector<std::unordered_set<int> > > identifyRombongan(
     double cs
 ) {
     std::vector<std::vector<std::unordered_set<int> > > result;
+    int dimension = entities[0].trajectories[0].size();
 
     // example: minimum interval is 3, then the time window starts from [0, 2]
     for (unsigned int end = k - 1; end < entities.size(); end++) {
@@ -48,14 +49,19 @@ std::vector<std::vector<std::unordered_set<int> > > identifyRombongan(
                             other.trajectories.begin() + end  
                         );
 
-                        for (unsigned int i = 0; i < sub_a.size() && is_similar; i++) {
-                            is_similar = calculateCosineSimilarity(
-                                sub_a[i],
-                                sub_b[i]
-                            ) <= cs;
+                        std::vector<double> vec_a, vec_b;
+                        
+                        for (unsigned int i = 0; i < dimension; i++) {
+                            vec_a.push_back(
+                                in_group.trajectories[end][i] - in_group.trajectories[start][i]
+                            );
+                            vec_b.push_back(
+                                other.trajectories[end][i] - other.trajectories[start][i]
+                            );
                         }
 
-                        is_similar = calculateDTWDistance(sub_a, sub_b) <= r;
+                        is_similar = calculateDTWDistance(sub_a, sub_b) <= r &&
+                            calculateCosineSimilarity(vec_a, vec_b);
 
                         is_similar_to_all = is_similar;
                     }
