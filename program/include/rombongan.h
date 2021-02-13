@@ -3,9 +3,14 @@
 
 #include "entity.h"
 #include <vector>
-#include <unordered_set>
+#include <set>
 
-std::vector<std::vector<std::unordered_set<int> > > identifyRombongan(
+struct Rombongan {
+    std::set<int> members;
+    double start, end;
+};
+
+std::vector<Rombongan> identifyRombongan(
     const std::vector<Entity>& entities,
     int m,
     int k,

@@ -2,10 +2,11 @@
 #define entity
 
 #include <vector>
+#include <map>
 
 struct Entity {
     int id;
-    std::vector<std::vector<double> > trajectories;
+    std::map<double, std::vector<double> > trajectories;
 
     bool operator<(const Entity &o) const {
         return id < o.id;
@@ -13,13 +14,6 @@ struct Entity {
 
     bool operator==(const Entity &o) const {
         return id == o.id;
-    }
-};
-
-class EntityHasher {
-public:
-    size_t operator()(const Entity &e) const {
-        return e.id;
     }
 };
 

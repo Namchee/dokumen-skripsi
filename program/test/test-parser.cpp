@@ -3,21 +3,22 @@
 #include <string>
 #include <vector>
 #include <cassert>
+#include <map>
 #include <iostream>
 #include <stdexcept>
 
-std::vector<std::vector<double> > b_trajectory{
-    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() },
-    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() },
-    { 1.5, 1.5 },
-    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() }
+std::map<double, std::vector<double> > b_trajectory{
+    { 1.0, { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() } },
+    { 1.1, { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() } },
+    { 1.2, { 1.5, 1.5 } },
+    { 1.3, { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() } }
 };
 
-std::vector<std::vector<double> > a_trajectory{
-    { 1.0, 1.0 },
-    { 2.0, 2.0 },
-    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() },
-    { 3.0, 5.55 }
+std::map<double, std::vector<double> > a_trajectory{
+    { 1.0, { 1.0, 1.0 } },
+    { 1.1, { 2.0, 2.0 } },
+    { 1.2, { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() } },
+    { 1.3, { 3.0, 5.55 } }
 };
 
 void should_parse_correctly() {
@@ -27,21 +28,10 @@ void should_parse_correctly() {
     std::vector<Entity> entities = parseMovementData(source, path);
 
     for (unsigned int i = 0; i < entities.size(); i++) {
-        Entity curr = entities[i];
-        std::vector<std::vector<double> > traj = curr.trajectories;
-
-        std::cout << curr.id << std::endl;
-
-        if (curr.id == 2) {
-            for (unsigned int j = 0; j < (int)b_trajectory.size(); j++) {
-                assert(curr.trajectories[j][0] == b_trajectory[j][0]);
-                assert(curr.trajectories[j][1] == b_trajectory[j][1]);
-            }
+        if (entities[i].id == 2) {
+            assert(entities[i].trajectories == b_trajectory);
         } else {
-            for (unsigned int j = 0; j < (int)a_trajectory.size(); j++) {
-                assert(curr.trajectories[j][0] == a_trajectory[j][0]);
-                assert(curr.trajectories[j][1] == a_trajectory[j][1]);
-            }
+            assert(entities[i].trajectories == a_trajectory);
         }
     }
 }

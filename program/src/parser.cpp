@@ -37,7 +37,7 @@ std::vector<Entity> parseMovementData(const std::string& name, const std::string
     std::unordered_set<int> id_list;
 
     std::map<double, std::unordered_map<int, std::vector<double> > > data_map;
-    std::unordered_map<int, std::vector<std::vector<double> > > trajectory_map;
+    std::unordered_map<int, std::map<double, std::vector<double> > > trajectory_map;
 
     while (std::getline(file, line)) {
         std::istringstream line_stream(line);
@@ -51,17 +51,16 @@ std::vector<Entity> parseMovementData(const std::string& name, const std::string
 
     file.close();
 
-    for (auto const& [_, position]: data_map) {
+    for (auto const& [frame, position]: data_map) {
         for (auto const& [id, plane]: position) {
-            trajectory_map[id].push_back(plane);
+            trajectory_map[id][frame] = plane;
             id_frame.insert(id);
         }
 
         for (auto id: id_list) {
             if (id_frame.find(id) == id_frame.end()) {
-                trajectory_map[id].push_back(
-                    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() }
-                );
+                trajectory_map[id][frame] =
+                    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() };
             }
         }
 
@@ -70,9 +69,9 @@ std::vector<Entity> parseMovementData(const std::string& name, const std::string
 
     std::vector<Entity> result;
 
-    for (auto const& [id, trajectory]: trajectory_map) {
+    for (auto const& [id, frame_position]: trajectory_map) {
         result.push_back(
-            { id, trajectory }
+            { id, frame_position }
         );
     }
 
