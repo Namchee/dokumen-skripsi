@@ -1,17 +1,17 @@
-Start testing: Feb 13 20:39 WIB
+Start testing: Feb 14 17:03 WIB
 ----------------------------------------------------------
 1/9 Testing: DTWAlgorithm
 1/9 Test: DTWAlgorithm
 Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-similarity" "dtw"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"DTWAlgorithm" start time: Feb 13 20:39 WIB
+"DTWAlgorithm" start time: Feb 14 17:03 WIB
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.02 sec
+Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"DTWAlgorithm" end time: Feb 13 20:39 WIB
+"DTWAlgorithm" end time: Feb 14 17:03 WIB
 "DTWAlgorithm" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -19,37 +19,37 @@ Test Passed.
 2/9 Test: CosineSimilarity
 Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-similarity" "cosine"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"CosineSimilarity" start time: Feb 13 20:39 WIB
+"CosineSimilarity" start time: Feb 14 17:03 WIB
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CosineSimilarity" end time: Feb 13 20:39 WIB
+"CosineSimilarity" end time: Feb 14 17:03 WIB
 "CosineSimilarity" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-3/9 Testing: IO
-3/9 Test: IO
-Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io" "seq_eth" "3" "10" "0.15" "1.0"
+3/9 Testing: Input
+3/9 Test: Input
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-i" "seq_eth" "3" "10" "0.15" "1.0"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"IO" start time: Feb 13 20:39 WIB
+"Input" start time: Feb 14 17:03 WIB
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.01 sec
+Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"IO" end time: Feb 13 20:39 WIB
-"IO" time elapsed: 00:00:00
+"Input" end time: Feb 14 17:03 WIB
+"Input" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-4/9 Testing: IOPath
-4/9 Test: IOPath
-Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io-path" "seq_eth" "3" "10" "0.15" "1.0" "-p=abc"
+4/9 Testing: InputPath
+4/9 Test: InputPath
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-i-path" "seq_eth" "3" "10" "0.15" "1.0" "-p=abc"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"IOPath" start time: Feb 13 20:39 WIB
+"InputPath" start time: Feb 14 17:03 WIB
 Output:
 ----------------------------------------------------------
 Unknown argument
@@ -65,80 +65,80 @@ cosine_similarity 	Nilai cosine similarity minimum antar anggota rombongan [requ
 Optional arguments:
 -h --help         	shows help message and exits
 -v --version      	prints version information and exits
--p --path         	Direktori sumber data lintasan. Relatif terhadap direktori saat ini. [default: "/data"]
+-p --path         	Direktori sumber data lintasan. Relatif terhadap direktori saat ini. [default: "/data/input"]
 <end of output>
-Test time =   0.02 sec
+Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"IOPath" end time: Feb 13 20:39 WIB
-"IOPath" time elapsed: 00:00:00
+"InputPath" end time: Feb 14 17:03 WIB
+"InputPath" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-5/9 Testing: IOExceptionMinimumEntity
-5/9 Test: IOExceptionMinimumEntity
-Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io-exception-minimum-entity" "seq_eth" "1" "2" "3.0" "1.0"
+5/9 Testing: InputExceptionMinimumEntity
+5/9 Test: InputExceptionMinimumEntity
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-i-exception-minimum-entity" "seq_eth" "1" "2" "3.0" "1.0"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"IOExceptionMinimumEntity" start time: Feb 13 20:39 WIB
+"InputExceptionMinimumEntity" start time: Feb 14 17:03 WIB
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"IOExceptionMinimumEntity" end time: Feb 13 20:39 WIB
-"IOExceptionMinimumEntity" time elapsed: 00:00:00
+"InputExceptionMinimumEntity" end time: Feb 14 17:03 WIB
+"InputExceptionMinimumEntity" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-6/9 Testing: IOExceptionMinimumInterval
-6/9 Test: IOExceptionMinimumInterval
-Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io-exception-minimum-interval" "seq_eth" "2" "1" "3.0" "1.0"
+6/9 Testing: InputExceptionMinimumInterval
+6/9 Test: InputExceptionMinimumInterval
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-i-exception-minimum-interval" "seq_eth" "2" "1" "3.0" "1.0"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"IOExceptionMinimumInterval" start time: Feb 13 20:39 WIB
+"InputExceptionMinimumInterval" start time: Feb 14 17:03 WIB
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"IOExceptionMinimumInterval" end time: Feb 13 20:39 WIB
-"IOExceptionMinimumInterval" time elapsed: 00:00:00
+"InputExceptionMinimumInterval" end time: Feb 14 17:03 WIB
+"InputExceptionMinimumInterval" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-7/9 Testing: IOExceptionMaximumRange
-7/9 Test: IOExceptionMaximumRange
-Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io-exception-maximum-range" "seq_eth" "2" "2" "-3.0" "1.0"
+7/9 Testing: InputExceptionMaximumRange
+7/9 Test: InputExceptionMaximumRange
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-i-exception-maximum-range" "seq_eth" "2" "2" "-3.0" "1.0"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"IOExceptionMaximumRange" start time: Feb 13 20:39 WIB
+"InputExceptionMaximumRange" start time: Feb 14 17:03 WIB
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.01 sec
+Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"IOExceptionMaximumRange" end time: Feb 13 20:39 WIB
-"IOExceptionMaximumRange" time elapsed: 00:00:00
+"InputExceptionMaximumRange" end time: Feb 14 17:03 WIB
+"InputExceptionMaximumRange" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-8/9 Testing: IOExceptionCosineSimilarity
-8/9 Test: IOExceptionCosineSimilarity
-Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-io-exception-cosine-similarity" "seq_eth" "2" "2" "3.0" "1.1"
+8/9 Testing: InputExceptionCosineSimilarity
+8/9 Test: InputExceptionCosineSimilarity
+Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-i-exception-cosine-similarity" "seq_eth" "2" "2" "3.0" "1.1"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"IOExceptionCosineSimilarity" start time: Feb 13 20:39 WIB
+"InputExceptionCosineSimilarity" start time: Feb 14 17:03 WIB
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.01 sec
+Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"IOExceptionCosineSimilarity" end time: Feb 13 20:39 WIB
-"IOExceptionCosineSimilarity" time elapsed: 00:00:00
+"InputExceptionCosineSimilarity" end time: Feb 14 17:03 WIB
+"InputExceptionCosineSimilarity" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 9/9 Testing: Parser
 9/9 Test: Parser
 Command: "/media/namchee/Shared Disk/OS/skripsi/program/bin/test-parser"
 Directory: /media/namchee/Shared Disk/OS/skripsi/program
-"Parser" start time: Feb 13 20:39 WIB
+"Parser" start time: Feb 14 17:03 WIB
 Output:
 ----------------------------------------------------------
 Attempting to read data from: test/fixtures/test_data.txt
@@ -147,8 +147,8 @@ Attempting to read data from: test/fixtures/not_exist.txt
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Parser" end time: Feb 13 20:39 WIB
+"Parser" end time: Feb 14 17:03 WIB
 "Parser" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Feb 13 20:39 WIB
+End testing: Feb 14 17:03 WIB

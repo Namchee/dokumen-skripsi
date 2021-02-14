@@ -42,7 +42,7 @@ Parameters parseArguments(int argc, char *argv[]) {
     program.add_argument("-p", "--path")
         .help("Direktori sumber data lintasan. Relatif terhadap direktori saat ini.")
         .default_value(
-            (std::filesystem::current_path() / ".." / "/data").string()
+            (std::filesystem::current_path() / ".." / "/data" / "input").string()
         )
         .action([](const std::string &value) {
             return std::filesystem::current_path().string() + value;

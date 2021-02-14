@@ -75,17 +75,6 @@ CMAKE_BINARY_DIR = "/media/namchee/Shared Disk/OS/skripsi/program"
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/snap/cmake/775/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -98,16 +87,38 @@ install/strip/fast: preinstall/fast
 	/snap/cmake/775/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/cmake/775/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/snap/cmake/775/bin/cmake -P cmake_install.cmake
+.PHONY : install
 
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/snap/cmake/775/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
 
-.PHONY : rebuild_cache/fast
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/snap/cmake/775/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -132,27 +143,16 @@ test/fast: test
 
 .PHONY : test/fast
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/snap/cmake/775/bin/cmake -P cmake_install.cmake
-.PHONY : install
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/snap/cmake/775/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
 
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/snap/cmake/775/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -187,43 +187,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test-parser
+# Target rules for targets named test-i-exception-cosine-similarity
 
 # Build rule for target.
-test-parser: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-parser
-.PHONY : test-parser
+test-i-exception-cosine-similarity: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-i-exception-cosine-similarity
+.PHONY : test-i-exception-cosine-similarity
 
 # fast build rule for target.
-test-parser/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/build
-.PHONY : test-parser/fast
+test-i-exception-cosine-similarity/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-cosine-similarity.dir/build.make CMakeFiles/test-i-exception-cosine-similarity.dir/build
+.PHONY : test-i-exception-cosine-similarity/fast
 
 #=============================================================================
-# Target rules for targets named test-io-exception-cosine-similarity
+# Target rules for targets named test-i-exception-maximum-range
 
 # Build rule for target.
-test-io-exception-cosine-similarity: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-io-exception-cosine-similarity
-.PHONY : test-io-exception-cosine-similarity
+test-i-exception-maximum-range: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-i-exception-maximum-range
+.PHONY : test-i-exception-maximum-range
 
 # fast build rule for target.
-test-io-exception-cosine-similarity/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-cosine-similarity.dir/build.make CMakeFiles/test-io-exception-cosine-similarity.dir/build
-.PHONY : test-io-exception-cosine-similarity/fast
-
-#=============================================================================
-# Target rules for targets named test-io-exception-maximum-range
-
-# Build rule for target.
-test-io-exception-maximum-range: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-io-exception-maximum-range
-.PHONY : test-io-exception-maximum-range
-
-# fast build rule for target.
-test-io-exception-maximum-range/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-maximum-range.dir/build.make CMakeFiles/test-io-exception-maximum-range.dir/build
-.PHONY : test-io-exception-maximum-range/fast
+test-i-exception-maximum-range/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-maximum-range.dir/build.make CMakeFiles/test-i-exception-maximum-range.dir/build
+.PHONY : test-i-exception-maximum-range/fast
 
 #=============================================================================
 # Target rules for targets named test-similarity
@@ -239,32 +226,6 @@ test-similarity/fast:
 .PHONY : test-similarity/fast
 
 #=============================================================================
-# Target rules for targets named test-io
-
-# Build rule for target.
-test-io: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-io
-.PHONY : test-io
-
-# fast build rule for target.
-test-io/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/build
-.PHONY : test-io/fast
-
-#=============================================================================
-# Target rules for targets named test-io-exception-minimum-interval
-
-# Build rule for target.
-test-io-exception-minimum-interval: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-io-exception-minimum-interval
-.PHONY : test-io-exception-minimum-interval
-
-# fast build rule for target.
-test-io-exception-minimum-interval/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-interval.dir/build.make CMakeFiles/test-io-exception-minimum-interval.dir/build
-.PHONY : test-io-exception-minimum-interval/fast
-
-#=============================================================================
 # Target rules for targets named main
 
 # Build rule for target.
@@ -278,30 +239,69 @@ main/fast:
 .PHONY : main/fast
 
 #=============================================================================
-# Target rules for targets named test-io-exception-minimum-entity
+# Target rules for targets named test-i-exception-minimum-interval
 
 # Build rule for target.
-test-io-exception-minimum-entity: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-io-exception-minimum-entity
-.PHONY : test-io-exception-minimum-entity
+test-i-exception-minimum-interval: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-i-exception-minimum-interval
+.PHONY : test-i-exception-minimum-interval
 
 # fast build rule for target.
-test-io-exception-minimum-entity/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/build
-.PHONY : test-io-exception-minimum-entity/fast
+test-i-exception-minimum-interval/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-interval.dir/build.make CMakeFiles/test-i-exception-minimum-interval.dir/build
+.PHONY : test-i-exception-minimum-interval/fast
 
 #=============================================================================
-# Target rules for targets named test-io-path
+# Target rules for targets named test-i
 
 # Build rule for target.
-test-io-path: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-io-path
-.PHONY : test-io-path
+test-i: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-i
+.PHONY : test-i
 
 # fast build rule for target.
-test-io-path/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/build
-.PHONY : test-io-path/fast
+test-i/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i.dir/build.make CMakeFiles/test-i.dir/build
+.PHONY : test-i/fast
+
+#=============================================================================
+# Target rules for targets named test-i-exception-minimum-entity
+
+# Build rule for target.
+test-i-exception-minimum-entity: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-i-exception-minimum-entity
+.PHONY : test-i-exception-minimum-entity
+
+# fast build rule for target.
+test-i-exception-minimum-entity/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-entity.dir/build.make CMakeFiles/test-i-exception-minimum-entity.dir/build
+.PHONY : test-i-exception-minimum-entity/fast
+
+#=============================================================================
+# Target rules for targets named test-parser
+
+# Build rule for target.
+test-parser: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-parser
+.PHONY : test-parser
+
+# fast build rule for target.
+test-parser/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/build
+.PHONY : test-parser/fast
+
+#=============================================================================
+# Target rules for targets named test-i-path
+
+# Build rule for target.
+test-i-path: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-i-path
+.PHONY : test-i-path
+
+# fast build rule for target.
+test-i-path/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-path.dir/build.make CMakeFiles/test-i-path.dir/build
+.PHONY : test-i-path/fast
 
 src/io.o: src/io.cpp.o
 
@@ -309,13 +309,13 @@ src/io.o: src/io.cpp.o
 
 # target to build an object file
 src/io.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-cosine-similarity.dir/build.make CMakeFiles/test-io-exception-cosine-similarity.dir/src/io.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-maximum-range.dir/build.make CMakeFiles/test-io-exception-maximum-range.dir/src/io.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/src/io.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-interval.dir/build.make CMakeFiles/test-io-exception-minimum-interval.dir/src/io.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-cosine-similarity.dir/build.make CMakeFiles/test-i-exception-cosine-similarity.dir/src/io.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-maximum-range.dir/build.make CMakeFiles/test-i-exception-maximum-range.dir/src/io.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/src/io.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/src/io.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-interval.dir/build.make CMakeFiles/test-i-exception-minimum-interval.dir/src/io.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i.dir/build.make CMakeFiles/test-i.dir/src/io.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-entity.dir/build.make CMakeFiles/test-i-exception-minimum-entity.dir/src/io.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-path.dir/build.make CMakeFiles/test-i-path.dir/src/io.cpp.o
 .PHONY : src/io.cpp.o
 
 src/io.i: src/io.cpp.i
@@ -324,13 +324,13 @@ src/io.i: src/io.cpp.i
 
 # target to preprocess a source file
 src/io.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-cosine-similarity.dir/build.make CMakeFiles/test-io-exception-cosine-similarity.dir/src/io.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-maximum-range.dir/build.make CMakeFiles/test-io-exception-maximum-range.dir/src/io.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/src/io.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-interval.dir/build.make CMakeFiles/test-io-exception-minimum-interval.dir/src/io.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-cosine-similarity.dir/build.make CMakeFiles/test-i-exception-cosine-similarity.dir/src/io.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-maximum-range.dir/build.make CMakeFiles/test-i-exception-maximum-range.dir/src/io.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/src/io.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/src/io.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-interval.dir/build.make CMakeFiles/test-i-exception-minimum-interval.dir/src/io.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i.dir/build.make CMakeFiles/test-i.dir/src/io.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-entity.dir/build.make CMakeFiles/test-i-exception-minimum-entity.dir/src/io.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-path.dir/build.make CMakeFiles/test-i-path.dir/src/io.cpp.i
 .PHONY : src/io.cpp.i
 
 src/io.s: src/io.cpp.s
@@ -339,13 +339,13 @@ src/io.s: src/io.cpp.s
 
 # target to generate assembly for a file
 src/io.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-cosine-similarity.dir/build.make CMakeFiles/test-io-exception-cosine-similarity.dir/src/io.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-maximum-range.dir/build.make CMakeFiles/test-io-exception-maximum-range.dir/src/io.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/src/io.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-interval.dir/build.make CMakeFiles/test-io-exception-minimum-interval.dir/src/io.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-cosine-similarity.dir/build.make CMakeFiles/test-i-exception-cosine-similarity.dir/src/io.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-maximum-range.dir/build.make CMakeFiles/test-i-exception-maximum-range.dir/src/io.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/io.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/src/io.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/src/io.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-interval.dir/build.make CMakeFiles/test-i-exception-minimum-interval.dir/src/io.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i.dir/build.make CMakeFiles/test-i.dir/src/io.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-entity.dir/build.make CMakeFiles/test-i-exception-minimum-entity.dir/src/io.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-path.dir/build.make CMakeFiles/test-i-path.dir/src/io.cpp.s
 .PHONY : src/io.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -381,8 +381,8 @@ src/parser.o: src/parser.cpp.o
 
 # target to build an object file
 src/parser.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/src/parser.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parser.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/src/parser.cpp.o
 .PHONY : src/parser.cpp.o
 
 src/parser.i: src/parser.cpp.i
@@ -391,8 +391,8 @@ src/parser.i: src/parser.cpp.i
 
 # target to preprocess a source file
 src/parser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/src/parser.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/src/parser.cpp.i
 .PHONY : src/parser.cpp.i
 
 src/parser.s: src/parser.cpp.s
@@ -401,8 +401,8 @@ src/parser.s: src/parser.cpp.s
 
 # target to generate assembly for a file
 src/parser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/src/parser.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-parser.dir/build.make CMakeFiles/test-parser.dir/src/parser.cpp.s
 .PHONY : src/parser.cpp.s
 
 src/rombongan.o: src/rombongan.cpp.o
@@ -462,167 +462,167 @@ src/similarity.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/similarity.cpp.s
 .PHONY : src/similarity.cpp.s
 
-test/io/test-io-exception-cosine-similarity.o: test/io/test-io-exception-cosine-similarity.cpp.o
+test/io/test-i-exception-cosine-similarity.o: test/io/test-i-exception-cosine-similarity.cpp.o
 
-.PHONY : test/io/test-io-exception-cosine-similarity.o
-
-# target to build an object file
-test/io/test-io-exception-cosine-similarity.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-cosine-similarity.dir/build.make CMakeFiles/test-io-exception-cosine-similarity.dir/test/io/test-io-exception-cosine-similarity.cpp.o
-.PHONY : test/io/test-io-exception-cosine-similarity.cpp.o
-
-test/io/test-io-exception-cosine-similarity.i: test/io/test-io-exception-cosine-similarity.cpp.i
-
-.PHONY : test/io/test-io-exception-cosine-similarity.i
-
-# target to preprocess a source file
-test/io/test-io-exception-cosine-similarity.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-cosine-similarity.dir/build.make CMakeFiles/test-io-exception-cosine-similarity.dir/test/io/test-io-exception-cosine-similarity.cpp.i
-.PHONY : test/io/test-io-exception-cosine-similarity.cpp.i
-
-test/io/test-io-exception-cosine-similarity.s: test/io/test-io-exception-cosine-similarity.cpp.s
-
-.PHONY : test/io/test-io-exception-cosine-similarity.s
-
-# target to generate assembly for a file
-test/io/test-io-exception-cosine-similarity.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-cosine-similarity.dir/build.make CMakeFiles/test-io-exception-cosine-similarity.dir/test/io/test-io-exception-cosine-similarity.cpp.s
-.PHONY : test/io/test-io-exception-cosine-similarity.cpp.s
-
-test/io/test-io-exception-maximum-range.o: test/io/test-io-exception-maximum-range.cpp.o
-
-.PHONY : test/io/test-io-exception-maximum-range.o
+.PHONY : test/io/test-i-exception-cosine-similarity.o
 
 # target to build an object file
-test/io/test-io-exception-maximum-range.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-maximum-range.dir/build.make CMakeFiles/test-io-exception-maximum-range.dir/test/io/test-io-exception-maximum-range.cpp.o
-.PHONY : test/io/test-io-exception-maximum-range.cpp.o
+test/io/test-i-exception-cosine-similarity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-cosine-similarity.dir/build.make CMakeFiles/test-i-exception-cosine-similarity.dir/test/io/test-i-exception-cosine-similarity.cpp.o
+.PHONY : test/io/test-i-exception-cosine-similarity.cpp.o
 
-test/io/test-io-exception-maximum-range.i: test/io/test-io-exception-maximum-range.cpp.i
+test/io/test-i-exception-cosine-similarity.i: test/io/test-i-exception-cosine-similarity.cpp.i
 
-.PHONY : test/io/test-io-exception-maximum-range.i
+.PHONY : test/io/test-i-exception-cosine-similarity.i
 
 # target to preprocess a source file
-test/io/test-io-exception-maximum-range.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-maximum-range.dir/build.make CMakeFiles/test-io-exception-maximum-range.dir/test/io/test-io-exception-maximum-range.cpp.i
-.PHONY : test/io/test-io-exception-maximum-range.cpp.i
+test/io/test-i-exception-cosine-similarity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-cosine-similarity.dir/build.make CMakeFiles/test-i-exception-cosine-similarity.dir/test/io/test-i-exception-cosine-similarity.cpp.i
+.PHONY : test/io/test-i-exception-cosine-similarity.cpp.i
 
-test/io/test-io-exception-maximum-range.s: test/io/test-io-exception-maximum-range.cpp.s
+test/io/test-i-exception-cosine-similarity.s: test/io/test-i-exception-cosine-similarity.cpp.s
 
-.PHONY : test/io/test-io-exception-maximum-range.s
+.PHONY : test/io/test-i-exception-cosine-similarity.s
 
 # target to generate assembly for a file
-test/io/test-io-exception-maximum-range.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-maximum-range.dir/build.make CMakeFiles/test-io-exception-maximum-range.dir/test/io/test-io-exception-maximum-range.cpp.s
-.PHONY : test/io/test-io-exception-maximum-range.cpp.s
+test/io/test-i-exception-cosine-similarity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-cosine-similarity.dir/build.make CMakeFiles/test-i-exception-cosine-similarity.dir/test/io/test-i-exception-cosine-similarity.cpp.s
+.PHONY : test/io/test-i-exception-cosine-similarity.cpp.s
 
-test/io/test-io-exception-minimum-entity.o: test/io/test-io-exception-minimum-entity.cpp.o
+test/io/test-i-exception-maximum-range.o: test/io/test-i-exception-maximum-range.cpp.o
 
-.PHONY : test/io/test-io-exception-minimum-entity.o
+.PHONY : test/io/test-i-exception-maximum-range.o
 
 # target to build an object file
-test/io/test-io-exception-minimum-entity.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/test/io/test-io-exception-minimum-entity.cpp.o
-.PHONY : test/io/test-io-exception-minimum-entity.cpp.o
+test/io/test-i-exception-maximum-range.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-maximum-range.dir/build.make CMakeFiles/test-i-exception-maximum-range.dir/test/io/test-i-exception-maximum-range.cpp.o
+.PHONY : test/io/test-i-exception-maximum-range.cpp.o
 
-test/io/test-io-exception-minimum-entity.i: test/io/test-io-exception-minimum-entity.cpp.i
+test/io/test-i-exception-maximum-range.i: test/io/test-i-exception-maximum-range.cpp.i
 
-.PHONY : test/io/test-io-exception-minimum-entity.i
+.PHONY : test/io/test-i-exception-maximum-range.i
 
 # target to preprocess a source file
-test/io/test-io-exception-minimum-entity.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/test/io/test-io-exception-minimum-entity.cpp.i
-.PHONY : test/io/test-io-exception-minimum-entity.cpp.i
+test/io/test-i-exception-maximum-range.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-maximum-range.dir/build.make CMakeFiles/test-i-exception-maximum-range.dir/test/io/test-i-exception-maximum-range.cpp.i
+.PHONY : test/io/test-i-exception-maximum-range.cpp.i
 
-test/io/test-io-exception-minimum-entity.s: test/io/test-io-exception-minimum-entity.cpp.s
+test/io/test-i-exception-maximum-range.s: test/io/test-i-exception-maximum-range.cpp.s
 
-.PHONY : test/io/test-io-exception-minimum-entity.s
+.PHONY : test/io/test-i-exception-maximum-range.s
 
 # target to generate assembly for a file
-test/io/test-io-exception-minimum-entity.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-entity.dir/build.make CMakeFiles/test-io-exception-minimum-entity.dir/test/io/test-io-exception-minimum-entity.cpp.s
-.PHONY : test/io/test-io-exception-minimum-entity.cpp.s
+test/io/test-i-exception-maximum-range.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-maximum-range.dir/build.make CMakeFiles/test-i-exception-maximum-range.dir/test/io/test-i-exception-maximum-range.cpp.s
+.PHONY : test/io/test-i-exception-maximum-range.cpp.s
 
-test/io/test-io-exception-minimum-interval.o: test/io/test-io-exception-minimum-interval.cpp.o
+test/io/test-i-exception-minimum-entity.o: test/io/test-i-exception-minimum-entity.cpp.o
 
-.PHONY : test/io/test-io-exception-minimum-interval.o
+.PHONY : test/io/test-i-exception-minimum-entity.o
 
 # target to build an object file
-test/io/test-io-exception-minimum-interval.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-interval.dir/build.make CMakeFiles/test-io-exception-minimum-interval.dir/test/io/test-io-exception-minimum-interval.cpp.o
-.PHONY : test/io/test-io-exception-minimum-interval.cpp.o
+test/io/test-i-exception-minimum-entity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-entity.dir/build.make CMakeFiles/test-i-exception-minimum-entity.dir/test/io/test-i-exception-minimum-entity.cpp.o
+.PHONY : test/io/test-i-exception-minimum-entity.cpp.o
 
-test/io/test-io-exception-minimum-interval.i: test/io/test-io-exception-minimum-interval.cpp.i
+test/io/test-i-exception-minimum-entity.i: test/io/test-i-exception-minimum-entity.cpp.i
 
-.PHONY : test/io/test-io-exception-minimum-interval.i
+.PHONY : test/io/test-i-exception-minimum-entity.i
 
 # target to preprocess a source file
-test/io/test-io-exception-minimum-interval.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-interval.dir/build.make CMakeFiles/test-io-exception-minimum-interval.dir/test/io/test-io-exception-minimum-interval.cpp.i
-.PHONY : test/io/test-io-exception-minimum-interval.cpp.i
+test/io/test-i-exception-minimum-entity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-entity.dir/build.make CMakeFiles/test-i-exception-minimum-entity.dir/test/io/test-i-exception-minimum-entity.cpp.i
+.PHONY : test/io/test-i-exception-minimum-entity.cpp.i
 
-test/io/test-io-exception-minimum-interval.s: test/io/test-io-exception-minimum-interval.cpp.s
+test/io/test-i-exception-minimum-entity.s: test/io/test-i-exception-minimum-entity.cpp.s
 
-.PHONY : test/io/test-io-exception-minimum-interval.s
+.PHONY : test/io/test-i-exception-minimum-entity.s
 
 # target to generate assembly for a file
-test/io/test-io-exception-minimum-interval.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-exception-minimum-interval.dir/build.make CMakeFiles/test-io-exception-minimum-interval.dir/test/io/test-io-exception-minimum-interval.cpp.s
-.PHONY : test/io/test-io-exception-minimum-interval.cpp.s
+test/io/test-i-exception-minimum-entity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-entity.dir/build.make CMakeFiles/test-i-exception-minimum-entity.dir/test/io/test-i-exception-minimum-entity.cpp.s
+.PHONY : test/io/test-i-exception-minimum-entity.cpp.s
 
-test/io/test-io-path.o: test/io/test-io-path.cpp.o
+test/io/test-i-exception-minimum-interval.o: test/io/test-i-exception-minimum-interval.cpp.o
 
-.PHONY : test/io/test-io-path.o
+.PHONY : test/io/test-i-exception-minimum-interval.o
 
 # target to build an object file
-test/io/test-io-path.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/test/io/test-io-path.cpp.o
-.PHONY : test/io/test-io-path.cpp.o
+test/io/test-i-exception-minimum-interval.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-interval.dir/build.make CMakeFiles/test-i-exception-minimum-interval.dir/test/io/test-i-exception-minimum-interval.cpp.o
+.PHONY : test/io/test-i-exception-minimum-interval.cpp.o
 
-test/io/test-io-path.i: test/io/test-io-path.cpp.i
+test/io/test-i-exception-minimum-interval.i: test/io/test-i-exception-minimum-interval.cpp.i
 
-.PHONY : test/io/test-io-path.i
+.PHONY : test/io/test-i-exception-minimum-interval.i
 
 # target to preprocess a source file
-test/io/test-io-path.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/test/io/test-io-path.cpp.i
-.PHONY : test/io/test-io-path.cpp.i
+test/io/test-i-exception-minimum-interval.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-interval.dir/build.make CMakeFiles/test-i-exception-minimum-interval.dir/test/io/test-i-exception-minimum-interval.cpp.i
+.PHONY : test/io/test-i-exception-minimum-interval.cpp.i
 
-test/io/test-io-path.s: test/io/test-io-path.cpp.s
+test/io/test-i-exception-minimum-interval.s: test/io/test-i-exception-minimum-interval.cpp.s
 
-.PHONY : test/io/test-io-path.s
+.PHONY : test/io/test-i-exception-minimum-interval.s
 
 # target to generate assembly for a file
-test/io/test-io-path.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io-path.dir/build.make CMakeFiles/test-io-path.dir/test/io/test-io-path.cpp.s
-.PHONY : test/io/test-io-path.cpp.s
+test/io/test-i-exception-minimum-interval.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-exception-minimum-interval.dir/build.make CMakeFiles/test-i-exception-minimum-interval.dir/test/io/test-i-exception-minimum-interval.cpp.s
+.PHONY : test/io/test-i-exception-minimum-interval.cpp.s
 
-test/io/test-io.o: test/io/test-io.cpp.o
+test/io/test-i-path.o: test/io/test-i-path.cpp.o
 
-.PHONY : test/io/test-io.o
+.PHONY : test/io/test-i-path.o
 
 # target to build an object file
-test/io/test-io.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/test/io/test-io.cpp.o
-.PHONY : test/io/test-io.cpp.o
+test/io/test-i-path.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-path.dir/build.make CMakeFiles/test-i-path.dir/test/io/test-i-path.cpp.o
+.PHONY : test/io/test-i-path.cpp.o
 
-test/io/test-io.i: test/io/test-io.cpp.i
+test/io/test-i-path.i: test/io/test-i-path.cpp.i
 
-.PHONY : test/io/test-io.i
+.PHONY : test/io/test-i-path.i
 
 # target to preprocess a source file
-test/io/test-io.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/test/io/test-io.cpp.i
-.PHONY : test/io/test-io.cpp.i
+test/io/test-i-path.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-path.dir/build.make CMakeFiles/test-i-path.dir/test/io/test-i-path.cpp.i
+.PHONY : test/io/test-i-path.cpp.i
 
-test/io/test-io.s: test/io/test-io.cpp.s
+test/io/test-i-path.s: test/io/test-i-path.cpp.s
 
-.PHONY : test/io/test-io.s
+.PHONY : test/io/test-i-path.s
 
 # target to generate assembly for a file
-test/io/test-io.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-io.dir/build.make CMakeFiles/test-io.dir/test/io/test-io.cpp.s
-.PHONY : test/io/test-io.cpp.s
+test/io/test-i-path.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i-path.dir/build.make CMakeFiles/test-i-path.dir/test/io/test-i-path.cpp.s
+.PHONY : test/io/test-i-path.cpp.s
+
+test/io/test-i.o: test/io/test-i.cpp.o
+
+.PHONY : test/io/test-i.o
+
+# target to build an object file
+test/io/test-i.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i.dir/build.make CMakeFiles/test-i.dir/test/io/test-i.cpp.o
+.PHONY : test/io/test-i.cpp.o
+
+test/io/test-i.i: test/io/test-i.cpp.i
+
+.PHONY : test/io/test-i.i
+
+# target to preprocess a source file
+test/io/test-i.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i.dir/build.make CMakeFiles/test-i.dir/test/io/test-i.cpp.i
+.PHONY : test/io/test-i.cpp.i
+
+test/io/test-i.s: test/io/test-i.cpp.s
+
+.PHONY : test/io/test-i.s
+
+# target to generate assembly for a file
+test/io/test-i.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test-i.dir/build.make CMakeFiles/test-i.dir/test/io/test-i.cpp.s
+.PHONY : test/io/test-i.cpp.s
 
 test/test-parser.o: test/test-parser.cpp.o
 
@@ -692,12 +692,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... main"
-	@echo "... test-io"
-	@echo "... test-io-exception-cosine-similarity"
-	@echo "... test-io-exception-maximum-range"
-	@echo "... test-io-exception-minimum-entity"
-	@echo "... test-io-exception-minimum-interval"
-	@echo "... test-io-path"
+	@echo "... test-i"
+	@echo "... test-i-exception-cosine-similarity"
+	@echo "... test-i-exception-maximum-range"
+	@echo "... test-i-exception-minimum-entity"
+	@echo "... test-i-exception-minimum-interval"
+	@echo "... test-i-path"
 	@echo "... test-parser"
 	@echo "... test-similarity"
 	@echo "... src/io.o"
@@ -715,24 +715,24 @@ help:
 	@echo "... src/similarity.o"
 	@echo "... src/similarity.i"
 	@echo "... src/similarity.s"
-	@echo "... test/io/test-io-exception-cosine-similarity.o"
-	@echo "... test/io/test-io-exception-cosine-similarity.i"
-	@echo "... test/io/test-io-exception-cosine-similarity.s"
-	@echo "... test/io/test-io-exception-maximum-range.o"
-	@echo "... test/io/test-io-exception-maximum-range.i"
-	@echo "... test/io/test-io-exception-maximum-range.s"
-	@echo "... test/io/test-io-exception-minimum-entity.o"
-	@echo "... test/io/test-io-exception-minimum-entity.i"
-	@echo "... test/io/test-io-exception-minimum-entity.s"
-	@echo "... test/io/test-io-exception-minimum-interval.o"
-	@echo "... test/io/test-io-exception-minimum-interval.i"
-	@echo "... test/io/test-io-exception-minimum-interval.s"
-	@echo "... test/io/test-io-path.o"
-	@echo "... test/io/test-io-path.i"
-	@echo "... test/io/test-io-path.s"
-	@echo "... test/io/test-io.o"
-	@echo "... test/io/test-io.i"
-	@echo "... test/io/test-io.s"
+	@echo "... test/io/test-i-exception-cosine-similarity.o"
+	@echo "... test/io/test-i-exception-cosine-similarity.i"
+	@echo "... test/io/test-i-exception-cosine-similarity.s"
+	@echo "... test/io/test-i-exception-maximum-range.o"
+	@echo "... test/io/test-i-exception-maximum-range.i"
+	@echo "... test/io/test-i-exception-maximum-range.s"
+	@echo "... test/io/test-i-exception-minimum-entity.o"
+	@echo "... test/io/test-i-exception-minimum-entity.i"
+	@echo "... test/io/test-i-exception-minimum-entity.s"
+	@echo "... test/io/test-i-exception-minimum-interval.o"
+	@echo "... test/io/test-i-exception-minimum-interval.i"
+	@echo "... test/io/test-i-exception-minimum-interval.s"
+	@echo "... test/io/test-i-path.o"
+	@echo "... test/io/test-i-path.i"
+	@echo "... test/io/test-i-path.s"
+	@echo "... test/io/test-i.o"
+	@echo "... test/io/test-i.i"
+	@echo "... test/io/test-i.s"
 	@echo "... test/test-parser.o"
 	@echo "... test/test-parser.i"
 	@echo "... test/test-parser.s"

@@ -1,7 +1,8 @@
 #ifndef io
 #define io
 
-#include <argparse/argparse.hpp>
+#include "rombongan.h"
+#include <vector>
 #include <string>
 
 /**
@@ -17,5 +18,6 @@ struct Parameters {
 };
 
 Parameters parseArguments(int argc, char *argv[]);
+void writeResultToFile(const std::vector<Rombongan>& result);
 
 #endif

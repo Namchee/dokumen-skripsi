@@ -60,7 +60,10 @@ std::vector<Entity> parseMovementData(const std::string& name, const std::string
         for (auto id: id_list) {
             if (id_frame.find(id) == id_frame.end()) {
                 trajectory_map[id][frame] =
-                    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() };
+                    {
+                        std::numeric_limits<double>::max(),
+                        std::numeric_limits<double>::max()
+                    };
             }
         }
 
