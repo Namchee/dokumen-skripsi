@@ -1,5 +1,7 @@
 #include "io.h"
 #include <iostream>
+#include <fstream>
+#include <iterator>
 #include <filesystem>
 #include <stdexcept>
 #include <argparse/argparse.hpp>
@@ -101,4 +103,41 @@ Parameters parseArguments(int argc, char *argv[]) {
     p.path = path;
 
     return p;
+}
+
+/**
+ * Write rombongan identification result to a text file.
+ * 
+ * @param result - rombongan identification result
+ * @param name - file name to be written on
+ */
+void writeResultToFile(
+    const std::vector<Rombongan>& result,
+    std::string name
+) {
+    std::ofstream file_stream;
+
+    file_stream.open(
+        (std::filesystem::current_path() / "data" / "output" / name / ".txt").string()
+    );
+
+    if (file_stream.is_open()) {
+        for (Rombongan group: result) {
+            std::set<int> members = group.members;
+
+            for (std::set<int>::iterator it = members.begin(); it != members.end(); it++) {
+                if (it != members.begin()) {
+                    file_stream << ",";
+                }
+
+                file_stream << *it;
+            }
+
+            file_stream << " " << group.start << " " << group.end << "\n";
+        }
+
+        std::cout << "Successfully written result to " << name << ".txt\n"; 
+    } else {
+        throw std::runtime_error("Failed to open output stream");
+    }
 }
