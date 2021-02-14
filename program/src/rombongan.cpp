@@ -2,6 +2,7 @@
 #include "similarity.h"
 #include "entity.h"
 #include <vector>
+#include <iostream>
 #include <map>
 #include <set>
 
@@ -17,7 +18,7 @@ std::vector<Rombongan> identifyRombongan(
     double r,
     double cs
 ) {
-    std::map<std::set<int>, std::pair<double, double> > paired_groups;
+    std::map<std::vector<int>, std::pair<double, double> > paired_groups;
     std::vector<double> frames;
     unsigned int dimension;
 
@@ -27,18 +28,24 @@ std::vector<Rombongan> identifyRombongan(
     }
 
     for (unsigned int end = k; end < frames.size(); end++) {
-        unsigned int start = end - k - 1;
+        unsigned int start = end - k;
 
-        std::vector<std::set<int> > rombongan_group;
+        std::vector<std::vector<int> > rombongan_group;
 
-        for (Entity curr: entities) {
-            std::set<Entity> group{ curr };
+        for (unsigned int itr_outer = 0; itr_outer < entities.size(); itr_outer++) {
+            Entity curr = entities[itr_outer];
 
-            for (Entity other: entities) {
+            std::vector<Entity> group{ curr };
+
+            for (unsigned int itr_inner = itr_outer + 1; itr_inner < entities.size(); itr_inner++) {
+                Entity other = entities[itr_inner];
+
                 if (other.id != curr.id) {
                     bool is_similar_to_all = true;
 
-                    for (Entity in_group: group) {
+                    for (unsigned int itr_group = 0; itr_group < group.size(); itr_group++) {
+                        Entity in_group = group[itr_group];
+
                         if (is_similar_to_all == false) {
                             break;
                         }
@@ -71,15 +78,17 @@ std::vector<Rombongan> identifyRombongan(
                     }
 
                     if (is_similar_to_all) {
-                        group.insert(other);
+                        group.push_back(other);
                     }
+                } else {
+                    continue;
                 }
             }
 
-            std::set<int> group_id;
+            std::vector<int> group_id;
 
             for (Entity member: group) {
-                group_id.insert(member.id);
+                group_id.push_back(member.id);
             }
 
             if (group.size() >= m) {
@@ -87,7 +96,7 @@ std::vector<Rombongan> identifyRombongan(
             }
         }
 
-        for (std::set<int> group: rombongan_group) {
+        for (std::vector<int> group: rombongan_group) {
             if (paired_groups.find(group) == paired_groups.end()) {
                 paired_groups[group].first = frames[start];
                 paired_groups[group].second = frames[end - 1];

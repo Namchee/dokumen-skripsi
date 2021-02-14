@@ -6,7 +6,7 @@
 #include <set>
 
 struct Rombongan {
-    std::set<int> members;
+    std::vector<int> members;
     double start, end;
 };
 

@@ -44,7 +44,7 @@ Parameters parseArguments(int argc, char *argv[]) {
     program.add_argument("-p", "--path")
         .help("Direktori sumber data lintasan. Relatif terhadap direktori saat ini.")
         .default_value(
-            (std::filesystem::current_path() / ".." / "/data" / "input").string()
+            (std::filesystem::current_path() / "data" / "input").string()
         )
         .action([](const std::string &value) {
             return std::filesystem::current_path().string() + value;
@@ -123,14 +123,14 @@ void writeResultToFile(
 
     if (file_stream.is_open()) {
         for (Rombongan group: result) {
-            std::set<int> members = group.members;
+            std::vector<int> members = group.members;
 
-            for (std::set<int>::iterator it = members.begin(); it != members.end(); it++) {
-                if (it != members.begin()) {
+            for (unsigned int i = 0; i < members.size(); i++) {
+                if (i < members.size() - 1) {
                     file_stream << ",";
                 }
 
-                file_stream << *it;
+                file_stream << members[i];
             }
 
             file_stream << " " << group.start << " " << group.end << "\n";
