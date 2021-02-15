@@ -4,7 +4,6 @@
 #include <vector>
 #include <cassert>
 #include <map>
-#include <iostream>
 #include <stdexcept>
 
 std::map<double, std::vector<double> > b_trajectory{

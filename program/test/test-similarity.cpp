@@ -133,7 +133,7 @@ void cosine_should_throw_an_error_when_dimension_is_not_same() {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc == 0) {
+    if (argc <= 1) {
         throw std::invalid_argument("This test file requires an argument.");
     }
 

@@ -1,5 +1,5 @@
 #include "io.h"
-#include <iostream>
+#include <filesystem>
 #include <cassert>
 
 int main(int argc, char *argv[]) {
@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     assert(params.time_interval == 10);
     assert(params.range == 0.15);
     assert(params.cosine_similarity == 1.0);
-    assert(params.path == "/data/input");
+    assert(params.path == (std::filesystem::current_path() / "data" / "input").string());
 
     return 0;
 }

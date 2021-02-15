@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
 
     entities = std::vector<Entity>(
         entities.begin(),
-        entities.begin() + 50
+        entities.begin() + 20
     );
 
     std::cout << "Entity count: " << entities.size() << std::endl;

@@ -13,7 +13,7 @@
  * @param entities - list of moving entities in two-dimensional space
  */
 std::vector<Rombongan> identifyRombongan(
-    std::vector<Entity> entities,
+    const std::vector<Entity>& entities,
     int m,
     int k,
     double r,
@@ -29,7 +29,7 @@ std::vector<Rombongan> identifyRombongan(
     }
 
     for (unsigned int end = k; end < frames.size(); end++) {
-        if (end == 100) {
+        if (end == 25) {
             break;
         }
 
@@ -74,6 +74,10 @@ std::vector<Rombongan> identifyRombongan(
                         direction_vector[other.id],
                         direction_vector[group_id[group_itr]]
                     );
+
+                    if (other.id == 2 && group_id[group_itr] == 1) {
+                        std::cout << "Frame: " << frames[start] << "-" << frames[end - 1] << " DTW: " << dist << " Cosine: " << cosim << std::endl;
+                    }
                     
                     is_similar_to_all = calculateDTWDistance(
                         sub_trajectories[other.id],

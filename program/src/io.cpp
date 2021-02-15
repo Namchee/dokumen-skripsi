@@ -47,7 +47,7 @@ Parameters parseArguments(int argc, char *argv[]) {
             (std::filesystem::current_path() / "data" / "input").string()
         )
         .action([](const std::string &value) {
-            return std::filesystem::current_path().string() + value;
+            return (std::filesystem::current_path() / value).string();
         });
 
     try {
