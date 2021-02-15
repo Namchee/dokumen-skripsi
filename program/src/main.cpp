@@ -11,14 +11,13 @@ int main(int argc, char *argv[]) {
         args.path
     );
 
+    // test
     std::sort(entities.begin(), entities.end());
 
     entities = std::vector<Entity>(
         entities.begin(),
         entities.begin() + 20
     );
-
-    std::cout << "Entity count: " << entities.size() << std::endl;
 
     auto result = identifyRombongan(
         entities,
@@ -28,7 +27,7 @@ int main(int argc, char *argv[]) {
         args.cosine_similarity
     );
 
-    std::cout << result.size() << std::endl;
+    std::cout << "Succesfully identified " << result.size() << " rombongan(s) from the current dataset" << std::endl;
 
     writeResultToFile(result, args.source);
 

@@ -2,7 +2,6 @@
 #include "similarity.h"
 #include "entity.h"
 #include <vector>
-#include <iostream>
 #include <unordered_map>
 #include <map>
 #include <set>
@@ -65,20 +64,6 @@ std::vector<Rombongan> identifyRombongan(
                 bool is_similar_to_all = true;
 
                 for (unsigned int group_itr = 0; group_itr < group_id.size() && is_similar_to_all; group_itr++) {
-                    double dist = calculateDTWDistance(
-                        sub_trajectories[other.id],
-                        sub_trajectories[group_id[group_itr]]
-                    );
-
-                    double cosim = calculateCosineSimilarity(
-                        direction_vector[other.id],
-                        direction_vector[group_id[group_itr]]
-                    );
-
-                    if (other.id == 2 && group_id[group_itr] == 1) {
-                        std::cout << "Frame: " << frames[start] << "-" << frames[end - 1] << " DTW: " << dist << " Cosine: " << cosim << std::endl;
-                    }
-                    
                     is_similar_to_all = calculateDTWDistance(
                         sub_trajectories[other.id],
                         sub_trajectories[group_id[group_itr]]
