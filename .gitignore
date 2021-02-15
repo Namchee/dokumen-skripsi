@@ -3,6 +3,7 @@ program/lib
 program/build
 program/CMakeFiles
 program/Testing
+program/data/output/*.txt
 
 # Ignore any executables
 program/bin

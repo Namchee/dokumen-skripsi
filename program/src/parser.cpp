@@ -72,9 +72,9 @@ std::vector<Entity> parseMovementData(const std::string& name, const std::string
 
     std::vector<Entity> result;
 
-    for (auto const& [id, frame_position]: trajectory_map) {
+    for (auto const& [id, frame]: trajectory_map) {
         result.push_back(
-            { id, frame_position }
+            { id, frame }
         );
     }
 

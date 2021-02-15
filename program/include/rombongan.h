@@ -11,7 +11,7 @@ struct Rombongan {
 };
 
 std::vector<Rombongan> identifyRombongan(
-    const std::vector<Entity>& entities,
+    std::vector<Entity> entities,
     int m,
     int k,
     double r,

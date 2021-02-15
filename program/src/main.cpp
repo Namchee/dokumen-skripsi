@@ -1,6 +1,7 @@
 #include "io.h"
 #include "parser.h"
 #include "rombongan.h"
+#include <algorithm>
 #include <iostream>
 
 int main(int argc, char *argv[]) {
@@ -10,6 +11,15 @@ int main(int argc, char *argv[]) {
         args.path
     );
 
+    std::sort(entities.begin(), entities.end());
+
+    entities = std::vector<Entity>(
+        entities.begin(),
+        entities.begin() + 50
+    );
+
+    std::cout << "Entity count: " << entities.size() << std::endl;
+
     auto result = identifyRombongan(
         entities,
         args.entity_count,
@@ -17,6 +27,8 @@ int main(int argc, char *argv[]) {
         args.range,
         args.cosine_similarity
     );
+
+    std::cout << result.size() << std::endl;
 
     writeResultToFile(result, args.source);
 

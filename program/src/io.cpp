@@ -116,9 +116,10 @@ void writeResultToFile(
     std::string name
 ) {
     std::ofstream file_stream;
-
+    
     file_stream.open(
-        (std::filesystem::current_path() / "data" / "output" / name / ".txt").string()
+        std::filesystem::current_path().string() + "/data/output/" + name + ".txt",
+        std::ofstream::trunc
     );
 
     if (file_stream.is_open()) {
@@ -126,7 +127,7 @@ void writeResultToFile(
             std::vector<int> members = group.members;
 
             for (unsigned int i = 0; i < members.size(); i++) {
-                if (i < members.size() - 1) {
+                if (i > 0) {
                     file_stream << ",";
                 }
 
@@ -135,6 +136,8 @@ void writeResultToFile(
 
             file_stream << " " << group.start << " " << group.end << "\n";
         }
+
+        file_stream.close();
 
         std::cout << "Successfully written result to " << name << ".txt\n"; 
     } else {
