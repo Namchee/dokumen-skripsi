@@ -3,6 +3,7 @@
 #include "entity.h"
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 #include <map>
 #include <set>
 
@@ -31,67 +32,51 @@ std::vector<Rombongan> identifyRombongan(
         unsigned int start = end - k;
 
         std::vector<std::vector<int> > rombongan_group;
+        std::unordered_map<int, std::vector<std::vector<double> > > sub_trajectories;
+        std::unordered_map<int, std::vector<double> > direction_vector;
+
+        // cache the sub-trajectories and direction vector
+        for (unsigned int it = 0; it < entities.size(); it++) {
+            Entity curr = entities[it];
+
+            for (unsigned int frame = start; frame < end; frame++) {
+                sub_trajectories[curr.id].push_back(
+                    curr.trajectories[frames[frame]]
+                );
+            }
+
+            for (unsigned int dim = 0; dim < dimension; dim++) {
+                direction_vector[curr.id].push_back(
+                    curr.trajectories[frames[end - 1]][dim] - curr.trajectories[frames[start]][dim]
+                );
+            }
+        }
 
         for (unsigned int itr_outer = 0; itr_outer < entities.size(); itr_outer++) {
-            Entity curr = entities[itr_outer];
-
-            std::vector<Entity> group{ curr };
+            std::vector<int> group_id{ entities[itr_outer].id };
 
             for (unsigned int itr_inner = itr_outer + 1; itr_inner < entities.size(); itr_inner++) {
                 Entity other = entities[itr_inner];
 
-                if (other.id != curr.id) {
-                    bool is_similar_to_all = true;
+                bool is_similar_to_all = true;
 
-                    for (unsigned int itr_group = 0; itr_group < group.size(); itr_group++) {
-                        Entity in_group = group[itr_group];
+                for (unsigned int group_itr = 0; group_itr < group_id.size() && is_similar_to_all; group_itr++) {
+                    is_similar_to_all = calculateDTWDistance(
+                        sub_trajectories[other.id],
+                        sub_trajectories[group_id[group_itr]]
+                    ) <= r &&
+                        calculateCosineSimilarity(
+                            direction_vector[other.id],
+                            direction_vector[group_id[group_itr]]
+                        ) >= cs;
+                }
 
-                        if (is_similar_to_all == false) {
-                            break;
-                        }
-
-                        bool is_similar = true;
-
-                        std::vector<std::vector<double> > sub_a, sub_b;
-                        std::vector<double> vec_a, vec_b;
-
-                        for (unsigned int i = start; i < end; i++) {
-                            double ref = frames[i];
-
-                            sub_a.push_back(in_group.trajectories[ref]);
-                            sub_b.push_back(other.trajectories[ref]);
-                        }
-
-                        for (unsigned int i = 0; i < dimension; i++) {
-                            vec_a.push_back(
-                                in_group.trajectories[frames[end - 1]][i] - in_group.trajectories[frames[start]][i]
-                            );
-                            vec_b.push_back(
-                                other.trajectories[frames[end - 1]][i] - other.trajectories[frames[start]][i]
-                            );
-                        }
-
-                        is_similar = calculateDTWDistance(sub_a, sub_b) <= r &&
-                            calculateCosineSimilarity(vec_a, vec_b);
-
-                        is_similar_to_all = is_similar;
-                    }
-
-                    if (is_similar_to_all) {
-                        group.push_back(other);
-                    }
-                } else {
-                    continue;
+                if (is_similar_to_all) {
+                    group_id.push_back(other.id);
                 }
             }
 
-            std::vector<int> group_id;
-
-            for (Entity member: group) {
-                group_id.push_back(member.id);
-            }
-
-            if (group.size() >= m) {
+            if (group_id.size() >= m) {
                 rombongan_group.push_back(group_id);
             }
         }
