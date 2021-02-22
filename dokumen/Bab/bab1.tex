@@ -81,7 +81,7 @@ Namun, seluruh definisi formal yang ada tidak mampu melakukan identifikasi yang 
 
 Masalah kedua, definisi-definisi formal pergerakan kolektif yang sudah ada akan mengalami kesulitan dalam menyimpulkan keanggotaan pergerakan kolektif pada kasus-kasus pergerakan di mana entitas-entitas yang bergerak memiliki kecepatan yang variatif. Sebagai contoh, terdapat sebuah pergerakan kolektif yang terdiri dari tiga buah anggota di mana terdapat satu anggota dari pergerakan kolektif yang memimpin pergerakan kolektif dengan berjalan mendahului kedua anggota lainnya. Karena entitas tersebut terus memimpin berjalan dengan menatap ke depan, entitas tersebut secara tidak sadar memiliki kecepatan yang lebih cepat dibandingkan dua entitas yang lain dan perlahan-lahan meninggalkan entitas-entitas lain. Kondisi tersebut menyebabkan entitas yang memimpin memiliki perbedaan jarak yang cukup jauh dengan kedua anggota lainnya. Setelah beberapa saat, entitas yang memimpin berhenti kemudian menoleh ke belakang untuk memastikan apakah dirinya dan kedua entitas lainnya masih bergerak secara kolektif. Karena perbedaan jarak yang jauh, entitas yang memimpin memutuskan untuk memperlambat gerakan atau menunggu entitas-entitas lainnya untuk menyusul sampai jarak tertentu kemudian menyesuaikan kecepatannya dengan kedua entitas lain untuk kembali bergerak secara kolektif dengan anggota lain. Pada kasus tersebut, definisi-definisi formal pergerakan kolektif yang sudah ada dapat menghasilkan identifikasi di mana entitas yang memimpin tidak tergabung sebagai anggota pergerakan kolektif selama beberapa saat. Hal tersebut disebabkan karena entitas yang memimpin memiliki jarak yang jauh dengan anggota-anggota pergerakan kolektif lainnya selama beberapa saat sehingga syarat kedekatan spasial dan durasi temporal tidak terpenuhi. Hasil tersebut bertentangan dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia, di mana entitas yang memimpin akan selalu tergabung sebagai anggota pergerakan kolektif mengingat kasus serupa lazim terjadi dalam sebuah rombongan pejalan kaki dunia nyata. Dua masalah tersebut mendorong perlunya perluasan ukuran lintasan yang digunakan dalam proses identifikasi terhadap sebuah pola pergerakan kolektif serta pembuatan definisi formal pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pergerakan kolektif pada kasus-kasus serupa. 
 
-Pada skripsi ini, akan dibuat sebuah definisi formal pergerakan kolektif baru yang akan memperluas ukuran-ukuran penentu yang digunakan untuk mengidentifikasi pola pergerakan kolektif. Setelah definisi formal selesai dibuat, definisi tersebut akan diuji efektivitasnya melalui sebuah eksperimen dengan mengidentifikasi pola pergerakan kolektif yang sesuai dengan definisi tersebut pada data pejalan kaki di dunia nyata yang tersedia melalui sumber data publik di internet. Hasil identifikasi dari definisi tersebut kemudian akan dibandingkan dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia yang diikutsertakan pada data lintasan. Untuk memenuhi kebutuhan tersebut, sebuah algoritma akan dikembangkan untuk mengidentifikasi pola pergerakan kolektif yang sesuai dengan definisi formal yang dibuat. Algoritma tersebut kemudian akan diimplementasikan menjadi sebuah perangkat lunak menggunakan bahasa pemrograman C++.
+Pada skripsi ini, akan dibuat sebuah definisi formal pergerakan kolektif baru yang akan memperluas ukuran-ukuran penentu yang digunakan untuk mengidentifikasi pola pergerakan kolektif. Setelah definisi formal selesai dibuat, definisi tersebut akan diuji efektivitasnya melalui sebuah eksperimen dengan mengidentifikasi pola pergerakan kolektif yang sesuai dengan definisi tersebut pada data pejalan kaki di dunia nyata yang tersedia melalui sumber data publik di internet. Hasil identifikasi dari definisi tersebut kemudian akan dibandingkan dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia yang diikutsertakan pada data lintasan. Untuk memenuhi kebutuhan tersebut, sebuah algoritma akan dikembangkan untuk mengidentifikasi pola pergerakan kolektif yang sesuai dengan definisi formal yang dibuat. Algoritma tersebut kemudian akan diimplementasikan menjadi sebuah perangkat lunak menggunakan bahasa pemrograman C++. Setelah proses identifikasi selesai, hasil identifikasi rombongan akan divisualiasikan dengan menggunakan sebuah model pewarnaan di dalam video rekaman data pejalan kaki.
 
 \iffalse
 
@@ -103,6 +103,7 @@ Berdasarkan uraian pada bagian sebelumnya, berikut merupakan masalah-masalah yan
     \item Bagaimana cara membuat definisi pergerakan kolektif yang memanfaatkan ukuran-ukuran yang terdapat dalam data lintasan?
     \item Bagaimana cara membuat algoritma untuk mengidentifikasi pergerakan kolektif berdasarkan definisi pergerakan kolektif yang dibuat?
     \item Bagaimana cara mengimplementasikan algoritma untuk mengidentifikasi pergerakan kolektif berdasarkan definisi pergerakan kolektif yang dibuat?
+    \item Bagaimana cara memvisualisasikan hasil identifikasi rombongan dalam data pejalan kaki?
     \item Seberapa efektifkah definisi formal pergerakan kolektif yang dibuat dalam mengidentifikasi pergerakan-pergerakan kolektif dalam data pejalan kaki di dunia nyata?
 \end{enumerate}
 
@@ -111,32 +112,24 @@ Berdasarkan uraian pada bagian sebelumnya, berikut merupakan masalah-masalah yan
 
 Berdasarkan masalah-masalah yang telah dirumuskan pada bagian sebelumnya, maka skripsi ini bertujuan untuk:
 
-\iffalse
-
-\lionov{``mengetahui'' jangan jadi tujuan, tapi jadi gini aja, pertama menentukan atau membuat ukuran yang baru yang akan digunakan, kedua membuat pemodelan yang baru, ketiga membuat algoritma}
-
-\fi
 \begin{enumerate}
     \item Menentukan ukuran-ukuran lintasan yang dapat digunakan untuk membuat sebuah definisi pola pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
     \item Membuat definisi pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
     \item Membuat algoritma yang dapat mengidentifikasi kelompok pergerakan kolektif yang sesuai dengan definisi formal yang telah dibuat pada sebuah data pejalan kaki di dunia nyata.
     \item Melakukan implementasi terhadap algoritma identifikasi pergerakan kolektif berdasarkan definisi baru yang dibuat.
+    \item Melakukan visualisasi hasil identifikasi rombongan menggunakan model pewarnaan dalam video rekaman data pejalan kaki.
     \item Mengukur efektivitas dan ketepatan dari definisi pergerakan kolektif yang dibuat dalam mengidentifikasi pergerakan-pergerakan kolektif dalam data pejalan kaki di dunia nyata.
 \end{enumerate}
 
 \section{Batasan Masalah}
 \label{sec:batasan}
 
-\iffalse
-
-\lionov{ini bukan batasan, batasan itu misalnya: data cuma di R2, terus si kunci jawaban yang ada di data lintasan gak akan diubah-ubah, terus eksperimen hanya akan melihat hasil tapi tidak melihat penggunaan tempat dan waktu}
-
-\fi
 Dalam pengerjaannya, skripsi ini hanya akan membahas masalah-masalah berikut:
 
 \begin{enumerate}
     \item Data pergerakan yang akan dianalisis bersumber dari pergerakan entitas dalam ruang \textit{euclidean} dua dimensi $\mathbb{R}^2$.
     \item Hasil identifikasi pola pergerakan kolektif yang dilakukan oleh manusia yang diikutsertakan pada data lintasan merupakan sumber kebenaran yang tidak dapat diubah.
+    \item Perangkat lunak yang digunakan untuk melakukan visualisasi hasil identifikasi rombongan merupakan perangkat lunak yang sudah tersedia dan bukan merupakan bagian dari implementasi perangkat lunak dalam skripsi ini.
     \item Evaluasi hasil eksperimen tidak akan memperhitungkan kompleksitas algoritma yang digunakan, melainkan hanya akan mengukur akurasi identifikasi pola pergerakan kolektif dibandingkan dengan identifikasi pola pergerakan kolektif yang dilakukan oleh manusia.
 \end{enumerate}
 
