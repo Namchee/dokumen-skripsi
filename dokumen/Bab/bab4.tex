@@ -1,2 +1,54 @@
 \chapter{Perancangan}
-\section{perancangan}
+\label{chap:perancangan}
+
+Sebelum melalui tahap implementasi, perangkat lunak perlu melalui proses perancangan perangkat lunak. Perancangan perangkat lunak merupakan sebuah proses untuk mengidentifikasi artefak-artefak dari perangkat lunak seperti modul, fungsi, kelas, serta artefak-artefak lainnya yang bertujuan untuk memenuhi kebutuhan perangkat lunak. Manfaat utama dari perancangan perangkat lunak adalah supaya perilaku perangkat lunak yang dihasilkan dapat lebih mudah diprediksi dan dikontrol sehingga perangkat lunak dapat lebih mudah dikembangkan dan diperbaiki di masa depan \cite{budgen:04:software-design}.
+
+Melalui proses analisis kebutuhan perangkat lunak, maka perangkat lunak yang akan dibuat harus memiliki 2 fungsionalitas berikut:
+
+\begin{enumerate}
+    \item Membaca dan memahami masukan dari pengguna berupa data pergerakan pejalan kaki dan parameter rombongan,
+    \item Melakukan identifikasi kelompok-kelompok rombongan yang terbentuk dalam data pergerakan pejalan kaki yang diberikan dalam masukan pengguna.
+\end{enumerate}
+
+Interaksi antara pengguna dan perangkat lunak berdasarkan 2 fungsionalitas tersebut digambarkan melalui diagram konteks yang ditunjukkan melalui gambar \ref{bab4:context-diagram}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\textwidth]{Gambar/bab4:dfd-level-0.pdf}
+    \caption{Diagram Konteks}
+    \label{bab4:context-diagram}
+\end{figure}
+
+\noindent Kedua fungsionalitas dari perangkat lunak akan dipecah menjadi 3 modul utama yaitu:
+
+\begin{enumerate}
+    \item \textbf{Modul I/O}
+    
+    Modul I/O merupakan modul yang berfungsi untuk membaca masukan pengguna yang diberikan melalui \textit{command line interface} dan mencetak hasil identifikasi rombongan dalam sebuah data pergerakan pejalan kaki pada sebuah berkas teks. Terdapat dua proses yang akan dikerjakan oleh modul I/O, yaitu proses penerjemahan masukan dan proses pembuatan berkas hasil.
+    
+    \item \textbf{Modul Penerjemah}
+    
+    Modul Penerjemah merupakan modul yang berfungsi untuk menerjemahkan berkas masukan data pejalan kaki menjadi data yang dapat dipahami dan digunakan oleh perangkat lunak. Terdapat satu proses yang akan dikerjakan oleh modul penerjemah, yaitu proses penerjemahan data pergerakan.
+    
+    \item \textbf{Modul Rombongan}
+    
+    Modul Rombongan merupakan modul yang berfungsi untuk mengidentifikasi kumpulan rombongan yang terbentuk dalam data pergerakan pejalan kaki yang sudah diterjemahkan oleh modul Penerjemah. Terdapat satu proses yang akan dikerjakan oleh modul rombongan, yaitu proses identifikasi rombongan.
+\end{enumerate}
+
+Interaksi antar ketiga modul tersebut ditunjukkan melalui proses-proses yang digambarkan melalui diagram alir data tingkat pertama yang ditunjukkan melalui gambar \ref{bab4:dfd-level-1}. Seluruh modul perangkat lunak akan diimplementasikan menggunakan bahasa pemrograman C++17 menggunakan paradigma pemrograman fungsional.
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Gambar/bab4:dfd-level-1.pdf}
+    \caption{Diagram Alir Data Tingkat Pertama}
+    \label{bab4:dfd-level-1}
+\end{figure}
+
+\section{Modul I/O}
+\label{io}
+
+Modul I/O memiliki 2 fungsionalitas berikut:
+
+\begin{enumerate}
+    \item Membaca dan memahami masukan pengguna yang diberikan melalui \textit{command line interface}
+\end{enumerate}
