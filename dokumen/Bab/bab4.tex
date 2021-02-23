@@ -14,7 +14,7 @@ Interaksi antara pengguna dan perangkat lunak berdasarkan 2 fungsionalitas terse
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{Gambar/bab4:dfd-level-0.pdf}
+    \includegraphics[width=0.75\textwidth]{Gambar/bab4:dfd-level-0.pdf}
     \caption{Diagram Konteks}
     \label{bab4:context-diagram}
 \end{figure}
@@ -81,5 +81,20 @@ Modul I/O akan diimplementasikan dalam berkas bernama \texttt{io.cpp}. Cara kerj
     
     Setelah proses identifikasi rombongan selesai, hasil dari proses identifikasi tersebut akan diteruskan pada modul I/O agar hasil tersebut dapat disimpan dalam bentuk berkas teks biasa yang mudah dibaca. Berkas teks hasil akan memiliki nama yang sama dengan nama dari sumber data. 
     
-    Sebuah rombongan yang teridentifikasi akan dicatat sebagai satu baris dalam berkas teks yang dihasilkan. Rombongan tersebut akan dicatat dalam bentuk \texttt{<anggota> <frame-mulai> <frame-berakhir>}. Nilai dari \texttt{<anggota>} merupakan nomor identitas dari setiap anggota rombongan yang akan dipisahkan menggunakan koma. Fungsionalitas ini akan diimplementasikan menggunakan pustaka standar bawaan C++17.
+    Sebuah rombongan yang teridentifikasi akan dicatat sebagai satu baris dalam berkas teks yang dihasilkan. Rombongan tersebut akan dicatat dalam bentuk \texttt{<anggota> <frame-mulai> <frame-berakhir>}. Nilai dari \texttt{<anggota>} merupakan nomor identitas dari setiap anggota rombongan yang akan dipisahkan menggunakan koma. Fungsionalitas ini akan diimplementasikan sebagai fungsi \texttt{writeResultToFile}. Fungsionalitas ini akan diimplementasikan menggunakan pustaka standar bawaan C++17.
 \end{enumerate}
+
+\section{Modul Penerjemah}
+\label{sec:parser}
+
+Modul Penerjemah akan diimplementasikan dalam berkas bernama \texttt{parser.cpp}. Berikut merupakan cara kerja dari modul Penerjemah:
+
+\begin{enumerate}
+    \item Menguji validitas berkas data pergerakan pejalan kaki. Apabila berkas tidak dapat dibaca oleh perangkat lunak, maka modul Penerjemah akan menampilkan pesan kesalahan dan menghentikan proses eksekusi perangkat lunak.
+    \item Membaca setiap baris teks yang tercatat dalam berkas data pergerakan. Setiap baris yang tercatat dalam berkas teks akan menyimpan informasi dalam bentuk \texttt{<frame> <nomor-entitas> <posisi-x> <posisi-z> <posisi-y> <kecepatan-x> <kecepatan-z> <kecepatan-y>}. Nilai \texttt{<frame>} menunjukkan \textit{frame} dalam data rekaman yang dimaksud oleh informasi yang tersimpan dari baris tersebut. \cristopher{Kudu jelasin gak sih ko bentuk datanya gimana?}
+    \item Untuk setiap baris teks, simpan informasi yang tercatat pada baris tersebut pada sebuah pemetaan sementara dalam bentuk \texttt{[frame] -> [nomor-identitas] -> [posisi]}.
+    \item Untuk setiap pemetaan yang berhasil dicatat, bentuk sebuah struktur data komposit bernama \texttt{Entity} yang terdiri dari nomor entitas dan pemetaan dalam bentuk \texttt{[frame] -> [posisi]}. Apabila posisi entitas tidak tercatat dalam sebuah \texttt{frame}, maka posisi entitas pada \texttt{frame} tersebut akan dipetakan pada nilai tak hingga. Hal tersebut bertujuan agar nilai \textit{dynamic time warping} antar entitas memiliki nilai maksimal, sehingga entitas lainnya tidak dapat dianggap dekat secara spasial dengan entitas tersebut pada \texttt{frame} yang dimaksud.
+    \item Kembalikan daftar setiap entitas yang berhasil tercatat.
+\end{enumerate}
+
+Seluruh fungsionalitas dari modul Penerjemah diimplementasikan dalam fungsi tunggal bernama \texttt{parseMovementData}.
