@@ -10,11 +10,11 @@ Melalui proses analisis kebutuhan perangkat lunak, maka perangkat lunak yang aka
     \item Melakukan identifikasi kelompok-kelompok rombongan yang terbentuk dalam data pergerakan pejalan kaki yang diberikan dalam masukan pengguna.
 \end{enumerate}
 
-Interaksi antara pengguna dan perangkat lunak berdasarkan 2 fungsionalitas tersebut digambarkan melalui diagram konteks yang ditunjukkan melalui gambar \ref{bab4:context-diagram}.
+Berdasarkan 2 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki antarmuka pengguna dalam bentuk \textit{command line interface} sederhana. Interaksi antara pengguna dan perangkat lunak berdasarkan kedua fungsionalitas tersebut digambarkan melalui diagram konteks yang ditunjukkan melalui gambar \ref{bab4:context-diagram}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.75\textwidth]{Gambar/bab4:dfd-level-0.pdf}
+    \includegraphics[width=0.55\textwidth]{Gambar/bab4:dfd-level-0.pdf}
     \caption{Diagram Konteks}
     \label{bab4:context-diagram}
 \end{figure}
@@ -107,7 +107,7 @@ Berikut merupakan cara kerja dari modul Penerjemah:
     \item Kembalikan setiap informasi entitas berupa posisi entitas pada setiap \textit{frame}.
 \end{enumerate}
 
-Gambar \ref{bab4:flowchart-penerjemah} menunjukkan diagram alir dari proses-proses yang berlangsung dalam modul Penerjemah.
+Gambar \ref{bab4:flowchart-penerjemah} menunjukkan diagram alir dari proses yang berlangsung dalam modul Penerjemah.
 
 \begin{figure}[h]
     \centering
@@ -123,3 +123,19 @@ Modul Rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari
 
 \section{Struktur Data}
 \label{sec:data-structure}
+
+Untuk mempermudah proses implementasi perangkat lunak, perlu dibuat beberapa struktur data komposit khusus. Berikut merupakan daftar struktur data akan yang dibuat:
+
+\begin{enumerate}
+    \item \textbf{Parameters}
+    
+    Struktur data ini akan menyimpan masukan-masukan pengguna yang diberikan melalui \textit{command line interface} yang sudah diterjemahkan, divalidasi, dan diubah ke dalam tipe data yang sesuai dengan kebutuhan perangkat lunak.
+    
+    \item \textbf{Entity}
+    
+    Struktur data ini akan menyimpan informasi-informasi penting dari entitas yang tercatat dalam data pergerakan pejalan kaki seperti nomor identitas dari entitas serta seluruh posisi dari entitas tersebut terhadap ruang $\mathbb{R}^2$ pada nilai-nilai \textit{frame} yang tercatat.
+    
+    \item \textbf{Rombongan}
+    
+    Struktur data ini akan menyimpan informasi mengenai nomor identitas dari entitas-entitas yang tergabung dalam rombongan, nilai \textit{frame} pertama di mana sekelompok entitas yang bergerak bersama memenuhi syarat pembentukan rombongan, dan nilai \textit{frame} terakhir dimana anggota-anggota rombongan masih bergerak bersama sebagai rombongan sebelum pergerakan kolektif tersebut tidak lagi memenuhi syarat-syarat pembentukan rombongan.
+\end{enumerate}
