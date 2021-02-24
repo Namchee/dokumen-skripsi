@@ -35,7 +35,7 @@ Interaksi antara pengguna dan perangkat lunak berdasarkan 2 fungsionalitas terse
     Modul Rombongan merupakan modul yang berfungsi untuk mengidentifikasi kumpulan rombongan yang terbentuk dalam data pergerakan pejalan kaki yang sudah diterjemahkan oleh modul Penerjemah. Terdapat satu proses yang akan dikerjakan oleh modul rombongan, yaitu proses identifikasi rombongan.
 \end{enumerate}
 
-Interaksi antar ketiga modul tersebut ditunjukkan serta proses-proses yang dilalui selama perangkat lunak dieksekusi digambarkan melalui diagram alir data tingkat pertama yang ditunjukkan melalui gambar \ref{bab4:dfd-level-1}. Seluruh modul perangkat lunak akan diimplementasikan menggunakan bahasa pemrograman C++17 menggunakan paradigma pemrograman fungsional.
+Interaksi antar ketiga modul tersebut ditunjukkan serta proses-proses yang dilalui selama perangkat lunak dieksekusi digambarkan melalui diagram alir data tingkat pertama yang ditunjukkan melalui gambar \ref{bab4:dfd-level-1}.
 
 \begin{figure}[t!]
     \centering
@@ -47,7 +47,7 @@ Interaksi antar ketiga modul tersebut ditunjukkan serta proses-proses yang dilal
 \section{Modul I/O}
 \label{io}
 
-Modul I/O akan diimplementasikan dalam berkas bernama \texttt{io.cpp}. Cara kerja dari modul I/O dapat dibagi menjadi 2 fungsi utama berikut:
+Cara kerja dari modul I/O dapat dibagi menjadi 2 fungsi utama berikut:
 
 \begin{enumerate}
     \item \textbf{Input}
@@ -62,39 +62,50 @@ Modul I/O akan diimplementasikan dalam berkas bernama \texttt{io.cpp}. Cara kerj
         \item Nilai dari $\vartheta$ harus dalam rentang [-1, 1].
     \end{enumerate}
     
-    Apabila masukan yang diberikan oleh pengguna tidak memenuhi minimal salah satu dari syarat di atas, modul I/O akan menampilkan kesalahan pada pengguna dan menghentikan proses eksekusi perangkat lunak. Apabila masukan pengguna memenuhi seluruh syarat di atas, modul I/O akan mengembalikan masukan pengguna dalam bentuk tipe data komposit. Fungsionalitas ini akan diimplementasikan sebagai fungsi \texttt{parseArguments}. Gambar xx menunjukkan diagram alur dari proses validasi masukan dari pengguna.
-    
-    Untuk mempermudah proses implementasi perangkat lunak, fungsionalitas ini akan diimplementasikan menggunakan bantuan pustaka C++ yang bernama \texttt{argparse}. Pustaka \texttt{argparse} dipilih karena memiliki kemampuan untuk mempermudah konversi tipe data menjadi tipe data yang sesuai serta menyediakan fitur untuk menampilkan bantuan penggunaan perangkat lunak dalam bentuk \textit{command line interface} pada pengguna.
+    Apabila masukan yang diberikan oleh pengguna tidak memenuhi minimal salah satu dari syarat di atas, modul I/O akan menampilkan kesalahan pada pengguna dan menghentikan proses eksekusi perangkat lunak. Apabila masukan yang diberikan oleh pengguna memenuhi seluruh syarat di atas, modul I/O akan mengembalikan masukan pengguna dalam bentuk tipe data komposit. Gambar \ref{bab4:flowchart-input} menunjukkan diagram alur dari proses validasi masukan yang diberikan oleh pengguna.
     
     \iffalse
     
+    Untuk mempermudah proses implementasi perangkat lunak, fungsionalitas ini akan diimplementasikan menggunakan bantuan pustaka C++ yang bernama \texttt{argparse}. Pustaka \texttt{argparse} dipilih karena memiliki kemampuan untuk mempermudah konversi tipe data menjadi tipe data yang sesuai serta menyediakan fitur untuk menampilkan bantuan penggunaan perangkat lunak dalam bentuk \textit{command line interface} pada pengguna.
+    
+    \fi
+    
     \begin{figure}[t]
         \centering
-        \includegraphics[height=15cm]{Gambar/bab4:flowchart-input.pdf}
+        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-input.pdf}
         \caption{Diagram Alir Proses Validasi Masukan}
         \label{bab4:flowchart-input}
     \end{figure}
-    
-    \fi
     
     \item \textbf{Output}
     
     Setelah proses identifikasi rombongan selesai, hasil dari proses identifikasi tersebut akan diteruskan pada modul I/O agar hasil tersebut dapat disimpan dalam bentuk berkas teks biasa yang mudah dibaca. Berkas teks hasil akan memiliki nama yang sama dengan nama dari sumber data. 
     
+    \iffalse
+    
     Sebuah rombongan yang teridentifikasi akan dicatat sebagai satu baris dalam berkas teks yang dihasilkan. Rombongan tersebut akan dicatat dalam bentuk \texttt{<anggota> <frame-mulai> <frame-berakhir>}. Nilai dari \texttt{<anggota>} merupakan nomor identitas dari setiap anggota rombongan yang akan dipisahkan menggunakan koma. Fungsionalitas ini akan diimplementasikan sebagai fungsi \texttt{writeResultToFile}. Fungsionalitas ini akan diimplementasikan menggunakan pustaka standar bawaan C++17.
+    
+    \fi
 \end{enumerate}
 
 \section{Modul Penerjemah}
 \label{sec:parser}
 
-Modul Penerjemah akan diimplementasikan dalam berkas bernama \texttt{parser.cpp}. Berikut merupakan cara kerja dari modul Penerjemah:
+Berikut merupakan cara kerja dari modul Penerjemah:
 
 \begin{enumerate}
     \item Menguji validitas berkas data pergerakan pejalan kaki. Apabila berkas tidak dapat dibaca oleh perangkat lunak, maka modul Penerjemah akan menampilkan pesan kesalahan dan menghentikan proses eksekusi perangkat lunak.
-    \item Membaca setiap baris teks yang tercatat dalam berkas data pergerakan. Setiap baris yang tercatat dalam berkas teks akan menyimpan informasi dalam bentuk \texttt{<frame> <nomor-entitas> <posisi-x> <posisi-z> <posisi-y> <kecepatan-x> <kecepatan-z> <kecepatan-y>}. Nilai \texttt{<frame>} menunjukkan \textit{frame} dalam data rekaman yang dimaksud oleh informasi yang tersimpan dari baris tersebut. \cristopher{Kudu jelasin gak sih ko bentuk datanya gimana?}
-    \item Untuk setiap baris teks, simpan informasi yang tercatat pada baris tersebut pada sebuah pemetaan sementara dalam bentuk \texttt{[frame] -> [nomor-identitas] -> [posisi]}.
-    \item Untuk setiap pemetaan yang berhasil dicatat, bentuk sebuah struktur data komposit bernama \texttt{Entity} yang terdiri dari nomor entitas dan pemetaan dalam bentuk \texttt{[frame] -> [posisi]}. Apabila posisi entitas tidak tercatat dalam sebuah \texttt{frame}, maka posisi entitas pada \texttt{frame} tersebut akan dipetakan pada nilai tak hingga. Hal tersebut bertujuan agar nilai \textit{dynamic time warping} antar entitas memiliki nilai maksimal, sehingga entitas lainnya tidak dapat dianggap dekat secara spasial dengan entitas tersebut pada \texttt{frame} yang dimaksud.
-    \item Kembalikan daftar setiap entitas yang berhasil tercatat.
+    \item Membaca setiap baris teks yang tercatat dalam berkas data pergerakan.
+    
+    \iffalse 
+    
+    \cristopher{Kudu jelasin gak sih ko bentuk datanya gimana?} \lionov{gak usah lah, bilang aja pokoknya ini buat nerima input, nanti di ``implementasi'' baru dijelasin setelah ngejelasin datanya kayak apa}
+    
+    \fi
+    
+    \item Untuk setiap baris data yang berhasil dibaca oleh perangkat lunak, simpan informasi posisi entitas dan nilai \textit{frame} yang menyimpan informasi posisi tersebut.
+    \item Kembalikan setiap informasi entitas berupa posisi entitas pada setiap \textit{frame}.
 \end{enumerate}
 
-Seluruh fungsionalitas dari modul Penerjemah diimplementasikan dalam fungsi tunggal bernama \texttt{parseMovementData}.
+\section{Modul Rombongan}
+\label{sec:rombongan-identifier}
