@@ -3,7 +3,12 @@
 
 Setelah rancangan perangkat lunak berhasil dibuat, tahap selanjutnya yang akan dikerjakan adalah tahap implementasi perangkat lunak. Dalam tahap implementasi perangkat lunak, rancangan perangkat lunak yang sudah dibuat akan diubah menjadi kode program yang sesuai dengan rancangan tersebut.
 
-Pada skripsi ini, perangkat lunak identifikasi rombongan akan diimplementasikan menggunakan bahasa pemrograman C++17. C++ dipilih karena program yang dihasilkan memiliki performa yang baik dan memiliki seperangkat perkakas pemrograman yang sudah teruji sejak lama. Paradigma pemrograman yang digunakan adalah paradigma pemrograman fungsional.
+Pada skripsi ini, perangkat lunak identifikasi rombongan akan diimplementasikan menggunakan bahasa pemrograman C++17. C++ dipilih karena program yang dihasilkan memiliki performa yang baik dan memiliki seperangkat perkakas pemrograman yang sudah teruji sejak lama. Untuk meningkatkan \textit{reusability} dari perangkat lunak, setiap modul akan didampingi sebuah berkas \textit{header} dengan nama yang sama dengan nama dari berkas modul. Pembuatan berkas \textit{header} untuk sebuah modul nantinya akan mempermudah modul lain untuk menggunakan fungsi-fungsi yang tersedia pada modul tersebut. Paradigma pemrograman yang digunakan adalah paradigma pemrograman fungsional. Untuk membantu mempermudah proses kompilasi kode perangkat lunak menjadi bahasa mesin, digunakan sebuah perkakas bernama CMake.
+
+\section{Bentuk Data Rombongan}
+\label{sec:input-structure}
+
+Masukan data rombongan akan diambil dari sumber data BIWI EWAP?
 
 \section{Modul I/O}
 \label{sec:impl-io}
@@ -13,7 +18,11 @@ Modul I/O akan diimplementasikan dalam berkas \texttt{io.cpp} dan memiliki berka
 \begin{enumerate}
     \item \textbf{Input}
     
+    Sesuai dengan rancangan perangkat lunak, salah satu tugas dari modul I/O adalah melakukan penerjemahan dan validasi masukan dari pengguna yang diberikan melalui \textit{command line interface}. Untuk memenuhi kebutuhan tersebut, digunakan sebuah pustaka bantuan bernama \texttt{argparse}. Pustaka \texttt{argparse} dipilih karena memiliki fitur penerjemahan, validasi, dan konversi tipe data yang mudah digunakan serta memiliki fleksibilitas yang lebih luwes dibandingkan pustaka lainnya yang serupa.
+    
     \item \textbf{Output}
+    
+    Hasil identifikasi rombongan pada sebuah data pergerakan pejalan kaki akan dicetak dalam sebuah berkas teks yang memiliki format \texttt{.txt}. Sebuah rombongan yang berhasil teridentifikasi akan dicetak sebagai satu baris yang memiliki bentuk \texttt{<anggota> <frame-mulai> <frame-akhir>}. \texttt{<anggota>} menunjukkan kumpulan nomor identitas dari anggota rombongan yang dipisahkan menggunakan koma. \texttt{<frame-mulai>} menunjukkan nilai \textit{frame} pertama di mana anggota-anggota rombongan memenuhi syarat-syarat pembentukan rombongan. \texttt{<frame-akhir>} menunjukkan nilai \textit{frame} terakhir di mana anggota-anggota rombongan masih memenuhi syarat-syarat pembentukan rombongan sebelum tidak lagi memenuhi syarat-syarat pembentukan rombongan pada \textit{frame} selanjutnya yang berhasil tercatat.
 \end{enumerate}
 
 \section{Modul Penerjemah}
@@ -28,3 +37,8 @@ Modul Rombongan akan diimplementasikan dalam 2 berkas yaitu \texttt{rombongan.cp
 
 \section{Struktur Data}
 \label{sec:impl-struct}
+
+\section{Unit Testing}
+\label{sec:unit-test}
+
+Sebelum melalui pengujian 
