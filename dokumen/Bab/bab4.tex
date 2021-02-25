@@ -15,7 +15,7 @@ Berdasarkan 2 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.55\textwidth]{Gambar/bab4:dfd-level-0.pdf}
-    \caption{Diagram Konteks}
+    \caption{Diagram konteks}
     \label{bab4:context-diagram}
 \end{figure}
 
@@ -40,12 +40,12 @@ Interaksi antar ketiga modul tersebut ditunjukkan serta proses-proses yang dilal
 \begin{figure}[t!]
     \centering
     \includegraphics[width=0.9\textwidth]{Gambar/bab4:dfd-level-1.pdf}
-    \caption{Diagram Alir Data Tingkat Pertama}
+    \caption{Diagram alir data tingkat pertama}
     \label{bab4:dfd-level-1}
 \end{figure}
 
 \section{Modul I/O}
-\label{io}
+\label{sec:des-io}
 
 Cara kerja dari modul I/O dapat dibagi menjadi 2 fungsi utama berikut:
 
@@ -73,7 +73,7 @@ Cara kerja dari modul I/O dapat dibagi menjadi 2 fungsi utama berikut:
     \begin{figure}[t]
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-input.pdf}
-        \caption{Diagram Alir Proses Validasi Masukan}
+        \caption{Diagram alir proses validasi masukan}
         \label{bab4:flowchart-input}
     \end{figure}
     
@@ -89,7 +89,7 @@ Cara kerja dari modul I/O dapat dibagi menjadi 2 fungsi utama berikut:
 \end{enumerate}
 
 \section{Modul Penerjemah}
-\label{sec:parser}
+\label{sec:des-parser}
 
 Berikut merupakan cara kerja dari modul Penerjemah:
 
@@ -112,17 +112,17 @@ Gambar \ref{bab4:flowchart-penerjemah} menunjukkan diagram alir dari proses yang
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-penerjemah.pdf}
-    \caption{Diagram Alir Modul Penerjemah}
+    \caption{Diagram alir modul penerjemah}
     \label{bab4:flowchart-penerjemah}
 \end{figure}
 
 \section{Modul Rombongan}
-\label{sec:rombongan-identifier}
+\label{sec:des-rombongan}
 
 Modul Rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui algoritma \ref{bab3:algoritma-identifikasi}. Modul rombongan juga akan mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh rumus \ref{bab3:cosine-similarity}.
 
 \section{Struktur Data}
-\label{sec:data-structure}
+\label{sec:des-struct}
 
 Untuk mempermudah proses implementasi perangkat lunak, perlu dibuat beberapa struktur data komposit khusus. Berikut merupakan daftar struktur data akan yang dibuat:
 
