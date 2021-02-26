@@ -5,10 +5,14 @@ Setelah rancangan perangkat lunak berhasil dibuat, tahap selanjutnya yang akan d
 
 Pada skripsi ini, perangkat lunak identifikasi rombongan akan diimplementasikan menggunakan bahasa pemrograman C++17. C++ dipilih karena program yang dihasilkan memiliki performa yang baik dan memiliki seperangkat perkakas pemrograman yang sudah teruji sejak lama. Untuk meningkatkan \textit{reusability} dari perangkat lunak, setiap modul akan didampingi sebuah berkas \textit{header} dengan nama yang sama dengan nama dari berkas modul. Pembuatan berkas \textit{header} untuk sebuah modul nantinya akan mempermudah modul lain untuk menggunakan fungsi-fungsi yang tersedia pada modul tersebut. Paradigma pemrograman yang digunakan adalah paradigma pemrograman fungsional. Untuk membantu mempermudah proses kompilasi kode perangkat lunak menjadi bahasa mesin, digunakan sebuah perkakas bernama CMake.
 
-\section{Bentuk Data Rombongan}
+\section{Format Data Rombongan}
 \label{sec:input-structure}
 
-Masukan data rombongan akan diambil dari sumber data BIWI EWAP?
+Data pergerakan pejalan kaki akan disimpan dalam sebuah berkas teks dengan format \texttt{.txt}. Berkas tersebut menyimpan informasi dari seluruh entitas yang terdapat dalam video rekaman data pejalan kaki. Informasi yang tertera dari sebuah \textit{frame} yang terdapat pada video rekaman data pejalan kaki disimpan sebagai satu baris dari berkas teks. Satu baris dalam berkas teks memiliki format \texttt{<nomor-frame> <nomor-identitas> <posisi-x> <posisi-z> <posisi-y> <kecepatan-x> <kecepatan-z> <kecepatan-y>}.
+
+Nilai dari \texttt{<nomor-frame>} menunjukkan \textit{frame} pada video rekaman yang memiliki informasi yang terdapat pada baris teks. Nilai dari \texttt{<nomor-identitas>} menunjukkan nomor penanda unik yang dimiliki oleh sebuah entitas bergerak yang terdapat pada video rekaman. Nilai dari \texttt{<posisi-x>} menunjukkan posisi entitas pada sumbu $X$ dari ruang gerak \textit{euclidean} $\mathbb{R}^3$. Hal yang sama juga berlaku untuk nilai \texttt{<posisi-y>} yang menyimpan posisi entitas pada sumbu $Y$ dan nilai \texttt{<posisi-z>} yang menyimpan posisi entitas pada sumbu $Z$. Nilai dari \texttt{<kecepatan-x>} menunjukkan kecepatan entitas pada sumbu $X$ dari ruang gerak \textit{euclidean} $\mathbb{R}^3$. Hal yang sama juga berlaku untuk nilai \texttt{<kecepatan-y>} yang menyimpan kecepatan entitas pada sumbu $Y$ dan nilai \texttt{<kecepatan-z>} yang menyimpan kecepatan entitas pada sumbu $Z$.
+
+Berdasarkan batasan masalah yang sudah dibahas pada subbab \ref{sec:batasan}, nilai dari \texttt{<posisi-z>} akan dihiraukan. Selain itu, nilai dari \texttt{<kecepatan-x>}, \texttt{<kecepatan-y>}, dan \texttt{<kecepatan-z>} juga akan dihiraukan karena atribut-atribut tersebut tidak digunakan dalam proses identifikasi rombongan.
 
 \section{Modul I/O}
 \label{sec:impl-io}
