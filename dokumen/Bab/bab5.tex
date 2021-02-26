@@ -45,4 +45,6 @@ Modul Rombongan akan diimplementasikan dalam 2 berkas yaitu \texttt{rombongan.cp
 \section{Unit Testing}
 \label{sec:unit-test}
 
-Sebelum melalui pengujian 
+Sebelum melalui pengujian hasil algoritma identifikasi rombongan, modul-modul dalam perangkat lunak akan melalui proses \textit{unit testing}. \textit{Unit testing} merupakan sebuah metode pengujian perangkat lunak di mana sebuah modul dalam perangkat lunak akan diuji secara terisolasi dari modul-modul lainnya. Pada \textit{unit testing}, diharapkan bahwa setiap modul perangkat lunak dapat menghasilkan perilaku tertentu yang diharapkan. Hal tersebut dapat dicapai dengan memberikan seperangkat masukan yang sudah disediakan sebelumnya.
+
+Untuk melakukan \textit{unit testing} pada perangkat lunak identifikasi rombongan, digunakan sebuah perkakas pengujian bernama CTest yang terintergrasi langsung bersama CMake. Dengan menggunakan CTest, berkas-berkas \textit{unit testing} dapat dikelola dan dieksekusi dengan cara yang lebih mudah dibandingkan dengan melakukan pengujian secara manual. Seluruh berkas modul dalam perangkat lunak akan melalui tahap \textit{unit testing}, kecuali untuk berkas \texttt{rombongan.cpp} dan \texttt{rombongan.h}. Hal tersebut dilakukan mengingat tidak ada standar kebenaran absolut yang dapat digunakan untuk menguji berkas-berkas tersebut. Kedua berkas tersebut akan diuji secara langsung melalui bab Eksperimen.
