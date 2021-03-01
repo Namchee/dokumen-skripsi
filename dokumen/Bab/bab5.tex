@@ -22,7 +22,7 @@ Modul I/O akan diimplementasikan dalam berkas \texttt{io.cpp} dan memiliki berka
 \begin{enumerate}
     \item \textbf{Input}
     
-    Sesuai dengan rancangan perangkat lunak, salah satu tugas dari modul I/O adalah melakukan penerjemahan dan validasi masukan dari pengguna yang diberikan melalui \textit{command line interface}. Untuk memenuhi kebutuhan tersebut, digunakan sebuah pustaka bantuan bernama \texttt{argparse}. Pustaka \texttt{argparse} dipilih karena memiliki fitur penerjemahan, validasi, dan konversi tipe data yang mudah digunakan serta memiliki fleksibilitas yang lebih luwes dibandingkan pustaka lainnya yang serupa.
+    Sesuai dengan rancangan perangkat lunak, salah satu tugas dari modul I/O adalah melakukan penerjemahan dan validasi masukan dari pengguna yang diberikan melalui \textit{command line interface}. Untuk memenuhi kebutuhan tersebut, digunakan sebuah pustaka bantuan bernama \texttt{argparse}. Pustaka \texttt{argparse} dipilih karena memiliki fitur penerjemahan, validasi, dan konversi tipe data yang mudah digunakan serta memiliki fleksibilitas yang lebih luwes dibandingkan pustaka lainnya yang serupa. Fungsionalitas ini akan mengembalikan struktur data \textbf{Parameters}.
     
     \item \textbf{Output}
     
@@ -34,17 +34,35 @@ Modul I/O akan diimplementasikan dalam berkas \texttt{io.cpp} dan memiliki berka
 
 Modul Penerjemah akan diimplementasikan dalam berkas \texttt{parser.cpp} dan memiliki berkas \textit{header} bernama \texttt{parser.h}. Berdasarkan cara kerja modul yang sudah dibahas pada bab sebelumnya dan format data rombongan, dibutuhkan sebuah struktur data yang mampu menyimpan pemetaan antara \textit{frame} dan posisi entitas. Untuk memenuhi kebutuhan tersebut, digunakan struktur data bernama \texttt{Map}. \texttt{Map} dipilih karena struktur data tersebut memiliki kemampuan untuk menyimpan dan mengembalikan pemetaan dengan kompleksitas waktu yang cenderung kecil.
 
-Pada modul ini, digunakan 2 buah \texttt{Map} di mana \texttt{Map} pertama digunakan untuk memetakan \textit{frame} pada entitas-entitas yang tercatat pada data pergerakan dan \texttt{Map} kedua digunakan untuk membalik pemetaan dari \texttt{Map} pertama menjadi pemetaan entitas pada \textit{frame} sehingga mempermudah proses pembuatan struktur data komposit yang akan dikembalikan.
+Pada modul ini, digunakan 2 buah \texttt{Map} di mana \texttt{Map} pertama digunakan untuk memetakan \textit{frame} pada entitas-entitas yang tercatat pada data pergerakan dan \texttt{Map} kedua digunakan untuk membalik pemetaan dari \texttt{Map} pertama menjadi pemetaan entitas pada \textit{frame} sehingga mempermudah proses pembuatan struktur data komposit yang akan dikembalikan. 
 
-Perlu diketahui semua \textit{frame} belum tentu menyimpan informasi posisi dari semua entitas bergerak yang tercatat dalam data pergerakan. Apabila posisi sebuah entitas tidak tercatat sebuah \textit{frame}, maka entitas tersebut tidak boleh dianggap dekat secara spasial dengan entitas lain yang posisinya tercatat dalam \textit{frame} yang dimaksud. Untuk mengatasi masalah tersebut, perlu dibuat sebuah aturan penerjemahan di mana apabila posisi dari sebuah entitas tidak tercatat pada sebuah \textit{frame} yang tercatat dalam data pergerakan, maka posisi entitas tersebut akan dicatat menggunakan nilai tak hingga. Aturan tersebut dicapai dengan menggunakan sebuah struktur data tambahan bernama \texttt{Set} yang berfungsi untuk menyimpan seluruh nomor identitas entitas yang terdapat dalam data pergerakan dan dalam sebuah \textit{frame}. Seluruh struktur data yang diperlukan untuk mengimplementasikan modul ini tersedia melalui pustaka standar bawaan C++.
+Perlu diketahui semua \textit{frame} belum tentu menyimpan informasi posisi dari semua entitas bergerak yang tercatat dalam data pergerakan. Apabila posisi sebuah entitas tidak tercatat sebuah \textit{frame}, maka entitas tersebut tidak boleh dianggap dekat secara spasial dengan entitas lain yang posisinya tercatat dalam \textit{frame} yang dimaksud. Untuk mengatasi masalah tersebut, perlu dibuat sebuah aturan penerjemahan di mana apabila posisi dari sebuah entitas tidak tercatat pada sebuah \textit{frame} yang tercatat dalam data pergerakan, maka posisi entitas tersebut akan dicatat menggunakan nilai tak hingga. Aturan tersebut dicapai dengan menggunakan sebuah struktur data tambahan bernama \texttt{Set} yang berfungsi untuk menyimpan seluruh nomor identitas entitas yang terdapat dalam data pergerakan dan dalam sebuah \textit{frame}. Seluruh struktur data yang diperlukan untuk mengimplementasikan modul ini tersedia melalui pustaka standar bawaan C++. Modul ini akan mengembalikan struktur data berupa kumpulan \textbf{Entity} yang disimpan dalam sebuah \texttt{vector}.
 
 \section{Modul Rombongan}
 \label{sec:impl-rombongan}
 
-Modul Rombongan akan diimplementasikan dalam 2 berkas yaitu \texttt{rombongan.cpp} beserta berkas \textit{header} bernama \texttt{rombongan.h} dan berkas \texttt{similarity.cpp} beserta berkas \textit{header} bernama \texttt{similarity.h}. Pemisahan tersebut dilakukan untuk menegaskan pemisahan antara implementasi algoritma yang sudah ada dan implementasi algoritma yang diusulkan.
+Modul Rombongan akan diimplementasikan dalam 2 berkas yaitu \texttt{rombongan.cpp} beserta berkas \textit{header} bernama \texttt{rombongan.h} dan berkas \texttt{similarity.cpp} beserta berkas \textit{header} bernama \texttt{similarity.h}. Pemisahan tersebut dilakukan untuk menegaskan pemisahan antara implementasi algoritma yang sudah ada dan implementasi algoritma yang diusulkan. Modul ini akan mengembalikan kumpulan struktur data \textbf{Rombongan} yang disimpan dalam struktur data \texttt{vector}.
 
 \section{Struktur Data}
 \label{sec:impl-struct}
+
+Berdasarkan rancangan perangkat lunak yang telah dibuat, terdapat tiga buah struktur data komposit yang perlu diimplementasikan. Seluruh struktur data akan diimplementasikan menggunakan \texttt{struct}. Hal tersebut dilakukan karena struktur-struktur data yang dibutuhkan merupakan struktur data statis yang nilainya tidak akan berubah dan struktur-struktur data ini tidak memiliki \textit{method} apapun yang biasanya terdapat pada \texttt{class}. Berikut merupakan detil implementasi dari ketiga struktur data tersebut:
+
+\begin{enumerate}
+    \item \textbf{Parameters}
+    
+    Struktur data ini menyimpan informasi mengenai parameter rombongan yang diberikan oleh pengguna. Struktur data ini diimplementasikan sebagai properti-properti yang merupakan kumpulan-kumpulan tipe data primitif hasil kembalian dari modul I/O.
+    
+    Nilai dari $m$ dan $k$ diimplementasikan sebagai bilangan bulat menggunakan tipe data \texttt{int}. Nilai dari $r$ dan $\vartheta$ diimplementasikan sebagai bilangan desimal menggunakan tipe data \texttt{double}. Nama berkas data pergerakan yang akan digunakan diimplementasikan menggunakan tipe data \texttt{string} yang bersumber dari pustaka bawaan C++.
+    
+    \item \textbf{Entity}
+    
+    Struktur data ini mewakili sebuah entitas yang tercatat dalam data pergerakan yang diberikan. Struktur data ini memiliki 2 properti yaitu \texttt{id} yang menunjukkan nomor identitas unik yang dimiliki oleh entitas yang dimaksud dan \texttt{trajectories} yang merupakan catatan posisi dari entitas pada setiap \textit{frame} yang terdapat pada data pergerakan. Untuk mempermudah proses identifikasi rombongan, \texttt{trajectories} akan diimplementasikan menggunakan struktur data \texttt{Map} yang memetakan \textit{frame} pada posisi entitas.
+    
+    \item \textbf{Rombongan}
+    
+    Struktur data ini merupakan hasil dari identifikasi rombongan yang dikembalikan oleh modul Rombongan. Struktur data ini memiliki 3 buah properti yaitu \texttt{members} yang menyimpan nomor-nomor identitas entitas yang tergabung dalam rombongan, \texttt{start} yang menunjukkan \textit{frame} pertama di mana kumpulan entitas memenuhi syarat-syarat rombongan, dan \texttt{end} yang menunjukkan \textit{frame} terakhir di mana kumpulan entitas masih memenuhi syarat-syarat rombongan. Nilai \texttt{members} akan diimplementasikan menggunakan struktur data \texttt{vector}. Nilai dari \texttt{start} dan \texttt{end} diimplementasikan menggunakan tipe data \texttt{double}.
+\end{enumerate}
 
 \section{Unit Testing}
 \label{sec:unit-test}
