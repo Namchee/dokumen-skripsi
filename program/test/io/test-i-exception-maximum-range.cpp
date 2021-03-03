@@ -1,5 +1,6 @@
 #include "io.h"
 #include <cassert>
+#include <stdexcept>
 
 int main(int argc, char *argv[]) {
     try {

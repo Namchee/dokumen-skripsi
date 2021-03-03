@@ -5,6 +5,7 @@
 #include <cassert>
 #include <map>
 #include <stdexcept>
+#include <limits>
 
 std::map<double, std::vector<double> > b_trajectory{
     { 1.0, { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() } },
