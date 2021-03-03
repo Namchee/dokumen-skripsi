@@ -1,4 +1,4 @@
-# Install script for directory: /media/namchee/Shared Disk/OS/skripsi/program/libs/argparse
+# Install script for directory: /media/namchee/Shared Disk/skripsi/repository/program/libs/argparse
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -46,7 +46,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/argparse/argparseConfig.cmake")
     file(DIFFERENT EXPORT_FILE_CHANGED FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/argparse/argparseConfig.cmake"
-         "/media/namchee/Shared Disk/OS/skripsi/program/libs/argparse/CMakeFiles/Export/lib/cmake/argparse/argparseConfig.cmake")
+         "/media/namchee/Shared Disk/skripsi/repository/program/libs/argparse/CMakeFiles/Export/lib/cmake/argparse/argparseConfig.cmake")
     if(EXPORT_FILE_CHANGED)
       file(GLOB OLD_CONFIG_FILES "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/argparse/argparseConfig-*.cmake")
       if(OLD_CONFIG_FILES)
@@ -55,10 +55,10 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
       endif()
     endif()
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/argparse" TYPE FILE FILES "/media/namchee/Shared Disk/OS/skripsi/program/libs/argparse/CMakeFiles/Export/lib/cmake/argparse/argparseConfig.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/argparse" TYPE FILE FILES "/media/namchee/Shared Disk/skripsi/repository/program/libs/argparse/CMakeFiles/Export/lib/cmake/argparse/argparseConfig.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/argparse" TYPE FILE FILES "/media/namchee/Shared Disk/OS/skripsi/program/libs/argparse/include/argparse/argparse.hpp")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/argparse" TYPE FILE FILES "/media/namchee/Shared Disk/skripsi/repository/program/libs/argparse/include/argparse/argparse.hpp")
 endif()
 

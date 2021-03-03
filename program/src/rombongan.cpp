@@ -28,10 +28,6 @@ std::vector<Rombongan> identifyRombongan(
     }
 
     for (unsigned int end = k; end < frames.size(); end++) {
-        if (end == 25) {
-            break;
-        }
-
         unsigned int start = end - k;
 
         std::vector<std::vector<int> > rombongan_group;
@@ -64,14 +60,21 @@ std::vector<Rombongan> identifyRombongan(
                 bool is_similar_to_all = true;
 
                 for (unsigned int group_itr = 0; group_itr < group_id.size() && is_similar_to_all; group_itr++) {
-                    is_similar_to_all = calculateDTWDistance(
+                    double dtw_distance = calculateDTWDistance(
                         sub_trajectories[other.id],
                         sub_trajectories[group_id[group_itr]]
-                    ) <= r &&
-                        calculateCosineSimilarity(
-                            direction_vector[other.id],
-                            direction_vector[group_id[group_itr]]
-                        ) >= cs;
+                    );
+
+                    double cosine_similarity = calculateCosineSimilarity(
+                        direction_vector[other.id],
+                        direction_vector[group_id[group_itr]]
+                    );
+
+                    // make sure that the distance is not zero to avoid
+                    // similarity checking when two entities
+                    // doesn't appear in the current timeframe.
+                    is_similar_to_all = dtw_distance != 0 && dtw_distance <= r &&
+                        cosine_similarity >= cs;
                 }
 
                 if (is_similar_to_all) {

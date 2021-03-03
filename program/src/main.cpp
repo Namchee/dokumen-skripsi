@@ -11,13 +11,11 @@ int main(int argc, char *argv[]) {
         args.path
     );
 
-    // test
-    std::sort(entities.begin(), entities.end());
+    std::cout << entities.size() << std::endl;
+    std::cout << entities[0].trajectories.size() << std::endl;
 
-    entities = std::vector<Entity>(
-        entities.begin(),
-        entities.begin() + 20
-    );
+    // test
+    // std::sort(entities.begin(), entities.end());
 
     auto result = identifyRombongan(
         entities,

@@ -50,7 +50,7 @@ add_library(argparse::argparse INTERFACE IMPORTED)
 
 set_target_properties(argparse::argparse PROPERTIES
   INTERFACE_COMPILE_FEATURES "cxx_std_17"
-  INTERFACE_INCLUDE_DIRECTORIES "/media/namchee/Shared Disk/OS/skripsi/program/libs/argparse/include"
+  INTERFACE_INCLUDE_DIRECTORIES "/media/namchee/Shared Disk/skripsi/repository/program/libs/argparse/include"
 )
 
 # This file does not depend on other imported targets which have
