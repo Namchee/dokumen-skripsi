@@ -25,6 +25,11 @@ double calculateEuclideanDistance(
     double distance = 0.0f;
 
     for (unsigned int it = 0; it < a.size(); it++) {
+        // return immediately when one of the position is not recorded
+        if (a[it] == std::numeric_limits<double>::max() || b[it] == std::numeric_limits<double>::max()) {
+            return -1;
+        }
+
         distance += pow(a[it] - b[it], 2);
     }
 
@@ -73,6 +78,11 @@ double calculateDTWDistance(
                 b[j - 1]
             );
 
+            // return immediately when trajectory isn't recorded
+            if (cost == -1) {
+                return -1;
+            }
+
             double min = std::min(
                 dtw[i - 1][j],
                 std::min(
@@ -109,6 +119,11 @@ double calculateCosineSimilarity(
     double dot_product = 0.0;
 
     for (unsigned int i = 0; i < a.size(); i++) {
+        // return immediately when one of the position is not recorded
+        if (a[i] == std::numeric_limits<double>::max() || b[i] == std::numeric_limits<double>::max()) {
+            return -1;
+        }
+
         dot_product += a[i] * b[i];
 
         len_a += pow(a[i], 2);

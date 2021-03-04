@@ -73,7 +73,7 @@ std::vector<Rombongan> identifyRombongan(
                     // make sure that the distance is not zero to avoid
                     // similarity checking when two entities
                     // doesn't appear in the current timeframe.
-                    is_similar_to_all = dtw_distance != 0 && dtw_distance <= r &&
+                    is_similar_to_all = dtw_distance != -1 && dtw_distance <= r &&
                         cosine_similarity >= cs;
                 }
 
