@@ -175,18 +175,18 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
 \noindent Berikut merupakan uraian dari langkah-langkah yang dikerjakan oleh algoritma tersebut:
 
 \begin{enumerate}
-    \item Inisialisasi sebuah \textit{array} $\mathcal{R}$ yang akan menyimpan himpunan rombongan yang teridentifikasi untuk setiap interval waktu $I$.
+    \item Inisialisasi sebuah himpunan $\mathcal{R}$ yang akan menyimpan himpunan rombongan yang teridentifikasi untuk setiap interval waktu $I$.
     \item Cari setiap interval waktu konsekutif $I$ sepanjang $k$ satuan waktu yang dapat dibentuk. Interval-interval waktu konsekutif dapat dicari menggunakan teknik \textit{sliding window} \cite{ralf:03:sliding-window}. Sebagai contoh, pada himpunan entitas $\mathcal{X}$ sepanjang $5$ satuan waktu dan $k = 3$, maka interval waktu $I$ yang mungkin adalah $[1, 2, 3]$, $[2, 3, 4]$, dan $[3, 4, 5]$.
     \item Untuk setiap interval waktu konsekutif $I$ yang berdurasi $k$ satuan waktu:
     
     \begin{enumerate}
         \item Inisialiasi sebuah himpunan $\mathcal{T}$ yang akan menyimpan himpunan rombongan yang teridentifikasi pada interval waktu $I$.  
-        \item Inisialisasi sebuah \textit{array} $\mathcal{S}$ untuk setiap entitas $a$ yang terdapat pada $\mathcal{X}$. Pada awalnya, himpunan $\mathcal{S}$ hanya akan beranggotakan entitas $a$.
+        \item Inisialisasi sebuah himpunan $\mathcal{S}$ untuk setiap entitas $a$ yang terdapat pada $\mathcal{X}$. Pada awalnya, himpunan $\mathcal{S}$ hanya akan beranggotakan entitas $a$.
         \item Hitung jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} dari setiap anggota himpunan $S$ dan setiap entitas lain pada himpunan $\mathcal{X}$ pada interval waktu $I$. Tambahkan setiap entitas yang memiliki jarak \textit{dynamic time warping} dengan setiap anggota himpunan $S$ yang lebih kecil sama dengan $r$ dan nilai \textit{cosine similiarity} dengan setiap anggota himpunan $S$ yang lebih besar sama dengan $\vartheta$ pada himpunan $S$.
-        \item Tambahkan himpunan $\mathcal{S}$ pada \textit{array} $\mathcal{T}$ apabila jumlah anggota himpunan $\mathcal{S}$ lebih besar atau sama dengan $m$.
-        \item Tambahkan \textit{array} $\mathcal{T}$ pada \textit{array} $\mathcal{R}$.
+        \item Tambahkan himpunan $\mathcal{S}$ pada himpunan $\mathcal{T}$ apabila jumlah anggota himpunan $\mathcal{S}$ lebih besar atau sama dengan $m$.
+        \item Tambahkan himpunan $\mathcal{T}$ pada himpunan $\mathcal{R}$.
     \end{enumerate}
-    \item Kembalikan \textit{array} $\mathcal{R}$ sebagai hasil. Pada titik ini, $\mathcal{R}$ akan berisi himpunan rombongan yang terbentuk pada setiap interval waktu $I$ yang berdurasi selama $k$ satuan waktu.
+    \item Kembalikan himpunan $\mathcal{R}$ sebagai hasil. Pada tahap ini, himpunan $\mathcal{R}$ akan berisi kumpulan himpunan rombongan yang terbentuk pada setiap interval waktu $I$ yang berdurasi selama $k$ satuan waktu.
 \end{enumerate}
 
 Algoritma identifikasi memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. Nilai tersebut didapatkan melalui perhitungan berikut:
@@ -198,3 +198,40 @@ Algoritma identifikasi memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ di
     \item Pada baris $9$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^3)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{S}$ yang memiliki kompleksitas sebesar $O(n)$.
     \item Pada baris $12$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ yang disebabkan oleh perhitungan algoritma \textit{dynamic time warping} yang memiliki kompleksitas waktu sebesar $O(k^2)$. Kompleksitas tersebut didapatkan dari hasil perkalian panjang dua lintasan yang dihitung yang masing-masing sebesar $k$. Pada titik ini, algoritma identifikasi akan memiliki nilai kompleksitas tertinggi selama algoritma dijalankan.
 \end{enumerate}
+
+\section{Contoh Proses Identifikasi Rombongan}
+\label{sec:algorithm-example}
+
+Diberikan himpunan entitas $\mathcal{X}$ yang bergerak ruang $\mathbb{R}^2$ yang terdiri atas 3 entitas yaitu $a$, $b$, dan $c$. Ketiga entitas tersebut tercatat memiliki lintasan berikut:
+
+\begin{enumerate}
+    \item $\textbf{a} = \{ 1, 1 \}, \{ 2, 1 \}, \{ 3, 1 \}$
+    \item $\textbf{b} = \{ 3, 2 \}, \{ 2, 2 \}, \{ 1, 2 \}$
+    \item $\textbf{c} = \{ 1, -2 \}, \{ 2, 0 \}, \{ 3, 0 \}$
+\end{enumerate}
+
+di mana lintasan dari sebuah entitas merupakan himpunan posisi yang terurut berdasarkan waktu secara menaik dalam ruang $\mathbb{R}^2$. Posisi yang tercatat dimulai dari $t = 0$. Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula $m = 2$, $k = 2$, $r = 3.5$, dan $\vartheta = 0.5$. Langkah-langkah yang dilakukan untuk melakukan identifikasi rombongan antara lain:
+
+\begin{enumerate}
+    \item Menginisialisasi sebuah himpunan untuk menyimpan himpunan rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$.
+    \item Mengidentifikasi seluruh interval waktu konsekutif sepanjang $k$ yang mungkin dibuat. Berdasarkan nilai $k = 2$, interval waktu yang mungkin adalah $[0, 1]$ dan $[1, 2]$.
+    \item Lakukan pemeriksaan kedekatan spasial untuk setiap pasang entitas pada interval waktu $[0, 1]$ dengan melakukan perbandingan jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} pada setiap pasang entitas. Langkah-langkah yang dikerjakan adalah sebagai berikut: 
+    
+    \begin{enumerate}
+        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $b$ adalah sebesar $\approx 3.23$ satuan jarak, namun memiliki nilai \textit{cosine similarity} sebesar $-1$. Kondisi tersebut menyebabkan entitas $a$ dan $b$ tidak dianggap dekat secara spasial pada interval waktu $[0, 1]$ karena nilai $\vartheta$ dari kedua entitas tersebut lebih kecil dari nilai $\vartheta$ minimum sebesar $0.5$.
+        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $c$ adalah sebesar $4$ satuan jarak. hasil tersebut sudah cukup untuk menyimpulkan bahwa $a$ dan $c$ tidak dekat secara spasial pada interval waktu $[0, 1]$ karena nilai $r$ dari kedua entitas tersebut lebih besar dari nilai $r$ maksimum sebesar $3.5$ satuan jarak.
+        \item Jarak \textit{dynamic time warping} dari entitas $b$ dan $c$ adalah sebesar $\approx 6.47$ satuan jarak. hasil tersebut sudah cukup untuk menyimpulkan bahwa $b$ dan $c$ tidak dekat secara spasial pada interval waktu $[0, 1]$ karena nilai $r$ dari kedua entitas entitas lebih besar dari nilai $r$ maksimum sebesar $3.5$ satuan jarak.
+        \item Oleh karena tidak ada himpunan entitas yang terbentuk, maka tidak ada rombongan yang terbentuk pada interval $[0, 1]$.
+    \end{enumerate}
+    
+    \item Lakukan pemeriksaan kedekatan spasial untuk setiap pasang entitas pada interval waktu $[1, 2]$ dengan melakukan perbandingan jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} pada setiap pasang entitas. Langkah-langkah yang dikerjakan adalah sebagai berikut: 
+    
+    \begin{enumerate}
+        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $b$ adalah sebesar $\approx 3.23$ satuan jarak, namun memiliki nilai \textit{cosine similarity} sebesar $-1$. Kondisi tersebut menyebabkan entitas $a$ dan $b$ tidak dianggap dekat secara spasial pada interval waktu $[1, 2]$ karena nilai $\vartheta$ dari kedua entitas tersebut lebih kecil dari nilai $\vartheta$ minimum sebesar $0.5$.
+        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $c$ adalah sebesar $2$ satuan jarak dan nilai \textit{cosine similarity} dari entitas $a$ dan $c$ adalah sebesar $1$. Oleh karena jarak \textit{dynamic time warping} yang lebih kecil dari $r$ dan nilai \textit{cosine similarity} yang lebih besar dari $\vartheta$, entitas $a$ dan $c$ membentuk sebuah sub-himpunan pergerakan bersama $\mathcal{A}$ beranggotakan 2 entitas $a$ dan $c$.
+        \item Jarak \textit{dynamic time warping} dari entitas $b$ dan $c$ adalah sebesar $\approx 4.82$ satuan jarak. hasil tersebut sudah cukup untuk menyimpulkan bahwa $b$ dan $c$ tidak dekat secara spasial pada interval waktu $[1, 2]$ karena nilai $r$ dari kedua entitas entitas lebih besar dari nilai $r$ maksimum sebesar $3.5$ satuan jarak.
+        \item Karena sub-himpunan $\mathcal{A}$ memenuhi seluruh syarat pembentukan rombongan di mana $\mathcal{A}$ memiliki 2 anggota yang dekat secara spasial, maka sub-himpunan $\mathcal{A}$ membentuk sebuah rombongan pada interval waktu $[1, 2]$.
+    \end{enumerate}
+\end{enumerate}
+
+Berdasarkan langkah-langkah yang diambil, dapat diidentifikasi sebuah rombongan pada himpunan entitas $\mathcal{X}$ bernama $\mathcal{A}$ pada interval waktu $[1, 2]$ yang beranggotakan entitas $a$ dan $c$.
