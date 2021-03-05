@@ -126,7 +126,7 @@ void writeResultToFile(
         for (Rombongan group: result) {
             std::vector<int> members = group.members;
 
-            for (unsigned int i = 0; i < members.size(); i++) {
+            for (size_t i = 0; i < members.size(); i++) {
                 if (i > 0) {
                     file_stream << ",";
                 }

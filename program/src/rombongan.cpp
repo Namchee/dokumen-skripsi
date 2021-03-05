@@ -27,7 +27,7 @@ std::vector<Rombongan> identifyRombongan(
         dimension = x.second.size();
     }
 
-    for (unsigned int end = k; end < frames.size(); end++) {
+    for (size_t end = k; end < frames.size(); end++) {
         unsigned int start = end - k;
 
         std::vector<std::vector<int> > rombongan_group;
@@ -35,31 +35,31 @@ std::vector<Rombongan> identifyRombongan(
         std::unordered_map<int, std::vector<double> > direction_vector;
 
         // cache the sub-trajectories and direction vector
-        for (unsigned int it = 0; it < entities.size(); it++) {
+        for (size_t it = 0; it < entities.size(); it++) {
             Entity curr = entities[it];
 
-            for (unsigned int frame = start; frame < end; frame++) {
+            for (size_t frame = start; frame < end; frame++) {
                 sub_trajectories[curr.id].push_back(
                     curr.trajectories[frames[frame]]
                 );
             }
 
-            for (unsigned int dim = 0; dim < dimension; dim++) {
+            for (size_t dim = 0; dim < dimension; dim++) {
                 direction_vector[curr.id].push_back(
                     curr.trajectories[frames[end - 1]][dim] - curr.trajectories[frames[start]][dim]
                 );
             }
         }
 
-        for (unsigned int itr_outer = 0; itr_outer < entities.size(); itr_outer++) {
+        for (size_t itr_outer = 0; itr_outer < entities.size(); itr_outer++) {
             std::vector<int> group_id{ entities[itr_outer].id };
 
-            for (unsigned int itr_inner = itr_outer + 1; itr_inner < entities.size(); itr_inner++) {
+            for (size_t itr_inner = itr_outer + 1; itr_inner < entities.size(); itr_inner++) {
                 Entity other = entities[itr_inner];
 
                 bool is_similar_to_all = true;
 
-                for (unsigned int group_itr = 0; group_itr < group_id.size() && is_similar_to_all; group_itr++) {
+                for (size_t group_itr = 0; group_itr < group_id.size() && is_similar_to_all; group_itr++) {
                     double dtw_distance = calculateDTWDistance(
                         sub_trajectories[other.id],
                         sub_trajectories[group_id[group_itr]]

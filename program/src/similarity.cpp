@@ -24,7 +24,7 @@ double calculateEuclideanDistance(
 
     double distance = 0.0f;
 
-    for (unsigned int it = 0; it < a.size(); it++) {
+    for (size_t it = 0; it < a.size(); it++) {
         // return immediately when one of the position is not recorded
         if (a[it] == std::numeric_limits<double>::max() || b[it] == std::numeric_limits<double>::max()) {
             return -1;
@@ -59,11 +59,11 @@ double calculateDTWDistance(
     double dtw[x_lim][y_lim];
 
     // initialize all illegal first pairings with infinity
-    for (unsigned int i = 0; i < x_lim; i++) {
+    for (int i = 0; i < x_lim; i++) {
         dtw[i][0] = std::numeric_limits<double>::max();        
     }
 
-    for (unsigned int i = 0; i < y_lim; i++) {
+    for (int i = 0; i < y_lim; i++) {
         dtw[0][i] = std::numeric_limits<double>::max();
     }
 
@@ -71,8 +71,8 @@ double calculateDTWDistance(
     dtw[0][0] = 0;
 
     // Calculate DTW distance
-    for (unsigned int i = 1; i < x_lim; i++) {
-        for (unsigned int j = 1; j < y_lim; j++) {
+    for (int i = 1; i < x_lim; i++) {
+        for (int j = 1; j < y_lim; j++) {
             double cost = calculateEuclideanDistance(
                 a[i - 1],
                 b[j - 1]
@@ -118,7 +118,7 @@ double calculateCosineSimilarity(
     double len_b = 0.0;
     double dot_product = 0.0;
 
-    for (unsigned int i = 0; i < a.size(); i++) {
+    for (size_t i = 0; i < a.size(); i++) {
         // return immediately when one of the position is not recorded
         if (a[i] == std::numeric_limits<double>::max() || b[i] == std::numeric_limits<double>::max()) {
             return -1;
