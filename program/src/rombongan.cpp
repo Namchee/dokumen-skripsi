@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <map>
 #include <set>
+#include <iostream>
 
 /**
  * Identify rombongan from a set of moving entities.
@@ -28,6 +29,10 @@ std::vector<Rombongan> identifyRombongan(
     }
 
     for (size_t end = k; end < frames.size(); end++) {
+        if (end == 25) {
+            break;
+        }
+
         unsigned int start = end - k;
 
         std::vector<std::vector<int> > rombongan_group;
@@ -59,7 +64,7 @@ std::vector<Rombongan> identifyRombongan(
 
                 bool is_similar_to_all = true;
 
-                for (size_t group_itr = 0; group_itr < group_id.size() && is_similar_to_all; group_itr++) {
+                for (size_t group_itr = 0; group_itr < group_id.size() && is_similar_to_all; group_itr++) {                    
                     double dtw_distance = calculateDTWDistance(
                         sub_trajectories[other.id],
                         sub_trajectories[group_id[group_itr]]
@@ -95,6 +100,8 @@ std::vector<Rombongan> identifyRombongan(
                 paired_groups[group].second = frames[end - 1];
             }
         }
+
+        std::cout << "Finished processing range [" << start << ", " << end << "]" << std::endl;
     }
 
     std::vector<Rombongan> result;

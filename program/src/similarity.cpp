@@ -54,8 +54,8 @@ double calculateDTWDistance(
     }
 
     // create a 2-dimensional array to store the DTW distances
-    int x_lim = a.size() + 1;
-    int y_lim = b.size() + 1;
+    const size_t x_lim = a.size() + 1;
+    const size_t y_lim = b.size() + 1;
     double dtw[x_lim][y_lim];
 
     // initialize all illegal first pairings with infinity

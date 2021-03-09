@@ -116,11 +116,14 @@ void writeResultToFile(
     std::string name
 ) {
     std::ofstream file_stream;
+
+    std::filesystem::path dir_path = std::filesystem::current_path() / "data" / "output";
+
+    if (!std::filesystem::exists(dir_path)) {
+        std::filesystem::create_directory(dir_path);
+    }
     
-    file_stream.open(
-        std::filesystem::current_path().string() + "/data/output/" + name + ".txt",
-        std::ofstream::trunc
-    );
+    file_stream.open(dir_path / name / ".txt");
 
     if (file_stream.is_open()) {
         for (Rombongan group: result) {
