@@ -14,6 +14,8 @@ int main(int argc, char *argv[]) {
         args.path
     );
 
+    sort(entities.begin(), entities.end());
+
     std::cout << "Number of entities: " << entities.size() << std::endl;
     std::cout << "Number of frames: " << entities[0].trajectories.size() << std::endl;
 
