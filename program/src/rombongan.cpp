@@ -29,7 +29,7 @@ std::vector<Rombongan> identifyRombongan(
     }
 
     for (size_t end = k; end < frames.size(); end++) {
-        if (end == 25) {
+        if (end > 25) {
             break;
         }
 

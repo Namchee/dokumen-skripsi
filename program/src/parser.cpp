@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <unordered_set>
 #include <unordered_map>
+#include <filesystem>
 #include <map>
 #include <stdexcept>
 
@@ -23,7 +24,9 @@ std::vector<Entity> parseMovementData(const std::string& name, const std::string
 
     double frame_time, id, x_pos, y_pos;
 
-    std::string filepath = path + "/" + name + ".txt";
+    std::string filepath = (std::filesystem::path(path) / name)
+        .make_preferred()
+        .replace_extension(".txt");
 
     std::cout << "Attempting to read data from: " << filepath << "\n"; 
 

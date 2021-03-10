@@ -44,10 +44,14 @@ Parameters parseArguments(int argc, char *argv[]) {
     program.add_argument("-p", "--path")
         .help("Direktori sumber data lintasan. Relatif terhadap direktori saat ini.")
         .default_value(
-            (std::filesystem::current_path() / "data" / "input").string()
+            (std::filesystem::current_path() / "data" / "input")
+                .make_preferred()
+                .string()
         )
         .action([](const std::string &value) {
-            return (std::filesystem::current_path() / value).string();
+            return (std::filesystem::current_path() / value)
+                .make_preferred()
+                .string();
         });
 
     try {
@@ -117,13 +121,21 @@ void writeResultToFile(
 ) {
     std::ofstream file_stream;
 
-    std::filesystem::path dir_path = std::filesystem::current_path() / "data" / "output";
+    std::filesystem::path dir_path = (std::filesystem::current_path() / "data" / "output").make_preferred();
 
     if (!std::filesystem::exists(dir_path)) {
         std::filesystem::create_directory(dir_path);
+        std::filesystem::permissions(
+            dir_path,
+            std::filesystem::perms::owner_all | std::filesystem::perms::group_all | std::filesystem::perms::others_read,
+            std::filesystem::perm_options::add
+        );
     }
     
-    file_stream.open(dir_path / name / ".txt");
+    file_stream.open(
+        (dir_path / name).make_preferred().replace_extension(".txt"),
+        std::ofstream::out | std::ofstream::trunc
+    );
 
     if (file_stream.is_open()) {
         for (Rombongan group: result) {
@@ -144,6 +156,6 @@ void writeResultToFile(
 
         std::cout << "Successfully written result to " << name << ".txt\n"; 
     } else {
-        throw std::runtime_error("Failed to open output stream");
+        throw std::runtime_error("Failed to open output stream due to lack of permissions.");
     }
 }
