@@ -139,7 +139,7 @@ void writeResultToFile(
 
     if (file_stream.is_open()) {
         for (Rombongan group: result) {
-            std::vector<int> members = group.members;
+            std::vector<unsigned int> members = group.members;
 
             for (size_t i = 0; i < members.size(); i++) {
                 if (i > 0) {

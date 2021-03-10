@@ -3,8 +3,8 @@
 #include "entity.h"
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <map>
-#include <set>
 #include <iostream>
 
 /**
@@ -39,6 +39,8 @@ std::vector<Rombongan> identifyRombongan(
         std::unordered_map<int, std::vector<std::vector<double> > > sub_trajectories;
         std::unordered_map<int, std::vector<double> > direction_vector;
 
+        std::unordered_set<int> groupings[entities.size()];
+
         // cache the sub-trajectories and direction vector
         for (size_t it = 0; it < entities.size(); it++) {
             Entity curr = entities[it];
@@ -61,6 +63,10 @@ std::vector<Rombongan> identifyRombongan(
 
             for (size_t itr_inner = itr_outer + 1; itr_inner < entities.size(); itr_inner++) {
                 Entity other = entities[itr_inner];
+                
+                if (groupings[itr_outer].find(other.id) != groupings[itr_outer].end()) {
+                    continue;
+                }
 
                 bool is_similar_to_all = true;
 
@@ -89,6 +95,10 @@ std::vector<Rombongan> identifyRombongan(
 
             if (group_id.size() >= m) {
                 rombongan_group.push_back(group_id);
+
+                for (int id: group_id) {
+                    groupings[id - 1] = std::unordered_set<int>(group_id.begin(), group_id.end()); 
+                }
             }
         }
 
