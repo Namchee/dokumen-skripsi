@@ -39,7 +39,7 @@ std::vector<Rombongan> identifyRombongan(
         std::unordered_map<int, std::vector<std::vector<double> > > sub_trajectories;
         std::unordered_map<int, std::vector<double> > direction_vector;
 
-        std::unordered_set<int> groupings[entities.size()];
+        std::vector<std::unordered_set<int> > groupings(entities.size());
 
         // cache the sub-trajectories and direction vector
         for (size_t it = 0; it < entities.size(); it++) {
