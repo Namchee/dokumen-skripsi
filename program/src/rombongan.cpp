@@ -83,17 +83,19 @@ std::vector<Rombongan> identifyRombongan(
             }
         }
 
-        for (size_t itr_outer = 0; itr_outer < entities.size(); itr_outer++) {
-            Entity curr = entities[itr_outer];
+        
+
+        for (size_t curr_itr = 0; curr_itr < entities.size(); curr_itr++) {
+            Entity curr = entities[curr_itr];
             std::vector<std::vector<int> > group_ids;
 
-            for (size_t itr_inner = itr_outer + 1; itr_inner < entities.size(); itr_inner++) {
-                Entity other = entities[itr_inner];
+            for (size_t other_itr = curr_itr + 1; other_itr < entities.size(); other_itr++) {
+                Entity other = entities[other_itr];
 
-                for (std::vector<int> group: group_ids) {
+                for (size_t groups_itr = 0; groups_itr < group_ids.size(); groups_itr++) {
                     bool is_similar_to_all_members = true;
 
-                    for (int member_id: group) {
+                    for (int member_id: group_ids[groups_itr]) {
                         double dtw_distance = calculateDTWDistance(
                             sub_trajectories[other.id],
                             sub_trajectories[member_id]
@@ -110,10 +112,14 @@ std::vector<Rombongan> identifyRombongan(
                         is_similar_to_all_members = dtw_distance != -1 &&
                             dtw_distance <= r &&
                             cosine_similarity >= cs;
+
+                        if (!is_similar_to_all_members) {
+                            break;
+                        }
                     }
 
                     if (is_similar_to_all_members) {
-                        group.push_back(other.id);
+                        group_ids[groups_itr].push_back(other.id);
                     }
                 }
 
@@ -131,32 +137,6 @@ std::vector<Rombongan> identifyRombongan(
                 if (dtw_distance != -1 && dtw_distance <= r && cosine_similarity >= cs) {
                     group_ids.push_back({ curr.id, other.id });
                 }
-
-                /*
-                bool is_similar_to_all = true;
-
-                for (size_t group_itr = 0; group_itr < group_id.size() && is_similar_to_all; group_itr++) {                    
-                    double dtw_distance = calculateDTWDistance(
-                        sub_trajectories[other.id],
-                        sub_trajectories[group_id[group_itr]]
-                    );
-
-                    double cosine_similarity = calculateCosineSimilarity(
-                        direction_vector[other.id],
-                        direction_vector[group_id[group_itr]]
-                    );
-
-                    // make sure that the distance is not zero to avoid
-                    // similarity checking when two entities
-                    // doesn't appear in the current timeframe.
-                    is_similar_to_all = dtw_distance != -1 && dtw_distance <= r &&
-                        cosine_similarity >= cs;
-                }
-
-                if (is_similar_to_all) {
-                    group_id.push_back(other.id);
-                }
-                */
             }
 
             bool sublist_mark[group_ids.size()] = { false };
@@ -176,7 +156,7 @@ std::vector<Rombongan> identifyRombongan(
             for (size_t itr_group = 0; itr_group < group_ids.size(); itr_group++) {
                 std::vector<int> group = group_ids[itr_group];
 
-                if (group.size() < m || sublist_mark[itr_group]) {
+                if (group.size() < m) {
                     continue;
                 }
 
