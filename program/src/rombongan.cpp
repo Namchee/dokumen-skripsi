@@ -7,6 +7,33 @@
 #include <map>
 #include <iostream>
 
+
+/**
+ * Determine if a list is a sublist of another list
+ * 
+ * @param a the first list
+ * @param b the second list
+ * @return `true` if one of the supplied list if a sublist of another,
+ * `false` otherwise
+ */
+bool is_sublist(
+    const std::vector<int>& a,
+    const std::vector<int>& b
+) {
+    std::unordered_set<int> container;
+
+    for (int member: a) {
+        container.insert(member);
+    }
+
+    for (int member: b) {
+        container.insert(member);
+    }
+
+    return container.size() == a.size() ||
+        container.size() == b.size();
+}
+
 /**
  * Identify rombongan from a set of moving entities.
  * 
@@ -59,38 +86,38 @@ std::vector<Rombongan> identifyRombongan(
         for (size_t itr_outer = 0; itr_outer < entities.size(); itr_outer++) {
             Entity curr = entities[itr_outer];
             std::vector<std::vector<int> > group_ids;
-            // std::vector<int> group_id{ entities[itr_outer].id };
 
             for (size_t itr_inner = itr_outer + 1; itr_inner < entities.size(); itr_inner++) {
                 Entity other = entities[itr_inner];
 
-                // check if an entity may extend existing group
-                for (size_t itr_groups = 0; itr_groups < group_ids.size(); itr_groups++) {
-                    bool is_similar_to_all = true;
+                for (std::vector<int> group: group_ids) {
+                    bool is_similar_to_all_members = true;
 
-                    for (size_t itr_group = 0; itr_group < group_ids[itr_groups].size(); itr_group++) {
+                    for (int member_id: group) {
                         double dtw_distance = calculateDTWDistance(
                             sub_trajectories[other.id],
-                            sub_trajectories[group_ids[itr_groups][itr_group]]
+                            sub_trajectories[member_id]
                         );
 
                         double cosine_similarity = calculateCosineSimilarity(
                             direction_vector[other.id],
-                            direction_vector[group_ids[itr_groups][itr_group]]
+                            direction_vector[member_id]
                         );
 
                         // make sure that the distance is not zero to avoid
                         // similarity checking when two entities
                         // doesn't appear in the current timeframe.
-                        is_similar_to_all = dtw_distance != -1 && dtw_distance <= r &&
+                        is_similar_to_all_members = dtw_distance != -1 &&
+                            dtw_distance <= r &&
                             cosine_similarity >= cs;
                     }
 
-                    if (is_similar_to_all) {
-                        group_ids[itr_groups].push_back(other.id);
+                    if (is_similar_to_all_members) {
+                        group.push_back(other.id);
                     }
                 }
 
+                // can entity `curr` create a subgroup with `other`?
                 double dtw_distance = calculateDTWDistance(
                     sub_trajectories[other.id],
                     sub_trajectories[curr.id]
@@ -101,7 +128,7 @@ std::vector<Rombongan> identifyRombongan(
                     direction_vector[curr.id]
                 );
 
-                if (dtw_distance != -1 && dtw_distance <= r && cosine_similarity <= cs) {
+                if (dtw_distance != -1 && dtw_distance <= r && cosine_similarity >= cs) {
                     group_ids.push_back({ curr.id, other.id });
                 }
 
@@ -132,25 +159,31 @@ std::vector<Rombongan> identifyRombongan(
                 */
             }
 
+            bool sublist_mark[group_ids.size()] = { false };
+
             for (size_t a = 0; a < group_ids.size(); a++) {
+                if (sublist_mark[a]) {
+                    continue;
+                }
+
                 for (size_t b = a + 1; b < group_ids.size(); b++) {
-                    if (isSublist(group_ids[a], group_ids[b])) {
-                        group_ids.erase(
-                            group_ids.begin() + (group_ids[a].size() >= group_ids[b].size() ? a : b)
-                        );
+                    if (is_sublist(group_ids[a], group_ids[b])) {
+                        sublist_mark[b] = true;
                     }
                 }
             }
 
-            for (std::vector<int> group: group_ids) {
-                if (group.size() < m) {
+            for (size_t itr_group = 0; itr_group < group_ids.size(); itr_group++) {
+                std::vector<int> group = group_ids[itr_group];
+
+                if (group.size() < m || sublist_mark[itr_group]) {
                     continue;
                 }
 
                 bool is_new_group = true;
 
-                for (std::vector<int> romb: rombongan_group) {
-                    if (isSublist(romb, group)) {
+                for (std::vector<int> rombongan_member: rombongan_group) {
+                    if (is_sublist(rombongan_member, group)) {
                         is_new_group = false;
                         break;
                     }
@@ -185,30 +218,4 @@ std::vector<Rombongan> identifyRombongan(
     }
 
     return result;
-}
-
-/**
- * Determine if a list is a sublist of another list
- * 
- * @param a the first list
- * @param b the second list
- * @return `true` if one of the supplied list if a sublist of another,
- * `false` otherwise
- */
-bool isSublist(
-    const std::vector<int>& a,
-    const std::vector<int>& b
-) {
-    std::unordered_set<int> container;
-
-    for (int member: a) {
-        container.insert(member);
-    }
-
-    for (int member: b) {
-        container.insert(member);
-    }
-
-    return container.size() == a.size() ||
-        container.size() == b.size();
 }
