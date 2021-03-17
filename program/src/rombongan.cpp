@@ -56,7 +56,7 @@ std::vector<Rombongan> identifyRombongan(
     }
 
     for (size_t end = k; end < frames.size(); end++) {
-        if (end > 25) {
+        if (end >= 25) {
             break;
         }
 
@@ -82,8 +82,6 @@ std::vector<Rombongan> identifyRombongan(
                 );
             }
         }
-
-        
 
         for (size_t curr_itr = 0; curr_itr < entities.size(); curr_itr++) {
             Entity curr = entities[curr_itr];
@@ -139,6 +137,7 @@ std::vector<Rombongan> identifyRombongan(
                 }
             }
 
+            /*
             bool sublist_mark[group_ids.size()] = { false };
 
             for (size_t a = 0; a < group_ids.size(); a++) {
@@ -171,8 +170,11 @@ std::vector<Rombongan> identifyRombongan(
 
                 if (is_new_group) {
                     rombongan_group.push_back(group);
+                } else {
+                    rombongan_group.push_back(group);
                 }
             }
+            */
         }
 
         for (std::vector<int> group: rombongan_group) {

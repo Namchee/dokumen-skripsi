@@ -4,7 +4,7 @@ if("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.5)
    message(FATAL_ERROR "CMake >= 2.6.0 required")
 endif()
 cmake_policy(PUSH)
-cmake_policy(VERSION 2.6...3.17)
+cmake_policy(VERSION 2.6)
 #----------------------------------------------------------------
 # Generated CMake target import file.
 #----------------------------------------------------------------
@@ -50,7 +50,7 @@ add_library(argparse::argparse INTERFACE IMPORTED)
 
 set_target_properties(argparse::argparse PROPERTIES
   INTERFACE_COMPILE_FEATURES "cxx_std_17"
-  INTERFACE_INCLUDE_DIRECTORIES "/media/namchee/Shared Disk/skripsi/repository/program/libs/argparse/include"
+  INTERFACE_INCLUDE_DIRECTORIES "/cygdrive/d/skripsi/repository/program/libs/argparse/include"
 )
 
 # This file does not depend on other imported targets which have
