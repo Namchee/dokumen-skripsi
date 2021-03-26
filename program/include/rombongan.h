@@ -7,7 +7,7 @@
 
 struct Rombongan {
     std::vector<int> members;
-    double start, end;
+    std::vector<std::pair<double, double> > time_list;
 };
 
 std::vector<Rombongan> identifyRombongan(

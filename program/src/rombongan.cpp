@@ -4,35 +4,9 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <algorithm>
 #include <map>
 #include <iostream>
-
-
-/**
- * Determine if a list is a sublist of another list
- * 
- * @param a the first list
- * @param b the second list
- * @return `true` if one of the supplied list if a sublist of another,
- * `false` otherwise
- */
-bool is_sublist(
-    const std::vector<int>& a,
-    const std::vector<int>& b
-) {
-    std::unordered_set<int> container;
-
-    for (int member: a) {
-        container.insert(member);
-    }
-
-    for (int member: b) {
-        container.insert(member);
-    }
-
-    return container.size() == a.size() ||
-        container.size() == b.size();
-}
 
 /**
  * Identify rombongan from a set of moving entities.
@@ -46,19 +20,19 @@ std::vector<Rombongan> identifyRombongan(
     double r,
     double cs
 ) {
-    std::map<std::vector<int>, std::pair<double, double> > paired_groups;
+    std::map<std::vector<int>, std::vector<std::pair<double, double> > > paired_groups;
     std::vector<double> frames;
-    unsigned int dimension;
 
     for (auto x: entities[0].trajectories) {
         frames.push_back(x.first);
-        dimension = x.second.size();
     }
 
+    unsigned int dimension = (*entities[0].trajectories.begin()).second.size();
+
     for (size_t end = k; end < frames.size(); end++) {
-        if (end >= 25) {
+        if (end > 50) {
             break;
-        }
+        }    
 
         unsigned int start = end - k;
 
@@ -107,7 +81,8 @@ std::vector<Rombongan> identifyRombongan(
                         // make sure that the distance is not zero to avoid
                         // similarity checking when two entities
                         // doesn't appear in the current timeframe.
-                        is_similar_to_all_members = dtw_distance != -1 &&
+                        is_similar_to_all_members = member_id != other.id && 
+                            dtw_distance != -1 &&
                             dtw_distance <= r &&
                             cosine_similarity >= cs;
 
@@ -117,7 +92,13 @@ std::vector<Rombongan> identifyRombongan(
                     }
 
                     if (is_similar_to_all_members) {
-                        group_ids[groups_itr].push_back(other.id);
+                        std::vector new_group = std::vector<int>(
+                            group_ids[groups_itr].begin(),
+                            group_ids[groups_itr].end()
+                        );
+
+                        new_group.push_back(other.id);
+                        group_ids.push_back(new_group);
                     }
                 }
 
@@ -137,67 +118,39 @@ std::vector<Rombongan> identifyRombongan(
                 }
             }
 
-            /*
-            bool sublist_mark[group_ids.size()] = { false };
-
-            for (size_t a = 0; a < group_ids.size(); a++) {
-                if (sublist_mark[a]) {
-                    continue;
-                }
-
-                for (size_t b = a + 1; b < group_ids.size(); b++) {
-                    if (is_sublist(group_ids[a], group_ids[b])) {
-                        sublist_mark[b] = true;
-                    }
-                }
-            }
-
             for (size_t itr_group = 0; itr_group < group_ids.size(); itr_group++) {
-                std::vector<int> group = group_ids[itr_group];
-
-                if (group.size() < m) {
-                    continue;
-                }
-
-                bool is_new_group = true;
-
-                for (std::vector<int> rombongan_member: rombongan_group) {
-                    if (is_sublist(rombongan_member, group)) {
-                        is_new_group = false;
-                        break;
-                    }
-                }
-
-                if (is_new_group) {
-                    rombongan_group.push_back(group);
-                } else {
-                    rombongan_group.push_back(group);
-                }
+                rombongan_group.push_back(group_ids[itr_group]);
             }
-            */
         }
 
         for (std::vector<int> group: rombongan_group) {
-            if (paired_groups.find(group) == paired_groups.end()) {
-                paired_groups[group].first = frames[start];
-                paired_groups[group].second = frames[end - 1];
+            std::vector<std::pair<double, double> > time_list = paired_groups[group];
+
+            if (
+                time_list.size() == 0 ||
+                start == 0 ||
+                frames[end - 1] != time_list[time_list.size() - 1].second
+            ) {
+                paired_groups[group].push_back({ frames[start], frames[end] });
             } else {
-                paired_groups[group].second = frames[end - 1];
+                paired_groups[group][time_list.size() - 1] = { 
+                    paired_groups[group][time_list.size() - 1].first,
+                    frames[end]
+                };
             }
         }
 
         std::cout << "Finished processing range [" << start << ", " << end << "]" << std::endl;
     }
 
-    std::vector<Rombongan> result;
+    std::vector<Rombongan> raw_result;
 
     for (auto const& [group, duration]: paired_groups) {
-        result.push_back({
+        raw_result.push_back({
             group,
-            duration.first,
-            duration.second
+            duration
         });
     }
 
-    return result;
+    return raw_result;
 }
