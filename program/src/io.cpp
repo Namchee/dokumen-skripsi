@@ -140,7 +140,7 @@ void writeResultToFile(
     if (file_stream.is_open()) {
         for (Rombongan group: result) {
             std::vector<int> members = group.members;
-            std::vector<std::pair<double, double> > time_list = group.time_list;
+            std::vector<std::pair<double, double> > duration = group.duration;
 
             for (size_t i = 0; i < members.size(); i++) {
                 if (i > 0) {
@@ -152,12 +152,12 @@ void writeResultToFile(
 
             file_stream << " ";
 
-            for (size_t i = 0; i < time_list.size(); i++) {
+            for (size_t i = 0; i < duration.size(); i++) {
                 if (i > 0) {
                     file_stream << ",";
                 }
 
-                file_stream << time_list[i].first << "-" << time_list[i].second;
+                file_stream << duration[i].first << "-" << duration[i].second;
             }
 
             file_stream << std::endl;

@@ -7,7 +7,11 @@
 
 struct Rombongan {
     std::vector<int> members;
-    std::vector<std::pair<double, double> > time_list;
+    std::vector<std::pair<double, double> > duration;
+
+    bool operator<(const Rombongan& other) const {
+        return members.size() > other.members.size();
+    }
 };
 
 std::vector<Rombongan> identifyRombongan(

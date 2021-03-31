@@ -8,6 +8,69 @@
 #include <map>
 #include <iostream>
 
+bool is_sublist(
+    const std::vector<int>& a,
+    const std::vector<int>& b
+) {
+    std::set<int> temp_container;
+
+    for (int member: a) {
+        temp_container.insert(member);
+    }
+
+    for (int member: b) {
+        temp_container.insert(member);
+    }
+
+    return a.size() != b.size() &&
+        (
+            temp_container.size() == a.size() ||
+            temp_container.size() == b.size()
+        );
+}
+
+bool result_comparator(const Rombongan& a, const Rombongan& b) {
+    return a.duration[0].first < b.duration[0].first;
+}
+
+std::vector<Rombongan> clean_result(
+    std::vector<Rombongan>& result
+) {
+    std::sort(result.begin(), result.end());
+
+    for (size_t curr_itr = 0; curr_itr < result.size(); curr_itr++) {
+        for (size_t other_itr = curr_itr + 1; other_itr < result.size(); other_itr++) {
+            if (result[other_itr].duration.size() == 0) {
+                continue;
+            }
+
+            if (is_sublist(result[curr_itr].members, result[other_itr].members)) {
+                std::vector<std::pair<double, double> > parent = result[curr_itr].duration;
+
+                for (size_t duration_itr = 0; duration_itr < result[other_itr].duration.size(); duration_itr++) {
+                    if (std::find(parent.begin(), parent.end(), result[other_itr].duration[duration_itr]) != parent.end()) {
+                        result[other_itr].duration.erase(
+                            result[other_itr].duration.begin() + duration_itr
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    std::vector<Rombongan> clean_result;
+
+    for (auto member: result) {
+        if (member.duration.size() > 0) {
+            clean_result.push_back(member);
+        }
+    }
+
+    sort(clean_result.begin(), clean_result.end(), result_comparator);
+
+    return clean_result;
+}
+
 /**
  * Identify rombongan from a set of moving entities.
  * 
@@ -30,10 +93,6 @@ std::vector<Rombongan> identifyRombongan(
     unsigned int dimension = (*entities[0].trajectories.begin()).second.size();
 
     for (size_t end = k; end < frames.size(); end++) {
-        if (end > 50) {
-            break;
-        }    
-
         unsigned int start = end - k;
 
         std::vector<std::vector<int> > rombongan_group;
@@ -152,5 +211,5 @@ std::vector<Rombongan> identifyRombongan(
         });
     }
 
-    return raw_result;
+    return clean_result(raw_result);
 }
