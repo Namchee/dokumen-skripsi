@@ -16,6 +16,7 @@ struct Rombongan {
 
 std::vector<Rombongan> identifyRombongan(
     const std::vector<Entity>& entities,
+    double fps,
     int m,
     int k,
     double r,

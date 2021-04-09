@@ -14,6 +14,7 @@ struct Parameters {
     int time_interval;
     double range;
     double cosine_similarity;
+    double fps;
     std::string path;
 };
 

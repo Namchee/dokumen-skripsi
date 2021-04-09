@@ -34,24 +34,35 @@ bool result_comparator(const Rombongan& a, const Rombongan& b) {
 }
 
 std::vector<Rombongan> clean_result(
-    std::vector<Rombongan>& result
+    std::vector<Rombongan>& raw_result,
+    double fps
 ) {
-    std::sort(result.begin(), result.end());
+    std::sort(raw_result.begin(), raw_result.end());
 
-    for (size_t curr_itr = 0; curr_itr < result.size(); curr_itr++) {
-        for (size_t other_itr = curr_itr + 1; other_itr < result.size(); other_itr++) {
-            if (result[other_itr].duration.size() == 0) {
+    for (size_t curr_itr = 0; curr_itr < raw_result.size(); curr_itr++) {
+        for (size_t other_itr = curr_itr + 1; other_itr < raw_result.size(); other_itr++) {
+            if (raw_result[other_itr].duration.size() == 0) {
                 continue;
             }
 
-            if (is_sublist(result[curr_itr].members, result[other_itr].members)) {
-                std::vector<std::pair<double, double> > parent = result[curr_itr].duration;
+            if (is_sublist(raw_result[curr_itr].members, raw_result[other_itr].members)) {
+                std::vector<std::pair<double, double> > parent = raw_result[curr_itr].duration;
 
-                for (size_t duration_itr = 0; duration_itr < result[other_itr].duration.size(); duration_itr++) {
-                    if (std::find(parent.begin(), parent.end(), result[other_itr].duration[duration_itr]) != parent.end()) {
-                        result[other_itr].duration.erase(
-                            result[other_itr].duration.begin() + duration_itr
-                        );
+                for (size_t parent_itr = 0; parent_itr < parent.size(); parent_itr++) {
+                    std::pair<double, double> par_dur = parent[parent_itr];
+
+                    for (size_t child_itr = 0; child_itr < raw_result[other_itr].duration.size(); child_itr++) {
+                        std::pair<double, double> chi_dur = raw_result[other_itr].duration[child_itr];
+
+                        if (
+                            (par_dur == chi_dur) ||
+                            (abs(par_dur.first - chi_dur.first) <= fps) ||
+                            (abs(par_dur.second - chi_dur.second) <= fps)
+                        ) {
+                            raw_result[other_itr].duration.erase(
+                                raw_result[other_itr].duration.begin() + child_itr
+                            );
+                        }
                     }
                 }
             }
@@ -60,7 +71,7 @@ std::vector<Rombongan> clean_result(
 
     std::vector<Rombongan> clean_result;
 
-    for (auto member: result) {
+    for (auto member: raw_result) {
         if (member.duration.size() > 0) {
             clean_result.push_back(member);
         }
@@ -78,6 +89,7 @@ std::vector<Rombongan> clean_result(
  */
 std::vector<Rombongan> identifyRombongan(
     const std::vector<Entity>& entities,
+    double fps,
     int m,
     int k,
     double r,
@@ -211,5 +223,5 @@ std::vector<Rombongan> identifyRombongan(
         });
     }
 
-    return clean_result(raw_result);
+    return clean_result(raw_result, fps);
 }

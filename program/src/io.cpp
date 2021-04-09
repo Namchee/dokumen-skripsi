@@ -21,6 +21,11 @@ Parameters parseArguments(int argc, char *argv[]) {
         .help("Nama berkas text dari sumber data yang ingin digunakan")
         .required();
 
+    program.add_argument("fps")
+        .help("Jumlah frame per detik")
+        .required()
+        .action([](const std::string &value) { return std::stod(value); });
+
     program.add_argument("entity_count")
         .help("Jumlah entitas minimum anggota rombongan")
         .required()
@@ -95,6 +100,14 @@ Parameters parseArguments(int argc, char *argv[]) {
         );
     }
 
+    auto fps = program.get<double>("fps");
+
+    if (fps < 1.0f) {
+        throw std::invalid_argument(
+            "Nilai frame per second minimum yang dapat diproses adalah 1 frame per sekon"
+        );
+    }
+
     auto path = program.get<std::string>("--path");
 
     Parameters p;
@@ -105,6 +118,7 @@ Parameters parseArguments(int argc, char *argv[]) {
     p.range = range;
     p.cosine_similarity = cosine_similarity;
     p.path = path;
+    p.fps = fps;
 
     return p;
 }

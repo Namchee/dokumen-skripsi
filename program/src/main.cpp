@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
 
     auto result = identifyRombongan(
         entities,
+        args.fps,
         args.entity_count,
         args.time_interval,
         args.range,
