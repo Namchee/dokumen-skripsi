@@ -190,7 +190,9 @@ std::vector<Rombongan> identifyRombongan(
             }
 
             for (size_t itr_group = 0; itr_group < group_ids.size(); itr_group++) {
-                rombongan_group.push_back(group_ids[itr_group]);
+                if (group_ids[itr_group].size() >= m) {
+                    rombongan_group.push_back(group_ids[itr_group]);
+                }
             }
         }
 
