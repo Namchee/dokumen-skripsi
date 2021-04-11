@@ -92,7 +92,7 @@ Melalui upaya penyelesaian tersebut, maka syarat kedekatan spasial dalam syarat-
 
 \section{Definisi Pergerakan Kolektif Baru}
 
-Berdasarkan pembahasan mengenai syarat-syarat pembentukan pergerakan kolektif pada subbab \ref{sec:collective-movement}, terdapat 3 aspek penting yang harus dipertimbangkan dalam membuat sebuah definisi pergerakan kolektif:
+Berdasarkan pembahasan mengenai syarat-syarat pembentukan pergerakan kolektif yang telah dibahas pada subbab \ref{sec:collective-movement}, terdapat 3 aspek penting yang harus dipertimbangkan dalam proses pembuatan sebuah definisi pergerakan kolektif baru:
 
 \begin{enumerate}
     \item \textbf{\textit{Size}} --- Berapa jumlah entitas minimum yang tergabung dalam sebuah himpunan entitas bergerak agar dapat dianggap sebagai sebuah pergerakan kolektif?
@@ -111,7 +111,26 @@ Dengan mempertimbangkan aspek-aspek di atas dan upaya penyelesaian masalah pada 
 \section{Algoritma Identifikasi Rombongan}
 \label{sec:algoritma}
     
-Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$ buah entitas, interval waktu minimum selama $k$ satuan waktu, jarak \textit{dynamic time warping} maksimum sepanjang $r$ satuan panjang, dan nilai \textit{cosine similarity} minimum sebesar $\vartheta$. Himpunan rombongan yang terbentuk dalam himpunan entitas $\mathcal{X}$ dapat dicari menggunakan algoritma berikut:
+Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$ buah entitas, interval waktu minimum selama $k$ satuan waktu, jarak \textit{dynamic time warping} maksimum sepanjang $r$ satuan panjang, dan nilai \textit{cosine similarity} minimum sebesar $\vartheta$. Himpunan rombongan yang terbentuk dalam himpunan entitas $\mathcal{X}$ dapat dicari menggunakan algoritma yang dinyatakan melalui algoritma \ref{bab3:algoritma-identifikasi}. Berikut merupakan uraian dari langkah-langkah yang ditempuh dalam algoritma identifikasi rombongan:
+
+\begin{enumerate}
+    \item Inisialisasi sebuah himpunan $\mathcal{R}$ yang akan menyimpan himpunan rombongan yang teridentifikasi untuk setiap interval waktu $I$.
+    \item Cari setiap interval waktu konsekutif $I$ sepanjang $k$ satuan waktu yang dapat dibentuk. Interval-interval waktu konsekutif dapat dicari menggunakan teknik \textit{sliding window} \cite{ralf:03:sliding-window}. Sebagai contoh, pada himpunan entitas $\mathcal{X}$ sepanjang $5$ satuan waktu dan $k = 3$, maka interval waktu $I$ yang mungkin adalah $[1, 2, 3]$, $[2, 3, 4]$, dan $[3, 4, 5]$.
+    \item Untuk setiap interval waktu konsekutif $I$ yang berdurasi $k$ satuan waktu:
+    
+    \begin{enumerate}
+        \item Inisialiasi sebuah himpunan $\mathcal{T}$ yang akan menyimpan himpunan rombongan yang teridentifikasi pada interval waktu $I$.
+        \item Cari setiap sub lintasan dan vektor arah untuk setiap entitas pada himpunan $\mathcal{X}$ pada interval waktu $I$.
+        \item Inisialisasi $\mathcal{S}$ untuk setiap entitas $a$ yang terdapat pada $\mathcal{X}$. $\mathcal{S}$ merupakan kumpulan dari himpunan entitas yang masing-masing beranggotakan $a$.
+        \item Untuk setiap himpunan entitas pada $\mathcal{S}$, hitung jarak \textit{dynamic time warping} dan \textit{cosine similarity} dari setiap anggota dari himpunan entitas $c$ dengan entitas lain yang 
+        tidak termasuk dalam anggota $c$. Apabila jarak \textit{dynamic time warping} dari entitas $d$ dan setiap anggota dari himpunan $c$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari entitas $d$ dan setiap anggota dari himpunan $c$ lebih besar atau sama dengan $\vartheta$, tambahkan sebuah himpunan entitas baru $\mathcal{U}$ pada $\mathcal{S}$ di mana $\mathcal{U}$ merupakan salinan dari $c$ ditambah dengan entitas $d$.
+        \item Hitung jarak \textit{dynamic time warping} dan nilai  \textit{cosine similarity} antara entitas $a$ dengan entitas-entitas lainnya dalam $\mathcal{X}$. Untuk setiap entitas lain $b$ yang memiliki jarak \textit{dynamic time warping} kurang dari atau sama dengan $r$ dan nilai \textit{cosine similarity} lebih dari atau sama dengan $\vartheta$ dengan entitas $a$, buatlah sebuah himpunan baru yang beranggotakan $a$ dan $b$ dan tambahkan himpunan tersebut pada $\mathcal{S}$.
+        \item Tambahkan setiap anggota dari himpunan $\mathcal{S}$ pada $\mathcal{T}$.
+        \item Tambahkan setiap anggota dari himpunan $\mathcal{T}$ pada himpunan $\mathcal{R}$.
+    \end{enumerate}
+    \item Kembalikan himpunan $\mathcal{R}$ sebagai hasil. Pada tahap ini, himpunan $\mathcal{R}$ akan berisi kumpulan rombongan yang terbentuk pada setiap interval waktu konsekutif $I$ yang memiliki panjang durasi minimum sebesar $k$ satuan waktu.
+\end{enumerate}
+
 
 \begin{algorithm}[h]
     \caption{Algoritma Identifikasi Rombongan}
@@ -119,7 +138,7 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \SetKwInput{KwOutput}{Output}              % set the Output
     \DontPrintSemicolon
     
-    \SetKwFunction{Kolektif}{FindKolektif}
+    \SetKwFunction{Rombongan}{FindRombongan}
  
     \SetKwProg{Fn}{Function}{:}{}
   
@@ -132,72 +151,75 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
             \item Nilai \textit{cosine similarity} minimum $\vartheta$
         \end{itemize}
     }
-    \KwOutput{Sebuah \textit{array} yang menyimpan himpunan dari himpunan rombongan yang teridentifikasi untuk setiap interval waktu yang memungkinkan}
+    \KwOutput{Kumpulan rombongan pada interval waktu konsekutif sepanjang $k$}
     
-    \Fn{\Kolektif{$\mathcal{X}, m, k, r, \vartheta$}}{
-        $result \gets []$ \\
+    \Fn{\Rombongan{$\mathcal{X}, m, k, r, \vartheta$}}{
+        $rombongan \gets sebuah\;pemetaan\;anggota\;rombongan\;pada\;interval\;waktu$ \\
         
-        \For{$(start, end)$ in each consecutive time intervals}{
-            $collectiveMovements \gets Set()$ \\
+        \For{$(start, end)$  intervals}{
+            $collectiveMovements \gets kumpulan\;rombongan\;pada\;interval\;start-end$ \\
+            
+            $subTrajectories \gets sub\;lintasan\;dari\;setiap\;entitas\;pada\;interval\;start-end$ \\
+            
+            $directionVector \gets vektor\;arah\;dari\;setiap\;entitas\;pada\;interval\;start-end$ \\
             
             \For{each entity $a$ in $\mathcal{X}$}{
-                $entitySet \gets [a]$ \\
+                $entitySet \gets kumpulan\;kelompok\;pergerakan\;yang\;beranggotakan\;a$ \\
                 \For{each entity $b$ in $\mathcal{X}$}{
-                    $isSimilar \gets TRUE$ \\
+                    \For{each entity group $c$ in $entitySet$}{
+                        $isSimilarToAll \gets TRUE$ \\
+                        
+                        \For{each entity $d$ in $c$}{
+                            $dtwC \gets DTWDistance(b, d)$ \\
+                            $cosineC \gets cosineSimilarity(b, d)$ \\
                     
-                    \For{each entity $c$ in $entitySet$}{
-                        $cSub \gets c[start \dots end]$ \\
-                        $bSub \gets b[start \dots end]$ \\
-                    
-                        \If{$c \neq b$ AND $(DTWDistance(cSub, bSub) > r$ OR $CosineSimilarity(cSub, bSub) < \vartheta)$}{
-                            $isSimilar \gets FALSE$
+                            \If{$c \neq b$ AND $(dtwC > r$ OR $cosineC < \vartheta)$}{
+                                $isSimilarToAll \gets FALSE$
+                            }
+                        }
+                        
+                        \If{$isSimilarToAll = TRUE$}{
+                            $groupCpy \gets duplikat\;dari\;c$ \\
+                            $groupCpy.insert(b)$ \\
+                            $entitySet.insert(groupCpy)$
                         }
                     }
                     
-                    \If{$isSimilar\;is\;equal\;to\;TRUE$}{
-                        $Insert\;b\;into\;entitySet$
-                    }
+                    $dtwA \gets DTWDistance(a, b)$ \\
+                    $cosineA \gets cosineSimilarity(a, b)$ \\
                     
+                    \If{$dtwA \leq r$ AND $cosineA \geq \vartheta$}{
+                        $newGroup \gets [a, b]$ \\
+                        $entitySet.insert(newGroup)$
+                    }
                 }
                 
-                \If{$length(entities) \geq m$}{
-                    $Insert\;entitySet\;into\;collectiveMovement$
+                \For{each entity group $\mathcal{G}$ in entitySet}{
+                    \If{$\mathcal{G}.size() \geq m$}{
+                        $collectiveMovements.insert(\mathcal{G})$
+                    }
                 }
             }
-            $Insert\;collectiveMovements\;into\;result$
+            
+            \For{each collective movement $\mathcal{C}$ in collectiveMovements}{
+                $rombongan.insert(\mathcal{C})$
+            }
         }
     }
-    \KwRet{$result$}
+    \KwRet{$rombongan$}
     
     \label{bab3:algoritma-identifikasi}
 \end{algorithm}
 
-\noindent Berikut merupakan uraian dari langkah-langkah yang dikerjakan oleh algoritma tersebut:
-
-\begin{enumerate}
-    \item Inisialisasi sebuah himpunan $\mathcal{R}$ yang akan menyimpan himpunan rombongan yang teridentifikasi untuk setiap interval waktu $I$.
-    \item Cari setiap interval waktu konsekutif $I$ sepanjang $k$ satuan waktu yang dapat dibentuk. Interval-interval waktu konsekutif dapat dicari menggunakan teknik \textit{sliding window} \cite{ralf:03:sliding-window}. Sebagai contoh, pada himpunan entitas $\mathcal{X}$ sepanjang $5$ satuan waktu dan $k = 3$, maka interval waktu $I$ yang mungkin adalah $[1, 2, 3]$, $[2, 3, 4]$, dan $[3, 4, 5]$.
-    \item Untuk setiap interval waktu konsekutif $I$ yang berdurasi $k$ satuan waktu:
-    
-    \begin{enumerate}
-        \item Inisialiasi sebuah himpunan $\mathcal{T}$ yang akan menyimpan himpunan rombongan yang teridentifikasi pada interval waktu $I$.  
-        \item Inisialisasi sebuah himpunan $\mathcal{S}$ untuk setiap entitas $a$ yang terdapat pada $\mathcal{X}$. Pada awalnya, himpunan $\mathcal{S}$ hanya akan beranggotakan entitas $a$.
-        \item Hitung jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} dari setiap anggota himpunan $S$ dan setiap entitas lain pada himpunan $\mathcal{X}$ pada interval waktu $I$. Tambahkan setiap entitas yang memiliki jarak \textit{dynamic time warping} dengan setiap anggota himpunan $S$ yang lebih kecil sama dengan $r$ dan nilai \textit{cosine similiarity} dengan setiap anggota himpunan $S$ yang lebih besar sama dengan $\vartheta$ pada himpunan $S$.
-        \item Tambahkan himpunan $\mathcal{S}$ pada himpunan $\mathcal{T}$ apabila jumlah anggota himpunan $\mathcal{S}$ lebih besar atau sama dengan $m$.
-        \item Tambahkan himpunan $\mathcal{T}$ pada himpunan $\mathcal{R}$.
-    \end{enumerate}
-    \item Kembalikan himpunan $\mathcal{R}$ sebagai hasil. Pada tahap ini, himpunan $\mathcal{R}$ akan berisi kumpulan himpunan rombongan yang terbentuk pada setiap interval waktu $I$ yang berdurasi selama $k$ satuan waktu.
-\end{enumerate}
-
-Algoritma identifikasi memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. Nilai tersebut didapatkan melalui perhitungan berikut:
+{\color{blue} Melalui proses analisis algoritma, algoritma identifikasi rombongan yang diusulkan memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. Nilai tersebut didapatkan melalui perhitungan berikut:
 
 \begin{enumerate}
     \item Pada baris $3$, algoritma akan memiliki kompleksitas waktu sebesar $O(t - k)$ di mana nilai tersebut diperoleh dengan menghitung jumlah interval waktu konsekutif yang mungkin dibuat. Jumlah interval waktu konsekutif yang dapat dibuat merupakan selisih dari panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$ dan durasi waktu konsekutif minimum untuk membentuk sebuah rombongan.
-    \item Pada baris $5$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{X}$ yang memiliki kompleksitas sebesar $O(n)$.
-    \item Pada baris $7$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^2)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{X}$ yang memiliki kompleksitas sebesar $O(n)$.
+    \item Pada baris $7$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{X}$ yang memiliki kompleksitas sebesar $O(n)$.
+    \item Pada baris $9$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^2)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{X}$ yang memiliki kompleksitas sebesar $O(n)$.
     \item Pada baris $9$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^3)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{S}$ yang memiliki kompleksitas sebesar $O(n)$.
     \item Pada baris $12$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ yang disebabkan oleh perhitungan algoritma \textit{dynamic time warping} yang memiliki kompleksitas waktu sebesar $O(k^2)$. Kompleksitas tersebut didapatkan dari hasil perkalian panjang dua lintasan yang dihitung yang masing-masing sebesar $k$. Pada titik ini, algoritma identifikasi akan memiliki nilai kompleksitas tertinggi selama algoritma dijalankan.
-\end{enumerate}
+\end{enumerate}}
 
 \section{Contoh Proses Identifikasi Rombongan}
 \label{sec:algorithm-example}
@@ -210,11 +232,11 @@ Diberikan himpunan entitas $\mathcal{X}$ yang bergerak ruang $\mathbb{R}^2$ yang
     \item $\textbf{c} = \{ 1, -2 \}, \{ 2, 0 \}, \{ 3, 0 \}$
 \end{enumerate}
 
-di mana lintasan dari sebuah entitas merupakan himpunan posisi yang terurut berdasarkan waktu secara menaik dalam ruang $\mathbb{R}^2$. Posisi yang tercatat dimulai dari $t = 0$. Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula $m = 2$, $k = 2$, $r = 3.5$, dan $\vartheta = 0.5$. Langkah-langkah yang dilakukan untuk melakukan identifikasi rombongan antara lain:
+Lintasan dari sebuah entitas dalam himpunan entitas $\mathcal{X}$ merupakan kumpulan posisi yang terurut berdasarkan waktu secara menaik dalam ruang gerak $\mathbb{R}^2$. Posisi setiap entitas dimulai dari titik waktu $t = 0$. Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3.5$ satuan jarak, dan syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.5$. Langkah-langkah yang diambil untuk mengidentifikasi rombongan pada himpunan entitas $\mathcal{X}$ berdasarkan algoritma identifikasi yang telah dibuat adalah sebagai berikut:
 
 \begin{enumerate}
     \item Menginisialisasi sebuah himpunan untuk menyimpan himpunan rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$.
-    \item Mengidentifikasi seluruh interval waktu konsekutif sepanjang $k$ yang mungkin dibuat. Berdasarkan nilai $k = 2$, interval waktu yang mungkin adalah $[0, 1]$ dan $[1, 2]$.
+    \item Mengidentifikasi seluruh interval waktu konsekutif sepanjang $k$ pada himpunan entitas $\mathcal{X}$. Berdasarkan parameter masukan yaitu $k = 2$, maka interval waktu konsekutif yang memungkinkan adalah $[0, 1]$ dan $[1, 2]$.
     \item Lakukan pemeriksaan kedekatan spasial untuk setiap pasang entitas pada interval waktu $[0, 1]$ dengan melakukan perbandingan jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} pada setiap pasang entitas. Langkah-langkah yang dikerjakan adalah sebagai berikut: 
     
     \begin{enumerate}
@@ -234,4 +256,4 @@ di mana lintasan dari sebuah entitas merupakan himpunan posisi yang terurut berd
     \end{enumerate}
 \end{enumerate}
 
-Berdasarkan langkah-langkah yang diambil, dapat diidentifikasi sebuah rombongan pada himpunan entitas $\mathcal{X}$ bernama $\mathcal{A}$ pada interval waktu $[1, 2]$ yang beranggotakan entitas $a$ dan $c$.
+Berdasarkan uraian langkah-langkah identifikasi yang diambil, dapat disimpulkan bahwa terdapat sebuah rombongan yang terbentuk pada himpunan entitas $\mathcal{X}$ pada interval waktu $[1, 2]$ yang beranggotakan entitas $a$ dan $c$.
