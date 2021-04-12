@@ -20,6 +20,6 @@ struct Parameters {
 
 Parameters parseArguments(int argc, char *argv[]);
 
-void writeResultToFile(const std::vector<Rombongan>& result, std::string name);
+void writeResultToFile(const std::vector<Rombongan>& result, const Parameters& params);
 
 #endif

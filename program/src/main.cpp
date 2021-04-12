@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Succesfully identified " << result.size() << " rombongan(s) from the current dataset" << std::endl;
     std::cout << "Runtime: " << millis.count() << " ms." << std::endl;
 
-    writeResultToFile(result, args.source);
+    writeResultToFile(result, args);
 
     return 0;
 }

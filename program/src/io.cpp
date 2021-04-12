@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iterator>
 #include <filesystem>
+#include <chrono>
 #include <stdexcept>
 #include <argparse/argparse.hpp>
 
@@ -126,12 +127,12 @@ Parameters parseArguments(int argc, char *argv[]) {
 /**
  * Write rombongan identification result to a text file.
  * 
- * @param result - rombongan identification result
- * @param name - file name to be written on
+ * @param result - Rombongan identification result
+ * @param params - List of arguments passed to the program
  */
 void writeResultToFile(
     const std::vector<Rombongan>& result,
-    std::string name
+    const Parameters& params
 ) {
     std::ofstream file_stream;
 
@@ -145,13 +146,25 @@ void writeResultToFile(
             std::filesystem::perm_options::add
         );
     }
+
+    unsigned long milliseconds_since_epoch =
+        std::chrono::system_clock::now().time_since_epoch() / 
+        std::chrono::milliseconds(1);
     
     file_stream.open(
-        (dir_path / name).make_preferred().replace_extension(".txt"),
+        (dir_path / (params.source + "-" + std::to_string(milliseconds_since_epoch))).make_preferred().replace_extension(".txt"),
         std::ofstream::out | std::ofstream::trunc
     );
 
     if (file_stream.is_open()) {
+        file_stream << "Data: " << params.source << ".txt" << std::endl;
+        file_stream << "Parameters:" << std::endl;
+        file_stream << "m: " << params.entity_count << std::endl;
+        file_stream << "k: " << params.time_interval << std::endl;
+        file_stream << "r: " << params.range << std::endl;
+        file_stream << "theta: " << params.cosine_similarity << std::endl;
+        file_stream << std::endl;
+    
         for (Rombongan group: result) {
             std::vector<int> members = group.members;
             std::vector<std::pair<double, double> > duration = group.duration;
@@ -179,7 +192,7 @@ void writeResultToFile(
 
         file_stream.close();
 
-        std::cout << "Successfully written result to " << name << ".txt\n"; 
+        std::cout << "Successfully written result to " << (params.source + "-" + std::to_string(milliseconds_since_epoch)) << ".txt" << std::endl; 
     } else {
         throw std::runtime_error("Failed to open output stream due to lack of permissions.");
     }
