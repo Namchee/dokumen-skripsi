@@ -104,11 +104,7 @@ std::vector<Rombongan> identifyRombongan(
 
     unsigned int dimension = (*entities[0].trajectories.begin()).second.size();
 
-    for (size_t end = k; end < frames.size(); end++) {
-        if (end > 25) {
-            break;
-        }
-    
+    for (size_t end = k; end < frames.size(); end++) {    
         unsigned int start = end - k;
 
         std::vector<std::vector<int> > rombongan_group;
