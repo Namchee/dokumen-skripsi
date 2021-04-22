@@ -8,29 +8,27 @@
 #include <map>
 #include <iostream>
 
+/**
+ * Determine is a list is a imperfect sublist of another.
+ *
+ * @param a - first list
+ * @param b - second list
+ * @return `true` if a list is a imperfect sublist of another,
+ * `false` otherwise
+ */
 bool is_sublist(
     const std::vector<int>& a,
     const std::vector<int>& b
 ) {
     std::set<int> temp_container;
-
-    for (int member: a) {
-        temp_container.insert(member);
-    }
-
-    for (int member: b) {
-        temp_container.insert(member);
-    }
+    temp_container.insert(a.begin(), a.end());
+    temp_container.insert(b.begin(), b.end());
 
     return a.size() != b.size() &&
         (
             temp_container.size() == a.size() ||
             temp_container.size() == b.size()
         );
-}
-
-bool result_comparator(const Rombongan& a, const Rombongan& b) {
-    return a.duration[0].first < b.duration[0].first;
 }
 
 std::vector<Rombongan> clean_result(
@@ -77,7 +75,13 @@ std::vector<Rombongan> clean_result(
         }
     }
 
-    sort(clean_result.begin(), clean_result.end(), result_comparator);
+    sort(
+        clean_result.begin(),
+        clean_result.end(),
+        [](const Rombongan& a, const Rombongan& b) -> bool {
+            return a.duration[0].first < b.duration[0].first;
+        }
+    );
 
     return clean_result;
 }
@@ -104,7 +108,7 @@ std::vector<Rombongan> identifyRombongan(
 
     unsigned int dimension = (*entities[0].trajectories.begin()).second.size();
 
-    for (size_t end = k; end < frames.size(); end++) {    
+    for (size_t end = k; end < frames.size(); end++) {   
         unsigned int start = end - k;
 
         std::vector<std::vector<int> > rombongan_group;

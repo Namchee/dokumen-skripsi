@@ -125,7 +125,7 @@ Parameters parseArguments(int argc, char *argv[]) {
 }
 
 /**
- * Write rombongan identification result to a text file.
+ * Write rombongan identification result into a text file.
  * 
  * @param result - Rombongan identification result
  * @param params - List of arguments passed to the program
@@ -136,13 +136,17 @@ void writeResultToFile(
 ) {
     std::ofstream file_stream;
 
-    std::filesystem::path dir_path = (std::filesystem::current_path() / "data" / "output").make_preferred();
+    std::filesystem::path dir_path = 
+        (std::filesystem::current_path() / "data" / "output")
+        .make_preferred();
 
     if (!std::filesystem::exists(dir_path)) {
         std::filesystem::create_directory(dir_path);
         std::filesystem::permissions(
             dir_path,
-            std::filesystem::perms::owner_all | std::filesystem::perms::group_all | std::filesystem::perms::others_read,
+            std::filesystem::perms::owner_all |
+            std::filesystem::perms::group_all |
+            std::filesystem::perms::others_read,
             std::filesystem::perm_options::add
         );
     }
@@ -152,36 +156,44 @@ void writeResultToFile(
         std::chrono::milliseconds(1);
     
     file_stream.open(
-        (dir_path / (params.source + "-" + std::to_string(milliseconds_since_epoch))).make_preferred().replace_extension(".txt"),
+        (
+            dir_path / (params.source + "-" + std::to_string(milliseconds_since_epoch))
+        )
+        .make_preferred()
+        .replace_extension(".txt"),
         std::ofstream::out | std::ofstream::trunc
     );
 
     if (file_stream.is_open()) {
-        file_stream << "Data: " << params.source << ".txt" << std::endl;
-        file_stream << "Parameters:" << std::endl;
-        file_stream << "m: " << params.entity_count << std::endl;
-        file_stream << "k: " << params.time_interval << std::endl;
-        file_stream << "r: " << params.range << std::endl;
-        file_stream << "theta: " << params.cosine_similarity << std::endl;
-        file_stream << std::endl;
-    
+        // write the parameters in csv-like format
+        file_stream << "data, m, k, r, theta" << std::endl;
+        file_stream << params.source << ", ";
+        file_stream << params.entity_count << ", ";
+        file_stream << params.time_interval << ", ";
+        file_stream << params.range << ", ";
+        file_stream << params.cosine_similarity;
+        file_stream << std::endl << std::endl;
+
+        // initialize csv-like header for identification result
+        file_stream << "members, duration" << std::endl;
+
         for (Rombongan group: result) {
             std::vector<int> members = group.members;
             std::vector<std::pair<double, double> > duration = group.duration;
 
             for (size_t i = 0; i < members.size(); i++) {
                 if (i > 0) {
-                    file_stream << ",";
+                    file_stream << " ";
                 }
 
                 file_stream << members[i];
             }
 
-            file_stream << " ";
+            file_stream << ", ";
 
             for (size_t i = 0; i < duration.size(); i++) {
                 if (i > 0) {
-                    file_stream << ",";
+                    file_stream << " ";
                 }
 
                 file_stream << duration[i].first << "-" << duration[i].second;
