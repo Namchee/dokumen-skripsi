@@ -26,7 +26,10 @@ double calculateEuclideanDistance(
 
     for (size_t it = 0; it < a.size(); it++) {
         // return immediately when one of the position is not recorded
-        if (a[it] == std::numeric_limits<double>::max() || b[it] == std::numeric_limits<double>::max()) {
+        if (
+            a[it] == std::numeric_limits<double>::max() ||
+            b[it] == std::numeric_limits<double>::max()
+        ) {
             return -1;
         }
 
@@ -111,7 +114,9 @@ double calculateCosineSimilarity(
 ) {
     // sanity check
     if (a.size() != b.size()) {
-        throw std::invalid_argument("Both vector must reside in the same dimensional space.");
+        throw std::invalid_argument(
+            "Both vector must reside in the same dimensional space."
+        );
     }
 
     double len_a = 0.0;
@@ -120,7 +125,10 @@ double calculateCosineSimilarity(
 
     for (size_t i = 0; i < a.size(); i++) {
         // return immediately when one of the position is not recorded
-        if (a[i] == std::numeric_limits<double>::max() || b[i] == std::numeric_limits<double>::max()) {
+        if (
+            a[i] == std::numeric_limits<double>::max() ||
+            b[i] == std::numeric_limits<double>::max()
+        ) {
             return -1;
         }
 

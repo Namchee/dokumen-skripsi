@@ -1,12 +1,14 @@
 #ifndef rombongan
 #define rombongan
 
+#include "io.h"
 #include "entity.h"
 #include <vector>
-#include <set>
+
+struct Parameters;
 
 struct Rombongan {
-    std::vector<int> members;
+    std::vector<unsigned int> members;
     std::vector<std::pair<double, double> > duration;
 
     bool operator<(const Rombongan& other) const {
@@ -16,11 +18,7 @@ struct Rombongan {
 
 std::vector<Rombongan> identifyRombongan(
     const std::vector<Entity>& entities,
-    double fps,
-    int m,
-    int k,
-    double r,
-    double cs
+    const Parameters& params
 );
 
 #endif

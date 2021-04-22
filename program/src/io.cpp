@@ -1,14 +1,14 @@
 #include "io.h"
+#include "utils.h"
 #include <iostream>
 #include <fstream>
 #include <iterator>
 #include <filesystem>
-#include <chrono>
 #include <stdexcept>
 #include <argparse/argparse.hpp>
 
 /**
- * Parse command-line arguments.
+ * Parse user inputs from command-line arguments.
  * 
  * @param argc arguments count
  * @param argv actual arguments
@@ -151,16 +151,15 @@ void writeResultToFile(
         );
     }
 
-    unsigned long milliseconds_since_epoch =
-        std::chrono::system_clock::now().time_since_epoch() / 
-        std::chrono::milliseconds(1);
+    auto now = get_current_time();
+    auto output_filename = params.source + "-" + std::to_string(now);
+
+    auto output_filepath = (dir_path / output_filename)
+        .make_preferred()
+        .replace_extension(".txt");
     
     file_stream.open(
-        (
-            dir_path / (params.source + "-" + std::to_string(milliseconds_since_epoch))
-        )
-        .make_preferred()
-        .replace_extension(".txt"),
+        output_filepath,
         std::ofstream::out | std::ofstream::trunc
     );
 
@@ -178,7 +177,7 @@ void writeResultToFile(
         file_stream << "members, duration" << std::endl;
 
         for (Rombongan group: result) {
-            std::vector<int> members = group.members;
+            std::vector<unsigned int> members = group.members;
             std::vector<std::pair<double, double> > duration = group.duration;
 
             for (size_t i = 0; i < members.size(); i++) {
@@ -204,8 +203,11 @@ void writeResultToFile(
 
         file_stream.close();
 
-        std::cout << "Successfully written result to " << (params.source + "-" + std::to_string(milliseconds_since_epoch)) << ".txt" << std::endl; 
+        std::cout << "Successfully written identification result to ";
+        std::cout << output_filename << ".txt" << std::endl;
     } else {
-        throw std::runtime_error("Failed to open output stream due to lack of permissions.");
+        throw std::runtime_error(
+            "Failed to open output stream due to lack of permissions."
+        );
     }
 }

@@ -5,7 +5,7 @@
 #include <map>
 
 struct Entity {
-    int id;
+    unsigned int id;
     std::map<double, std::vector<double> > trajectories;
 
     bool operator<(const Entity& o) const {

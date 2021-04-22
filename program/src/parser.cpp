@@ -18,17 +18,20 @@
  * @param name Name of the file to be read from
  * @return List of moving entities with their trajectories
  */
-std::vector<Entity> parseMovementData(const std::string& name, const std::string& path) {
+std::vector<Entity> parseMovementData(
+    const std::string& name,
+    const std::string& path
+) {
     std::ifstream file;
     std::string line;
 
     double frame_time, id, x_pos, y_pos;
 
-    std::string filepath = (std::filesystem::path(path) / name)
+    auto filepath = (std::filesystem::path(path) / name)
         .make_preferred()
         .replace_extension(".txt");
 
-    std::cout << "Attempting to read data from: " << filepath << "\n"; 
+    std::cout << "Attempting to read data from: " << filepath.string() << std::endl; 
 
     file.open(filepath);
 
@@ -36,11 +39,11 @@ std::vector<Entity> parseMovementData(const std::string& name, const std::string
         throw std::invalid_argument("File doesn't exist!");
     }
 
-    std::unordered_set<int> id_frame;
-    std::unordered_set<int> id_list;
+    std::unordered_set<unsigned int> id_frame;
+    std::unordered_set<unsigned int> id_list;
 
-    std::map<double, std::unordered_map<int, std::vector<double> > > data_map;
-    std::unordered_map<int, std::map<double, std::vector<double> > > trajectory_map;
+    std::map<double, std::unordered_map<unsigned int, std::vector<double> > > data_map;
+    std::unordered_map<unsigned int, std::map<double, std::vector<double> > > trajectory_map;
 
     while (std::getline(file, line)) {
         std::istringstream line_stream(line);
@@ -80,6 +83,9 @@ std::vector<Entity> parseMovementData(const std::string& name, const std::string
             { id, frame }
         );
     }
+
+    // make sure that entities are sorted to prevent random pairings
+    sort(result.begin(), result.end());
 
     return result;
 }

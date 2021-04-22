@@ -1,12 +1,23 @@
 #include "rombongan.h"
 #include "similarity.h"
 #include "entity.h"
+#include "io.h"
 #include <vector>
+#include <set>
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
 #include <map>
 #include <iostream>
+
+#define trajectory_map std::unordered_map<unsigned int, std::vector<std::vector<double> > >
+#define direction_map std::unordered_map<unsigned int, std::vector<double> >
+#define rombongan_lifespan std::map<std::vector<unsigned int>, std::vector<std::pair<double, double> > >
+
+struct Metadata {
+    std::vector<double> frames;
+    size_t dimension;
+};
 
 /**
  * Determine is a list is a imperfect sublist of another.
@@ -17,10 +28,10 @@
  * `false` otherwise
  */
 bool is_sublist(
-    const std::vector<int>& a,
-    const std::vector<int>& b
+    const std::vector<unsigned int>& a,
+    const std::vector<unsigned int>& b
 ) {
-    std::set<int> temp_container;
+    std::set<unsigned int> temp_container;
     temp_container.insert(a.begin(), a.end());
     temp_container.insert(b.begin(), b.end());
 
@@ -87,95 +98,185 @@ std::vector<Rombongan> clean_result(
 }
 
 /**
+ * Get entities metadata from input.
+ * 
+ * @param entities - input entities
+ */
+Metadata get_metadata(
+    const std::vector<Entity>& entities
+) {
+    std::vector<double> frames;
+
+    for (auto const& trajectory: entities[0].trajectories) {
+        frames.push_back(trajectory.first);
+    }
+
+    size_t dimension = (*entities[0].trajectories.begin()).second.size();
+
+    return Metadata{
+        frames,
+        dimension
+    };
+}
+
+/**
+ * Get sub trajectories from all entities for a time interval
+ * 
+ * @param entities - input entities
+ * @param frames - list of available frames
+ * @param start - start of time interval
+ * @param end - end of time interval
+ */
+trajectory_map get_sub_trajectories(
+    const std::vector<Entity>& entities,
+    const std::vector<double>& frames,
+    size_t start,
+    size_t end
+) {
+    trajectory_map sub_trajectories;
+
+    for (size_t itr = 0; itr < entities.size(); itr++) {
+        Entity curr = entities[itr];
+
+        for (size_t frame = start; frame < end; frame++) {
+            double current_frame = frames[frame];
+
+            sub_trajectories[curr.id].push_back(
+                curr.trajectories[current_frame]
+            );
+        }
+    }
+
+    return sub_trajectories;
+}
+
+direction_map get_directional_vectors(
+    const std::vector<Entity>& entities,
+    const std::vector<double>& frames,
+    size_t start,
+    size_t end,
+    unsigned short dimension
+) {
+    direction_map directional_vectors;
+
+    for (size_t itr = 0; itr < entities.size(); itr++) {
+        Entity curr = entities[itr];
+        std::vector<double> end_pos = curr.trajectories[frames[end - 1]];
+        std::vector<double> start_pos = curr.trajectories[frames[start]];
+
+        for (size_t curr_dimension = 0; curr_dimension < dimension; curr_dimension++) {
+            directional_vectors[curr.id].push_back(
+                end_pos[curr_dimension] - start_pos[curr_dimension]
+            );
+        }
+    }
+
+    return directional_vectors;
+}
+
+void extend_current_groups(
+    std::vector<std::vector<unsigned int> >&  groups,
+    const Entity& other,
+    trajectory_map& sub_trajectories,
+    direction_map& direction_vector,
+    const Parameters& params
+) {
+    double r = params.range;
+    double cs = params.cosine_similarity;
+
+    for (size_t groups_itr = 0; groups_itr < groups.size(); groups_itr++) {
+        bool is_similar_to_all_members = true;
+
+        for (int member_id: groups[groups_itr]) {
+            double dtw_distance = calculateDTWDistance(
+                sub_trajectories[other.id],
+                sub_trajectories[member_id]
+            );
+
+            double cosine_similarity = calculateCosineSimilarity(
+                direction_vector[other.id],
+                direction_vector[member_id]
+            );
+
+            // make sure that the distance is not zero to avoid
+            // similarity checking when two entities
+            // doesn't appear in the current timeframe.
+            is_similar_to_all_members = member_id != other.id && 
+                dtw_distance != -1 &&
+                dtw_distance <= r &&
+                cosine_similarity >= cs;
+
+                if (!is_similar_to_all_members) {
+                    break;
+                }
+        }
+
+        if (is_similar_to_all_members) {
+            std::vector new_group = std::vector<unsigned int>(
+                groups[groups_itr].begin(),
+                groups[groups_itr].end()
+            );
+
+            new_group.push_back(other.id);
+            groups.push_back(new_group);
+        }
+    }
+}
+
+/**
  * Identify rombongan from a set of moving entities.
  * 
  * @param entities - list of moving entities in two-dimensional space
  */
 std::vector<Rombongan> identifyRombongan(
     const std::vector<Entity>& entities,
-    double fps,
-    int m,
-    int k,
-    double r,
-    double cs
+    const Parameters& params
 ) {
-    std::map<std::vector<int>, std::vector<std::pair<double, double> > > paired_groups;
-    std::vector<double> frames;
+    int m = params.entity_count;
+    int k = params.time_interval;
+    double r = params.range;
+    double cs = params.cosine_similarity;
 
-    for (auto x: entities[0].trajectories) {
-        frames.push_back(x.first);
-    }
+    rombongan_lifespan paired_groups;
+    auto [frames, dimension] = get_metadata(entities);
 
-    unsigned int dimension = (*entities[0].trajectories.begin()).second.size();
+    for (size_t end = k; end < frames.size(); end++) {
+        if (end > 25) {
+            break;
+        }
 
-    for (size_t end = k; end < frames.size(); end++) {   
         unsigned int start = end - k;
 
-        std::vector<std::vector<int> > rombongan_group;
-        std::unordered_map<int, std::vector<std::vector<double> > > sub_trajectories;
-        std::unordered_map<int, std::vector<double> > direction_vector;
+        std::vector<std::vector<unsigned int> > rombongan_group;
 
-        // cache the sub-trajectories and direction vector
-        for (size_t it = 0; it < entities.size(); it++) {
-            Entity curr = entities[it];
-
-            for (size_t frame = start; frame < end; frame++) {
-                sub_trajectories[curr.id].push_back(
-                    curr.trajectories[frames[frame]]
-                );
-            }
-
-            for (size_t dim = 0; dim < dimension; dim++) {
-                direction_vector[curr.id].push_back(
-                    curr.trajectories[frames[end - 1]][dim] - curr.trajectories[frames[start]][dim]
-                );
-            }
-        }
+        trajectory_map sub_trajectories = get_sub_trajectories(
+            entities,
+            frames,
+            start,
+            end
+        );
+        direction_map direction_vector = get_directional_vectors(
+            entities,
+            frames,
+            start,
+            end,
+            dimension
+        );
 
         for (size_t curr_itr = 0; curr_itr < entities.size(); curr_itr++) {
             Entity curr = entities[curr_itr];
-            std::vector<std::vector<int> > group_ids;
+            std::vector<std::vector<unsigned int> > group_ids;
 
             for (size_t other_itr = curr_itr + 1; other_itr < entities.size(); other_itr++) {
                 Entity other = entities[other_itr];
 
-                for (size_t groups_itr = 0; groups_itr < group_ids.size(); groups_itr++) {
-                    bool is_similar_to_all_members = true;
-
-                    for (int member_id: group_ids[groups_itr]) {
-                        double dtw_distance = calculateDTWDistance(
-                            sub_trajectories[other.id],
-                            sub_trajectories[member_id]
-                        );
-
-                        double cosine_similarity = calculateCosineSimilarity(
-                            direction_vector[other.id],
-                            direction_vector[member_id]
-                        );
-
-                        // make sure that the distance is not zero to avoid
-                        // similarity checking when two entities
-                        // doesn't appear in the current timeframe.
-                        is_similar_to_all_members = member_id != other.id && 
-                            dtw_distance != -1 &&
-                            dtw_distance <= r &&
-                            cosine_similarity >= cs;
-
-                        if (!is_similar_to_all_members) {
-                            break;
-                        }
-                    }
-
-                    if (is_similar_to_all_members) {
-                        std::vector new_group = std::vector<int>(
-                            group_ids[groups_itr].begin(),
-                            group_ids[groups_itr].end()
-                        );
-
-                        new_group.push_back(other.id);
-                        group_ids.push_back(new_group);
-                    }
-                }
+                extend_current_groups(
+                    group_ids,
+                    other,
+                    sub_trajectories,
+                    direction_vector,
+                    params
+                );
 
                 // can entity `curr` create a subgroup with `other`?
                 double dtw_distance = calculateDTWDistance(
@@ -200,7 +301,7 @@ std::vector<Rombongan> identifyRombongan(
             }
         }
 
-        for (std::vector<int> group: rombongan_group) {
+        for (std::vector<unsigned int> group: rombongan_group) {
             std::vector<std::pair<double, double> > time_list = paired_groups[group];
 
             if (
@@ -217,7 +318,8 @@ std::vector<Rombongan> identifyRombongan(
             }
         }
 
-        std::cout << "Finished processing range [" << start << ", " << end << "]" << std::endl;
+        std::cout << "Finished processing range ";
+        std::cout << "[" << start << ", " << end << "]" << std::endl;
     }
 
     std::vector<Rombongan> raw_result;
@@ -229,5 +331,5 @@ std::vector<Rombongan> identifyRombongan(
         });
     }
 
-    return clean_result(raw_result, fps);
+    return clean_result(raw_result, params.fps);
 }

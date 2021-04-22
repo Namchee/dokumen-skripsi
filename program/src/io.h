@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 
+struct Rombongan;
+
 /**
  * Parameters to be used when identifying rombongan from trajectory data.
  */
@@ -20,6 +22,9 @@ struct Parameters {
 
 Parameters parseArguments(int argc, char *argv[]);
 
-void writeResultToFile(const std::vector<Rombongan>& result, const Parameters& params);
+void writeResultToFile(
+    const std::vector<Rombongan>& result,
+    const Parameters& params
+);
 
 #endif
