@@ -16,7 +16,7 @@ struct Rombongan {
     }
 };
 
-std::vector<Rombongan> identifyRombongan(
+std::vector<Rombongan> identify_rombongan(
     const std::vector<Entity>& entities,
     const Parameters& params
 );

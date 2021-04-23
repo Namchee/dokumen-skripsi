@@ -10,13 +10,20 @@
 #include <map>
 #include <iostream>
 
-#define trajectory_map std::unordered_map<unsigned int, std::vector<std::vector<double> > >
-#define direction_map std::unordered_map<unsigned int, std::vector<double> >
-#define rombongan_lifespan std::map<std::vector<unsigned int>, std::vector<std::pair<double, double> > >
+typedef std::unordered_map<unsigned int, std::vector<std::vector<double> > > trajectory_map;
+typedef std::unordered_map<unsigned int, std::vector<double> > direction_map;
+typedef std::map<std::vector<unsigned int>, std::vector<std::pair<double, double> > > rombongan_lifespan;
 
-struct Metadata {
+class Metadata {
+public:
     std::vector<double> frames;
     size_t dimension;
+};
+
+class FrameInformation {
+public:
+    std::vector<double> frames;
+    size_t start, end;
 };
 
 /**
@@ -123,16 +130,13 @@ Metadata get_metadata(
  * Get sub trajectories from all entities for a time interval
  * 
  * @param entities - input entities
- * @param frames - list of available frames
- * @param start - start of time interval
- * @param end - end of time interval
+ * @param frame_info list of frames and desired duration
  */
 trajectory_map get_sub_trajectories(
     const std::vector<Entity>& entities,
-    const std::vector<double>& frames,
-    size_t start,
-    size_t end
+    const FrameInformation& frame_info
 ) {
+    auto [frames, start, end] = frame_info;
     trajectory_map sub_trajectories;
 
     for (size_t itr = 0; itr < entities.size(); itr++) {
@@ -150,13 +154,20 @@ trajectory_map get_sub_trajectories(
     return sub_trajectories;
 }
 
+/**
+ * Get directional vectors for all entities in a time interval
+ * 
+ * @param entities list of entities
+ * @param frame_info list of frames and desired duration
+ * @param dimension trajectory dimension
+ */
 direction_map get_directional_vectors(
     const std::vector<Entity>& entities,
-    const std::vector<double>& frames,
-    size_t start,
-    size_t end,
+    const FrameInformation& frame_info,
     unsigned short dimension
 ) {
+    auto [frames, start, end] = frame_info;
+
     direction_map directional_vectors;
 
     for (size_t itr = 0; itr < entities.size(); itr++) {
@@ -174,8 +185,8 @@ direction_map get_directional_vectors(
     return directional_vectors;
 }
 
-void extend_current_groups(
-    std::vector<std::vector<unsigned int> >&  groups,
+void extend_current_rombongan(
+    std::vector<std::vector<unsigned int> >& groups,
     const Entity& other,
     trajectory_map& sub_trajectories,
     direction_map& direction_vector,
@@ -223,12 +234,37 @@ void extend_current_groups(
     }
 }
 
+void extend_rombongan_duration(
+    rombongan_lifespan& groups,
+    std::vector<std::vector<unsigned int> >& current_groups,
+    const FrameInformation& frame_info
+) {
+    auto [frames, start, end] = frame_info;
+
+    for (std::vector<unsigned int> group: current_groups) {
+        std::vector<std::pair<double, double> > time_list = groups[group];
+
+        if (
+            time_list.size() == 0 ||
+            start == 0 ||
+            frames[end - 1] != time_list[time_list.size() - 1].second
+        ) {
+            groups[group].push_back({ frames[start], frames[end] });
+        } else {
+            groups[group][time_list.size() - 1] = { 
+                groups[group][time_list.size() - 1].first,
+                frames[end]
+            };
+        }
+    }
+}
+
 /**
  * Identify rombongan from a set of moving entities.
  * 
  * @param entities - list of moving entities in two-dimensional space
  */
-std::vector<Rombongan> identifyRombongan(
+std::vector<Rombongan> identify_rombongan(
     const std::vector<Entity>& entities,
     const Parameters& params
 ) {
@@ -237,7 +273,7 @@ std::vector<Rombongan> identifyRombongan(
     double r = params.range;
     double cs = params.cosine_similarity;
 
-    rombongan_lifespan paired_groups;
+    rombongan_lifespan rombongan_list;
     auto [frames, dimension] = get_metadata(entities);
 
     for (size_t end = k; end < frames.size(); end++) {
@@ -247,19 +283,21 @@ std::vector<Rombongan> identifyRombongan(
 
         unsigned int start = end - k;
 
-        std::vector<std::vector<unsigned int> > rombongan_group;
+        std::vector<std::vector<unsigned int> > current_rombongan;
 
-        trajectory_map sub_trajectories = get_sub_trajectories(
-            entities,
+        FrameInformation frame_info = FrameInformation{
             frames,
             start,
             end
+        };
+
+        trajectory_map sub_trajectories = get_sub_trajectories(
+            entities,
+            frame_info
         );
         direction_map direction_vector = get_directional_vectors(
             entities,
-            frames,
-            start,
-            end,
+            frame_info,
             dimension
         );
 
@@ -270,7 +308,7 @@ std::vector<Rombongan> identifyRombongan(
             for (size_t other_itr = curr_itr + 1; other_itr < entities.size(); other_itr++) {
                 Entity other = entities[other_itr];
 
-                extend_current_groups(
+                extend_current_rombongan(
                     group_ids,
                     other,
                     sub_trajectories,
@@ -296,27 +334,16 @@ std::vector<Rombongan> identifyRombongan(
 
             for (size_t itr_group = 0; itr_group < group_ids.size(); itr_group++) {
                 if (group_ids[itr_group].size() >= m) {
-                    rombongan_group.push_back(group_ids[itr_group]);
+                    current_rombongan.push_back(group_ids[itr_group]);
                 }
             }
         }
 
-        for (std::vector<unsigned int> group: rombongan_group) {
-            std::vector<std::pair<double, double> > time_list = paired_groups[group];
-
-            if (
-                time_list.size() == 0 ||
-                start == 0 ||
-                frames[end - 1] != time_list[time_list.size() - 1].second
-            ) {
-                paired_groups[group].push_back({ frames[start], frames[end] });
-            } else {
-                paired_groups[group][time_list.size() - 1] = { 
-                    paired_groups[group][time_list.size() - 1].first,
-                    frames[end]
-                };
-            }
-        }
+        extend_rombongan_duration(
+            rombongan_list,
+            current_rombongan,
+            frame_info
+        );
 
         std::cout << "Finished processing range ";
         std::cout << "[" << start << ", " << end << "]" << std::endl;
@@ -324,7 +351,7 @@ std::vector<Rombongan> identifyRombongan(
 
     std::vector<Rombongan> raw_result;
 
-    for (auto const& [group, duration]: paired_groups) {
+    for (auto const& [group, duration]: rombongan_list) {
         raw_result.push_back({
             group,
             duration

@@ -13,10 +13,12 @@ int main(int argc, char *argv[]) {
         arguments.path
     );
 
-    std::cout << "Number of entities: " << entities.size() << std::endl;
-    std::cout << "Number of frames: " << entities[0].trajectories.size() << std::endl;
+    std::cout << "Number of entities: ";
+    std::cout << entities.size() << " entities" << std::endl;
+    std::cout << "Number of frames: ";
+    std::cout << entities[0].trajectories.size() << " frames" << std::endl;
 
-    auto result = identifyRombongan(
+    auto result = identify_rombongan(
         entities,
         arguments
     );
