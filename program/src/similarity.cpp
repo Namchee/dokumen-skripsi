@@ -62,11 +62,11 @@ double calculate_dtw_distance(
     double dtw[x_lim][y_lim];
 
     // initialize all illegal first pairings with infinity
-    for (int i = 0; i < x_lim; i++) {
+    for (size_t i = 0; i < x_lim; i++) {
         dtw[i][0] = std::numeric_limits<double>::max();        
     }
 
-    for (int i = 0; i < y_lim; i++) {
+    for (size_t i = 0; i < y_lim; i++) {
         dtw[0][i] = std::numeric_limits<double>::max();
     }
 
@@ -74,8 +74,8 @@ double calculate_dtw_distance(
     dtw[0][0] = 0;
 
     // Calculate DTW distance
-    for (int i = 1; i < x_lim; i++) {
-        for (int j = 1; j < y_lim; j++) {
+    for (size_t i = 1; i < x_lim; i++) {
+        for (size_t j = 1; j < y_lim; j++) {
             double cost = calculateEuclideanDistance(
                 a[i - 1],
                 b[j - 1]
