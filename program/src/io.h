@@ -10,7 +10,8 @@ struct Rombongan;
 /**
  * Parameters to be used when identifying rombongan from trajectory data.
  */
-struct Parameters {
+class Parameters {
+public:
     std::string source;
     int entity_count;
     int time_interval;

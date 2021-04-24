@@ -4,7 +4,8 @@
 #include <vector>
 #include <map>
 
-struct Entity {
+class Entity {
+public:
     unsigned int id;
     std::map<double, std::vector<double> > trajectories;
 

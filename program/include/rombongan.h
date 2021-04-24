@@ -7,7 +7,8 @@
 
 struct Parameters;
 
-struct Rombongan {
+class Rombongan {
+public:
     std::vector<unsigned int> members;
     std::vector<std::pair<double, double> > duration;
 
