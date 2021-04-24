@@ -1,6 +1,8 @@
 #include "io.h"
+#include "eval.h"
 #include "utils.h"
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <iterator>
 #include <filesystem>
@@ -50,7 +52,7 @@ Parameters read_arguments(int argc, char *argv[]) {
     program.add_argument("-p", "--path")
         .help("Direktori sumber data lintasan. Relatif terhadap direktori saat ini.")
         .default_value(
-            (std::filesystem::current_path() / "data" / "input")
+            (std::filesystem::current_path() / "data")
                 .make_preferred()
                 .string()
         )
@@ -127,12 +129,14 @@ Parameters read_arguments(int argc, char *argv[]) {
 /**
  * Write rombongan identification result into a text file.
  * 
- * @param result - Rombongan identification result
- * @param params - List of arguments passed to the program
+ * @param result rombongan identification result
+ * @param params arguments passed to the program
+ * @param score predicition score
  */
 void write_result(
     const std::vector<Rombongan>& result,
-    const Parameters& params
+    const Parameters& params,
+    const Score& score
 ) {
     std::ofstream file_stream;
 
@@ -154,6 +158,8 @@ void write_result(
     auto now = get_current_time();
     auto output_filename = params.source + "-" + std::to_string(now);
 
+    auto [precision, recall, f1_score] = score;
+
     auto output_filepath = (dir_path / output_filename)
         .make_preferred()
         .replace_extension(".txt");
@@ -172,6 +178,17 @@ void write_result(
         file_stream << params.range << ", ";
         file_stream << params.cosine_similarity;
         file_stream << std::endl << std::endl;
+
+        std::streamsize ss = std::cout.precision();
+
+        file_stream << "precision, recall, f1_score" << std::endl;
+        file_stream << std::setprecision(2);
+        file_stream << precision << ", ";
+        file_stream << recall << ", ";
+        file_stream << f1_score;
+        file_stream << std::endl << std::endl;
+
+        file_stream << std::setprecision(ss);
 
         // initialize csv-like header for identification result
         file_stream << "members, duration" << std::endl;

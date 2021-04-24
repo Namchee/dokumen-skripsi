@@ -11,8 +11,11 @@
 #include <map>
 #include <stdexcept>
 
+typedef std::map<double, std::unordered_map<unsigned int, std::vector<double> > > frame_to_entity;
+typedef std::unordered_map<unsigned int, std::map<double, std::vector<double> > > entity_to_frame;
+
 /**
- * Read data from a text file and return it as list of moving
+ * Parse data from a text file and return it as list of moving
  * entities
  * 
  * @param name Name of the file to be read from
@@ -28,23 +31,24 @@ std::vector<Entity> parse_data(
 
     double frame_time, id, x_pos, y_pos;
 
-    auto filepath = (std::filesystem::path(path) / name)
+    auto filepath = (std::filesystem::path(path) / "input" / name)
         .make_preferred()
         .replace_extension(".txt");
 
-    std::cout << "Attempting to read data from: " << filepath.string() << std::endl; 
+    std::cout << "Attempting to read source data from: ";
+    std::cout << filepath.string() << std::endl; 
 
     file.open(filepath);
 
     if (!file) {
-        throw std::invalid_argument("File doesn't exist!");
+        throw std::invalid_argument("Source data doesn't exist!");
     }
 
     std::unordered_set<unsigned int> id_frame;
     std::unordered_set<unsigned int> id_list;
 
-    std::map<double, std::unordered_map<unsigned int, std::vector<double> > > data_map;
-    std::unordered_map<unsigned int, std::map<double, std::vector<double> > > trajectory_map;
+    frame_to_entity data_map;
+    entity_to_frame trajectory_map;
 
     while (std::getline(file, line)) {
         std::istringstream line_stream(line);
@@ -89,4 +93,57 @@ std::vector<Entity> parse_data(
     sort(result.begin(), result.end());
 
     return result;
+}
+
+/**
+ * Parse expected result from a text file and return it
+ * as an array of entity id
+ * 
+ * @param name expected result filename
+ * @param path expected result filepath
+ * 
+ * @return list of groups, which is a list of id
+ */
+std::vector<std::vector<unsigned int> > parse_expected_result(
+    const std::string& name,
+    const std::string& path
+) {
+    std::ifstream file;
+    std::string line;
+    unsigned int bucket;
+
+    double frame_time, id, x_pos, y_pos;
+
+    auto filepath = (std::filesystem::path(path) / "result" / name)
+        .make_preferred()
+        .replace_extension(".txt");
+
+    std::cout << "Attempting to read expected results from: ";
+    std::cout << filepath.string() << std::endl; 
+
+    file.open(filepath);
+
+    if (!file) {
+        throw std::invalid_argument("Expected result doesn't exist!");
+    }
+
+    std::vector<std::vector<unsigned int> > expected_result;
+
+    while (std::getline(file, line)) {
+        std::vector<unsigned int> group;
+
+        std::istringstream line_stream(line);
+
+        while (line_stream >> bucket) {
+            group.push_back(bucket);
+        }
+
+        // sort the ids to make sure that default
+        // comparator function work.
+        sort(group.begin(), group.end());
+
+        expected_result.push_back(group);
+    }
+
+    return expected_result;
 }

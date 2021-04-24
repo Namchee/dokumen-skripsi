@@ -277,10 +277,6 @@ std::vector<Rombongan> identify_rombongan(
     auto [frames, dimension] = get_metadata(entities);
 
     for (size_t end = k; end < frames.size(); end++) {
-        if (end > 25) {
-            break;
-        }
-
         unsigned int start = end - k;
 
         std::vector<std::vector<unsigned int> > current_rombongan;

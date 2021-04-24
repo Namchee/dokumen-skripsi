@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <cassert>
+#include <iostream>
 #include <map>
 #include <stdexcept>
 #include <limits>
@@ -21,7 +22,12 @@ std::map<double, std::vector<double> > a_trajectory{
     { 1.3, { 3.0, 5.55 } }
 };
 
-void should_parse_correctly() {
+std::vector<std::vector<unsigned int> > expected_data{
+    { 1, 2, 3 },
+    { 4, 5 }
+};
+
+void data_should_parse_correctly() {
     std::string source("test_data");
     std::string path("test/fixtures");
 
@@ -36,7 +42,7 @@ void should_parse_correctly() {
     }
 }
 
-void should_throw_an_error_as_file_not_found() {
+void data_should_throw_an_error_if_file_not_found() {
     std::string source("not_exist");
     std::string path("test/fixtures");
 
@@ -44,13 +50,34 @@ void should_throw_an_error_as_file_not_found() {
         parse_data(source, path);
         throw std::logic_error("Should throw an error as file does not exist.");
     } catch(const std::invalid_argument &err) {
-        assert(err.what() == std::string("File doesn't exist!"));
+        assert(err.what() == std::string("Source data doesn't exist!"));
+    }
+}
+
+void expected_should_parse_correctly() {
+    std::string source("test_data");
+    std::string path("test/fixtures");
+
+    auto expected_result = parse_expected_result(source, path);
+
+    assert(expected_data == expected_result);
+}
+
+void expected_should_throw_an_error_if_file_not_found() {
+    std::string source("not_exist");
+    std::string path("test/fixtures");
+
+    try {
+        parse_expected_result(source, path);
+        throw std::logic_error("Should throw an error as file does not exist.");
+    } catch(const std::invalid_argument &err) {
+        assert(err.what() == std::string("Expected result doesn't exist!"));
     }
 }
 
 int main() {
-    should_parse_correctly();
-    should_throw_an_error_as_file_not_found();
+    data_should_parse_correctly();
+    data_should_throw_an_error_if_file_not_found();
 
     return 0;
 }

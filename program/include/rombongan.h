@@ -5,7 +5,7 @@
 #include "entity.h"
 #include <vector>
 
-struct Parameters;
+class Parameters;
 
 class Rombongan {
 public:

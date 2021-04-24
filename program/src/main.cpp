@@ -1,6 +1,7 @@
 #include "io.h"
 #include "utils.h"
 #include "parser.h"
+#include "eval.h"
 #include "rombongan.h"
 #include <iostream>
 
@@ -31,7 +32,14 @@ int main(int argc, char *argv[]) {
     std::cout << " rombongan(s) from the current dataset" << std::endl;
     std::cout << "Runtime: " << std::to_string(delta) << " ms." << std::endl;
 
-    write_result(result, arguments);
+    auto expected_result = parse_expected_result(
+        arguments.source,
+        arguments.path
+    );
+
+    auto score = calculate_score(expected_result, result);
+
+    write_result(result, arguments, score);
 
     return 0;
 }

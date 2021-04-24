@@ -1,3 +1,5 @@
+#include "eval.h"
+#include "rombongan.h"
 #include <vector>
 #include <algorithm>
 
@@ -72,14 +74,25 @@ double calculate_recall(
  * @param expected_result - ground truth
  * @param result - predicition
  * 
- * @return f1 score.
+ * @return evaluation result, including precision, recall, and F1 score
  */
-double calculate_f1_score(
+Score calculate_score(
     const std::vector<std::vector<unsigned int> >& expected_result,
-    const std::vector<std::vector<unsigned int> >& result
+    const std::vector<Rombongan>& result
 ) {
-    double precision = calculate_precision(expected_result, result);
-    double recall = calculate_recall(expected_result, result);
+    std::vector<std::vector<unsigned int> > result_ids;
 
-    return 2 * (precision * recall) / (precision + recall);
+    for (size_t itr = 0; itr < result.size(); itr++) {
+        result_ids.push_back(result[itr].members);
+    }
+
+    double precision = calculate_precision(expected_result, result_ids);
+    double recall = calculate_recall(expected_result, result_ids);
+    double f1_score = 2 * (precision * recall) / (precision + recall);
+
+    return {
+        precision,
+        recall,
+        f1_score
+    };
 }

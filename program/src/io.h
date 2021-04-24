@@ -5,7 +5,8 @@
 #include <vector>
 #include <string>
 
-struct Rombongan;
+class Rombongan;
+class Score;
 
 /**
  * Parameters to be used when identifying rombongan from trajectory data.
@@ -25,7 +26,8 @@ Parameters read_arguments(int, char *[]);
 
 void write_result(
     const std::vector<Rombongan>&,
-    const Parameters&
+    const Parameters&,
+    const Score&
 );
 
 #endif
