@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories(./include ./src ./test ./libs/argparse/include)
 
-set(SOURCES ${SOURCE_DIR}/utils.h ${SOURCE_DIR}/utils.cpp ${SOURCE_DIR}/similarity.cpp ${SOURCE_DIR}/similarity.h ${SOURCE_DIR}/parser.cpp ${SOURCE_DIR}/parser.h ${SOURCE_DIR}/rombongan.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp ./include/rombongan.h ./include/entity.h)
+set(SOURCES ${SOURCE_DIR}/utils.h ${SOURCE_DIR}/utils.cpp ${SOURCE_DIR}/eval.h ${SOURCE_DIR}/eval.cpp ${SOURCE_DIR}/similarity.cpp ${SOURCE_DIR}/similarity.h ${SOURCE_DIR}/parser.cpp ${SOURCE_DIR}/parser.h ${SOURCE_DIR}/rombongan.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp ./include/rombongan.h ./include/entity.h)
 
 add_executable(main ${SOURCE_DIR}/main.cpp ${SOURCES})
 add_executable(test-similarity ${TEST_DIR}/test-similarity.cpp ${SOURCE_DIR}/similarity.h ${SOURCE_DIR}/similarity.cpp)
@@ -24,6 +24,7 @@ add_executable(test-i-exception-minimum-interval ${TEST_DIR}/io/test-i-exception
 add_executable(test-i-exception-maximum-range ${TEST_DIR}/io/test-i-exception-maximum-range.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp ${SOURCE_DIR}/utils.h ${SOURCE_DIR}/utils.cpp)
 add_executable(test-i-exception-cosine-similarity ${TEST_DIR}/io/test-i-exception-cosine-similarity.cpp ${SOURCE_DIR}/io.h ${SOURCE_DIR}/io.cpp ${SOURCE_DIR}/utils.h ${SOURCE_DIR}/utils.cpp)
 add_executable(test-parser ${TEST_DIR}/test-parser.cpp ${SOURCE_DIR}/parser.cpp ${SOURCE_DIR}/parser.h ./include/entity.h)
+add_executable(test-eval ${TEST_DIR}/test-eval.cpp ${SOURCE_DIR}/eval.cpp ${SOURCE_DIR}/eval.h)
 
 add_subdirectory(./libs/argparse)
 target_link_libraries(main argparse)
@@ -40,3 +41,4 @@ add_test(NAME InputExceptionMinimumInterval COMMAND test-i-exception-minimum-int
 add_test(NAME InputExceptionMaximumRange COMMAND test-i-exception-maximum-range seq_eth 2 2 -3.0 1.0)
 add_test(NAME InputExceptionCosineSimilarity COMMAND test-i-exception-cosine-similarity seq_eth 2 2 3.0 1.1)
 add_test(NAME Parser COMMAND test-parser)
+add_test(NAME Eval COMMAND test-eval)
