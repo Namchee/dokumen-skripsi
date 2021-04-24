@@ -199,12 +199,12 @@ void extend_current_rombongan(
         bool is_similar_to_all_members = true;
 
         for (int member_id: groups[groups_itr]) {
-            double dtw_distance = calculateDTWDistance(
+            double dtw_distance = calculate_dtw_distance(
                 sub_trajectories[other.id],
                 sub_trajectories[member_id]
             );
 
-            double cosine_similarity = calculateCosineSimilarity(
+            double cosine_similarity = calculate_cosine_similarity(
                 direction_vector[other.id],
                 direction_vector[member_id]
             );
@@ -317,12 +317,12 @@ std::vector<Rombongan> identify_rombongan(
                 );
 
                 // can entity `curr` create a subgroup with `other`?
-                double dtw_distance = calculateDTWDistance(
+                double dtw_distance = calculate_dtw_distance(
                     sub_trajectories[other.id],
                     sub_trajectories[curr.id]
                 );
 
-                double cosine_similarity = calculateCosineSimilarity(
+                double cosine_similarity = calculate_cosine_similarity(
                     direction_vector[other.id],
                     direction_vector[curr.id]
                 );

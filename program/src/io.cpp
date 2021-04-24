@@ -15,7 +15,7 @@
  * 
  * @return list of parsed arguments.
  */
-Parameters parseArguments(int argc, char *argv[]) {
+Parameters read_arguments(int argc, char *argv[]) {
     argparse::ArgumentParser program("rombongan");
 
     program.add_argument("data")
@@ -130,7 +130,7 @@ Parameters parseArguments(int argc, char *argv[]) {
  * @param result - Rombongan identification result
  * @param params - List of arguments passed to the program
  */
-void writeResultToFile(
+void write_result(
     const std::vector<Rombongan>& result,
     const Parameters& params
 ) {

@@ -3,13 +3,13 @@
 
 #include <vector>
 
-double calculateDTWDistance(
-    const std::vector<std::vector<double> >& a,
-    const std::vector<std::vector<double> >& b
+double calculate_dtw_distance(
+    const std::vector<std::vector<double> >&,
+    const std::vector<std::vector<double> >&
 );
-double calculateCosineSimilarity(
-    const std::vector<double>& a,
-    const std::vector<double>& b
+double calculate_cosine_similarity(
+    const std::vector<double>&,
+    const std::vector<double>&
 );
 
 #endif

@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]) {
     try {
-        Parameters params = parseArguments(argc, argv);
+        Parameters params = read_arguments(argc, argv);
 
         throw std::logic_error("Should throw an error since entity_count is less than 2.");
     } catch(std::invalid_argument const &err) {

@@ -20,11 +20,11 @@ struct Parameters {
     std::string path;
 };
 
-Parameters parseArguments(int argc, char *argv[]);
+Parameters read_arguments(int, char *[]);
 
-void writeResultToFile(
-    const std::vector<Rombongan>& result,
-    const Parameters& params
+void write_result(
+    const std::vector<Rombongan>&,
+    const Parameters&
 );
 
 #endif

@@ -16,9 +16,10 @@
  * entities
  * 
  * @param name Name of the file to be read from
+ * @param path File path to read from
  * @return List of moving entities with their trajectories
  */
-std::vector<Entity> parseMovementData(
+std::vector<Entity> parse_data(
     const std::string& name,
     const std::string& path
 ) {

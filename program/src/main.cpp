@@ -7,8 +7,8 @@
 int main(int argc, char *argv[]) {
     auto start = get_current_time();
 
-    Parameters arguments = parseArguments(argc, argv);
-    auto entities = parseMovementData(
+    Parameters arguments = read_arguments(argc, argv);
+    auto entities = parse_data(
         arguments.source,
         arguments.path
     );
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     std::cout << " rombongan(s) from the current dataset" << std::endl;
     std::cout << "Runtime: " << std::to_string(delta) << " ms." << std::endl;
 
-    writeResultToFile(result, arguments);
+    write_result(result, arguments);
 
     return 0;
 }

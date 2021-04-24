@@ -48,7 +48,7 @@ double calculateEuclideanDistance(
  * @return Dynamic time warping distance between two trajectories
  * `a` and `b`
  */
-double calculateDTWDistance(
+double calculate_dtw_distance(
     const std::vector<std::vector<double> >& a,
     const std::vector<std::vector<double> >& b
 ) {
@@ -108,7 +108,7 @@ double calculateDTWDistance(
  * @param b - the second vector
  * @return 
  */
-double calculateCosineSimilarity(
+double calculate_cosine_similarity(
     const std::vector<double>& a,
     const std::vector<double>& b
 ) {

@@ -3,7 +3,7 @@
 #include <cassert>
 
 int main(int argc, char *argv[]) {
-    Parameters params = parseArguments(argc, argv);
+    Parameters params = read_arguments(argc, argv);
 
     assert(params.source == "seq_eth");
     assert(params.entity_count == 3);

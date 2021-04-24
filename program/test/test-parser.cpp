@@ -25,7 +25,7 @@ void should_parse_correctly() {
     std::string source("test_data");
     std::string path("test/fixtures");
 
-    std::vector<Entity> entities = parseMovementData(source, path);
+    std::vector<Entity> entities = parse_data(source, path);
 
     for (unsigned int i = 0; i < entities.size(); i++) {
         if (entities[i].id == 2) {
@@ -41,7 +41,7 @@ void should_throw_an_error_as_file_not_found() {
     std::string path("test/fixtures");
 
     try {
-        parseMovementData(source, path);
+        parse_data(source, path);
         throw std::logic_error("Should throw an error as file does not exist.");
     } catch(const std::invalid_argument &err) {
         assert(err.what() == std::string("File doesn't exist!"));

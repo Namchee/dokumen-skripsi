@@ -20,7 +20,7 @@ void dtw_should_return_correct_value() {
         { 4 }
     };
 
-    double range = calculateDTWDistance(a, b);
+    double range = calculate_dtw_distance(a, b);
 
     assert(range == 2.0f);
 }
@@ -45,7 +45,7 @@ void dtw_should_also_return_correct_value() {
         { 0 }
     };
 
-    double range = calculateDTWDistance(a, b);
+    double range = calculate_dtw_distance(a, b);
 
     assert(range == 6.0f);
 }
@@ -66,7 +66,7 @@ void dtw_should_return_correct_value_as_input_order_does_not_matter() {
         { 4 }
     };
 
-    double range = calculateDTWDistance(a, b);
+    double range = calculate_dtw_distance(a, b);
 
     assert(range == 2.0f);
 }
@@ -82,7 +82,7 @@ void dtw_should_throw_error_when_dimension_is_not_same() {
     };
 
     try {
-        calculateDTWDistance(a, b);
+        calculate_dtw_distance(a, b);
 
         throw std::logic_error("Should throw an error as trajectories reside in different movement dimension.");
     } catch(std::invalid_argument const &err) {
@@ -98,7 +98,7 @@ void dtw_should_throw_error_when_trajectory_is_empty() {
     };
 
     try {
-        calculateDTWDistance(a, b);
+        calculate_dtw_distance(a, b);
 
         throw std::logic_error("Should throw an error as trajectory `a` is empty");
     } catch(std::invalid_argument const &err) {
@@ -110,7 +110,7 @@ void cosine_should_return_correct_value() {
     std::vector<double> a = { 3, 2, 0, 5 };
     std::vector<double> b = { 1, 0, 0, 0 };
 
-    double cosine_similarity = calculateCosineSimilarity(a, b);
+    double cosine_similarity = calculate_cosine_similarity(a, b);
 
     assert(abs(cosine_similarity - 0.49) < 1e-9); 
 }
@@ -120,7 +120,7 @@ void cosine_should_throw_an_error_when_dimension_is_not_same() {
     std::vector<double> b = { 3, 1 };
 
     try {
-        calculateCosineSimilarity(a, b);
+        calculate_cosine_similarity(a, b);
 
         throw std::logic_error(
             "Should throw an error as vectors does not reside in the same dimensional space."
