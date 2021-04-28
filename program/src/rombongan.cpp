@@ -14,13 +14,19 @@ typedef std::unordered_map<unsigned int, std::vector<std::vector<double> > > tra
 typedef std::unordered_map<unsigned int, std::vector<double> > direction_map;
 typedef std::map<std::vector<unsigned int>, std::vector<std::pair<double, double> > > rombongan_lifespan;
 
+/**
+ * Input metadata
+ */
 class Metadata {
 public:
     std::vector<double> frames;
     size_t dimension;
 };
 
-class FrameInformation {
+/**
+ * Current frame interval
+ */
+class FrameInterval {
 public:
     std::vector<double> frames;
     size_t start, end;
@@ -49,6 +55,45 @@ bool is_sublist(
         );
 }
 
+/**
+ * Merge similar duration from child to parent, a.k.a deleting it
+ * 
+ * @param parent parent duration
+ * @param child child duration
+ * @param fps frame per second
+ */
+void merge_rombongan(
+    std::vector<std::pair<double, double> >& parent,
+    std::vector<std::pair<double, double> >& child,
+    double fps
+) {
+    for (size_t parent_itr = 0; parent_itr < parent.size(); parent_itr++) {
+        std::pair<double, double> parent_duration = parent[parent_itr];
+
+        for (size_t child_itr = 0; child_itr < child.size(); child_itr++) {
+            std::pair<double, double> child_duration = child[child_itr];
+
+            if (
+                (parent_duration == child_duration) ||
+                (abs(parent_duration.first - child_duration.first) <= fps) ||
+                (abs(parent_duration.second - child_duration.second) <= fps)
+            ) {
+                child.erase(
+                    child.begin() + child_itr  
+                );
+            }
+        }
+    }
+}
+
+/**
+ * Clean rombongan identification result by merging
+ * sub-rombongan into parent rombongan.
+ * 
+ * @param raw_result raw idenfication result
+ * @param fps input data frame per second
+ * @return cleaned identification result
+ */
 std::vector<Rombongan> clean_result(
     std::vector<Rombongan>& raw_result,
     double fps
@@ -62,25 +107,11 @@ std::vector<Rombongan> clean_result(
             }
 
             if (is_sublist(raw_result[curr_itr].members, raw_result[other_itr].members)) {
-                std::vector<std::pair<double, double> > parent = raw_result[curr_itr].duration;
-
-                for (size_t parent_itr = 0; parent_itr < parent.size(); parent_itr++) {
-                    std::pair<double, double> par_dur = parent[parent_itr];
-
-                    for (size_t child_itr = 0; child_itr < raw_result[other_itr].duration.size(); child_itr++) {
-                        std::pair<double, double> chi_dur = raw_result[other_itr].duration[child_itr];
-
-                        if (
-                            (par_dur == chi_dur) ||
-                            (abs(par_dur.first - chi_dur.first) <= fps) ||
-                            (abs(par_dur.second - chi_dur.second) <= fps)
-                        ) {
-                            raw_result[other_itr].duration.erase(
-                                raw_result[other_itr].duration.begin() + child_itr
-                            );
-                        }
-                    }
-                }
+                merge_rombongan(
+                    raw_result[curr_itr].duration,
+                    raw_result[other_itr].duration,
+                    fps
+                );
             }
         }
     }
@@ -134,7 +165,7 @@ Metadata get_metadata(
  */
 trajectory_map get_sub_trajectories(
     const std::vector<Entity>& entities,
-    const FrameInformation& frame_info
+    const FrameInterval& frame_info
 ) {
     auto [frames, start, end] = frame_info;
     trajectory_map sub_trajectories;
@@ -163,7 +194,7 @@ trajectory_map get_sub_trajectories(
  */
 direction_map get_directional_vectors(
     const std::vector<Entity>& entities,
-    const FrameInformation& frame_info,
+    const FrameInterval& frame_info,
     unsigned short dimension
 ) {
     auto [frames, start, end] = frame_info;
@@ -237,7 +268,7 @@ void extend_current_rombongan(
 void extend_rombongan_duration(
     rombongan_lifespan& groups,
     std::vector<std::vector<unsigned int> >& current_groups,
-    const FrameInformation& frame_info
+    const FrameInterval& frame_info
 ) {
     auto [frames, start, end] = frame_info;
 
@@ -281,7 +312,7 @@ std::vector<Rombongan> identify_rombongan(
 
         std::vector<std::vector<unsigned int> > current_rombongan;
 
-        FrameInformation frame_info = FrameInformation{
+        FrameInterval frame_info = FrameInterval{
             frames,
             start,
             end
