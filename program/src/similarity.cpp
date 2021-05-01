@@ -22,14 +22,11 @@ double calculate_euclidean_distance(
         );
     }
 
-    double distance = 0.0f;
+    double distance = 0.0;
 
     for (size_t it = 0; it < a.size(); it++) {
         // return immediately when one of the position is not recorded
-        if (
-            a[it] == std::numeric_limits<double>::max() ||
-            b[it] == std::numeric_limits<double>::max()
-        ) {
+        if (a[it] == -1 || b[it] == -1) {
             return -1;
         }
 
@@ -123,19 +120,16 @@ double calculate_cosine_similarity(
     double len_b = 0.0;
     double dot_product = 0.0;
 
-    for (size_t i = 0; i < a.size(); i++) {
+    for (size_t itr = 0; itr < a.size(); itr++) {
         // return immediately when one of the position is not recorded
-        if (
-            a[i] == std::numeric_limits<double>::max() ||
-            b[i] == std::numeric_limits<double>::max()
-        ) {
+        if (a[itr] == -1 || b[itr] == -1) {
             return -1;
         }
 
-        dot_product += a[i] * b[i];
+        dot_product += a[itr] * b[itr];
 
-        len_a += pow(a[i], 2);
-        len_b += pow(b[i], 2);
+        len_a += pow(a[itr], 2);
+        len_b += pow(b[itr], 2);
     }
 
     len_a = sqrt(len_a);

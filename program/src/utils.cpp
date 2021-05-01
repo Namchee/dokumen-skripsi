@@ -1,4 +1,6 @@
 #include <chrono>
+#include <cmath>
+#include <climits>
 
 /**
  * Get current UNIX epoch time in milliseconds

@@ -1,6 +1,7 @@
 #include "rombongan.h"
 #include "similarity.h"
 #include "entity.h"
+#include "utils.h"
 #include "io.h"
 #include "parser.h"
 #include <vector>
@@ -44,14 +45,12 @@ bool on_interval(
 ) {
     std::vector<std::vector<double> > trajectory = {
         target_entity.trajectories.begin() + interval.first,
-        target_entity.trajectories.begin() + interval.first
+        target_entity.trajectories.begin() + interval.second
     };
 
     for (size_t t_itr = 0; t_itr < trajectory.size(); t_itr++) {
-        for (size_t d_itr = 0; d_itr < trajectory[t_itr].size(); d_itr++) {
-            if (trajectory[t_itr][d_itr] == std::numeric_limits<double>::max()) {
-                return false;
-            }
+        if (trajectory[t_itr][0] == -1) {
+            return false;
         }
     }
 
@@ -65,11 +64,13 @@ bool on_interval(
  * @param child child duration
  * @param p time period
  */
-void merge_rombongan(
+void deduplicate(
     std::vector<std::pair<unsigned int, unsigned int> >& parent,
     std::vector<std::pair<unsigned int, unsigned int> >& child,
     unsigned int p
 ) {
+    std::vector<std::pair<unsigned int, unsigned int> > deleted;
+
     for (size_t parent_itr = 0; parent_itr < parent.size(); parent_itr++) {
         std::pair<unsigned int, unsigned int> parent_duration = parent[parent_itr];
 
@@ -81,10 +82,20 @@ void merge_rombongan(
                 (abs((int)parent_duration.first - (int)child_duration.first) <= p) ||
                 (abs((int)parent_duration.second - (int)child_duration.second) <= p)
             ) {
-                child.erase(
-                    child.begin() + child_itr  
-                );
+                deleted.push_back(child_duration);
             }
+        }
+    }
+
+    for (size_t del_itr = 0; del_itr < deleted.size() && child.size() > 0; del_itr++) {
+        std::vector<std::pair<unsigned int, unsigned int> >::iterator position = std::find(
+            child.begin(),
+            child.end(),
+            deleted[del_itr]
+        );
+
+        if (position != child.end()) {
+            child.erase(position);
         }
     }
 }
@@ -94,26 +105,30 @@ void merge_rombongan(
  * sub-rombongan into parent rombongan.
  * 
  * @param raw_result raw idenfication result
- * @param fps input data frame per second
+ * @param p time period
  * @return cleaned identification result
  */
-std::vector<Rombongan> clean_result(
+std::vector<Rombongan> merge_rombongan(
     std::vector<Rombongan>& raw_result,
-    double fps
+    double p
 ) {
     std::sort(raw_result.begin(), raw_result.end());
 
-    for (size_t curr_itr = 0; curr_itr < raw_result.size(); curr_itr++) {
+    for (size_t curr_itr = 0; curr_itr < raw_result.size() - 1; curr_itr++) {
+        if (raw_result[curr_itr].duration.size() == 0) {
+            continue;
+        }
+
         for (size_t other_itr = curr_itr + 1; other_itr < raw_result.size(); other_itr++) {
             if (raw_result[other_itr].duration.size() == 0) {
                 continue;
             }
 
             if (is_sublist(raw_result[curr_itr].members, raw_result[other_itr].members)) {
-                merge_rombongan(
+                deduplicate(
                     raw_result[curr_itr].duration,
                     raw_result[other_itr].duration,
-                    fps
+                    p
                 );
             }
         }
@@ -286,11 +301,7 @@ std::vector<Rombongan> identify_rombongan(
     
     unsigned int frame_count = entities[0].trajectories.size();
 
-    for (size_t end = k; end < frame_count; end++) {
-        if (end > 25) {
-            break;
-        }
-
+    for (size_t end = k; end < frame_count; end++) {    
         unsigned int start = end - k;
 
         std::vector<std::vector<unsigned int> > current_rombongan;
@@ -304,12 +315,21 @@ std::vector<Rombongan> identify_rombongan(
             { start, end }
         );
 
-        for (size_t curr_itr = 0; curr_itr < entities.size(); curr_itr++) {
+        for (size_t curr_itr = 0; curr_itr < entities.size() - 1; curr_itr++) {
             Entity curr = entities[curr_itr];
+
+            if (!on_interval(curr, { start, end })) {
+                continue;
+            }
+
             std::vector<std::vector<unsigned int> > group_ids;
 
             for (size_t other_itr = curr_itr + 1; other_itr < entities.size(); other_itr++) {
                 Entity other = entities[other_itr];
+
+                if (!on_interval(other, { start, end })) {
+                    continue;
+                }
 
                 extend_current_rombongan(
                     group_ids,
@@ -342,11 +362,13 @@ std::vector<Rombongan> identify_rombongan(
             }
         }
 
-        extend_rombongan_duration(
-            rombongan_list,
-            current_rombongan,
-            { start, end }
-        );
+        if (current_rombongan.size() > 0) {
+            extend_rombongan_duration(
+                rombongan_list,
+                current_rombongan,
+                { start, end }
+            );
+        }
 
         std::cout << "Finished processing range ";
         std::cout << "[" << start << ", " << end << "]" << std::endl;
@@ -361,5 +383,5 @@ std::vector<Rombongan> identify_rombongan(
         });
     }
 
-    return clean_result(raw_result, params.p);
+    return merge_rombongan(raw_result, params.p);
 }
