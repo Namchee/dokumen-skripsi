@@ -12,7 +12,7 @@
  * @param b the second point
  * @return Euclidean distance between two points `a` and `b`
  */
-double calculateEuclideanDistance(
+double calculate_euclidean_distance(
     const std::vector<double> &a,
     const std::vector<double> &b
 ) {
@@ -76,7 +76,7 @@ double calculate_dtw_distance(
     // Calculate DTW distance
     for (size_t i = 1; i < x_lim; i++) {
         for (size_t j = 1; j < y_lim; j++) {
-            double cost = calculateEuclideanDistance(
+            double cost = calculate_euclidean_distance(
                 a[i - 1],
                 b[j - 1]
             );

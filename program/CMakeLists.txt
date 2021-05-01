@@ -34,7 +34,7 @@ enable_testing()
 # unit test for dynamic time warping algorithm
 add_test(NAME DTWAlgorithm COMMAND test-similarity dtw)
 add_test(NAME CosineSimilarity COMMAND test-similarity cosine)
-add_test(NAME Input COMMAND test-i seq_eth 3 10 0.15 1.0)
+add_test(NAME Input COMMAND test-i seq_eth 3 10 0.15 0.0)
 add_test(NAME InputPath COMMAND test-i-path seq_eth 3 10 0.15 1.0 -p=abc)
 add_test(NAME InputExceptionMinimumEntity COMMAND test-i-exception-minimum-entity seq_eth 1 2 3.0 1.0)
 add_test(NAME InputExceptionMinimumInterval COMMAND test-i-exception-minimum-interval seq_eth 2 1 3.0 1.0)

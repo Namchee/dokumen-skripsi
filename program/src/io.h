@@ -1,7 +1,6 @@
 #ifndef io
 #define io
 
-#include "rombongan.h"
 #include <vector>
 #include <string>
 
@@ -11,22 +10,23 @@ class Score;
 /**
  * Parameters to be used when identifying rombongan from trajectory data.
  */
-class Parameters {
+class Arguments {
 public:
     std::string source;
-    int entity_count;
-    int time_interval;
-    double range;
-    double cosine_similarity;
-    double fps;
     std::string path;
+    unsigned int entities;
+    double interval;
+    double range;
+    double angle;
+    double fps;
 };
 
-Parameters read_arguments(int, char *[]);
+Arguments read_arguments(int, char *[]);
 
 void write_result(
     const std::vector<Rombongan>&,
-    const Parameters&,
+    const std::vector<double>&,
+    const Arguments&,
     const Score&
 );
 

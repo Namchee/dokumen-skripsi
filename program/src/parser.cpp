@@ -1,18 +1,23 @@
 #include "entity.h"
+#include "io.h"
+#include "parser.h"
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 #include <unordered_set>
 #include <unordered_map>
 #include <filesystem>
 #include <map>
 #include <stdexcept>
 
+const double PI = std::acos(-1);
+
 typedef std::map<double, std::unordered_map<unsigned int, std::vector<double> > > frame_to_entity;
-typedef std::unordered_map<unsigned int, std::map<double, std::vector<double> > > entity_to_frame;
+typedef std::unordered_map<unsigned int, std::vector<std::vector<double> > > entity_to_frame;
 
 /**
  * Parse data from a text file and return it as list of moving
@@ -22,7 +27,7 @@ typedef std::unordered_map<unsigned int, std::map<double, std::vector<double> > 
  * @param path File path to read from
  * @return List of moving entities with their trajectories
  */
-std::vector<Entity> parse_data(
+MovementData parse_data(
     const std::string& name,
     const std::string& path
 ) {
@@ -62,37 +67,69 @@ std::vector<Entity> parse_data(
 
     file.close();
 
+    std::vector<double> frames;
+
     for (auto const& [frame, position]: data_map) {
+        frames.push_back(frame);
+    
         for (auto const& [id, plane]: position) {
-            trajectory_map[id][frame] = plane;
+            trajectory_map[id].push_back(
+                plane  
+            );
+
             id_frame.insert(id);
         }
 
-        for (auto id: id_list) {
+        for (auto const id: id_list) {
             if (id_frame.find(id) == id_frame.end()) {
-                trajectory_map[id][frame] =
+                trajectory_map[id].push_back(
                     {
                         std::numeric_limits<double>::max(),
                         std::numeric_limits<double>::max()
-                    };
+                    }
+                );
             }
         }
 
         id_frame.clear();
     }
 
-    std::vector<Entity> result;
+    std::vector<Entity> entities;
 
     for (auto const& [id, frame]: trajectory_map) {
-        result.push_back(
+        entities.push_back(
             { id, frame }
         );
     }
 
     // make sure that entities are sorted to prevent random pairings
-    sort(result.begin(), result.end());
+    sort(entities.begin(), entities.end());
 
-    return result;
+    return {
+        entities,
+        frames
+    };
+}
+
+/**
+ * Parse rombongan identification parameters from input
+ * arguments
+ * 
+ * @param args input arguments
+ * @return rombongan identification parameters
+ */
+Parameter parse_arguments(
+    const Arguments& args
+) {
+    Parameter params;
+
+    params.m = args.entities;
+    params.k = round(args.interval * args.fps);
+    params.r = args.range * args.interval * args.fps;
+    params.cs = cos(args.angle * PI / 180);
+    params.p = ceil(args.fps);
+
+    return params;
 }
 
 /**

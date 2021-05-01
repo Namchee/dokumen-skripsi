@@ -3,13 +3,13 @@
 #include <cassert>
 
 int main(int argc, char *argv[]) {
-    Parameters params = read_arguments(argc, argv);
+    Arguments params = read_arguments(argc, argv);
     
     assert(params.source == "seq_eth");
-    assert(params.entity_count == 3);
-    assert(params.time_interval == 10);
+    assert(params.entities == 3);
+    assert(params.interval == 10);
     assert(params.range == 0.15);
-    assert(params.cosine_similarity == 1.0);
+    assert(params.angle == 0.0);
     assert(params.path == (std::filesystem::current_path() / "data" / "input").string());
 
     return 0;

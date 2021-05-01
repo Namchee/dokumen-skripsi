@@ -2,6 +2,7 @@
 #include "similarity.h"
 #include "entity.h"
 #include "io.h"
+#include "parser.h"
 #include <vector>
 #include <set>
 #include <unordered_map>
@@ -12,25 +13,7 @@
 
 typedef std::unordered_map<unsigned int, std::vector<std::vector<double> > > trajectory_map;
 typedef std::unordered_map<unsigned int, std::vector<double> > direction_map;
-typedef std::map<std::vector<unsigned int>, std::vector<std::pair<double, double> > > rombongan_lifespan;
-
-/**
- * Input metadata
- */
-class Metadata {
-public:
-    std::vector<double> frames;
-    size_t dimension;
-};
-
-/**
- * Current frame interval
- */
-class FrameInterval {
-public:
-    std::vector<double> frames;
-    size_t start, end;
-};
+typedef std::map<std::vector<unsigned int>, std::vector<std::pair<unsigned int, unsigned int> > > rombongan_lifespan;
 
 /**
  * Determine is a list is a imperfect sublist of another.
@@ -55,28 +38,48 @@ bool is_sublist(
         );
 }
 
+bool on_interval(
+    const Entity& target_entity,
+    const std::pair<unsigned int, unsigned int>& interval
+) {
+    std::vector<std::vector<double> > trajectory = {
+        target_entity.trajectories.begin() + interval.first,
+        target_entity.trajectories.begin() + interval.first
+    };
+
+    for (size_t t_itr = 0; t_itr < trajectory.size(); t_itr++) {
+        for (size_t d_itr = 0; d_itr < trajectory[t_itr].size(); d_itr++) {
+            if (trajectory[t_itr][d_itr] == std::numeric_limits<double>::max()) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
 /**
  * Merge similar duration from child to parent, a.k.a deleting it
  * 
  * @param parent parent duration
  * @param child child duration
- * @param fps frame per second
+ * @param p time period
  */
 void merge_rombongan(
-    std::vector<std::pair<double, double> >& parent,
-    std::vector<std::pair<double, double> >& child,
-    double fps
+    std::vector<std::pair<unsigned int, unsigned int> >& parent,
+    std::vector<std::pair<unsigned int, unsigned int> >& child,
+    unsigned int p
 ) {
     for (size_t parent_itr = 0; parent_itr < parent.size(); parent_itr++) {
-        std::pair<double, double> parent_duration = parent[parent_itr];
+        std::pair<unsigned int, unsigned int> parent_duration = parent[parent_itr];
 
         for (size_t child_itr = 0; child_itr < child.size(); child_itr++) {
-            std::pair<double, double> child_duration = child[child_itr];
+            std::pair<unsigned int, unsigned int> child_duration = child[child_itr];
 
             if (
                 (parent_duration == child_duration) ||
-                (abs(parent_duration.first - child_duration.first) <= fps) ||
-                (abs(parent_duration.second - child_duration.second) <= fps)
+                (abs((int)parent_duration.first - (int)child_duration.first) <= p) ||
+                (abs((int)parent_duration.second - (int)child_duration.second) <= p)
             ) {
                 child.erase(
                     child.begin() + child_itr  
@@ -136,50 +139,24 @@ std::vector<Rombongan> clean_result(
 }
 
 /**
- * Get entities metadata from input.
- * 
- * @param entities - input entities
- */
-Metadata get_metadata(
-    const std::vector<Entity>& entities
-) {
-    std::vector<double> frames;
-
-    for (auto const& trajectory: entities[0].trajectories) {
-        frames.push_back(trajectory.first);
-    }
-
-    size_t dimension = (*entities[0].trajectories.begin()).second.size();
-
-    return Metadata{
-        frames,
-        dimension
-    };
-}
-
-/**
  * Get sub trajectories from all entities for a time interval
  * 
- * @param entities - input entities
- * @param frame_info list of frames and desired duration
+ * @param entities input entities
+ * @param interval time interval
  */
 trajectory_map get_sub_trajectories(
     const std::vector<Entity>& entities,
-    const FrameInterval& frame_info
+    const std::pair<unsigned int, unsigned int>& interval
 ) {
-    auto [frames, start, end] = frame_info;
     trajectory_map sub_trajectories;
 
     for (size_t itr = 0; itr < entities.size(); itr++) {
         Entity curr = entities[itr];
 
-        for (size_t frame = start; frame < end; frame++) {
-            double current_frame = frames[frame];
-
-            sub_trajectories[curr.id].push_back(
-                curr.trajectories[current_frame]
-            );
-        }
+        sub_trajectories[curr.id] = {
+            curr.trajectories.begin() + interval.first,
+            curr.trajectories.begin() + interval.second
+        };
     }
 
     return sub_trajectories;
@@ -189,22 +166,20 @@ trajectory_map get_sub_trajectories(
  * Get directional vectors for all entities in a time interval
  * 
  * @param entities list of entities
- * @param frame_info list of frames and desired duration
- * @param dimension trajectory dimension
+ * @param interval time interval
  */
 direction_map get_directional_vectors(
     const std::vector<Entity>& entities,
-    const FrameInterval& frame_info,
-    unsigned short dimension
+    const std::pair<unsigned int, unsigned int>& interval
 ) {
-    auto [frames, start, end] = frame_info;
+    unsigned int dimension = entities[0].trajectories[0].size();
 
     direction_map directional_vectors;
 
     for (size_t itr = 0; itr < entities.size(); itr++) {
         Entity curr = entities[itr];
-        std::vector<double> end_pos = curr.trajectories[frames[end - 1]];
-        std::vector<double> start_pos = curr.trajectories[frames[start]];
+        std::vector<double> end_pos = curr.trajectories[interval.second - 1];
+        std::vector<double> start_pos = curr.trajectories[interval.first];
 
         for (size_t curr_dimension = 0; curr_dimension < dimension; curr_dimension++) {
             directional_vectors[curr.id].push_back(
@@ -221,15 +196,17 @@ void extend_current_rombongan(
     const Entity& other,
     trajectory_map& sub_trajectories,
     direction_map& direction_vector,
-    const Parameters& params
+    const Parameter& params
 ) {
-    double r = params.range;
-    double cs = params.cosine_similarity;
+    double r = params.r;
+    double cs = params.cs;
 
     for (size_t groups_itr = 0; groups_itr < groups.size(); groups_itr++) {
         bool is_similar_to_all_members = true;
 
-        for (int member_id: groups[groups_itr]) {
+        for (size_t member_itr = 0; member_itr < groups[groups_itr].size(); member_itr++) {
+            unsigned int member_id = groups[groups_itr][member_itr];
+        
             double dtw_distance = calculate_dtw_distance(
                 sub_trajectories[other.id],
                 sub_trajectories[member_id]
@@ -268,23 +245,24 @@ void extend_current_rombongan(
 void extend_rombongan_duration(
     rombongan_lifespan& groups,
     std::vector<std::vector<unsigned int> >& current_groups,
-    const FrameInterval& frame_info
+    const std::pair<unsigned int, unsigned int>& interval
 ) {
-    auto [frames, start, end] = frame_info;
+    unsigned int start = interval.first;
+    unsigned int end = interval.second;
 
     for (std::vector<unsigned int> group: current_groups) {
-        std::vector<std::pair<double, double> > time_list = groups[group];
+        std::vector<std::pair<unsigned int, unsigned int> > time_list = groups[group];
 
         if (
             time_list.size() == 0 ||
             start == 0 ||
-            frames[end - 1] != time_list[time_list.size() - 1].second
+            (end - 1) != time_list[time_list.size() - 1].second
         ) {
-            groups[group].push_back({ frames[start], frames[end] });
+            groups[group].push_back({ start, end });
         } else {
             groups[group][time_list.size() - 1] = { 
                 groups[group][time_list.size() - 1].first,
-                frames[end]
+                end
             };
         }
     }
@@ -297,35 +275,33 @@ void extend_rombongan_duration(
  */
 std::vector<Rombongan> identify_rombongan(
     const std::vector<Entity>& entities,
-    const Parameters& params
+    const Parameter& params
 ) {
-    int m = params.entity_count;
-    int k = params.time_interval;
-    double r = params.range;
-    double cs = params.cosine_similarity;
+    int m = params.m;
+    int k = params.k;
+    double r = params.r;
+    double cs = params.cs;
 
     rombongan_lifespan rombongan_list;
-    auto [frames, dimension] = get_metadata(entities);
+    
+    unsigned int frame_count = entities[0].trajectories.size();
 
-    for (size_t end = k; end < frames.size(); end++) {
+    for (size_t end = k; end < frame_count; end++) {
+        if (end > 25) {
+            break;
+        }
+
         unsigned int start = end - k;
 
         std::vector<std::vector<unsigned int> > current_rombongan;
 
-        FrameInterval frame_info = FrameInterval{
-            frames,
-            start,
-            end
-        };
-
         trajectory_map sub_trajectories = get_sub_trajectories(
             entities,
-            frame_info
+            { start, end }
         );
         direction_map direction_vector = get_directional_vectors(
             entities,
-            frame_info,
-            dimension
+            { start, end }
         );
 
         for (size_t curr_itr = 0; curr_itr < entities.size(); curr_itr++) {
@@ -369,7 +345,7 @@ std::vector<Rombongan> identify_rombongan(
         extend_rombongan_duration(
             rombongan_list,
             current_rombongan,
-            frame_info
+            { start, end }
         );
 
         std::cout << "Finished processing range ";
@@ -385,5 +361,5 @@ std::vector<Rombongan> identify_rombongan(
         });
     }
 
-    return clean_result(raw_result, params.fps);
+    return clean_result(raw_result, params.p);
 }

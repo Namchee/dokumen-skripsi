@@ -8,18 +8,18 @@
 #include <stdexcept>
 #include <limits>
 
-std::map<double, std::vector<double> > b_trajectory{
-    { 1.0, { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() } },
-    { 1.1, { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() } },
-    { 1.2, { 1.5, 1.5 } },
-    { 1.3, { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() } }
+std::vector<std::vector<double> > b_trajectory{
+    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() },
+    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() },
+    { 1.5, 1.5 },
+    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() }
 };
 
-std::map<double, std::vector<double> > a_trajectory{
-    { 1.0, { 1.0, 1.0 } },
-    { 1.1, { 2.0, 2.0 } },
-    { 1.2, { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() } },
-    { 1.3, { 3.0, 5.55 } }
+std::vector<std::vector<double> > a_trajectory{
+    { 1.0, 1.0 },
+    { 2.0, 2.0 },
+    { std::numeric_limits<double>::max(), std::numeric_limits<double>::max() },
+    { 3.0, 5.55 }
 };
 
 std::vector<std::vector<unsigned int> > expected_data{
@@ -31,7 +31,8 @@ void data_should_parse_correctly() {
     std::string source("test_data");
     std::string path("test/fixtures");
 
-    std::vector<Entity> entities = parse_data(source, path);
+    MovementData data = parse_data(source, path);
+    std::vector<Entity> entities = data.entities;
 
     for (unsigned int i = 0; i < entities.size(); i++) {
         if (entities[i].id == 2) {

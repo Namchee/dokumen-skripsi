@@ -17,7 +17,7 @@
  * 
  * @return list of parsed arguments.
  */
-Parameters read_arguments(int argc, char *argv[]) {
+Arguments read_arguments(int argc, char *argv[]) {
     argparse::ArgumentParser program("rombongan");
 
     program.add_argument("data")
@@ -29,23 +29,23 @@ Parameters read_arguments(int argc, char *argv[]) {
         .required()
         .action([](const std::string &value) { return std::stod(value); });
 
-    program.add_argument("entity_count")
+    program.add_argument("entities")
         .help("Jumlah entitas minimum anggota rombongan")
         .required()
         .action([](const std::string &value) { return std::stoi(value); });
     
-    program.add_argument("time_interval")
-        .help("Interval waktu minimum pergerakan bersama secara konsekutif")
-        .required()
-        .action([](const std::string &value) { return std::stoi(value); });
-
-    program.add_argument("range")
-        .help("Jarak dynamic time warping maksimum antar anggota rombongan")
+    program.add_argument("interval")
+        .help("Interval waktu minimum pergerakan bersama secara konsekutif dalam detik")
         .required()
         .action([](const std::string &value) { return std::stod(value); });
 
-    program.add_argument("cosine_similarity")
-        .help("Nilai cosine similarity minimum antar anggota rombongan")
+    program.add_argument("range")
+        .help("Jarak entitas maksimum antar anggota rombongan dalam satu waktu")
+        .required()
+        .action([](const std::string &value) { return std::stod(value); });
+
+    program.add_argument("angle")
+        .help("Beda sudut maksimum antar entitas dalam rombongan dalam derajat")
         .required()
         .action([](const std::string &value) { return std::stod(value); });
 
@@ -71,19 +71,19 @@ Parameters read_arguments(int argc, char *argv[]) {
     }
 
     auto data = program.get<std::string>("data");
-    auto entity_count = program.get<int>("entity_count");
+    auto entities = program.get<int>("entities");
 
-    if (entity_count < 2) {
+    if (entities < 2) {
         throw std::invalid_argument(
             "Jumlah entitas minimum harus lebih besar dari 1."
         );
     }
 
-    auto time_interval = program.get<int>("time_interval");
+    auto interval = program.get<double>("interval");
 
-    if (time_interval < 2) {
+    if (interval < 0) {
         throw std::invalid_argument(
-            "Durasi pergerakan bersama harus lebih besar dari 1."
+            "Durasi pergerakan bersama harus merupakan bilangan positif 1."
         );
     }
 
@@ -95,31 +95,24 @@ Parameters read_arguments(int argc, char *argv[]) {
         );
     }
 
-    auto cosine_similarity = program.get<double>("cosine_similarity");
-
-    if (cosine_similarity < -1.0f || cosine_similarity > 1.0f) {
-        throw std::invalid_argument(
-            "Nilai cosine similarity yang valid berkisar antara [-1, 1]."
-        );
-    }
-
+    auto angle = program.get<double>("angle");
     auto fps = program.get<double>("fps");
 
-    if (fps < 1.0f) {
+    if (fps <= 0) {
         throw std::invalid_argument(
-            "Nilai frame per second minimum yang dapat diproses adalah 1 frame per sekon"
+            "Nilai frame per second harus merupakan bilangan positif"
         );
     }
 
     auto path = program.get<std::string>("--path");
 
-    Parameters p;
+    Arguments p;
 
     p.source = data;
-    p.entity_count = entity_count;
-    p.time_interval = time_interval;
+    p.entities = entities;
+    p.interval = interval;
     p.range = range;
-    p.cosine_similarity = cosine_similarity;
+    p.angle = angle;
     p.path = path;
     p.fps = fps;
 
@@ -130,12 +123,14 @@ Parameters read_arguments(int argc, char *argv[]) {
  * Write rombongan identification result into a text file.
  * 
  * @param result rombongan identification result
+ * @param frames frame list
  * @param params arguments passed to the program
  * @param score predicition score
  */
 void write_result(
     const std::vector<Rombongan>& result,
-    const Parameters& params,
+    const std::vector<double>& frames,
+    const Arguments& args,
     const Score& score
 ) {
     std::ofstream file_stream;
@@ -156,7 +151,7 @@ void write_result(
     }
 
     auto now = get_current_time();
-    auto output_filename = params.source + "-" + std::to_string(now);
+    auto output_filename = args.source + "-" + std::to_string(now);
 
     auto [precision, recall, f1_score] = score;
 
@@ -172,11 +167,11 @@ void write_result(
     if (file_stream.is_open()) {
         // write the parameters in csv-like format
         file_stream << "data, m, k, r, theta" << std::endl;
-        file_stream << params.source << ", ";
-        file_stream << params.entity_count << ", ";
-        file_stream << params.time_interval << ", ";
-        file_stream << params.range << ", ";
-        file_stream << params.cosine_similarity;
+        file_stream << args.source << ", ";
+        file_stream << args.entities << ", ";
+        file_stream << args.interval << ", ";
+        file_stream << args.range << ", ";
+        file_stream << args.angle;
         file_stream << std::endl << std::endl;
 
         std::streamsize ss = std::cout.precision();
@@ -195,7 +190,7 @@ void write_result(
 
         for (Rombongan group: result) {
             std::vector<unsigned int> members = group.members;
-            std::vector<std::pair<double, double> > duration = group.duration;
+            std::vector<std::pair<unsigned int, unsigned int> > duration = group.duration;
 
             for (size_t i = 0; i < members.size(); i++) {
                 if (i > 0) {
@@ -212,7 +207,10 @@ void write_result(
                     file_stream << " ";
                 }
 
-                file_stream << duration[i].first << "-" << duration[i].second;
+                double start = frames[duration[i].first];
+                double end = frames[duration[i].second];
+
+                file_stream << start << "-" << end;
             }
 
             file_stream << std::endl;
