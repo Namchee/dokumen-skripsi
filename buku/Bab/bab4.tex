@@ -24,22 +24,26 @@ Berdasarkan 2 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki
 \begin{enumerate}
     \item \textbf{Modul I/O}
     
-    Modul I/O merupakan modul yang berfungsi untuk membaca masukan pengguna dan mencetak hasil identifikasi rombongan yang dihasilkan oleh modul Rombongan. Terdapat dua proses yang akan dikerjakan oleh modul I/O, yaitu proses penerjemahan masukan dan proses pembuatan berkas hasil.
+    Modul I/O merupakan modul yang berfungsi untuk membaca masukan pengguna dan mencetak hasil identifikasi rombongan yang dihasilkan oleh modul Rombongan. Terdapat dua proses yang akan dikerjakan oleh modul I/O, yaitu proses penerjemahan masukan pengguna dan proses pembuatan berkas hasil identifikasi rombongan.
     
     \item \textbf{Modul Penerjemah}
     
-    Modul Penerjemah merupakan modul yang berfungsi untuk menerjemahkan berkas masukan data pejalan kaki menjadi data yang dapat dipahami dan digunakan oleh perangkat lunak. Terdapat satu proses yang akan dikerjakan oleh modul penerjemah, yaitu proses penerjemahan data pergerakan.
+    Modul Penerjemah merupakan modul yang berfungsi untuk menerjemahkan berkas masukan data pejalan kaki menjadi data yang dapat dipahami dan digunakan oleh perangkat lunak. Terdapat dua proses yang akan dikerjakan oleh modul penerjemah, yaitu proses penerjemahan data pergerakan dan proses penerjemahan parameter identifikasi.
     
     \item \textbf{Modul Rombongan}
     
     Modul Rombongan merupakan modul yang berfungsi untuk mengidentifikasi kumpulan rombongan yang terbentuk dalam data pergerakan pejalan kaki yang sudah diterjemahkan oleh modul Penerjemah. Terdapat satu proses yang akan dikerjakan oleh modul rombongan, yaitu proses identifikasi rombongan.
+    
+    \item \textbf{Modul Spasial}
+    
+    Modul Spasial merupakan modul yang berfungsi untuk melakukan perhitungan kedekatan spasial antar entitas yang nantinya akan digunakan oleh modul Rombongan dalam proses identifikasi rombongan. 
 \end{enumerate}
 
 Interaksi antar ketiga modul tersebut ditunjukkan serta proses-proses yang dilalui selama perangkat lunak dieksekusi digambarkan melalui diagram alir data tingkat pertama yang ditunjukkan melalui gambar \ref{bab4:dfd-level-1}.
 
 \begin{figure}[t!]
     \centering
-    \includegraphics[width=0.9\textwidth]{Gambar/bab4:dfd-level-1.pdf}
+    \includegraphics[width=0.85\textwidth]{Gambar/bab4:dfd-level-1.pdf}
     \caption{Diagram alir data tingkat pertama}
     \label{bab4:dfd-level-1}
 \end{figure}
@@ -47,28 +51,24 @@ Interaksi antar ketiga modul tersebut ditunjukkan serta proses-proses yang dilal
 \section{Modul I/O}
 \label{sec:des-io}
 
-Cara kerja dari modul I/O dapat dibagi menjadi 2 fungsi utama berikut:
+Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
 
 \begin{enumerate}
     \item \textbf{Input / Penerjemahan Masukan}
     
-    Saat perangkat lunak dieksekusi melalui \textit{command line interface}, perangkat lunak akan meminta seperangkat masukan dari pengguna dalam bentuk \texttt{<nama-sumber-data> <m> <k> <r> <$\vartheta$>}. Masukan tersebut kemudian akan divalidasi agar memenuhi seluruh syarat berikut:
+    Saat perangkat lunak dieksekusi melalui \textit{command line interface}, perangkat lunak akan meminta seperangkat masukan dari pengguna dalam bentuk \texttt{<nama-sumber-data> <fps> <m> <k> <r> <$\vartheta$>}. $fps$ merupakan jumlah \textit{frame} yang terdapat dalam sumber data. $m$ merupakan jumlah anggota minimum dalam rombongan. $k$ merupakan rentang waktu minimum rombongan dalam satuan detik. $r$ merupakan jarak \textit{dynamic time warping} maksimum antar anggota rombongan dalam satuan meter. $\vartheta$ merupakan beda sudut maksimum antar anggota rombongan dalam satuan derajat.
+    
+    Sebelum perangkat lunak menjalankan proses selanjutnya, masukan tersebut akan divalidasi supaya memenuhi seluruh syarat berikut:
     
     \begin{enumerate}
-        \item Berkas yang ditunjuk oleh \texttt{<nama-sumber-data>} harus merupakan berkas yang dapat ditemukan dan dapat dibaca dengan sempurna oleh perangkat lunak.
-        \item Nilai dari \texttt{m} harus lebih besar sama dengan 2.
-        \item Nilai dari \texttt{k} harus lebih besar sama dengan 2.
+        \item Nilai dari \texttt{m} harus merupakan bilangan bulat yang lebih besar dari 2.
+        \item Nilai dari \texttt{k} harus merupakan bilangan positif.
         \item Nilai dari \texttt{r} harus merupakan bilangan positif.
-        \item Nilai dari $\vartheta$ harus dalam rentang [-1, 1].
     \end{enumerate}
     
-    Apabila masukan yang diberikan oleh pengguna tidak memenuhi minimal salah satu dari syarat di atas, modul I/O akan menampilkan kesalahan pada pengguna dan menghentikan proses eksekusi perangkat lunak. Apabila masukan yang diberikan oleh pengguna memenuhi seluruh syarat di atas, modul I/O akan mengembalikan masukan pengguna dalam bentuk tipe data komposit. Gambar \ref{bab4:flowchart-input} menunjukkan diagram alur dari proses validasi masukan yang diberikan oleh pengguna.
+    Apabila masukan yang diberikan oleh pengguna tidak memenuhi seluruh syarat di atas, proses penerjemahan masukan akan menampilkan pesan kesalahan pada pengguna dan menghentikan proses eksekusi perangkat lunak.
     
-    \iffalse
-    
-    Untuk mempermudah proses implementasi perangkat lunak, fungsionalitas ini akan diimplementasikan menggunakan bantuan pustaka C++ yang bernama \texttt{argparse}. Pustaka \texttt{argparse} dipilih karena memiliki kemampuan untuk mempermudah konversi tipe data menjadi tipe data yang sesuai serta menyediakan fitur untuk menampilkan bantuan penggunaan perangkat lunak dalam bentuk \textit{command line interface} pada pengguna.
-    
-    \fi
+    Setelah proses validasi masukan selesai, modul I/O akan mengembalikan masukan pengguna dalam bentuk tipe data komposit tanpa melakukan proses tambahan lainnya. Gambar \ref{bab4:flowchart-input} menunjukkan diagram alur dari proses validasi masukan yang diberikan oleh pengguna.
     
     \begin{figure}[t]
         \centering
@@ -79,7 +79,7 @@ Cara kerja dari modul I/O dapat dibagi menjadi 2 fungsi utama berikut:
     
     \item \textbf{Output / Pembuatan Berkas Hasil}
     
-    Setelah proses identifikasi rombongan selesai, hasil dari proses identifikasi tersebut akan diteruskan pada modul I/O agar hasil tersebut dapat disimpan dalam bentuk berkas teks biasa yang mudah dibaca. Berkas teks hasil akan memiliki nama yang sama dengan nama dari sumber data. 
+    Setelah proses identifikasi rombongan selesai, hasil dari proses identifikasi tersebut akan diteruskan pada modul I/O agar hasil tersebut dapat disimpan dalam bentuk berkas teks biasa yang mudah dibaca dan dievaluasi. Berkas teks hasil akan memiliki nama yang sama dengan nama dari sumber data. 
     
     \iffalse
     
@@ -91,25 +91,38 @@ Cara kerja dari modul I/O dapat dibagi menjadi 2 fungsi utama berikut:
 \section{Modul Penerjemah}
 \label{sec:des-parser}
 
-Berikut merupakan cara kerja dari modul Penerjemah:
+Modul Penerjemah bertanggun jawab untuk melaksanakan 2 proses berikut:
 
 \begin{enumerate}
-    \item Menguji validitas berkas data pergerakan pejalan kaki. Apabila berkas tidak dapat dibaca oleh perangkat lunak, maka modul Penerjemah akan menampilkan pesan kesalahan dan menghentikan proses eksekusi perangkat lunak.
-    \item Membaca setiap baris teks yang tercatat dalam berkas data pergerakan.
+    \item \textbf{Penerjemahan Data Pergerakan}
     
-    \iffalse 
+    Setelah nama berkas  modul I/O, modul penerjemah akan mengubah data pergerakan yang terdapat pada berkas data menjadi bentuk yang dapat dipahami oleh perangkat lunak. Berikut merupakan langkah-langkah yang dikerjakan dalam proses penerjemahan data pergerakan:
     
-    \cristopher{Kudu jelasin gak sih ko bentuk datanya gimana?} \lionov{gak usah lah, bilang aja pokoknya ini buat nerima input, nanti di ``implementasi'' baru dijelasin setelah ngejelasin datanya kayak apa}
+    \begin{enumerate}
+        \item Menguji validitas berkas data pergerakan pejalan kaki. Apabila berkas tidak dapat dibaca oleh perangkat lunak, maka modul Penerjemah akan menampilkan pesan kesalahan dan menghentikan proses eksekusi perangkat lunak.
+        
+        \item Membaca setiap baris teks yang tercatat dalam berkas data pergerakan.
     
-    \fi
+        \iffalse 
     
-    \item Untuk setiap baris data yang berhasil dibaca oleh perangkat lunak, simpan informasi posisi entitas dan nilai \textit{frame} yang menyimpan informasi posisi tersebut.
-    \item Kembalikan setiap informasi entitas berupa posisi entitas pada setiap \textit{frame}.
+        \cristopher{Kudu jelasin gak sih ko bentuk datanya gimana?} \lionov{gak usah lah, bilang aja pokoknya ini buat nerima input, nanti di ``implementasi'' baru dijelasin setelah ngejelasin datanya kayak apa}
+    
+        \fi
+    
+        \item Untuk setiap baris data yang berhasil dibaca oleh perangkat lunak, simpan informasi posisi entitas dan nilai \textit{frame} yang menyimpan informasi posisi tersebut.
+        \item Kembalikan setiap informasi entitas berupa posisi setiap entitas bergerak yang tercatat dalam data pergerakan pada setiap \textit{frame} yang terdapat dalam data pergerakan.
+    \end{enumerate}
+    
+    Gambar \ref{bab4:flowchart-penerjemah} menunjukkan diagram alir dari proses penerjemahan data pergerakan yang berlangsung dalam modul Penerjemah.
+
+    \item \textbf{Penerjemahan Parameter Identifikasi}
+    
+    Sebelum proses identifikasi rombongan dilakukan, perangkat lunak perlu mengetahui parameter-parameter yang akan digunakan dalam proses identifikasi rombongan. Parameter identifikasi diperoleh dengan mengolah masukan pengguna yang diperoleh dari modul I/O.
+    
+    Terdapat 2 nilai yang akan diproses oleh fungsi ini, yaitu $k$ dan $\vartheta$. Nilai $k$ akan diterjemahkan menjadi satuan \textit{frame}. Nilai dari $\vartheta$ akan diterjemahkan menjadi nilai \textit{cosinus} dari sudut tersebut. Parameter-parameter lainnya tidak akan melalui proses lanjutan apapun dan akan langsung diteruskan pada modul Rombongan.
 \end{enumerate}
 
-Gambar \ref{bab4:flowchart-penerjemah} menunjukkan diagram alir dari proses yang berlangsung dalam modul Penerjemah.
-
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-penerjemah.pdf}
     \caption{Diagram alir modul penerjemah}
@@ -119,7 +132,16 @@ Gambar \ref{bab4:flowchart-penerjemah} menunjukkan diagram alir dari proses yang
 \section{Modul Rombongan}
 \label{sec:des-rombongan}
 
-Modul Rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui algoritma \ref{bab3:algoritma-identifikasi}. Modul rombongan juga akan mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh rumus \ref{bab3:cosine-similarity}.
+Modul Rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui algoritma \ref{bab3:algoritma-identifikasi}. Modul Rombongan akan menghasilkan rombongan-rombongan yang teridentifikasi pada data pergerakan yang sesuai dengan parameter identifikasi yang dihasilkan oleh modul Penerjemah. Rombongan akan dihasilkan dalam bentuk struktur data komposit yang berisi kumpulan nomor identitas anggota-anggota rombongan serta durasi terbentuknya rombongan.
+
+Pada proses identifikasi rombongan, modul Rombongan akan menggunakan algoritma \textit{dynamic time warping} dan perhitungan \textit{cosine similarity} yang terdapat dalam modul Spasial.
+
+\section{Modul Spasial}
+\label{sec:des-spatial}
+
+Modul Spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul Rombongan untuk mempermudah pengujian perangkat lunak.
+
+Modul Spasial mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh rumus \ref{bab3:cosine-similarity}.
 
 \section{Struktur Data}
 \label{sec:des-struct}
@@ -127,13 +149,17 @@ Modul Rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari
 Untuk mempermudah proses implementasi perangkat lunak, perlu dibuat beberapa struktur data komposit khusus. Berikut merupakan daftar struktur data akan yang dibuat:
 
 \begin{enumerate}
+    \item \textbf{Arguments}
+    
+    Struktur data ini akan menyimpan masukan-masukan mentah dari pengguna yang diberikan melalui \textit{command line interface}. Masukan-masukan tersebut akan melalui proses validasi dasar dan diubah menjadi tipe data yang dapat dipahami oleh perangkat lunak.
+    
     \item \textbf{Parameters}
     
-    Struktur data ini akan menyimpan masukan-masukan pengguna yang diberikan melalui \textit{command line interface} yang sudah diterjemahkan, divalidasi, dan diubah ke dalam tipe data yang sesuai dengan kebutuhan perangkat lunak.
+    Struktur data ini akan menyimpan masukan-masukan pengguna yang telah diproses menjadi parameter-parameter yang dapat digunakan oleh algoritma identifikasi perangkat lunak.  
     
     \item \textbf{Entity}
     
-    Struktur data ini akan menyimpan informasi-informasi penting dari entitas yang tercatat dalam data pergerakan pejalan kaki seperti nomor identitas dari entitas serta seluruh posisi dari entitas tersebut terhadap ruang $\mathbb{R}^2$ pada nilai-nilai \textit{frame} yang tercatat.
+    Struktur data ini akan menyimpan informasi-informasi penting dari entitas yang tercatat dalam data pergerakan pejalan kaki seperti nomor identitas dari entitas serta seluruh posisi dari entitas tersebut pada ruang $\mathbb{R}^2$.
     
     \item \textbf{Rombongan}
     
