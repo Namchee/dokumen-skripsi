@@ -95,9 +95,17 @@ Melalui upaya penyelesaian tersebut, maka syarat kedekatan spasial dalam syarat-
 Berdasarkan pembahasan mengenai syarat-syarat pembentukan pergerakan kolektif yang telah dibahas pada subbab \ref{sec:collective-movement}, terdapat 3 aspek penting yang harus dipertimbangkan dalam proses pembuatan sebuah definisi pergerakan kolektif baru:
 
 \begin{enumerate}
-    \item \textbf{\textit{Size}} --- Berapa jumlah entitas minimum yang tergabung dalam sebuah himpunan entitas bergerak agar dapat dianggap sebagai sebuah pergerakan kolektif?
-    \item \textbf{Kedekatan Spasial} --- Bagaimana cara mengukur kedekatan spasial antara dua buah entitas yang bergerak?
-    \item \textbf{Durasi Temporal} --- Berapa durasi waktu minimum pergerakan bersama terjadi agar dapat dianggap sebagai sebuah pergerakan kolektif?
+    \item \textbf{\textit{Size}}
+    
+    Berapa jumlah entitas minimum yang tergabung dalam sebuah himpunan entitas bergerak agar dapat dianggap sebagai sebuah pergerakan kolektif?
+    
+    \item \textbf{Kedekatan Spasial}
+    
+    Bagaimana cara mengukur kedekatan spasial antara dua buah entitas yang bergerak?
+    
+    \item \textbf{Durasi Temporal}
+    
+    Berapa durasi waktu minimum pergerakan bersama terjadi agar dapat dianggap sebagai sebuah pergerakan kolektif?
 \end{enumerate}
 
 Seluruh aspek yang telah disebutkan di atas merupakan sebuah parameter masukan yang ditentukan oleh peneliti sebelum proses identifikasi pergerakan kolektif dilakukan, sehingga sebuah definisi pergerakan kolektif yang sama dapat menghasilkan hasil identifikasi yang berbeda-beda yang dipengaruhi oleh parameter-parameter yang dimasukkan.
@@ -131,8 +139,7 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \item Kembalikan himpunan $\mathcal{R}$ sebagai hasil. Pada tahap ini, himpunan $\mathcal{R}$ akan berisi kumpulan rombongan yang terbentuk pada setiap interval waktu konsekutif $I$ yang memiliki panjang durasi minimum sebesar $k$ satuan waktu.
 \end{enumerate}
 
-
-\begin{algorithm}[h]
+\begin{algorithm}[t]
     \caption{Algoritma Identifikasi Rombongan}
     \SetKwInput{KwInput}{Input}                % Set the Input
     \SetKwInput{KwOutput}{Output}              % set the Output
@@ -211,15 +218,33 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \label{bab3:algoritma-identifikasi}
 \end{algorithm}
 
-{\color{blue} Melalui proses analisis algoritma, algoritma identifikasi rombongan yang diusulkan memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. Nilai tersebut didapatkan melalui perhitungan berikut:
+\subsection{Analisis Kompleksitas Algoritma Identifikasi Rombongan}
+\label{subsec:complexity}
+
+Dalam mendesain sebuah algoritma yang baik, perlu dilakukan proses analisis kompleksitas terhadap algoritma yang akan dibuat. Melalui proses analisis algoritma, karakteristik dan perilaku dari algoritma tersebut dapat diketahui di mana hal tersebut dapat menjadi pertimbangan bagi calon pengguna algoritma untuk memilih algoritma terbaik sesuai kebutuhannya.
+
+Terdapat dua jenis kompleksitas yang dimiliki oleh sebuah algoritma, yaitu kompleksitas waktu dan kompleksitas tempat. Kompleksitas waktu merujuk pada jumlah operasi yang harus dikerjakan oleh algoritma untuk memproses masukan sampai menghasilkan nilai keluaran. Kompleksitas tempat merujuk pada kebutuhan ruang memori yang dibutuhkan oleh algoritma untuk memproses masukan sampai menghasilkan nilai keluaran.
+
+\subsubsection{Kompleksitas Waktu Algoritma Identifikasi Rombongan}
+\label{subsubsec:time-complexity}
+
+Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan yang diusulkan memiliki kompleksitas waktu sebesar $O((t - k)n^5k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. Nilai kompleksitas tersebut didapatkan melalui perhitungan berikut:
 
 \begin{enumerate}
-    \item Pada baris $3$, algoritma akan memiliki kompleksitas waktu sebesar $O(t - k)$ di mana nilai tersebut diperoleh dengan menghitung jumlah interval waktu konsekutif yang mungkin dibuat. Jumlah interval waktu konsekutif yang dapat dibuat merupakan selisih dari panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$ dan durasi waktu konsekutif minimum untuk membentuk sebuah rombongan.
-    \item Pada baris $7$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{X}$ yang memiliki kompleksitas sebesar $O(n)$.
-    \item Pada baris $9$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^2)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{X}$ yang memiliki kompleksitas sebesar $O(n)$.
-    \item Pada baris $9$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^3)$ yang disebabkan oleh penghitungan seluruh entitas yang terdapat pada $\mathcal{S}$ yang memiliki kompleksitas sebesar $O(n)$.
-    \item Pada baris $12$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^3k^2)$ yang disebabkan oleh perhitungan algoritma \textit{dynamic time warping} yang memiliki kompleksitas waktu sebesar $O(k^2)$. Kompleksitas tersebut didapatkan dari hasil perkalian panjang dua lintasan yang dihitung yang masing-masing sebesar $k$. Pada titik ini, algoritma identifikasi akan memiliki nilai kompleksitas tertinggi selama algoritma dijalankan.
-\end{enumerate}}
+    \item Pada baris $3$, algoritma identifikasi akan menghitung untuk seluruh interval waktu konsekutif sepanjang $k$ satuan waktu yang dapat terbentuk. Proses tersebut memiliki kompleksitas waktu sebesar $O(t - k)$ di mana nilai tersebut diperoleh dengan menghitung jumlah interval waktu konsekutif yang mungkin dibuat. Jumlah interval waktu konsekutif yang dapat dibuat merupakan selisih dari panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$ dan durasi waktu konsekutif minimum untuk membentuk sebuah rombongan.
+    \item Pada baris $7$, algoritma identifikasi akan mengevaluasi setiap entitas yang terdapat pada $\mathcal{X}$. Proses tersebut memiliki kompleksitas waktu sebesar $O(n)$.
+    \item Pada baris $9$, algoritma identifikasi akan mengevaluasi setiap entitas yang terdapat pada $\mathcal{X}$ selain entitas yang dirujuk oleh proses pada baris $7$. Proses tersebut memiliki kompleksitas waktu sebesar $O(n)$.
+    \item Pada baris $10$, algoritma identifikasi akan mengevaluasi kedekatan spasial entitas yang dirujuk pada baris $9$ dengan seluruh himpunan entitas yang terdapat pada $\mathcal{C}$. Berdasarkan cara kerja algoritma, himpunan entitas $\mathcal{C}$ dapat memiliki sebanyak $n^2$ anggota. Sehingga proses evaluasi akan memiliki kompleksitas waktu sebesar $O(n^2)$.
+    \item Pada baris $12$, algoritma identifikasi akan menguji kedekatan spasial dari entitas yang dirujuk pada baris $9$ dengan setiap anggota dari salah satu anggota dari himpunan entitas $\mathcal{C}$. Berdasarkan cara kerja algoritma, sebuah himpunan entitas yang terdapat pada $\mathcal{C}$ dapat memiliki anggota sebanyak $n$ entitas. Sehingga proses pengujian kedekatan spasial akan memiliki kompleksitas waktu sebesar $O(n)$.
+    \item Pada baris $13$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^4k^2)$ yang disebabkan oleh perhitungan algoritma \textit{dynamic time warping} yang memiliki kompleksitas waktu sebesar $O(k^2)$. Kompleksitas tersebut didapatkan dari hasil perkalian panjang dua lintasan yang dihitung yang masing-masing sebesar $k$. Pada titik ini, algoritma identifikasi akan memiliki nilai kompleksitas tertinggi selama algoritma dijalankan.
+\end{enumerate}
+
+\subsubsection{Kompleksitas Tempat Algoritma Identifikasi Rombongan}
+\label{subsubsec:space-complexity}
+
+Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan memiliki kompleksitas ruang sebesar $O(nt \mathbb{R})$ di mana $n$ merupakan jumlah entitas yang terdapat pada $\mathcal{X}$, $\mathbb{R}$ merupakan dimensi ruang gerak entitas, dan $t$ merupakan panjang interval waktu terpanjang dari setiap entitas anggota himpunan $\mathcal{X}$.
+
+Nilai kompleksitas tersebut didapatkan dari kompleksitas tempat yang digunakan untuk menyimpan $\mathcal{X}$, di mana $\mathcal{X}$ akan menyimpan informasi posisi untuk setiap entitas pada $\mathcal{X}$ yang beranggotakan sebanyak $n$ entitas. Setiap entitas akan menyimpan posisi untuk setiap waktu sepanjang $t$. Posisi dari entitas pada satu titik waktu akan disimpan menggunakan tempat sebanyak $\mathbb{R}$ untuk setiap sumbu pada dimensi gerak entitas.
 
 \section{Contoh Proses Identifikasi Rombongan}
 \label{sec:algorithm-example}
