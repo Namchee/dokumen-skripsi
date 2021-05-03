@@ -3,6 +3,9 @@
 
 Sebelum melalui tahap implementasi, perangkat lunak perlu melalui proses perancangan perangkat lunak. Perancangan perangkat lunak merupakan sebuah proses untuk mengidentifikasi artefak-artefak dari perangkat lunak seperti modul, fungsi, kelas, serta artefak-artefak lainnya yang bertujuan untuk memenuhi kebutuhan perangkat lunak. Manfaat utama dari perancangan perangkat lunak adalah supaya perilaku perangkat lunak yang dihasilkan dapat lebih mudah diprediksi dan dikontrol sehingga perangkat lunak dapat lebih mudah dikembangkan dan diperbaiki di masa depan \cite{budgen:04:software-design}.
 
+\section{Fungsionalitas Perangkat Lunak}
+\label{sec:functionality}
+
 Melalui proses analisis kebutuhan perangkat lunak, maka perangkat lunak yang akan dibuat harus memiliki 2 fungsionalitas berikut:
 
 \begin{enumerate}
@@ -14,7 +17,7 @@ Berdasarkan 2 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.55\textwidth]{Gambar/bab4:dfd-level-0.pdf}
+    \includegraphics[width=0.7\textwidth]{Gambar/bab4:dfd-level-0.pdf}
     \caption{Diagram konteks}
     \label{bab4:context-diagram}
 \end{figure}
@@ -24,26 +27,26 @@ Berdasarkan 2 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki
 \begin{enumerate}
     \item \textbf{Modul I/O}
     
-    Modul I/O merupakan modul yang berfungsi untuk membaca masukan pengguna dan mencetak hasil identifikasi rombongan yang dihasilkan oleh modul Rombongan. Terdapat dua proses yang akan dikerjakan oleh modul I/O, yaitu proses penerjemahan masukan pengguna dan proses pembuatan berkas hasil identifikasi rombongan.
+    Modul I/O merupakan modul yang berfungsi untuk membaca masukan pengguna dan mencetak hasil identifikasi rombongan yang dihasilkan oleh modul rombongan. Terdapat dua proses yang akan dikerjakan oleh modul I/O, yaitu proses penerjemahan masukan pengguna dan proses pembuatan berkas hasil identifikasi rombongan.
     
     \item \textbf{Modul Penerjemah}
     
-    Modul Penerjemah merupakan modul yang berfungsi untuk menerjemahkan berkas masukan data pejalan kaki menjadi data yang dapat dipahami dan digunakan oleh perangkat lunak. Terdapat dua proses yang akan dikerjakan oleh modul penerjemah, yaitu proses penerjemahan data pergerakan dan proses penerjemahan parameter identifikasi.
+    Modul penerjemah merupakan modul yang berfungsi untuk menerjemahkan berkas masukan data pejalan kaki menjadi data yang dapat dipahami dan digunakan oleh perangkat lunak. Terdapat dua proses yang akan dikerjakan oleh modul penerjemah, yaitu proses penerjemahan data pergerakan dan proses penerjemahan parameter identifikasi.
     
     \item \textbf{Modul Rombongan}
     
-    Modul Rombongan merupakan modul yang berfungsi untuk mengidentifikasi kumpulan rombongan yang terbentuk dalam data pergerakan pejalan kaki yang sudah diterjemahkan oleh modul Penerjemah. Terdapat satu proses yang akan dikerjakan oleh modul rombongan, yaitu proses identifikasi rombongan.
+    Modul rombongan merupakan modul yang berfungsi untuk mengidentifikasi kumpulan rombongan yang terbentuk dalam data pergerakan pejalan kaki yang sudah diterjemahkan oleh modul penerjemah. Terdapat satu proses yang akan dikerjakan oleh modul rombongan, yaitu proses identifikasi rombongan.
     
     \item \textbf{Modul Spasial}
     
-    Modul Spasial merupakan modul yang berfungsi untuk melakukan perhitungan kedekatan spasial antar entitas yang nantinya akan digunakan oleh modul Rombongan dalam proses identifikasi rombongan. 
+    Modul spasial merupakan modul yang berfungsi untuk melakukan perhitungan kedekatan spasial antar entitas yang nantinya akan digunakan oleh modul rombongan dalam proses identifikasi rombongan. 
 \end{enumerate}
 
 Interaksi antar ketiga modul tersebut ditunjukkan serta proses-proses yang dilalui selama perangkat lunak dieksekusi digambarkan melalui diagram alir data tingkat pertama yang ditunjukkan melalui gambar \ref{bab4:dfd-level-1}.
 
 \begin{figure}[t!]
     \centering
-    \includegraphics[width=0.85\textwidth]{Gambar/bab4:dfd-level-1.pdf}
+    \includegraphics[width=0.9\textwidth]{Gambar/bab4:dfd-level-1.pdf}
     \caption{Diagram alir data tingkat pertama}
     \label{bab4:dfd-level-1}
 \end{figure}
@@ -72,26 +75,20 @@ Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
     
     \begin{figure}[t]
         \centering
-        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-input.pdf}
+        \includegraphics[width=0.975\textwidth]{Gambar/bab4:flowchart-input.pdf}
         \caption{Diagram alir proses validasi masukan}
         \label{bab4:flowchart-input}
     \end{figure}
     
     \item \textbf{Output / Pembuatan Berkas Hasil}
     
-    Setelah proses identifikasi rombongan selesai, hasil dari proses identifikasi tersebut akan diteruskan pada modul I/O agar hasil tersebut dapat disimpan dalam bentuk berkas teks biasa yang mudah dibaca dan dievaluasi. Berkas teks hasil akan memiliki nama yang sama dengan nama dari sumber data. 
-    
-    \iffalse
-    
-    Sebuah rombongan yang teridentifikasi akan dicatat sebagai satu baris dalam berkas teks yang dihasilkan. Rombongan tersebut akan dicatat dalam bentuk \texttt{<anggota> <frame-mulai> <frame-berakhir>}. Nilai dari \texttt{<anggota>} merupakan nomor identitas dari setiap anggota rombongan yang akan dipisahkan menggunakan koma. Fungsionalitas ini akan diimplementasikan sebagai fungsi \texttt{writeResultToFile}. Fungsionalitas ini akan diimplementasikan menggunakan pustaka standar bawaan C++17.
-    
-    \fi
+    Setelah proses identifikasi rombongan selesai, hasil dari proses identifikasi tersebut akan diteruskan pada modul I/O agar hasil tersebut dapat disimpan dalam bentuk berkas teks biasa yang mudah dibaca dan dievaluasi. Berkas teks hasil akan memiliki nama yang sama dengan nama dari sumber data.
 \end{enumerate}
 
 \section{Modul Penerjemah}
 \label{sec:des-parser}
 
-Modul Penerjemah bertanggun jawab untuk melaksanakan 2 proses berikut:
+Modul Penerjemah bertanggung jawab untuk melaksanakan 2 proses berikut:
 
 \begin{enumerate}
     \item \textbf{Penerjemahan Data Pergerakan}
@@ -99,7 +96,7 @@ Modul Penerjemah bertanggun jawab untuk melaksanakan 2 proses berikut:
     Setelah nama berkas  modul I/O, modul penerjemah akan mengubah data pergerakan yang terdapat pada berkas data menjadi bentuk yang dapat dipahami oleh perangkat lunak. Berikut merupakan langkah-langkah yang dikerjakan dalam proses penerjemahan data pergerakan:
     
     \begin{enumerate}
-        \item Menguji validitas berkas data pergerakan pejalan kaki. Apabila berkas tidak dapat dibaca oleh perangkat lunak, maka modul Penerjemah akan menampilkan pesan kesalahan dan menghentikan proses eksekusi perangkat lunak.
+        \item Menguji validitas berkas data pergerakan pejalan kaki. Apabila berkas tidak dapat dibaca oleh perangkat lunak, maka modul penerjemah akan menampilkan pesan kesalahan dan menghentikan proses eksekusi perangkat lunak.
         
         \item Membaca setiap baris teks yang tercatat dalam berkas data pergerakan.
     
@@ -110,6 +107,9 @@ Modul Penerjemah bertanggun jawab untuk melaksanakan 2 proses berikut:
         \fi
     
         \item Untuk setiap baris data yang berhasil dibaca oleh perangkat lunak, simpan informasi posisi entitas dan nilai \textit{frame} yang menyimpan informasi posisi tersebut.
+        
+        \item Untuk setiap entitas yang berhasil dibaca, periksa keberadaan entitas tersebut untuk setiap \textit{frame} yang tercatat. Apabila entitas tidak terdapat pada sebuah \textit{frame}, tandai posisi entitas tersebut pada \textit{frame} yang dimaksud menggunakan sebuah \textit{anchor value}.
+        
         \item Kembalikan setiap informasi entitas berupa posisi setiap entitas bergerak yang tercatat dalam data pergerakan pada setiap \textit{frame} yang terdapat dalam data pergerakan.
     \end{enumerate}
     
@@ -119,7 +119,7 @@ Modul Penerjemah bertanggun jawab untuk melaksanakan 2 proses berikut:
     
     Sebelum proses identifikasi rombongan dilakukan, perangkat lunak perlu mengetahui parameter-parameter yang akan digunakan dalam proses identifikasi rombongan. Parameter identifikasi diperoleh dengan mengolah masukan pengguna yang diperoleh dari modul I/O.
     
-    Terdapat 2 nilai yang akan diproses oleh fungsi ini, yaitu $k$ dan $\vartheta$. Nilai $k$ akan diterjemahkan menjadi satuan \textit{frame}. Nilai dari $\vartheta$ akan diterjemahkan menjadi nilai \textit{cosinus} dari sudut tersebut. Parameter-parameter lainnya tidak akan melalui proses lanjutan apapun dan akan langsung diteruskan pada modul Rombongan.
+    Terdapat 2 nilai yang akan diproses oleh fungsi ini, yaitu $k$ dan $\vartheta$. Nilai $k$ akan diterjemahkan menjadi satuan \textit{frame}. Nilai dari $\vartheta$ akan diterjemahkan menjadi nilai \textit{cosinus} dari sudut tersebut. Parameter-parameter lainnya tidak akan melalui proses lanjutan apapun dan akan langsung diteruskan pada modul rombongan.
 \end{enumerate}
 
 \begin{figure}[t]
@@ -132,16 +132,16 @@ Modul Penerjemah bertanggun jawab untuk melaksanakan 2 proses berikut:
 \section{Modul Rombongan}
 \label{sec:des-rombongan}
 
-Modul Rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui algoritma \ref{bab3:algoritma-identifikasi}. Modul Rombongan akan menghasilkan rombongan-rombongan yang teridentifikasi pada data pergerakan yang sesuai dengan parameter identifikasi yang dihasilkan oleh modul Penerjemah. Rombongan akan dihasilkan dalam bentuk struktur data komposit yang berisi kumpulan nomor identitas anggota-anggota rombongan serta durasi terbentuknya rombongan.
+Modul rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui algoritma \ref{bab3:algoritma-identifikasi}. Modul rombongan akan menghasilkan rombongan-rombongan yang teridentifikasi pada data pergerakan yang sesuai dengan parameter identifikasi yang diterjemahkan dari masukan pengguna oleh modul penerjemah. Rombongan akan dihasilkan dalam bentuk struktur data komposit yang berisi kumpulan nomor identitas anggota-anggota rombongan serta durasi terbentuknya rombongan.
 
-Pada proses identifikasi rombongan, modul Rombongan akan menggunakan algoritma \textit{dynamic time warping} dan perhitungan \textit{cosine similarity} yang terdapat dalam modul Spasial.
+Pada proses identifikasi rombongan, modul rombongan akan menggunakan algoritma \textit{dynamic time warping} dan perhitungan \textit{cosine similarity} yang terdapat dalam modul spasial.
 
 \section{Modul Spasial}
 \label{sec:des-spatial}
 
-Modul Spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul Rombongan untuk mempermudah pengujian perangkat lunak.
+Modul spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul rombongan untuk mempermudah pengujian perangkat lunak.
 
-Modul Spasial mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh rumus \ref{bab3:cosine-similarity}.
+Modul spasial mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh rumus \ref{bab3:cosine-similarity}.
 
 \section{Struktur Data}
 \label{sec:des-struct}
