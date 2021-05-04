@@ -242,9 +242,9 @@ Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan
 \subsubsection{Kompleksitas Tempat Algoritma Identifikasi Rombongan}
 \label{subsubsec:space-complexity}
 
-Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan memiliki kompleksitas ruang sebesar $O(nt \mathbb{R})$ di mana $n$ merupakan jumlah entitas yang terdapat pada $\mathcal{X}$, $\mathbb{R}$ merupakan dimensi ruang gerak entitas, dan $t$ merupakan panjang interval waktu terpanjang dari setiap entitas anggota himpunan $\mathcal{X}$.
+Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan memiliki kompleksitas ruang sebesar $O(n^3)$ di mana $n$ merupakan jumlah entitas yang terdapat pada $\mathcal{X}$.
 
-Nilai kompleksitas tersebut didapatkan dari kompleksitas tempat yang digunakan untuk menyimpan $\mathcal{X}$, di mana $\mathcal{X}$ akan menyimpan informasi posisi untuk setiap entitas pada $\mathcal{X}$ yang beranggotakan sebanyak $n$ entitas. Setiap entitas akan menyimpan posisi untuk setiap waktu sepanjang $t$. Posisi dari entitas pada satu titik waktu akan disimpan menggunakan tempat sebanyak $\mathbb{R}$ untuk setiap sumbu pada dimensi gerak entitas.
+Nilai kompleksitas tersebut didapatkan dari kompleksitas tempat paling signifikan `yang digunakan untuk menyimpan $entitySet$ yang terdapat pada baris $8$ pada algoritma identifikasi rombongan. Berdasarkan cara kerja algoritma, $entitySet$ dapat beranggotakan sebanyak $n^2$ himpunan. Masing-masing himpunan dapat memiliki paling banyak sebanyak $n$ entitas. Oleh karena itu, dibutuhkan sebanyak $n^3$ tempat untuk menyimpan $entitySet$. 
 
 \section{Contoh Proses Identifikasi Rombongan}
 \label{sec:algorithm-example}
