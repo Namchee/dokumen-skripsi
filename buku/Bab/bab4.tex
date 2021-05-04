@@ -11,13 +11,14 @@ Melalui proses analisis kebutuhan perangkat lunak, maka perangkat lunak yang aka
 \begin{enumerate}
     \item Membaca dan memahami masukan dari pengguna berupa data pergerakan pejalan kaki dan parameter rombongan,
     \item Melakukan identifikasi kelompok-kelompok rombongan yang terbentuk dalam data pergerakan pejalan kaki yang diberikan dalam masukan pengguna.
+    \item Melakukan evaluasi terhadap hasil identifikasi rombongan.
 \end{enumerate}
 
-Berdasarkan 2 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki antarmuka pengguna dalam bentuk \textit{command line interface} sederhana. Interaksi antara pengguna dan perangkat lunak berdasarkan kedua fungsionalitas tersebut digambarkan melalui diagram konteks yang ditunjukkan melalui gambar \ref{bab4:context-diagram}.
+Berdasarkan 3 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki antarmuka pengguna dalam bentuk \textit{command line interface} sederhana. Interaksi antara pengguna dan perangkat lunak berdasarkan kedua fungsionalitas tersebut digambarkan melalui diagram konteks yang ditunjukkan melalui gambar \ref{bab4:context-diagram}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\textwidth]{Gambar/bab4:dfd-level-0.pdf}
+    \includegraphics[width=0.6\textwidth]{Gambar/bab4:dfd-level-0.pdf}
     \caption{Diagram konteks}
     \label{bab4:context-diagram}
 \end{figure}
@@ -39,12 +40,16 @@ Berdasarkan 2 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki
     
     \item \textbf{Modul Spasial}
     
-    Modul spasial merupakan modul yang berfungsi untuk melakukan perhitungan kedekatan spasial antar entitas yang nantinya akan digunakan oleh modul rombongan dalam proses identifikasi rombongan. 
+    Modul spasial merupakan modul yang berfungsi untuk melakukan perhitungan kedekatan spasial antar entitas yang nantinya akan digunakan oleh modul rombongan dalam proses identifikasi rombongan.
+    
+    \item \textbf{Modul Evaluasi}
+    
+    Modul evaluasi merupakan modul yang berfungsi untuk melakukan evaluasi terhadap algoritma identifikasi rombongan yang dilakukan oleh modul rombongan. Evaluasi dilakukan dengan membandingkan hasil identifikasi rombongan dengan \textit{ground truth}.
 \end{enumerate}
 
-Interaksi antar ketiga modul tersebut ditunjukkan serta proses-proses yang dilalui selama perangkat lunak dieksekusi digambarkan melalui diagram alir data tingkat pertama yang ditunjukkan melalui gambar \ref{bab4:dfd-level-1}.
+Interaksi antar kelima modul tersebut serta proses-proses yang dilalui selama perangkat lunak identifikasi rombongan dieksekusi digambarkan melalui diagram alir data tingkat pertama yang ditunjukkan melalui gambar \ref{bab4:dfd-level-1}.
 
-\begin{figure}[t!]
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{Gambar/bab4:dfd-level-1.pdf}
     \caption{Diagram alir data tingkat pertama}
@@ -73,9 +78,9 @@ Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
     
     Setelah proses validasi masukan selesai, modul I/O akan mengembalikan masukan pengguna dalam bentuk tipe data komposit tanpa melakukan proses tambahan lainnya. Gambar \ref{bab4:flowchart-input} menunjukkan diagram alur dari proses validasi masukan yang diberikan oleh pengguna.
     
-    \begin{figure}[t]
+    \begin{figure}[h]
         \centering
-        \includegraphics[width=0.975\textwidth]{Gambar/bab4:flowchart-input.pdf}
+        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-input.pdf}
         \caption{Diagram alir proses validasi masukan}
         \label{bab4:flowchart-input}
     \end{figure}
@@ -83,12 +88,14 @@ Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
     \item \textbf{Output / Pembuatan Berkas Hasil}
     
     Setelah proses identifikasi rombongan selesai, hasil dari proses identifikasi tersebut akan diteruskan pada modul I/O agar hasil tersebut dapat disimpan dalam bentuk berkas teks biasa yang mudah dibaca dan dievaluasi. Berkas teks hasil akan memiliki nama yang sama dengan nama dari sumber data.
+    
+    Berkas teks hasil akan mengandung informasi mengenai parameter identifikasi rombongan yang digunakan, evaluasi hasil identifikasi rombongan yang dihasilkan oleh modul evaluasi, serta daftar rombongan yang berhasil teridentifikasi.
 \end{enumerate}
 
 \section{Modul Penerjemah}
 \label{sec:des-parser}
 
-Modul Penerjemah bertanggung jawab untuk melaksanakan 2 proses berikut:
+Modul penerjemah bertanggung jawab untuk melaksanakan 2 proses berikut:
 
 \begin{enumerate}
     \item \textbf{Penerjemahan Data Pergerakan}
@@ -108,7 +115,7 @@ Modul Penerjemah bertanggung jawab untuk melaksanakan 2 proses berikut:
     
         \item Untuk setiap baris data yang berhasil dibaca oleh perangkat lunak, simpan informasi posisi entitas dan nilai \textit{frame} yang menyimpan informasi posisi tersebut.
         
-        \item Untuk setiap entitas yang berhasil dibaca, periksa keberadaan entitas tersebut untuk setiap \textit{frame} yang tercatat. Apabila entitas tidak terdapat pada sebuah \textit{frame}, tandai posisi entitas tersebut pada \textit{frame} yang dimaksud menggunakan sebuah \textit{anchor value}.
+        \item Untuk setiap entitas yang berhasil dibaca, periksa keberadaan entitas tersebut untuk setiap \textit{frame} yang tercatat. Apabila entitas tidak terdapat pada sebuah \textit{frame}, tandai posisi entitas tersebut pada \textit{frame} yang dimaksud menggunakan sebuah \textit{anchor value}. \textit{Anchor value} akan digunakan untuk memeriksa keberadaan entitas pada sebuah \textit{frame}.
         
         \item Kembalikan setiap informasi entitas berupa posisi setiap entitas bergerak yang tercatat dalam data pergerakan pada setiap \textit{frame} yang terdapat dalam data pergerakan.
     \end{enumerate}
@@ -132,21 +139,22 @@ Modul Penerjemah bertanggung jawab untuk melaksanakan 2 proses berikut:
 \section{Modul Rombongan}
 \label{sec:des-rombongan}
 
-Modul rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui algoritma \ref{bab3:algoritma-identifikasi}. Modul rombongan akan menghasilkan rombongan-rombongan yang teridentifikasi pada data pergerakan yang sesuai dengan parameter identifikasi yang diterjemahkan dari masukan pengguna oleh modul penerjemah. Rombongan akan dihasilkan dalam bentuk struktur data komposit yang berisi kumpulan nomor identitas anggota-anggota rombongan serta durasi terbentuknya rombongan.
-
-Pada proses identifikasi rombongan, modul rombongan akan menggunakan algoritma \textit{dynamic time warping} dan perhitungan \textit{cosine similarity} yang terdapat dalam modul spasial.
+Modul rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui algoritma \ref{bab3:algoritma-identifikasi}. Modul rombongan akan menghasilkan rombongan-rombongan yang teridentifikasi pada data pergerakan yang sesuai dengan parameter identifikasi yang diterjemahkan dari masukan pengguna oleh modul penerjemah. Pada proses identifikasi rombongan, modul rombongan akan menggunakan algoritma \textit{dynamic time warping} dan perhitungan \textit{cosine similarity} yang diimplementasikan dalam modul spasial.
 
 \section{Modul Spasial}
 \label{sec:des-spatial}
 
-Modul spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul rombongan untuk mempermudah pengujian perangkat lunak.
+Modul spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul rombongan untuk mempermudah pengujian perangkat lunak. Modul spasial akan mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh rumus \ref{bab3:cosine-similarity}.
 
-Modul spasial mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh rumus \ref{bab3:cosine-similarity}.
+\section{Modul Evaluasi}
+\label{sec:des-evaluation}
+
+Modul evaluasi merupakan modul yang berfungsi untuk melakukan evaluasi hasil identifikasi rombongan yang dihasilkan oleh modul rombongan dengan membandingkan hasil identifikasi rombongan dengan data \textit{ground truth} yang sesuai dengan masukan data pergerakan. Evaluasi hasil identifikasi dilakukan secara kuantitatif dengan menghitung nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari hasil identifikasi rombongan.
 
 \section{Struktur Data}
 \label{sec:des-struct}
 
-Untuk mempermudah proses implementasi perangkat lunak, perlu dibuat beberapa struktur data komposit khusus. Berikut merupakan daftar struktur data akan yang dibuat:
+Untuk mempermudah proses implementasi perangkat lunak, diperlukan beberapa struktur data komposit yang terdiri dari berbagai nilai primitif. Berikut merupakan daftar struktur data komposit yang akan dibuat:
 
 \begin{enumerate}
     \item \textbf{Arguments}
@@ -155,13 +163,13 @@ Untuk mempermudah proses implementasi perangkat lunak, perlu dibuat beberapa str
     
     \item \textbf{Parameters}
     
-    Struktur data ini akan menyimpan masukan-masukan pengguna yang telah diproses menjadi parameter-parameter yang dapat digunakan oleh algoritma identifikasi perangkat lunak.  
+    Struktur data ini akan menyimpan masukan-masukan pengguna yang telah diproses menjadi parameter-parameter yang akan digunakan oleh algoritma identifikasi rombongan.  
     
     \item \textbf{Entity}
     
-    Struktur data ini akan menyimpan informasi-informasi penting dari entitas yang tercatat dalam data pergerakan pejalan kaki seperti nomor identitas dari entitas serta seluruh posisi dari entitas tersebut pada ruang $\mathbb{R}^2$.
+    Struktur data ini akan menyimpan informasi-informasi penting dari entitas yang tercatat dalam data pergerakan pejalan kaki seperti nomor identitas dari entitas serta seluruh posisi dari entitas tersebut pada ruang gerak $\mathbb{R}^2$.
     
     \item \textbf{Rombongan}
     
-    Struktur data ini akan menyimpan informasi mengenai nomor identitas dari entitas-entitas yang tergabung dalam rombongan, nilai \textit{frame} pertama di mana sekelompok entitas yang bergerak bersama memenuhi syarat pembentukan rombongan, dan nilai \textit{frame} terakhir dimana anggota-anggota rombongan masih bergerak bersama sebagai rombongan sebelum pergerakan kolektif tersebut tidak lagi memenuhi syarat-syarat pembentukan rombongan.
+    Struktur data ini akan menyimpan informasi mengenai nomor identitas dari entitas-entitas yang tergabung dalam rombongan serta daftar durasi terbentuknya rombongan. Durasi rombongan akan menyimpan nilai \textit{frame} pertama di mana sekelompok entitas yang bergerak bersama memenuhi syarat pembentukan rombongan, dan nilai \textit{frame} terakhir dimana anggota-anggota rombongan masih bergerak bersama sebagai rombongan sebelum pergerakan kolektif tersebut tidak lagi memenuhi syarat-syarat pembentukan rombongan.
 \end{enumerate}
