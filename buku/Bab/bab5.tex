@@ -1,61 +1,105 @@
 \chapter{Implementasi}
 \label{chap:implementasi}
 
-Setelah rancangan perangkat lunak berhasil dibuat, tahap selanjutnya yang akan dikerjakan adalah tahap implementasi perangkat lunak. Dalam tahap implementasi perangkat lunak, rancangan perangkat lunak yang sudah dibuat akan diubah menjadi kode program yang sesuai dengan rancangan tersebut.
+Setelah rancangan perangkat lunak berhasil dibuat, tahap selanjutnya yang akan dikerjakan adalah tahap implementasi perangkat lunak. Dalam tahap implementasi perangkat lunak, rancangan perangkat lunak yang sudah dibuat akan diubah menjadi kode program yang sesuai dengan rancangan dan tujuan perangkat lunak.
 
-Pada skripsi ini, perangkat lunak identifikasi rombongan akan diimplementasikan menggunakan bahasa pemrograman C++17. C++ dipilih karena program yang dihasilkan memiliki performa yang baik dan memiliki seperangkat perkakas pemrograman yang sudah teruji sejak lama. Untuk meningkatkan \textit{reusability} dari perangkat lunak, setiap modul akan didampingi sebuah berkas \textit{header} dengan nama yang sama dengan nama dari berkas modul. Pembuatan berkas \textit{header} untuk sebuah modul nantinya akan mempermudah modul lain untuk menggunakan fungsi-fungsi yang tersedia pada modul tersebut. Paradigma pemrograman yang digunakan adalah paradigma pemrograman fungsional. Untuk membantu mempermudah proses kompilasi kode perangkat lunak menjadi bahasa mesin, digunakan sebuah perkakas bernama CMake.
+Pada skripsi ini, perangkat lunak identifikasi rombongan akan dibuat menggunakan paradigma paradigma pemrograman fungsional. C++ dipilih sebagai bahasa pemrograman yang digunakan untuk mengimplementasikan perangkat lunak. Pemilihan C++ sebagai bahasa pemrograman didasarkan pada performa dari bahasa pemrograman yang baik dan adanya seperangkat perkakas pemrograman berupa STL yang mempermudah proses pembuatan perangkat lunak.
 
 \section{Format Data Rombongan}
 \label{sec:input-structure}
 
-Data pergerakan pejalan kaki akan disimpan dalam sebuah berkas teks dengan format \texttt{.txt}. Berkas tersebut menyimpan informasi dari seluruh entitas yang terdapat dalam video rekaman data pejalan kaki. Informasi yang tertera dari sebuah \textit{frame} yang terdapat pada video rekaman data pejalan kaki disimpan sebagai satu baris dari berkas teks. Satu baris dalam berkas teks memiliki format \texttt{<nomor-frame> <nomor-identitas> <posisi-x> <posisi-z> <posisi-y> <kecepatan-x> <kecepatan-z> <kecepatan-y>}.
+Data pergerakan pejalan kaki akan disimpan dalam sebuah berkas teks dengan format \texttt{.txt} dengan \textit{encoding} UTF-8. Berkas tersebut menyimpan informasi dari seluruh entitas yang tercatat dalam data pergerakan pejalan kaki. Berkas tersebut merupakan hasil ekstraksi dari informasi yang terdapat dalam sebuah video rekaman pergerakan pejalan kaki.
 
-Nilai dari \texttt{<nomor-frame>} menunjukkan \textit{frame} pada video rekaman yang memiliki informasi yang terdapat pada baris teks. Nilai dari \texttt{<nomor-identitas>} menunjukkan nomor penanda unik yang dimiliki oleh sebuah entitas bergerak yang terdapat pada video rekaman. Nilai dari \texttt{<posisi-x>} menunjukkan posisi entitas pada sumbu $X$ dari ruang gerak \textit{euclidean} $\mathbb{R}^3$. Hal yang sama juga berlaku untuk nilai \texttt{<posisi-y>} yang menyimpan posisi entitas pada sumbu $Y$ dan nilai \texttt{<posisi-z>} yang menyimpan posisi entitas pada sumbu $Z$. Nilai dari \texttt{<kecepatan-x>} menunjukkan kecepatan entitas pada sumbu $X$ dari ruang gerak \textit{euclidean} $\mathbb{R}^3$. Hal yang sama juga berlaku untuk nilai \texttt{<kecepatan-y>} yang menyimpan kecepatan entitas pada sumbu $Y$ dan nilai \texttt{<kecepatan-z>} yang menyimpan kecepatan entitas pada sumbu $Z$.
+Informasi yang terdapat dalam data pejalan kaki disimpan dalam bentuk \textit{frame} yang telah diekstrak dari video rekaman pergerakan pejalan kaki. Sebuah \textit{frame} mengandung informasi dalam bentuk \texttt{<nomor-frame> <nomor-identitas> <posisi-x> <posisi-z> <posisi-y> <kecepatan-x> <kecepatan-z> <kecepatan-y>} yang ditulis dalam satu baris pada berkas teks.
 
-Berdasarkan batasan masalah yang sudah dibahas pada subbab \ref{sec:batasan}, nilai dari \texttt{<posisi-z>} akan dihiraukan. Selain itu, nilai dari \texttt{<kecepatan-x>}, \texttt{<kecepatan-y>}, dan \texttt{<kecepatan-z>} juga akan dihiraukan karena atribut-atribut tersebut tidak digunakan dalam proses identifikasi rombongan.
+Nilai dari \texttt{<nomor-frame>} menunjukkan \textit{frame} pada video rekaman yang memiliki informasi yang terdapat pada baris teks. Nilai dari \texttt{<nomor-identitas>} menunjukkan nomor identitas unik dari entitas. Nilai dari \texttt{<posisi-x>} menunjukkan posisi entitas pada sumbu $X$ dari ruang gerak \textit{euclidean} $\mathbb{R}^3$. Hal yang sama juga berlaku untuk nilai \texttt{<posisi-y>} yang menyimpan posisi entitas pada sumbu $Y$ dan nilai \texttt{<posisi-z>} yang menyimpan posisi entitas pada sumbu $Z$. Nilai dari \texttt{<kecepatan-x>} menunjukkan kecepatan entitas pada sumbu $X$ dari ruang gerak \textit{euclidean} $\mathbb{R}^3$. Hal yang sama juga berlaku untuk nilai \texttt{<kecepatan-y>} yang menyimpan kecepatan entitas pada sumbu $Y$ dan nilai \texttt{<kecepatan-z>} yang menyimpan kecepatan entitas pada sumbu $Z$.
+
+Berdasarkan batasan masalah yang sudah dibahas pada subbab \ref{sec:batasan}, nilai dari \texttt{<posisi-z>} akan dihiraukan sehingga entitas akan dianggap bergerak pada ruang $\mathbb{R}^2$. Selain itu, nilai dari \texttt{<kecepatan-x>}, \texttt{<kecepatan-y>}, dan \texttt{<kecepatan-z>} juga akan dihiraukan karena atribut-atribut tersebut tidak digunakan dalam proses identifikasi rombongan.
 
 \section{Modul I/O}
 \label{sec:impl-io}
 
-Modul I/O akan diimplementasikan dalam berkas \texttt{io.cpp} dan memiliki berkas \textit{header} bernama \texttt{io.h}. Berikut merupakan detil implementasi dari modul I/O berdasarkan 2 fungsionalitas modul yang sudah dibahas pada bab sebelumnya:
+Modul I/O akan diimplementasikan dalam berkas \texttt{io.cpp}. Berikut merupakan detil implementasi dari modul I/O berdasarkan 2 fungsionalitas modul I/O:
 
 \begin{enumerate}
-    \item \textbf{Input}
+    \item \textbf{Input / Penerjemahan Masukan}
     
-    Sesuai dengan rancangan perangkat lunak, salah satu tugas dari modul I/O adalah melakukan penerjemahan dan validasi masukan dari pengguna yang diberikan melalui \textit{command line interface}. Untuk memenuhi kebutuhan tersebut, digunakan sebuah pustaka bantuan bernama \texttt{argparse}. Pustaka \texttt{argparse} dipilih karena memiliki fitur penerjemahan, validasi, dan konversi tipe data yang mudah digunakan serta memiliki fleksibilitas yang lebih luwes dibandingkan pustaka lainnya yang serupa. Fungsionalitas ini akan mengembalikan struktur data \textbf{Parameters}.
+    Implementasi dari fungsi pembacaan masukan akan mengembalikan struktur data komposit bernama \texttt{Parameters}. Untuk memenuhi kebutuhan pembacaan masukan pengguna, modul I/O akan dibantu oleh sebuah pustaka C++ bernama \texttt{argparse}. Pustaka \texttt{argparse} merupakan sebuah pustaka yang memiliki fitur penerjemahan argumen yang diberikan melalui \textit{command line interface}.
     
-    \item \textbf{Output}
+    Pemilihan pustaka tersebut disebabkan oleh kemudahan penggunaan fitur penerjemahan dan konversi masukan menjadi tipe data tertentu serta memiliki fleksibilitas yang lebih baik dibandingkan pustaka lainnya dengan fitur serupa. 
     
-    Hasil identifikasi rombongan pada sebuah data pergerakan pejalan kaki akan dicetak dalam sebuah berkas teks yang memiliki format \texttt{.txt}. Sebuah rombongan yang berhasil teridentifikasi akan dicetak sebagai satu baris yang memiliki bentuk \texttt{<anggota> <frame-mulai> <frame-akhir>}. \texttt{<anggota>} menunjukkan kumpulan nomor identitas dari anggota rombongan yang dipisahkan menggunakan koma. \texttt{<frame-mulai>} menunjukkan nilai \textit{frame} pertama di mana anggota-anggota rombongan memenuhi syarat-syarat pembentukan rombongan. \texttt{<frame-akhir>} menunjukkan nilai \textit{frame} terakhir di mana anggota-anggota rombongan masih memenuhi syarat-syarat pembentukan rombongan sebelum tidak lagi memenuhi syarat-syarat pembentukan rombongan pada \textit{frame} selanjutnya yang berhasil tercatat. Fungsionalitas untuk mencetak berkas teks hasil identifikasi diimplementasikan menggunakan bantuan pustaka standar bawaan dari C++.
+    \item \textbf{Output / Pembuatan Berkas Hasil}
+    
+    Hasil identifikasi rombongan yang dihasilkan oleh modul rombongan akan ditulis dalam sebuah berkas teks yang memiliki format \texttt{.txt} dengan \textit{encoding} UTF-8. Terdapat 3 buah informasi yang akan ditulis pada berkas hasil identifikasi rombongan:
+    
+    \begin{enumerate}
+        \item Nilai masukan yang diberikan pengguna melalui \textit{command line interface}.
+        
+        \item Nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari hasil identifikasi rombongan.
+        
+        \item Kumpulan rombongan yang berhasil teridentifikasi.
+    \end{enumerate}
+    
+    Sebuah rombongan yang berhasil teridentifikasi akan dicetak sebagai satu baris yang memiliki bentuk \texttt{<anggota>, <durasi>}. \texttt{<anggota>} menunjukkan kumpulan nomor identitas dari anggota rombongan yang dipisahkan menggunakan spasi. \texttt{<durasi>} menunjukkan kumpulan interval \textit{frame} konsekutif di mana rombongan tersebut terbentuk. Sebuah interval \textit{frame} ditulis sebagai sepasang \textit{frame} yang menunjukkan \textit{frame} mulai dan \textit{frame} berakhirnya rombongan. Fungsionalitas untuk mencetak berkas teks hasil identifikasi diimplementasikan menggunakan bantuan pustaka STL bawaan dari C++.
+    
+    Fungsi ini akan mencetak berkas yang memiliki nama yang sama dengan nama berkas sumber data pergerakan ditambah dengan \textit{epoch time} yang dihitung dari waktu eksekusi perangkat lunak. Berkas yang dihasilkan akan memiliki format \texttt{.txt} dengan \textit{encoding} UTF-8. Penamaan berkas dengan cara tersebut bertujuan untuk mempermudah penyimpanan banyak berkas hasil dengan sumber data yang sama. 
 \end{enumerate}
 
 \section{Modul Penerjemah}
 \label{sec:impl-parser}
 
-Modul Penerjemah akan diimplementasikan dalam berkas \texttt{parser.cpp} dan memiliki berkas \textit{header} bernama \texttt{parser.h}. Berdasarkan cara kerja modul yang sudah dibahas pada bab sebelumnya dan format data rombongan, dibutuhkan sebuah struktur data yang mampu menyimpan pemetaan antara \textit{frame} dan posisi entitas. Seluruh struktur data yang diperlukan untuk mengimplementasikan modul ini tersedia melalui pustaka standar bawaan C++. Modul ini akan mengembalikan struktur data berupa kumpulan \textbf{Entity} yang disimpan dalam sebuah \texttt{vector}.
+Modul penerjemah akan diimplementasikan dalam berkas \texttt{parser.cpp}. Seluruh struktur data yang diperlukan untuk mengimplementasikan modul ini tersedia melalui pustaka STL bawaan C++. Modul ini memiliki 3 fungsi utama berikut:
 
-Untuk memenuhi kebutuhan tersebut, digunakan struktur data bernama \texttt{Map}. \texttt{Map} dipilih karena struktur data tersebut memiliki kemampuan untuk menyimpan dan mengembalikan pemetaan dengan kompleksitas waktu yang cenderung kecil. Pada implementasi dari modul ini, digunakan 2 buah \texttt{Map} di mana \texttt{Map} pertama digunakan untuk memetakan \textit{frame} pada entitas-entitas yang tercatat pada data pergerakan dan \texttt{Map} kedua digunakan untuk membalik pemetaan dari \texttt{Map} pertama menjadi pemetaan entitas pada \textit{frame} sehingga mempermudah proses pembuatan struktur data komposit yang akan dikembalikan. 
+\begin{enumerate}
+    \item \texttt{parse\_data}
+    
+    Fungsi ini bertugas untuk menerjemahkan data pergerakan pejalan kaki dari berkas teks menjadi struktur data komposit bernama \texttt{MovementData} yang membungkus kumpulan \texttt{Entity} dan kumpulan nilai \textit{frame} yang muncul pada data pergerakan. Pembuatan struktur data tersebut didasarkan oleh kebutuhan akan pencatatan durasi rombongan yang dibutuhkan oleh modul I/O.
+    
+    Seperti yang sudah dibahas pada rancangan perangkat lunak, perlu ditetapkan sebuah \textit{anchor value} yang berfungsi untuk menandakan kemunculan entitas pada sebuah \textit{frame}. Pada skripsi ini, \textit{anchor value} yang dipilih adalah nilai \texttt{NaN}. Nilai \texttt{NaN} dipilih untuk menghindari \textit{false negative} yang dapat disebabkan oleh nilai posisi yang variatif.
 
-Perlu diketahui semua \textit{frame} belum tentu menyimpan informasi posisi dari semua entitas bergerak yang tercatat dalam data pergerakan. Apabila posisi sebuah entitas tidak tercatat sebuah \textit{frame}, maka entitas tersebut tidak boleh dianggap dekat secara spasial dengan entitas lain yang posisinya tercatat dalam \textit{frame} yang dimaksud. Untuk mengatasi masalah tersebut, perlu dibuat sebuah aturan penerjemahan di mana apabila posisi dari sebuah entitas tidak tercatat pada sebuah \textit{frame} yang tercatat dalam data pergerakan, maka posisi entitas tersebut akan dicatat menggunakan nilai tak hingga. Aturan tersebut dicapai dengan menggunakan sebuah struktur data tambahan bernama \texttt{Set} yang berfungsi untuk menyimpan seluruh nomor identitas entitas yang terdapat dalam data pergerakan dan dalam sebuah \textit{frame}. 
+    Nilai \texttt{NaN} sebagai posisi dari sebuah entitas pada titik waktu $x$ menyatakan bahwa entitas tersebut tidak terekam pada titik waktu $x$, sehingga pemeriksaan kedekatan spasial dari entitas tersebut dengan entitas lain dapat dilewatkan. Hal tersebut akan meningkatkan efisiensi algoritma identifikasi rombongan dengan tidak melakukan perhitungan yang tidak perlu dilakukan. 
+    
+    \item \texttt{parse\_arguments}
+    
+    Fungsi ini bertugas untuk menerjemahkan masukan pengguna selain berkas data pergerakan menjadi parameter-parameter identifikasi rombongan yang akan digunakan oleh modul rombongan selama proses identifikasi rombongan berlangsung. Fungsi ini mengembalikan sebuah struktur data komposit bernama \texttt{Parameters}.
+    
+    \item \texttt{parse\_expected\_result}
+    
+    Fungsi ini bertugas untuk menerjemahkan data \textit{ground truth} agar hasil identifikasi rombongan bisa dievaluasi oleh modul evaluasi. Data \textit{ground truth} diambil dari sebuah berkas teks dengan format \texttt{.txt} dengan \textit{encoding} UTF-8 yang memiliki nama yang sama dengan nama berkas sumber data pergerakan. 
+\end{enumerate}
+
+\iffalse
+
+\cristopher{ga penting?}
+
+Untuk memenuhi kebutuhan tersebut, digunakan struktur data bernama \texttt{Map}. \texttt{Map} dipilih karena struktur data tersebut memiliki kemampuan untuk menyimpan dan mengembalikan pemetaan dengan kompleksitas waktu yang cenderung kecil. Pada implementasi dari modul ini, digunakan 2 buah \texttt{Map} di mana \texttt{Map} pertama digunakan untuk memetakan \textit{frame} pada entitas-entitas yang tercatat pada data pergerakan dan \texttt{Map} kedua digunakan untuk membalik pemetaan dari \texttt{Map} pertama menjadi pemetaan entitas pada \textit{frame} sehingga mempermudah proses pembuatan struktur data komposit yang akan dikembalikan.
+
+\fi
 
 \section{Modul Rombongan}
 \label{sec:impl-rombongan}
 
-Modul Rombongan akan diimplementasikan dalam 2 berkas yaitu \texttt{rombongan.cpp} beserta berkas \textit{header} bernama \texttt{rombongan.h} dan berkas \texttt{similarity.cpp} beserta berkas \textit{header} bernama \texttt{similarity.h}. Pemisahan tersebut dilakukan untuk menegaskan pemisahan antara implementasi algoritma yang sudah ada dan implementasi algoritma yang diusulkan. Seluruh struktur data yang diperlikan untuk mengimplementasikan modul ini tersedia melalui pustaka standar bawaan C++. Modul ini akan mengembalikan kumpulan struktur data \textbf{Rombongan} yang disimpan dalam struktur data \texttt{vector}.
+Modul rombongan akan diimplementasikan dalam berkas \texttt{rombongan.cpp}. Seluruh struktur data yang diperlukan untuk mengimplementasikan modul ini tersedia melalui pustaka STL bawaan C++. Modul ini memiliki satu fungsi utama bernama \texttt{identify\_rombongan} yang merupakan implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan oleh algoritma \ref{bab3:algoritma-identifikasi}. Fungsi tersebut akan mengembalikan kumpulan \texttt{Rombongan} yang dapat diidentifikasi dalam data pergerakan pejalan kaki menggunakan parameter yang diberikan oleh pengguna.
 
-Berdasarkan hasil penerjemahan data pergerakan yang dihasilkan oleh modul Penerjemah, posisi dari entitas yang tidak terdapat dalam sebuah \textit{frame} akan dicatat sebagai tak hingga pada \textit{frame} tersebut. Hal tersebut dapat menimbulkan masalah pada penentuan kedekatan spasial antara dua entitas yang tidak muncul pada interval waktu minimum sepanjang $k$ karena jarak \textit{dynamic time warping} dari kedua entitas tersebut akan bernilai 0. Hasil tersebut tentunya bertentangan dengan syarat kedekatan spasial di mana kedua entitas harus tercatat dalam interval waktu yang bersangkutan. Untuk mengatasi hal tersebut, ditambahkan sebuah syarat kedekatan spasial yaitu $r > 0$ untuk setiap pasang entitas. 
+\section{Modul Spasial}
+
+Modul spasial akan diimplementasikan dalam berkas \texttt{spatial.cpp}. Seluruh struktur data yang diperlukan untuk mengimplementasikan modul ini tersedia melalui pustaka STL bawaan C++. Terdapat dua fungsi utama yang diimplementasikan modul ini, yaitu fungsi untuk menghitung jarak \textit{dynamic time warping} dan menghitung \textit{cosine similarity}.
+
+Fungsi untuk menghitung jarak \textit{dynamic time warping} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_dtw\_distance} yang merupakan implementasi konkrit dari algoritma \textit{dynamic time warping} dari algoritma \ref{bab2:dtw-pseudocode}. Sedangkan fungsi untuk menghitung nilai \textit{cosine similarity} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_cosine\_similarity} yang merupakan implementasi konkrit dari rumus \ref{bab3:cosine-similarity}.
 
 \section{Struktur Data}
 \label{sec:impl-struct}
 
-Berdasarkan rancangan perangkat lunak yang telah dibuat, terdapat tiga buah struktur data komposit yang perlu diimplementasikan. Seluruh struktur data akan diimplementasikan menggunakan \texttt{struct}. Hal tersebut dilakukan karena struktur-struktur data yang dibutuhkan merupakan struktur data statis yang nilainya tidak akan berubah dan struktur-struktur data ini tidak memiliki \textit{method} apapun yang biasanya terdapat pada \texttt{class}. Berikut merupakan detil implementasi dari ketiga struktur data tersebut:
+Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan implementasi yang telah dibahas sebelumnya, terdapat lima buah struktur data komposit yang perlu diimplementasikan. Seluruh struktur data akan diimplementasikan menggunakan kata kunci \texttt{struct}. Berikut merupakan detil implementasi dari ketiga struktur data tersebut:
 
 \begin{enumerate}
     \item \textbf{Parameters}
     
-    Struktur data ini menyimpan informasi mengenai parameter rombongan yang diberikan oleh pengguna. Struktur data ini diimplementasikan sebagai properti-properti yang merupakan kumpulan-kumpulan tipe data primitif hasil kembalian dari modul I/O.
+    Struktur data ini menyimpan informasi mengenai masukan pengguna yang diberikan melalui \textit{command line interface}. rombongan yang diberikan oleh pengguna. Struktur data ini diimplementasikan sebagai properti-properti yang merupakan kumpulan-kumpulan tipe data primitif hasil kembalian dari modul I/O.
     
     Nilai dari $m$ dan $k$ diimplementasikan sebagai bilangan bulat menggunakan tipe data \texttt{int}. Nilai dari $r$ dan $\vartheta$ diimplementasikan sebagai bilangan desimal menggunakan tipe data \texttt{double}. Nama berkas data pergerakan yang akan digunakan diimplementasikan menggunakan tipe data \texttt{string} yang bersumber dari pustaka bawaan C++.
+    
+    \item \textbf{Arguments}
     
     \item \textbf{Entity}
     
@@ -66,7 +110,12 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat, terdapat tiga buah stru
     Struktur data ini merupakan hasil dari identifikasi rombongan yang dikembalikan oleh modul Rombongan. Struktur data ini memiliki 3 buah properti yaitu \texttt{members} yang menyimpan nomor-nomor identitas entitas yang tergabung dalam rombongan, \texttt{start} yang menunjukkan \textit{frame} pertama di mana kumpulan entitas memenuhi syarat-syarat rombongan, dan \texttt{end} yang menunjukkan \textit{frame} terakhir di mana kumpulan entitas masih memenuhi syarat-syarat rombongan. Nilai \texttt{members} akan diimplementasikan menggunakan struktur data \texttt{vector}. Nilai dari \texttt{start} dan \texttt{end} diimplementasikan menggunakan tipe data \texttt{double}.
 \end{enumerate}
 
-\section{Unit Testing}
+\section{Pembangungan Perangkat Lunak}
+\label{sec:build-tools}
+
+Untuk membantu proses kompilasi kode perangkat lunak dari bahasa pemrograman C++ menjadi bahasa mesin, dibutuhkan sebuah perkakas bernama Make.
+
+\section{Pengujian Unit}
 \label{sec:unit-test}
 
 Sebelum melalui pengujian hasil algoritma identifikasi rombongan, modul-modul dalam perangkat lunak akan melalui proses \textit{unit testing}. \textit{Unit testing} merupakan sebuah metode pengujian perangkat lunak di mana sebuah modul dalam perangkat lunak akan diuji secara terisolasi dari modul-modul lainnya. Pada \textit{unit testing}, diharapkan bahwa setiap modul perangkat lunak dapat menghasilkan perilaku tertentu yang diharapkan. Hal tersebut dapat dicapai dengan memberikan seperangkat masukan yang sudah disediakan sebelumnya.
