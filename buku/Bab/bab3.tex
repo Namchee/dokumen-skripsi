@@ -144,6 +144,8 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \SetKwInput{KwInput}{Input}                % Set the Input
     \SetKwInput{KwOutput}{Output}              % set the Output
     \DontPrintSemicolon
+
+    \label{bab3:algoritma-identifikasi}
     
     \SetKwFunction{Rombongan}{FindRombongan}
  
@@ -161,7 +163,7 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \KwOutput{Kumpulan rombongan pada interval waktu konsekutif sepanjang $k$}
     
     \Fn{\Rombongan{$\mathcal{X}, m, k, r, \vartheta$}}{
-        $rombongan \gets sebuah\;pemetaan\;anggota\;rombongan\;pada\;interval\;waktu$ \\
+        $hasil \gets kumpulan\;rombongan\;yang\;teridentifikasi$ \\
         
         \For{$(start, end)$  intervals}{
             $collectiveMovements \gets kumpulan\;rombongan\;pada\;interval\;start-end$ \\
@@ -170,52 +172,52 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
             
             $directionVector \gets vektor\;arah\;dari\;setiap\;entitas\;pada\;interval\;start-end$ \\
             
-            \For{each entity $a$ in $\mathcal{X}$}{
-                $entitySet \gets kumpulan\;kelompok\;pergerakan\;yang\;beranggotakan\;a$ \\
-                \For{each entity $b$ in $\mathcal{X}$}{
-                    \For{each entity group $c$ in $entitySet$}{
+            \For{each entitas $a$ in $\mathcal{X}$}{
+                $entitySet \gets himpunan\;pergerakan\;kolektif\;yang\;beranggotakan\;a$ \\
+        
+                \For{each entitas $b$ in $\mathcal{X}$}{
+                
+                    \For{each himpunan entitas $c$ in $entitySet$}{
                         $isSimilarToAll \gets TRUE$ \\
                         
-                        \For{each entity $d$ in $c$}{
-                            $dtwC \gets DTWDistance(b, d)$ \\
-                            $cosineC \gets cosineSimilarity(b, d)$ \\
+                        \For{each entitas $d$ in $c$}{
+                            $dtwC \gets jarak\;DTW\;dari\;b\;dan\;d\;pada\;interval\;start-end$ \\
+                            $cosineC \gets cosine\;similarity\;dari\;b\;dan\;d\;pada\;interval\;start-end$ \\
                     
-                            \If{$c \neq b$ AND $(dtwC > r$ OR $cosineC < \vartheta)$}{
+                            \If{$b \neq d$ AND $(dtwC > r$ OR $cosineC < \vartheta)$}{
                                 $isSimilarToAll \gets FALSE$
                             }
                         }
                         
                         \If{$isSimilarToAll = TRUE$}{
                             $groupCpy \gets duplikat\;dari\;c$ \\
-                            $groupCpy.insert(b)$ \\
-                            $entitySet.insert(groupCpy)$
+                            $tambahkan\;b\;pada\;groupCpy$ \\
+                            $tambahkan\;groupCpy\;pada\;entitySet$
                         }
                     }
                     
-                    $dtwA \gets DTWDistance(a, b)$ \\
-                    $cosineA \gets cosineSimilarity(a, b)$ \\
+                    $dtw \gets jarak\;DTW\;dari\;a\;dan\;b\;pada\;interval\;start-end$ \\
+                    $cosine \gets cosine\;similarity\;dari\;a\;dan\;b\;pada\;interval\;start-end$ \\
                     
-                    \If{$dtwA \leq r$ AND $cosineA \geq \vartheta$}{
+                    \If{$dtw \leq r$ AND $cosine \geq \vartheta$}{
                         $newGroup \gets [a, b]$ \\
-                        $entitySet.insert(newGroup)$
+                        $tambahkan\;newGroup\;pada\;entitySet$
                     }
                 }
                 
-                \For{each entity group $\mathcal{G}$ in entitySet}{
-                    \If{$\mathcal{G}.size() \geq m$}{
-                        $collectiveMovements.insert(\mathcal{G})$
+                \For{each himpunan entitas $\mathcal{G}$ in entitySet}{
+                    \If{jumlah anggota $\mathcal{G}$ $\geq m$}{
+                        $tambahkan\;\mathcal{G}\;pada\;collectiveMovements$
                     }
                 }
             }
             
-            \For{each collective movement $\mathcal{C}$ in collectiveMovements}{
-                $rombongan.insert(\mathcal{C})$
+            \For{each rombongan $\mathcal{C}$ in collectiveMovements}{
+                $tambahkan\;\mathcal{C}\;pada\;hasil$
             }
         }
     }
-    \KwRet{$rombongan$}
-    
-    \label{bab3:algoritma-identifikasi}
+    \KwRet{$hasil$}
 \end{algorithm}
 
 \subsection{Analisis Kompleksitas Algoritma Identifikasi Rombongan}
