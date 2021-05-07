@@ -71,7 +71,7 @@ Pada skripsi ini, entitas yang diamati akan bergerak dalam ruang \textit{euclide
 
 Keterbatasan teknologi yang digunakan untuk memperoleh data lintasan menyebabkan data lintasan yang awalnya diharapkan bersifat kontinu berubah menjadi data yang bersifat diskrit. Perubahan sifat tersebut menyebabkan menurunnya akurasi data lintasan yang diperoleh. Penurunan akurasi ditandai oleh menurunnya jumlah sampel posisi-waktu pada data lintasan. Untuk menangani masalah sifat data lintasan yang tidak sesuai harapan, umumnya proses analisis hanya dilakukan sebatas pada titik-titik lokasi yang berhasil tercatat oleh sensor \cite{wiratma:trajectory}. Keunggulan dari cara tersebut adalah analisis yang dilakukan dapat berlangsung lebih cepat dan sederhana. Namun cara tersebut dapat menghasilkan hasil analisis yang keliru apabila diimplementasikan pada data lintasan yang memiliki jumlah sampel yang sedikit.
 
-Untuk menangani data lintasan dengan jumlah sampel yang sedikit, data lintasan dapat diinterpolasi untuk mengetahui posisi dan waktu antara sampel posisi-waktu yang tersedia. Terdapat beberapa jenis interpolasi yang umumn digunakan untuk menginterpolasi data lintasan seperti interpolasi linear \cite{wiratma:trajectory}, interpolasi menggunakan kurva \textit{curvilinear} seperti kurva \textit{Bezier} \cite{tremblay:02:curvilinear}, \textit{constrained random walk} \cite{wentz:02:constrained-random-walk}, dan masih banyak lagi. Gambar \ref{bab2:interpolasi-lintasan} menunjukkan pengaplikasian interpolasi linear untuk meningkatkan akurasi pada sebuah data lintasan.
+Untuk menangani data lintasan dengan jumlah sampel yang sedikit, data lintasan dapat diinterpolasi untuk mengetahui posisi dan waktu antara sampel posisi-waktu yang tersedia. Terdapat beberapa jenis interpolasi yang umum digunakan untuk menginterpolasi data lintasan seperti interpolasi linear \cite{wiratma:trajectory}, interpolasi menggunakan kurva \textit{curvilinear} seperti kurva \textit{Bezier} \cite{tremblay:02:curvilinear}, \textit{constrained random walk} \cite{wentz:02:constrained-random-walk}, dan masih banyak lagi. Gambar \ref{bab2:interpolasi-lintasan} menunjukkan pengaplikasian interpolasi linear untuk meningkatkan akurasi pada sebuah data lintasan.
 
 \begin{figure}[h]
     \centering
@@ -243,7 +243,7 @@ Dua keunggulan tersebut diperoleh dari cara perbandingan data lintasan pada algo
         \caption{Penghitungan kemiripan non-linear menggunakan algoritma \textit{dynamic time warping}}
         \label{bab2:dtw}
     \end{subfigure}
-    \caption{Perbandingan penghitungan kemiripan menggunakan jarak \textit{euclidean} dan algoritma \textit{dynamic time warping}}
+    \caption[Perbandingan kemiripan lintasan secara linear dan non-linear]{Perbandingan penghitungan kemiripan menggunakan jarak \textit{euclidean} dan algoritma \textit{dynamic time warping}}
     \label{bab2:dtw-euclidean}
 \end{figure}
 
@@ -301,6 +301,8 @@ Jarak total $c_p$ dari sebuah \textit{warping path} yang valid merupakan akumula
 
 \textit{Warping path} optimal antara dua buah lintasan merupakan \textit{warping path} $p^*$ yang memiliki jarak terkecil di antara semua \textit{warping path} yang valid. Jarak \textit{dynamic time warping} $DTW(X, Y)$ antara dua buah lintasan $X$ dan $Y$ merupakan jarak total dari \textit{warping path} $p^*$. Secara formal, jarak \textit{dynamic time warping} dari dua buah lintasan $X$ dan $Y$ dapat dinyatakan sebagai:
 
+\vspace{-10pt}
+
 \begin{align*}
     DTW(X, Y) & = c\textsubscript{$p*$}(X, Y) \\
     & = min\{c_p(X, Y)\;|\;p\;adalah\;warping\;path\;dari\;lintasan\;(X, Y)\}
@@ -311,31 +313,37 @@ Jarak total $c_p$ dari sebuah \textit{warping path} yang valid merupakan akumula
 Karena proses perhitungan jarak total \textit{warping path} memiliki properti \textit{optimal substructure}, algoritma \textit{dynamic time warping} biasanya diimplementasikan menggunakan prinsip \textit{dynamic time warping} untuk meningkatkan efisiensi algoritma pada proses perhitungan jarak total \textit{warping path}. Berikut merupakan implementasi sederhana dari algoritma \textit{dynamic time warping}:
 
 \begin{algorithm}
-    \caption{Implementasi Algoritma \textit{Dynamic Time Warping}}
+    \caption{Algoritma \textit{Dynamic Time Warping}}
     \SetKwInput{KwInput}{Input}                % Set the Input
     \SetKwInput{KwOutput}{Output}              % set the Output
     \DontPrintSemicolon
+    \SetKwFunction{DTW}{DTWDistance}
+    
+    \label{bab2:dtw-pseudocode}
+ 
+    \SetKwProg{Fn}{Function}{:}{}
   
     \KwInput{Dua buah lintasan $X$ dan $Y$ yang terdiri atas pasangan $(posisi, waktu)$}
     \KwOutput{Sebuah bilangan \textit{real} yang merupakan jarak \textit{dynamic time warping} dari lintasan $X$ dan $Y$}
     
-    $n \gets length(X)$ \\
-    $m \gets length(Y)$ \\
-    $DTW \gets array [0 \dots n, 0 \dots m]$ \\
-    \For{$i \gets 0$ \KwTo{n}}{
-        \For{$j \gets 0$ \KwTo{m}}{
-            $DTW[i, j] \gets \infty$
+    \Fn{\DTW{$X, Y$}}{
+        $n \gets length(X)$ \\
+        $m \gets length(Y)$ \\
+        $DTW \gets array [0 \dots n, 0 \dots m]$ \\
+        \For{$i \gets 0$ \KwTo{n}}{
+            \For{$j \gets 0$ \KwTo{m}}{
+                $DTW[i, j] \gets \infty$
+            }
         }
-    }
-    $DTW[0, 0] \gets 0$ \\
-    \For{$i \gets 1$ \KwTo{n}}{
-        \For{$j \gets 1$ \KwTo{m}}{
-            $cost \gets d(x_i, y_i)$ \\
-            $DTW[i, j] \gets cost + \min(DTW[i - 1, j], DTW[i, j - 1], DTW[i - 1, j - 1])$
+        $DTW[0, 0] \gets 0$ \\
+        \For{$i \gets 1$ \KwTo{n}}{
+            \For{$j \gets 1$ \KwTo{m}}{
+                $cost \gets d(x_i, y_i)$ \\
+                $DTW[i, j] \gets cost + \min(DTW[i - 1, j], DTW[i, j - 1], DTW[i - 1, j - 1])$
+            }
         }
+        \KwRet{$DTW[n, m]$}
     }
-    \KwRet{$DTW[n, m]$}
-    \label{bab2:dtw-pseudocode}
 \end{algorithm}
 
 Pada implementasi di atas, algoritma \textit{dynamic time warping} memiliki kompleksitas waktu dan tempat sebesar $O(MN)$, di mana $M$ merupakan jumlah posisi yang tercatat pada lintasan $X$ dan $N$ merupakan jumlah posisi yang tercatat pada lintasan $Y$. Selain implementasi di atas, terdapat beberapa variasi implementasi untuk algoritma \textit{dynamic time warping} seperti PrunedDTW \cite{diego:02:pruned-dtw}, SparseDTW \cite{ghazi:02:sparse-dtw}, FastDTW \cite{salvador:02:fast-dtw}, dan berbagai variasi implementasi lainnya.
@@ -364,6 +372,8 @@ Diberikan dua buah lintasan berdimensi satu $X = ((3, 0), (1, 1), (2, 2), (2, 3)
 \end{figure}
 
 Setelah seluruh \textit{warping path} yang valid untuk kedua lintasan tersebut berhasil ditemukan, langkah selanjutnya yang perlu dilakukan adalah mencari jarak total untuk seluruh \textit{warping path} yang ditemukan, yang dapat dicari menggunakan rumus \ref{bab2:warping-path-length}. Berdasarkan rumus tersebut, maka jarak total untuk \textit{warping path} yang ditunjukkan melalui gambar \ref{bab2:warping-path} dapat dihitung sebagai:
+
+\vspace{-7.5pt}
 
 \begin{align*}
     c_p(X, Y) & = \sum_{\ell = 1}^{L} |x_\ell - y_\ell| \\
@@ -439,7 +449,7 @@ Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kol
 \begin{itemize}
     \item \textbf{Flock}
     
-    Diberikan sebuah himpunan lintasan dari $n$ buah entitas yang masing-masing terdiri dari $\gamma$ segmen garis, jumlah entitas minimum $m$, interval waktu minimum $k$, dan jarak maksimum antar entitas $r$. Sebuah \textit{flock} pada interval waktu konsekutif $I\;(I \geq k)$ merupakan sebuah pergerakan kolektif yang terdiri dari setidaknya $m$ entitas dan untuk setiap satuan waktu pada interval waktu $I$, terdapat sebuah cakram (\textit{disc}) dengan radius $r$ di mana seluruh entitas memiliki jarak kurang dari $r$ ke titik pusat cakram \cite{gudmundsson:flock}. Gambar \ref{bab2:flock} menunjukkan pemodelan sederhana dari sebuah \textit{flock}.
+    Diberikan sebuah himpunan lintasan dari $n$ buah entitas yang masing-masing terdiri dari $\gamma$ segmen garis, jumlah entitas minimum $m$, interval waktu minimum $k$, dan jarak maksimum antar entitas $r$. Sebuah \textit{flock} pada interval waktu konsekutif $I\;(I \geq k)$ merupakan sebuah pergerakan kolektif yang terdiri dari setidaknya $m$ buah entitas dan untuk setiap satuan waktu pada interval waktu $I$, terdapat sebuah cakram (\textit{disc}) dengan radius $r$ di mana seluruh entitas memiliki jarak kurang dari $r$ ke titik pusat cakram \cite{gudmundsson:flock}. Gambar \ref{bab2:flock} menunjukkan pemodelan sederhana dari sebuah \textit{flock}.
     
     \begin{figure}[h]
         \centering
