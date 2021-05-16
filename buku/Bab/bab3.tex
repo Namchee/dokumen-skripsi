@@ -114,12 +114,14 @@ Berkaca dari masalah-masalah pada definisi formal pergerakan kolektif sebelumnya
 
 Dengan mempertimbangkan aspek-aspek di atas dan upaya penyelesaian masalah pada definisi formal pergerakan kolektif yang sudah ada, dapat dibuat sebuah definisi pergerakan kolektif baru bernama rombongan yang secara formal dinyatakan sebagai:
 
-\noindent \textbf{\pergerakankolektif($m$, $k$, $r$, $\vartheta$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$ yang memiliki jumlah entitas sebanyak $n$, jumlah entitas minimum sebanyak $m$ buah entitas di mana $k \in [2, n]$, interval waktu minimum selama $k$ satuan waktu di mana $k \geq 2$, jarak maksimum antar entitas sepanjang $r$ satuan panjang di mana $r \in \mathbb{R}^+$, dan nilai kemiripan sudut minimum sebesar $\vartheta$ di mana $\vartheta \in [-1, 1]$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$. Sebuah rombongan pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung satu sama lain selama interval waktu $I$ secara konsekutif.
+\noindent \textbf{\pergerakankolektif($m$, $k$, $r$, $\vartheta$, $c$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$ yang memiliki jumlah entitas sebanyak $n$, jumlah entitas minimum sebanyak $m$ buah entitas di mana $k \in [2, n]$, interval waktu minimum selama $k$ satuan waktu di mana $k \geq 2$, jarak maksimum antar entitas sepanjang $r$ satuan panjang di mana $r \in \mathbb{R}^+$, dan nilai kemiripan sudut minimum sebesar $\vartheta$ di mana $\vartheta \in [-1, 1]$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$.
+
+Sebuah rombongan pada interval waktu $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung dengan setidaknya $c$ anggota berbeda dari sub himpunan $\mathcal{X}$ selama interval waktu $I$ secara konsekutif.
 
 \section{Algoritma Identifikasi Rombongan}
 \label{sec:algoritma}
     
-Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$ buah entitas, interval waktu minimum selama $k$ satuan waktu, jarak \textit{dynamic time warping} maksimum sepanjang $r$ satuan panjang, dan nilai \textit{cosine similarity} minimum sebesar $\vartheta$. Himpunan rombongan yang terbentuk dalam himpunan entitas $\mathcal{X}$ dapat dicari menggunakan algoritma yang dinyatakan melalui algoritma \ref{bab3:algoritma-identifikasi}. Berikut merupakan uraian dari langkah-langkah yang ditempuh dalam algoritma identifikasi rombongan:
+Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum sebanyak $m$ buah entitas, interval waktu minimum selama $k$ satuan waktu, jarak \textit{dynamic time warping} maksimum sepanjang $r$ satuan panjang, nilai \textit{cosine similarity} minimum sebesar $\vartheta$, dan nilai kedekatan minimum sebesar $c$. Himpunan rombongan yang terbentuk dalam himpunan entitas $\mathcal{X}$ dapat dicari menggunakan algoritma yang dinyatakan melalui algoritma \ref{bab3:algoritma-identifikasi}. Berikut merupakan uraian dari langkah-langkah yang ditempuh dalam algoritma identifikasi rombongan:
 
 \begin{enumerate}
     \item Inisialisasi sebuah himpunan $\mathcal{R}$ yang akan menyimpan himpunan rombongan yang teridentifikasi untuk setiap interval waktu $I$.
@@ -130,8 +132,7 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
         \item Inisialiasi sebuah himpunan $\mathcal{T}$ yang akan menyimpan himpunan rombongan yang teridentifikasi pada interval waktu $I$.
         \item Cari setiap sub lintasan dan vektor arah untuk setiap entitas pada himpunan $\mathcal{X}$ pada interval waktu $I$.
         \item Inisialisasi $\mathcal{S}$ untuk setiap entitas $a$ yang terdapat pada $\mathcal{X}$. $\mathcal{S}$ merupakan kumpulan dari himpunan entitas yang masing-masing beranggotakan $a$.
-        \item Untuk setiap himpunan entitas pada $\mathcal{S}$, hitung jarak \textit{dynamic time warping} dan \textit{cosine similarity} dari setiap anggota dari himpunan entitas $c$ dengan entitas lain yang 
-        tidak termasuk dalam anggota $c$. Apabila jarak \textit{dynamic time warping} dari entitas $d$ dan setiap anggota dari himpunan $c$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari entitas $d$ dan setiap anggota dari himpunan $c$ lebih besar atau sama dengan $\vartheta$, tambahkan sebuah himpunan entitas baru $\mathcal{U}$ pada $\mathcal{S}$ di mana $\mathcal{U}$ merupakan salinan dari $c$ ditambah dengan entitas $d$.
+        \item Untuk setiap himpunan entitas pada $\mathcal{S}$, hitung keterhubungan entitas $d$ di mana $d \in \mathcal{X}$ dengan setiap anggota dari himpunan entitas $n$ dengan cara menghitung jarak \textit{dynamic time warping} dan \textit{cosine similarity} dari setiap anggota dari himpunan entitas $n$. Entitas $d$ dikatakan terhubungan dengan sebuah anggota dari himpunan entitas $n$ apabila entitas $d$ memiliki jarak \textit{dynamic time warping} kurang dari atau sama dengan $r$ dan nilai \textit{cosine similarity} lebih dari atau sama dengan $\vartheta$ dengan anggota tersebut. Apabila jumlah keterhubungan entitas $d$ dengan anggota-anggota $n$ lebih besar atau sama dengan $c$, tambahkan entitas $d$ sebagai anggota dari himpunan entitas $n$.
         \item Hitung jarak \textit{dynamic time warping} dan nilai  \textit{cosine similarity} antara entitas $a$ dengan entitas-entitas lainnya dalam $\mathcal{X}$. Untuk setiap entitas lain $b$ yang memiliki jarak \textit{dynamic time warping} kurang dari atau sama dengan $r$ dan nilai \textit{cosine similarity} lebih dari atau sama dengan $\vartheta$ dengan entitas $a$, buatlah sebuah himpunan baru yang beranggotakan $a$ dan $b$ dan tambahkan himpunan tersebut pada $\mathcal{S}$.
         \item Tambahkan setiap anggota dari himpunan $\mathcal{S}$ pada $\mathcal{T}$.
         \item Tambahkan setiap anggota dari himpunan $\mathcal{T}$ pada himpunan $\mathcal{R}$.
@@ -190,9 +191,7 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
                         }
                         
                         \If{$isSimilarToAll = TRUE$}{
-                            $groupCpy \gets duplikat\;dari\;c$ \\
-                            $tambahkan\;b\;pada\;groupCpy$ \\
-                            $tambahkan\;groupCpy\;pada\;entitySet$
+                            $tambahkan\;b\;pada\;c$
                         }
                     }
                     
@@ -246,7 +245,7 @@ Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan
 
 Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan memiliki kompleksitas ruang sebesar $O(n^3)$ di mana $n$ merupakan jumlah entitas yang terdapat pada $\mathcal{X}$.
 
-Nilai kompleksitas tersebut didapatkan dari kompleksitas tempat paling signifikan `yang digunakan untuk menyimpan $entitySet$ yang terdapat pada baris $8$ pada algoritma identifikasi rombongan. Berdasarkan cara kerja algoritma, $entitySet$ dapat beranggotakan sebanyak $n^2$ himpunan. Masing-masing himpunan dapat memiliki paling banyak sebanyak $n$ entitas. Oleh karena itu, dibutuhkan sebanyak $n^3$ tempat untuk menyimpan $entitySet$. 
+Nilai kompleksitas tersebut didapatkan dari kompleksitas tempat paling signifikan yang digunakan untuk menyimpan $entitySet$ yang terdapat pada baris $8$ pada algoritma identifikasi rombongan. Berdasarkan cara kerja algoritma, $entitySet$ dapat beranggotakan sebanyak $n^2$ himpunan. Masing-masing himpunan dapat memiliki paling banyak sebanyak $n$ entitas. Oleh karena itu, dibutuhkan sebanyak $n^3$ tempat untuk menyimpan $entitySet$. 
 
 \section{Contoh Proses Identifikasi Rombongan}
 \label{sec:algorithm-example}
