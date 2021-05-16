@@ -188,12 +188,7 @@ Fungsi untuk menghitung nilai \textit{cosine similarity} akan diimplementasikan 
 \section{Modul Evaluasi}
 \label{sec:impl-eval}
 
-Modul evaluasi diimplementasikan dalam berkas \texttt{eval.cpp}. Modul ini memiliki satu fungsi utama bernama \texttt{calculate\_score} yang mengembalikan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari evaluasi kuantitatif dari hasil identifikasi rombongan. Untuk memenuhi kebutuhan akan pengembalian 3 nilai sekaligus, dibuat sebuah struktur data baru bernama \texttt{Score} yang akan dikembalikan oleh fungsi \texttt{calculate\_score}. 
-
-\section{Struktur Data}
-\label{sec:impl-struct}
-
-Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan implementasi yang telah dibahas sebelumnya, terdapat lima buah struktur data komposit baru yang perlu diimplementasikan. Seluruh struktur data akan diimplementasikan menggunakan tipe data \texttt{struct}. Berikut merupakan detil implementasi dari seluruh struktur data komposit yang dibutuhkan:
+Modul evaluasi diimplementasikan dalam berkas \texttt{eval.cpp}. Modul ini memiliki satu fungsi utama bernama \texttt{calculate\_score} yang menerima rombongan yang teridentifikasi melalui algoritma dan rombongan yang berasal dari \textit{ground truth}. Fungsi tersebut mengembalikan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari evaluasi kuantitatif dari hasil identifikasi rombongan. Untuk memenuhi kebutuhan akan pengembalian 3 nilai sekaligus, dibuat sebuah struktur data baru bernama \texttt{Score} yang akan dikembalikan oleh fungsi \texttt{calculate\_score}.
 
 \begin{lstlisting}[language=C++, caption=Implementasi fungsi \texttt{calculate\_cosine\_similarity}, label={bab5:cosine-similarity}]
     /**
@@ -237,22 +232,29 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     }
 \end{lstlisting}
 
+\section{Struktur Data}
+\label{sec:impl-struct}
+
+Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan implementasi yang telah dibahas sebelumnya, terdapat lima buah struktur data komposit baru yang perlu diimplementasikan. Seluruh struktur data akan diimplementasikan menggunakan tipe data \texttt{struct}. Berikut merupakan detil implementasi dari seluruh struktur data komposit yang dibutuhkan:
+
+
+
 \begin{enumerate}
     \item \texttt{Arguments}
     
     Struktur data ini menyimpan informasi mengenai masukan pengguna yang diberikan melalui \textit{command line interface}. rombongan yang diberikan oleh pengguna. Struktur data ini diimplementasikan sebagai properti-properti yang merupakan kumpulan-kumpulan tipe data primitif hasil penerjemahan dari masukan pengguna.
     
-    Nilai dari $m$ disimpan sebagai bilangan bulat menggunakan tipe data \texttt{unsigned int}. Nilai dari $fps$, $k$, $r$ dan $\vartheta$ disimpan sebagai bilangan desimal menggunakan tipe data \texttt{double}. Nama berkas dan letak berkas dari data pergerakan yang akan digunakan disimpan menggunakan tipe data \texttt{string}. Tipe data \texttt{string} yang digunakan bersumber dari pustaka STL bawaan C++. Potongan kode \ref{bab5:arguments} menunjukkan kode perangkat lunak untuk struktur data \texttt{Arguments}. 
+    Nilai dari $m$ dan $n$ disimpan sebagai bilangan bulat menggunakan tipe data \texttt{unsigned int}. Nilai dari $k$, $r$, dan $\vartheta$ disimpan sebagai bilangan desimal menggunakan tipe data \texttt{double}. Nama berkas dan letak berkas dari data pergerakan yang akan digunakan disimpan menggunakan tipe data \texttt{string}. Tipe data \texttt{string} yang digunakan bersumber dari pustaka STL bawaan C++. Potongan kode \ref{bab5:arguments} menunjukkan kode perangkat lunak untuk struktur data \texttt{Arguments}. 
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Arguments}, label={bab5:arguments}]
         typedef struct Arguments {
             std::string source;
             std::string path;
             unsigned int entities;
+            unsigned int closeness;
             double interval;
             double range;
             double angle;
-            double fps;
         } Arguments;
     \end{lstlisting}
     
@@ -260,11 +262,11 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     Struktur data ini menyimpan parameter yang akan digunakan oleh fungsi \texttt{identify\_rombongan} untuk melakukan identifikasi terhadap rombongan pada data pergerakan. Parameter tersebut didapatkan melalui masukan pengguna yang disimpan pada \texttt{Arguments}.
     
-    Nilai $k$ pada struktur data ini didapatkan dengan mengalikan nilai $fps$ dan $k$. Nilai $r$ pada struktur data ini didapatkan dengan mengalikan nilai $fps$, $r$, dan $k$ yang terdapat pada masukan mentah pengguna. Properti lainnya didapatkan secara langsung melalui \texttt{Arguments}. Potongan kode \ref{bab5:parameters} menunjukkan kode perangkat lunak untuk struktur data \texttt{Parameters}.
+    Nilai $r$ pada struktur data ini didapatkan dengan mengalikan nilai $r$ dan $k$ yang terdapat pada masukan mentah pengguna. Properti lainnya didapatkan secara langsung melalui \texttt{Arguments}. Potongan kode \ref{bab5:parameters} menunjukkan kode perangkat lunak untuk struktur data \texttt{Parameters}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Parameters}, label={bab5:parameters}]
         typedef struct Parameter {
-            unsigned int p, m, k;
+            unsigned int m, k, n;
             double r, cs;
         } Parameter;
     \end{lstlisting}
@@ -322,10 +324,3 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
         } Score;
     \end{lstlisting}
 \end{enumerate}
-
-\section{Pengujian Unit}
-\label{sec:unit-test}
-
-Sebelum melalui pengujian hasil algoritma identifikasi rombongan, modul-modul dalam perangkat lunak akan melalui proses \textit{unit testing}. \textit{Unit testing} merupakan sebuah metode pengujian perangkat lunak di mana sebuah modul dalam perangkat lunak akan diuji secara terisolasi dari modul-modul lainnya. Pada \textit{unit testing}, diharapkan bahwa setiap modul perangkat lunak dapat menghasilkan perilaku tertentu yang diharapkan. Hal tersebut dapat dicapai dengan memberikan seperangkat masukan yang sudah disediakan sebelumnya.
-
-Untuk melakukan \textit{unit testing} pada perangkat lunak identifikasi rombongan, digunakan sebuah perkakas pengujian bernama CTest yang terintergrasi langsung bersama CMake. Dengan menggunakan CTest, berkas-berkas \textit{unit testing} dapat dikelola dan dieksekusi dengan cara yang lebih mudah dibandingkan dengan melakukan pengujian secara manual. Seluruh berkas modul dalam perangkat lunak akan melalui tahap \textit{unit testing}, kecuali untuk berkas \texttt{rombongan.cpp} dan \texttt{rombongan.h}. Hal tersebut dilakukan mengingat tidak ada standar kebenaran absolut yang dapat digunakan untuk menguji berkas-berkas tersebut. Kedua berkas tersebut akan diuji secara langsung melalui bab Eksperimen.
