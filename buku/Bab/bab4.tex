@@ -51,7 +51,7 @@ Interaksi antar kelima modul tersebut serta proses-proses yang dilalui selama pe
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.9\textwidth]{Gambar/bab4:dfd-level-1.pdf}
+    \includegraphics[width=\textwidth]{Gambar/bab4:dfd-level-1.pdf}
     \caption{Diagram alir data tingkat pertama}
     \label{bab4:dfd-level-1}
 \end{figure}
@@ -64,7 +64,7 @@ Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
 \begin{enumerate}
     \item \textbf{Input / Penerjemahan Masukan}
     
-    Saat perangkat lunak dieksekusi melalui \textit{command line interface}, perangkat lunak akan meminta seperangkat masukan dari pengguna dalam bentuk \texttt{<nama-sumber-data> <fps> <m> <k> <r> <$\vartheta$>}. $fps$ merupakan jumlah \textit{frame} yang terdapat dalam sumber data. $m$ merupakan jumlah anggota minimum dalam rombongan. $k$ merupakan rentang waktu minimum rombongan dalam satuan detik. $r$ merupakan jarak \textit{dynamic time warping} maksimum antar anggota rombongan dalam satuan meter. $\vartheta$ merupakan beda sudut maksimum antar anggota rombongan dalam satuan derajat.
+    Saat perangkat lunak dieksekusi melalui \textit{command line interface}, perangkat lunak akan meminta seperangkat masukan dari pengguna dalam bentuk \texttt{<nama-sumber-data> <m> <k> <r> <$\vartheta$> <n>}. $m$ merupakan jumlah anggota minimum dalam rombongan. $k$ merupakan rentang waktu minimum rombongan dalam satuan detik. $r$ merupakan jarak \textit{dynamic time warping} maksimum antar anggota rombongan dalam satuan meter. $\vartheta$ merupakan beda sudut maksimum antar anggota rombongan dalam satuan derajat. $n$ merupakan jumlah kedekatan minimum agar sebuah entitas dapat tergabung dalam sebuah rombongan.
     
     Sebelum perangkat lunak menjalankan proses selanjutnya, masukan tersebut akan divalidasi supaya memenuhi seluruh syarat berikut:
     
@@ -72,6 +72,7 @@ Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
         \item Nilai dari \texttt{m} harus merupakan bilangan bulat yang lebih besar dari 2.
         \item Nilai dari \texttt{k} harus merupakan bilangan positif.
         \item Nilai dari \texttt{r} harus merupakan bilangan positif.
+        \item Nilai dari \texttt{n} harus merupakan bilangan non-negatif.
     \end{enumerate}
     
     Apabila masukan yang diberikan oleh pengguna tidak memenuhi seluruh syarat di atas, proses penerjemahan masukan akan menampilkan pesan kesalahan pada pengguna dan menghentikan proses eksekusi perangkat lunak.
@@ -87,7 +88,7 @@ Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
     
     \item \textbf{Output / Pembuatan Berkas Hasil}
     
-    Setelah proses identifikasi rombongan selesai, hasil dari proses identifikasi tersebut akan diteruskan pada modul I/O agar hasil tersebut dapat disimpan dalam bentuk berkas teks biasa yang mudah dibaca dan dievaluasi. Berkas teks hasil akan memiliki nama yang sama dengan nama dari sumber data.
+    Setelah proses identifikasi rombongan selesai, hasil dari proses identifikasi tersebut akan diteruskan pada modul I/O agar hasil tersebut dapat disimpan dalam bentuk berkas teks biasa yang mudah dibaca dan dievaluasi.
     
     Berkas teks hasil akan mengandung informasi mengenai parameter identifikasi rombongan yang digunakan, evaluasi hasil identifikasi rombongan yang dihasilkan oleh modul evaluasi, serta daftar rombongan yang berhasil teridentifikasi.
 \end{enumerate}
@@ -139,12 +140,12 @@ Modul penerjemah bertanggung jawab untuk melaksanakan 2 proses berikut:
 \section{Modul Rombongan}
 \label{sec:des-rombongan}
 
-Modul rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui algoritma \ref{bab3:algoritma-identifikasi}. Modul rombongan akan menghasilkan rombongan-rombongan yang teridentifikasi pada data pergerakan yang sesuai dengan parameter identifikasi yang diterjemahkan dari masukan pengguna oleh modul penerjemah. Pada proses identifikasi rombongan, modul rombongan akan menggunakan algoritma \textit{dynamic time warping} dan perhitungan \textit{cosine similarity} yang diimplementasikan dalam modul spasial.
+Modul rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma \ref{bab3:algoritma-identifikasi}. Modul rombongan akan menghasilkan rombongan-rombongan yang teridentifikasi pada data pergerakan yang sesuai dengan parameter identifikasi yang diterjemahkan dari masukan pengguna oleh modul penerjemah. Pada proses identifikasi rombongan, modul rombongan akan menggunakan algoritma \textit{dynamic time warping} dan perhitungan \textit{cosine similarity} yang diimplementasikan dalam modul spasial.
 
 \section{Modul Spasial}
 \label{sec:des-spatial}
 
-Modul spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul rombongan untuk mempermudah pengujian perangkat lunak. Modul spasial akan mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh rumus \ref{bab3:cosine-similarity}.
+Modul spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul rombongan untuk mempermudah pengujian perangkat lunak. Modul spasial akan mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh Algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh Rumus \ref{bab3:cosine-similarity}.
 
 \section{Modul Evaluasi}
 \label{sec:des-evaluation}
