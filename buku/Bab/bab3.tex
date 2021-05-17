@@ -140,7 +140,16 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \item Kembalikan himpunan $\mathcal{R}$ sebagai hasil. Pada tahap ini, himpunan $\mathcal{R}$ akan berisi kumpulan rombongan yang terbentuk pada setiap interval waktu konsekutif $I$ yang memiliki panjang durasi minimum sebesar $k$ satuan waktu.
 \end{enumerate}
 
-\begin{algorithm}[t]
+\subsection{Analisis Kompleksitas Algoritma Identifikasi Rombongan}
+\label{subsec:complexity}
+
+Dalam mendesain sebuah algoritma yang baik, perlu dilakukan proses analisis kompleksitas terhadap algoritma yang akan dibuat. Melalui proses analisis algoritma, karakteristik dan perilaku dari algoritma tersebut dapat diketahui di mana hal tersebut dapat menjadi pertimbangan bagi calon pengguna algoritma untuk memilih algoritma terbaik sesuai kebutuhannya.
+
+Terdapat dua jenis kompleksitas yang dimiliki oleh sebuah algoritma, yaitu kompleksitas waktu dan kompleksitas tempat. Kompleksitas waktu merujuk pada jumlah operasi yang harus dikerjakan oleh algoritma untuk memproses masukan sampai menghasilkan nilai keluaran. Kompleksitas tempat merujuk pada kebutuhan ruang memori yang dibutuhkan oleh algoritma untuk memproses masukan sampai menghasilkan nilai keluaran.
+
+\clearpage
+
+\begin{algorithm}[H]
     \caption{Algoritma Identifikasi Rombongan}
     \SetKwInput{KwInput}{Input}                % Set the Input
     \SetKwInput{KwOutput}{Output}              % set the Output
@@ -159,14 +168,15 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
             \item Interval waktu minimum $k$
             \item Jarak \textit{dynamic time warping} maksimum antar entitas $r$
             \item Nilai \textit{cosine similarity} minimum $\vartheta$
+            \item Jumlah kedekatan minimum $n$
         \end{itemize}
     }
     \KwOutput{Kumpulan rombongan pada interval waktu konsekutif sepanjang $k$}
     
-    \Fn{\Rombongan{$\mathcal{X}, m, k, r, \vartheta$}}{
+    \Fn{\Rombongan{$\mathcal{X}, m, k, r, \vartheta$, $n$}}{
         $hasil \gets kumpulan\;rombongan\;yang\;teridentifikasi$ \\
         
-        \For{$(start, end)$  intervals}{
+        \For{$(start, end)$ in interval waktu}{
             $collectiveMovements \gets kumpulan\;rombongan\;pada\;interval\;start-end$ \\
             
             $subTrajectories \gets sub\;lintasan\;dari\;setiap\;entitas\;pada\;interval\;start-end$ \\
@@ -179,18 +189,18 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
                 \For{each entitas $b$ in $\mathcal{X}$}{
                 
                     \For{each himpunan entitas $c$ in $entitySet$}{
-                        $isSimilarToAll \gets TRUE$ \\
+                        $closeness \gets 0$ \\
                         
                         \For{each entitas $d$ in $c$}{
                             $dtwC \gets jarak\;DTW\;dari\;b\;dan\;d\;pada\;interval\;start-end$ \\
                             $cosineC \gets cosine\;similarity\;dari\;b\;dan\;d\;pada\;interval\;start-end$ \\
                     
-                            \If{$b \neq d$ AND $(dtwC > r$ OR $cosineC < \vartheta)$}{
-                                $isSimilarToAll \gets FALSE$
+                            \If{$b \neq d$ AND $dtwC \leq r$ AND $cosineC \geq \vartheta$}{
+                                $closeness \gets closeness + 1$
                             }
                         }
                         
-                        \If{$isSimilarToAll = TRUE$}{
+                        \If{$closeness \geq n$}{
                             $tambahkan\;b\;pada\;c$
                         }
                     }
@@ -219,13 +229,6 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \KwRet{$hasil$}
 \end{algorithm}
 
-\subsection{Analisis Kompleksitas Algoritma Identifikasi Rombongan}
-\label{subsec:complexity}
-
-Dalam mendesain sebuah algoritma yang baik, perlu dilakukan proses analisis kompleksitas terhadap algoritma yang akan dibuat. Melalui proses analisis algoritma, karakteristik dan perilaku dari algoritma tersebut dapat diketahui di mana hal tersebut dapat menjadi pertimbangan bagi calon pengguna algoritma untuk memilih algoritma terbaik sesuai kebutuhannya.
-
-Terdapat dua jenis kompleksitas yang dimiliki oleh sebuah algoritma, yaitu kompleksitas waktu dan kompleksitas tempat. Kompleksitas waktu merujuk pada jumlah operasi yang harus dikerjakan oleh algoritma untuk memproses masukan sampai menghasilkan nilai keluaran. Kompleksitas tempat merujuk pada kebutuhan ruang memori yang dibutuhkan oleh algoritma untuk memproses masukan sampai menghasilkan nilai keluaran.
-
 \subsubsection{Kompleksitas Waktu Algoritma Identifikasi Rombongan}
 \label{subsubsec:time-complexity}
 
@@ -237,15 +240,61 @@ Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan
     \item Pada baris $9$, algoritma identifikasi akan mengevaluasi setiap entitas yang terdapat pada $\mathcal{X}$ selain entitas yang dirujuk oleh proses pada baris $7$. Proses tersebut memiliki kompleksitas waktu sebesar $O(n)$.
     \item Pada baris $10$, algoritma identifikasi akan mengevaluasi kedekatan spasial entitas yang dirujuk pada baris $9$ dengan seluruh himpunan entitas yang terdapat pada $\mathcal{C}$. Berdasarkan cara kerja algoritma, himpunan entitas $\mathcal{C}$ dapat memiliki sebanyak $n^2$ anggota. Sehingga proses evaluasi akan memiliki kompleksitas waktu sebesar $O(n^2)$.
     \item Pada baris $12$, algoritma identifikasi akan menguji kedekatan spasial dari entitas yang dirujuk pada baris $9$ dengan setiap anggota dari salah satu anggota dari himpunan entitas $\mathcal{C}$. Berdasarkan cara kerja algoritma, sebuah himpunan entitas yang terdapat pada $\mathcal{C}$ dapat memiliki anggota sebanyak $n$ entitas. Sehingga proses pengujian kedekatan spasial akan memiliki kompleksitas waktu sebesar $O(n)$.
-    \item Pada baris $13$, algoritma tersebut akan memiliki kompleksitas waktu sebesar $O((t - k)n^4k^2)$ yang disebabkan oleh perhitungan algoritma \textit{dynamic time warping} yang memiliki kompleksitas waktu sebesar $O(k^2)$. Kompleksitas tersebut didapatkan dari hasil perkalian panjang dua lintasan yang dihitung yang masing-masing sebesar $k$. Pada titik ini, algoritma identifikasi akan memiliki nilai kompleksitas tertinggi selama algoritma dijalankan.
+    \item Pada baris $13$, algoritma identifikasi akan melakukan perhitungan jarak \textit{dynamic time warping} yang memiliki kompleksitas waktu sebesar $O(k^2)$. Kompleksitas tersebut didapatkan dari hasil perkalian panjang dua sublintasan yang dihitung yang masing-masing memiliki panjang sebesar $k$. Pada titik ini, algoritma identifikasi akan memiliki nilai kompleksitas tertinggi selama proses identifikasi berlangsung.
 \end{enumerate}
 
 \subsubsection{Kompleksitas Tempat Algoritma Identifikasi Rombongan}
 \label{subsubsec:space-complexity}
 
-Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan memiliki kompleksitas ruang sebesar $O(n^3)$ di mana $n$ merupakan jumlah entitas yang terdapat pada $\mathcal{X}$.
+Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan memiliki kompleksitas ruang sebesar $O(n^3)$ di mana $n$ merupakan jumlah entitas yang terdapat pada himpunan entitas $\mathcal{X}$. Nilai kompleksitas tersebut didapatkan dari kompleksitas tempat paling signifikan yang digunakan untuk menyimpan $entitySet$ yang terdapat pada baris $8$ pada algoritma identifikasi rombongan. Berdasarkan cara kerja algoritma, $entitySet$ dapat beranggotakan sebanyak $n^2$ himpunan. Masing-masing himpunan dapat memiliki paling banyak sebanyak $n$ entitas. Oleh karena itu, dibutuhkan sebanyak $n^3$ tempat untuk menyimpan $entitySet$.
 
-Nilai kompleksitas tersebut didapatkan dari kompleksitas tempat paling signifikan yang digunakan untuk menyimpan $entitySet$ yang terdapat pada baris $8$ pada algoritma identifikasi rombongan. Berdasarkan cara kerja algoritma, $entitySet$ dapat beranggotakan sebanyak $n^2$ himpunan. Masing-masing himpunan dapat memiliki paling banyak sebanyak $n$ entitas. Oleh karena itu, dibutuhkan sebanyak $n^3$ tempat untuk menyimpan $entitySet$. 
+\subsection{Redundansi Rombongan}
+\label{sec:redundancy}
+
+Salah satu masalah yang terdapat dalam algoritma identifikasi rombongan yang diusulkan adalah redundansi yang terdapat pada rombongan-rombongan yang berhasil diidentifikasi. Redundansi dihasilkan ketika algoritma identifikasi rombongan menghasilkan rombongan $\mathcal{X}$ di mana $\mathcal{X} \subset \mathcal{G}$, $|\mathcal{X}| < |\mathcal{G}|$ pada interval waktu yang sama. Redundansi disebabkan oleh cara kerja algoritma identifikasi yang melakukan pemeriksaan kedekatan spasial pada setiap pasang entitas yang mungkin dalam himpunan entitas yang diberikan.
+
+Sebagai contoh, diberikan sebuah himpunan entitas $\mathcal{M}$ yang memiliki 3 buah anggota $a$, $b$, dan $c$. Redundansi terjadi apabila algoritma identifikasi rombongan menghasilkan rombongan dengan anggota $a$, $b$, $c$ dan rombongan dengan anggota $b$ dan $c$ pada interval waktu $x$ --- $y$. Hal tersebut tentunya menyebabkan hasil identifikasi rombongan yang kurang efisien dan ambigu. Untuk mengatasi masalah redundansi hasil, perlu dibuat sebuah algoritma tambahan untuk mengurangi redundansi pada hasil identifikasi rombongan.
+
+Redundansi hasil identifikasi rombongan dapat dikurangi dengan menghapus salah satu durasi dari rombongan $\mathcal{X}$ yang merupakan \textit{proper subset} dari rombongan $\mathcal{G}$ apabila rombongan $\mathcal{X}$ dan $\mathcal{G}$ teridentifikasi pada interval waktu yang sama. Algoritma pengurangan redundansi dapat dilihat melalui Algoritma \ref{bab3:redundansi}.
+
+\begin{algorithm}[h]
+    \caption{Algoritma Pengurangan Redundansi}
+    \SetKwInput{KwInput}{Input}                % Set the Input
+    \SetKwInput{KwOutput}{Output}              % set the Output
+    \DontPrintSemicolon
+    
+    \label{bab3:redundansi}
+    
+    \SetKwFunction{Redundancy}{EraseRedundantRombongan}
+ 
+    \SetKwProg{Fn}{Function}{:}{}
+  
+    \KwInput{Himpunan rombongan yang teridentifikasi $\mathcal{R}$.}
+    \KwOutput{Himpunan rombongan yang tidak redundan.}
+    
+    \Fn{\Redundancy{$\mathcal{R}$}}{
+        \For{each rombongan $\mathcal{X}$ in $\mathcal{R}$}{
+            \For{each rombongan $\mathcal{Y}$ in $\mathcal{R}$}{
+                \If{$|Y| < |X|$ AND $Y \in X$}{
+                    \For{each durasi $a$ in interval waktu $\mathcal{X}$}{
+                        \For{each durasi $b$ in interval waktu $\mathcal{Y}$}{
+                            \If{$a = b$ OR $b \subset a$}{
+                                $hapus\;durasi\;b\;dari\;\mathcal{Y}$ \\
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        \For{each rombongan $\mathcal{X}$ in $\mathcal{R}$}{
+            \If{$\mathcal{X}$ tidak memiliki durasi}{
+                $hapus\;\mathcal{X}\;dari\;\mathcal{R}$ \\
+            }
+        }
+    }
+    \KwRet{$\mathcal{R}$}
+\end{algorithm}
 
 \section{Contoh Proses Identifikasi Rombongan}
 \label{sec:algorithm-example}
@@ -258,7 +307,7 @@ Diberikan himpunan entitas $\mathcal{X}$ yang bergerak ruang $\mathbb{R}^2$ yang
     \item $\textbf{c} = \{ 1, -2 \}, \{ 2, 0 \}, \{ 3, 0 \}$
 \end{enumerate}
 
-Lintasan dari sebuah entitas dalam himpunan entitas $\mathcal{X}$ merupakan kumpulan posisi yang terurut berdasarkan waktu secara menaik dalam ruang gerak $\mathbb{R}^2$. Posisi setiap entitas dimulai dari titik waktu $t = 0$. Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3.5$ satuan jarak, dan syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.5$. Langkah-langkah yang diambil untuk mengidentifikasi rombongan pada himpunan entitas $\mathcal{X}$ berdasarkan algoritma identifikasi yang telah dibuat adalah sebagai berikut:
+Lintasan dari sebuah entitas dalam himpunan entitas $\mathcal{X}$ merupakan kumpulan posisi yang terurut berdasarkan waktu secara menaik dalam ruang gerak $\mathbb{R}^2$. Posisi setiap entitas dimulai dari titik waktu $t = 0$. Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3.5$ satuan jarak, syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.5$, dan nilai kedekatan minimum $n$ sebanyak $1$. Langkah-langkah yang diambil untuk mengidentifikasi rombongan pada himpunan entitas $\mathcal{X}$ berdasarkan algoritma identifikasi yang telah dibuat adalah sebagai berikut:
 
 \begin{enumerate}
     \item Menginisialisasi sebuah himpunan untuk menyimpan himpunan rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$.
@@ -280,6 +329,8 @@ Lintasan dari sebuah entitas dalam himpunan entitas $\mathcal{X}$ merupakan kump
         \item Jarak \textit{dynamic time warping} dari entitas $b$ dan $c$ adalah sebesar $\approx 4.82$ satuan jarak. hasil tersebut sudah cukup untuk menyimpulkan bahwa $b$ dan $c$ tidak dekat secara spasial pada interval waktu $[1, 2]$ karena nilai $r$ dari kedua entitas entitas lebih besar dari nilai $r$ maksimum sebesar $3.5$ satuan jarak.
         \item Karena sub-himpunan $\mathcal{A}$ memenuhi seluruh syarat pembentukan rombongan di mana $\mathcal{A}$ memiliki 2 anggota yang dekat secara spasial, maka sub-himpunan $\mathcal{A}$ membentuk sebuah rombongan pada interval waktu $[1, 2]$.
     \end{enumerate}
+    
+    \item Lakukan proses pengurangan redundansi hasil identifikasi dengan menghapus \textit{proper subset} dari setiap rombongan yang teridentifikasi pada interval waktu yang sama. Karena rombongan hasil identifikasi tidak memiliki \textit{proper subset} yang redundan, maka hasil rombongan akan langsung dikembalikan.
 \end{enumerate}
 
 Berdasarkan uraian langkah-langkah identifikasi yang diambil, dapat disimpulkan bahwa terdapat sebuah rombongan yang terbentuk pada himpunan entitas $\mathcal{X}$ pada interval waktu $[1, 2]$ yang beranggotakan entitas $a$ dan $c$.
