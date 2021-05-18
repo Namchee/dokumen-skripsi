@@ -1,0 +1,74 @@
+\chapter{Pengamatan dan Pengujian}
+\label{chap:pengujian}
+
+Untuk memastikan bahwa perangkat lunak yang dibuat mampu menjawab rumusan masalah dan mencapai tujuan penelitian, perangkat lunak identifikasi rombongan akan diuji melalui proses pengujian baik secara kuantitatif maupun kualitatif.
+
+\section{Sumber Data Pergerakan}
+\label{bab6:data-pergerakan}
+
+Untuk melakukan pengujian terhadap hasil identifikasi rombongan, diperlukan sumber data pejalan kaki dunia nyata yang sesuai dengan spesifikasi yang tertera pada bab implementasi perangkat lunak. Terdapat dua sumber data pergerakan pejalan kaki dunia nyata yang digunakan untuk menguji perangkat lunak identifikasi rombongan:
+
+\begin{enumerate}
+    \item \textbf{BIWI ETH Walking Pedestrian}
+    
+    Data pergerakan BIWI ETH diambil dari pengamatan pergerakan pejalan kaki di depan gedung universitas ETH Zurich, Swiss pada tahun 2009 \cite{pellegrini:eth}. Data pergerakan ini memiliki karakteristik tingkat kepadatan pejalan kaki yang rendah.
+    
+    \item \textbf{Vittorio Emanuele II Gallery (VEIIG)}
+    
+    Data pergerakan VEIIG diambil dari pengamatan pergerakan pejalan kaki dua arah di daerah sekitar pusat perbelanjaan Vittorio Emanuele II Galleria pada 24 November 2012 \cite{bandini:gveii}. Data pergerakan ini memiliki karakteristik tingkat kecepatan pejalan kaki yang tinggi serta memiliki tingkat kepadatan yang dinamis.
+    
+    Untuk mempermudah proses pengujian, data VEIIG yang digunakan dalam proses pengujian akan dipotong menjadi data pergerakan yang berdurasi sepanjang 5 menit.
+\end{enumerate}
+
+Kedua data pergerakan tersebut disertai dengan hasil identifikasi rombongan yang dilakukan secara manual oleh manusia. Nantinya, hasil identifikasi tersebut akan digunakan pada proses pengujian dengan membandingkan hasil identifikasi yang dilakukan oleh manusia dengan hasil identifikasi yang dihasilkan oleh perangkat lunak.
+
+Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan yang digunakan pada proses pengujian algoritma identifikasi rombongan. Nilai $g$ menunjukkan jumlah rombongan yang teridentifikasi secara manual oleh manusia. Nilai $G$ menunjukkan rentang jumlah anggota rombongan yang teridentifikasi secara manual oleh manusia.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{4cm} p{3cm} p{3cm}}
+        \hline
+        & \textbf{BIWI ETH} & \textbf{VEIIG} \\
+        \hline
+        Durasi Video & 08:39 & 05:00 \\
+        FPS & 2.5 & 8 \\
+        Jumlah Entitas & 360 & 630 \\
+        Jumlah \textit{Frame} & 1480 & 2400 \\
+        $g$ & 58 & 207 \\
+        $G$ & 2--3 & 2--7 \\
+        \hline
+    \end{tabular}
+    \caption[Metadata sumber data pergerakan]{Informasi metadata dari data pergerakan yang digunakan pada proses pengujian}
+    \label{bab6:metadata-pergerakan}
+\end{table}
+
+\section{Pengujian Kuantitatif}
+\label{sec:quantitative}
+
+Dalam pengujian kuantitatif, perangkat lunak akan melakukan proses identifikasi rombongan pada kedua sumber data pergerakan menggunakan parameter identifikasi yang bervariasi. Pengaruh parameter identifikasi yang diuji adalah jumlah entitas minimum $m$, interval waktu minimum $k$, jarak entitas maksimum $r$, dan perbedaan sudut maksimum antar entitas $\vartheta$. 
+
+Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak dengan hasil identifikasi yang dilakukan manusia diukur menggunakan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score}. Sebagai catatan, proses pengujian pada skripsi ini menghindari penggunaan istilah 'ketepatan' dan 'kebenaran'. Hal tersebut disebabkan oleh tidak adanya acuan mutlak yang dapat digunakan untuk mengukur kebenaran identifikasi.
+
+Tabel \ref{bab6:parameter} menunjukkan parameter-parameter identifikasi rombongan yang akan digunakan pada proses pengujian hasil identifikasi rombongan.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{1cm} p{3cm} p{3cm}}
+        \hline
+        & \textbf{BIWI ETH} & \textbf{VEIIG} \\
+        \hline
+        $m$ & 2 & 2 \\
+        $k$ & \{7.2, 8.9, 10.5\} & \{17, 38, 58\} \\
+        $r$ & \{1, 1.24\} & 1 \\
+        $\vartheta$ & \{11.25, 5.625\} & 11.25 \\
+        $n$ & 1 & 2 \\
+        \hline
+    \end{tabular}
+    \caption[Parameter identifikasi rombongan]{Parameter identifikasi rombongan yang digunakan pada proses pengujian}
+    \label{bab6:parameter}
+\end{table}
+
+Untuk setiap data pergerakan yang diuji, jumlah entitas minimum $m$ ditetapkan dengan nilai 2, sesuai dengan jumlah anggota minimum dari hasil identifikasi yang dilakukan oleh manusia.
+
+\section{Pengujian Kualitatif}
+\label{sec:qualitative}
