@@ -1,12 +1,16 @@
 \chapter{Perancangan}
 \label{chap:perancangan}
 
+\iffalse
+
 Sebelum melalui tahap implementasi, perangkat lunak perlu melalui proses perancangan perangkat lunak. Perancangan perangkat lunak merupakan sebuah proses untuk mengidentifikasi artefak-artefak dari perangkat lunak seperti modul, fungsi, kelas, serta artefak-artefak lainnya yang bertujuan untuk memenuhi kebutuhan perangkat lunak. Manfaat utama dari perancangan perangkat lunak adalah supaya perilaku perangkat lunak yang dihasilkan dapat lebih mudah diprediksi dan dikontrol sehingga perangkat lunak dapat lebih mudah dikembangkan dan diperbaiki di masa depan \cite{budgen:04:software-design}.
+
+\fi
 
 \section{Fungsionalitas Perangkat Lunak}
 \label{sec:functionality}
 
-Melalui proses analisis kebutuhan perangkat lunak, maka perangkat lunak yang akan dibuat harus memiliki 2 fungsionalitas berikut:
+Melalui proses analisis terhadap kebutuhan perangkat lunak, perangkat lunak identifikasi rombongan yang akan dibuat membutuhkan 3 fungsionalitas berikut:
 
 \begin{enumerate}
     \item Membaca dan memahami masukan dari pengguna berupa data pergerakan pejalan kaki dan parameter rombongan,
@@ -18,7 +22,7 @@ Berdasarkan 3 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{Gambar/bab4:dfd-level-0.pdf}
+    \includegraphics[width=0.8\textwidth]{Gambar/bab4:dfd-level-0.pdf}
     \caption{Diagram konteks}
     \label{bab4:context-diagram}
 \end{figure}
@@ -51,7 +55,7 @@ Interaksi antar kelima modul tersebut serta proses-proses yang dilalui selama pe
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\textwidth]{Gambar/bab4:dfd-level-1.pdf}
+    \includegraphics[width=0.95\textwidth]{Gambar/bab4:dfd-level-1.pdf}
     \caption{Diagram alir data tingkat pertama}
     \label{bab4:dfd-level-1}
 \end{figure}
@@ -81,7 +85,7 @@ Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-input.pdf}
+        \includegraphics[width=0.95\textwidth]{Gambar/bab4:flowchart-input.pdf}
         \caption{Diagram alir proses validasi masukan}
         \label{bab4:flowchart-input}
     \end{figure}
@@ -107,12 +111,6 @@ Modul penerjemah bertanggung jawab untuk melaksanakan 2 proses berikut:
         \item Menguji validitas berkas data pergerakan pejalan kaki. Apabila berkas tidak dapat dibaca oleh perangkat lunak, maka modul penerjemah akan menampilkan pesan kesalahan dan menghentikan proses eksekusi perangkat lunak.
         
         \item Membaca setiap baris teks yang tercatat dalam berkas data pergerakan.
-    
-        \iffalse 
-    
-        \cristopher{Kudu jelasin gak sih ko bentuk datanya gimana?} \lionov{gak usah lah, bilang aja pokoknya ini buat nerima input, nanti di ``implementasi'' baru dijelasin setelah ngejelasin datanya kayak apa}
-    
-        \fi
     
         \item Untuk setiap baris data yang berhasil dibaca oleh perangkat lunak, simpan informasi posisi entitas dan nilai \textit{frame} yang menyimpan informasi posisi tersebut.
         
