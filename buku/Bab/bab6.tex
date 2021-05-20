@@ -31,7 +31,7 @@ Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan y
         & \textbf{BIWI ETH} & \textbf{VEIIG} \\
         \hline
         Durasi Video & 08:39 & 05:00 \\
-        FPS & 2.5 & 8 \\
+        FPS & 25 & 8 \\
         Jumlah Entitas & 360 & 630 \\
         Jumlah \textit{Frame} & 1480 & 2400 \\
         $g$ & 58 & 207 \\
@@ -47,9 +47,7 @@ Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan y
 
 Dalam pengujian kuantitatif, perangkat lunak akan melakukan proses identifikasi rombongan pada kedua sumber data pergerakan menggunakan parameter identifikasi yang bervariasi. Pengaruh parameter identifikasi yang diuji adalah jumlah entitas minimum $m$, interval waktu minimum $k$, jarak entitas maksimum $r$, dan perbedaan sudut maksimum antar entitas $\vartheta$. 
 
-Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak dengan hasil identifikasi yang dilakukan manusia diukur menggunakan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score}. Sebagai catatan, proses pengujian pada skripsi ini menghindari penggunaan istilah 'ketepatan' dan 'kebenaran'. Hal tersebut disebabkan oleh tidak adanya acuan mutlak yang dapat digunakan untuk mengukur kebenaran identifikasi.
-
-Tabel \ref{bab6:parameter} menunjukkan parameter-parameter identifikasi rombongan yang akan digunakan pada proses pengujian hasil identifikasi rombongan.
+Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak dengan hasil identifikasi yang dilakukan manusia diukur menggunakan nilai \textit{F1 score}. \textit{F1 score} merupakan nilai \textit{harmonic mean} dari \textit{precision} dan \textit{recall} yang dihitung menggunakan rumus $F1 = 2 \cdot \frac{P \cdot R}{P + R}$. Sebagai catatan, proses pengujian pada skripsi ini menghindari penggunaan istilah 'ketepatan' dan 'kebenaran'. Hal tersebut disebabkan oleh tidak adanya acuan mutlak yang dapat digunakan untuk mengukur kebenaran identifikasi \cite{wiratma:trajectory}. Tabel \ref{bab6:parameter} menunjukkan parameter-parameter identifikasi rombongan yang akan digunakan pada proses pengujian hasil identifikasi rombongan.
 
 \begin{table}[h]
     \centering
@@ -58,9 +56,9 @@ Tabel \ref{bab6:parameter} menunjukkan parameter-parameter identifikasi rombonga
         & \textbf{BIWI ETH} & \textbf{VEIIG} \\
         \hline
         $m$ & 2 & 2 \\
-        $k$ & \{7.2, 8.9, 10.5\} & \{17, 38, 58\} \\
-        $r$ & \{1, 1.24\} & 1 \\
-        $\vartheta$ & \{11.25, 5.625\} & 11.25 \\
+        $k$ & \{72, 89, 105\} & \{17, 38, 58\} \\
+        $r$ & \{1, 1.24\} & \{0.8, 1\} \\
+        $\vartheta$ & \{$\frac{\pi}{32}$, $\frac{\pi}{64}$\} & \{$\frac{\pi}{32}$, $\frac{\pi}{64}$\} \\
         $n$ & 1 & 2 \\
         \hline
     \end{tabular}
@@ -68,7 +66,65 @@ Tabel \ref{bab6:parameter} menunjukkan parameter-parameter identifikasi rombonga
     \label{bab6:parameter}
 \end{table}
 
-Untuk setiap data pergerakan yang diuji, jumlah entitas minimum $m$ ditetapkan dengan nilai 2, sesuai dengan jumlah anggota minimum dari hasil identifikasi yang dilakukan oleh manusia.
+Untuk setiap data pergerakan yang diuji, jumlah entitas minimum $m$ ditetapkan dengan nilai $2$, sesuai dengan jumlah anggota minimum dari hasil identifikasi yang dilakukan oleh manusia. Nilai $r$ yang diuji ditentukan dari densitas rombongan dari sumber data pergerakan \cite{solera:06:range-reference} dan teori jarak personal berdasarkan teori proksemik \cite{hall:06:proxemic}. Nilai $\vartheta$ yang digunakan ditentukan secara intuitif dengan mengamati deviasi sudut yang umum ketika manusia bergerak. Nilai jumlah kedekatan minimum $n$ ditentukan berdasarkan setengah dari jumlah anggota rata-rata yang terdapat pada data pergerakan. Terakhir, nilai $k$ yang diuji diambil dari durasi rombongan paling singkat dari seluruh rombongan berdasarkan hasil identifikasi yang dilakukan oleh manusia. Durasi rombongan dihitung ketika seluruh anggota rombongan muncul pada video pergerakan. Dua nilai $k$ lainnya diambil dari durasi rata-rata rombongan $\delta$ dan standar deviasi durasi rombongan $\sigma$, yaitu $\delta - \sigma$ dan $\delta - \frac{1}{2}\sigma$ \cite{wiratma:trajectory}.
 
 \section{Pengujian Kualitatif}
 \label{sec:qualitative}
+
+Dalam pengujian kualitatif, hasil identifikasi rombongan yang dihasilkan akan divisualisasikan secara langsung pada lintasan yang dilalui pejalan kaki pada video rekaman sumber data pergerakan.
+
+Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar \ref{bab6:representasi-entitas}. Kepala menunjukkan posisi entitas saat ini. Ekor menunjukkan urutan posisi-posisi sebelumnya yang ditempuh oleh entitas. ID menunjukkan nomor identitas unik yang digunakan untuk membedakan satu entitas dengan entitas lainnya.
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Gambar/bab6:entitas.pdf}
+    \caption{Representasi entitas pada pengujian kualitatif}
+    \label{bab6:representasi-entitas}
+\end{figure}
+
+Keanggotaan entitas pada sebuah rombongan akan ditunjukkan melalui warna kepala dan ekor dari entitas. Warna kepala entitas merepresentasikan keanggotaan entitas yang dihasilkan oleh perangkat lunak. Warna ekor entitas merepresentasikan keanggotaan entitas yang ditunjukkan oleh hasil identifikasi yang dilakukan oleh manusia. Entitas yang tergabung dalam rombongan yang sama akan memiliki warna kepala dan ekor yang sama. Entitas yang tidak tergabung dalam rombongan manapun akan memiliki kepala dan ekor yang berwarna putih. Hal yang patut menjadi perhatian adalah warna yang digunakan untuk merepresentasikan sebuah rombongan akan diambil secara acak. Oleh karena itu, warna kepala dan ekor dapat berbeda walaupun hasil identifikasi manusia dan hasil identifikasi perangkat lunak menyatakan hasil yang sama.
+
+Pada penelitian ini, beberapa hasil visualisasi menarik akan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar. Fitur visualisasi hasil identifikasi pada video rekaman pergerakan pejalan kaki dicapai menggunakan bantuan perangkat lunak lain oleh Maurice Marx.
+
+\section{Hasil Pengujian}
+\label{sec:result}
+
+Bagian ini akan menyajikan hasil pengujian pada setiap sumber data pergerakan yang digunakan. Hasil pengujian dibagi menjadi subseksi-subseksi dengan judul sesuai dengan nama data pergerakan yang digunakan. Setiap subseksi menyajikan hasil pengujian kualitatif dan kuantitatif.
+
+\subsection{Hasil Pengujian BIWI ETH}
+\label{subsec:eth-result}
+
+Tabel \ref{bab6:seq-eth-numbers} menunjukkan hasil pengujian kuantitatif pada data BIWI ETH.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|c|c|c|}
+\hline
+\multicolumn{3}{|l|}{}                                                                                   & Precision & Recall & F1 Score \\ \hline \hline
+\multicolumn{1}{|c|}{\multirow{4}{*}{k = 72}} & \multirow{2}{*}{r = 1}    & $\vartheta = \frac{\pi}{32}$ & 0.342     & 0.631  & 0.443    \\ \cline{3-6} 
+\multicolumn{1}{|c|}{}                        &                           & $\vartheta = \frac{\pi}{64}$ & 0.373     & 0.631  & 0.469    \\ \cline{2-6} 
+\multicolumn{1}{|c|}{}                        & \multirow{2}{*}{r = 1.24} & $\vartheta = \frac{\pi}{32}$ & 0.35      & 0.754  & 0.478    \\ \cline{3-6} 
+\multicolumn{1}{|c|}{}                        &                           & $\vartheta = \frac{\pi}{64}$ & 0.32      & 0.723  & 0.443    \\ \hline
+\multirow{4}{*}{k = 89}                       & \multirow{2}{*}{r = 1}    & $\vartheta = \frac{\pi}{32}$ & 0.348     & 0.708  & 0.467    \\ \cline{3-6} 
+                                              &                           & $\vartheta = \frac{\pi}{64}$ & 0.351     & 0.708  & 0.469    \\ \cline{2-6} 
+                                              & \multirow{2}{*}{r = 1.24} & $\vartheta = \frac{\pi}{32}$ & 0.325     & 0.785  & 0.459    \\ \cline{3-6} 
+                                              &                           & $\vartheta = \frac{\pi}{64}$ & 0.296     & 0.769  & 0.427    \\ \hline
+\multirow{4}{*}{k = 105}                      & \multirow{2}{*}{r = 1}    & $\vartheta = \frac{\pi}{32}$ & 0.368     & 0.646  & 0.469    \\ \cline{3-6} 
+                                              &                           & $\vartheta = \frac{\pi}{64}$ & 0.377     & 0.662  & 0.48     \\ \cline{2-6} 
+                                              & \multirow{2}{*}{r = 1.24} & $\vartheta = \frac{\pi}{32}$ & 0.338     & 0.769  & 0.469    \\ \cline{3-6} 
+                                              &                           & $\vartheta = \frac{\pi}{64}$ & 0.329     & 0.754  & 0.458    \\ \hline
+\end{tabular}
+\caption{Hasil pengujian kuantitatif pada data pergerakan BIWI ETH}
+\label{bab6:seq-eth-numbers}
+\end{table}
+
+Pada data BIWI ETH yang memiliki tingkat kepadatan pejalan kaki yang rendah, variasi parameter identifikasi yang digunakan memberikan hasil yang serupa. Hal tersebut dapat dilihat pada deviasi nilai \textit{F1 score} yang cukup kecil.
+
+Peningkatan terhadap nilai $r$ berdampak pada peningkatan nilai \textit{recall} yang konsisten untuk setiap nilai $k$ dan $\vartheta$, di mana hal tersebut disebabkan oleh pergerakan kolektif yang sebelumnya tidak terhubung karena memiliki jarak yang dianggap jauh dapat teridentifikasi sebagai rombongan.
+
+Memperketat syarat kedekatan spasial dengan memperkecil nilai $\vartheta$ memberikan dampak positif peningkatan nilai \textit{precision} dan \textit{F1 score} pada $r = 1$. Namun hal tersebut berdampak negatif pada $r = 1.24$, di mana menambah nilai $r$ menyebabkan penurunan nilai \textit{precision} dan \textit{F1 score} untuk setiap nilai $k$ yang diuji.
+ 
+\subsection{Hasil Pengujian VEIIG}
+\label{subsec:veiig-result}
+
+Tabel menunjukkan hasil pengujian kuantitatif pada sumber data VEIIG.
