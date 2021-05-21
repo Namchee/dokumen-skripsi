@@ -98,33 +98,72 @@ Tabel \ref{bab6:seq-eth-numbers} menunjukkan hasil pengujian kuantitatif pada da
 
 \begin{table}[h]
 \centering
-\begin{tabular}{|l|l|l|c|c|c|}
-\hline
-\multicolumn{3}{|l|}{}                                                                                   & Precision & Recall & F1 Score \\ \hline \hline
-\multicolumn{1}{|c|}{\multirow{4}{*}{k = 72}} & \multirow{2}{*}{r = 1}    & $\vartheta = \frac{\pi}{32}$ & 0.342     & 0.631  & 0.443    \\ \cline{3-6} 
-\multicolumn{1}{|c|}{}                        &                           & $\vartheta = \frac{\pi}{64}$ & 0.373     & 0.631  & 0.469    \\ \cline{2-6} 
-\multicolumn{1}{|c|}{}                        & \multirow{2}{*}{r = 1.24} & $\vartheta = \frac{\pi}{32}$ & 0.35      & 0.754  & 0.478    \\ \cline{3-6} 
-\multicolumn{1}{|c|}{}                        &                           & $\vartheta = \frac{\pi}{64}$ & 0.32      & 0.723  & 0.443    \\ \hline
-\multirow{4}{*}{k = 89}                       & \multirow{2}{*}{r = 1}    & $\vartheta = \frac{\pi}{32}$ & 0.348     & 0.708  & 0.467    \\ \cline{3-6} 
-                                              &                           & $\vartheta = \frac{\pi}{64}$ & 0.351     & 0.708  & 0.469    \\ \cline{2-6} 
-                                              & \multirow{2}{*}{r = 1.24} & $\vartheta = \frac{\pi}{32}$ & 0.325     & 0.785  & 0.459    \\ \cline{3-6} 
-                                              &                           & $\vartheta = \frac{\pi}{64}$ & 0.296     & 0.769  & 0.427    \\ \hline
-\multirow{4}{*}{k = 105}                      & \multirow{2}{*}{r = 1}    & $\vartheta = \frac{\pi}{32}$ & 0.368     & 0.646  & 0.469    \\ \cline{3-6} 
-                                              &                           & $\vartheta = \frac{\pi}{64}$ & 0.377     & 0.662  & 0.48     \\ \cline{2-6} 
-                                              & \multirow{2}{*}{r = 1.24} & $\vartheta = \frac{\pi}{32}$ & 0.338     & 0.769  & 0.469    \\ \cline{3-6} 
-                                              &                           & $\vartheta = \frac{\pi}{64}$ & 0.329     & 0.754  & 0.458    \\ \hline
-\end{tabular}
 \caption{Hasil pengujian kuantitatif pada data pergerakan BIWI ETH}
+\begin{tabular}{|l|l|c|c|c|}
+\hline
+\multicolumn{2}{|l|}{}                                                                                         & Precision & Recall & F1 Score \\ \hline \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 72$\\ $r = 1$\end{tabular}}     & $\vartheta = \frac{\pi}{32}$ & 0.342     & 0.631  & 0.443    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.373     & 0.631  & 0.469    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 72$\\ $r = 1.24$\end{tabular}}  & $\vartheta = \frac{\pi}{32}$ & 0.350     & 0.754  & 0.478    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.320     & 0.723  & 0.443    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 89$\\ $r = 1$\end{tabular}}     & $\vartheta = \frac{\pi}{32}$ & 0.348     & 0.708  & 0.467    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.351     & 0.708  & 0.469    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 89$\\ $r = 1.24$\end{tabular}}  & $\vartheta = \frac{\pi}{32}$ & 0.325     & 0.785  & 0.459    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.296     & 0.769  & 0.427    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 105$\\ $r = 1$\end{tabular}}    & $\vartheta = \frac{\pi}{32}$ & 0.368     & 0.646  & 0.469    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.377     & 0.662  & 0.480    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 105$\\ $r = 1.24$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.338     & 0.769  & 0.469    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.329     & 0.754  & 0.458    \\ \hline
+\end{tabular}
+
+
 \label{bab6:seq-eth-numbers}
 \end{table}
 
-Pada data BIWI ETH yang memiliki tingkat kepadatan pejalan kaki yang rendah, variasi parameter identifikasi yang digunakan memberikan hasil yang serupa. Hal tersebut dapat dilihat pada deviasi nilai \textit{F1 score} yang cukup kecil.
+Pada data BIWI ETH yang memiliki tingkat kepadatan pejalan kaki yang rendah, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{precision} yang cukup rendah dan nilai \textit{recall} yang cukup tinggi. Nilai \textit{precision} yang cukup rendah menandakan bahwa algoritma identifikasi rombongan mengidentifikasi beberapa rombongan yang tidak terdapat pada hasil identifikasi manusia. Nilai \textit{recall} yang cukup tinggi menandakan bahwa algoritma identifikasi rombongan mampu
+mengidentifikasi cukup banyak rombongan yang relevan dengan hasil identifikasi manusia.
 
-Peningkatan terhadap nilai $r$ berdampak pada peningkatan nilai \textit{recall} yang konsisten untuk setiap nilai $k$ dan $\vartheta$, di mana hal tersebut disebabkan oleh pergerakan kolektif yang sebelumnya tidak terhubung karena memiliki jarak yang dianggap jauh dapat teridentifikasi sebagai rombongan.
+Variasi parameter identifikasi rombongan yang digunakan tidak berpengaruh banyak pada relevansi hasil identifikasi rombongan oleh perangkat lunak. Hal tersebut dapat dilihat pada deviasi nilai \textit{F1 score} yang cukup kecil.
 
-Memperketat syarat kedekatan spasial dengan memperkecil nilai $\vartheta$ memberikan dampak positif peningkatan nilai \textit{precision} dan \textit{F1 score} pada $r = 1$. Namun hal tersebut berdampak negatif pada $r = 1.24$, di mana menambah nilai $r$ menyebabkan penurunan nilai \textit{precision} dan \textit{F1 score} untuk setiap nilai $k$ yang diuji.
+Peningkatan terhadap nilai $r$ berdampak pada peningkatan nilai \textit{recall} yang konsisten untuk setiap nilai $k$ dan $\vartheta$, di mana hal tersebut disebabkan oleh entitas yang sebelumnya tidak terhubung dengan sebuah pergerakan kolektif manapun karena memiliki jarak yang dianggap jauh dapat teridentifikasi sebagai rombongan. Hal tersebut berdampak pada penurunan terhadap nilai \textit{false negative} dan meningkatkan nilai \textit{true positive} dari hasil identifikasi rombongan. 
+
+Memperketat syarat kedekatan spasial dengan memperkecil nilai $\vartheta$ memberikan dampak positif peningkatan nilai \textit{precision} dan \textit{F1 score} pada $r = 1$. Namun hal tersebut berdampak negatif pada $r = 1.24$, di mana menambah nilai $r$ menyebabkan penurunan nilai \textit{precision} dan \textit{F1 score} untuk setiap nilai $k$ yang diuji. Penurunan nilai \textit{precision} disebabkan oleh adanya subrombongan baru yang terpisah dari rombongan lain akibat salah satu entitasnya tidak memenuhi syarat perbedaan sudut maksimum. Subrombongan tersebut tidak terdapat pada hasil identifikasi manusia, sehingga adanya penambahan rombongan baru menambah nilai \textit{false positive} dari hasil identifikasi rombongan yang dilakukan oleh perangkat lunak.
+
+Peningkatan terhadap nilai $k$ berpengaruh dalam meningkatkan nilai \textit{precision} apabila $r = 1$ dan $\vartheta = \frac{\pi}{32}$. Namun perubahan tersebut membawa dampak negatif dalam $\vartheta = \frac{\pi}{64}$, di mana hal tersebut sebaliknya mengurangi nilai \textit{precision}.
  
 \subsection{Hasil Pengujian VEIIG}
 \label{subsec:veiig-result}
 
-Tabel menunjukkan hasil pengujian kuantitatif pada sumber data VEIIG.
+Tabel \ref{bab6:gveii-numbers} menunjukkan hasil pengujian kuantitatif pada sumber data VEIIG.
+
+\begin{table}[h]
+    \centering
+    \caption{Hasil pengujian kuantitatif pada data VEIIG}
+\begin{tabular}{|l|l|c|c|c|}
+\hline
+\multicolumn{2}{|l|}{}                                                                                       & Precision & Recall & F1 Score \\ \hline \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.219     & 0.894  & 0.351    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.323     & 0.778  & 0.457    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.309     & 0.812  & 0.447    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.235     & 0.855  & 0.369    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.268     & 0.778  & 0.399    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.290     & 0.773  & 0.422    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.216     & 0.855  & 0.345    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.225     & 0.826  & 0.354    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.262     & 0.739  & 0.387    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.291     & 0.729  & 0.416    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.230     & 0.802  & 0.357    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.245     & 0.797  & 0.375    \\ \hline
+\end{tabular}
+   \label{bab6:gveii-numbers}
+\end{table}
+
+Pada data VEIIG yang memiliki tingkat kepadatan pejalan kaki yang tinggi dengan kepadatan yang dinamis, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{recall} yang tinggi disertai dengan nilai \textit{precision} yang cenderung rendah. Di satu sisi, nilai \textit{recall} yang tinggi menandakan bahwa algoritma identifikasi rombongan mampu mengidentifikasi sebagian besar rombongan yang juga diidentifikasi oleh manusia. Di sisi lain, nilai \textit{precision} yang cenderung rendah menandakan bahwa algoritma identifikasi rombongan menghasilkan terlalu banyak pergerakan kolektif yang diidentifikasi sebagai rombongan yang berdampak pada kenaikan nilai \textit{false positive}.
+
+Variasi dari parameter identifikasi rombongan yang digunakan memiliki pengaruh yang cukup besar pada hasil identifikasi perangkat lunak. Hal tersebut dapat dilihat dari deviasi dari \textit{F1 score} yang lebih besar dibandingkan dengan data dengan tingkat kepadatan pejalan kaki yang rendah.
+
+Peningkatan nilai $r$ berdampak pada menurunnya nilai \textit{precision} yang diakibatkan oleh banyaknya rombongan tambahan tidak relevan yang dihasilkan. Hal tersebut menyebabkan kenaikan nilai \textit{false positive}. Pengecualian untuk premis tersebut adalah ketika $k = 17$ dan $\vartheta = \frac{\pi}{32}$, di mana nilai \textit{precision} mengalami kenaikan sebanyak 8\%. Hal tersebut disebabkan oleh tingkat kepadatan pejalan kaki pada data VEIIG yang tinggi, sehingga menambah nilai $r$ akan menambah jumlah rombongan tidak relevan yang teridentifikasi,
+
+Memperketat syarat kedekatan spasial dengan mengurangi beda sudut maksimum $\vartheta$ berdampak positif pada nilai \textit{precision} yang meningkat. Peningkatan tersebut tidak lepas dari tingkat kepadatan pejalan kaki yang tinggi di mana pada kondisi tersebut, beda sudut menjadi nilai yang sensitif dalam proses identifikasi rombongan. Namun, memperkecil nilai $\vartheta$ akan sedikit memperendah nilai \textit{recall} dari hasil identifikasi. Hal tersebut disebabkan oleh nilai \textit{false negative} yang meningkat.
+
+Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \textit{recall} yang menurun seiring dengan peningkatan nilai $k$. Hal tersebut disebabkan oleh rombongan relevan yang tidak teridentifikasi karena durasi rombongan-rombongan tersebut dianggap terlalu singkat akibat tidak mencapai nilai $k$.  
