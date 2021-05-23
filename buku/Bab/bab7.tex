@@ -1,0 +1,55 @@
+\chapter{Simpulan}
+\label{chap:simpulan}
+
+\section{Jawaban Atas Permasalahan Penelitian}
+\label{sec:jawaban-masalah}
+
+\section{Pencapaian Tujuan Penelitian}
+\label{sec:pencapaian-tujuan}
+
+Seperti yang sudah dijabarkan pada subbab \ref{sec:tujuan}, tujuan dari penelitian ini adalah:
+
+\begin{enumerate}
+    \item \textbf{Menentukan ukuran-ukuran lintasan yang dapat digunakan untuk membuat sebuah definisi pola pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan}
+    
+    Subbab \ref{subsec:beda-arah} telah menjelaskan tentang masalah perbedaan arah yang dapat terjadi selama proses identifikasi pergerakan kolektif. Melalui analisis terhadap ukuran-ukuran yang terdapat pada data lintasan, diputuskan bahwa arah lintasan dapat digunakan untuk menyelesaikan masalah perbedaan arah dalam proses identifikasi pergerakan kolektif.
+    
+    \item \textbf{Membuat definisi pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan}
+    
+    Melalui subbab \ref{sec:definisi}, telah dijelaskan mengenai 3 pertimbangan yang perlu dipikirkan sebelum membuat definisi pergerakan kolektif baru. Berdasarkan pertimbangan-pertimbangan tersebut, dibuatlah sebuah definisi pergerakan kolektif baru bernama rombongan yang dapat dilihat pada subbab yang sama. Definisi tersebut menggunakan ukuran arah lintasan sebagai upaya untuk menyelesaikan masalah arah dan algoritma \textit{dynamic time warping} untuk menyelesaikan masalah perbedaan kecepatan entitas.
+    
+    \item \textbf{Membuat algoritma yang dapat mengidentifikasi kelompok pergerakan kolektif yang sesuai dengan definisi formal yang telah dibuat pada sebuah data pejalan kaki di dunia nyata}
+    
+    Algoritma identifikasi pergerakan kolektif yang sesuai dengan definisi formal rombongan dapat dilihat melalui Algoritma \ref{bab3:algoritma-identifikasi} yang dijabarkan melalui subbab \ref{sec:algoritma}. Cara kerja algoritma identifikasi rombongan dapat dilihat melalui subbab \ref{sec:algorithm-example}.
+    
+    Karena cara kerja algoritma identifikasi rombongan yang dapat menghasilkan banyak rombongan yang redundan, dibuatlah sebuah algoritma tambahan untuk mengurangi redundansi rombongan yang dapat dilihat melalui Algoritma \ref{bab3:redundansi}
+    
+    \item \textbf{Melakukan implementasi terhadap algoritma identifikasi pergerakan kolektif berdasarkan definisi baru yang dibuat}
+    
+    Bab \ref{chap:perancangan} menunjukkan detil rancangan perangkat lunak algoritma identifikasi rombongan yang dibuat. Implementasi dari perangkat lunak dapat dilihat melalui bab \ref{chap:implementasi}. Kode sumber dari perangkat lunak identifikasi rombongan ditunjukkan melalui Lampiran.
+    
+    \item \textbf{Melakukan visualisasi hasil identifikasi rombongan menggunakan model pewarnaan dalam video rekaman data pejalan kaki}
+    
+    Rest in peace lmao AAAAAAAAAAAAAAAAAA
+    
+    \item \textbf{Mengukur efektivitas dan ketepatan dari definisi pergerakan kolektif yang dibuat dalam mengidentifikasi pergerakan-pergerakan kolektif dalam data pejalan kaki di dunia nyata}
+    
+    Pengujian terhadap algoritma identifikasi rombongan diukur menggunakan pengujian kualitatif dan kuantitatif. Pengujian kualitatif dilakukan melalui analisis terhadap visualisasi hasil identifikasi pejalan kaki. Pengujian kuantitatif dilakukan melalui perbandingan hasil identifikasi manusia dan hasil identifikasi yang dihasilkan perangkat lunak dengan menghitung nilai \textit{precision}, \textit{recall}, dan \textit{F1 score}.
+    
+    Melalui hasil pengujian kuantitatif, 
+\end{enumerate}
+
+Berdasarkan jawaban-jawaban di atas, dapat disimpulkan bahwa sebagian besar tujuan penelitian yang telah dijabarkan sebelumnya dapat dicapai.
+
+\section{Saran Penelitian Lanjutan}
+\label{sec:saran}
+
+Berdasarkan proses dan hasil penelitian, terdapat beberapa poin-poin yang dapat dijadikan sebagai bahan penelitian lanjutan mengenai pola pergerakan kolektif rombongan. Berikut merupakan poin-poin yang dianggap dapat menjadi bahan penelitian lanjutan:
+
+\begin{enumerate}
+    \item Melakukan pengujian lanjutan pada lebih banyak sampel data pergerakan, khususnya pada sampel-sampel yang memiliki tingkat kepadatan entitas yang variatif, memiliki pola pergerakan yang tidak umum seperti adanya perubahan kecepatan dan arah yang ekstrim, dan pada data pergerakan di mana entitas yang diamati bukan manusia.
+    \item Melakukan pengujian mengenai pengaruh nilai jumlah entitas minimum $m$ dan jumlah kedekatan minimum $n$.
+    \item Melakukan optimisasi terhadap kompleksitas algoritma identifikasi rombongan.
+    \item Mengurangi redundansi yang terdapat algoritma identifikasi rombongan sehingga perangkat lunak tidak membutuhkan algoritma tambahan untuk mengurangi redundansi hasil identifikasi.
+    \item Mengimplementasikan pemrosesan paralel pada algoritma identifikasi rombongan.
+\end{enumerate}
