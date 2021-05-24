@@ -6,36 +6,41 @@ Untuk memastikan bahwa perangkat lunak yang dibuat mampu menjawab rumusan masala
 \section{Sumber Data Pergerakan}
 \label{bab6:data-pergerakan}
 
-Untuk melakukan pengujian terhadap hasil identifikasi rombongan, diperlukan sumber data pejalan kaki dunia nyata yang sesuai dengan spesifikasi yang tertera pada bab implementasi perangkat lunak. Terdapat dua sumber data pergerakan pejalan kaki dunia nyata yang digunakan untuk menguji perangkat lunak identifikasi rombongan:
+Untuk melakukan pengujian terhadap hasil identifikasi rombongan, diperlukan sumber data pejalan kaki dunia nyata yang sesuai dengan spesifikasi yang tertera pada bab implementasi perangkat lunak. Terdapat tiga sumber data pergerakan pejalan kaki dunia nyata yang digunakan untuk menguji perangkat lunak identifikasi rombongan:
 
 \begin{enumerate}
     \item \textbf{BIWI ETH Walking Pedestrian}
     
-    Data pergerakan BIWI ETH diambil dari pengamatan pergerakan pejalan kaki di depan gedung universitas ETH Zurich, Swiss pada tahun 2009 \cite{pellegrini:eth}. Data pergerakan ini memiliki karakteristik tingkat kepadatan pejalan kaki yang rendah.
+    Data pergerakan BIWI ETH diambil dari pengamatan pergerakan pejalan kaki di depan gedung universitas ETH Zurich, Swiss pada tahun 2009 \cite{pellegrini:eth}. Data pergerakan ini memiliki karakteristik tingkat kepadatan pejalan kaki dan pergerakan kolektif yang rendah.
     
     \item \textbf{Vittorio Emanuele II Gallery (VEIIG)}
     
-    Data pergerakan VEIIG diambil dari pengamatan pergerakan pejalan kaki dua arah di daerah sekitar pusat perbelanjaan Vittorio Emanuele II Galleria pada 24 November 2012 \cite{bandini:gveii}. Data pergerakan ini memiliki karakteristik tingkat kecepatan pejalan kaki yang tinggi serta memiliki tingkat kepadatan yang dinamis.
+    Data pergerakan VEIIG diambil dari pengamatan pergerakan pejalan kaki dua arah di daerah sekitar pusat perbelanjaan Vittorio Emanuele II Galleria pada 24 November 2012 \cite{bandini:gveii}. Keunikan dari data pergerakan ini adalah tingkat kepadatan pergerakan kolektif yang dinamis dan memiliki kecepatan perubahan yang tinggi. 
     
     Untuk mempermudah proses pengujian, data VEIIG yang digunakan dalam proses pengujian akan dipotong menjadi data pergerakan yang berdurasi sepanjang 5 menit.
+    
+    \item \textbf{Crowds by Example (CBE)}
+    
+    Data pergerakan CBE diambil dari pengamatan pergerakan pejalan kaki di luar sebuah gedung universitas \cite{solera:06:range-reference}. Data pergerakan ini memiliki tingkat kepadatan pejalan kaki menengah. Keunikan dari data pergerakan ini adalah data pergerakan ini memiliki tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan entitas yang multidireksional.
 \end{enumerate}
 
-Kedua data pergerakan tersebut disertai dengan hasil identifikasi rombongan yang dilakukan secara manual oleh manusia. Nantinya, hasil identifikasi tersebut akan digunakan pada proses pengujian dengan membandingkan hasil identifikasi yang dilakukan oleh manusia dengan hasil identifikasi yang dihasilkan oleh perangkat lunak.
+Dalam seluruh data pergerakan yang diugnakan, terdapat hasil identifikasi rombongan yang dilakukan secara manual oleh manusia pada data pergerakan tersebut. Nantinya, hasil identifikasi tersebut akan digunakan pada proses pengujian perangkat lunak dengan membandingkan hasil identifikasi yang dilakukan oleh manusia dengan hasil identifikasi yang dihasilkan oleh perangkat lunak.
 
 Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan yang digunakan pada proses pengujian algoritma identifikasi rombongan. Nilai $g$ menunjukkan jumlah rombongan yang teridentifikasi secara manual oleh manusia. Nilai $G$ menunjukkan rentang jumlah anggota rombongan yang teridentifikasi secara manual oleh manusia.
 
-\begin{table}[h]
+\begin{table}[t]
     \centering
-    \begin{tabular}{p{4cm} p{3cm} p{3cm}}
+    \begin{tabular}{p{3cm} p{2.5cm} p{2.5cm} p{2.5cm}}
         \hline
-        & \textbf{BIWI ETH} & \textbf{VEIIG} \\
+        & \textbf{BIWI ETH} & \textbf{VEIIG} & \textbf{CBE} \\
         \hline
-        Durasi Video & 08:39 & 05:00 \\
-        FPS & 25 & 8 \\
-        Jumlah Entitas & 360 & 630 \\
-        Jumlah \textit{Frame} & 1480 & 2400 \\
-        $g$ & 58 & 207 \\
-        $G$ & 2--3 & 2--7 \\
+        Durasi Video & 08:39 & 05:00 & 03:36 \\
+        FPS & 25 & 8 & 25 \\
+        Jumlah Entitas & 360 & 630 & 434 \\
+        Arah Pergerakan & Bidireksional & Bidireksional & Multidireksional \\
+        Jumlah \textit{Frame} & 1480 & 2400 & 901 \\
+        $g$ & 58 & 207 & 115 \\
+        $G$ & 2--3 & 2--7 & 2--4 \\
         \hline
     \end{tabular}
     \caption[Metadata sumber data pergerakan]{Informasi metadata dari data pergerakan yang digunakan pada proses pengujian}
@@ -51,22 +56,22 @@ Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak deng
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{p{1cm} p{3cm} p{3cm}}
+    \begin{tabular}{p{1cm} p{2.25cm} p{2.25cm} p{2.25cm}}
         \hline
-        & \textbf{BIWI ETH} & \textbf{VEIIG} \\
+        & \textbf{BIWI ETH} & \textbf{VEIIG} & \textbf{CBE} \\
         \hline
-        $m$ & 2 & 2 \\
-        $k$ & \{72, 89, 105\} & \{17, 38, 58\} \\
-        $r$ & \{1, 1.24\} & \{0.8, 1\} \\
-        $\vartheta$ & \{$\frac{\pi}{32}$, $\frac{\pi}{64}$\} & \{$\frac{\pi}{32}$, $\frac{\pi}{64}$\} \\
-        $n$ & 1 & 2 \\
+        $m$ & 2 & 2 & 2 \\
+        $k$ & \{72, 89, 105\} & \{17, 38, 58\} & \{36, 57, 78\} \\
+        $r$ & \{1, 1.24\} & \{0.8, 1\} & \{1.22, 1.52\} \\
+        $\vartheta$ & \{$\frac{\pi}{32}$, $\frac{\pi}{64}$\} & \{$\frac{\pi}{32}$, $\frac{\pi}{64}$\} & \{$\frac{\pi}{32}$, $\frac{\pi}{64}$\} \\
+        $n$ & 1 & 2 & 1 \\
         \hline
     \end{tabular}
     \caption[Parameter identifikasi rombongan]{Parameter identifikasi rombongan yang digunakan pada proses pengujian}
     \label{bab6:parameter}
 \end{table}
 
-Untuk setiap data pergerakan yang diuji, jumlah entitas minimum $m$ ditetapkan dengan nilai $2$, sesuai dengan jumlah anggota minimum dari hasil identifikasi yang dilakukan oleh manusia. Nilai $r$ yang diuji ditentukan dari densitas rombongan dari sumber data pergerakan \cite{solera:06:range-reference} dan teori jarak personal berdasarkan teori proksemik \cite{hall:06:proxemic}. Nilai $\vartheta$ yang digunakan ditentukan secara intuitif dengan mengamati deviasi sudut yang umum ketika manusia bergerak. Nilai jumlah kedekatan minimum $n$ ditentukan berdasarkan setengah dari jumlah anggota rata-rata yang terdapat pada data pergerakan. Terakhir, nilai $k$ yang diuji diambil dari durasi rombongan paling singkat dari seluruh rombongan berdasarkan hasil identifikasi yang dilakukan oleh manusia. Durasi rombongan dihitung ketika seluruh anggota rombongan muncul pada video pergerakan. Dua nilai $k$ lainnya diambil dari durasi rata-rata rombongan $\delta$ dan standar deviasi durasi rombongan $\sigma$, yaitu $\delta - \sigma$ dan $\delta - \frac{1}{2}\sigma$ \cite{wiratma:trajectory}.
+Untuk setiap data pergerakan yang diuji, jumlah entitas minimum $m$ ditetapkan dengan nilai $2$, sesuai dengan jumlah anggota minimum dari hasil identifikasi yang dilakukan oleh manusia. Nilai $r$ yang diuji ditentukan dari densitas rombongan dari sumber data pergerakan \cite{solera:06:range-reference} dan teori jarak personal berdasarkan teori proksemik \cite{hall:06:proxemic}. Nilai $\vartheta$ yang digunakan ditentukan secara intuitif dengan mengamati deviasi sudut yang umum ketika manusia bergerak. Nilai jumlah kedekatan minimum $n$ ditentukan berdasarkan setengah dari jumlah anggota rata-rata yang terdapat pada data pergerakan berdasarkan hasil identifikasi manusia. Terakhir, nilai $k$ yang diuji diambil dari durasi rombongan paling singkat dari seluruh rombongan berdasarkan hasil identifikasi yang dilakukan oleh manusia. Durasi rombongan dihitung ketika seluruh anggota rombongan muncul pada video pergerakan. Dua nilai $k$ lainnya diambil dari durasi rata-rata rombongan $\delta$ dan standar deviasi durasi rombongan $\sigma$, yaitu $\delta - \sigma$ dan $\delta - \frac{1}{2}\sigma$ \cite{wiratma:trajectory}.
 
 \section{Pengujian Kualitatif}
 \label{sec:qualitative}
@@ -75,7 +80,7 @@ Dalam pengujian kualitatif, hasil identifikasi rombongan yang dihasilkan akan di
 
 Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar \ref{bab6:representasi-entitas}. Kepala menunjukkan posisi entitas saat ini. Ekor menunjukkan urutan posisi-posisi sebelumnya yang ditempuh oleh entitas. ID menunjukkan nomor identitas unik yang digunakan untuk membedakan satu entitas dengan entitas lainnya.
 
-\begin{figure}[b!]
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.3\textwidth]{Gambar/bab6:entitas.pdf}
     \caption{Representasi entitas pada pengujian kualitatif}
@@ -167,3 +172,8 @@ Peningkatan nilai $r$ berdampak pada menurunnya nilai \textit{precision} yang di
 Memperketat syarat kedekatan spasial dengan mengurangi beda sudut maksimum $\vartheta$ berdampak positif pada nilai \textit{precision} yang meningkat. Peningkatan tersebut tidak lepas dari tingkat kepadatan pejalan kaki yang tinggi di mana pada kondisi tersebut, beda sudut menjadi nilai yang sensitif dalam proses identifikasi rombongan. Namun, memperkecil nilai $\vartheta$ akan sedikit memperendah nilai \textit{recall} dari hasil identifikasi. Hal tersebut disebabkan oleh nilai \textit{false negative} yang meningkat.
 
 Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \textit{recall} yang menurun seiring dengan peningkatan nilai $k$. Hal tersebut disebabkan oleh rombongan relevan yang tidak teridentifikasi karena durasi rombongan-rombongan tersebut dianggap terlalu singkat akibat tidak mencapai nilai $k$.  
+
+\subsection{Hasil Pengujian CBE}
+\label{subsec:veiig-result}
+
+Tabel menunjukkan hasil pengujian kuantitatif terhadap data pergerakan CBE.
