@@ -24,13 +24,13 @@ Untuk melakukan pengujian terhadap hasil identifikasi rombongan, diperlukan sumb
     Data pergerakan CBE diambil dari pengamatan pergerakan pejalan kaki di luar sebuah gedung universitas \cite{solera:06:range-reference}. Data pergerakan ini memiliki tingkat kepadatan pejalan kaki menengah. Keunikan dari data pergerakan ini adalah data pergerakan ini memiliki tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan entitas yang multidireksional.
 \end{enumerate}
 
-Dalam seluruh data pergerakan yang diugnakan, terdapat hasil identifikasi rombongan yang dilakukan secara manual oleh manusia pada data pergerakan tersebut. Nantinya, hasil identifikasi tersebut akan digunakan pada proses pengujian perangkat lunak dengan membandingkan hasil identifikasi yang dilakukan oleh manusia dengan hasil identifikasi yang dihasilkan oleh perangkat lunak.
+Dalam seluruh data pergerakan yang digunakan dalam proses pengujian, terdapat hasil identifikasi rombongan yang dilakukan secara manual oleh manusia pada data pergerakan tersebut. Nantinya, hasil identifikasi tersebut akan digunakan pada proses pengujian perangkat lunak dengan membandingkan hasil identifikasi yang dilakukan oleh manusia dengan hasil identifikasi yang dihasilkan oleh perangkat lunak.
 
 Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan yang digunakan pada proses pengujian algoritma identifikasi rombongan. Nilai $g$ menunjukkan jumlah rombongan yang teridentifikasi secara manual oleh manusia. Nilai $G$ menunjukkan rentang jumlah anggota rombongan yang teridentifikasi secara manual oleh manusia.
 
 \begin{table}[t]
     \centering
-    \begin{tabular}{p{3cm} p{2.5cm} p{2.5cm} p{2.5cm}}
+    \begin{tabular}{p{3cm} p{2.5cm} p{2.5cm} p{3cm}}
         \hline
         & \textbf{BIWI ETH} & \textbf{VEIIG} & \textbf{CBE} \\
         \hline
@@ -128,7 +128,7 @@ Tabel \ref{bab6:seq-eth-numbers} menunjukkan hasil pengujian kuantitatif pada da
 Pada data BIWI ETH yang memiliki tingkat kepadatan pejalan kaki yang rendah, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{precision} yang cukup rendah dan nilai \textit{recall} yang cukup tinggi. Nilai \textit{precision} yang cukup rendah menandakan bahwa algoritma identifikasi rombongan mengidentifikasi beberapa rombongan yang tidak terdapat pada hasil identifikasi manusia. Nilai \textit{recall} yang cukup tinggi menandakan bahwa algoritma identifikasi rombongan mampu
 mengidentifikasi cukup banyak rombongan yang relevan dengan hasil identifikasi manusia.
 
-Variasi parameter identifikasi rombongan yang digunakan tidak berpengaruh banyak pada relevansi hasil identifikasi rombongan oleh perangkat lunak. Hal tersebut dapat dilihat pada deviasi nilai \textit{F1 score} yang cukup kecil.
+Variasi parameter identifikasi rombongan yang digunakan tidak berpengaruh banyak pada relevansi hasil identifikasi rombongan oleh perangkat lunak. Hal tersebut dapat dilihat pada rentang perubahan nilai \textit{F1 score} yang cukup kecil.
 
 Peningkatan terhadap nilai $r$ berdampak pada peningkatan nilai \textit{recall} yang konsisten untuk setiap nilai $k$ dan $\vartheta$, di mana hal tersebut disebabkan oleh entitas yang sebelumnya tidak terhubung dengan sebuah pergerakan kolektif manapun karena memiliki jarak yang dianggap jauh dapat teridentifikasi sebagai rombongan. Hal tersebut berdampak pada penurunan terhadap nilai \textit{false negative} dan meningkatkan nilai \textit{true positive} dari hasil identifikasi rombongan. 
 
@@ -163,17 +163,52 @@ Tabel \ref{bab6:gveii-numbers} menunjukkan hasil pengujian kuantitatif pada sumb
    \label{bab6:gveii-numbers}
 \end{table}
 
-Pada data VEIIG yang memiliki tingkat kepadatan pejalan kaki yang tinggi dengan kepadatan yang dinamis, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{recall} yang tinggi disertai dengan nilai \textit{precision} yang cenderung rendah. Di satu sisi, nilai \textit{recall} yang tinggi menandakan bahwa algoritma identifikasi rombongan mampu mengidentifikasi sebagian besar rombongan yang juga diidentifikasi oleh manusia. Di sisi lain, nilai \textit{precision} yang cenderung rendah menandakan bahwa algoritma identifikasi rombongan menghasilkan terlalu banyak pergerakan kolektif yang diidentifikasi sebagai rombongan yang berdampak pada kenaikan nilai \textit{false positive}.
+Pada data VEIIG yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dengan kecepatan perubahan yang dinamis, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{recall} yang tinggi disertai dengan nilai \textit{precision} yang cenderung rendah. Di satu sisi, nilai \textit{recall} yang tinggi menandakan bahwa algoritma identifikasi rombongan mampu mengidentifikasi sebagian besar rombongan yang juga diidentifikasi oleh manusia. Di sisi lain, nilai \textit{precision} yang cenderung rendah menandakan bahwa algoritma identifikasi rombongan menghasilkan terlalu banyak pergerakan kolektif yang diidentifikasi sebagai rombongan yang berdampak secara langsung pada kenaikan nilai \textit{false positive}.
 
-Variasi dari parameter identifikasi rombongan yang digunakan memiliki pengaruh yang cukup besar pada hasil identifikasi perangkat lunak. Hal tersebut dapat dilihat dari deviasi dari \textit{F1 score} yang lebih besar dibandingkan dengan data dengan tingkat kepadatan pejalan kaki yang rendah.
+Variasi dari parameter identifikasi rombongan yang digunakan memiliki pengaruh yang cukup besar pada hasil identifikasi perangkat lunak. Hal tersebut dapat dilihat dari rentang perubahan dari \textit{F1 score} yang dapat mencapai nilai $10.6\%$ yang dipengaruhi oleh perubahan nilai $\vartheta$ yang digunakan dalam proses identifikasi.
 
 Peningkatan nilai $r$ berdampak pada menurunnya nilai \textit{precision} yang diakibatkan oleh banyaknya rombongan tambahan tidak relevan yang dihasilkan. Hal tersebut menyebabkan kenaikan nilai \textit{false positive}. Pengecualian untuk premis tersebut adalah ketika $k = 17$ dan $\vartheta = \frac{\pi}{32}$, di mana nilai \textit{precision} mengalami kenaikan sebanyak 8\%. Hal tersebut disebabkan oleh tingkat kepadatan pejalan kaki pada data VEIIG yang tinggi, sehingga menambah nilai $r$ akan menambah jumlah rombongan tidak relevan yang teridentifikasi,
 
 Memperketat syarat kedekatan spasial dengan mengurangi beda sudut maksimum $\vartheta$ berdampak positif pada nilai \textit{precision} yang meningkat. Peningkatan tersebut tidak lepas dari tingkat kepadatan pejalan kaki yang tinggi di mana pada kondisi tersebut, beda sudut menjadi nilai yang sensitif dalam proses identifikasi rombongan. Namun, memperkecil nilai $\vartheta$ akan sedikit memperendah nilai \textit{recall} dari hasil identifikasi. Hal tersebut disebabkan oleh nilai \textit{false negative} yang meningkat.
 
-Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \textit{recall} yang menurun seiring dengan peningkatan nilai $k$. Hal tersebut disebabkan oleh rombongan relevan yang tidak teridentifikasi karena durasi rombongan-rombongan tersebut dianggap terlalu singkat akibat tidak mencapai nilai $k$.  
+Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \textit{recall} yang menurun seiring dengan peningkatan nilai $k$. Hal tersebut disebabkan oleh rombongan relevan yang tidak teridentifikasi karena durasi rombongan-rombongan tersebut dianggap terlalu singkat akibat durasi rombongan yang tidak mencapai nilai $k$.  
 
 \subsection{Hasil Pengujian CBE}
-\label{subsec:veiig-result}
+\label{subsec:cbe-result}
 
-Tabel menunjukkan hasil pengujian kuantitatif terhadap data pergerakan CBE.
+Tabel \ref{bab6:cbe-numbers} menunjukkan hasil pengujian kuantitatif terhadap data pergerakan CBE.
+
+\begin{table}[h]
+\centering
+\caption{Hasil pengujian kuantitatif terhadap data pergerakan CBE}
+\begin{tabular}{|l|l|c|c|c|}
+\hline
+\multicolumn{2}{|l|}{}                                                                                        & Precision & Recall & F1 Score \\ \hline \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.342     & 0.178  & 0.234    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.369     & 0.165  & 0.228    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.376     & 0.283  & 0.323    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.383     & 0.270  & 0.316    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.391     & 0.109  & 0.170    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.404     & 0.100  & 0.160    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.392     & 0.165  & 0.232    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.430     & 0.161  & 0.234    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.400     & 0.069  & 0.119    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.410     & 0.069  & 0.119    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.434     & 0.100  & 0.163    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.407     & 0.095  & 0.155    \\ \hline
+\end{tabular}
+
+\label{bab6:cbe-numbers}
+\end{table}
+
+Pada data CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan yang multidireksional, hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak menghasilkan nilai \textit{recall} yang sangat rendah diserta dengan nilai \textit{precision} yang cukup tinggi. Dari hasil tersebut, dapat dikatakan bahwa perangkat lunak menunjukkan gejala \textit{overestimation}.
+
+Nilai \textit{recall} yang rendah menunjukkan bahwa perangkat lunak hanya mampu mengidentifikasi rombongan dalam jumlah yang sedikit, di mana hal tersebut akan meningkatkan nilai \textit{false negative}. Sedikitnya rombongan yang dihasilkan disebabkan oleh syarat perbedaan sudut yang dianggap terlalu ketat untuk data yang mengandung pergerakan multidireksional. Di sisi lain, nilai \textit{precision} yang cukup tinggi menunjukkan bahwa sebagian besar dari hasil identifikasi rombongan merupakan rombongan yang relevan dengan hasil identifikasi manusia.
+
+Variasi dari parameter identifikasi rombongan yang digunakan memberikan pengaruh yang cukup besar pada relevansi dari hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak. Hal tersebut dapat dilihat melalui rentang perubahan nilai \textit{F1 score} yang dapat mencapai $9.9\%$ dari perubahan nilai $r$ yang digunakan dalam proses identifikasi.
+
+Peningkatan terhadap nilai $r$ yang digunakan berdampak pada meningkatnya nilai \textit{precision} dan \textit{recall} yang konsisten untuk setiap nilai $k$ dan $\vartheta$. Hal tersebut disebabkan oleh terbentuknya rombongan yang relevan akibat entitas yang sebelumnya tidak terbentuk akibat salah satu anggotanya dianggap tidak cukup dekat akibat jarak entitas yang dianggap terlalu jauh.
+
+Nilai beda sudut maksimum $\vartheta$ memiliki peranan yang cukup besar terhadap relevansi hasil identifikasi rombongan. Memperkecil nilai $\vartheta$ menghasilkan dampak positif pada nilai \textit{precision} yang mengalami kenaikan, namun memiliki dampak yang sangat kecil terhadap penurunan nilai \textit{recall}. Pengecualian untuk premis tersebut adalah ketika $k = 78$ dan $r = 1.52$, di mana nilai \textit{precision} mengalami penurunan ketika $\vartheta = \frac{\pi}{32}$ menjadi $\vartheta = \frac{\pi}{64}$. Kenaikan tersebut disebabkan oleh sifat pergerakan entitas yang multidireksional.
+
+Meningkatkan nilai durasi interval minimum $k$ menyebabkan peningkatan nilai \textit{precision} pada hasil identifikasi perangkat lunak, namun mengurangi nilai \textit{recall} secara drastis. Hal tersebut disebabkan oleh banyaknya durasi pergerakan kolektif yang dianggap tidak cukup lama agar dapat diidentifikasi sebagai sebuah rombongan sehingga menyebabkan kenaikan nilai \textit{false negative}. 
