@@ -1,9 +1,6 @@
 \chapter{Simpulan}
 \label{chap:simpulan}
 
-\section{Jawaban Atas Permasalahan Penelitian}
-\label{sec:jawaban-masalah}
-
 \section{Pencapaian Tujuan Penelitian}
 \label{sec:pencapaian-tujuan}
 
@@ -22,11 +19,11 @@ Seperti yang sudah dijabarkan pada subbab \ref{sec:tujuan}, tujuan dari peneliti
     
     Algoritma identifikasi pergerakan kolektif yang sesuai dengan definisi formal rombongan dapat dilihat melalui Algoritma \ref{bab3:algoritma-identifikasi} yang dijabarkan melalui subbab \ref{sec:algoritma}. Cara kerja algoritma identifikasi rombongan dapat dilihat melalui subbab \ref{sec:algorithm-example}.
     
-    Karena cara kerja algoritma identifikasi rombongan yang dapat menghasilkan banyak rombongan yang redundan, dibuatlah sebuah algoritma tambahan untuk mengurangi redundansi rombongan yang dapat dilihat melalui Algoritma \ref{bab3:redundansi}
+    Karena cara kerja algoritma identifikasi rombongan yang dapat menghasilkan banyak rombongan yang redundan, dibuatlah sebuah algoritma tambahan untuk mengurangi redundansi rombongan yang dapat dilihat melalui Algoritma \ref{bab3:redundansi}.
     
     \item \textbf{Melakukan implementasi terhadap algoritma identifikasi pergerakan kolektif berdasarkan definisi baru yang dibuat}
     
-    Bab \ref{chap:perancangan} menunjukkan detil rancangan perangkat lunak algoritma identifikasi rombongan yang dibuat. Implementasi dari perangkat lunak dapat dilihat melalui bab \ref{chap:implementasi}. Kode sumber dari perangkat lunak identifikasi rombongan ditunjukkan melalui Lampiran.
+    Bab \ref{chap:perancangan} menunjukkan detil rancangan perangkat lunak algoritma identifikasi rombongan yang dibuat. Implementasi dari perangkat lunak dapat dilihat melalui bab \ref{chap:implementasi}. Kode sumber dari perangkat lunak identifikasi rombongan ditunjukkan melalui Lampiran \ref{lamp:A}.
     
     \item \textbf{Melakukan visualisasi hasil identifikasi rombongan menggunakan model pewarnaan dalam video rekaman data pejalan kaki}
     
@@ -36,10 +33,27 @@ Seperti yang sudah dijabarkan pada subbab \ref{sec:tujuan}, tujuan dari peneliti
     
     Pengujian terhadap algoritma identifikasi rombongan diukur menggunakan pengujian kualitatif dan kuantitatif. Pengujian kualitatif dilakukan melalui analisis terhadap visualisasi hasil identifikasi pejalan kaki. Pengujian kuantitatif dilakukan melalui perbandingan hasil identifikasi manusia dan hasil identifikasi yang dihasilkan perangkat lunak dengan menghitung nilai \textit{precision}, \textit{recall}, dan \textit{F1 score}.
     
-    Melalui hasil pengujian kuantitatif, 
+    Melalui hasil pengujian kuantitatif, dapat dikatakan bahwa penggunaan ukuran arah lintasan memiliki pengaruh positif pada relevansi hasil identifikasi rombongan, khususnya pada data pergerakan yang multidireksional.
 \end{enumerate}
 
-Berdasarkan jawaban-jawaban di atas, dapat disimpulkan bahwa sebagian besar tujuan penelitian yang telah dijabarkan sebelumnya dapat dicapai.
+Berdasarkan jawaban-jawaban di atas, dapat disimpulkan bahwa tujuan penelitian yang telah dijabarkan sebelumnya dapat dicapai seluruhnya. Dengan demikian, dapat dibuat sebuah penjabaran akan jawaban dari masalah-masalah yang hendak dipecahkan oleh penelitian ini.
+
+\section{Jawaban Atas Masalah Penelitian}
+\label{sec:jawaban-masalah}
+
+Seperti yang sudah disebutkan melalui Subbab \ref{sec:rumusan}, masalah utama yang hendak dipecahkan oleh skripsi ini adalah \textit{bagaimana cara membuat definisi pergerakan kolektif yang dapat mengatasi masalah perbedaan arah dan kecepatan}.
+
+Sebelum definisi pergerakan kolektif dapat dibuat, perlu dibuat solusi untuk memecahkan masalah \textit{apa saja ukuran-ukuran lintasan yang dapat digunakan untuk membuat sebuah definisi pergerakan kolektif yang bisa mengatasi masalah perbedaan arah dan kecepatan}. Pemecahan masalah tersebut dilakukan dengan melakukan studi pustaka mengenai ukuran-ukuran yang terdapat dalam sebuah data lintasan. Hal tersebut telah dibahas melalui Bab \ref{chap:teori}.
+
+Detil dari masalah perbedaan arah dan kecepatan dibahas pada Bab \ref{chap:analisis}. Melalui pembahasan yang dilakukan di bab tersebut, diketahui bahwa arah lintasan dapat digunakan untuk memecahkan masalah perbedaan arah entitas. Untuk mengatasi masalah perbedaan kecepatan entitas, digunakan algoritma \textit{dynamic time warping} sebagai pengganti dari penggunaan \textit{euclidean distance} untuk mengukur jarak antara dua buah entitas.
+
+Setelah penggunaan ukuran lintasan selesai ditetapkan, maka masalah \textit{bagaimana cara membuat definisi pergerakan kolektif yang dapat mengatasi masalah perbedaan arah dan kecepatan} dapat diselesaikan dengan memanfaatkan ukuran arah lintasan dan algoritma \textit{dynamic time warping}. Dari pemecahan masalah tersebut, lahirlah sebuah definisi pergerakan kolektif baru bernama rombongan. Definisi formal dari rombongan dapat dilihat melalui Subbab \ref{sec:definisi}. Setelah definisi rombongan rampung, dibuatlah sebuah algoritma yang mampu mengidentifikasi rombongan sesuai dengan definisi yang dibuat. Algoritma identifikasi rombongan dapat dilihat melalui Subbab \ref{sec:algoritma} beserta cara kerja algoritma yang dapat dilihat melalui Subbab \ref{sec:algorithm-example}.
+
+Untuk menyelesaikan masalah \textit{bagaimana cara mengimplementasikan algoritma untuk mengidentifikasi pergerakan kolektif berdasarkan definisi pergerakan kolektif yang dibuat}, diperlukan tahap analisis kebutuhan dan desain perangkat lunak. Analisis kebutuhan dan desain perangkat lunak dapat dilihat melalui Bab \ref{chap:perancangan}. Rancangan tersebut diimplementasikan secara konkrit melalui Bab \ref{chap:implementasi}. Untuk memvisualisasikan hasil identifikasi pada rekaman video pejalan kaki, digunakan sebuah perangkat lunak tambahan yang bukan merupakan lingkup pengerjaan skripsi ini.
+
+Penyelesaian masalah \textit{efektivitas definisi formal pergerakan kolektif yang dibuat dalam menyelesaikan masalah perbedaan arah dan kecepatan pada identifikasi pergerakan kolektif} diselesaikan dengan melakukan pengujian kuantitatif dan kualitatif. Pengujian kuantitatif dilakukan dengan menghitung relevansi hasil identifikasi perangkat lunak dengan hasil identifikasi yang dilakukan oleh manusia melalui nilai \textit{precision}, \textit{recall}, dan \textit{F1 score}. Pengujian kualitatif dilakukan melalui pengamatan terhadap hasil visualisasi rombongan pada rekaman video pejalan kaki. Detil pengujian dapat dilihat melalui Bab \ref{chap:pengujian}.
+
+Berdasarkan hasil pengujian kualitatif dan kuantitatif yang dilakukan terhadap hasil identifikasi rombongan berdasarkan definisi formal rombongan,
 
 \section{Saran Penelitian Lanjutan}
 \label{sec:saran}
@@ -47,7 +61,8 @@ Berdasarkan jawaban-jawaban di atas, dapat disimpulkan bahwa sebagian besar tuju
 Berdasarkan proses dan hasil penelitian, terdapat beberapa poin-poin yang dapat dijadikan sebagai bahan penelitian lanjutan mengenai pola pergerakan kolektif rombongan. Berikut merupakan poin-poin yang dianggap dapat menjadi bahan penelitian lanjutan:
 
 \begin{enumerate}
-    \item Melakukan pengujian lanjutan pada lebih banyak sampel data pergerakan, khususnya pada sampel-sampel yang memiliki tingkat kepadatan entitas yang variatif, memiliki pola pergerakan yang tidak umum seperti adanya perubahan kecepatan dan arah yang ekstrim, dan pada data pergerakan di mana entitas yang diamati bukan manusia.
+    \item Melakukan pengujian lanjutan pada lebih banyak sampel data pergerakan, khususnya pada sampel-sampel yang memiliki tingkat kepadatan entitas yang variatif, memiliki pola pergerakan yang tidak umum seperti adanya perubahan kecepatan dan arah yang ekstrim, serta pada data pergerakan di mana entitas yang diamati bukan manusia.
+    \item Meningkatkan kualitas hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia.
     \item Melakukan pengujian mengenai pengaruh nilai jumlah entitas minimum $m$ dan jumlah kedekatan minimum $n$.
     \item Melakukan optimisasi terhadap kompleksitas algoritma identifikasi rombongan.
     \item Mengurangi redundansi yang terdapat algoritma identifikasi rombongan sehingga perangkat lunak tidak membutuhkan algoritma tambahan untuk mengurangi redundansi hasil identifikasi.
