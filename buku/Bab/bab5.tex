@@ -18,7 +18,7 @@ Data pergerakan pejalan kaki akan disimpan dalam sebuah berkas teks dengan forma
 
 Informasi yang terdapat dalam data pejalan kaki disimpan dalam bentuk \textit{frame} yang telah diekstrak dari video rekaman pergerakan pejalan kaki. Sebuah \textit{frame} mengandung informasi dalam bentuk \texttt{<nomor-frame> <nomor-identitas> <posisi-x> <posisi-z> <posisi-y>} yang ditulis dalam satu baris pada berkas teks. Nilai tambahan lainnya yang terdapat dalam berkas teks akan dihiraukan oleh perangkat lunak.
 
-Nilai dari \texttt{<nomor-frame>} menunjukkan \textit{frame} pada video rekaman yang memiliki informasi yang terdapat pada baris teks. Nilai dari \texttt{<nomor-identitas>} menunjukkan nomor identitas unik dari entitas. Nilai dari \texttt{<posisi-x>} menunjukkan posisi entitas pada sumbu $X$ dari ruang gerak \textit{euclidean} $\mathbb{R}^3$. Hal yang sama juga berlaku untuk nilai \texttt{<posisi-y>} yang menyimpan posisi entitas pada sumbu $Y$ dan nilai \texttt{<posisi-z>} yang menyimpan posisi entitas pada sumbu $Z$. Berdasarkan batasan masalah yang sudah dibahas pada subbab \ref{sec:batasan}, nilai dari \texttt{<posisi-z>} akan dihiraukan sehingga entitas akan dianggap bergerak pada ruang $\mathbb{R}^2$.
+Nilai dari \texttt{<nomor-frame>} menunjukkan \textit{frame} pada video rekaman yang memiliki informasi yang terdapat pada baris teks. Nilai dari \texttt{<nomor-identitas>} menunjukkan nomor identitas unik dari entitas. Nilai dari \texttt{<posisi-x>} menunjukkan posisi entitas pada sumbu $X$ dari ruang gerak \textit{euclidean} $\mathbb{R}^3$. Hal yang sama juga berlaku untuk nilai \texttt{<posisi-y>} yang menyimpan posisi entitas pada sumbu $Y$ dan nilai \texttt{<posisi-z>} yang menyimpan posisi entitas pada sumbu $Z$. Berdasarkan batasan masalah yang sudah dibahas melalui Subbab \ref{sec:batasan}, nilai dari \texttt{<posisi-z>} akan dihiraukan sehingga entitas akan dianggap bergerak pada ruang $\mathbb{R}^2$.
 
 \section{Modul I/O}
 \label{sec:impl-io}
@@ -69,7 +69,7 @@ Modul penerjemah diimplementasikan dalam berkas \texttt{parser.cpp}. Seluruh str
     
     \item \texttt{parse\_expected\_result}
     
-    Fungsi ini bertugas untuk menerjemahkan data \textit{ground truth} agar hasil identifikasi rombongan bisa dievaluasi oleh modul evaluasi. Data \textit{ground truth} diambil dari sebuah berkas teks dengan format \texttt{.txt} dengan \textit{encoding} UTF-8 yang memiliki nama yang sama dengan nama berkas sumber data pergerakan. 
+    Fungsi ini bertugas untuk menerjemahkan data \textit{ground truth} agar hasil identifikasi rombongan bisa dievaluasi oleh modul evaluasi. Data \textit{ground truth} diambil dari sebuah berkas teks dengan format \texttt{.txt} dengan \textit{encoding} UTF-8 yang memiliki nama yang sama dengan nama berkas sumber data pergerakan. Fungsi ini akan mengembalikan daftar rombongan yang teridentifikasi dalam hasil identifikasi manusia.
 \end{enumerate}
 
 \section{Modul Rombongan}
@@ -81,7 +81,7 @@ Modul rombongan diimplementasikan dalam berkas \texttt{rombongan.cpp}. Modul ini
 
 Modul spasial diimplementasikan dalam berkas \texttt{spatial.cpp}. Seluruh struktur data yang diperlukan untuk mengimplementasikan modul ini tersedia melalui pustaka STL bawaan C++. Terdapat dua fungsi utama yang diimplementasikan modul ini, yaitu fungsi untuk menghitung jarak \textit{dynamic time warping} dan menghitung \textit{cosine similarity}.
 
-Fungsi untuk menghitung jarak \textit{dynamic time warping} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_dtw\_distance} yang merupakan implementasi konkrit dari algoritma \textit{dynamic time warping} dari Algoritma \ref{bab2:dtw-pseudocode}. Fungsi tersebut akan memanggil sebuah fungsi bantuan bernama \texttt{calculate\_euclidean\_distance}. Fungsi \texttt{calculate\_euclidean\_distance} bertugas untuk menghitung jarak \textit{euclidean} dari 2 titik dalam dimensi ruang yang sama. Potongan kode \ref{bab5:euclidean} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_euclidean\_distance}.
+Fungsi untuk menghitung jarak \textit{dynamic time warping} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_dtw\_distance} yang merupakan implementasi konkrit dari algoritma \textit{dynamic time warping} dari Algoritma \ref{bab2:dtw-pseudocode}. Fungsi tersebut akan memanggil sebuah fungsi bantuan bernama \texttt{calculate\_euclidean\_distance}. Fungsi \texttt{calculate\_euclidean\_distance} bertugas untuk menghitung jarak \textit{euclidean} dari 2 titik dalam dimensi ruang yang sama. Kode \ref{bab5:euclidean} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_euclidean\_distance}.
 
 \begin{lstlisting}[language=C++, caption=Implementasi fungsi \texttt{calculate\_euclidean\_distance}, label={bab5:euclidean}]
     /**
@@ -117,7 +117,7 @@ Fungsi untuk menghitung jarak \textit{dynamic time warping} akan diimplementasik
     }
 \end{lstlisting}
 
-Melalui proses analisis singkat terhadap kebutuhan, rancangan, serta implementasi modul penerjemah, efisiensi algoritma perhitungan jarak \textit{dynamic time warping} antara dua buah lintasan dapat ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila posisi dari salah satu sublintasan yang diperiksa pada sebuah dimensi bernilai \texttt{NaN}. Potongan kode \ref{bab5:dtw} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_dtw\_distance}.
+Melalui proses analisis singkat terhadap kebutuhan, rancangan, serta implementasi modul penerjemah, efisiensi algoritma perhitungan jarak \textit{dynamic time warping} antara dua buah lintasan dapat ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila posisi dari salah satu sublintasan dari entitas yang diperiksa pada sebuah dimensi bernilai \texttt{NaN}. Kode \ref{bab5:dtw} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_dtw\_distance}.
 
 \clearpage
 
@@ -189,7 +189,7 @@ Melalui proses analisis singkat terhadap kebutuhan, rancangan, serta implementas
     }
 \end{lstlisting}
 
-Fungsi untuk menghitung nilai \textit{cosine similarity} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_cosine\_similarity} yang merupakan implementasi konkrit dari Rumus \ref{bab3:cosine-similarity}. Sama seperti fungsi \texttt{calculate\_dtw\_distance}, efisiensi perhitungan nilai \textit{cosine similarity} ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila nilai dari salah satu dimensi dalam vektor yang diperiksa bernilai \texttt{NaN}. Potongan kode \ref{bab5:cosine-similarity} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_cosine\_similarity}.
+Fungsi untuk menghitung nilai \textit{cosine similarity} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_cosine\_similarity} yang merupakan implementasi konkrit dari Rumus \ref{bab3:cosine-similarity}. Sama seperti fungsi \texttt{calculate\_dtw\_distance}, efisiensi perhitungan nilai \textit{cosine similarity} ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila nilai dari salah satu dimensi dalam vektor dari entitas yang diperiksa bernilai \texttt{NaN}. Kode \ref{bab5:cosine-similarity} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_cosine\_similarity}.
 
 \section{Modul Evaluasi}
 \label{sec:impl-eval}
@@ -243,14 +243,12 @@ Modul evaluasi diimplementasikan dalam berkas \texttt{eval.cpp}. Modul ini memil
 
 Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan implementasi yang telah dibahas sebelumnya, terdapat lima buah struktur data komposit baru yang perlu diimplementasikan. Seluruh struktur data akan diimplementasikan menggunakan tipe data \texttt{struct}. Berikut merupakan detil implementasi dari seluruh struktur data komposit yang dibutuhkan:
 
-
-
 \begin{enumerate}
     \item \texttt{Arguments}
     
     Struktur data ini menyimpan informasi mengenai masukan pengguna yang diberikan melalui \textit{command line interface}. rombongan yang diberikan oleh pengguna. Struktur data ini diimplementasikan sebagai properti-properti yang merupakan kumpulan-kumpulan tipe data primitif hasil penerjemahan dari masukan pengguna.
     
-    Nilai dari $m$ dan $n$ disimpan sebagai bilangan bulat menggunakan tipe data \texttt{unsigned int}. Nilai dari $k$, $r$, dan $\vartheta$ disimpan sebagai bilangan desimal menggunakan tipe data \texttt{double}. Nama berkas dan letak berkas dari data pergerakan yang akan digunakan disimpan menggunakan tipe data \texttt{string}. Tipe data \texttt{string} yang digunakan bersumber dari pustaka STL bawaan C++. Potongan kode \ref{bab5:arguments} menunjukkan kode perangkat lunak untuk struktur data \texttt{Arguments}. 
+    Nilai dari $m$ dan $n$ disimpan sebagai bilangan bulat menggunakan tipe data \texttt{unsigned int}. Nilai dari $k$, $r$, dan $\vartheta$ disimpan sebagai bilangan desimal menggunakan tipe data \texttt{double}. Nama berkas dan letak berkas dari data pergerakan yang akan digunakan disimpan menggunakan tipe data \texttt{string}. Tipe data \texttt{string} yang digunakan bersumber dari pustaka STL bawaan C++. Kode \ref{bab5:arguments} menunjukkan kode perangkat lunak untuk struktur data \texttt{Arguments}. 
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Arguments}, label={bab5:arguments}]
         typedef struct Arguments {
@@ -268,7 +266,7 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     Struktur data ini menyimpan parameter yang akan digunakan oleh fungsi \texttt{identify\_rombongan} untuk melakukan identifikasi terhadap rombongan pada data pergerakan. Parameter tersebut didapatkan melalui masukan pengguna yang disimpan pada \texttt{Arguments}.
     
-    Nilai $r$ pada struktur data ini didapatkan dengan mengalikan nilai $r$ dan $k$ yang terdapat pada masukan mentah pengguna. Properti lainnya didapatkan secara langsung melalui \texttt{Arguments}. Potongan kode \ref{bab5:parameters} menunjukkan kode perangkat lunak untuk struktur data \texttt{Parameters}.
+    Nilai $r$ pada struktur data ini didapatkan dengan mengalikan nilai $r$ dan $k$ yang terdapat pada masukan mentah pengguna. Properti lainnya didapatkan secara langsung melalui \texttt{Arguments}. Kode \ref{bab5:parameters} menunjukkan kode perangkat lunak untuk struktur data \texttt{Parameters}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Parameters}, label={bab5:parameters}]
         typedef struct Parameter {
@@ -284,7 +282,7 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     Struktur data ini mewakili sebuah entitas yang tercatat dalam data pergerakan yang diberikan. Struktur data ini memiliki 2 properti yaitu \texttt{id} yang menunjukkan nomor identitas unik yang dimiliki oleh entitas yang dimaksud dan \texttt{trajectories} yang merupakan kumpulan posisi entitas yang tercatat dalam data pergerakan yang diurutkan secara menaik.
     
-    Struktur data ini akan melakukan \textit{operator overloading} pada operator $<$. Hal tersebut dilakukan untuk mempermudah proses pengurutan entitas yang dilakukan pada fungsi \texttt{identify\_rombongan}. Potongan kode \ref{bab5:entity} menunjukkan kode perangkat lunak untuk struktur data \texttt{Entity}.
+    Struktur data ini melakukan \textit{operator overloading} pada operator $<$. Hal tersebut dilakukan untuk mempermudah proses pengurutan entitas yang dilakukan pada fungsi \texttt{identify\_rombongan} dengan tujuan untuk mempermudah proses perbandingan kedekatan spasial antar entitas. Kode \ref{bab5:entity} menunjukkan kode perangkat lunak untuk struktur data \texttt{Entity}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Entity}, label={bab5:entity}]
         typedef struct Entity {
@@ -299,7 +297,7 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     \item \texttt{MovementData}
     
-    Struktur data ini menyimpan informasi entitas dalam bentuk kumpulan \texttt{Entity} dan kumpulan nilai \textit{frame} dalam bentuk \textit{array} dengan tipe data \texttt{double} yang tercatat pada sumber data pergerakan pejalan kaki. Kumpulan \texttt{Entity} akan digunakan secara langsung oleh fungsi \texttt{identify\_rombongan}, sedangkan kumpulan nilai \textit{frame} nantinya akan digunakan pada proses pencetakan berkas hasil identifikasi. Potongan kode \ref{bab5:movement-data} menunjukkan kode perangkat lunak untuk struktur data \texttt{MovementData}.
+    Struktur data ini menyimpan informasi entitas dalam bentuk kumpulan \texttt{Entity} dan kumpulan nilai \textit{frame} dalam bentuk \textit{array} dengan tipe data \texttt{double} yang tercatat pada sumber data pergerakan pejalan kaki. Kumpulan \texttt{Entity} akan digunakan secara langsung oleh fungsi \texttt{identify\_rombongan}, sedangkan kumpulan nilai \textit{frame} nantinya akan digunakan pada proses pencetakan berkas hasil identifikasi. Kode \ref{bab5:movement-data} menunjukkan kode perangkat lunak untuk struktur data \texttt{MovementData}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{MovementData}, label={bab5:movement-data}]
         typedef struct MovementData {
@@ -312,7 +310,7 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     Struktur data ini merupakan hasil dari identifikasi rombongan yang dikembalikan oleh modul Rombongan. Struktur data ini memiliki 2 buah properti yaitu \texttt{members} yang menyimpan nomor-nomor identitas entitas yang tergabung dalam rombongan dan \texttt{duration} yang merupakan himpunan dari durasi terbentuknya rombongan.
     
-    Durasi rombongan disimpan sebagai pasangan bilangan bulat yang mewakili durasi mulai dan durasi selesainya rombongan. Durasi rombongan diimplementasikan menggunakan struktur data \texttt{pair} yang disediakan oleh pustaka STL bawaan C++. Potongan kode \ref{bab5:rombongan} menunjukkan kode perangkat lunak untuk struktur data \texttt{Rombongan}.
+    Durasi rombongan disimpan sebagai pasangan bilangan bulat yang mewakili durasi mulai dan durasi selesainya rombongan. Durasi rombongan diimplementasikan menggunakan struktur data \texttt{pair} yang disediakan oleh pustaka STL bawaan C++. Kode \ref{bab5:rombongan} menunjukkan kode perangkat lunak untuk struktur data \texttt{Rombongan}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Rombongan}, label={bab5:rombongan}]
         typedef struct Rombongan {
@@ -323,7 +321,7 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     \item \texttt{Score}
     
-    Struktur data ini menyimpan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari hasil evaluasi kuantitatif terhadap hasil identifikasi rombongan. Potongan kode \ref{bab5:score} menunjukkan kode perangkat lunak untuk struktur data \texttt{Score}.
+    Struktur data ini menyimpan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari hasil evaluasi kuantitatif terhadap hasil identifikasi rombongan. Kode \ref{bab5:score} menunjukkan kode perangkat lunak untuk struktur data \texttt{Score}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Score}, label={bab5:score}]
         typedef struct Score {
