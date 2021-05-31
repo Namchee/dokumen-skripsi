@@ -83,19 +83,19 @@ Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan sepe
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.35\textwidth]{Gambar/bab6:entitas.pdf}
+    \includegraphics[width=0.25\textwidth]{Gambar/bab6:entitas.pdf}
     \caption{Representasi entitas pada pengujian kualitatif}
     \label{bab6:representasi-entitas}
 \end{figure}
 
-Keanggotaan entitas pada sebuah rombongan akan ditunjukkan melalui warna kepala dan ekor dari entitas. Warna kepala entitas merepresentasikan keanggotaan entitas yang dihasilkan oleh perangkat lunak. Warna ekor entitas merepresentasikan keanggotaan entitas yang ditunjukkan oleh hasil identifikasi yang dilakukan oleh manusia. Entitas yang tergabung dalam rombongan yang sama akan memiliki warna kepala dan ekor yang sama. Entitas yang tidak tergabung dalam rombongan manapun akan memiliki kepala dan ekor yang berwarna putih. Hal yang patut menjadi perhatian adalah warna yang digunakan untuk merepresentasikan sebuah rombongan akan diambil secara acak. Oleh karena itu, warna kepala dan ekor dapat berbeda walaupun hasil identifikasi manusia dan hasil identifikasi perangkat lunak menyatakan hasil yang sama.
+Keanggotaan entitas pada sebuah rombongan akan ditunjukkan melalui warna kepala dan ekor dari entitas. Warna kepala entitas merepresentasikan keanggotaan entitas yang dihasilkan oleh perangkat lunak. Warna ekor entitas merepresentasikan keanggotaan entitas yang ditunjukkan oleh hasil identifikasi yang dilakukan oleh manusia. Entitas yang tergabung dalam rombongan yang sama akan memiliki warna kepala dan ekor yang sama. Entitas yang tidak tergabung dalam rombongan manapun akan memiliki kepala dan ekor yang berwarna putih. Hal yang patut menjadi perhatian adalah warna yang digunakan untuk merepresentasikan sebuah rombongan akan diambil secara acak. Oleh karena itu, warna kepala dan ekor dapat berbeda walaupun hasil identifikasi manusia dan hasil identifikasi perangkat lunak menyatakan hasil yang sama. Selain itu, entitas yang tergabung dalam 2 atau lebih rombongan di saat yang bersamaan akan memiliki lebih dari satu warna kepala entitas sesuai dengan jumlah rombongan di mana entitas yang dimaksud tergabung sebagai anggota rombongan.
 
-Pada penelitian ini, beberapa hasil visualisasi menarik akan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar \ref{bab6:contoh-visualisasi}. Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak pada video rekaman pergerakan pejalan kaki dilakukan dengan bantuan perangkat lunak visualisasi yang dibuat oleh Lionov Wiratma \cite{wiratma:software}.
+Pada penelitian ini, beberapa hasil visualisasi yang menarik untuk dibahas akan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar \ref{bab6:contoh-visualisasi}. Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak pada video rekaman pergerakan pejalan kaki dilakukan dengan bantuan perangkat lunak visualisasi yang dibuat oleh Lionov Wiratma \cite{wiratma:software}. Perangkat lunak tersebut menerima masukan berupa rekaman video pergerakan, rekaman data lintasan, hasil identifikasi manusia, dan hasil identifikasi dari perangkat lunak identifikasi rombongan. Perangkat lunak visualisasi kemudian akan menghasilkan video rekaman di mana seluruh entitas yang terdapat dalam video rekaman asli akan ditandai dengan figur yang ditunjukkan melalui Gambar \ref{bab6:representasi-entitas}. 
 
 \begin{figure}[h]
     \centering
     \captionsetup{width=0.8\textwidth}
-    \includegraphics[width=0.75\textwidth]{Gambar/bab6:contoh-visualisasi.pdf}
+    \includegraphics[width=0.6\textwidth]{Gambar/bab6:contoh-visualisasi.pdf}
     \caption[Contoh hasil visualisasi rombongan]{Contoh hasil visualisasi hasil identifikasi rombongan pada video rekaman data pergerakan pejalan kaki}
     \label{bab6:contoh-visualisasi}
 \end{figure}
@@ -184,11 +184,11 @@ Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak 
     \captionsetup{width=.65\textwidth}
     \begin{subfigure}[t]{0.225\textwidth}
         \centering
-        \includegraphics[height=8cm]{Gambar/bab6:masalah-eth-n.pdf}
+        \includegraphics[height=8.25cm]{Gambar/bab6:masalah-eth-n.pdf}
     \end{subfigure}
     \begin{subfigure}[t]{0.225\textwidth}
         \centering
-        \includegraphics[height=8cm]{Gambar/bab6:masalah-eth-n-2.pdf}
+        \includegraphics[height=8.25cm]{Gambar/bab6:masalah-eth-n-2.pdf}
     \end{subfigure}
     \caption[Masalah nilai $n$ pada data BIWI ETH]{Nilai kedekatan minimum $n = 1$ membuat entitas dengan nomor identitas 44 tergabung sebagai anggota dari rombongan yang berada jauh di depan}
     \label{bab6:masalah-eth-n}
@@ -196,6 +196,9 @@ Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak 
  
 \subsection{Hasil Pengujian VEIIG}
 \label{subsec:veiig-result}
+
+\subsubsection{Hasil Pengujian Kuantitatif}
+\label{subsubsec:veiig-quantitative}
 
 Tabel \ref{bab6:gveii-numbers} menunjukkan hasil pengujian kuantitatif pada sumber data VEIIG.
 
@@ -229,7 +232,10 @@ Peningkatan nilai $r$ berdampak pada menurunnya nilai \textit{precision} yang di
 
 Memperketat syarat kedekatan spasial dengan mengurangi beda sudut maksimum $\vartheta$ berdampak positif pada nilai \textit{precision} yang meningkat. Peningkatan tersebut tidak lepas dari tingkat kepadatan pejalan kaki yang tinggi di mana pada kondisi tersebut, beda sudut menjadi nilai yang sensitif dalam proses identifikasi rombongan. Namun, memperkecil nilai $\vartheta$ akan sedikit memperendah nilai \textit{recall} dari hasil identifikasi. Hal tersebut disebabkan oleh nilai \textit{false negative} yang meningkat.
 
-Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \textit{recall} yang menurun seiring dengan peningkatan nilai $k$. Hal tersebut disebabkan oleh rombongan relevan yang tidak teridentifikasi karena durasi rombongan-rombongan tersebut dianggap terlalu singkat akibat durasi rombongan yang tidak mencapai nilai $k$.  
+Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \textit{recall} yang menurun seiring dengan peningkatan nilai $k$. Hal tersebut disebabkan oleh rombongan relevan yang tidak teridentifikasi karena durasi rombongan-rombongan tersebut dianggap terlalu singkat akibat durasi rombongan yang tidak mencapai nilai $k$.
+
+\subsubsection{Hasil Pengujian Kualitatif}
+\label{subsubsec:veiig-qualitative}
 
 \subsection{Hasil Pengujian CBE}
 \label{subsec:cbe-result}
@@ -302,18 +308,17 @@ Berdasarkan algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma 
 
 Bukti penyelesaian masalah perbedaan kecepatan dapat dilihat melalui hasil visualisasi rombongan yang ditunjukkan melalui Gambar \ref{bab6:solusi-beda-kecepatan}. Pada gambar tersebut, terdapat sebuah entitas yang memiliki nomor identitas 104 yang menunggu dua buah entitas yaitu entitas 64 dan 65 pada satu tempat. Setelah entitas 64 dan 65 menyusul entitas 104, mereka bertiga melanjutkan pergerakan bersama. Melalui hasil visualisasi, dapat dilihat bahwa entitas 104 dapat teridentifikasi dari semula sebagai anggota dari rombongan bersama dengan entitas 65. Dapat dikatakan bahwa perbedaan kecepatan tidak menjadi masalah yang dimiliki oleh algoritma identifikasi rombongan.
 
-\begin{figure}[t]
+\begin{figure}[h]
     \centering
     \captionsetup{width=.85\textwidth}
-    \begin{subfigure}[t]{0.45\textwidth}
+    \begin{subfigure}[h]{0.475\textwidth}
         \centering
         \includegraphics[height=4cm]{Gambar/bab6:beda-kecepatan-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[t]{0.45\textwidth}
+    \begin{subfigure}[h]{0.45\textwidth}
         \centering
-        \includegraphics[height=4.5cm]{Gambar/bab6:beda-kecepatan-2.pdf}
+        \includegraphics[height=4.25cm]{Gambar/bab6:beda-kecepatan-2.pdf}
     \end{subfigure}
-    \caption[Bukti penyelesaian beda kecepatan]{Entitas 104 yang menunggu entitas 64 dan 65 pada satu tempat dapat teridentifikasi sebagai anggota rombongan bersamaan dengan entitas 64 dan 65.}
+    \caption[Bukti penyelesaian beda kecepatan]{Entitas 104 yang menunggu entitas 64 dan 65 pada satu tempat dapat teridentifikasi sebagai anggota rombongan bersamaan dengan entitas 64 dan 65}
     \label{bab6:solusi-beda-kecepatan}
 \end{figure}
-

@@ -27,13 +27,15 @@ Seperti yang sudah dijabarkan pada subbab \ref{sec:tujuan}, tujuan dari peneliti
     
     \item \textbf{Melakukan visualisasi hasil identifikasi rombongan menggunakan model pewarnaan dalam video rekaman data pejalan kaki}
     
-    Rest in peace lmao AAAAAAAAAAAAAAAAAA
+    Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak identifikasi rombongan dilakukan menggunakan bantuan perangkat lunak lain yang diluar dari lingkup pengerjaan penelitian ini. Detil penggunaan perangkat lunak visualisasi hasil identifikasi rombogan dapat dilihat melalui Subbab \ref{sec:qualitative}.
     
     \item \textbf{Mengukur efektivitas dan ketepatan dari definisi pergerakan kolektif yang dibuat dalam mengidentifikasi pergerakan-pergerakan kolektif dalam data pejalan kaki di dunia nyata}
     
     Pengujian terhadap algoritma identifikasi rombongan diukur menggunakan pengujian kualitatif dan kuantitatif. Pengujian kualitatif dilakukan melalui analisis terhadap visualisasi hasil identifikasi pejalan kaki. Pengujian kuantitatif dilakukan melalui perbandingan hasil identifikasi manusia dan hasil identifikasi yang dihasilkan perangkat lunak dengan menghitung nilai \textit{precision}, \textit{recall}, dan \textit{F1 score}.
     
-    Melalui hasil pengujian kuantitatif, dapat dikatakan bahwa penggunaan ukuran arah lintasan memiliki pengaruh positif pada relevansi hasil identifikasi rombongan, khususnya pada data pergerakan yang multidireksional.
+    Melalui hasil pengujian kuantitatif, dapat terlihat penggunaan ukuran arah lintasan memiliki pengaruh positif pada relevansi hasil identifikasi rombongan, khususnya pada data pergerakan yang multidireksional. Namun, penggunaan arah lintasan yang terlalu ketat dapat mengakibatkan banyaknya rombongan yang tidak teridentifikasi oleh perangkat lunak.
+    
+    Melalui hasil pengujian kualitatif yang dilakukan dengan visualisasi hasil identifikasi, terdapat beberapa masalah identifikasi rombongan sepert ketatnya nilai perbedaan arah yang menyebabkan beberapa rombongan tidak teridentifikasi dan banyaknya subrombongan redundan yang tidak berhasil dieliminasi oleh algoritma pengurangan redundansi rombongan. Walaupun demikian, hasil pengujian kualitatif menunjukkan bahwa algoritma identifikasi rombongan dapat mengatasi masalah perbedaan kecepatan pada proses identifikasi rombongan.
 \end{enumerate}
 
 Berdasarkan jawaban-jawaban di atas, dapat disimpulkan bahwa tujuan penelitian yang telah dijabarkan sebelumnya dapat dicapai seluruhnya. Dengan demikian, dapat dibuat sebuah penjabaran akan jawaban dari masalah-masalah yang hendak dipecahkan oleh penelitian ini.
@@ -53,7 +55,7 @@ Untuk menyelesaikan masalah \textit{bagaimana cara mengimplementasikan algoritma
 
 Penyelesaian masalah \textit{efektivitas definisi formal pergerakan kolektif yang dibuat dalam menyelesaikan masalah perbedaan arah dan kecepatan pada identifikasi pergerakan kolektif} diselesaikan dengan melakukan pengujian kuantitatif dan kualitatif. Pengujian kuantitatif dilakukan dengan menghitung relevansi hasil identifikasi perangkat lunak dengan hasil identifikasi yang dilakukan oleh manusia melalui nilai \textit{precision}, \textit{recall}, dan \textit{F1 score}. Pengujian kualitatif dilakukan melalui pengamatan terhadap hasil visualisasi rombongan pada rekaman video pejalan kaki. Detil pengujian dapat dilihat melalui Bab \ref{chap:pengujian}.
 
-Berdasarkan hasil pengujian kualitatif dan kuantitatif yang dilakukan terhadap hasil identifikasi rombongan berdasarkan definisi formal rombongan,
+Berdasarkan hasil pengujian kualitatif dan kuantitatif yang dilakukan terhadap hasil identifikasi rombongan berdasarkan definisi formal rombongan, dapat dikatakan bahwa penggunaan ukuran arah lintasan serta penggunaan algoritma \textit{dynamic time warping} cukup efektif untuk mengatasi masalah perbedaan arah dan kecepatan pada proses identifikasi rombongan.
 
 \section{Saran Penelitian Lanjutan}
 \label{sec:saran}
