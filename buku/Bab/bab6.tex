@@ -274,18 +274,23 @@ Nilai beda sudut maksimum $\vartheta$ memiliki peranan yang cukup besar terhadap
 
 Meningkatkan nilai durasi interval minimum $k$ menyebabkan peningkatan nilai \textit{precision} pada hasil identifikasi perangkat lunak, namun mengurangi nilai \textit{recall} secara drastis. Hal tersebut disebabkan oleh banyaknya durasi pergerakan kolektif yang dianggap tidak cukup lama agar dapat diidentifikasi sebagai sebuah rombongan sehingga menyebabkan kenaikan nilai \textit{false negative}. 
 
-\begin{figure}
+\subsubsection{Hasil Pengujian Kualitatif}
+\label{subsub:sec:cbe-qualitative}
+
+Hasil pengujian kualitatif melalui visualisasi pada data CBE menunjukkan alasan dari tingginya nilai \textit{false negative} dari hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar \ref{bab6:masalah-cbe}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat beberapa rombongan yang tidak teridentifikasi oleh perangkat lunak identifikasi rombongan, namun teridentifikasi sebagai rombongan pada hasil identifikasi manusia. Hal tersebut disebabkan cara perhitungan beda sudut maksimum antar anggota rombongan.
+
+\begin{figure}[h]
     \centering
     \captionsetup{width=.75\textwidth}
-    \begin{subfigure}[t]{0.25\textwidth}
+    \begin{subfigure}[h]{0.25\textwidth}
         \centering
         \includegraphics[height=5.5cm]{Gambar/bab6:masalah-cbe-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[t]{0.25\textwidth}
+    \begin{subfigure}[h]{0.25\textwidth}
         \centering
         \includegraphics[height=5.5cm]{Gambar/bab6:masalah-cbe-2.pdf}
     \end{subfigure}
-    \begin{subfigure}[t]{0.25\textwidth}
+    \begin{subfigure}[h]{0.25\textwidth}
         \centering
         \includegraphics[height=5.5cm]{Gambar/bab6:masalah-cbe-3.pdf}
     \end{subfigure}
@@ -293,9 +298,22 @@ Meningkatkan nilai durasi interval minimum $k$ menyebabkan peningkatan nilai \te
     \label{bab6:masalah-cbe}
 \end{figure}
 
-\subsubsection{Hasil Pengujian Kualitatif}
-\label{subsub:sec:cbe-qualitative}
+Berdasarkan algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma \ref{bab3:algoritma-identifikasi}, beda arah antar entitas dihitung sepanjang durasi interval waktu minimum rombongan. Dapat dikatakan bahwa setiap anggota rombongan harus memiliki beda arah yang sangat minim dalam durasi interval waktu yang cukup lama. Pada data pergerakan CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dan pergerakan entitas yang multidireksional, cara perhitungan beda arah tersebut berdampak pada peningkatkan nilai \textit{false negative} pada hasil identifikasi rombongan yang dilakukan oleh perangkat lunak. Peningkatan nilai \textit{false negative} disebabkan oleh frekuensi perubahan beda arah yang cukup tinggi, sehingga perangkat lunak menganggap bahwa rombongan tersebut tidak memenuhi syarat perbedaan arah maksimum antar entitas. Tingginya nilai \textit{false negative} berdampak pada penurunan nilai \textit{recall} yang ditunjukkan melalui hasil pengujian kuantitatif pada bagian sebelumnya.
 
-Hasil pengujian kualitatif melalui visualisasi pada data CBE menunjukkan alasan dari tingginya nilai \textit{false negative} dari hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar \ref{bab6:masalah-cbe}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat beberapa rombongan yang tidak teridentifikasi oleh perangkat lunak identifikasi rombongan, namun teridentifikasi sebagai rombongan pada hasil identifikasi manusia. Hal tersebut disebabkan cara perhitungan beda sudut maksimum antar anggota rombongan.
+Bukti penyelesaian masalah perbedaan kecepatan dapat dilihat melalui hasil visualisasi rombongan yang ditunjukkan melalui Gambar \ref{bab6:solusi-beda-kecepatan}. Pada gambar tersebut, terdapat sebuah entitas yang memiliki nomor identitas 104 yang menunggu dua buah entitas yaitu entitas 64 dan 65 pada satu tempat. Setelah entitas 64 dan 65 menyusul entitas 104, mereka bertiga melanjutkan pergerakan bersama. Melalui hasil visualisasi, dapat dilihat bahwa entitas 104 dapat teridentifikasi dari semula sebagai anggota dari rombongan bersama dengan entitas 65. Dapat dikatakan bahwa perbedaan kecepatan tidak menjadi masalah yang dimiliki oleh algoritma identifikasi rombongan.
 
-Berdasarkan algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma \ref{bab3:algoritma-identifikasi}, beda arah antar entitas dihitung sepanjang durasi interval waktu minimum rombongan. Dapat dikatakan bahwa setiap anggota rombongan harus memiliki beda arah yang sangat minim dalam durasi interval waktu yang cukup lama. Pada data pergerakan CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dan pergerakan entitas yang multidireksional, cara perhitungan beda arah tersebut berdampak pada peningkatkan nilai \textit{false negative} pada hasil identifikasi rombongan yang dilakukan oleh perangkat lunak. Peningkatan nilai \textit{false negative} disebabkan oleh frekuensi perubahan beda arah yang cukup tinggi, sehingga perangkat lunak menganggap bahwa rombongan tersebut tidak memenuhi syarat perbedaan arah maksimum antar entitas. Tingginya nilai \textit{false negative} berdampak pada penurunan nilai \textit{recall} yang ditunjukkan melalui hasil pengujian kuantitatif pada bagian sebelumnya. 
+\begin{figure}[t]
+    \centering
+    \captionsetup{width=.85\textwidth}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=4cm]{Gambar/bab6:beda-kecepatan-1.pdf}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=4.5cm]{Gambar/bab6:beda-kecepatan-2.pdf}
+    \end{subfigure}
+    \caption[Bukti penyelesaian beda kecepatan]{Entitas 104 yang menunggu entitas 64 dan 65 pada satu tempat dapat teridentifikasi sebagai anggota rombongan bersamaan dengan entitas 64 dan 65.}
+    \label{bab6:solusi-beda-kecepatan}
+\end{figure}
+
