@@ -11,17 +11,17 @@ Untuk melakukan pengujian terhadap hasil identifikasi rombongan, diperlukan sumb
 \begin{enumerate}
     \item \textbf{BIWI ETH Walking Pedestrian}
     
-    Data pergerakan BIWI ETH diambil dari pengamatan pergerakan pejalan kaki di depan gedung universitas ETH Zurich, Swiss pada tahun 2009 \cite{pellegrini:eth}. Data pergerakan ini memiliki karakteristik tingkat kepadatan pejalan kaki dan pergerakan kolektif yang rendah.
+    Data pergerakan BIWI ETH diambil dari pengamatan pergerakan pejalan kaki di depan gedung universitas ETH Zurich, Swiss pada tahun 2009 \cite{pellegrini:eth}. Data pergerakan ini memiliki karakteristik tingkat kepadatan pejalan kaki dan pergerakan kolektif yang rendah. Setiap baris informasi yang tercatat dalam data pergerakan ETH dicatat setiap 2\.5 \textit{frame} per detik.
     
     \item \textbf{Vittorio Emanuele II Gallery (VEIIG)}
     
-    Data pergerakan VEIIG diambil dari pengamatan pergerakan pejalan kaki dua arah di daerah sekitar pusat perbelanjaan Vittorio Emanuele II Galleria pada 24 November 2012 \cite{bandini:gveii}. Keunikan dari data pergerakan ini adalah tingkat kepadatan pergerakan kolektif yang dinamis dan memiliki kecepatan perubahan yang tinggi. 
+    Data pergerakan VEIIG diambil dari pengamatan pergerakan pejalan kaki dua arah di daerah sekitar pusat perbelanjaan Vittorio Emanuele II Galleria pada 24 November 2012 \cite{bandini:gveii}. Keunikan dari data pergerakan ini adalah tingkat kepadatan pergerakan kolektif yang dinamis dan memiliki kecepatan perubahan yang tinggi. Setiap baris informasi yang tercatat dalam data pergerakan VEIIG dicatat setiap 8 \textit{frame} per detik.
     
     Untuk mempermudah proses pengujian, data VEIIG yang digunakan dalam proses pengujian akan dipotong menjadi data pergerakan yang berdurasi sepanjang 5 menit.
     
     \item \textbf{Crowds by Example (CBE)}
     
-    Data pergerakan CBE diambil dari pengamatan pergerakan pejalan kaki di luar sebuah gedung universitas \cite{solera:06:range-reference}. Data pergerakan ini memiliki tingkat kepadatan pejalan kaki menengah. Keunikan dari data pergerakan ini adalah data pergerakan ini memiliki tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan entitas yang multidireksional.
+    Data pergerakan CBE diambil dari pengamatan pergerakan pejalan kaki di luar sebuah gedung universitas \cite{solera:06:range-reference}. Data pergerakan ini memiliki tingkat kepadatan pejalan kaki menengah. Keunikan dari data pergerakan ini adalah data pergerakan ini memiliki tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan entitas yang multidireksional. Setiap baris informasi yang tercatat dalam data pergerakan CBE dicatat setiap 25 \textit{frame} per detik.
 \end{enumerate}
 
 Dalam seluruh data pergerakan yang digunakan dalam proses pengujian, terdapat hasil identifikasi rombongan yang dilakukan secara manual oleh manusia pada data pergerakan tersebut. Nantinya, hasil identifikasi tersebut akan digunakan pada proses pengujian perangkat lunak dengan membandingkan hasil identifikasi yang dilakukan oleh manusia dengan hasil identifikasi yang dihasilkan oleh perangkat lunak.
@@ -82,14 +82,21 @@ Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan sepe
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.3\textwidth]{Gambar/bab6:entitas.pdf}
+    \includegraphics[width=0.35\textwidth]{Gambar/bab6:entitas.pdf}
     \caption{Representasi entitas pada pengujian kualitatif}
     \label{bab6:representasi-entitas}
 \end{figure}
 
 Keanggotaan entitas pada sebuah rombongan akan ditunjukkan melalui warna kepala dan ekor dari entitas. Warna kepala entitas merepresentasikan keanggotaan entitas yang dihasilkan oleh perangkat lunak. Warna ekor entitas merepresentasikan keanggotaan entitas yang ditunjukkan oleh hasil identifikasi yang dilakukan oleh manusia. Entitas yang tergabung dalam rombongan yang sama akan memiliki warna kepala dan ekor yang sama. Entitas yang tidak tergabung dalam rombongan manapun akan memiliki kepala dan ekor yang berwarna putih. Hal yang patut menjadi perhatian adalah warna yang digunakan untuk merepresentasikan sebuah rombongan akan diambil secara acak. Oleh karena itu, warna kepala dan ekor dapat berbeda walaupun hasil identifikasi manusia dan hasil identifikasi perangkat lunak menyatakan hasil yang sama.
 
-Pada penelitian ini, beberapa hasil visualisasi menarik akan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar. Fitur visualisasi hasil identifikasi pada video rekaman pergerakan pejalan kaki dicapai menggunakan bantuan perangkat lunak lain oleh Maurice Marx.
+Pada penelitian ini, beberapa hasil visualisasi menarik akan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar \ref{bab6:contoh-visualisasi}. Fitur visualisasi hasil identifikasi pada video rekaman pergerakan pejalan kaki dicapai menggunakan bantuan perangkat lunak lain oleh Maurice Marx.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Gambar/bab6:contoh-visualisasi.pdf}
+    \caption[Contoh hasil visualisasi rombongan]{Contoh hasil visualisasi hasil identifikasi rombongan pada video rekaman data pergerakan pejalan kaki}
+    \label{bab6:contoh-visualisasi}
+\end{figure}
 
 \section{Hasil Pengujian}
 \label{sec:result}
@@ -176,6 +183,9 @@ Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \text
 \subsection{Hasil Pengujian CBE}
 \label{subsec:cbe-result}
 
+\subsubsection{Hasil Pengujian Kuantitatif}
+\label{subsubsec:cbe-quantitative}
+
 Tabel \ref{bab6:cbe-numbers} menunjukkan hasil pengujian kuantitatif terhadap data pergerakan CBE.
 
 \begin{table}[h]
@@ -212,3 +222,29 @@ Peningkatan terhadap nilai $r$ yang digunakan berdampak pada meningkatnya nilai 
 Nilai beda sudut maksimum $\vartheta$ memiliki peranan yang cukup besar terhadap relevansi hasil identifikasi rombongan. Memperkecil nilai $\vartheta$ menghasilkan dampak positif pada nilai \textit{precision} yang mengalami kenaikan, namun memiliki dampak yang sangat kecil terhadap penurunan nilai \textit{recall}. Pengecualian untuk premis tersebut adalah ketika $k = 78$ dan $r = 1.52$, di mana nilai \textit{precision} mengalami penurunan ketika $\vartheta = \frac{\pi}{32}$ menjadi $\vartheta = \frac{\pi}{64}$. Kenaikan tersebut disebabkan oleh sifat pergerakan entitas yang multidireksional.
 
 Meningkatkan nilai durasi interval minimum $k$ menyebabkan peningkatan nilai \textit{precision} pada hasil identifikasi perangkat lunak, namun mengurangi nilai \textit{recall} secara drastis. Hal tersebut disebabkan oleh banyaknya durasi pergerakan kolektif yang dianggap tidak cukup lama agar dapat diidentifikasi sebagai sebuah rombongan sehingga menyebabkan kenaikan nilai \textit{false negative}. 
+
+\begin{figure}
+    \centering
+    \captionsetup{width=.75\textwidth}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \centering
+        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-cbe-1.pdf}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \centering
+        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-cbe-2.pdf}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \centering
+        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-cbe-3.pdf}
+    \end{subfigure}
+    \caption[Masalah identifikasi pada data CBE]{Parameter perbedaan arah yang terlalu ketat menyebabkan rombongan tidak teridentifikasi oleh perangkat lunak}
+    \label{bab6:masalah-cbe}
+\end{figure}
+
+\subsubsection{Hasil Pengujian Kualitatif}
+\label{subsub:sec:cbe-qualitative}
+
+Hasil pengujian kualitatif menunjukkan alasan dari tingginya nilai \textit{false negative} dari hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar \ref{bab6:masalah-cbe}. Melalu gambar-gambar tersebut, dapat dilihat bahwa terdapat beberapa rombongan yang tidak teridentifikasi oleh perangkat lunak identifikasi rombongan, namun teridentifikasi sebagai rombongan pada hasil identifikasi manusia. Hal tersebut disebabkan cara perhitungan beda sudut maksimum antar anggota rombongan.
+
+Berdasarkan algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma \ref{bab3:algoritma-identifikasi}, beda arah antar entitas dihitung sepanjang durasi interval waktu minimum rombongan. Dapat dikatakan bahwa setiap anggota rombongan harus memiliki beda arah yang sangat minim dalam durasi interval waktu yang cukup lama. Pada data pergerakan CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dan pergerakan entitas yang multidireksional, cara perhitungan beda arah tersebut berdampak pada peningkatkan nilai \textit{false negative} pada hasil identifikasi rombongan yang dilakukan oleh perangkat lunak. Peningkatan nilai \textit{false negative} disebabkan oleh frekuensi perubahan beda arah yang cukup tinggi, sehingga perangkat lunak menganggap bahwa rombongan tersebut tidak memenuhi syarat perbedaan arah maksimum antar entitas.
