@@ -237,6 +237,63 @@ Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \text
 \subsubsection{Hasil Pengujian Kualitatif}
 \label{subsubsec:veiig-qualitative}
 
+Hasil pengujian kualitatif melalui visualisasi pada data VEIIG menunjukkan alasan dari nilai \textit{precision} yang cukup rendah dari hasil identifikasi rombongan yang ditunjukkan melalui Gambar \ref{bab6:masalah-veiig-arah}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat rombongan yang tidak teridentifikasi dan ada anggota rombongan yang tidak tergabung dalam rombongan yang terbentuk. Hal tersebut disebabkan oleh nilai perbedaan sudut maksimum yang terlalu ketat dan kaku sehingga anggota rombongan tidak memenuhi syarat kedekatan spasial.
+
+Melalui proses analisis terhadap cara kerja algoritma, kekakuan pada masalah perbedaan arah maksimum berasal dari algoritma identifikasi rombongan. Berdasarkan algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma \ref{bab3:algoritma-identifikasi}, beda arah antar entitas dihitung sepanjang durasi interval waktu minimum rombongan. Dapat dikatakan bahwa setiap anggota rombongan hanya dapat memiliki beda arah yang sangat minim dalam durasi interval waktu yang cukup lama. Syarat tersebut dapat menyebabkan rombongan tidak teridentifikasi oleh algoritma apabila terdapat entitas yang melakukan perubahan arah yang kecil dengan frekuensi yang cukup tinggi.
+
+\begin{figure}[b]
+    \centering
+    \captionsetup{width=.75\textwidth}
+    \begin{subfigure}[b]{0.25\textwidth}
+        \centering
+        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-veiig-arah-1.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.25\textwidth}
+        \centering
+        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-veiig-arah-2.pdf}
+    \end{subfigure}
+    \caption[Masalah perbedaan arah maksimum pada data VEIIG]{Syarat kedekatakan spasial dengan perbedaan arah maksimum yang terlalu ketat dan kaku mengakibatkan rombongan dan anggota rombongan tidak teridentifikasi}
+    \label{bab6:masalah-veiig-arah}
+\end{figure}
+
+Masalah lain yang dimiliki oleh perangkat lunak identifikasi rombongan ditunjukkan oleh Gambar \ref{bab6:masalah-rintangan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah rombongan yang diwakili oleh warna biru yang memiliki dua buah anggota. Pada saat tertentu, kedua anggota bergerak menuju arah yang berbeda selama kurun waktu yang minim untuk menghindari rintangan yang ada di depan rombongan tersebut. Dalam kurun waktu yang singkat, kedua entitas tersebut bertemu kembali pada satu titik dan kembali melanjutkan pergerakan bersama menuju arah yang sama. Upaya untuk menghindari rintangan menyebabkan rombongan tidak teridentifikasi selama kedua entitas berpisah. Hal tersebut kembali disebabkan oleh ketatnya syarat perbedaan arah yang tidak dapat mentoleransi adanya perubahan arah yang lebih tinggi dari parameter $\vartheta$ dalam rentang waktu sekecil apapun selama proses identifikasi rombongan berlangsung.
+
+Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap penggunaan algoritma \textit{dynamic time warping} sebagai solusi untuk menyelesaikan masalah perbedaan kecepatan yang ditunjukkan melalui Gambar \ref{bab6:solusi-beda-kecepatan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah anggota rombongan yang memiliki jarak yang cukup jauh dengan anggota lain. Anggota yang memimpin kemudian menunggu anggota lain menyusul dan kembali melakukan pergerakan bersama kembali. Melalui hasil visualisasi, dapat dilihat bahwa perangkat lunak dapat mengidentifikasi rombongan tersebut sejak awal dengan baik.
+
+\begin{figure}[t]
+    \centering
+    \captionsetup{width=.8\textwidth}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \centering
+        \includegraphics[height=6cm]{Gambar/bab6:masalah-veiig-batu-1.pdf}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.275\textwidth}
+        \centering
+        \includegraphics[height=6cm]{Gambar/bab6:masalah-veiig-batu-2.pdf}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \centering
+        \includegraphics[height=6cm]{Gambar/bab6:masalah-veiig-batu-3.pdf}
+    \end{subfigure}
+    \caption[Masalah menghindari rintangan]{Usaha untuk menghindari rintangan menyebabkan durasi rombongan terputus selama beberapa saat walaupun perbedaan arah antar entitas yang cukup minim serta jarak antar entitas yang masih cukup dekat}
+    \label{bab6:masalah-rintangan-veiig}
+\end{figure}
+
+\begin{figure}[b]
+    \centering
+    \captionsetup{width=.8\textwidth}
+    \begin{subfigure}[b]{0.225\textwidth}
+        \centering
+        \includegraphics[height=6cm]{Gambar/bab6:solusi-kecepatan-veiig-1.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.225\textwidth}
+        \centering
+        \includegraphics[height=6cm]{Gambar/bab6:solusi-kecepatan-veiig-2.pdf}
+    \end{subfigure}
+    \caption[Penyelesaian masalah beda kecepatan pada data VEIIG]{Perbedaan kecepatan entitas yang menyebabkan salah satu anggota rombongan memimpin dapat diidentifikasi dengan baik oleh perangkat lunak}
+    \label{bab6:solusi-beda-kecepatan-veiig}
+\end{figure}
+
 \subsection{Hasil Pengujian CBE}
 \label{subsec:cbe-result}
 
@@ -288,37 +345,37 @@ Hasil pengujian kualitatif melalui visualisasi pada data CBE menunjukkan alasan 
 \begin{figure}[h]
     \centering
     \captionsetup{width=.75\textwidth}
-    \begin{subfigure}[h]{0.25\textwidth}
+    \begin{subfigure}[h]{0.225\textwidth}
         \centering
-        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-cbe-1.pdf}
+        \includegraphics[height=5cm]{Gambar/bab6:masalah-cbe-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.25\textwidth}
+    \begin{subfigure}[h]{0.225\textwidth}
         \centering
-        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-cbe-2.pdf}
+        \includegraphics[height=5cm]{Gambar/bab6:masalah-cbe-2.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.25\textwidth}
+    \begin{subfigure}[h]{0.225\textwidth}
         \centering
-        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-cbe-3.pdf}
+        \includegraphics[height=5cm]{Gambar/bab6:masalah-cbe-3.pdf}
     \end{subfigure}
-    \caption[Masalah identifikasi pada data CBE]{Parameter perbedaan arah yang terlalu ketat menyebabkan beberapa rombongan tidak teridentifikasi oleh perangkat lunak}
+    \caption[Masalah syarat perbedaan arah maksimum pada data CBE]{Parameter perbedaan arah yang terlalu ketat menyebabkan beberapa rombongan tidak teridentifikasi oleh perangkat lunak}
     \label{bab6:masalah-cbe}
 \end{figure}
 
-Berdasarkan algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma \ref{bab3:algoritma-identifikasi}, beda arah antar entitas dihitung sepanjang durasi interval waktu minimum rombongan. Dapat dikatakan bahwa setiap anggota rombongan harus memiliki beda arah yang sangat minim dalam durasi interval waktu yang cukup lama. Pada data pergerakan CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dan pergerakan entitas yang multidireksional, cara perhitungan beda arah tersebut berdampak pada peningkatkan nilai \textit{false negative} pada hasil identifikasi rombongan yang dilakukan oleh perangkat lunak. Peningkatan nilai \textit{false negative} disebabkan oleh frekuensi perubahan beda arah yang cukup tinggi, sehingga perangkat lunak menganggap bahwa rombongan tersebut tidak memenuhi syarat perbedaan arah maksimum antar entitas. Tingginya nilai \textit{false negative} berdampak pada penurunan nilai \textit{recall} yang ditunjukkan melalui hasil pengujian kuantitatif pada bagian sebelumnya.
+Melalui gambar-gambar tersebut, dapat dikatakan bahwa algoritma identifikasi rombongan memiliki masalah yang sama tentang nilai perbedaan arah maksimum yang terlalu ketat seperti yang ditunjukkan oleh hasil pengujian kualitatif pada data pergerakan VEIIG. Pada data pergerakan CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dan pergerakan entitas yang multidireksional, cara perhitungan beda arah tersebut berdampak pada peningkatkan nilai \textit{false negative} pada hasil identifikasi rombongan yang dilakukan oleh perangkat lunak. Peningkatan nilai \textit{false negative} disebabkan oleh frekuensi perubahan beda arah yang cukup tinggi, sehingga perangkat lunak menganggap bahwa rombongan tersebut tidak memenuhi syarat perbedaan arah maksimum antar entitas. Tingginya nilai \textit{false negative} berdampak pada penurunan nilai \textit{recall} yang ditunjukkan melalui hasil pengujian kuantitatif pada bagian sebelumnya.
 
 Bukti penyelesaian masalah perbedaan kecepatan dapat dilihat melalui hasil visualisasi rombongan yang ditunjukkan melalui Gambar \ref{bab6:solusi-beda-kecepatan}. Pada gambar tersebut, terdapat sebuah entitas yang memiliki nomor identitas 104 yang menunggu dua buah entitas yaitu entitas 64 dan 65 pada satu tempat. Setelah entitas 64 dan 65 menyusul entitas 104, mereka bertiga melanjutkan pergerakan bersama. Melalui hasil visualisasi, dapat dilihat bahwa entitas 104 dapat teridentifikasi dari semula sebagai anggota dari rombongan bersama dengan entitas 65. Dapat dikatakan bahwa perbedaan kecepatan tidak menjadi masalah yang dimiliki oleh algoritma identifikasi rombongan.
 
 \begin{figure}[h]
     \centering
     \captionsetup{width=.85\textwidth}
-    \begin{subfigure}[h]{0.475\textwidth}
+    \begin{subfigure}[h]{0.425\textwidth}
         \centering
-        \includegraphics[height=4cm]{Gambar/bab6:beda-kecepatan-1.pdf}
+        \includegraphics[height=3.75cm]{Gambar/bab6:beda-kecepatan-1.pdf}
     \end{subfigure}
     \begin{subfigure}[h]{0.45\textwidth}
         \centering
-        \includegraphics[height=4.25cm]{Gambar/bab6:beda-kecepatan-2.pdf}
+        \includegraphics[height=4cm]{Gambar/bab6:beda-kecepatan-2.pdf}
     \end{subfigure}
-    \caption[Bukti penyelesaian beda kecepatan]{Entitas 104 yang menunggu entitas 64 dan 65 pada satu tempat dapat teridentifikasi sebagai anggota rombongan bersamaan dengan entitas 64 dan 65}
+    \caption[Penyelesaian masalah beda kecepatan pada data CBE]{Entitas 104 yang menunggu entitas 64 dan 65 pada satu tempat dapat teridentifikasi sebagai anggota rombongan bersamaan dengan entitas 64 dan 65}
     \label{bab6:solusi-beda-kecepatan}
 \end{figure}
