@@ -51,7 +51,6 @@ Terdapat berbagai jenis analisis yang dapat dilakukan pada data pergerakan seper
 \iffalse 
 
 \lionov{sebaiknya ada ilustrasi kayak Figure 1.7 di thesis, buat memperjelas apa itu pergerakan kolektif} \cristopher{sedang digambar}.
-
 \fi
 
 \begin{figure}[h]
@@ -99,12 +98,9 @@ Berdasarkan uraian pada bagian sebelumnya, berikut merupakan masalah-masalah yan
 
 \fi
 \begin{enumerate}
-    \item Apa saja ukuran-ukuran yang terdapat dalam data lintasan yang bisa digunakan untuk membuat sebuah definisi pergerakan kolektif?
-    \item Bagaimana cara membuat definisi pergerakan kolektif yang memanfaatkan ukuran-ukuran yang terdapat dalam data lintasan?
-    \item Bagaimana cara membuat algoritma untuk mengidentifikasi pergerakan kolektif berdasarkan definisi pergerakan kolektif yang dibuat?
-    \item Bagaimana cara mengimplementasikan algoritma untuk mengidentifikasi pergerakan kolektif berdasarkan definisi pergerakan kolektif yang dibuat?
-    \item Bagaimana cara memvisualisasikan hasil identifikasi rombongan dalam data pejalan kaki?
-    \item Seberapa efektifkah definisi formal pergerakan kolektif yang dibuat dalam mengidentifikasi pergerakan-pergerakan kolektif dalam data pejalan kaki di dunia nyata?
+    \item Bagaimana cara mengatasi masalah identifikasi pergerakan kolektif pada data pergerakan yang memiliki kasus perbedaan arah dan kecepatan?
+    \item Bagaimana cara mendefinisikan sebuah definisi pergerakan kolektif yang dapat mengatasi masalah identifikasi pergerakan kolektif yang memiliki kasus perbedaan arah dan kecepatan?
+    \item Bagaimana cara menguji sebuah definisi pergerakan kolektif secara kualitatif dan kuantitatif?
 \end{enumerate}
 
 \section{Tujuan}
@@ -113,12 +109,13 @@ Berdasarkan uraian pada bagian sebelumnya, berikut merupakan masalah-masalah yan
 Berdasarkan masalah-masalah yang telah dirumuskan pada bagian sebelumnya, maka skripsi ini bertujuan untuk:
 
 \begin{enumerate}
-    \item Menentukan ukuran-ukuran lintasan yang dapat digunakan untuk membuat sebuah definisi pola pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
+    \iffalse 
+    \item Menentukan ukuran-ukuran lintasan yang mampu mengatasi masalah identifikasi pergerakan kolektif di mana terdapat kasus perbedaan arah dan kecepatan.
+    
+    \fi
     \item Membuat definisi pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan.
-    \item Membuat algoritma yang dapat mengidentifikasi kelompok pergerakan kolektif yang sesuai dengan definisi formal yang telah dibuat pada sebuah data pejalan kaki di dunia nyata.
-    \item Melakukan implementasi terhadap algoritma identifikasi pergerakan kolektif berdasarkan definisi baru yang dibuat.
-    \item Melakukan visualisasi hasil identifikasi rombongan menggunakan model pewarnaan dalam video rekaman data pejalan kaki.
-    \item Mengukur efektivitas dan ketepatan dari definisi pergerakan kolektif yang dibuat dalam mengidentifikasi pergerakan-pergerakan kolektif dalam data pejalan kaki di dunia nyata.
+    \item Membuat dan mengimplementasikan algoritma yang dapat mengidentifikasi kelompok pergerakan kolektif yang sesuai dengan definisi formal yang telah dibuat.
+    \item Melakukan pengujian terhadap definisi formal pergerakan kolektif yang sudah dibuat secara kuantitatif dan kualitatif.
 \end{enumerate}
 
 \section{Batasan Masalah}
@@ -128,9 +125,9 @@ Dalam pengerjaannya, skripsi ini hanya akan membahas masalah-masalah berikut:
 
 \begin{enumerate}
     \item Data pergerakan yang akan dianalisis bersumber dari pergerakan entitas dalam ruang \textit{euclidean} dua dimensi $\mathbb{R}^2$.
-    \item Hasil identifikasi pola pergerakan kolektif yang dilakukan oleh manusia yang diikutsertakan pada data lintasan merupakan sumber kebenaran yang tidak dapat diubah.
-    \item Perangkat lunak yang digunakan untuk melakukan visualisasi hasil identifikasi rombongan merupakan perangkat lunak yang sudah tersedia dan bukan merupakan bagian dari implementasi perangkat lunak dalam skripsi ini.
-    \item Evaluasi hasil eksperimen tidak akan memperhitungkan kompleksitas algoritma yang digunakan, melainkan hanya akan mengukur akurasi identifikasi pola pergerakan kolektif dibandingkan dengan identifikasi pola pergerakan kolektif yang dilakukan oleh manusia.
+    \item Hasil identifikasi pola pergerakan kolektif yang dilakukan oleh manusia yang diikutsertakan pada setiap data pergerakan merupakan sumber kebenaran yang tidak dapat diubah.
+    \item Perangkat lunak yang digunakan untuk melakukan visualisasi hasil identifikasi rombongan merupakan perangkat lunak yang sudah tersedia dan bukan merupakan bagian dari implementasi perangkat lunak dalam penelitian ini.
+    \item Evaluasi hasil eksperimen tidak akan memperhitungkan kompleksitas algoritma yang digunakan, melainkan hanya akan mengukur relevansi hasil identifikasi pergerakan kolektif yang dihasilkan oleh algoritma identifikasi dibandingkan dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia.
 \end{enumerate}
 
 \section{Metodologi}
@@ -150,27 +147,35 @@ Metodologi penelitian yang akan digunakan dalam skripsi ini adalah sebagai berik
 Skripsi ini akan ditulis dalam enam bab yang masing-masing akan berisi:
 
 \begin{enumerate}
-    \item Bab 1 Pendahuluan
+    \item \textbf{Bab 1 Pendahuluan}
     
     Bab 1 akan berisi pembahasan mengenai latar belakang tentang pergerakan, lintasan, pergerakan kolektif, serta masalah-masalah yang terdapat pada definisi-definisi pergerakan kolektif sebelumnya. Bab ini juga membahas rumusan masalah, tujuan yang hendak dicapai, batasan masalah, metodologi penelititan, serta sistematika penulisan dari skripsi ini.
     
-    \item Bab 2 Dasar Teori
+    \item \textbf{Bab 2 Dasar Teori}
     
-    Bab 2 akan berisi dasar teori mengenai lintasan, sumber data lintasan, ukuran yang terdapat pada lintasan, penghitungan kemiripan lintasan, algoritma \textit{dynamic time warping} yang dapat digunakan untuk mengukur kemiripan antara dua buah lintasan, serta pergerakan kolektif secara umum. Pada bab ini juga akan dibahas secara singkat mengenai definisi pergerakan kolektif yang sudah ada.
+    Bab 2 akan berisi dasar teori mengenai lintasan, sumber data lintasan, ukuran yang terdapat pada lintasan, penghitungan kemiripan lintasan, serta pergerakan kolektif secara umum. Pada bab ini juga akan dibahas secara singkat mengenai definisi pergerakan kolektif yang sudah dibuat sebelumnya.
     
-    \item Bab 3 Analisis
+    \item \textbf{Bab 3 Analisis}
     
-    Bab 3 akan berisi pembahasan mengenai masalah-masalah yang terdapat pada definisi-definisi formal pergerakan kolektif yang sudah ada serta cara untuk mengatasi masalah-masalah tersebut. Selain itu, bab ini juga akan membahas mengenai definisi formal pergerakan kolektif baru yang dibuat dan algoritma yang dapat digunakan untuk mengidentifikasi pergerakan kolektif berdasarkan definisi tersebut.
+    Bab 3 akan berisi pembahasan mengenai masalah-masalah yang terdapat pada definisi-definisi formal pergerakan kolektif yang sudah dibuat sebelumnya serta analisis mengenai cara yang diusulkan untuk mengatasi masalah-masalah tersebut.
     
-    \item Bab 4 Perancangan
+    Selain itu, bab ini juga akan membahas mengenai definisi formal pergerakan kolektif baru yang dibuat dan algoritma yang dapat digunakan untuk mengidentifikasi pergerakan kolektif berdasarkan definisi tersebut.
     
-    Bab 4 akan berisi pembahasan mengenai rancangan perangkat lunak yang merupakan implementasi algoritma identifikasi rombongan yang diusulkan. Secara spesifik, bab ini akan membahas mengenai modul-modul perangkat lunak yang akan dibuat serta struktur-struktur data yang akan digunakan selama proses identifikasi rombongan dilakukan.
+    \item \textbf{Bab 4 Perancangan}
     
-    \item Bab 5 Pengujian
+    Bab 4 akan berisi pembahasan mengenai rancangan perangkat lunak identifikasi rombongan yang akan dibuat. Bab ini juga akan membahas mengenai modul-modul perangkat lunak yang akan dibuat serta struktur-struktur data yang akan digunakan selama proses identifikasi rombongan dilakukan.
     
-    Bab 5 akan berisi
+    \clearpage
     
-    \item Bab 6 Simpulan
+    \item \textbf{Bab 5 Implementasi}
     
-    Bab 6 akan berisi
+    Bab 5 akan berisi pembahasan mengenai detil implementasi rancangan perangkat lunak identifikasi rombongan yang sudah dibuat pada bab sebelumnya. Dalam bab ini, akan dibahas mengenai bahasa pemrograman, paradigma, serta pustaka-pustaka yang digunakan dalam mengimplementasikan rancangan perangkat lunak yang telah dibuat.
+    
+    \item \textbf{Bab 6 Pengamatan dan Pengujian}
+    
+    Bab 6 akan berisi proses pengujian perangkat lunak identifikasi rombongan yang sudah dibuat pada bab sebelumnya. Dalam bab ini, akan dijelaskan mengenai metodologi pengujian yang digunakan, sumber data pergerakan yang digunakan, serta pembahasan hasil dari pengujian terhadap perangkat lunak identifikasi rombongan.
+    
+    \item \textbf{Bab 7 Simpulan}
+    
+    Bab 7 akan berisi simpulan dari proses penelitian yang sudah dilakukan. Dalam bab ini, terdapat pembahasan mengenai pencapaian tujuan penelitian yang telah dinyatakan pada Bab 1 serta jawaban mengenai rumusan masalah penelitian. Bab ini juga akan membahas mengenai saran penelitian lanjutan yang relevan dengan topik yang sama.
 \end{enumerate}
