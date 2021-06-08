@@ -31,6 +31,7 @@ Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan y
 
 \begin{table}[t]
     \centering
+    \caption[Metadata sumber data pergerakan]{Informasi metadata dari data pergerakan yang digunakan pada proses pengujian}
     \begin{tabular}{p{3cm} p{2.5cm} p{2.5cm} p{3cm}}
         \hline
         & \textbf{BIWI ETH} & \textbf{VEIIG} & \textbf{CBE} \\
@@ -44,7 +45,6 @@ Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan y
         $G$ & 2--3 & 2--7 & 2--4 \\
         \hline
     \end{tabular}
-    \caption[Metadata sumber data pergerakan]{Informasi metadata dari data pergerakan yang digunakan pada proses pengujian}
     \label{bab6:metadata-pergerakan}
 \end{table}
 
@@ -53,11 +53,12 @@ Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan y
 
 Dalam pengujian kuantitatif, perangkat lunak akan melakukan proses identifikasi rombongan pada kedua sumber data pergerakan menggunakan parameter identifikasi yang bervariasi. Pengaruh parameter identifikasi yang diuji adalah jumlah entitas minimum $m$, interval waktu minimum $k$, jarak entitas maksimum $r$, dan perbedaan sudut maksimum antar entitas $\vartheta$. 
 
-Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak dengan hasil identifikasi yang dilakukan manusia diukur menggunakan nilai \textit{F1 score}. \textit{F1 score} merupakan nilai \textit{harmonic mean} dari \textit{precision} dan \textit{recall} yang dihitung menggunakan rumus $F1 = 2 \cdot \frac{P \cdot R}{P + R}$. Sebagai catatan, proses pengujian pada skripsi ini menghindari penggunaan istilah 'ketepatan' dan 'kebenaran'. Hal tersebut disebabkan oleh tidak adanya acuan mutlak yang dapat digunakan untuk mengukur kebenaran identifikasi \cite{wiratma:trajectory}. Tabel \ref{bab6:parameter} menunjukkan parameter-parameter identifikasi rombongan yang akan digunakan pada proses pengujian hasil identifikasi rombongan.
+Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak dengan hasil identifikasi yang dilakukan manusia diukur menggunakan nilai \textit{F1 score}. \textit{F1 score} merupakan nilai \textit{harmonic mean} dari \textit{precision} dan \textit{recall} yang dihitung menggunakan rumus $F1 = 2 \cdot \frac{P \cdot R}{P + R}$. Sebagai catatan, proses pengujian pada skripsi ini menghindari penggunaan istilah 'ketepatan' dan 'kebenaran'. Hal tersebut disebabkan oleh tidak adanya acuan mutlak yang dapat digunakan untuk mengukur kebenaran identifikasi \cite{wiratma:software}. Tabel \ref{bab6:parameter} menunjukkan parameter-parameter identifikasi rombongan yang akan digunakan pada proses pengujian hasil identifikasi rombongan.
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{p{1cm} p{2.25cm} p{2.25cm} p{2.25cm}}
+    \caption[Parameter identifikasi rombongan]{Parameter identifikasi rombongan yang digunakan pada proses pengujian}
+    \begin{tabular}{p{1cm} p{2.5cm} p{2.5cm} p{2.5cm}}
         \hline
         & \textbf{BIWI ETH} & \textbf{VEIIG} & \textbf{CBE} \\
         \hline
@@ -68,7 +69,7 @@ Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak deng
         $n$ & 1 & 2 & 1 \\
         \hline
     \end{tabular}
-    \caption[Parameter identifikasi rombongan]{Parameter identifikasi rombongan yang digunakan pada proses pengujian}
+    
     \label{bab6:parameter}
 \end{table}
 
