@@ -248,17 +248,14 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     Struktur data ini menyimpan informasi mengenai masukan pengguna yang diberikan melalui \textit{command line interface}. rombongan yang diberikan oleh pengguna. Struktur data ini diimplementasikan sebagai properti-properti yang merupakan kumpulan-kumpulan tipe data primitif hasil penerjemahan dari masukan pengguna.
     
-    Nilai dari $m$ dan $n$ disimpan sebagai bilangan bulat menggunakan tipe data \texttt{unsigned int}. Nilai dari $k$, $r$, dan $\vartheta$ disimpan sebagai bilangan desimal menggunakan tipe data \texttt{double}. Nama berkas dan letak berkas dari data pergerakan yang akan digunakan disimpan menggunakan tipe data \texttt{string}. Tipe data \texttt{string} yang digunakan bersumber dari pustaka STL bawaan C++. Kode \ref{bab5:arguments} menunjukkan kode perangkat lunak untuk struktur data \texttt{Arguments}. 
+    Nilai dari $m$ dan $n$ disimpan sebagai bilangan bulat menggunakan tipe data \texttt{unsigned int}. Nilai dari $k$, $r$, dan $\vartheta$ disimpan sebagai bilangan desimal menggunakan tipe data \texttt{double}. Parameter penentu penggunaan algoritma redundansi disimpan menggunakan tipe data \textit{boolean} dengan nama \texttt{redundant}. Nama berkas dan letak berkas dari data pergerakan yang akan digunakan disimpan menggunakan tipe data \texttt{string}. Tipe data \texttt{string} yang digunakan untuk men bersumber dari pustaka STL bawaan C++. Kode \ref{bab5:arguments} menunjukkan kode perangkat lunak untuk struktur data \texttt{Arguments}. 
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Arguments}, label={bab5:arguments}]
         typedef struct Arguments {
-            std::string source;
-            std::string path;
-            unsigned int entities;
-            unsigned int closeness;
-            double interval;
-            double range;
-            double angle;
+            std::string source, path;
+            unsigned int entities, closeness;
+            double interval, range, angle;
+            bool redundant;
         } Arguments;
     \end{lstlisting}
     
@@ -266,15 +263,12 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     Struktur data ini menyimpan parameter yang akan digunakan oleh fungsi \texttt{identify\_rombongan} untuk melakukan identifikasi terhadap rombongan pada data pergerakan. Parameter tersebut didapatkan melalui masukan pengguna yang disimpan pada \texttt{Arguments}.
     
-    Nilai $r$ pada struktur data ini didapatkan dengan mengalikan nilai $r$ dan $k$ yang terdapat pada masukan mentah pengguna. Properti lainnya didapatkan secara langsung melalui \texttt{Arguments}. Kode \ref{bab5:parameters} menunjukkan kode perangkat lunak untuk struktur data \texttt{Parameters}.
+    Nilai $r$ pada struktur data ini didapatkan dengan mengalikan nilai $r$ dan $k$ yang terdapat pada masukan mentah pengguna. Parameter identifikasi lainnya didapatkan secara langsung melalui \texttt{Arguments}. Selain properti identifikasi, struktur data ini juga menyimpan parameter penentu penggunaan algoritma pengurangan redundansi \texttt{redundant}. Kode \ref{bab5:parameters} menunjukkan kode perangkat lunak untuk struktur data \texttt{Parameters}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Parameters}, label={bab5:parameters}]
         typedef struct Parameter {
-            unsigned int m;
-            unsigned int k;
-            unsigned int n;
-            double r;
-            double cs;
+            unsigned int m, k, n;
+            double r, cs;
         } Parameter;
     \end{lstlisting}
     
