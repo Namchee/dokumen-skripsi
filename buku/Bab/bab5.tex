@@ -251,6 +251,7 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     Nilai dari $m$ dan $n$ disimpan sebagai bilangan bulat menggunakan tipe data \texttt{unsigned int}. Nilai dari $k$, $r$, dan $\vartheta$ disimpan sebagai bilangan desimal menggunakan tipe data \texttt{double}. Parameter penentu penggunaan algoritma redundansi disimpan menggunakan tipe data \textit{boolean} dengan nama \texttt{redundant}. Nama berkas dan letak berkas dari data pergerakan yang akan digunakan disimpan menggunakan tipe data \texttt{string}. Tipe data \texttt{string} yang digunakan untuk men bersumber dari pustaka STL bawaan C++. Kode \ref{bab5:arguments} menunjukkan kode perangkat lunak untuk struktur data \texttt{Arguments}. 
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Arguments}, label={bab5:arguments}]
+        // represents raw user inputs
         typedef struct Arguments {
             std::string source, path;
             unsigned int entities, closeness;
@@ -266,9 +267,11 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     Nilai $r$ pada struktur data ini didapatkan dengan mengalikan nilai $r$ dan $k$ yang terdapat pada masukan mentah pengguna. Parameter identifikasi lainnya didapatkan secara langsung melalui \texttt{Arguments}. Selain properti identifikasi, struktur data ini juga menyimpan parameter penentu penggunaan algoritma pengurangan redundansi \texttt{redundant}. Kode \ref{bab5:parameters} menunjukkan kode perangkat lunak untuk struktur data \texttt{Parameters}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Parameters}, label={bab5:parameters}]
+        // represents parameters to be used by the identification algorithm
         typedef struct Parameter {
             unsigned int m, k, n;
             double r, cs;
+            bool redundant;
         } Parameter;
     \end{lstlisting}
     
@@ -279,10 +282,12 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     Struktur data ini melakukan \textit{operator overloading} pada operator $<$. Hal tersebut dilakukan untuk mempermudah proses pengurutan entitas yang dilakukan pada fungsi \texttt{identify\_rombongan} dengan tujuan untuk mempermudah proses perbandingan kedekatan spasial antar entitas. Kode \ref{bab5:entity} menunjukkan kode perangkat lunak untuk struktur data \texttt{Entity}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Entity}, label={bab5:entity}]
+        // represents a single moving entity
         typedef struct Entity {
             unsigned int id;
             std::vector<std::vector<double> > trajectories;
 
+            // override `<` for sorting
             bool operator<(const Entity& o) const {
                 return id < o.id;
             }
@@ -294,6 +299,7 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     Struktur data ini menyimpan informasi entitas dalam bentuk kumpulan \texttt{Entity} dan kumpulan nilai \textit{frame} dalam bentuk \textit{array} dengan tipe data \texttt{double} yang tercatat pada sumber data pergerakan pejalan kaki. Kumpulan \texttt{Entity} akan digunakan secara langsung oleh fungsi \texttt{identify\_rombongan}, sedangkan kumpulan nilai \textit{frame} nantinya akan digunakan pada proses pencetakan berkas hasil identifikasi. Kode \ref{bab5:movement-data} menunjukkan kode perangkat lunak untuk struktur data \texttt{MovementData}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{MovementData}, label={bab5:movement-data}]
+        // represents parsed movement data
         typedef struct MovementData {
             std::vector<Entity> entities;
             std::vector<double> frames;
@@ -306,7 +312,10 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     Durasi rombongan disimpan sebagai pasangan bilangan bulat yang mewakili durasi mulai dan durasi selesainya rombongan. Durasi rombongan diimplementasikan menggunakan struktur data \texttt{pair} yang disediakan oleh pustaka STL bawaan C++. Kode \ref{bab5:rombongan} menunjukkan kode perangkat lunak untuk struktur data \texttt{Rombongan}.
     
+    \clearpage
+    
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Rombongan}, label={bab5:rombongan}]
+        // represents identified entourage
         typedef struct Rombongan {
             std::vector<unsigned int> members;
             std::vector<std::pair<unsigned int, unsigned int> > duration;
@@ -318,10 +327,9 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     Struktur data ini menyimpan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari hasil evaluasi kuantitatif terhadap hasil identifikasi rombongan. Kode \ref{bab5:score} menunjukkan kode perangkat lunak untuk struktur data \texttt{Score}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Score}, label={bab5:score}]
+        // represents evaluation result of the current identification result compared with 'ground truth'
         typedef struct Score {
-            double precision;
-            double recall;
-            double f1_score;
+            double precision, recall, f1_score;
         } Score;
     \end{lstlisting}
 \end{enumerate}

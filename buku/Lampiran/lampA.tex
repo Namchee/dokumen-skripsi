@@ -14,9 +14,7 @@
 % Perhatian: Abaikan warning tentang textasteriskcentered!!
 %
 
-
 \begin{lstlisting}[language=C++, caption=Implementasi fungsi \texttt{identify\_rombongan}, label={lamp:identify-rombongan}]
-
 typedef std::unordered_map<unsigned int, std::vector<std::vector<double> > > trajectory_map;
 typedef std::unordered_map<unsigned int, std::vector<double> > direction_map;
 typedef std::map<std::vector<unsigned int>, std::vector<std::pair<unsigned int, unsigned int> > > rombongan_lifespan;
@@ -122,6 +120,10 @@ void deduplicate_duration(
 std::vector<Rombongan> deduplicate(
     std::vector<Rombongan>& raw_result
 ) {
+    if (raw_result.size() == 0) {
+        return raw_result;
+    }
+
     std::sort(raw_result.begin(), raw_result.end());
 
     for (size_t curr_itr = 0; curr_itr < raw_result.size() - 1; curr_itr++) {
@@ -141,6 +143,8 @@ std::vector<Rombongan> deduplicate(
                     raw_result[curr_itr].duration,
                     raw_result[other_itr].duration
                 );
+
+                
             }
         }
     }
@@ -218,6 +222,15 @@ direction_map get_directional_vectors(
     return directional_vectors;
 }
 
+/**
+ * Extends a rombongan duration
+ * 
+ * @param groups list of possible rombongan
+ * @param other tested entity
+ * @param sub_trajectories List of sub trajectories for the current time interval
+ * @param direction_vector List of directional vectors for the current time interval
+ * @param params Identification parameters
+ */
 void extend_current_rombongan(
     std::vector<std::vector<unsigned int> >& groups,
     const Entity& other,
@@ -264,6 +277,14 @@ void extend_current_rombongan(
     }
 }
 
+/**
+ * Extend identified rombongan duration by either appending
+ * or replacing duration pairs
+ * 
+ * @param groups - list of identified rombongan
+ * @param current_groups - list of newly identified rombongan
+ * @param interval - time interval
+ */
 void extend_rombongan_duration(
     rombongan_lifespan& groups,
     std::vector<std::vector<unsigned int> >& current_groups,
@@ -336,10 +357,6 @@ std::vector<Rombongan> identify_rombongan(
 
     for (size_t end = k; end < frame_count; end++) {
         unsigned int start = end - k;
-
-        if (end > 100) {
-            break;
-        }
 
         std::vector<std::vector<unsigned int> > current_rombongan;
 
@@ -425,6 +442,6 @@ std::vector<Rombongan> identify_rombongan(
         });
     }
 
-    return deduplicate(raw_result);
+    return params.redundant ? raw_result : deduplicate(raw_result);
 }
 \end{lstlisting}
