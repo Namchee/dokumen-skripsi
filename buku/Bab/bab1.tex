@@ -11,12 +11,12 @@ Bergerak merupakan sebuah aktivitas yang selalu kita temui setiap saat. Berdasar
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth, height=4.5cm]{Gambar/bab1:manusia.jpg}
-        \caption{Manusia bergerak untuk memenuhi kebutuhan sehari-hari\protect\footnotemark}
+        \caption{Manusia bergerak untuk memenuhi kebutuhan sehari-hari\protect\footnotemark[2]}
         \label{bab1:manusia}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth, height=4.5cm]{Gambar/bab1:sunflower.jpg}
-        \caption{Bunga matahari bertumbuh mengikuti arah sinar matahari\protect\footnotemark}
+        \caption{Bunga matahari bertumbuh mengikuti arah sinar matahari\protect\footnotemark[3]}
         \label{bab1:sunflower}
     \end{subfigure}
     \caption[Aktivitas pergerakan]{
@@ -24,20 +24,42 @@ Bergerak merupakan sebuah aktivitas yang selalu kita temui setiap saat. Berdasar
     \label{bab1:pergerakan}
 \end{figure}
 
-\footnotetext{Alvin Mamudov,  2017, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/FlLHbmF3AHc}.}
+\footnotetext[2]{Alvin Mamudov,  2017, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/FlLHbmF3AHc}.}
 
-\footnotetext{Lisa Pellegrini, 2016, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/XCvy_eufErI}.}
+\footnotetext[3]{Lisa Pellegrini, 2016, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/XCvy_eufErI}.}
 
 Seiring berjalannya waktu, kemunculan teknologi modern seperti \textit{Geographic Information System} (GIS) menyebabkan data pergerakan yang bersumber dari berbagai entitas menjadi semakin banyak dan semakin mudah didapatkan. Hal tersebut memicu kembalinya pertumbuhan minat penelitian mengenai pergerakan oleh berbagai peneliti dalam berbagai bidang. Terdapat banyak hal menarik yang dapat dimanfaatkan melalui analisis terhadap data pergerakan. Salah satu contoh nyata dari pemanfaatan analisis data pergerakan adalah analisis pergerakan bebek domestik, di mana melalui data pergerakan bebek, virolog dapat mengidentifikasi daerah-daerah yang memiliki risiko persebaran flu burung yang tinggi \cite{diann:01:movement-analysis}.
 
 Dalam sebuah pergerakan, setiap entitas yang bergerak memiliki lintasan. Lintasan merupakan jalur yang dilalui oleh entitas selama melakukan pergerakan dalam rentang waktu tertentu. Data mengenai lintasan yang ditempuh oleh entitas yang bergerak bersifat kontinu. Data lintasan dapat diperoleh melalui berbagai cara, di mana hal tersebut ditentukan oleh tipe entitas, lingkungan tempat terjadinya pergerakan, teknologi yang digunakan, dan lain sebagainya \cite{wiratma:trajectory}. Sekarang ini, data mengenai lintasan biasanya diperoleh melalui sistem modern seperti sistem Argos-Doppler dan \textit{global positioning system} (GPS) yang lazim ditemukan pada telepon pintar, di mana keduanya sama-sama memanfaatkan teknologi satelit \cite{carter:argos}. Kedua sistem tersebut memiliki beberapa kelebihan dibandingkan penggunaan cara-cara tradisional seperti memiliki akurasi yang jauh lebih baik, mampu memperoleh lebih banyak data lintasan dari berbagai entitas sekaligus, dapat dikustomisasi sesuai kebutuhan, dan masih banyak lagi.
 
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}[h]{0.425\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=4.35cm]{Gambar/bab1:pesawat.jpg}
+        \caption{Lintasan yang ditempuh oleh pesawat tempur militer\protect\footnotemark[4]}
+        \label{bab1:fighter-plane}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.425\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=4.35cm]{Gambar/bab1:roket.jpg}
+        \caption{Lintasan yang ditempuh oleh sebuah roket uji coba\protect\footnotemark[5]}
+        \label{bab1:rocket}
+    \end{subfigure}
+    \caption[Lintasan dalam dunia nyata]{Lintasan yang dapat kita temui di dunia nyata}
+    \label{bab1:trajectory}
+\end{figure}
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{Gambar/bab1:sumber-data.png}
-    \caption[Teknologi pengambilan data lintasan]{Pengambilan data lintasan melalui pemanfaatan teknologi modern. Kiri ke kanan: Sistem Argos-Doppler, \textit{Global positioning system} (GPS)}
+    \includegraphics[width=0.95\textwidth]{Gambar/bab1:sumber-data.png}
+    \caption[Teknologi pengambilan data lintasan]{Pengambilan data lintasan melalui pemanfaatan teknologi modern \cite{carter:argos}. Kiri ke kanan: Sistem Argos-Doppler, \textit{Global positioning system} (GPS)}
     \label{bab1:sumber-data}
 \end{figure}
+
+\footnotetext[4]{Aral Tasher, \textit{Thunderbirds at Melbourne Airshow}, 2018, diakses pada tanggal 11 Juni 2021, \url{https://unsplash.com/photos/nsqDXJdYzF8}}
+
+\footnotetext[5]{SpaceX, \textit{Ray of light near body of water}, 2016, diakses pada tanggal 11 Juni 2021, \url{https://unsplash.com/photos/-p-KCm6xB9I}}
 
 Sayangnya, perkembangan teknologi tetap tidak mampu untuk merekam data lintasan secara sempurna. Hal tersebut menyebabkan data lintasan yang diperoleh tidak bersifat kontinu seperti yang diharapkan, melainkan bersifat diskrit. Berdasarkan sifat tersebut, data lintasan yang diperoleh akan direpresentasikan sebagai catatan posisi dari entitas yang bergerak yang diurutkan berdasarkan titik waktu. Secara formal, lintasan merupakan himpunan dari pasangan posisi-waktu $(p_0, t_0), (p_1, t_1), \ldots, (p_x, t_x)$, di mana $p_i$ merupakan posisi entitas yang relatif terhadap ruang gerak entitas pada titik waktu $t_i$. Pada umumnya, entitas akan bergerak dalam sebuah ruang \textit{euclidean} dua dimensi atau tiga dimensi yang masing-masing dapat direpresentasikan sebagai 
 $\mathbb{R}^2$ dan $\mathbb{R}^3$. \iffalse \lionov{disebut di sini bahwa ruang gerak biasanya R2 atau R3}. \fi
@@ -58,21 +80,21 @@ Terdapat berbagai jenis analisis yang dapat dilakukan pada data pergerakan seper
     \begin{subfigure}[h]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth, height=4.5cm]{Gambar/bab1:army.jpg}
-        \caption{Kumpulan tentara bergerak bersama membentuk sebuah regu\protect\footnotemark}
+        \caption{Kumpulan tentara bergerak bersama membentuk sebuah regu\protect\footnotemark[6]}
     \end{subfigure}
     \begin{subfigure}[h]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth, height=4.5cm]{Gambar/bab1:wildebeest.jpg}
-        \caption{Kawanan \textit{wildebeest} bergerak bersama untuk melakukan migrasi musiman\protect\footnotemark}
+        \caption{Kawanan \textit{wildebeest} bergerak bersama untuk melakukan migrasi musiman\protect\footnotemark[7]}
         \label{bab1:wildebeest}
     \end{subfigure}
     \caption[Pergerakan kolektif dunia nyata]{Pergerakan kolektif yang sering kita temui di dunia nyata}
     \label{bab1:collective-movement}
 \end{figure}
 
-\footnotetext{Damon On Road, \textit{C\'{e}r\'{e}monie militaire du Man\`{e}ge militaire du Qu\'{e}bec}, 2020, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/nmePDwaW9I8}}
+\footnotetext[6]{Damon On Road, \textit{C\'{e}r\'{e}monie militaire du Man\`{e}ge militaire du Qu\'{e}bec}, 2020, diakses pada tanggal 4 Januari 2021, \url{https://unsplash.com/photos/nmePDwaW9I8}}
 
-\footnotetext{Jorge Tung, \textit{Great wildebeest migration crossing Mara river at Serengeti National Park --- Tanzania}, 2019, diakses pada tanggal 23 Desember 2020, \url{https://unsplash.com/photos/1pZJqQlgpsY}}
+\footnotetext[7]{Jorge Tung, \textit{Great wildebeest migration crossing Mara river at Serengeti National Park --- Tanzania}, 2019, diakses pada tanggal 23 Desember 2020, \url{https://unsplash.com/photos/1pZJqQlgpsY}}
 
 Ada berbagai macam definisi formal yang sudah dibuat untuk mengidentifikasi pola pergerakan kolektif seperti \textit{flock} \cite{cao:flock, gudmundsson:flock}, \textit{convoy} \cite{jeung:convoys}, \textit{group} \cite{buchin:group, yida:group}, dan masih banyak lagi. Seluruh definisi formal tersebut bergantung pada \textit{size}\iffalse \lionov{ini jadi aneh, pake {\it size} aja deh} kelompok \fi, kedekatan spasial, dan durasi temporal untuk melakukan identifikasi pergerakan kolektif pada sekelompok entitas yang bergerak bersama. \textit{Size} menentukan jumlah anggota minimum yang harus tergabung dalam sebuah pergerakan kolektif. Kedekatan spasial menentukan batas maksimum jarak antar anggota kelompok. Durasi temporal menentukan durasi minimum pergerakan bersama dari seluruh anggota pergerakan kolektif.
 
