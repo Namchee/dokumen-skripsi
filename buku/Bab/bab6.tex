@@ -336,13 +336,13 @@ Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap peng
 \begin{figure}[t]
     \centering
     \captionsetup{width=.8\textwidth}
-    \begin{subfigure}[b]{0.2\textwidth}
+    \begin{subfigure}[b]{0.275\textwidth}
         \centering
-        \includegraphics[height=6cm]{Gambar/bab6:solusi-kecepatan-veiig-1.pdf}
+        \includegraphics[height=7.75cm]{Gambar/bab6:solusi-kecepatan-veiig-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.2\textwidth}
+    \begin{subfigure}[b]{0.275\textwidth}
         \centering
-        \includegraphics[height=6cm]{Gambar/bab6:solusi-kecepatan-veiig-2.pdf}
+        \includegraphics[height=7.75cm]{Gambar/bab6:solusi-kecepatan-veiig-2.pdf}
     \end{subfigure}
     \caption[Penyelesaian masalah beda kecepatan pada data VEIIG]{Perbedaan kecepatan entitas yang menyebabkan salah satu anggota rombongan memimpin dapat diidentifikasi dengan baik oleh perangkat lunak}
     \label{bab6:solusi-beda-kecepatan-veiig}
@@ -356,11 +356,12 @@ Data pergerakan CBE memiliki tingkat kepadatan pejalan kaki menengah, namun data
 \subsubsection{Hasil Pengujian Kuantitatif}
 \label{subsubsec:cbe-quantitative}
 
-Tabel \ref{bab6:cbe-numbers} menunjukkan hasil pengujian kuantitatif terhadap data pergerakan CBE.
+Pada data CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan yang multidireksional, hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak menghasilkan nilai \textit{recall} yang sangat rendah disertai dengan nilai \textit{precision} yang cukup tinggi yang dapat dilihat melalui Tabel \ref{bab6:cbe-numbers}. Dari hasil tersebut, dapat dikatakan bahwa algoritma identifikasi rombongan menunjukkan gejala \textit{overestimation}.
 
 \begin{table}[h]
 \centering
-\caption{Hasil pengujian kuantitatif terhadap data pergerakan CBE}
+\captionsetup{width=0.6\textwidth}
+\caption{Hasil pengujian kuantitatif pada data pergerakan CBE dengan upaya pengurangan redundansi rombongan}
 \begin{tabular}{|l|l|c|c|c|}
 \hline
 \multicolumn{2}{|l|}{}                                                                                        & Precision & Recall & F1 Score \\ \hline \hline
@@ -381,17 +382,40 @@ Tabel \ref{bab6:cbe-numbers} menunjukkan hasil pengujian kuantitatif terhadap da
 \label{bab6:cbe-numbers}
 \end{table}
 
-Pada data CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan yang multidireksional, hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak menghasilkan nilai \textit{recall} yang sangat rendah diserta dengan nilai \textit{precision} yang cukup tinggi. Dari hasil tersebut, dapat dikatakan bahwa perangkat lunak menunjukkan gejala \textit{overestimation}.
-
 Nilai \textit{recall} yang rendah menunjukkan bahwa perangkat lunak hanya mampu mengidentifikasi rombongan dalam jumlah yang sedikit, di mana hal tersebut akan meningkatkan nilai \textit{false negative}. Sedikitnya rombongan yang dihasilkan disebabkan oleh syarat perbedaan sudut yang dianggap terlalu ketat untuk data yang mengandung pergerakan multidireksional. Di sisi lain, nilai \textit{precision} yang cukup tinggi menunjukkan bahwa sebagian besar dari hasil identifikasi rombongan merupakan rombongan yang relevan dengan hasil identifikasi manusia.
 
 Variasi dari parameter identifikasi rombongan yang digunakan memberikan pengaruh yang cukup besar pada relevansi dari hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak. Hal tersebut dapat dilihat melalui rentang perubahan nilai \textit{F1 score} yang dapat mencapai $9.9\%$ dari perubahan nilai $r$ yang digunakan dalam proses identifikasi.
 
 Peningkatan terhadap nilai $r$ yang digunakan berdampak pada meningkatnya nilai \textit{precision} dan \textit{recall} yang konsisten untuk setiap nilai $k$ dan $\vartheta$. Hal tersebut disebabkan oleh terbentuknya rombongan yang relevan akibat entitas yang sebelumnya tidak terbentuk akibat salah satu anggotanya dianggap tidak cukup dekat akibat jarak entitas yang dianggap terlalu jauh.
 
+\begin{table}[b!]
+\centering
+\captionsetup{width=0.6\textwidth}
+\caption{Hasil pengujian kuantitatif pada data pergerakan CBE tanpa pengurangan redundansi rombongan}
+\begin{tabular}{|l|l|c|c|c|}
+\hline
+\multicolumn{2}{|l|}{}                                                                                        & Precision & Recall & F1 Score \\ \hline \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.351     & 0.178  & 0.228    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.345     & 0.165  & 0.224    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.344     & 0.283  & 0.310    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.363     & 0.270  & 0.309    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.379     & 0.109  & 0.169    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.390     & 0.100  & 0.159    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.365     & 0.165  & 0.228    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.407     & 0.161  & 0.231    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.390     & 0.069  & 0.118    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.400     & 0.069  & 0.119    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.397     & 0.100  & 0.160    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.393     & 0.095  & 0.154    \\ \hline
+\end{tabular}
+\label{bab6:cbe-redundant}
+\end{table}
+
 Nilai beda sudut maksimum $\vartheta$ memiliki peranan yang cukup besar terhadap relevansi hasil identifikasi rombongan. Memperkecil nilai $\vartheta$ menghasilkan dampak positif pada nilai \textit{precision} yang mengalami kenaikan, namun memiliki dampak yang sangat kecil terhadap penurunan nilai \textit{recall}. Pengecualian untuk premis tersebut adalah ketika $k = 78$ dan $r = 1.52$, di mana nilai \textit{precision} mengalami penurunan ketika $\vartheta = \frac{\pi}{32}$ menjadi $\vartheta = \frac{\pi}{64}$. Kenaikan tersebut disebabkan oleh sifat pergerakan entitas yang multidireksional.
 
 Meningkatkan nilai durasi interval minimum $k$ menyebabkan peningkatan nilai \textit{precision} pada hasil identifikasi perangkat lunak, namun mengurangi nilai \textit{recall} secara drastis. Hal tersebut disebabkan oleh banyaknya durasi pergerakan kolektif yang dianggap tidak cukup lama agar dapat diidentifikasi sebagai sebuah rombongan sehingga menyebabkan kenaikan nilai \textit{false negative}. 
+
+Penggunaan algoritma pengurangan redundansi rombongan membawa dampak positif pada relevansi hasil identifikasi rombongan pada data pergerakan CBE. Hal tersebut dapat dilihat melalui perbandingan Tabel \ref{bab6:cbe-numbers} dan Tabel \ref{bab6:cbe-redundant} yang menyajikan hasil pengujian kuantitatif dari hasil identifikasi rombongan tanpa adanya upaya pengurangan redundansi rombongan. Tanpa adanya upaya pengurangan redundansi rombongan, algoritma identifikasi menghasilkan terlalubanyak rombongan redundan yang tidak terdapat pada hasil identifikasi manusia. Rombongan-rombongan redundan tersebut menyebabkan penurunan terhadap nilai \textit{precision} dan \textit{F1 score} secara keseluruhan tanpa mempengaruhi nilai \textit{recall} sedikitpun bila dibandingkan dengan hasil identifikasi rombongan dengan pengurangan redundansi rombongan. Perubahan tersebut konsisten untuk setiap kombinasi nilai $r$, $k$, dan $\vartheta$ yang diuji.
 
 \subsubsection{Hasil Pengujian Kualitatif}
 \label{subsub:sec:cbe-qualitative}
