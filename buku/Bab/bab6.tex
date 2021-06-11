@@ -232,7 +232,8 @@ Pada data VEIIG yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi 
 
 \begin{table}[h]
     \centering
-    \caption{Hasil pengujian kuantitatif pada data VEIIG}
+    \captionsetup{width=0.6\textwidth}
+\caption{Hasil pengujian kuantitatif pada data pergerakan VEIIG dengan upaya pengurangan redundansi rombongan}
 \begin{tabular}{|l|l|c|c|c|}
 \hline
 \multicolumn{2}{|l|}{}                                                                                       & Precision & Recall & F1 Score \\ \hline \hline
@@ -260,6 +261,33 @@ Memperketat syarat kedekatan spasial dengan mengurangi beda sudut maksimum $\var
 
 Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \textit{recall} yang menurun seiring dengan peningkatan nilai $k$. Hal tersebut disebabkan oleh rombongan relevan yang tidak teridentifikasi karena durasi rombongan-rombongan tersebut dianggap terlalu singkat akibat durasi rombongan yang tidak mencapai nilai $k$.
 
+\begin{table}[h]
+\centering
+\captionsetup{width=0.6\textwidth}
+\caption{Hasil pengujian kuantitatif pada data pergerakan VEIIG tanpa pengurangan redundansi rombongan}
+\begin{tabular}{|l|l|c|c|c|}
+
+
+\hline
+\multicolumn{2}{|l|}{}                                                                                       & Precision & Recall & F1 Score \\ \hline \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.261     & 0.932  & 0.408    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.282     & 0.903  & 0.403    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.165     & 0.966  & 0.281    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.181     & 0.937  & 0.304    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.237     & 0.889  & 0.375    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.256     & 0.874  & 0.396    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.168     & 0.932  & 0.285    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.189     & 0.923  & 0.313    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.252     & 0.841  & 0.388    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.277     & 0.841  & 0.417    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.252     & 0.841  & 0.388    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.212     & 0.879  & 0.342    \\ \hline
+\end{tabular}
+\label{bab6:gveii-redundant}
+\end{table}
+
+Pengaruh pengunaan algoritma identifikasi rombongan pada data pergerakan VEIIG menghasilkan kenaikan pada nilai \textit{F1 score} secara keseluruhan yang dapat dilihat melalui perbandingan Tabel \ref{bab6:gveii-numbers} dan Tabel \ref{bab6:gveii-redundant} yang menyajikan hasil pengujian kuantitatif tanpa upaya pengurangan redundansi rombongan. Penurunan terhadap nilai \textit{F1 score} disertai penurunan nilai \textit{precision} yang disebabkan oleh banyaknya rombongan redundan yang meningkatkan nilai \textit{false positive}. Namun, algoritma pengurangan redundansi rombongan berdampak pada penurunan nilai \textit{recall} pada seluruh kombinasi nilai $k$, $r$, dan $\vartheta$ yang digunakan. Hal tersebut disebabkan oleh algoritma pengurangan redundansi menghapus beberapa rombongan-rombongan yang relevan dengan hasil identifikasi yang dilakukan oleh manusia yang berdampak pada kenaikan nilai \textit{false negative}.
+
 \subsubsection{Hasil Pengujian Kualitatif}
 \label{subsubsec:veiig-qualitative}
 
@@ -267,7 +295,7 @@ Hasil pengujian kualitatif melalui visualisasi pada data VEIIG menunjukkan alasa
 
 Melalui proses analisis terhadap cara kerja algoritma, kekakuan pada masalah perbedaan arah maksimum berasal dari algoritma identifikasi rombongan. Berdasarkan algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma \ref{bab3:algoritma-identifikasi}, beda arah antar entitas dihitung sepanjang durasi interval waktu minimum rombongan. Dapat dikatakan bahwa setiap anggota rombongan hanya dapat memiliki beda arah yang sangat minim dalam durasi interval waktu yang cukup lama. Syarat tersebut dapat menyebabkan rombongan tidak teridentifikasi oleh algoritma apabila terdapat entitas yang melakukan perubahan arah yang kecil dengan frekuensi yang cukup tinggi.
 
-\begin{figure}[b]
+\begin{figure}[t]
     \centering
     \captionsetup{width=.75\textwidth}
     \begin{subfigure}[b]{0.25\textwidth}
@@ -286,7 +314,7 @@ Masalah lain yang dimiliki oleh perangkat lunak identifikasi rombongan ditunjukk
 
 Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap penggunaan algoritma \textit{dynamic time warping} sebagai solusi untuk menyelesaikan masalah perbedaan kecepatan yang ditunjukkan melalui Gambar \ref{bab6:solusi-beda-kecepatan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah anggota rombongan yang memiliki jarak yang cukup jauh dengan anggota lain. Anggota yang memimpin kemudian menunggu anggota lain menyusul dan kembali melakukan pergerakan bersama kembali. Melalui hasil visualisasi, dapat dilihat bahwa perangkat lunak dapat mengidentifikasi rombongan tersebut sejak awal dengan baik.
 
-\begin{figure}[t]
+\begin{figure}[h]
     \centering
     \captionsetup{width=.8\textwidth}
     \begin{subfigure}[t]{0.25\textwidth}
@@ -305,14 +333,14 @@ Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap peng
     \label{bab6:masalah-rintangan-veiig}
 \end{figure}
 
-\begin{figure}[b]
+\begin{figure}[t]
     \centering
     \captionsetup{width=.8\textwidth}
-    \begin{subfigure}[b]{0.225\textwidth}
+    \begin{subfigure}[b]{0.2\textwidth}
         \centering
         \includegraphics[height=6cm]{Gambar/bab6:solusi-kecepatan-veiig-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.225\textwidth}
+    \begin{subfigure}[b]{0.2\textwidth}
         \centering
         \includegraphics[height=6cm]{Gambar/bab6:solusi-kecepatan-veiig-2.pdf}
     \end{subfigure}
