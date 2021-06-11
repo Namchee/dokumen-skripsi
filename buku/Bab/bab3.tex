@@ -249,7 +249,69 @@ Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan
 
 Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan memiliki kompleksitas ruang sebesar $O(n^3)$ di mana $n$ merupakan jumlah entitas yang terdapat pada himpunan entitas $\mathcal{X}$. Nilai kompleksitas tersebut didapatkan dari kompleksitas tempat paling signifikan yang digunakan untuk menyimpan $entitySet$ yang terdapat pada baris $8$ pada algoritma identifikasi rombongan. Berdasarkan cara kerja algoritma, $entitySet$ dapat beranggotakan sebanyak $n^2$ himpunan. Masing-masing himpunan dapat memiliki paling banyak sebanyak $n$ entitas. Oleh karena itu, dibutuhkan sebanyak $n^3$ tempat untuk menyimpan $entitySet$.
 
-\subsection{Redundansi Rombongan}
+
+\section{Contoh Proses Identifikasi Rombongan}
+\label{sec:algorithm-example}
+
+Diberikan sebuah himpunan entitas $\mathcal{X}$ yang bergerak ruang $\mathbb{R}^2$ yang terdiri atas 3 entitas yaitu $a$, $b$, dan $c$ yang ditunjukkan melalui Gambar \ref{bab3:contoh-algoritma-identifikasi}. Masing-masing dari entitas tersebut menempuh lintasan sebagai berikut:
+
+\begin{enumerate}
+    \item $\textbf{a} = \{ 1, 1 \}, \{ 2, 1 \}, \{ 3, 1 \}$
+    \item $\textbf{b} = \{ 3, 2 \}, \{ 2, 2 \}, \{ 1, 2 \}$
+    \item $\textbf{c} = \{ 1, -2 \}, \{ 2, 0 \}, \{ 3, 0 \}$
+\end{enumerate}
+
+\begin{figure}[t]
+    \centering
+    \captionsetup{width=0.7\textwidth}
+    \includegraphics[width=0.625\textwidth]{Gambar/bab3:contoh-algoritma-identifikasi.pdf}
+    \caption[Contoh proses algoritma identifikasi rombongan]{Himpunan entitas $\mathcal{X}$ beserta lintasan yang ditempuh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah.}
+    \label{bab3:contoh-algoritma-identifikasi}
+\end{figure}
+
+Lintasan dari sebuah entitas dalam himpunan entitas $\mathcal{X}$ merupakan kumpulan posisi yang terurut berdasarkan waktu secara menaik dalam ruang gerak $\mathbb{R}^2$. Posisi setiap entitas dimulai dari titik waktu $t = 0$. Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3.5$ satuan jarak, syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.5$, dan nilai kedekatan minimum $n$ sebanyak $1$. Langkah-langkah yang diambil untuk mengidentifikasi rombongan pada himpunan entitas $\mathcal{X}$ berdasarkan algoritma identifikasi yang telah dibuat adalah sebagai berikut:
+
+\begin{enumerate}
+    \item Menginisialisasi sebuah himpunan untuk menyimpan himpunan rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$.
+    \item Mengidentifikasi seluruh interval waktu konsekutif sepanjang $k$ pada himpunan entitas $\mathcal{X}$. Berdasarkan parameter masukan yaitu $k = 2$, maka interval waktu konsekutif yang memungkinkan adalah $[0, 1]$ dan $[1, 2]$.
+    \item Lakukan pemeriksaan kedekatan spasial untuk setiap pasang entitas pada interval waktu $[0, 1]$ dengan melakukan perbandingan jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} pada setiap pasang entitas. Langkah-langkah yang dikerjakan adalah sebagai berikut: 
+    
+    \begin{enumerate}
+        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $b$ adalah sebesar $\approx 3.23$ satuan jarak, namun memiliki nilai \textit{cosine similarity} sebesar $-1$. Kondisi tersebut menyebabkan entitas $a$ dan $b$ tidak dianggap dekat secara spasial pada interval waktu $[0, 1]$ karena nilai $\vartheta$ dari kedua entitas tersebut lebih kecil dari nilai $\vartheta$ minimum sebesar $0.5$.
+        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $c$ adalah sebesar $4$ satuan jarak. hasil tersebut sudah cukup untuk menyimpulkan bahwa $a$ dan $c$ tidak dekat secara spasial pada interval waktu $[0, 1]$ karena nilai $r$ dari kedua entitas tersebut lebih besar dari nilai $r$ maksimum sebesar $3.5$ satuan jarak.
+        \item Jarak \textit{dynamic time warping} dari entitas $b$ dan $c$ adalah sebesar $\approx 6.47$ satuan jarak. hasil tersebut sudah cukup untuk menyimpulkan bahwa $b$ dan $c$ tidak dekat secara spasial pada interval waktu $[0, 1]$ karena nilai $r$ dari kedua entitas entitas lebih besar dari nilai $r$ maksimum sebesar $3.5$ satuan jarak.
+        \item Oleh karena tidak ada himpunan entitas yang terbentuk, maka tidak ada rombongan yang terbentuk pada interval $[0, 1]$.
+    \end{enumerate}
+    
+    \item Lakukan pemeriksaan kedekatan spasial untuk setiap pasang entitas pada interval waktu $[1, 2]$ dengan melakukan perbandingan jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} pada setiap pasang entitas. Langkah-langkah yang dikerjakan adalah sebagai berikut: 
+    
+    \begin{enumerate}
+        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $b$ adalah sebesar $\approx 3.23$ satuan jarak, namun memiliki nilai \textit{cosine similarity} sebesar $-1$. Kondisi tersebut menyebabkan entitas $a$ dan $b$ tidak dianggap dekat secara spasial pada interval waktu $[1, 2]$ karena nilai $\vartheta$ dari kedua entitas tersebut lebih kecil dari nilai $\vartheta$ minimum sebesar $0.5$.
+        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $c$ adalah sebesar $2$ satuan jarak dan nilai \textit{cosine similarity} dari entitas $a$ dan $c$ adalah sebesar $1$. Oleh karena jarak \textit{dynamic time warping} yang lebih kecil dari $r$ dan nilai \textit{cosine similarity} yang lebih besar dari $\vartheta$, entitas $a$ dan $c$ membentuk sebuah sub-himpunan pergerakan bersama $\mathcal{A}$ beranggotakan 2 entitas $a$ dan $c$.
+        \item Jarak \textit{dynamic time warping} dari entitas $b$ dan $c$ adalah sebesar $\approx 4.82$ satuan jarak. hasil tersebut sudah cukup untuk menyimpulkan bahwa $b$ dan $c$ tidak dekat secara spasial pada interval waktu $[1, 2]$ karena nilai $r$ dari kedua entitas entitas lebih besar dari nilai $r$ maksimum sebesar $3.5$ satuan jarak.
+        \item Karena sub-himpunan $\mathcal{A}$ memenuhi seluruh syarat pembentukan rombongan di mana $\mathcal{A}$ memiliki 2 anggota yang dekat secara spasial, maka sub-himpunan $\mathcal{A}$ membentuk sebuah rombongan pada interval waktu $[1, 2]$.
+    \end{enumerate}
+    
+    \item Lakukan proses pengurangan redundansi hasil identifikasi dengan menghapus \textit{proper subset} dari setiap rombongan yang teridentifikasi pada interval waktu yang sama. Karena rombongan hasil identifikasi tidak memiliki \textit{proper subset} yang redundan, maka hasil rombongan akan langsung dikembalikan.
+\end{enumerate}
+
+Berdasarkan uraian langkah-langkah algoritma identifikasi, berikut merupakan rombongan-rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$ beserta durasi waktu konsekutif dari masing-masing rombongan yang teridentifikasi:
+
+\begin{table}[h]
+    \centering
+    \captionsetup{width=0.6\textwidth}
+    \caption{Hasil identifikasi rombongan pada contoh kasus pergerakan yang ditunjukkan oleh Gambar \ref{bab3:contoh-algoritma-identifikasi}}
+    \begin{tabular}{|c|c|}
+        \hline
+        Anggota & Durasi \\
+        \hline
+        a, c & $[1, 2]$ \\
+        \hline
+    \end{tabular}
+    \label{bab6:contoh-identifikasi-non-redundan}
+\end{table}
+
+\section{Redundansi Rombongan}
 \label{sec:redundancy}
 
 Salah satu masalah yang terdapat dalam algoritma identifikasi rombongan yang diusulkan adalah redundansi yang terdapat pada rombongan-rombongan yang berhasil diidentifikasi. Redundansi dihasilkan ketika algoritma identifikasi rombongan menghasilkan rombongan $\mathcal{X}$ di mana $\mathcal{X} \subset \mathcal{G}$, $|\mathcal{X}| < |\mathcal{G}|$ pada interval waktu yang sama. Redundansi disebabkan oleh cara kerja algoritma identifikasi yang melakukan pemeriksaan kedekatan spasial pada setiap pasang entitas yang mungkin dalam himpunan entitas yang diberikan.
@@ -298,67 +360,6 @@ Redundansi hasil identifikasi rombongan dapat dikurangi dengan menghapus salah s
     \KwRet{$\mathcal{R}$}
 \end{algorithm}
 
-\section{Contoh Proses Identifikasi Rombongan}
-\label{sec:algorithm-example}
-
-Diberikan sebuah himpunan entitas $\mathcal{X}$ yang bergerak ruang $\mathbb{R}^2$ yang terdiri atas 3 entitas yaitu $a$, $b$, dan $c$ yang ditunjukkan melalui Gambar \ref{bab3:contoh-algoritma-identifikasi}. Masing-masing dari entitas tersebut menempuh lintasan sebagai berikut:
-
-\begin{enumerate}
-    \item $\textbf{a} = \{ 1, 1 \}, \{ 2, 1 \}, \{ 3, 1 \}$
-    \item $\textbf{b} = \{ 3, 2 \}, \{ 2, 2 \}, \{ 1, 2 \}$
-    \item $\textbf{c} = \{ 1, -2 \}, \{ 2, 0 \}, \{ 3, 0 \}$
-\end{enumerate}
-
-\begin{figure}[t]
-    \centering
-    \captionsetup{width=0.7\textwidth}
-    \includegraphics[width=0.575\textwidth]{Gambar/bab3:contoh-algoritma-identifikasi.pdf}
-    \caption[Contoh proses algoritma identifikasi rombongan]{Himpunan entitas $\mathcal{X}$ beserta lintasan yang ditempuh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah.}
-    \label{bab3:contoh-algoritma-identifikasi}
-\end{figure}
-
-Lintasan dari sebuah entitas dalam himpunan entitas $\mathcal{X}$ merupakan kumpulan posisi yang terurut berdasarkan waktu secara menaik dalam ruang gerak $\mathbb{R}^2$. Posisi setiap entitas dimulai dari titik waktu $t = 0$. Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3.5$ satuan jarak, syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.5$, dan nilai kedekatan minimum $n$ sebanyak $1$. Langkah-langkah yang diambil untuk mengidentifikasi rombongan pada himpunan entitas $\mathcal{X}$ berdasarkan algoritma identifikasi yang telah dibuat adalah sebagai berikut:
-
-\begin{enumerate}
-    \item Menginisialisasi sebuah himpunan untuk menyimpan himpunan rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$.
-    \item Mengidentifikasi seluruh interval waktu konsekutif sepanjang $k$ pada himpunan entitas $\mathcal{X}$. Berdasarkan parameter masukan yaitu $k = 2$, maka interval waktu konsekutif yang memungkinkan adalah $[0, 1]$ dan $[1, 2]$.
-    \item Lakukan pemeriksaan kedekatan spasial untuk setiap pasang entitas pada interval waktu $[0, 1]$ dengan melakukan perbandingan jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} pada setiap pasang entitas. Langkah-langkah yang dikerjakan adalah sebagai berikut: 
-    
-    \begin{enumerate}
-        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $b$ adalah sebesar $\approx 3.23$ satuan jarak, namun memiliki nilai \textit{cosine similarity} sebesar $-1$. Kondisi tersebut menyebabkan entitas $a$ dan $b$ tidak dianggap dekat secara spasial pada interval waktu $[0, 1]$ karena nilai $\vartheta$ dari kedua entitas tersebut lebih kecil dari nilai $\vartheta$ minimum sebesar $0.5$.
-        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $c$ adalah sebesar $4$ satuan jarak. hasil tersebut sudah cukup untuk menyimpulkan bahwa $a$ dan $c$ tidak dekat secara spasial pada interval waktu $[0, 1]$ karena nilai $r$ dari kedua entitas tersebut lebih besar dari nilai $r$ maksimum sebesar $3.5$ satuan jarak.
-        \item Jarak \textit{dynamic time warping} dari entitas $b$ dan $c$ adalah sebesar $\approx 6.47$ satuan jarak. hasil tersebut sudah cukup untuk menyimpulkan bahwa $b$ dan $c$ tidak dekat secara spasial pada interval waktu $[0, 1]$ karena nilai $r$ dari kedua entitas entitas lebih besar dari nilai $r$ maksimum sebesar $3.5$ satuan jarak.
-        \item Oleh karena tidak ada himpunan entitas yang terbentuk, maka tidak ada rombongan yang terbentuk pada interval $[0, 1]$.
-    \end{enumerate}
-    
-    \item Lakukan pemeriksaan kedekatan spasial untuk setiap pasang entitas pada interval waktu $[1, 2]$ dengan melakukan perbandingan jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} pada setiap pasang entitas. Langkah-langkah yang dikerjakan adalah sebagai berikut: 
-    
-    \begin{enumerate}
-        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $b$ adalah sebesar $\approx 3.23$ satuan jarak, namun memiliki nilai \textit{cosine similarity} sebesar $-1$. Kondisi tersebut menyebabkan entitas $a$ dan $b$ tidak dianggap dekat secara spasial pada interval waktu $[1, 2]$ karena nilai $\vartheta$ dari kedua entitas tersebut lebih kecil dari nilai $\vartheta$ minimum sebesar $0.5$.
-        \item Jarak \textit{dynamic time warping} dari entitas $a$ dan $c$ adalah sebesar $2$ satuan jarak dan nilai \textit{cosine similarity} dari entitas $a$ dan $c$ adalah sebesar $1$. Oleh karena jarak \textit{dynamic time warping} yang lebih kecil dari $r$ dan nilai \textit{cosine similarity} yang lebih besar dari $\vartheta$, entitas $a$ dan $c$ membentuk sebuah sub-himpunan pergerakan bersama $\mathcal{A}$ beranggotakan 2 entitas $a$ dan $c$.
-        \item Jarak \textit{dynamic time warping} dari entitas $b$ dan $c$ adalah sebesar $\approx 4.82$ satuan jarak. hasil tersebut sudah cukup untuk menyimpulkan bahwa $b$ dan $c$ tidak dekat secara spasial pada interval waktu $[1, 2]$ karena nilai $r$ dari kedua entitas entitas lebih besar dari nilai $r$ maksimum sebesar $3.5$ satuan jarak.
-        \item Karena sub-himpunan $\mathcal{A}$ memenuhi seluruh syarat pembentukan rombongan di mana $\mathcal{A}$ memiliki 2 anggota yang dekat secara spasial, maka sub-himpunan $\mathcal{A}$ membentuk sebuah rombongan pada interval waktu $[1, 2]$.
-    \end{enumerate}
-    
-    \item Lakukan proses pengurangan redundansi hasil identifikasi dengan menghapus \textit{proper subset} dari setiap rombongan yang teridentifikasi pada interval waktu yang sama. Karena rombongan hasil identifikasi tidak memiliki \textit{proper subset} yang redundan, maka hasil rombongan akan langsung dikembalikan.
-\end{enumerate}
-
-Berdasarkan uraian langkah-langkah algoritma identifikasi, berikut merupakan rombongan-rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$ beserta durasi waktu konsekutif dari masing-masing rombongan yang teridentifikasi:
-
-\begin{table}[h]
-    \centering
-    \captionsetup{width=0.75\textwidth}
-    \caption{Hasil identifikasi rombongan pada contoh kasus Subbab \ref{sec:algorithm-example}}
-    \begin{tabular}{|c|c|}
-        \hline
-        Anggota & Durasi \\
-        \hline
-        a, c & $[1, 2]$ \\
-        \hline
-    \end{tabular}
-    \label{bab6:contoh-identifikasi-non-redundan}
-\end{table}
-
 \section{Contoh Proses Pengurangan Redundansi Rombongan}
 \label{sec:redundancy-example}
 
@@ -372,22 +373,14 @@ Diberikan sebuah himpunan entitas $\mathcal{Y}$ yang terdiri atas 5 entitas yait
     \item $\textbf{e} = \{ 1, 3 \}, \{ 2, 1.5 \}, \{ 3, 1.5 \}, \{ 4, 1.5 \}$
 \end{enumerate}
 
-\begin{figure}[t]
-    \centering
-    \captionsetup{width=0.85\textwidth}
-    \includegraphics[width=0.95\textwidth]{Gambar/bab3:contoh-algoritma-redundansi.pdf}
-    \caption[Contoh proses algoritma pengurangan redundansi]{Himpunan entitas $\mathcal{Y}$ beserta lintasan yang ditempuh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah. Entitas $d$ digambarkan sebagai entitas berwarna hijau. Entitas $e$ digambarkan sebagai entitas berwarna ungu.}
-    \label{bab3:contoh-algoritma-redundansi}
-\end{figure}
+Beserta dengan himpunan entitas $\mathcal{Y}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3$ satuan jarak, syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.75$, dan nilai kedekatan minimum $n$ sebanyak $1$.
 
-Lintasan dari sebuah entitas dalam himpunan entitas $\mathcal{X}$ merupakan kumpulan posisi yang terurut berdasarkan waktu secara menaik dalam ruang gerak $\mathbb{R}^2$. Posisi setiap entitas dimulai dari titik waktu $t = 0$. Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3$ satuan jarak, syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.75$, dan nilai kedekatan minimum $n$ sebanyak $1$.
-
-Melalui proses identifikasi rombongan menggunakan Algoritma \ref{bab3:algoritma-identifikasi}, terdapat beberapa rombongan yang berhasil diidentifikasi dari himpunan entitas $\mathcal{Y}$. Berikut merupakan rombongan-rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$ beserta durasi waktu konsekutif dari masing-masing rombongan yang teridentifikasi.
+Melalui proses identifikasi rombongan menggunakan Algoritma \ref{bab3:algoritma-identifikasi}, terdapat beberapa pergerakan kolektif yang berhasil diidentifikasi sebagai rombongan pada himpunan entitas $\mathcal{Y}$. Tabel \ref{bab6:contoh-identifikasi-redundan} menunjukkan rombongan-rombongan yang teridentifikasi pada himpunan entitas $\mathcal{Y}$ beserta durasi waktu konsekutif dari masing-masing rombongan yang teridentifikasi.
 
 \begin{table}[h]
     \centering
-    \captionsetup{width=0.75\textwidth}
-    \caption{Hasil identifikasi rombongan pada contoh kasus Subbab \ref{sec:redundancy-example}}
+    \captionsetup{width=0.6\textwidth}
+    \caption{Hasil identifikasi rombongan pada contoh kasus pergerakan yang ditunjukkan oleh Gambar \ref{bab3:contoh-algoritma-redundansi}}
     \begin{tabular}{|c|c|}
         \hline
         Anggota & Durasi \\
@@ -400,7 +393,15 @@ Melalui proses identifikasi rombongan menggunakan Algoritma \ref{bab3:algoritma-
     \label{bab6:contoh-identifikasi-redundan}
 \end{table}
 
-Melalui analisis singkat dari hasil identifikasi rombongan yang ditunjukkan melalui Tabel \ref{bab6:contoh-identifikasi-redundan}, dapat dilihat bahwa rombongan dengan anggota $\{ c, d, e \}$ dan $\{ d, e \}$ merupakan rombongan yang redundan. Redundansi tersebut disebabkan oleh hasil identifikasi rombongan yang juga berhasil mengidentifikasi rombongan dengan anggota $\{ a, c, d, e \}$ yang memiliki durasi yang sama persis dengan rombongan dengan anggota $\{ c, d, e \}$ dan $\{ d, e \}$. Oleh karena itu, perlu dilakukan pengurangan redundansi pada hasil identifikasi rombongan untuk meningkatkan kualitas hasil identifikasi rombongan. Berikut merupakan langkah-langkah yang diambil pada proses pengurangan redundansi rombongan:
+\begin{figure}[t]
+    \centering
+    \captionsetup{width=0.8\textwidth}
+    \includegraphics[width=0.9\textwidth]{Gambar/bab3:contoh-algoritma-redundansi.pdf}
+    \caption[Contoh proses algoritma pengurangan redundansi]{Himpunan entitas $\mathcal{Y}$ beserta lintasan yang ditempuh oleh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah. Entitas $d$ digambarkan sebagai entitas berwarna hijau. Entitas $e$ digambarkan sebagai entitas berwarna ungu.}
+    \label{bab3:contoh-algoritma-redundansi}
+\end{figure}
+
+Analisis singkat terhadap hasil identifikasi rombongan menunjukkan bahwa rombongan dengan anggota $\{ c, d, e \}$ dan $\{ d, e \}$ merupakan rombongan yang redundan. Redundansi tersebut disebabkan oleh hasil identifikasi rombongan yang juga berhasil mengidentifikasi rombongan dengan anggota $\{ a, c, d, e \}$ yang memiliki durasi yang sama persis dengan rombongan dengan anggota $\{ c, d, e \}$ dan $\{ d, e \}$. Oleh karena itu, perlu dilakukan pengurangan redundansi pada hasil identifikasi rombongan untuk meningkatkan kualitas hasil identifikasi rombongan. Berikut merupakan langkah-langkah yang diambil pada proses pengurangan redundansi rombongan:
 
 \begin{enumerate}
     \item Buatlah sebuah himpunan pasangan rombongan untuk setiap rombongan yang teridentifikasi.
