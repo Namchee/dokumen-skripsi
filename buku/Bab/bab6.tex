@@ -1,7 +1,7 @@
 \chapter{Pengamatan dan Pengujian}
 \label{chap:pengujian}
 
-Untuk memastikan bahwa perangkat lunak yang dibuat mampu menjawab rumusan masalah dan mencapai tujuan penelitian, perangkat lunak identifikasi rombongan akan diuji melalui proses pengujian baik secara kuantitatif maupun kualitatif.
+Bab ini akan membahas pengujian yang dilakukan pada perangkat lunak identifikasi rombongan. Pertama, bab ini akan membahas mengenai sumber data pergerakan yang akan digunakan dalam proses pengujian perangkat lunak. Setelah itu, bab ini akan menyajikan hasil pengujian kualitatif dan kuantitatif dari setiap data pergerakan yang diuji beserta dengan hasil analisis dari hasil pengujian kuantitatif dan kualitatif yang dilakukan.
 
 \section{Sumber Data Pergerakan}
 \label{bab6:data-pergerakan}
@@ -11,22 +11,26 @@ Untuk melakukan pengujian terhadap hasil identifikasi rombongan, diperlukan sumb
 \begin{enumerate}
     \item \textbf{BIWI ETH Walking Pedestrian}
     
-    Data pergerakan BIWI ETH diambil dari pengamatan pergerakan pejalan kaki dua arah di depan gedung universitas ETH Zurich, Swiss pada tahun 2009 \cite{pellegrini:eth}. 
+    Data pergerakan BIWI ETH diambil dari pengamatan pergerakan pejalan kaki dua arah di depan gedung universitas ETH Zurich, Swiss pada tahun 2009 \cite{pellegrini:eth}. Data pergerakan BIWI ETH memiliki karakteristik tingkat kepadatan pejalan kaki dan pergerakan kolektif yang rendah. Informasi yang tercatat dalam data pergerakan BIWI ETH dicatat setiap 2\.5 \textit{frame} per detik. Rekaman video pergerakan pejalan kaki pada data pergerakan BIWI ETH berjalan dalam 25 \textit{frame} per detik.
     
     \item \textbf{Vittorio Emanuele II Gallery (VEIIG)}
     
-    Data pergerakan VEIIG diambil dari pengamatan pergerakan pejalan kaki dua arah di daerah sekitar pusat perbelanjaan Vittorio Emanuele II Galleria pada 24 November 2012 \cite{bandini:gveii}.
+    Data pergerakan VEIIG diambil dari pengamatan pergerakan pejalan kaki dua arah di daerah sekitar pusat perbelanjaan Vittorio Emanuele II Galleria pada 24 November 2012 \cite{bandini:gveii}. Data pergerakan VEIIG memiliki tingkat kepadatan pergerakan kolektif yang dinamis dan memiliki kecepatan perubahan kepadatan yang tinggi. Informasi yang tercatat dalam data pergerakan VEIIG dicatat setiap 8 \textit{frame} per detik. Rekaman video pergerakan dari data pergerakan VEIIG berjalan dalam 8 \textit{frame} per detik.
+    
+    Untuk mempermudah proses pengujian algoritma identifikasi rombongan, data pergerakan VEIIG yang digunakan dalam proses pengujian ini akan dipotong menjadi data pergerakan yang berdurasi sepanjang 5 menit.
     
     \item \textbf{Crowds by Example (CBE)}
     
-    Data pergerakan CBE diambil dari pengamatan pergerakan pejalan kaki multidireksional di luar sebuah gedung universitas \cite{solera:06:range-reference}.
+    Data pergerakan CBE diambil dari pengamatan pergerakan pejalan kaki multidireksional di luar sebuah gedung universitas \cite{solera:06:range-reference}. Data pergerakan CBE memiliki tingkat kepadatan pejalan kaki menengah, namun data pergerakan CBE tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan entitas yang multidireksional. Informasi yang tercatat dalam data pergerakan CBE dicatat setiap 25 \textit{frame} per detik. Rekaman video pergerakan pada data pergerakan CBE berjalan dalam 25 \textit{frame} per detik.
 \end{enumerate}
+
+Seluruh informasi yang terdapat dalam data pergerakan disajikan dalam bentuk berkas teks yang merupakan hasil ekstraksi terhadap lintasan-lintasan yang terdapat dalam rekaman video. Hasil ekstraksi lintasan dari rekaman video pergerakan kemudian diterjemahkan ke dalam ruang gerak $\mathbb{R}^2$ dengan mengalikan hasil terjemahan mentah dengan \textit{homography matrix}.
 
 Dalam seluruh data pergerakan yang digunakan dalam proses pengujian, terdapat hasil identifikasi rombongan yang dilakukan secara manual oleh manusia pada data pergerakan tersebut. Nantinya, hasil identifikasi tersebut akan digunakan pada proses pengujian perangkat lunak dengan membandingkan hasil identifikasi yang dilakukan oleh manusia dengan hasil identifikasi yang dihasilkan oleh perangkat lunak.
 
 Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan yang digunakan pada proses pengujian algoritma identifikasi rombongan. Nilai $g$ menunjukkan jumlah rombongan yang teridentifikasi secara manual oleh manusia. Nilai $G$ menunjukkan rentang jumlah anggota rombongan yang teridentifikasi secara manual oleh manusia.
 
-\begin{table}[b]
+\begin{table}[h]
     \centering
     \caption[Metadata sumber data pergerakan]{Informasi metadata dari data pergerakan yang digunakan pada proses pengujian}
     \begin{tabular}{p{3cm} p{2.5cm} p{2.5cm} p{3cm}}
@@ -77,25 +81,23 @@ Pengujian efektivitas algoritma pengurangan redundansi dilakukan dengan membandi
 \section{Pengujian Kualitatif}
 \label{sec:qualitative}
 
-Dalam pengujian kualitatif, hasil identifikasi rombongan yang dihasilkan akan divisualisasikan secara langsung pada lintasan yang dilalui pejalan kaki pada video rekaman sumber data pergerakan.
+Dalam pengujian kualitatif, hasil identifikasi rombongan yang dihasilkan akan divisualisasikan secara langsung pada lintasan yang dilalui pejalan kaki pada video rekaman sumber data pergerakan. Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar \ref{bab6:representasi-entitas}. Kepala menunjukkan posisi entitas saat ini. Ekor menunjukkan urutan posisi-posisi sebelumnya yang ditempuh oleh entitas. ID menunjukkan nomor identitas unik yang digunakan untuk membedakan satu entitas dengan entitas lainnya.
 
-Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar \ref{bab6:representasi-entitas}. Kepala menunjukkan posisi entitas saat ini. Ekor menunjukkan urutan posisi-posisi sebelumnya yang ditempuh oleh entitas. ID menunjukkan nomor identitas unik yang digunakan untuk membedakan satu entitas dengan entitas lainnya.
-
-\begin{figure}[t]
+\begin{figure}[b]
     \centering
-    \includegraphics[width=0.3\textwidth]{Gambar/bab6:entitas.pdf}
+    \includegraphics[width=0.325\textwidth]{Gambar/bab6:entitas.pdf}
     \caption{Representasi entitas pada pengujian kualitatif}
     \label{bab6:representasi-entitas}
 \end{figure}
 
 Keanggotaan entitas pada sebuah rombongan akan ditunjukkan melalui warna kepala dan ekor dari entitas. Warna kepala entitas merepresentasikan keanggotaan entitas yang dihasilkan oleh perangkat lunak. Warna ekor entitas merepresentasikan keanggotaan entitas yang ditunjukkan oleh hasil identifikasi yang dilakukan oleh manusia. Entitas yang tergabung dalam rombongan yang sama akan memiliki warna kepala dan ekor yang sama. Entitas yang tidak tergabung dalam rombongan manapun akan memiliki kepala dan ekor yang berwarna putih. Hal yang patut menjadi perhatian adalah warna yang digunakan untuk merepresentasikan sebuah rombongan akan diambil secara acak. Oleh karena itu, warna kepala dan ekor dapat berbeda walaupun hasil identifikasi manusia dan hasil identifikasi perangkat lunak menyatakan hasil yang sama. Selain itu, entitas yang tergabung dalam 2 atau lebih rombongan di saat yang bersamaan akan memiliki lebih dari satu warna kepala entitas sesuai dengan jumlah rombongan di mana entitas yang dimaksud tergabung sebagai anggota rombongan.
 
-Pada penelitian ini, beberapa hasil visualisasi yang menarik untuk dibahas akan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar \ref{bab6:contoh-visualisasi}. Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak pada video rekaman pergerakan pejalan kaki dilakukan dengan bantuan perangkat lunak visualisasi yang dibuat oleh Lionov Wiratma \cite{wiratma:software}. Perangkat lunak tersebut menerima masukan berupa rekaman video pergerakan, rekaman data lintasan, hasil identifikasi manusia, dan hasil identifikasi dari perangkat lunak identifikasi rombongan. Perangkat lunak visualisasi kemudian akan menghasilkan video rekaman di mana seluruh entitas yang terdapat dalam video rekaman asli akan ditandai dengan figur yang ditunjukkan melalui Gambar \ref{bab6:representasi-entitas}. 
+Pada penelitian ini, beberapa hasil visualisasi yang menarik untuk dibahas akan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar \ref{bab6:contoh-visualisasi}. Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak pada video rekaman pergerakan pejalan kaki dilakukan dengan bantuan perangkat lunak visualisasi yang dibuat oleh Lionov Wiratma dan Maurice Marx \cite{wiratma:software}. Perangkat lunak tersebut menerima masukan berupa rekaman video pergerakan, rekaman data lintasan, hasil identifikasi manusia, dan hasil identifikasi dari perangkat lunak identifikasi rombongan. Perangkat lunak visualisasi kemudian akan menghasilkan video rekaman di mana seluruh entitas yang terdapat dalam video rekaman asli akan ditandai dengan figur yang ditunjukkan melalui Gambar \ref{bab6:representasi-entitas}. 
 
 \begin{figure}[h]
     \centering
-    \captionsetup{width=0.8\textwidth}
-    \includegraphics[width=0.765\textwidth]{Gambar/bab6:contoh-visualisasi.pdf}
+    \captionsetup{width=0.85\textwidth}
+    \includegraphics[width=0.85\textwidth]{Gambar/bab6:contoh-visualisasi.pdf}
     \caption[Contoh hasil visualisasi rombongan]{Contoh hasil visualisasi dari hasil identifikasi rombongan pada video rekaman data pergerakan pejalan kaki}
     \label{bab6:contoh-visualisasi}
 \end{figure}
@@ -107,8 +109,6 @@ Bagian ini akan menyajikan hasil pengujian pada setiap sumber data pergerakan ya
 
 \subsection{Hasil Pengujian BIWI ETH}
 \label{subsec:eth-result}
-
-Data pergerakan BIWI ETH memiliki karakteristik tingkat kepadatan pejalan kaki dan pergerakan kolektif yang rendah. Informasi yang tercatat dalam data pergerakan BIWI ETH dicatat setiap 2\.5 \textit{frame} per detik. Rekaman video pergerakan pejalan kaki pada data pergerakan BIWI ETH berjalan dalam 25 \textit{frame} per detik.
 
 \subsubsection{Hasil Pengujian Kuantitatif}
 \label{subsubsec:eth-quantitative}
@@ -173,21 +173,6 @@ Upaya pengurangan redundansi rombongan menggunakan Algoritma \ref{bab3:redundans
 \label{bab6:seq-eth-redundant}
 \end{table}
 
-\begin{figure}[b]
-    \centering
-    \captionsetup{width=.65\textwidth}
-    \begin{subfigure}[t]{0.25\textwidth}
-        \centering
-        \includegraphics[height=5cm]{Gambar/bab6:masalah-eth-1.pdf}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.25\textwidth}
-        \centering
-        \includegraphics[height=5cm]{Gambar/bab6:masalah-eth-2.pdf}
-    \end{subfigure}
-    \caption[Subrombongan pada data BIWI ETH]{Banyaknya subrombongan yang dihasilkan oleh perangkat lunak menyebabkan kenaikan nilai \textit{false positive} dari hasil identifikasi pada data pergerakan BIWI ETH}
-    \label{bab6:masalah-eth}
-\end{figure}
-
 \subsubsection{Hasil Pengujian Kualitatif}
 \label{subsubsec:eth-qualitative}
 
@@ -195,10 +180,27 @@ Hasil pengujian kualitatif melalui visualisasi pada data BIWI ETH menunjukkan al
 
 Mengurangi nilai $r$ dan $\vartheta$ sedikit mengurangi jumlah subrombongan redundan yang teridentifikasi, namun hal tersebut tidak cukup untuk mengurangi nilai \textit{false positive} dari hasil identifikasi perangkat lunak secara signifikan. Selain itu, memperketat syarat kedekatan spasial membuat keanggotaan rombongan menjadi terputus yang dapat dilihat melalui Gambar \ref{bab6:masalah-syarat-ketat-eth}. Pada gambar tersebut, dapat dilihat bahwa entitas bergerak dengan nomor identitas 2 tidak tergabung dalam rombongan yang dibentuk oleh entitas-entitas dengan nomor identitas 3 dan 6.
 
-\begin{figure}[h]
+Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak negatif pada relevansi hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar \ref{bab6:masalah-eth-n}. Pada gambar tersebut, dapat dilihat bahwa entitas 44 tergabung sebagai anggota dari rombongan yang dibentuk oleh entitas 40, 41, dan 42 walaupun memiliki jarak yang jauh. Keanggotaan tersebut disebabkan oleh nilai kedekatan minimum $n = 1$ yang dipenuhi oleh entitas 43 yang cukup dekat dengan entitas 41. Keanggotaan entitas 43 menyebabkan entitas 44 terhubung dengan entitas 40, 41, dan 42 melalui entitas 43. Hal tersebut tidak relevan dengan hasil identifikasi manusia yang menganggap entitas 44 terlalu jauh dengan entitas 40, 41, dan 42 sehingga entitas 44 tidak tergabung dalam rombongan manapun.
+
+\begin{figure}[b]
+    \centering
+    \captionsetup{width=.65\textwidth}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \centering
+        \includegraphics[height=4.5cm]{Gambar/bab6:masalah-eth-1.pdf}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \centering
+        \includegraphics[height=4.5cm]{Gambar/bab6:masalah-eth-2.pdf}
+    \end{subfigure}
+    \caption[Subrombongan pada data BIWI ETH]{Banyaknya subrombongan yang dihasilkan oleh perangkat lunak menyebabkan kenaikan nilai \textit{false positive} dari hasil identifikasi pada data pergerakan BIWI ETH}
+    \label{bab6:masalah-eth}
+\end{figure}
+
+\begin{figure}[t]
     \centering
     \captionsetup{width=0.6\textwidth}
-    \includegraphics[height=3cm]{Gambar/bab6:masalah-eth-ketat.pdf}
+    \includegraphics[height=3.25cm]{Gambar/bab6:masalah-eth-ketat.pdf}
     \caption[Dampak ketatnya syarat kedekatan spasial pada data ETH]{Memperketat syarat kedekatan spasial membuat entitas dengan nomor identitas 2 keluar dari rombongan yang dibentuk oleh entitas 2, 3, dan 6}
     \label{bab6:masalah-syarat-ketat-eth}
 \end{figure}
@@ -208,22 +210,18 @@ Mengurangi nilai $r$ dan $\vartheta$ sedikit mengurangi jumlah subrombongan redu
     \captionsetup{width=.6\textwidth}
     \begin{subfigure}[t]{0.175\textwidth}
         \centering
-        \includegraphics[height=8.25cm]{Gambar/bab6:masalah-eth-n.pdf}
+        \includegraphics[height=8cm]{Gambar/bab6:masalah-eth-n.pdf}
     \end{subfigure}
     \begin{subfigure}[t]{0.175\textwidth}
         \centering
-        \includegraphics[height=8.25cm]{Gambar/bab6:masalah-eth-n-2.pdf}
+        \includegraphics[height=8cm]{Gambar/bab6:masalah-eth-n-2.pdf}
     \end{subfigure}
     \caption[Masalah nilai $n$ pada data BIWI ETH]{Nilai kedekatan minimum $n = 1$ membuat entitas dengan nomor identitas 44 tergabung sebagai anggota dari rombongan yang berada jauh di depan}
     \label{bab6:masalah-eth-n}
 \end{figure}
 
-Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak negatif pada relevansi hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar \ref{bab6:masalah-eth-n}. Pada gambar tersebut, dapat dilihat bahwa entitas 44 tergabung sebagai anggota dari rombongan yang dibentuk oleh entitas 40, 41, dan 42 walaupun memiliki jarak yang jauh. Keanggotaan tersebut disebabkan oleh nilai kedekatan minimum $n = 1$ yang dipenuhi oleh entitas 43 yang cukup dekat dengan entitas 41. Keanggotaan entitas 43 menyebabkan entitas 44 terhubung dengan entitas 40, 41, dan 42 melalui entitas 43. Hal tersebut tidak relevan dengan hasil identifikasi manusia yang menganggap entitas 44 terlalu jauh dengan entitas 40, 41, dan 42 sehingga entitas 44 tidak tergabung dalam rombongan manapun.
-
 \subsection{Hasil Pengujian VEIIG}
 \label{subsec:veiig-result}
-
-Data pergerakan VEIIG memiliki tingkat kepadatan pergerakan kolektif yang dinamis dan memiliki kecepatan perubahan kepadatan yang tinggi. Informasi yang tercatat dalam data pergerakan VEIIG dicatat setiap 8 \textit{frame} per detik. Rekaman video pergerakan dari data pergerakan VEIIG berjalan dalam 8 \textit{frame} per detik. Untuk mempermudah proses pengujian algoritma identifikasi rombongan, data pergerakan VEIIG yang digunakan dalam proses pengujian ini akan dipotong menjadi data pergerakan yang berdurasi sepanjang 5 menit.
 
 \subsubsection{Hasil Pengujian Kuantitatif}
 \label{subsubsec:veiig-quantitative}
@@ -300,11 +298,11 @@ Melalui proses analisis terhadap cara kerja algoritma, kekakuan pada masalah per
     \captionsetup{width=.75\textwidth}
     \begin{subfigure}[b]{0.25\textwidth}
         \centering
-        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-veiig-arah-1.pdf}
+        \includegraphics[height=6.5cm]{Gambar/bab6:masalah-veiig-arah-1.pdf}
     \end{subfigure}
     \begin{subfigure}[b]{0.25\textwidth}
         \centering
-        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-veiig-arah-2.pdf}
+        \includegraphics[height=6.5cm]{Gambar/bab6:masalah-veiig-arah-2.pdf}
     \end{subfigure}
     \caption[Masalah perbedaan arah maksimum pada data VEIIG]{Syarat kedekatakan spasial dengan perbedaan arah maksimum yang terlalu ketat dan kaku mengakibatkan rombongan dan anggota rombongan tidak teridentifikasi}
     \label{bab6:masalah-veiig-arah}
@@ -314,7 +312,7 @@ Masalah lain yang dimiliki oleh perangkat lunak identifikasi rombongan ditunjukk
 
 Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap penggunaan algoritma \textit{dynamic time warping} sebagai solusi untuk menyelesaikan masalah perbedaan kecepatan yang ditunjukkan melalui Gambar \ref{bab6:solusi-beda-kecepatan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah anggota rombongan yang memiliki jarak yang cukup jauh dengan anggota lain. Anggota yang memimpin kemudian menunggu anggota lain menyusul dan kembali melakukan pergerakan bersama kembali. Melalui hasil visualisasi, dapat dilihat bahwa perangkat lunak dapat mengidentifikasi rombongan tersebut sejak awal dengan baik.
 
-\begin{figure}[h]
+\begin{figure}[t!]
     \centering
     \captionsetup{width=.8\textwidth}
     \begin{subfigure}[t]{0.25\textwidth}
@@ -333,7 +331,7 @@ Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap peng
     \label{bab6:masalah-rintangan-veiig}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[t!]
     \centering
     \captionsetup{width=.8\textwidth}
     \begin{subfigure}[b]{0.275\textwidth}
@@ -350,8 +348,6 @@ Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap peng
 
 \subsection{Hasil Pengujian CBE}
 \label{subsec:cbe-result}
-
-Data pergerakan CBE memiliki tingkat kepadatan pejalan kaki menengah, namun data pergerakan CBE tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan entitas yang multidireksional. Informasi yang tercatat dalam data pergerakan CBE dicatat setiap 25 \textit{frame} per detik. Rekaman video pergerakan pada data pergerakan CBE berjalan dalam 25 \textit{frame} per detik.
 
 \subsubsection{Hasil Pengujian Kuantitatif}
 \label{subsubsec:cbe-quantitative}
@@ -422,20 +418,20 @@ Penggunaan algoritma pengurangan redundansi rombongan membawa dampak positif pad
 
 Hasil pengujian kualitatif melalui visualisasi pada data CBE menunjukkan alasan dari tingginya nilai \textit{false negative} dari hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar \ref{bab6:masalah-cbe}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat beberapa rombongan yang tidak teridentifikasi oleh perangkat lunak identifikasi rombongan, namun teridentifikasi sebagai rombongan pada hasil identifikasi manusia. Hal tersebut disebabkan cara perhitungan beda sudut maksimum antar anggota rombongan.
 
-\begin{figure}[h]
+\begin{figure}[b]
     \centering
     \captionsetup{width=.75\textwidth}
-    \begin{subfigure}[h]{0.225\textwidth}
+    \begin{subfigure}[h]{0.275\textwidth}
         \centering
-        \includegraphics[height=5cm]{Gambar/bab6:masalah-cbe-1.pdf}
+        \includegraphics[height=6cm]{Gambar/bab6:masalah-cbe-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.225\textwidth}
+    \begin{subfigure}[h]{0.275\textwidth}
         \centering
-        \includegraphics[height=5cm]{Gambar/bab6:masalah-cbe-2.pdf}
+        \includegraphics[height=6cm]{Gambar/bab6:masalah-cbe-2.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.225\textwidth}
+    \begin{subfigure}[h]{0.275\textwidth}
         \centering
-        \includegraphics[height=5cm]{Gambar/bab6:masalah-cbe-3.pdf}
+        \includegraphics[height=6cm]{Gambar/bab6:masalah-cbe-3.pdf}
     \end{subfigure}
     \caption[Masalah syarat perbedaan arah maksimum pada data CBE]{Parameter perbedaan arah yang terlalu ketat menyebabkan beberapa rombongan tidak teridentifikasi oleh perangkat lunak}
     \label{bab6:masalah-cbe}

@@ -1,6 +1,8 @@
 \chapter{Analisis}
 \label{chap:analisis}
 
+Bab ini akan membahas mengenai masalah identifikasi pergerakan kolektif pada kasus perbedaan arah dan kecepatan yang terdapat pada definisi formal pergerakan kolektif yang sudah ada serta usulan upaya penyelesaian masalah untuk menyelesaikan masalah-masalah tersebut. Dengan menggunakan usulan upaya penyelesaian masalah tersebut, akan dibuat definisi formal pergerakan kolektif baru yang mampu menyelesaikan masalah identifikasi pergerakan kolektif pada kasus perbedaan arah dan kecepatan. Terakhir, bab ini akan membahas algoritma yang mampu mengidentifikasi pergerakan kolektif sesuai dengan definisi formal baru yang dibuat.
+
 \section{Masalah Definisi Pergerakan Kolektif Sebelumnya}
 \label{sec:masalah-definisi-sebelumnya}
 
@@ -47,10 +49,10 @@ Masalah identifikasi pergerakan kolektif dalam kasus perbedaan arah dapat diatas
 
 Berdasarkan upaya penyelesaian tersebut, maka syarat kedekatan spasial dalam syarat-syarat pembentukan pergerakan kolektif perlu diperluas menjadi: \textbf{suatu entitas akan tergabung sebagai anggota dalam sebuah kelompok pergerakan kolektif apabila entitas tersebut dekat secara spasial dengan anggota-anggota pergerakan kolektif lainnya. Dua buah entitas dikatakan dekat secara spasial apabila keduanya memiliki jarak dalam ruang gerak yang kurang dari $r$ dan perbedaan arah dari dua entitas tersebut kurang lebih atau sama dengan $\vartheta$}.
 
-\begin{figure}[t]
+\begin{figure}[b!]
     \centering
     \captionsetup{width=0.8\textwidth}
-    \includegraphics[height=11.25cm]{Gambar/bab3:beda-arah-lokal.pdf}
+    \includegraphics[height=10.5cm]{Gambar/bab3:beda-arah-lokal.pdf}
     \caption[Masalah identifikasi pada penghitungan arah secara global]{Pada kasus di mana $m = 2$ dan $k = 3$, menghitung arah secara global dapat menyebabkan pergerakan kolektif tidak terbentuk sama sekali karena perbedaan arah akhir yang terlalu ekstrim (ditunjukkan melalui garis putus-putus hijau)}
     \label{bab3:beda-arah-lokal}
 \end{figure}
@@ -137,15 +139,6 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \item Kembalikan himpunan $\mathcal{R}$ sebagai hasil. Pada tahap ini, himpunan $\mathcal{R}$ akan berisi kumpulan rombongan yang terbentuk pada setiap interval waktu konsekutif $I$ yang memiliki panjang durasi minimum sebesar $k$ satuan waktu.
 \end{enumerate}
 
-\subsection{Analisis Kompleksitas Algoritma Identifikasi Rombongan}
-\label{subsec:complexity}
-
-Dalam mendesain sebuah algoritma yang baik, perlu dilakukan proses analisis kompleksitas terhadap algoritma yang akan dibuat. Melalui proses analisis algoritma, karakteristik dan perilaku dari algoritma tersebut dapat diketahui di mana hal tersebut dapat menjadi pertimbangan bagi calon pengguna algoritma untuk memilih algoritma terbaik sesuai kebutuhannya.
-
-Terdapat dua jenis kompleksitas yang dimiliki oleh sebuah algoritma, yaitu kompleksitas waktu dan kompleksitas tempat. Kompleksitas waktu merujuk pada jumlah operasi yang harus dikerjakan oleh algoritma untuk memproses masukan sampai menghasilkan nilai keluaran. Kompleksitas tempat merujuk pada kebutuhan ruang memori yang dibutuhkan oleh algoritma untuk memproses masukan sampai menghasilkan nilai keluaran.
-
-\clearpage
-
 \begin{algorithm}[H]
     \caption{Algoritma Identifikasi Rombongan}
     \SetKwInput{KwInput}{Input}                % Set the Input
@@ -225,6 +218,13 @@ Terdapat dua jenis kompleksitas yang dimiliki oleh sebuah algoritma, yaitu kompl
     }
     \KwRet{$hasil$}
 \end{algorithm}
+
+\subsection{Analisis Kompleksitas Algoritma Identifikasi Rombongan}
+\label{subsec:complexity}
+
+Dalam mendesain sebuah algoritma yang baik, perlu dilakukan proses analisis kompleksitas terhadap algoritma yang akan dibuat. Melalui proses analisis algoritma, karakteristik dan perilaku dari algoritma tersebut dapat diketahui di mana hal tersebut dapat menjadi pertimbangan bagi calon pengguna algoritma untuk memilih algoritma terbaik sesuai kebutuhannya.
+
+Terdapat dua jenis kompleksitas yang dimiliki oleh sebuah algoritma, yaitu kompleksitas waktu dan kompleksitas tempat. Kompleksitas waktu merujuk pada jumlah operasi yang harus dikerjakan oleh algoritma untuk memproses masukan sampai menghasilkan nilai keluaran. Kompleksitas tempat merujuk pada kebutuhan ruang memori yang dibutuhkan oleh algoritma untuk memproses masukan sampai menghasilkan nilai keluaran.
 
 \subsubsection{Kompleksitas Waktu Algoritma Identifikasi Rombongan}
 \label{subsubsec:time-complexity}
@@ -392,7 +392,7 @@ Melalui proses identifikasi rombongan menggunakan Algoritma \ref{bab3:algoritma-
 \begin{figure}[t]
     \centering
     \captionsetup{width=0.8\textwidth}
-    \includegraphics[width=0.9\textwidth]{Gambar/bab3:contoh-algoritma-redundansi.pdf}
+    \includegraphics[width=0.95\textwidth]{Gambar/bab3:contoh-algoritma-redundansi.pdf}
     \caption[Contoh proses algoritma pengurangan redundansi]{Himpunan entitas $\mathcal{Y}$ beserta lintasan yang ditempuh oleh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah. Entitas $d$ digambarkan sebagai entitas berwarna hijau. Entitas $e$ digambarkan sebagai entitas berwarna ungu.}
     \label{bab3:contoh-algoritma-redundansi}
 \end{figure}

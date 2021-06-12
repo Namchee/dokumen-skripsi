@@ -1,6 +1,8 @@
 \chapter{Perancangan}
 \label{chap:perancangan}
 
+Bab ini akan membahas rancangan perangkat lunak identifikasi rombongan. Pada bab ini, akan dibahas mengenai analisis kebutuhan perangkat lunak serta arsitektur perangkat lunak berupa modul-modul perangkat lunak identifikasi rombongan yang akan dibuat.
+
 \iffalse
 
 Sebelum melalui tahap implementasi, perangkat lunak perlu melalui proses perancangan perangkat lunak. Perancangan perangkat lunak merupakan sebuah proses untuk mengidentifikasi artefak-artefak dari perangkat lunak seperti modul, fungsi, kelas, serta artefak-artefak lainnya yang bertujuan untuk memenuhi kebutuhan perangkat lunak. Manfaat utama dari perancangan perangkat lunak adalah supaya perilaku perangkat lunak yang dihasilkan dapat lebih mudah diprediksi dan dikontrol sehingga perangkat lunak dapat lebih mudah dikembangkan dan diperbaiki di masa depan \cite{budgen:04:software-design}.
@@ -22,7 +24,7 @@ Berdasarkan 3 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{Gambar/bab4:dfd-level-0.pdf}
+    \includegraphics[width=0.825\textwidth]{Gambar/bab4:dfd-level-0.pdf}
     \caption{Diagram konteks}
     \label{bab4:context-diagram}
 \end{figure}
@@ -145,7 +147,7 @@ Modul rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari
 \section{Modul Spasial}
 \label{sec:des-spatial}
 
-Modul spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul rombongan untuk mempermudah pengujian perangkat lunak. Modul spasial akan mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh Algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh Rumus \ref{bab3:cosine-similarity}.
+Modul spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul rombongan untuk mempermudah pengujian perangkat lunak. Modul spasial akan mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh Algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh Rumus \ref{bab2:cosine-similarity}.
 
 \section{Modul Evaluasi}
 \label{sec:des-evaluation}

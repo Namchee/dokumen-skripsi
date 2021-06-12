@@ -1,11 +1,16 @@
 \chapter{Implementasi}
 \label{chap:implementasi}
 
+Bab ini akan membahas mengenai proses implementasi perangkat lunak identifikasi rombongan dibuat. Pertama, bab ini akan membahas mengenai paradigma pemrograman yang digunakan dalam mengimplementasikan perangkat lunak identifikasi rombogan. Setelah paradigma pemrograman selesai dibahas, bab ini akan membahas mengenai implementasi modul-modul dan struktur data yang dibutuhkan oleh perangkat lunak yang sudah dirancang pada bab sebelumnya.
+
 \iffalse
 
 Setelah rancangan perangkat lunak berhasil dibuat, tahap selanjutnya yang akan dikerjakan adalah tahap implementasi perangkat lunak. Dalam tahap implementasi perangkat lunak, rancangan perangkat lunak yang sudah dibuat akan diubah menjadi kode program yang sesuai dengan rancangan dan tujuan perangkat lunak.
 
 \fi
+
+\section{Paradigma Pemrograman}
+\label{sec:paradigm}
 
 Perangkat lunak identifikasi rombongan dibuat menggunakan paradigma pemrograman fungsional. C++ dipilih sebagai bahasa pemrograman yang digunakan untuk mengimplementasikan perangkat lunak. Pemilihan C++ sebagai bahasa pemrograman didasarkan pada performa dari bahasa pemrograman yang baik dan adanya seperangkat perkakas pemrograman berupa STL yang mempermudah proses pembuatan perangkat lunak.
 
@@ -84,14 +89,6 @@ Modul spasial diimplementasikan dalam berkas \texttt{spatial.cpp}. Seluruh struk
 Fungsi untuk menghitung jarak \textit{dynamic time warping} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_dtw\_distance} yang merupakan implementasi konkrit dari algoritma \textit{dynamic time warping} dari Algoritma \ref{bab2:dtw-pseudocode}. Fungsi tersebut akan memanggil sebuah fungsi bantuan bernama \texttt{calculate\_euclidean\_distance}. Fungsi \texttt{calculate\_euclidean\_distance} bertugas untuk menghitung jarak \textit{euclidean} dari 2 titik dalam dimensi ruang yang sama. Kode \ref{bab5:euclidean} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_euclidean\_distance}.
 
 \begin{lstlisting}[language=C++, caption=Implementasi fungsi \texttt{calculate\_euclidean\_distance}, label={bab5:euclidean}]
-    /**
-     * Calculate the euclidean distance between two points in
-     * n-dimensional space.
-     * 
-     * @param a the first point
-     * @param b the second point
-     * @return Euclidean distance between two points `a` and `b`
-     */
     double calculate_euclidean_distance(
         const std::vector<double> &a,
         const std::vector<double> &b
@@ -105,7 +102,6 @@ Fungsi untuk menghitung jarak \textit{dynamic time warping} akan diimplementasik
         double distance = 0.0;
 
         for (size_t it = 0; it < a.size(); it++) {
-            // return immediately when one of the position doesn't exist
             if (std::isnan(a[it]) || std::isnan(b[it])) {
                 return std::nan("");
             }
@@ -119,18 +115,7 @@ Fungsi untuk menghitung jarak \textit{dynamic time warping} akan diimplementasik
 
 Melalui proses analisis singkat terhadap kebutuhan, rancangan, serta implementasi modul penerjemah, efisiensi algoritma perhitungan jarak \textit{dynamic time warping} antara dua buah lintasan dapat ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila posisi dari salah satu sublintasan dari entitas yang diperiksa pada sebuah dimensi bernilai \texttt{NaN}. Kode \ref{bab5:dtw} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_dtw\_distance}.
 
-\clearpage
-
 \begin{lstlisting}[language=C++, caption=Implementasi fungsi \texttt{calculate\_dtw\_distance}, label={bab5:dtw}]
-    /**
-     * Calculate dynamic time warping distance between two distinct
-     * trajectories.
-     * 
-     * @param a the first trajectory
-     * @param b the second trajectory
-     * @return Dynamic time warping distance between two trajectories
-     * `a` and `b`
-     */
     double calculate_dtw_distance(
         const std::vector<std::vector<double> >& a,
         const std::vector<std::vector<double> >& b
@@ -141,25 +126,21 @@ Melalui proses analisis singkat terhadap kebutuhan, rancangan, serta implementas
             );
         }
 
-        // create a 2-dimensional array to store the DTW distances
         const size_t x_lim = a.size() + 1;
         const size_t y_lim = b.size() + 1;
 
         double dtw[x_lim][y_lim];
-
-        // initialize all illegal first pairings with infinity
+        
         for (size_t i = 0; i < x_lim; i++) {
-            dtw[i][0] = std::numeric_limits<double>::max();        
+            dtw[i][0] = std::numeric_limits<double>::max();
         }
 
         for (size_t i = 0; i < y_lim; i++) {
             dtw[0][i] = std::numeric_limits<double>::max();
         }
 
-        // Pair the first point of `a` with the first point of `b`
         dtw[0][0] = 0;
 
-        // Calculate DTW distance
         for (size_t i = 1; i < x_lim; i++) {
             for (size_t j = 1; j < y_lim; j++) {
                 double cost = calculate_euclidean_distance(
@@ -167,12 +148,10 @@ Melalui proses analisis singkat terhadap kebutuhan, rancangan, serta implementas
                     b[j - 1]
                 );
 
-                // return immediately when trajectory isn't recorded
                 if (std::isnan(cost)) {
                     return std::nan("");
                 }
 
-                // get the minimum cost
                 double min = std::min(
                     dtw[i - 1][j],
                     std::min(
@@ -189,26 +168,20 @@ Melalui proses analisis singkat terhadap kebutuhan, rancangan, serta implementas
     }
 \end{lstlisting}
 
-Fungsi untuk menghitung nilai \textit{cosine similarity} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_cosine\_similarity} yang merupakan implementasi konkrit dari Rumus \ref{bab3:cosine-similarity}. Sama seperti fungsi \texttt{calculate\_dtw\_distance}, efisiensi perhitungan nilai \textit{cosine similarity} ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila nilai dari salah satu dimensi dalam vektor dari entitas yang diperiksa bernilai \texttt{NaN}. Kode \ref{bab5:cosine-similarity} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_cosine\_similarity}.
+Fungsi untuk menghitung nilai \textit{cosine similarity} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_cosine\_similarity} yang merupakan implementasi konkrit dari Rumus \ref{bab2:cosine-similarity}. Sama seperti fungsi \texttt{calculate\_dtw\_distance}, efisiensi perhitungan nilai \textit{cosine similarity} ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila nilai dari salah satu dimensi dalam vektor dari entitas yang diperiksa bernilai \texttt{NaN}. Kode \ref{bab5:cosine-similarity} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_cosine\_similarity}.
 
 \section{Modul Evaluasi}
 \label{sec:impl-eval}
 
 Modul evaluasi diimplementasikan dalam berkas \texttt{eval.cpp}. Modul ini memiliki satu fungsi utama bernama \texttt{calculate\_score} yang menerima rombongan yang teridentifikasi melalui algoritma dan rombongan yang berasal dari \textit{ground truth}. Fungsi tersebut mengembalikan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari evaluasi kuantitatif dari hasil identifikasi rombongan. Untuk memenuhi kebutuhan akan pengembalian 3 nilai sekaligus, dibuat sebuah struktur data baru bernama \texttt{Score} yang akan dikembalikan oleh fungsi \texttt{calculate\_score}.
 
+\clearpage
+
 \begin{lstlisting}[language=C++, caption=Implementasi fungsi \texttt{calculate\_cosine\_similarity}, label={bab5:cosine-similarity}]
-    /**
-     * Calculate cosine similarity between two n-dimensional vector.
-     * 
-     * @param a - the first vector
-     * @param b - the second vector
-     * @return 
-     */
     double calculate_cosine_similarity(
         const std::vector<double>& a,
         const std::vector<double>& b
     ) {
-        // sanity check
         if (a.size() != b.size()) {
             throw std::invalid_argument(
                 "Both vector must reside in the same dimensional space."
@@ -220,7 +193,6 @@ Modul evaluasi diimplementasikan dalam berkas \texttt{eval.cpp}. Modul ini memil
         double dot_product = 0.0;
 
         for (size_t itr = 0; itr < a.size(); itr++) {
-            // return immediately when one of the position is not recorded
             if (std::isnan(a[itr]) || std::isnan(b[itr])) {
                 return std::nan("");
             }
@@ -251,7 +223,6 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     Nilai dari $m$ dan $n$ disimpan sebagai bilangan bulat menggunakan tipe data \texttt{unsigned int}. Nilai dari $k$, $r$, dan $\vartheta$ disimpan sebagai bilangan desimal menggunakan tipe data \texttt{double}. Parameter penentu penggunaan algoritma redundansi disimpan menggunakan tipe data \textit{boolean} dengan nama \texttt{redundant}. Nama berkas dan letak berkas dari data pergerakan yang akan digunakan disimpan menggunakan tipe data \texttt{string}. Tipe data \texttt{string} yang digunakan untuk men bersumber dari pustaka STL bawaan C++. Kode \ref{bab5:arguments} menunjukkan kode perangkat lunak untuk struktur data \texttt{Arguments}. 
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Arguments}, label={bab5:arguments}]
-        // represents raw user inputs
         typedef struct Arguments {
             std::string source, path;
             unsigned int entities, closeness;
@@ -267,7 +238,6 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     Nilai $r$ pada struktur data ini didapatkan dengan mengalikan nilai $r$ dan $k$ yang terdapat pada masukan mentah pengguna. Parameter identifikasi lainnya didapatkan secara langsung melalui \texttt{Arguments}. Selain properti identifikasi, struktur data ini juga menyimpan parameter penentu penggunaan algoritma pengurangan redundansi \texttt{redundant}. Kode \ref{bab5:parameters} menunjukkan kode perangkat lunak untuk struktur data \texttt{Parameters}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Parameters}, label={bab5:parameters}]
-        // represents parameters to be used by the identification algorithm
         typedef struct Parameter {
             unsigned int m, k, n;
             double r, cs;
@@ -279,18 +249,16 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     Struktur data ini mewakili sebuah entitas yang tercatat dalam data pergerakan yang diberikan. Struktur data ini memiliki 2 properti yaitu \texttt{id} yang menunjukkan nomor identitas unik yang dimiliki oleh entitas yang dimaksud dan \texttt{trajectories} yang merupakan kumpulan posisi entitas yang tercatat dalam data pergerakan yang diurutkan secara menaik.
     
+    \iffalse
+    
     Struktur data ini melakukan \textit{operator overloading} pada operator $<$. Hal tersebut dilakukan untuk mempermudah proses pengurutan entitas yang dilakukan pada fungsi \texttt{identify\_rombongan} dengan tujuan untuk mempermudah proses perbandingan kedekatan spasial antar entitas. Kode \ref{bab5:entity} menunjukkan kode perangkat lunak untuk struktur data \texttt{Entity}.
     
+    \fi
+    
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Entity}, label={bab5:entity}]
-        // represents a single moving entity
         typedef struct Entity {
             unsigned int id;
             std::vector<std::vector<double> > trajectories;
-
-            // override `<` for sorting
-            bool operator<(const Entity& o) const {
-                return id < o.id;
-            }
         } Entity;
     \end{lstlisting}
     
@@ -299,7 +267,6 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     Struktur data ini menyimpan informasi entitas dalam bentuk kumpulan \texttt{Entity} dan kumpulan nilai \textit{frame} dalam bentuk \textit{array} dengan tipe data \texttt{double} yang tercatat pada sumber data pergerakan pejalan kaki. Kumpulan \texttt{Entity} akan digunakan secara langsung oleh fungsi \texttt{identify\_rombongan}, sedangkan kumpulan nilai \textit{frame} nantinya akan digunakan pada proses pencetakan berkas hasil identifikasi. Kode \ref{bab5:movement-data} menunjukkan kode perangkat lunak untuk struktur data \texttt{MovementData}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{MovementData}, label={bab5:movement-data}]
-        // represents parsed movement data
         typedef struct MovementData {
             std::vector<Entity> entities;
             std::vector<double> frames;
@@ -312,10 +279,7 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     
     Durasi rombongan disimpan sebagai pasangan bilangan bulat yang mewakili durasi mulai dan durasi selesainya rombongan. Durasi rombongan diimplementasikan menggunakan struktur data \texttt{pair} yang disediakan oleh pustaka STL bawaan C++. Kode \ref{bab5:rombongan} menunjukkan kode perangkat lunak untuk struktur data \texttt{Rombongan}.
     
-    \clearpage
-    
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Rombongan}, label={bab5:rombongan}]
-        // represents identified entourage
         typedef struct Rombongan {
             std::vector<unsigned int> members;
             std::vector<std::pair<unsigned int, unsigned int> > duration;
@@ -327,7 +291,6 @@ Berdasarkan rancangan perangkat lunak yang telah dibuat serta pertimbangan imple
     Struktur data ini menyimpan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari hasil evaluasi kuantitatif terhadap hasil identifikasi rombongan. Kode \ref{bab5:score} menunjukkan kode perangkat lunak untuk struktur data \texttt{Score}.
     
     \begin{lstlisting}[language=C++, caption=Implementasi \texttt{Score}, label={bab5:score}]
-        // represents evaluation result of the current identification result compared with 'ground truth'
         typedef struct Score {
             double precision, recall, f1_score;
         } Score;

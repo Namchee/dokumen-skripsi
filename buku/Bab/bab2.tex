@@ -2,6 +2,8 @@
 \chapter{Landasan Teori}
 \label{chap:teori}
 
+Bab ini akan mengenai mengenai teori-teori dasar mengenai lintasan seperti pemodelan lintasan, sumber data lintasan, dan ukuran-ukuran dalam sebuah lintasan. Selain itu, bab ini juga akan membahas lebih dalam mengenai topik kemiripan lintasan dan dua cara yang dapat digunakan untuk mengukur kemiripan lintasan yaitu \textit{dynamic time warping} dan \textit{cosine similarity}. Selanjutnya, bab ini akan membahas mengenai teori dasar pergerakan kolektif. Terakhir, bab ini akan membahas mengenai evaluasi hasil identifikasi pergerakan kolektif.
+
 \section{Lintasan}
 \label{sec:lintasan}
 
@@ -20,14 +22,14 @@ Sayangnya seperti yang sudah di bahas pada bab sebelumnya, keterbatasan dalam te
 
 \fi
 
-\begin{figure}[b]
+\begin{figure}[t]
     \centering
     \begin{subfigure}[b]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:model-abstrak.pdf}
         \caption{Model Abstrak. Lintasan digambarkan sebagai sebuah garis tidak putus-putus yang menunjukkan pergerakan entitas}
         \label{bab2:model-abstrak}
-    \end{subfigure} \hspace{2cm}
+    \end{subfigure} \hspace{1.5cm}
     \begin{subfigure}[b]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:model-data.pdf}
@@ -50,13 +52,13 @@ Pada skripsi ini, entitas yang diamati akan bergerak dalam ruang \textit{euclide
 
 \begin{figure}[b!]
     \centering
-    \begin{subfigure}[h]{0.35\textwidth}
+    \begin{subfigure}[h]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:dua-dimensi.pdf}
         \caption{Ruang \textit{euclidean} dua dimensi}
         \label{bab2:dua-dimensi}
-    \end{subfigure} \hspace{2cm}
-    \begin{subfigure}[h]{0.35\textwidth}
+    \end{subfigure} \hspace{1.5cm}
+    \begin{subfigure}[h]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:tiga-dimensi.pdf}
         \caption{Ruang \textit{euclidean} tiga dimensi}
@@ -75,7 +77,8 @@ Untuk menangani data lintasan dengan jumlah sampel yang sedikit, data lintasan d
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.55\textwidth]{Gambar/bab2:interpolasi-lintasan.pdf}
+    \captionsetup{width=0.7\textwidth}
+    \includegraphics[width=0.6\textwidth]{Gambar/bab2:interpolasi-lintasan.pdf}
     \caption[Interpolasi lintasan]{Upaya interpolasi linear pada sebuah data lintasan. Kurva abu-abu menunjukkan bentuk lintasan yang sesungguhnya. Titik-titik merah merupakan hasil dari interpolasi linear pada lintasan. Titik-titik hasil interpolasi kemudian dihubungkan dan membentuk lintasan yang semirip mungkin dengan lintasan sesungguhnya}
     \label{bab2:interpolasi-lintasan}
 \end{figure}
@@ -93,6 +96,13 @@ Selain mengamati pergerakan entitas secara langsung, data pergerakan juga dapat 
 
 Pengambilan sampel data pergerakan entitas merupakan bagian dari \textit{Geometric Computation System} (GIS), sebuah sistem informasi berbasis komputer yang bertujuan untuk meningkatkan efisiensi dan efektivitas dari segala objek dan kejadian yang terjadi pada ruang geografis dengan mengumpulkan, menyimpan, memproses, menganalisis, serta memvisualisasikan informasi geografis yang diperoleh \cite{longley:02:gis}.
 
+\section{Homografi}
+\label{sec:homography}
+
+Seperti yang dibahas pada bagian sebelumnya, data pergerakan dunia nyata dapat diperoleh dalam bentuk rekaman video pergerakan entitas dalam dimensi gerak $\mathbb{R}^3$. Sayangnya, data pergerakan tersebut tidak dapat digunakan secara langsung untuk dianalisis pada proses analisis pergerakan. Hal tersebut disebabkan oleh perbedaan perspektif dimensi gerak yang tercatat dalam rekaman video pergerakan dengan perspektif permukaan gerak yang sesungguhnya. Oleh karena itu, koordinat-koordinat posisi dalam data pergerakan yang diperoleh melalui rekaman video pergerakan dunia nyata harus diubah terlebih dahulu menjadi koordinat-koordinat posisi dalam dunia nyata. Salah satu cara untuk mengubah koordinat posisi dalam data pergerakan adalah memproyeksikan setiap koordinat posisi menggunakan matriks homografi.
+
+Matriks homografi merupakan sebuah matriks homogen dengan dimensi $3 \times 3$ dengan jumlah \textit{degrees of freedom} sebanyak $8$. Matriks homografi dihasilkan dari perhitungan transformasi bidang gerak dari kamera yang digunakan untuk mendapatkan rekaman video pergerakan dunia nyata. Koordinat hasil proyeksi menggunakan matriks homogen harus dinormalisasi untuk menghasilkan nilai non-homogen \cite{szeliski:02:homography}.
+
 \section{Ukuran Lintasan}
 \label{sec:ukuran}
 
@@ -102,10 +112,10 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|m{4cm}|l|p{8cm}|} 
+    \begin{tabular}{|m{4cm}|l|p{7cm}|} 
         \hline
         \multirow{5}{*}{
-            \includegraphics{Gambar/bab2:arah.pdf}
+            \includegraphics[width=3cm]{Gambar/bab2:arah.pdf}
         } & Nama & Arah \\ 
         \cline{2-3}
         & Deskripsi & Arah lintasan yang dihitung dari posisi awal dan posisi akhir entitas                    \\ 
@@ -121,10 +131,10 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|m{4cm}|l|p{8cm}|} 
+    \begin{tabular}{|m{4cm}|l|p{7cm}|} 
         \hline
         \multirow{5}{*}{
-            \includegraphics{Gambar/bab2:durasi.pdf}
+            \includegraphics[width=3.5cm]{Gambar/bab2:durasi.pdf}
         } & Nama & Durasi \\ 
         \cline{2-3}
         & Deskripsi & Lamanya pergerakan dalam satuan waktu                    \\ 
@@ -140,7 +150,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|m{4cm}|l|p{8cm}|} 
+    \begin{tabular}{|m{4cm}|l|p{7cm}|} 
         \hline
         \multirow{5}{*}{
             \includegraphics{Gambar/bab2:kecepatan.pdf}
@@ -159,10 +169,10 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|m{4cm}|l|p{8cm}|} 
+    \begin{tabular}{|m{4cm}|l|p{7cm}|} 
         \hline
         \multirow{5}{*}{
-            \includegraphics{Gambar/bab2:kemiripan.pdf}
+            \includegraphics[width=2.5cm]{Gambar/bab2:kemiripan.pdf}
         } & Nama & Kemiripan \\ 
         \cline{2-3}
         & Deskripsi & Kemiripan antar lintasan yang dihitung berdasarkan jarak rata-rata lintasan                     \\ 
@@ -176,12 +186,12 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
     \end{tabular}
 \end{table}
 
-\begin{table}[t!]
+\begin{table}[h!]
     \centering
-    \begin{tabular}{|m{4cm}|l|p{8cm}|} 
+    \begin{tabular}{|m{4cm}|l|p{7cm}|} 
         \hline
         \multirow{5}{*}{
-            \includegraphics{Gambar/bab2:jumlah.pdf}
+            \includegraphics[width=2.75cm]{Gambar/bab2:jumlah.pdf}
         } & Nama & Jumlah \\ 
         \cline{2-3}
         & Deskripsi & Jumlah entitas yang membentuk kumpulan entitas                     \\ 
@@ -198,7 +208,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 \section{Kemiripan Lintasan}
 \label{sec:kemiripan}
 
-Salah satu bagian penting dari kegiatan analisis data lintasan adalah pengukuran kemiripan antar lintasan. Pengukuran kemiripan lintasan bertujuan untuk menentukan apakah dua buah lintasan memiliki tingkat kemiripan tertentu. Menurut Wiratma (2019:12), kemiripan lintasan dapat diukur melalui berbagai kriteria seperti lokasi-lokasi yang dikunjungi, kecepatan rata-rata yang mirip, jarak antar entitas, dan kriteria-kriteria lainnya. Biasanya, pengukuran kemiripan lintasan digunakan untuk mendahului proses-proses analisis lintasan lainnya, seperti \textit{clustering} dan identifikasi pola pergerakan kolektif yang menjadi fokus pada skripsi ini. Selain sebagai sebuah bentuk \textit{preprocessing} pada dua buah lintasan, pengukuran kemiripan lintasan juga dapat digunakan untuk mencari lintasan turunan yang mirip dengan lintasan turunan lain dalam satu lintasan utama yang sama.
+Salah satu bagian penting dari kegiatan analisis data lintasan adalah pengukuran kemiripan antar lintasan. Pengukuran kemiripan lintasan bertujuan untuk menentukan apakah dua buah lintasan memiliki tingkat kemiripan tertentu. Menurut Wiratma, dkk (2019:12), kemiripan lintasan dapat diukur melalui berbagai kriteria seperti lokasi-lokasi yang dikunjungi, kecepatan rata-rata yang mirip, jarak antar entitas, dan kriteria-kriteria lainnya. Biasanya, pengukuran kemiripan lintasan digunakan untuk mendahului proses-proses analisis lintasan lainnya, seperti \textit{clustering} dan identifikasi pola pergerakan kolektif yang menjadi fokus pada skripsi ini. Selain sebagai sebuah bentuk \textit{preprocessing} pada dua buah lintasan, pengukuran kemiripan lintasan juga dapat digunakan untuk mencari lintasan turunan dengan tingkat kemiripan tertentu dengan lintasan turunan lain dalam satu lintasan utama yang sama.
 
 Salah satu algoritma yang paling sering digunakan untuk mengukur kemiripan antara dua buah lintasan adalah jarak \textit{euclidean} \cite{bashir:02:euclidean}. Jarak \textit{euclidean} $d$ dari dua buah lintasan $X$ dan $Y$ yang masing-masing berdimensi $n$ dengan jumlah posisi yang tercatat pada kedua lintasan sebanyak $L$ dapat dinyatakan sebagai:
 
@@ -206,6 +216,8 @@ Salah satu algoritma yang paling sering digunakan untuk mengukur kemiripan antar
     d(X, Y) = \sum_{i=0}^{L} \sqrt{\sum_{j=0}^{n}(x_j - y_j)^2}
     \label{bab2:euclidean-distance}
 \end{equation}
+
+\clearpage
 
 Pada lintasan yang hanya memiliki satu dimensi, jarak \textit{euclidean} dapat dihitung sebagai akumulasi selisih dari setiap posisi yang tercatat pada kedua lintasan. Jarak \textit{euclidean} dari dua buah lintasan berdimensi satu dapat dinyatakan sebagai:
 
@@ -229,14 +241,15 @@ Terdapat dua keunggulan yang dimiliki oleh algoritma \textit{dynamic time warpin
 
 Dua keunggulan tersebut diperoleh dari cara perbandingan data lintasan pada algoritma \textit{dynamic time warping} yang dilakukan secara non-linear, di mana posisi entitas $a$ pada titik waktu $t_x$ dapat dipasangkan dengan posisi entitas $b$ pada titik waktu lain selain $t_x$. Perbandingan tersebut sangat berbeda dengan cara-cara penghitungan kemiripan lintasan lainnya yang dilakukan secara linear untuk setiap titik waktu yang tercatat, di mana posisi entitas $a$ pada titik waktu $t_x$ akan selalu dipasangkan dengan posisi entitas $b$ pada titik waktu $t_x$. Gambar \ref{bab2:dtw-euclidean} menunjukkan perbandingan data lintasan secara non-linear yang dilakukan oleh algoritma \textit{dynamic time warping} dan perbandingan data lintasan secara linear yang dilakukan pada perhitungan jarak \textit{euclidean}.
 
-\begin{figure}[t]
+\begin{figure}[b]
     \centering
+    \captionsetup{width=0.8\textwidth}
     \begin{subfigure}[h]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:euclidean.pdf}
         \caption{Penghitungan kemiripan linear menggunakan jarak \textit{euclidean} (linear)}
         \label{bab2:euclidean}
-    \end{subfigure} \hspace{1cm}
+    \end{subfigure} \hspace{0.75cm}
     \begin{subfigure}[h]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:dtw.pdf}
@@ -260,7 +273,7 @@ Algoritma \textit{dynamic time warping} menghitung kemiripan dua buah lintasan d
 
 \textit{Warping path} $p = (p_1, p_2, \ldots, p_L)$ untuk dua buah lintasan $X = (x_1, x_2, \ldots, x_N)$ dan $Y = (y_1, y_2, \ldots, y_M)$ dinyatakan dengan memasangkan elemen $x_\ell$ dari lintasan $X$ dengan elemen $y_\ell$ dari lintasan $Y$. Syarat \textit{boundary} mengharuskan elemen pertama dari lintasan $X$ dipasangkan dengan elemen pertama dari lintasan $Y$, begitu juga dengan elemen terakhir dari lintasan $X$ harus dipasangkan dengan elemen terakhir dari lintasan $Y$. Dengan kata lain, kondisi tersebut berlaku untuk seluruh elemen pada lintasan $X$ dan $Y$. Syarat monotonik mengharuskan elemen-elemen pada lintasan diurutkan menaik secara inklusif. Syarat \textit{step size} mengharuskan terjadinya kontinuitas pada pemasangan elemen, tidak ada elemen dari lintasan $X$ dan $Y$ yang tidak digunakan dan tidak ada pasangan duplikat dari seluruh pemasangan elemen dari lintasan $X$ dan $Y$. Gambar \ref{bab2:dtw-requirements} menunjukkan syarat-syarat dari \textit{warping path} antara dua buah lintasan.
 
-\begin{figure}[t]
+\begin{figure}[h]
     \centering
     \begin{subfigure}[ht]{0.225\textwidth}
         \centering
@@ -297,22 +310,22 @@ Jarak total $c_p$ dari sebuah \textit{warping path} yang valid merupakan akumula
     \label{bab2:warping-path-length}
 \end{equation}
 
-\newpage
-
 \textit{Warping path} optimal antara dua buah lintasan merupakan \textit{warping path} $p^*$ yang memiliki jarak terkecil di antara semua \textit{warping path} yang valid. Jarak \textit{dynamic time warping} $DTW(X, Y)$ antara dua buah lintasan $X$ dan $Y$ merupakan jarak total dari \textit{warping path} $p^*$. Secara formal, jarak \textit{dynamic time warping} dari dua buah lintasan $X$ dan $Y$ dapat dinyatakan sebagai:
 
-\vspace{-10pt}
+\vspace{-7.5pt}
 
 \begin{align*}
     DTW(X, Y) & = c\textsubscript{$p*$}(X, Y) \\
     & = min\{c_p(X, Y)\;|\;p\;adalah\;warping\;path\;dari\;lintasan\;(X, Y)\}
 \end{align*}
 
+\clearpage
+
 \subsection{Implementasi Algoritma \textit{Dynamic Time Warping}}
 
-Karena proses perhitungan jarak total \textit{warping path} memiliki properti \textit{optimal substructure}, algoritma \textit{dynamic time warping} biasanya diimplementasikan menggunakan prinsip \textit{dynamic time warping} untuk meningkatkan efisiensi algoritma pada proses perhitungan jarak total \textit{warping path}. Berikut merupakan implementasi sederhana dari algoritma \textit{dynamic time warping}:
+Karena proses perhitungan jarak total \textit{warping path} memiliki properti \textit{optimal substructure}, algoritma \textit{dynamic time warping} biasanya diimplementasikan menggunakan prinsip \textit{dynamic time warping} untuk meningkatkan efisiensi algoritma pada proses perhitungan jarak total \textit{warping path}. Algoritma \ref{bab2:dtw-pseudocode} menunjukkan implementasi standar dari algoritma \textit{dynamic time warping}.
 
-\begin{algorithm}
+\begin{algorithm}[h]
     \caption{Algoritma \textit{Dynamic Time Warping}}
     \SetKwInput{KwInput}{Input}                % Set the Input
     \SetKwInput{KwOutput}{Output}              % set the Output
@@ -351,7 +364,7 @@ Pada implementasi di atas, algoritma \textit{dynamic time warping} memiliki komp
 \subsection{Contoh Perhitungan \textit{Dynamic Time Warping}}
 \label{subsec:contoh-dtw}
 
-Diberikan dua buah lintasan $X$ dan $Y$ dalam dimensi ruang $\mathbb{R}$ sebagai berikut:
+Diberikan sebuah himpunan entitas $\mathcal{A}$ yang memiliki dua buah anggota $x$ dan $y$ yang bergerak dalam dimensi ruang gerak $\mathbb{R}$. Lintasan dari kedua entitas tersebut dicatat sebagai lintasan $X$ dan $Y$ yang dapat dinyatakan sebagai: 
 
 \begin{enumerate}
     \item $X = \{ (3, 0), (1, 1), (2, 2), (2, 3), (1, 4) \}$
@@ -359,6 +372,17 @@ Diberikan dua buah lintasan $X$ dan $Y$ dalam dimensi ruang $\mathbb{R}$ sebagai
 \end{enumerate}
 
 Elemen dari masing-masing lintasan merupakan sebuah pasangan $(posisi, waktu)$. Langkah pertama yang harus dilakukan untuk mencari jarak \textit{dynamic time warping} dari kedua lintasan tersebut adalah menemukan seluruh \textit{warping path} yang valid untuk kedua lintasan tersebut. Gambar \ref{bab2:contoh-dtw} menunjukkan dua buah contoh \textit{warping path} yang valid untuk kedua lintasan tersebut.
+
+Setelah seluruh \textit{warping path} yang valid untuk kedua lintasan tersebut berhasil ditemukan, langkah selanjutnya yang perlu dilakukan adalah mencari jarak total untuk seluruh \textit{warping path} yang ditemukan, yang dapat dicari menggunakan rumus \ref{bab2:warping-path-length}. Berdasarkan rumus tersebut, maka jarak total untuk \textit{warping path} yang ditunjukkan melalui Gambar \ref{bab2:warping-path} dapat dihitung sebagai:
+
+\begin{align*}
+    c_p(X, Y) & = \sum_{\ell = 1}^{L} |x_\ell - y_\ell| \\
+    & = |3 - 2| + |1 - 0| + |2 - 0| + |2 - 3| + |1 - 3| + |1 - 1| + |1 - 0| \\
+    & = 1 + 1 + 2 + 1 + 2 + 0 + 1 \\
+    & = 8
+\end{align*}
+
+Menggunakan cara yang sama, jarak total dari \textit{warping path} yang ditunjukkan melalui Gambar \ref{bab2:warping-path-optimal} adalah sebesar $6$ satuan jarak. Setelah seluruh jarak \textit{warping path} yang valid berhasil dihitung, langkah terakhir yang perlu dilakukan untuk menghitung jarak \textit{dynamic time warping} dari kedua lintasan adalah mencari \textit{warping path} yang optimal, yaitu \textit{warping path} yang memiliki jarak total yang paling minimum. \textit{Warping path} yang optimal untuk kedua lintasan tersebut ditunjukkan melalui Gambar \ref{bab2:warping-path-optimal}. Berdasarkan informasi tersebut, dapat disimpulkan bahwa jarak \textit{dynamic time warping} dari dua buah lintasan $X$ dan $Y$ adalah sebesar $6$ satuan jarak.
 
 \begin{figure}[h]
     \centering
@@ -377,19 +401,6 @@ Elemen dari masing-masing lintasan merupakan sebuah pasangan $(posisi, waktu)$. 
     \caption{Contoh jalur kesejajaran yang valid untuk lintasan $X$ dan $Y$}
     \label{bab2:contoh-dtw}
 \end{figure}
-
-Setelah seluruh \textit{warping path} yang valid untuk kedua lintasan tersebut berhasil ditemukan, langkah selanjutnya yang perlu dilakukan adalah mencari jarak total untuk seluruh \textit{warping path} yang ditemukan, yang dapat dicari menggunakan rumus \ref{bab2:warping-path-length}. Berdasarkan rumus tersebut, maka jarak total untuk \textit{warping path} yang ditunjukkan melalui Gambar \ref{bab2:warping-path} dapat dihitung sebagai:
-
-\vspace{-10pt}
-
-\begin{align*}
-    c_p(X, Y) & = \sum_{\ell = 1}^{L} |x_\ell - y_\ell| \\
-    & = |3 - 2| + |1 - 0| + |2 - 0| + |2 - 3| + |1 - 3| + |1 - 1| + |1 - 0| \\
-    & = 1 + 1 + 2 + 1 + 2 + 0 + 1 \\
-    & = 8
-\end{align*}
-
-Menggunakan cara yang sama, jarak total dari \textit{warping path} yang ditunjukkan melalui Gambar \ref{bab2:warping-path-optimal} adalah sebesar $6$ satuan jarak. Setelah seluruh jarak \textit{warping path} yang valid berhasil dihitung, langkah terakhir yang perlu dilakukan untuk menghitung jarak \textit{dynamic time warping} dari kedua lintasan adalah mencari \textit{warping path} yang optimal, yaitu \textit{warping path} yang memiliki jarak total yang paling minimum. \textit{Warping path} yang optimal untuk kedua lintasan tersebut ditunjukkan melalui Gambar \ref{bab2:warping-path-optimal}. Berdasarkan informasi tersebut, dapat disimpulkan bahwa jarak \textit{dynamic time warping} dari dua buah lintasan $X$ dan $Y$ adalah sebesar $6$ satuan jarak.
 
 \iffalse 
 
@@ -430,7 +441,7 @@ Langkah pertama yang dilakukan menghitung kemiripan dari kedua lintasan tersebut
 
 Selain \textit{dot product} dari kedua lintasan tersebut, panjang dari masing-masing lintasan juga perlu diketahui. Panjang dari lintasan $a$ dan $b$ dapat dihitung sebagai:
 
-\vspace{-10pt}
+\vspace{-7.5pt}
 
 \begin{align*}
     \|a\| & = \sqrt{\sum_{i=1}^{n}{(a_i)^2}} & \|b\| & = \sqrt{\sum_{i=1}^{n}{(b_i)^2}} \\
@@ -441,7 +452,7 @@ Selain \textit{dot product} dari kedua lintasan tersebut, panjang dari masing-ma
 
 Dengan menggunakan Rumus \ref{bab2:cosine-similarity}, maka nilai \textit{cosine similarity} antara lintasan $a$ dan $b$ adalah sebesar $0.49$ yang didapatkan melalui perhitungan berikut:
 
-\vspace{-10pt}
+\vspace{-7.5pt}
 
 \begin{align*}
     \cos (a, b) & = \frac{x \cdot y}{\|x\| \|y\|} \\
@@ -457,7 +468,7 @@ Pergerakan kolektif merupakan sebuah keadaan di mana terdapat dua atau lebih ent
 
 Identifikasi terhadap pola pergerakan kolektif dapat diaplikasikan pada berbagai bidang seperti pada bidang ilmu ternak, peneliti dapat melakukan identifikasi pergerakan kolektif pada ayam-ayam yang terinfeksi bakteri \textit{Campylobacter} yang menyebabkan keracunan makanan pada manusia \cite{colles:02:chicken}. Pada bidang keamanan, identifikasi pola pergerakan kolektif dapat dimanfaatkan untuk mendeteksi gerak-gerik mencurigakan pada sekelompok orang yang terekam pada kamera pengawas \cite{makris:01:security}. Pada contoh aplikasi tersebut, identifikasi pergerakan kolektif memunculkan informasi baru yang berguna untuk lebih memahami pergerakan yang dilakukan oleh entitas.
 
-Terdapat beberapa aspek penting dalam identifikasi pola pergerakan kolektif:
+\noindent Terdapat beberapa aspek penting dalam identifikasi pola pergerakan kolektif:
 
 \begin{itemize}
     \item \textbf{Sifat Data Lintasan}
@@ -513,14 +524,16 @@ Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kol
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.75\textwidth]{Gambar/bab2:flock.pdf}
+        \captionsetup{width=0.75\textwidth}
+        \includegraphics[width=0.65\textwidth]{Gambar/bab2:flock.pdf}
         \caption[Sebuah \textit{flock}]{Entitas-entitas berwarna biru yang membentuk sebuah \textit{flock} dengan $m = 3$ dan $k = 3$. Lingkaran kuning menunjukkan cakram yang memiliki radius $r$ yang berisi seluruh anggota \textit{flock}}
         \label{bab2:flock}
     \end{figure}
     
-    \begin{figure}[t]
+    \begin{figure}[h]
         \centering
-        \includegraphics[width=0.85\textwidth]{Gambar/bab2:group.pdf}
+        \captionsetup{width=0.75\textwidth}
+        \includegraphics[width=0.65\textwidth]{Gambar/bab2:group.pdf}
         \caption[Sebuah \textit{group}]{Entitas-entitas berwarna merah yang membentuk sebuah \textit{group} dengan $m = 3$ dan $k = 3$. Salah satu entitas merah yang terletak di paling bawah terhubung secara relatif dengan entitas-entitas merah lainnya melalui entitas biru.}
         \label{bab2:group}
     \end{figure}
