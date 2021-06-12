@@ -35,7 +35,8 @@ Dalam sebuah kasus yang ditunjukkan melalui Gambar \ref{bab3:masalah-arah}, dibe
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.6\textwidth]{Gambar/bab3:beda-arah.pdf}
+    \captionsetup{width=0.8\textwidth}
+    \includegraphics[width=0.7\textwidth]{Gambar/bab3:beda-arah.pdf}
     \caption[Masalah identifikasi pada kasus perbedaan arah]{Upaya identifikasi pergerakan kolektif oleh definisi formal yang telah dibuat sebelumnya dapat menyebabkan entitas berwarna biru tergabung dalam pergerakan kolektif entitas-entitas berwarna merah, walaupun terdapat perbedaan arah yang besar antara kedua lintasan.}
     \label{bab3:masalah-arah}
 \end{figure}
@@ -48,7 +49,8 @@ Berdasarkan upaya penyelesaian tersebut, maka syarat kedekatan spasial dalam sya
 
 \begin{figure}[t]
     \centering
-    \includegraphics[height=10cm]{Gambar/bab3:beda-arah-lokal.pdf}
+    \captionsetup{width=0.8\textwidth}
+    \includegraphics[height=11.25cm]{Gambar/bab3:beda-arah-lokal.pdf}
     \caption[Masalah identifikasi pada penghitungan arah secara global]{Pada kasus di mana $m = 2$ dan $k = 3$, menghitung arah secara global dapat menyebabkan pergerakan kolektif tidak terbentuk sama sekali karena perbedaan arah akhir yang terlalu ekstrim (ditunjukkan melalui garis putus-putus hijau)}
     \label{bab3:beda-arah-lokal}
 \end{figure}
@@ -57,14 +59,7 @@ Dalam pemanfaatan ukuran arah lintasan sebagai syarat baru dalam pengukuran kede
 
 Masalah perbedaan arah tersebut dapat diselesaikan dengan mengukur arah lintasan menggunakan cara pandang kedua, yaitu dengan mengukur arah lintasan dari entitas yang bergerak secara lokal. Dalam cara pandang lokal, perbedaan arah antara dua buah lintasan perbedaan dihitung pada setiap durasi waktu minimum $I$. Sebagai contoh pada kasus di mana panjang lintasan yang tercatat adalah sebesar $8$ dan durasi waktu minimum $I$ adalah sepanjang $3$ satuan waktu, maka perbedaan arah akan dihitung pada interval waktu $(t_1 - t_3), (t_2 - t_4), \ldots, (t_6 - t_8)$. Dalam kasus perbedaan arah yang ditunjukkan melalui Gambar \ref{bab3:beda-arah-lokal}, cara pandang lokal menyebabkan entitas $a$ dan $b$ membentuk pergerakan kolektif pada interval waktu $t_1$ -- $t_3$, sesuai dengan hasil identifikasi yang dilakukan oleh manusia. Berdasarkan hasil pengamatan tersebut, maka syarat kedekatan spasial dari pembentukan pergerakan kolektif yang telah diperluas sebelumnya perlu dipertajam menjadi: \textbf{...dua buah entitas dikatakan dekat secara spasial pada interval waktu ke $I$ apabila kedua entitas tersebut memiliki jarak dalam ruang gerak yang kurang dari $r$ dan perbedaan arah dari dua entitas tersebut kurang lebih atau sama dengan $\vartheta$ pada setiap titik waktu dalam interval waktu $I$}.
 
-Salah satu cara yang dapat digunakan untuk mengukur perbedaan arah antar dua buah lintasan adalah menggunakan \textit{cosine similarity} yang dapat dinyatakan sebagai:
-
-\begin{equation}
-    \cos (X, Y)= \frac{x \cdot y}{\|x\| \|y\|} = \frac{ \sum_{i=1}^{n}{x_i y_i}}{ \sqrt{\sum_{i=1}^{n}{(x_i)^2}} \sqrt{\sum_{i=1}^{n}{( y_i)^2}} }
-    \label{bab3:cosine-similarity}
-\end{equation}
-
-Nilai yang dihasilkan oleh rumus \textit{cosine similarity} memiliki rentang nilai $[-1, 1]$, di mana \textit{cosine similarity} yang bernilai $-1$ menandakan bahwa kedua lintasan memiliki arah lintasan yang bertolak belakang dan \textit{cosine similarity} yang bernilai $1$ menandakan bahwa kedua lintasan memiliki arah lintasan yang sama persis. Penggunaan \textit{cosine similarity} sebagai cara untuk mengukur perbedaan arah lokal antara dua buah lintasan menyebabkan syarat kedekatan spasial antara dua buah lintasan perlu diperluas menjadi: \textbf{...dua buah entitas dikatakan dekat secara spasial pada interval waktu ke $I$ apabila kedua entitas tersebut memiliki jarak dalam ruang gerak yang kurang dari $r$ dan perbedaan arah dari dua entitas tersebut yang dihitung menggunakan \textit{cosine similarity} kurang lebih atau sama dengan $\vartheta$ pada setiap titik waktu dalam interval waktu $I$}.
+Salah satu cara yang dapat digunakan untuk mengukur perbedaan arah antar dua buah lintasan adalah menggunakan perhitungan \textit{cosine similarity}. Penggunaan \textit{cosine similarity} sebagai cara untuk mengukur perbedaan arah lokal antara dua buah lintasan menyebabkan syarat kedekatan spasial antara dua buah lintasan perlu diperluas menjadi: \textbf{...dua buah entitas dikatakan dekat secara spasial pada interval waktu ke $I$ apabila kedua entitas tersebut memiliki jarak dalam ruang gerak yang kurang dari $r$ dan perbedaan arah dari dua entitas tersebut yang dihitung menggunakan \textit{cosine similarity} kurang lebih atau sama dengan $\vartheta$ pada setiap titik waktu dalam interval waktu $I$}.
     
 \subsection{Perbedaan Kecepatan}
 \label{subsec:beda-kecepatan}
@@ -77,7 +72,8 @@ Dalam sebuah kasus pergerakan yang digambarkan melalui Gambar \ref{bab3:masalah-
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
+    \captionsetup{width=0.8\textwidth}
+    \includegraphics[width=0.95\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
     \caption[Masalah identifikasi pada kasus perbedaan kecepatan]{Pada kasus di mana $m = 3$ dan $t = 3$, perbedaan kecepatan entitas berwarna biru dapat berujung pada perbedaan jarak yang jauh dengan entitas-entitas merah sehingga pergerakan kolektif tidak terbentuk, walaupun entitas tersebut hanya memiliki perbedaan jarak yang jauh dengan entitas lain selama beberapa saat}
     \label{bab3:masalah-kecepatan}
 \end{figure}

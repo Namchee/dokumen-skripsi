@@ -351,7 +351,14 @@ Pada implementasi di atas, algoritma \textit{dynamic time warping} memiliki komp
 \subsection{Contoh Perhitungan \textit{Dynamic Time Warping}}
 \label{subsec:contoh-dtw}
 
-Diberikan dua buah lintasan berdimensi satu $X = ((3, 0), (1, 1), (2, 2), (2, 3), (1, 4))$ dan $Y = ((2, 0), (0, 1), (0, 2), (3, 3), (3, 4), (1, 5), (0, 6))$ di mana elemen dari masing-masing lintasan merupakan sebuah pasangan $(posisi, waktu)$. Langkah pertama yang harus dilakukan untuk mencari jarak \textit{dynamic time warping} dari kedua lintasan tersebut adalah menemukan seluruh \textit{warping path} yang valid untuk kedua lintasan tersebut. Gambar \ref{bab2:contoh-dtw} menunjukkan dua buah contoh \textit{warping path} yang valid untuk kedua lintasan tersebut.
+Diberikan dua buah lintasan $X$ dan $Y$ dalam dimensi ruang $\mathbb{R}$ sebagai berikut:
+
+\begin{enumerate}
+    \item $X = \{ (3, 0), (1, 1), (2, 2), (2, 3), (1, 4) \}$
+    \item $Y = \{ (2, 0), (0, 1), (0, 2), (3, 3), (3, 4), (1, 5), (0, 6) \}$
+\end{enumerate}
+
+Elemen dari masing-masing lintasan merupakan sebuah pasangan $(posisi, waktu)$. Langkah pertama yang harus dilakukan untuk mencari jarak \textit{dynamic time warping} dari kedua lintasan tersebut adalah menemukan seluruh \textit{warping path} yang valid untuk kedua lintasan tersebut. Gambar \ref{bab2:contoh-dtw} menunjukkan dua buah contoh \textit{warping path} yang valid untuk kedua lintasan tersebut.
 
 \begin{figure}[h]
     \centering
@@ -373,7 +380,7 @@ Diberikan dua buah lintasan berdimensi satu $X = ((3, 0), (1, 1), (2, 2), (2, 3)
 
 Setelah seluruh \textit{warping path} yang valid untuk kedua lintasan tersebut berhasil ditemukan, langkah selanjutnya yang perlu dilakukan adalah mencari jarak total untuk seluruh \textit{warping path} yang ditemukan, yang dapat dicari menggunakan rumus \ref{bab2:warping-path-length}. Berdasarkan rumus tersebut, maka jarak total untuk \textit{warping path} yang ditunjukkan melalui Gambar \ref{bab2:warping-path} dapat dihitung sebagai:
 
-\vspace{-7.5pt}
+\vspace{-10pt}
 
 \begin{align*}
     c_p(X, Y) & = \sum_{\ell = 1}^{L} |x_\ell - y_\ell| \\
@@ -390,6 +397,59 @@ Menggunakan cara yang sama, jarak total dari \textit{warping path} yang ditunjuk
 
 \fi
 
+\section{\textit{Cosine Similarity}}
+
+Selain jarak \textit{euclidean} dan jarak \textit{dynamic time warping}, kemiripan lintasan juga dapat diukur menggunakan perhitungan \textit{cosine similarity}. \textit{Cosine similarity} merupakan salah satu cara untuk mengukur kemiripan lintasan melalui nilai kosinus sudut dari dua buat vektor. Dalam \textit{cosine similarity}, kemiripan dari dua buah vektor diukur berdasarkan orientasi arah dibandingkan dengan pengukuran berdasarkan jarak pada jarak \textit{euclidean} dan \textit{dynamic time warping} \cite{sitikhu:cosine-similarity}. Perhitungan \textit{cosine similarity} biasanya dimanfaatkan dalam pengukuran kemiripan antar dokumen \cite{sitikhu:cosine-similarity}. Secara formal, nilai \textit{cosine similarity} antara dua buah vektor $X$ dan $Y$ dapat dapat dinyatakan sebagai:
+
+\begin{equation}
+    \cos (X, Y)= \frac{x \cdot y}{\|x\| \|y\|} = \frac{ \sum_{i=1}^{n}{x_i y_i}}{ \sqrt{\sum_{i=1}^{n}{(x_i)^2}} \sqrt{\sum_{i=1}^{n}{( y_i)^2}} }
+    \label{bab2:cosine-similarity}
+\end{equation}
+
+Nilai yang dihasilkan oleh \textit{cosine similarity} memiliki rentang nilai $[-1, 1]$, di mana \textit{cosine similarity} yang bernilai $-1$ menandakan bahwa kedua lintasan memiliki arah lintasan yang bertolak belakang dan \textit{cosine similarity} yang bernilai $1$ menandakan bahwa kedua lintasan memiliki arah lintasan yang sama persis.
+
+\subsection{Contoh Perhitungan \textit{Cosine Similarity}}
+\label{subsec:contoh-cosine}
+
+Diberikan dua buah lintasan $a$ dan $b$ dalam dimensi ruang $\mathbb{R}$ sebagai berikut:
+
+\begin{enumerate}
+    \item $a = \{ 3, 2, 0, 5 \}$
+    \item $b = \{ 1, 0, 0, 0 \}$
+\end{enumerate}
+
+Langkah pertama yang dilakukan menghitung kemiripan dari kedua lintasan tersebut menggunakan \textit{cosine similarity} adalah menghitung \textit{dot product} dari kedua lintasan tersebut. \textit{Dot product} dari kedua lintasan $a$ dan $b$ dapat dihitung sebagai:
+
+\vspace{-10pt}
+
+\begin{align*}
+    a \cdot b & =  \sum_{i=1}^{n}{a_i b_i} \\
+    & = 3 \times 1 + 2 \times 0 + 0 \times 0 + 5 \times 0 \\
+    & = 3
+\end{align*}
+
+Selain \textit{dot product} dari kedua lintasan tersebut, panjang dari masing-masing lintasan juga perlu diketahui. Panjang dari lintasan $a$ dan $b$ dapat dihitung sebagai:
+
+\vspace{-10pt}
+
+\begin{align*}
+    \|a\| & = \sqrt{\sum_{i=1}^{n}{(a_i)^2}} & \|b\| & = \sqrt{\sum_{i=1}^{n}{(b_i)^2}} \\
+    & = \sqrt{3^2 + 2^2 + 0^0 + 5^2} & & = \sqrt{1^2 + 0^2 + 0^0 + 0^2}  \\
+    & = \sqrt{38} & & = \sqrt{1} \\
+    & \approx 6.16 & & = 1
+\end{align*}
+
+Dengan menggunakan Rumus \ref{bab2:cosine-similarity}, maka nilai \textit{cosine similarity} antara lintasan $a$ dan $b$ adalah sebesar $0.49$ yang didapatkan melalui perhitungan berikut:
+
+\vspace{-10pt}
+
+\begin{align*}
+    \cos (a, b) & = \frac{x \cdot y}{\|x\| \|y\|} \\
+    & = \frac{ \sum_{i=1}^{n}{x_i y_i}}{ \sqrt{\sum_{i=1}^{n}{(x_i)^2}} \sqrt{\sum_{i=1}^{n}{(y_i)^2}}} \\
+    & = \frac{3}{6.16 \times 1} \\
+    & \approx 0.49
+\end{align*}
+
 \section{Pergerakan Kolektif}
 \label{sec:collective-movement}
 
@@ -405,11 +465,10 @@ Terdapat beberapa aspek penting dalam identifikasi pola pergerakan kolektif:
     Seperti yang sudah dibahas pada bagian sebelumnya, data lintasan dapat bersifat diskrit dan kontinu. Pada data lintasan yang bersifat diskrit, waktu terbentuknya pergerakan kolektif dan waktu berakhirnya pergerakan kolektif juga harus bersifat diskrit dan terdapat pada titik-titik waktu yang tercatat pada data lintasan.
     
     Pada data lintasan yang bersifat kontinu, waktu terbentuknya pergerakan kolektif, waktu berakhirnya pergerakan kolektif, serta posisi entitas dapat diestimasi di antara posisi-posisi yang diketahui menggunakan interpolasi lintasan. Sehingga, kelompok pergerakan kolektif yang sama dapat memiliki durasi yang lebih lama dibandingkan pada hasil proses identifikasi menggunakan data yang bersifat diskrit \cite{wiratma:trajectory}.
+
     \item \textbf{Kedekatan Spasial}
     
     Atribut spasial menyatakan lokasi entitas yang bergerak relatif terhadap ruang gerak entitas. Biasanya, manusia akan menganggap dua buah entitas bergerak bersama apabila kedua entitas tersebut dekat secara spasial. Salah satu cara sederhana yang sering digunakan untuk mengukur kedekatan spasial dari dua buah entitas adalah dengan menetapkan sebuah konstanta $\varepsilon > 0$ \iffalse \lionov{pake varepsilon ($\varepsilon$)} \fi sebagai batas jarak maksimum antara kedua entitas supaya dapat dikatakan dekat secara spasial. Cara tersebut dapat diperluas untuk dapat digunakan pada identifikasi pergerakan kolektif, misalnya dengan mengharuskan setiap pasang anggota pergerakan kolektif untuk memiliki jarak di bawah $\varepsilon$ setiap waktu.
-    
-    Selain menggunakan sebuah konstanta yang menyatakan jarak maksimum, terdapat cara-cara lain untuk menentukan kedekatan dua buah entitas seperti menggunakan sebuah cakram dengan radius $\epsilon$ di mana seluruh anggota pergerakan kolektif harus masuk dalam diameter dari cakram tersebut \cite{gudmundsson:flock}. Jarak maksimum juga dapat dihitung secara relatif, di mana terdapat entitas lain dapat digunakan sebagai perantara dari dua buah entitas yang dikatakan dekat. Sebagai contoh, dua entitas $a$ dan $b$ dikatakan dekat pada titik waktu $t$ apabila terdapat sebuah entitas $c$ di mana $d\textsubscript{ac}(t) \leq \varepsilon$ dan $d\textsubscript{bc}(t) \leq \varepsilon$ walaupun $d\textsubscript{ab}(t) > \varepsilon$. \iffalse \lionov{harus didefinisikan dulu sebelumnya kalo $d_{ac}(t)$ itu menyatakan jarak $a$ dan $c$ pada waktu $t$} \cristopher{udah di bagian \ref{sec:kemiripan} ko} \fi Gambar \ref{bab2:spasial} menunjukkan cara-cara untuk menentukan kedekatan spasial antar entitas.
     
     \begin{figure}[h]
         \centering
@@ -417,25 +476,26 @@ Terdapat beberapa aspek penting dalam identifikasi pola pergerakan kolektif:
             \centering
             \includegraphics[width=\textwidth]{Gambar/bab2:spatial-euclidean.pdf}
             \caption{Jarak \textit{euclidean}}
-        \end{subfigure} \hspace{0.75cm}
+        \end{subfigure} \hspace{0.5cm}
         \begin{subfigure}[h]{0.25\textwidth}
             \centering
             \includegraphics[width=\textwidth]{Gambar/bab2:disc.pdf}
             \caption{Cakram \textit{(disc)}}
-        \end{subfigure} \hspace{0.75cm}
+        \end{subfigure} \hspace{0.5cm}
         \begin{subfigure}[h]{0.25\textwidth}
             \centering
-            \includegraphics[height=3.5cm]{Gambar/bab2:intermediate.pdf}
+            \includegraphics[height=3.625cm]{Gambar/bab2:intermediate.pdf}
             \caption{Entitas perantara}
         \end{subfigure}
         \caption[Pengukuran kedekatan spasial]{Berbagai macam cara pengukuran kedekatan spasial}
         \label{bab2:spasial}
     \end{figure}
+    
+    Selain menggunakan sebuah konstanta yang menyatakan jarak maksimum, terdapat cara-cara lain untuk menentukan kedekatan dua buah entitas seperti menggunakan sebuah cakram dengan radius $\epsilon$ di mana seluruh anggota pergerakan kolektif harus masuk dalam diameter dari cakram tersebut \cite{gudmundsson:flock}. Jarak maksimum juga dapat dihitung secara relatif, di mana terdapat entitas lain dapat digunakan sebagai perantara dari dua buah entitas yang dikatakan dekat. Sebagai contoh, dua entitas $a$ dan $b$ dikatakan dekat pada titik waktu $t$ apabila terdapat sebuah entitas $c$ di mana $d\textsubscript{ac}(t) \leq \varepsilon$ dan $d\textsubscript{bc}(t) \leq \varepsilon$ walaupun $d\textsubscript{ab}(t) > \varepsilon$. \iffalse \lionov{harus didefinisikan dulu sebelumnya kalo $d_{ac}(t)$ itu menyatakan jarak $a$ dan $c$ pada waktu $t$} \cristopher{udah di bagian \ref{sec:kemiripan} ko} \fi Gambar \ref{bab2:spasial} menunjukkan cara-cara untuk menentukan kedekatan spasial antar entitas.
+    
     \item \textbf{\textit{Size}} \iffalse \lionov{kayaknya ini jangan pake ``ukuran'', nanti sama dengan measure, pake {\it size} ato langung aja jumlah minimumentitas } \fi
     
     \textit{Size} menyatakan jumlah entitas minimum yang bergerak bersama agar entitas-entitas tersebut dapat diidentifikasi sebagai sebuah pergerakan kolektif. Walaupun dua buah entitas dapat membentuk sebuah pergerakan kolektif, namun jumlah entitas minimum untuk membentuk sebuah pergerakan kolektif dapat disesuaikan oleh peneliti berdasarkan tujuan dan kebutuhan penelitian \cite{wiratma:trajectory}. Selain jumlah entitas, peneliti juga harus mempertimbangkan apakah satu entitas dapat tergabung dalam lebih dari satu pergerakan kolektif atau tidak.
-    
-    \newpage
     
     \item \textbf{Durasi Temporal}
     
@@ -453,29 +513,27 @@ Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kol
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.65\textwidth]{Gambar/bab2:flock.pdf}
+        \includegraphics[width=0.75\textwidth]{Gambar/bab2:flock.pdf}
         \caption[Sebuah \textit{flock}]{Entitas-entitas berwarna biru yang membentuk sebuah \textit{flock} dengan $m = 3$ dan $k = 3$. Lingkaran kuning menunjukkan cakram yang memiliki radius $r$ yang berisi seluruh anggota \textit{flock}}
         \label{bab2:flock}
     \end{figure}
     
     \begin{figure}[t]
         \centering
-        \includegraphics[width=0.75\textwidth]{Gambar/bab2:group.pdf}
+        \includegraphics[width=0.85\textwidth]{Gambar/bab2:group.pdf}
         \caption[Sebuah \textit{group}]{Entitas-entitas berwarna merah yang membentuk sebuah \textit{group} dengan $m = 3$ dan $k = 3$. Salah satu entitas merah yang terletak di paling bawah terhubung secara relatif dengan entitas-entitas merah lainnya melalui entitas biru.}
         \label{bab2:group}
     \end{figure}
     
     \item \textbf{Group}
     
-    Diberikan sebuah himpunan entitas $\mathcal{X}$, jumlah entitas minimum $m$, interval waktu minimum $k$, dan jarak maksimum antar entitas $r$. Sebuah \textit{group} merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang terbentuk pada interval waktu $I$ dan memenuhi syarat-syarat berikut:
+    Diberikan sebuah himpunan entitas $\mathcal{X}$, jumlah entitas minimum $m$, interval waktu minimum $k$, dan jarak maksimum antar entitas $r$. Sebuah \textit{group} yang ditunjukkan melalui Gambar \ref{bab2:group} merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang terbentuk pada interval waktu $I$ dan memenuhi syarat-syarat berikut:
     
     \begin{enumerate}
         \item Sub-himpunan $\mathcal{G}$ terdiri dari setidaknya $m$ buah entitas.
         \item Interval waktu $I$ memiliki durasi minimal selama $k$.
         \item Setiap pasang entitas $x, y$ di mana $x, y \in \mathcal{G}$ secara relatif pada $\mathcal{X}$ untuk setiap satuan waktu pada interval waktu $I$ dengan jarak maksimum antar entitas adalah sepanjang $r$.
     \end{enumerate}
-    
-    Gambar \ref{bab2:group} menunjukkan sebuah pemodelan sederhana dari sebuah \textit{group}.
 \end{itemize}
 
 \iffalse
