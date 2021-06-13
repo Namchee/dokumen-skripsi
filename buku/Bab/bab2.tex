@@ -2,7 +2,7 @@
 \chapter{Landasan Teori}
 \label{chap:teori}
 
-Bab ini akan mengenai mengenai teori-teori dasar mengenai lintasan seperti pemodelan lintasan, sumber data lintasan, dan ukuran-ukuran dalam sebuah lintasan. Selain itu, bab ini juga akan membahas lebih dalam mengenai topik kemiripan lintasan dan dua cara yang dapat digunakan untuk mengukur kemiripan lintasan yaitu \textit{dynamic time warping} dan \textit{cosine similarity}. Selanjutnya, bab ini akan membahas mengenai teori dasar pergerakan kolektif. Terakhir, bab ini akan membahas mengenai evaluasi hasil identifikasi pergerakan kolektif.
+Bab ini akan mengenai mengenai teori-teori dasar mengenai lintasan seperti pemodelan lintasan, sumber data lintasan, dan ukuran-ukuran dalam sebuah lintasan. Selain itu, bab ini juga akan membahas lebih dalam mengenai topik kemiripan lintasan dan dua cara yang dapat digunakan untuk mengukur kemiripan lintasan yaitu \textit{dynamic time warping} dan \textit{cosine similarity}. Selanjutnya, bab ini akan membahas mengenai teori dasar pergerakan kolektif.
 
 \section{Lintasan}
 \label{sec:lintasan}
@@ -24,13 +24,13 @@ Sayangnya seperti yang sudah di bahas pada bab sebelumnya, keterbatasan dalam te
 
 \begin{figure}[t]
     \centering
-    \begin{subfigure}[b]{0.35\textwidth}
+    \begin{subfigure}[b]{0.375\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:model-abstrak.pdf}
         \caption{Model Abstrak. Lintasan digambarkan sebagai sebuah garis tidak putus-putus yang menunjukkan pergerakan entitas}
         \label{bab2:model-abstrak}
-    \end{subfigure} \hspace{1.5cm}
-    \begin{subfigure}[b]{0.35\textwidth}
+    \end{subfigure} \hspace{1.25cm}
+    \begin{subfigure}[b]{0.375\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:model-data.pdf}
         \caption{Model Data. Lintasan digambarkan sebagai rangkaian posisi entitas yang terurut berdasarkan waktu secara menaik}
@@ -52,13 +52,13 @@ Pada skripsi ini, entitas yang diamati akan bergerak dalam ruang \textit{euclide
 
 \begin{figure}[b!]
     \centering
-    \begin{subfigure}[h]{0.3\textwidth}
+    \begin{subfigure}[h]{0.325\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:dua-dimensi.pdf}
         \caption{Ruang \textit{euclidean} dua dimensi}
         \label{bab2:dua-dimensi}
-    \end{subfigure} \hspace{1.5cm}
-    \begin{subfigure}[h]{0.3\textwidth}
+    \end{subfigure} \hspace{1.25cm}
+    \begin{subfigure}[h]{0.325\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:tiga-dimensi.pdf}
         \caption{Ruang \textit{euclidean} tiga dimensi}
@@ -101,7 +101,33 @@ Pengambilan sampel data pergerakan entitas merupakan bagian dari \textit{Geometr
 
 Seperti yang dibahas pada bagian sebelumnya, data pergerakan dunia nyata dapat diperoleh dalam bentuk rekaman video pergerakan entitas dalam dimensi gerak $\mathbb{R}^3$. Sayangnya, data pergerakan tersebut tidak dapat digunakan secara langsung untuk dianalisis pada proses analisis pergerakan. Hal tersebut disebabkan oleh perbedaan perspektif dimensi gerak yang tercatat dalam rekaman video pergerakan dengan perspektif permukaan gerak yang sesungguhnya. Oleh karena itu, koordinat-koordinat posisi dalam data pergerakan yang diperoleh melalui rekaman video pergerakan dunia nyata harus diubah terlebih dahulu menjadi koordinat-koordinat posisi dalam dunia nyata. Salah satu cara untuk mengubah koordinat posisi dalam data pergerakan adalah memproyeksikan setiap koordinat posisi menggunakan matriks homografi.
 
-Matriks homografi merupakan sebuah matriks homogen dengan dimensi $3 \times 3$ dengan jumlah \textit{degrees of freedom} sebanyak $8$. Matriks homografi dihasilkan dari perhitungan transformasi bidang gerak dari kamera yang digunakan untuk mendapatkan rekaman video pergerakan dunia nyata. Koordinat hasil proyeksi menggunakan matriks homogen harus dinormalisasi untuk menghasilkan nilai non-homogen \cite{szeliski:02:homography}.
+Matriks homografi merupakan sebuah matriks homogen dengan dimensi $3 \times 3$ dengan jumlah \textit{degrees of freedom} sebanyak $8$. Matriks homografi dihasilkan dari perhitungan transformasi bidang gerak dari bidang yang digunakan untuk mendapatkan rekaman video pergerakan dunia nyata dan bidang dunia nyata. Koordinat hasil proyeksi menggunakan matriks homogen harus dinormalisasi untuk menghasilkan nilai non-homogen \cite{szeliski:02:homography}. Perhitungan proyeksi sebuah koordinat menggunakan matriks homografi dapat dinyatakan melalui perhitungan sebagai berikut:
+
+\vspace{-5pt}
+
+\begin{gather*}
+    x' = H x \\
+    \begin{bmatrix}
+        x_1 \\
+        y_1 \\
+        1
+    \end{bmatrix} = H
+    \begin{bmatrix}
+        x_2 \\
+        y_2 \\
+        1
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        h\textsubscript{00} & h\textsubscript{01} & h\textsubscript{02} \\
+        h\textsubscript{10} & h\textsubscript{11} & h\textsubscript{12} \\
+        h\textsubscript{20} & h\textsubscript{21} & h\textsubscript{22}
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_2 \\
+        y_2 \\
+        1
+    \end{bmatrix}
+\end{gather*}
 
 \section{Ukuran Lintasan}
 \label{sec:ukuran}
@@ -112,7 +138,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|m{4cm}|l|p{7cm}|} 
+    \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
         \hline
         \multirow{5}{*}{
             \includegraphics[width=3cm]{Gambar/bab2:arah.pdf}
@@ -131,7 +157,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|m{4cm}|l|p{7cm}|} 
+    \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
         \hline
         \multirow{5}{*}{
             \includegraphics[width=3.5cm]{Gambar/bab2:durasi.pdf}
@@ -150,7 +176,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|m{4cm}|l|p{7cm}|} 
+    \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
         \hline
         \multirow{5}{*}{
             \includegraphics{Gambar/bab2:kecepatan.pdf}
@@ -169,10 +195,10 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|m{4cm}|l|p{7cm}|} 
+    \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
         \hline
         \multirow{5}{*}{
-            \includegraphics[width=2.5cm]{Gambar/bab2:kemiripan.pdf}
+            \includegraphics[width=2.25cm]{Gambar/bab2:kemiripan.pdf}
         } & Nama & Kemiripan \\ 
         \cline{2-3}
         & Deskripsi & Kemiripan antar lintasan yang dihitung berdasarkan jarak rata-rata lintasan                     \\ 
@@ -188,7 +214,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|m{4cm}|l|p{7cm}|} 
+    \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
         \hline
         \multirow{5}{*}{
             \includegraphics[width=2.75cm]{Gambar/bab2:jumlah.pdf}
@@ -208,7 +234,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 \section{Kemiripan Lintasan}
 \label{sec:kemiripan}
 
-Salah satu bagian penting dari kegiatan analisis data lintasan adalah pengukuran kemiripan antar lintasan. Pengukuran kemiripan lintasan bertujuan untuk menentukan apakah dua buah lintasan memiliki tingkat kemiripan tertentu. Menurut Wiratma, dkk (2019:12), kemiripan lintasan dapat diukur melalui berbagai kriteria seperti lokasi-lokasi yang dikunjungi, kecepatan rata-rata yang mirip, jarak antar entitas, dan kriteria-kriteria lainnya. Biasanya, pengukuran kemiripan lintasan digunakan untuk mendahului proses-proses analisis lintasan lainnya, seperti \textit{clustering} dan identifikasi pola pergerakan kolektif yang menjadi fokus pada skripsi ini. Selain sebagai sebuah bentuk \textit{preprocessing} pada dua buah lintasan, pengukuran kemiripan lintasan juga dapat digunakan untuk mencari lintasan turunan dengan tingkat kemiripan tertentu dengan lintasan turunan lain dalam satu lintasan utama yang sama.
+Salah satu bagian penting dari kegiatan analisis data lintasan adalah pengukuran kemiripan antar lintasan. Pengukuran kemiripan lintasan bertujuan untuk menentukan apakah dua buah lintasan memiliki tingkat kemiripan tertentu. Menurut Wiratma, dkk (2019:12), kemiripan lintasan dapat diukur melalui berbagai kriteria seperti lokasi-lokasi yang dikunjungi, kecepatan rata-rata yang mirip, jarak antar entitas, dan kriteria-kriteria lainnya. Biasanya, pengukuran kemiripan lintasan digunakan untuk mendahului proses-proses analisis lintasan lainnya, seperti \textit{clustering} dan identifikasi pola pergerakan kolektif yang menjadi fokus pada skripsi ini. Selain itu, pengukuran kemiripan lintasan juga dapat digunakan untuk mencari lintasan turunan dengan tingkat kemiripan tertentu dengan lintasan turunan lain dalam satu lintasan utama yang sama.
 
 Salah satu algoritma yang paling sering digunakan untuk mengukur kemiripan antara dua buah lintasan adalah jarak \textit{euclidean} \cite{bashir:02:euclidean}. Jarak \textit{euclidean} $d$ dari dua buah lintasan $X$ dan $Y$ yang masing-masing berdimensi $n$ dengan jumlah posisi yang tercatat pada kedua lintasan sebanyak $L$ dapat dinyatakan sebagai:
 
@@ -216,8 +242,6 @@ Salah satu algoritma yang paling sering digunakan untuk mengukur kemiripan antar
     d(X, Y) = \sum_{i=0}^{L} \sqrt{\sum_{j=0}^{n}(x_j - y_j)^2}
     \label{bab2:euclidean-distance}
 \end{equation}
-
-\clearpage
 
 Pada lintasan yang hanya memiliki satu dimensi, jarak \textit{euclidean} dapat dihitung sebagai akumulasi selisih dari setiap posisi yang tercatat pada kedua lintasan. Jarak \textit{euclidean} dari dua buah lintasan berdimensi satu dapat dinyatakan sebagai:
 
@@ -244,13 +268,13 @@ Dua keunggulan tersebut diperoleh dari cara perbandingan data lintasan pada algo
 \begin{figure}[b]
     \centering
     \captionsetup{width=0.8\textwidth}
-    \begin{subfigure}[h]{0.45\textwidth}
+    \begin{subfigure}[h]{0.475\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:euclidean.pdf}
         \caption{Penghitungan kemiripan linear menggunakan jarak \textit{euclidean} (linear)}
         \label{bab2:euclidean}
-    \end{subfigure} \hspace{0.75cm}
-    \begin{subfigure}[h]{0.45\textwidth}
+    \end{subfigure} \hspace{0.5cm}
+    \begin{subfigure}[h]{0.475\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:dtw.pdf}
         \caption{Penghitungan kemiripan non-linear menggunakan algoritma \textit{dynamic time warping}}
@@ -272,6 +296,8 @@ Algoritma \textit{dynamic time warping} menghitung kemiripan dua buah lintasan d
 \end{enumerate}
 
 \textit{Warping path} $p = (p_1, p_2, \ldots, p_L)$ untuk dua buah lintasan $X = (x_1, x_2, \ldots, x_N)$ dan $Y = (y_1, y_2, \ldots, y_M)$ dinyatakan dengan memasangkan elemen $x_\ell$ dari lintasan $X$ dengan elemen $y_\ell$ dari lintasan $Y$. Syarat \textit{boundary} mengharuskan elemen pertama dari lintasan $X$ dipasangkan dengan elemen pertama dari lintasan $Y$, begitu juga dengan elemen terakhir dari lintasan $X$ harus dipasangkan dengan elemen terakhir dari lintasan $Y$. Dengan kata lain, kondisi tersebut berlaku untuk seluruh elemen pada lintasan $X$ dan $Y$. Syarat monotonik mengharuskan elemen-elemen pada lintasan diurutkan menaik secara inklusif. Syarat \textit{step size} mengharuskan terjadinya kontinuitas pada pemasangan elemen, tidak ada elemen dari lintasan $X$ dan $Y$ yang tidak digunakan dan tidak ada pasangan duplikat dari seluruh pemasangan elemen dari lintasan $X$ dan $Y$. Gambar \ref{bab2:dtw-requirements} menunjukkan syarat-syarat dari \textit{warping path} antara dua buah lintasan.
+
+\vspace{10pt}
 
 \begin{figure}[h]
     \centering
@@ -303,6 +329,8 @@ Algoritma \textit{dynamic time warping} menghitung kemiripan dua buah lintasan d
     \label{bab2:dtw-requirements}
 \end{figure}
 
+\vspace{10pt}
+
 Jarak total $c_p$ dari sebuah \textit{warping path} yang valid merupakan akumulasi perbedaan jarak dari setiap pasang titik yang terdapat dalam \textit{warping path}. Secara formal, $c_p$ dapat dinyatakan sebagai:
 
 \begin{equation}
@@ -312,14 +340,10 @@ Jarak total $c_p$ dari sebuah \textit{warping path} yang valid merupakan akumula
 
 \textit{Warping path} optimal antara dua buah lintasan merupakan \textit{warping path} $p^*$ yang memiliki jarak terkecil di antara semua \textit{warping path} yang valid. Jarak \textit{dynamic time warping} $DTW(X, Y)$ antara dua buah lintasan $X$ dan $Y$ merupakan jarak total dari \textit{warping path} $p^*$. Secara formal, jarak \textit{dynamic time warping} dari dua buah lintasan $X$ dan $Y$ dapat dinyatakan sebagai:
 
-\vspace{-7.5pt}
-
 \begin{align*}
     DTW(X, Y) & = c\textsubscript{$p*$}(X, Y) \\
     & = min\{c_p(X, Y)\;|\;p\;adalah\;warping\;path\;dari\;lintasan\;(X, Y)\}
 \end{align*}
-
-\clearpage
 
 \subsection{Implementasi Algoritma \textit{Dynamic Time Warping}}
 
@@ -412,10 +436,14 @@ Menggunakan cara yang sama, jarak total dari \textit{warping path} yang ditunjuk
 
 Selain jarak \textit{euclidean} dan jarak \textit{dynamic time warping}, kemiripan lintasan juga dapat diukur menggunakan perhitungan \textit{cosine similarity}. \textit{Cosine similarity} merupakan salah satu cara untuk mengukur kemiripan lintasan melalui nilai kosinus sudut dari dua buat vektor. Dalam \textit{cosine similarity}, kemiripan dari dua buah vektor diukur berdasarkan orientasi arah dibandingkan dengan pengukuran berdasarkan jarak pada jarak \textit{euclidean} dan \textit{dynamic time warping} \cite{sitikhu:cosine-similarity}. Perhitungan \textit{cosine similarity} biasanya dimanfaatkan dalam pengukuran kemiripan antar dokumen \cite{sitikhu:cosine-similarity}. Secara formal, nilai \textit{cosine similarity} antara dua buah vektor $X$ dan $Y$ dapat dapat dinyatakan sebagai:
 
+\vspace{7.5pt}
+
 \begin{equation}
     \cos (X, Y)= \frac{x \cdot y}{\|x\| \|y\|} = \frac{ \sum_{i=1}^{n}{x_i y_i}}{ \sqrt{\sum_{i=1}^{n}{(x_i)^2}} \sqrt{\sum_{i=1}^{n}{( y_i)^2}} }
     \label{bab2:cosine-similarity}
 \end{equation}
+
+\vspace{7.5pt}
 
 Nilai yang dihasilkan oleh \textit{cosine similarity} memiliki rentang nilai $[-1, 1]$, di mana \textit{cosine similarity} yang bernilai $-1$ menandakan bahwa kedua lintasan memiliki arah lintasan yang bertolak belakang dan \textit{cosine similarity} yang bernilai $1$ menandakan bahwa kedua lintasan memiliki arah lintasan yang sama persis.
 
