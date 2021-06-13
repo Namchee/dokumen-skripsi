@@ -2,7 +2,7 @@
 \chapter{Landasan Teori}
 \label{chap:teori}
 
-Bab ini akan mengenai mengenai teori-teori dasar mengenai lintasan seperti pemodelan lintasan, sumber data lintasan, dan ukuran-ukuran dalam sebuah lintasan. Selain itu, bab ini juga akan membahas lebih dalam mengenai topik kemiripan lintasan dan dua cara yang dapat digunakan untuk mengukur kemiripan lintasan yaitu \textit{dynamic time warping} dan \textit{cosine similarity}. Selanjutnya, bab ini akan membahas mengenai teori dasar pergerakan kolektif.
+Bab ini akan mengenai mengenai teori-teori dasar mengenai lintasan seperti pemodelan lintasan, sumber data lintasan, dan ukuran-ukuran dalam sebuah lintasan. Selain itu, bab ini juga akan membahas lebih dalam mengenai topik kemiripan lintasan dan dua cara yang dapat digunakan untuk mengukur kemiripan lintasan yaitu \textit{dynamic time warping} dan \textit{cosine similarity}. Selanjutnya, bab ini akan membahas mengenai teori dasar pergerakan kolektif. Terakhir, bab ini akan membahas mengenai evaluasi identifikasi pergerakan kolektif.
 
 \section{Lintasan}
 \label{sec:lintasan}
@@ -577,28 +577,49 @@ Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kol
     \end{enumerate}
 \end{itemize}
 
-\iffalse
-
-\lionov{ini harus dijelasin m apa, k apa, r apa}
-\textbf{flock($m, k, r$)} Diberikan sekumpulan lintasan sebanyak $n$ dari entitas yang bergerak dalam sebuah ruang dan masing-masing terdiri dari $\gamma$ segmen garis, sebuah \textit{flock} pada interval waktu $I$, di mana durasi minimal dari $I$ adalah selama $k$ waktu konsekutif, terdiri dari setidaknya $m$ buah entitas di mana untuk setiap titik waktu yang ada pada interval $I$, ada sebuah cakram dengan radius $r$ yang berisi $m$ entitas seluruhnya, di mana $m \in \mathbb{N}, k \in \mathbb{R}, r > 0$ \cite{gudmundsson:flock}.
-\lionov{\textbf{Flock}: diberikan sekumpulan lintasan dari $n$ entitas dan masing-masing terdiri dari $\gamma$ segmen garis. Sebuah \textit{flock} pada interval waktu konsekutif $I$ ($I \le k$)terdiri dari paling sedikit $m$ buah entitas dan untuk setiap satuan waktu pada interval $I$, ada sebuah cakram ({\it disc}) dengan radius $r$ di mana seluruh entitas memiliki jarak kurang dari $r$ ke titik pusat cakram \cite{gudmundsson:flock}.}
-
-Selain \textit{flock}, terdapat definisi lain seperti \textit{group} yang didefinisikan sebagai:
-
-\textbf{group($m, k, r$)} Diberikan sekumpulan\lionov{kayaknya dari awal jangan pake kumpulan, tapi pake ``himpunan'' supaya bisa ``sub-himpunan''. Diberikan sebuah himpunan $\chi$ yang terdiri dari $n$ entitias...... (itu bukan $\chi$ tapi $\mathcal{X}$)} entitas $\chi$, sebuah \textit{group} merupakan sebuah sub-himpunan $\mathcal{G} \in \chi$ yang terbentuk pada interval waktu $\mathcal{T}$\lionov{I kayak di atas? biar gak ganti2 simbol} yang memenuhi syarat-syarat berikut:
-
-\begin{enumerate}
-    \item $\mathcal{G}$ terdiri dari minimal $m$ buah entitas.
-    \item $\mathcal{T}$ memiliki durasi minimal selama $k$.
-    \item Setiap pasang entitas $x, y$ di mana $x, y \in \mathcal{G}$ terhubung secara relatif dengan jarak maksimum sebesar $r$ pada $\chi$ pada setiap titik waktu dalam $\mathcal{T}$.
-\end{enumerate}
-
-\fi
-
-\iffalse
-
-\lionov{ini dua biji perlu dikasih ilustrasi sih} \cristopher{menyusul}
-
-\fi
-
 Selain kedua definisi di atas, terdapat definisi-definisi lain seperti \textit{convoy} \cite{jeung:convoys}, \textit{herd} \cite{huang:02:herd}, \textit{swarm} \cite{li:swarm}, \textit{gathering} \cite{zheng:02:gatherings}, dan masih banyak definisi formal lainnya. Seluruh definisi formal yang sudah dibuat selalu bergantung pada setidaknya tiga ukuran lintasan: \textit{size}, kedekatan spasial, dan parameter temporal. Walaupun kebanyak definisi formal yang sudah dibuat untuk data lintasan yang bersifat diskrit, terdapat definisi formal pergerakan kolektif yang dapat menangani data lintasan yang bersifat kontinu seperti \textit{group} \cite{buchin:group}.
+
+\section{Evaluasi Definisi Pergerakan Kolektif}
+\label{sec:eval-theory}
+
+Terdapat dua metode pengujian yang dapat digunakan untuk menguji definisi dari pergerakan kolektif, yaitu pengujian kuantitatif dan kualitatif.
+
+\subsection{Pengujian Kuantitatif Definisi Pergerakan Kolektif}
+\label{subsec:quantitative-theory}
+
+Pengujian kuantitatif terhadap sebuah definisi pergerakan kolektif dilakukan dengan menguji relevansi hasil identifikasi pergerakan kolektif yang sesuai dengan definisi formal dengan sebuah hasil identifikasi yang dijadikan sebagai \textit{ground truth}. Sebuah pergerakan kolektif pada hasil identifikasi akan dianggap relevan dengan \textit{ground truth} apabila pergerakan kolektif tersebut juga teridentifikasi pada \textit{ground truth}. Hasil identifikasi yang dijadikan rujukan biasanya berasal dari hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia pada data pergerakan yang sama. Salah satu cara yang dapat digunakan untuk mengukur relevansi hasil identifikasi adalah melalui klasifikasi biner yang melibatkan nilai \textit{true positive}, \textit{false positive}, \textit{false negative}, dan \textit{true negative}. Hubungan antara keempat nilai tersebut ditunjukkan melalui \textit{confusion matrix} pada Tabel \ref{bab2:confusion}.
+
+\begin{table}[h]
+    \centering
+    \caption{\textit{Confusion matrix} pada klasifikasi biner}
+    \begin{tabular}{|c|c|c|}
+        \hline
+         & Relevan & Tidak Relevan  \\ \hline
+        Teridentifikasi & \textit{true positive} ($t_p$) & \textit{false positive} ($f_p$) \\ \hline
+        Tidak Teridentifikasi & \textit{false negative} ($f_n$) & \textit{true negative} ($t_n$) \\
+        \hline
+    \end{tabular}
+    \label{bab2:confusion}
+\end{table}
+
+Nilai-nilai tersebut dapat diolah lebih lanjut menjadi nilai \textit{precision}, \textit{recall}, dan \textit{F measure} \cite{manning:02:ir}. Nilai \textit{precision} merupakan rasio dari pergerakan kolektif yang relevan pada seluruh pergerakan kolektif yang berhasil teridentifikasi. Nilai \textit{recall} merupakan rasio dari pergerakan kolektif relevan yang teridentifikasi. \textit{F measure} merupakan relevansi dari hasil pengujian yang dilakukan melalui perhitungan nilai \textit{precision} dan \textit{recall}. Salah satu nilai \textit{F measure} yang dapat digunakan adalah \textit{F1 score} yang merupakan \textit{harmonic mean} dari nilai \textit{precision} dan \textit{recall}. Nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dapat dihitung menggunakan rumus-rumus berikut:
+
+\begin{align*}
+    P\;(precision) & = \frac{t_p}{t_p + f_p} & R\;(recall) & = \frac{t_p}{t_p + t_n} & F_1\;Score & = 2 \cdot \frac{P \cdot R}{P + R}
+\end{align*}
+
+\clearpage
+
+\subsection{Pengujian Kualitatif Definisi Pergerakan Kolektif}
+\label{subsec:qualitative-theory}
+
+Pengujian kualitatif terhadap sebuah definisi pergerakan kolektif dilakukan dengan memvisualisasikan hasil identifikasi pergerakan kolektif pada rekaman video pergerakan yang menjadi sumber data pergerakan. Melalui visualisasi pergerakan kolektif, peneliti dapat mengamati keanggotaan entitas bergerak dalam pergerakan kolektif dan durasi pergerakan kolektif secara langsung seakan peneliti pengamatan pergerakan secara nyata. Gambar \ref{bab2:visualization} menunjukkan contoh visualisasi identifikasi pergerakan kolektif pada rekaman video pergerakan dunia nyata.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Gambar/bab2:visualisasi.jpg}
+    \caption{Contoh visualisasi pergerakan kolektif pada rekaman video pergerakan\protect\footnotemark[8]}
+    \label{bab2:visualization}
+\end{figure}
+
+\footnotetext[8]{Francesco Solera, \textit{Group detection example}, 2015, diakses pada tanggal 13 Juni 2021. \url{https://aimagelab.ing.unimore.it/group-detection/}}
