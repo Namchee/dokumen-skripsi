@@ -5,67 +5,105 @@ Bab ini akan membahas rancangan perangkat lunak identifikasi rombongan. Pada bab
 
 \iffalse
 
-Sebelum melalui tahap implementasi, perangkat lunak perlu melalui proses perancangan perangkat lunak. Perancangan perangkat lunak merupakan sebuah proses untuk mengidentifikasi artefak-artefak dari perangkat lunak seperti modul, fungsi, kelas, serta artefak-artefak lainnya yang bertujuan untuk memenuhi kebutuhan perangkat lunak. Manfaat utama dari perancangan perangkat lunak adalah supaya perilaku perangkat lunak yang dihasilkan dapat lebih mudah diprediksi dan dikontrol sehingga perangkat lunak dapat lebih mudah dikembangkan dan diperbaiki di masa depan \cite{budgen:04:software-design}.
+Sebelum melalui tahap implementasi, perangkat lunak perlu melalui proses perancangan perangkat lunak. Perancangan perangkat lunak merupakan sebuah proses untuk mengidentifikasi artefak-artefak dari perangkat lunak seperti modul, fungsi, kelas, serta artefak-artefak lainnya yang bertujuan untuk memenuhi kebutuhan perangkat lunak. Manfaat utama dari perancangan perangkat lunak adalah supaya perilaku perangkat lunak yang dihasilkan dapat lebih mudah diprediksi dan dikontrol sehingga perangkat lunak dapat lebih mudah dikembangkan dan diperbaiki di masa depan~\cite{budgen:04:software-design}.
 
 \fi
 
 \section{Fungsionalitas Perangkat Lunak}
 \label{sec:functionality}
 
-Melalui proses analisis terhadap kebutuhan perangkat lunak, perangkat lunak identifikasi rombongan yang akan dibuat membutuhkan 3 fungsionalitas berikut:
+Melalui proses analisis terhadap kebutuhan perangkat lunak, perangkat lunak identifikasi rombongan yang akan dibuat membutuhkan tiga fungsionalitas berikut:
 
 \begin{enumerate}
-    \item Membaca dan memahami masukan dari pengguna berupa data pergerakan pejalan kaki dan parameter rombongan,
-    \item Melakukan identifikasi kelompok-kelompok rombongan yang terbentuk dalam data pergerakan pejalan kaki yang diberikan dalam masukan pengguna.
+    \item Membaca dan menterjemahkan masukan dari pengguna berupa data pergerakan pejalan kaki dan parameter rombongan,
+    \item Melakukan identifikasi rombongan-rombongan yang terbentuk dalam data pergerakan pejalan kaki yang diberikan dalam masukan pengguna.
     \item Melakukan evaluasi terhadap hasil identifikasi rombongan.
 \end{enumerate}
 
-Berdasarkan 3 kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki antarmuka pengguna dalam bentuk \textit{command line interface} sederhana. Interaksi antara pengguna dan perangkat lunak berdasarkan kedua fungsionalitas tersebut digambarkan melalui diagram konteks yang ditunjukkan melalui Gambar \ref{bab4:context-diagram}.
+Berdasarkan tiga kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memiliki antarmuka pengguna dalam bentuk \textit{command line interface} sederhana. Interaksi antara pengguna dan perangkat lunak berdasarkan kedua fungsionalitas tersebut digambarkan melalui diagram konteks yang ditunjukkan melalui Gambar~\ref{bab4:context-diagram}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.825\textwidth]{Gambar/bab4:dfd-level-0.pdf}
+    \includegraphics[width=0.65\textwidth]{Gambar/bab4:dfd-level-0.pdf}
     \caption{Diagram konteks}
     \label{bab4:context-diagram}
 \end{figure}
 
-\noindent Kedua fungsionalitas dari perangkat lunak akan dipecah menjadi 3 modul utama yaitu:
+\noindent Ketiga fungsionalitas dari perangkat lunak akan dipecah menjadi lima modul utama yaitu:
 
 \begin{enumerate}
     \item \textbf{Modul I/O}
     
-    Modul I/O merupakan modul yang berfungsi untuk membaca masukan pengguna dan mencetak hasil identifikasi rombongan yang dihasilkan oleh modul rombongan. Terdapat dua proses yang akan dikerjakan oleh modul I/O, yaitu proses penerjemahan masukan pengguna dan proses pembuatan berkas hasil identifikasi rombongan.
+    Modul I/O merupakan modul yang berfungsi untuk membaca masukan pengguna dan mencetak hasil identifikasi rombongan yang dihasilkan oleh modul rombongan. Terdapat dua proses yang akan dikerjakan oleh modul I/O, yaitu proses penerjemahan masukan pengguna dan proses pembuatan berkas hasil identifikasi rombongan. 
     
     \item \textbf{Modul Penerjemah}
     
-    Modul penerjemah merupakan modul yang berfungsi untuk menerjemahkan berkas masukan data pejalan kaki menjadi data yang dapat dipahami dan digunakan oleh perangkat lunak. Terdapat dua proses yang akan dikerjakan oleh modul penerjemah, yaitu proses penerjemahan data pergerakan dan proses penerjemahan parameter identifikasi.
+    Modul penerjemah merupakan modul yang berfungsi untuk menerjemahkan berkas masukan data pejalan kaki menjadi data yang dapat dipahami dan digunakan oleh perangkat lunak. Terdapat tiga proses yang akan dikerjakan oleh modul penerjemah, yaitu proses penerjemahan data pergerakan, proses penerjemahan parameter identifikasi, dan proses penerjemahan hasil identifikasi rombongan yang dilakukan oleh manusia.
+    
+    \clearpage
     
     \item \textbf{Modul Rombongan}
     
     Modul rombongan merupakan modul yang berfungsi untuk mengidentifikasi kumpulan rombongan yang terbentuk dalam data pergerakan pejalan kaki yang sudah diterjemahkan oleh modul penerjemah. Terdapat satu proses yang akan dikerjakan oleh modul rombongan, yaitu proses identifikasi rombongan.
-    
+
     \item \textbf{Modul Spasial}
     
-    Modul spasial merupakan modul yang berfungsi untuk melakukan perhitungan kedekatan spasial antar entitas yang nantinya akan digunakan oleh modul rombongan dalam proses identifikasi rombongan.
+    Modul spasial merupakan modul yang berfungsi untuk melakukan perhitungan kedekatan spasial antar entitas yang nantinya akan digunakan oleh modul rombongan dalam proses identifikasi rombongan. Modul spasial akan memiliki fungsi untuk menghitung jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity}.
     
     \item \textbf{Modul Evaluasi}
     
-    Modul evaluasi merupakan modul yang berfungsi untuk melakukan evaluasi terhadap algoritma identifikasi rombongan yang dilakukan oleh modul rombongan. Evaluasi dilakukan dengan membandingkan hasil identifikasi rombongan dengan \textit{ground truth}.
+    Modul evaluasi merupakan modul yang berfungsi untuk melakukan evaluasi terhadap algoritma identifikasi rombongan yang dilakukan oleh modul rombongan. Evaluasi dilakukan dengan membandingkan hasil identifikasi rombongan dengan hasil identifikasi rombongan yang dilakukan oleh manusia pada data pergerakan yang sama. Terdapat satu proses yang dilakukan oleh modul evaluasi, yaitu evaluasi hasil identifikasi.
 \end{enumerate}
 
-Interaksi antar kelima modul tersebut serta proses-proses yang dilalui selama perangkat lunak identifikasi rombongan dieksekusi digambarkan melalui diagram alir data tingkat pertama yang ditunjukkan melalui Gambar \ref{bab4:dfd-level-1}.
+Interaksi antar kelima modul tersebut serta proses-proses yang dilalui selama perangkat lunak identifikasi rombongan dieksekusi digambarkan melalui diagram alir data tingkat pertama yang ditunjukkan melalui Gambar~\ref{bab4:dfd-level-1}.
 
-\begin{figure}[t]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.95\textwidth]{Gambar/bab4:dfd-level-1.pdf}
+    \includegraphics[width=\textwidth]{Gambar/bab4:dfd-level-1.pdf}
     \caption{Diagram alir data tingkat pertama}
     \label{bab4:dfd-level-1}
 \end{figure}
 
+\section{Spesifikasi Input dan Output}
+\label{sec:input-output}
+
+\subsection{Bentuk Data Rombongan}
+\label{sec:input}
+
+Data pergerakan pejalan kaki akan disimpan dalam sebuah berkas teks dengan format \texttt{.txt} dengan \textit{encoding} UTF-8. Berkas tersebut menyimpan informasi dari seluruh entitas yang tercatat dalam data pergerakan pejalan kaki. Berkas tersebut merupakan hasil ekstraksi dari informasi yang terdapat dalam sebuah video rekaman pergerakan pejalan kaki.
+
+\clearpage
+
+Informasi yang terdapat dalam data pejalan kaki disimpan dalam bentuk \textit{frame} yang telah diekstrak dari video rekaman pergerakan pejalan kaki. Sebuah \textit{frame} mengandung informasi dalam bentuk \texttt{<nomor-frame> <nomor-identitas> <posisi-x> <posisi-y>} yang ditulis dalam satu baris pada berkas teks. Nilai tambahan lainnya yang terdapat dalam berkas teks akan dihiraukan oleh perangkat lunak.
+
+Nilai dari \texttt{<nomor-frame>} menunjukkan \textit{frame} pada video rekaman yang memiliki informasi yang terdapat pada baris teks. Nilai dari \texttt{<nomor-identitas>} menunjukkan nomor identitas unik dari entitas. Nilai dari \texttt{<posisi-x>} menunjukkan posisi entitas pada sumbu $X$ dari ruang gerak \textit{euclidean} $\mathbb{R}^2$. Hal yang sama juga berlaku untuk nilai \texttt{<posisi-y>} yang menyimpan posisi entitas pada sumbu $Y$ dari ruang gerak \textit{euclidean} $\mathbb{R}^2$.
+
+\subsection{Bentuk Data Identifikasi Manusia}
+\label{sec:human-identification}
+
+Hasil identifikasi rombongan yang dilakukan secara manual oleh manusia akan disimpan dalam sebuah berkas teks dengan format \texttt{.txt} dengan \textit{encoding} UTF-8. Berkas tersebut akan menyimpan informasi mengenai seluruh rombongan yang diidentifikasi oleh manusia pada sebuah data pergerakan. Berkas hasil identifikasi manusia akan memiliki nama yang sama dengan nama berkas data pergerakan yang digunakan dalam proses identifikasi rombongan. 
+
+Sebuah rombongan yang berhasil diidentifikasi secara manual oleh manusia direpresentasikan dalam satu baris dalam berkas teks. Setiap rombongan menyimpan informasi mengenai nomor identitas anggota yang tergabung dalam rombongan yang dimaksud. Data identifikasi manusia tidak menyimpan informasi mengenai durasi rombongan. 
+
+\subsection{Bentuk Berkas Hasil}
+\label{sec:result-text}
+
+Berkas hasil akan disimpan dalam sebuah berkas teks dengan format \texttt{.txt} dengan \textit{encoding} UTF-8. Terdapat tiga buah informasi yang akan disimpan pada berkas hasil:
+
+\begin{enumerate}
+    \item Kumpulan parameter identifikasi yang digunakan pada proses identifikasi rombongan.
+    \item Nilai relevansi hasil identifikasi rombongan dengan hasil identifikasi manusia yang direpresentasikan melalui nilai \textit{precision}, \textit{recall}, dan \textit{F1 score}.
+    \item Kumpulan rombongan yang berhasil teridentifikasi oleh perangkat lunak.
+\end{enumerate}
+
+Sebuah rombongan yang berhasil teridentifikasi akan disimpan dalam satu baris berkas teks. Setiap rombongan akan disimpan dalam bentuk \texttt{<anggota>, <durasi>}. \texttt{<anggota>} menunjukkan kumpulan nomor identitas dari anggota rombongan yang dipisahkan menggunakan spasi. \texttt{<durasi>} menunjukkan kumpulan interval \textit{frame} konsekutif di mana rombongan tersebut terbentuk. Sebuah interval \textit{frame} ditulis sebagai sepasang \textit{frame} yang menunjukkan \textit{frame} mulai dan \textit{frame} berakhirnya rombongan yang dipisahkan menggunakan karakter strip (-).
+
+Untuk mempermudah proses pengujian, berkas yang dihasilkan akan memiliki nama dalam bentuk \texttt{<data-pergerakan>-<waktu>}. Penyematan waktu pada nama berkas bertujuan agar hasil identifikasi rombongan pada data pergerakan yang sama dapat disimpan secara terpisah sehingga mempermudah proses analisis hasil identifikasi.
+
 \section{Modul I/O}
 \label{sec:des-io}
 
-Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
+Modul I/O bertanggung jawab untuk melaksanakan dua proses berikut:
 
 \begin{enumerate}
     \item \textbf{Input / Penerjemahan Masukan}
@@ -83,11 +121,11 @@ Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
     
     Apabila masukan yang diberikan oleh pengguna tidak memenuhi seluruh syarat di atas, proses penerjemahan masukan akan menampilkan pesan kesalahan pada pengguna dan menghentikan proses eksekusi perangkat lunak.
     
-    Setelah proses validasi masukan selesai, modul I/O akan mengembalikan masukan pengguna dalam bentuk tipe data komposit tanpa melakukan proses tambahan lainnya. Gambar \ref{bab4:flowchart-input} menunjukkan diagram alur dari proses validasi masukan yang diberikan oleh pengguna.
+    Setelah proses validasi masukan selesai, modul I/O akan mengembalikan masukan pengguna dalam bentuk tipe data komposit tanpa melakukan proses tambahan lainnya. Gambar~\ref{bab4:flowchart-input} menunjukkan diagram alur dari proses validasi masukan yang diberikan oleh pengguna.
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.95\textwidth]{Gambar/bab4:flowchart-input.pdf}
+        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-input.pdf}
         \caption{Diagram alir proses validasi masukan}
         \label{bab4:flowchart-input}
     \end{figure}
@@ -104,7 +142,7 @@ Modul I/O bertanggung jawab untuk melaksanakan 2 proses berikut:
 \section{Modul Penerjemah}
 \label{sec:des-parser}
 
-Modul penerjemah bertanggung jawab untuk melaksanakan 2 proses berikut:
+Modul penerjemah bertanggung jawab untuk melaksanakan tiga proses berikut:
 
 \begin{enumerate}
     \item \textbf{Penerjemahan Data Pergerakan}
@@ -123,31 +161,44 @@ Modul penerjemah bertanggung jawab untuk melaksanakan 2 proses berikut:
         \item Kembalikan setiap informasi entitas berupa posisi setiap entitas bergerak yang tercatat dalam data pergerakan pada setiap \textit{frame} yang terdapat dalam data pergerakan.
     \end{enumerate}
     
-    Gambar \ref{bab4:flowchart-penerjemah} menunjukkan diagram alir dari proses penerjemahan data pergerakan yang berlangsung dalam modul Penerjemah.
+    Gambar~\ref{bab4:flowchart-penerjemah} menunjukkan diagram alir dari proses penerjemahan data pergerakan yang berlangsung dalam modul penerjemah.
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-penerjemah.pdf}
+        \caption{Diagram alir proses penerjemahan data pergerakan}
+        \label{bab4:flowchart-penerjemah}
+    \end{figure}
 
     \item \textbf{Penerjemahan Parameter Identifikasi}
     
     Sebelum proses identifikasi rombongan dilakukan, perangkat lunak perlu mengetahui parameter-parameter yang akan digunakan dalam proses identifikasi rombongan. Parameter identifikasi diperoleh dengan mengolah masukan pengguna yang diperoleh dari modul I/O.
     
-    Terdapat 2 nilai yang akan diproses oleh fungsi ini, yaitu $k$ dan $\vartheta$. Nilai $k$ akan diterjemahkan menjadi satuan \textit{frame}. Nilai dari $\vartheta$ akan diterjemahkan menjadi nilai \textit{cosinus} dari sudut tersebut. Parameter-parameter lainnya tidak akan melalui proses lanjutan apapun dan akan langsung diteruskan pada modul rombongan.
+    Terdapat dua nilai yang akan diproses oleh fungsi ini, yaitu $k$ dan $\vartheta$. Nilai $k$ akan diterjemahkan menjadi satuan \textit{frame}. Nilai dari $\vartheta$ akan diterjemahkan menjadi nilai \textit{cosinus} dari sudut tersebut. Parameter-parameter lainnya tidak akan melalui proses lanjutan apapun dan akan langsung diteruskan pada modul rombongan.
+    
+    \clearpage
+    
+    \item \textbf{Penerjemahan Hasil Identifikasi Manusia}
+    
+    Sebelum hasil identifikasi rombongan pada data pejalan kaki diuji melalui pengujian kualitatif dan kuantitatif yang dilakukan oleh modul evaluasi, perangkat lunak memerlukan hasil identifikasi manusia yang dijadikan sebagai acuan. Data hasil identifikasi acuan yang disimpan dalam berkas teks akan diterjemahkan menjadi bentuk yang dapat dimengerti oleh perangkat lunak sehingga dapat digunakan pada proses evaluasi hasil identifikasi rombongan. Gambar~\ref{bab4:flowchart-manusia} menunjukkan diagram alir dari proses penerjemahan hasil identifikasi manusia.
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-manusia.pdf}
+        \caption{Diagram alir proses penerjemahan hasil identifikasi manusia}
+        \label{bab4:flowchart-manusia}
+    \end{figure}
 \end{enumerate}
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-penerjemah.pdf}
-    \caption{Diagram alir modul penerjemah}
-    \label{bab4:flowchart-penerjemah}
-\end{figure}
 
 \section{Modul Rombongan}
 \label{sec:des-rombongan}
 
-Modul rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma \ref{bab3:algoritma-identifikasi}. Modul rombongan akan menghasilkan rombongan-rombongan yang teridentifikasi pada data pergerakan yang sesuai dengan parameter identifikasi yang diterjemahkan dari masukan pengguna oleh modul penerjemah. Pada proses identifikasi rombongan, modul rombongan akan menggunakan algoritma \textit{dynamic time warping} dan perhitungan \textit{cosine similarity} yang diimplementasikan dalam modul spasial.
+Modul rombongan merupakan modul yang berfungsi sebagai implementasi konkrit dari algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma~\ref{bab3:algoritma-identifikasi}. Modul rombongan akan menghasilkan rombongan-rombongan yang teridentifikasi pada data pergerakan yang sesuai dengan parameter identifikasi yang diterjemahkan dari masukan pengguna oleh modul penerjemah. Pada proses identifikasi rombongan, modul rombongan akan menggunakan algoritma \textit{dynamic time warping} dan perhitungan \textit{cosine similarity} yang diimplementasikan dalam modul spasial.
 
 \section{Modul Spasial}
 \label{sec:des-spatial}
 
-Modul spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul rombongan untuk mempermudah pengujian perangkat lunak. Modul spasial akan mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh Algoritma \ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh Rumus \ref{bab2:cosine-similarity}.
+Modul spasial merupakan modul yang berisi implementasi dari algoritma-algoritma yang akan digunakan untuk menentukan kedekatan spasial antara dua buah entitas yang digunakan selama proses identifikasi rombongan. Implementasi tersebut dipisahkan dari modul rombongan untuk mempermudah pengujian perangkat lunak. Modul spasial akan mengimplementasikan algoritma \textit{dynamic time warping} yang ditunjukkan oleh Algoritma~\ref{bab2:dtw-pseudocode} dan perhitungan \textit{cosine similarity} yang ditunjukkan oleh Rumus~\ref{bab2:cosine-similarity}.
 
 \section{Modul Evaluasi}
 \label{sec:des-evaluation}
@@ -162,17 +213,25 @@ Untuk mempermudah proses implementasi perangkat lunak, diperlukan beberapa struk
 \begin{enumerate}
     \item \textbf{Arguments}
     
-    Struktur data ini akan menyimpan masukan-masukan mentah dari pengguna yang diberikan melalui \textit{command line interface}. Masukan-masukan tersebut akan melalui proses validasi dasar dan diubah menjadi tipe data yang dapat dipahami oleh perangkat lunak.
+    Struktur data ini akan menyimpan masukan-masukan mentah dari pengguna yang diberikan melalui \textit{command line interface}. Masukan-masukan tersebut akan melalui proses validasi dasar dan diubah menjadi tipe data yang dapat dipahami oleh perangkat lunak. Struktur data ini akan dihasilkan oleh modul I/O.
     
     \item \textbf{Parameters}
     
-    Struktur data ini akan menyimpan masukan-masukan pengguna yang telah diproses menjadi parameter-parameter yang akan digunakan oleh algoritma identifikasi rombongan.  
+    Struktur data ini akan menyimpan masukan-masukan pengguna yang telah diproses menjadi parameter-parameter yang akan digunakan oleh algoritma identifikasi rombongan. Struktur data ini akan dihasilkan oleh modul penerjemah.
     
     \item \textbf{Entity}
     
-    Struktur data ini akan menyimpan informasi-informasi penting dari entitas yang tercatat dalam data pergerakan pejalan kaki seperti nomor identitas dari entitas serta seluruh posisi dari entitas tersebut pada ruang gerak $\mathbb{R}^2$.
+    Struktur data ini akan menyimpan informasi-informasi penting dari entitas yang tercatat dalam data pergerakan pejalan kaki seperti nomor identitas dari entitas serta seluruh posisi dari entitas tersebut pada ruang gerak $\mathbb{R}^2$. Struktur data ini akan dihasilkan oleh modul penerjemah.
+    
+    \item \textbf{MovementData}
+    
+    Struktur data ini akan menyimpan informasi mengenai rombongan-rombongan yang teridentifikasi pada hasil identifikasi rombongan yang dilakukan secara manual oleh manusia. Struktur data ini akan dihasilkan oleh modul penerjemah.
     
     \item \textbf{Rombongan}
     
-    Struktur data ini akan menyimpan informasi mengenai nomor identitas dari entitas-entitas yang tergabung dalam rombongan serta daftar durasi terbentuknya rombongan. Durasi rombongan akan menyimpan nilai \textit{frame} pertama di mana sekelompok entitas yang bergerak bersama memenuhi syarat pembentukan rombongan, dan nilai \textit{frame} terakhir dimana anggota-anggota rombongan masih bergerak bersama sebagai rombongan sebelum pergerakan kolektif tersebut tidak lagi memenuhi syarat-syarat pembentukan rombongan.
+    Struktur data ini akan menyimpan informasi mengenai nomor identitas dari entitas-entitas yang tergabung dalam rombongan serta daftar durasi terbentuknya rombongan. Durasi rombongan akan menyimpan nilai \textit{frame} pertama di mana sekelompok entitas yang bergerak bersama memenuhi syarat pembentukan rombongan, dan nilai \textit{frame} terakhir dimana anggota-anggota rombongan masih bergerak bersama sebagai rombongan sebelum pergerakan kolektif tersebut tidak lagi memenuhi syarat-syarat pembentukan rombongan. Struktur data ini akan dihasilkan oleh modul rombongan.
+    
+    \item \textbf{Score}
+    
+    Struktur data ini akan menyimpan nilai relevansi dari hasil identifikasi rombongan yang dilakukan oleh perangkat lunak dibandingkan dengan hasil identifikasi yang dilakukan secara manual oleh manusia. Struktur data ini akan dihasilkan oleh modul evaluasi.
 \end{enumerate}

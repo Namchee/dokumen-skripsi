@@ -11,7 +11,7 @@ Untuk melakukan pengujian terhadap hasil identifikasi rombongan, diperlukan sumb
 \begin{enumerate}
     \item \textbf{BIWI ETH Walking Pedestrian}
     
-    Data pergerakan BIWI ETH diambil dari pengamatan pergerakan pejalan kaki dua arah di depan gedung universitas ETH Zurich, Swiss pada tahun 2009 \cite{pellegrini:eth}. Data pergerakan BIWI ETH memiliki karakteristik tingkat kepadatan pejalan kaki dan pergerakan kolektif yang rendah. Informasi yang tercatat dalam data pergerakan BIWI ETH dicatat setiap 2\.5 \textit{frame} per detik. Rekaman video pergerakan pejalan kaki pada data pergerakan BIWI ETH berjalan dalam 25 \textit{frame} per detik. Gambar \ref{bab6:contoh-eth} menunjukkan salah satu cuplikan dari rekaman video data pergerakan BIWI ETH.
+    Data pergerakan BIWI ETH diambil dari pengamatan pergerakan pejalan kaki dua arah di depan gedung universitas ETH Zurich, Swiss pada tahun 2009~\cite{pellegrini:eth}. Data pergerakan BIWI ETH memiliki karakteristik tingkat kepadatan pejalan kaki dan pergerakan kolektif yang rendah. Informasi yang tercatat dalam data pergerakan BIWI ETH dicatat setiap 2\.5 \textit{frame} per detik. Rekaman video pergerakan pejalan kaki pada data pergerakan BIWI ETH berjalan dalam 25 \textit{frame} per detik. Gambar~\ref{bab6:contoh-eth} menunjukkan salah satu cuplikan dari rekaman video data pergerakan BIWI ETH.
     
     \begin{figure}[b!]
         \centering
@@ -22,7 +22,7 @@ Untuk melakukan pengujian terhadap hasil identifikasi rombongan, diperlukan sumb
     
     \item \textbf{Vittorio Emanuele II Gallery (VEIIG)}
     
-    Data pergerakan VEIIG diambil dari pengamatan pergerakan pejalan kaki dua arah di daerah sekitar pusat perbelanjaan Vittorio Emanuele II Galleria pada 24 November 2012 \cite{bandini:gveii}. Data pergerakan VEIIG memiliki tingkat kepadatan pergerakan kolektif yang dinamis dan memiliki kecepatan perubahan kepadatan yang tinggi. Informasi yang tercatat dalam data pergerakan VEIIG dicatat setiap 8 \textit{frame} per detik. Rekaman video pergerakan dari data pergerakan VEIIG berjalan dalam 8 \textit{frame} per detik. Gambar \ref{bab6:contoh-gveii} menunjukkan cuplikan dari rekaman video data pergerakan GVEII.
+    Data pergerakan VEIIG diambil dari pengamatan pergerakan pejalan kaki dua arah di daerah sekitar pusat perbelanjaan Vittorio Emanuele II Galleria pada 24 November 2012~\cite{bandini:gveii}. Data pergerakan VEIIG memiliki tingkat kepadatan pergerakan kolektif yang dinamis dan memiliki kecepatan perubahan kepadatan yang tinggi. Informasi yang tercatat dalam data pergerakan VEIIG dicatat setiap 8 \textit{frame} per detik. Rekaman video pergerakan dari data pergerakan VEIIG berjalan dalam 8 \textit{frame} per detik. Gambar~\ref{bab6:contoh-gveii} menunjukkan cuplikan dari rekaman video data pergerakan GVEII.
     
     Untuk mempermudah proses pengujian algoritma identifikasi rombongan, data pergerakan VEIIG yang digunakan dalam proses pengujian ini akan dipotong menjadi data pergerakan yang berdurasi sepanjang 5 menit.
     
@@ -42,16 +42,14 @@ Untuk melakukan pengujian terhadap hasil identifikasi rombongan, diperlukan sumb
     
     \item \textbf{Crowds by Example (CBE)}
     
-    Data pergerakan CBE diambil dari pengamatan pergerakan pejalan kaki multidireksional di luar sebuah gedung universitas \cite{solera:06:range-reference}. Data pergerakan CBE memiliki tingkat kepadatan pejalan kaki menengah, namun data pergerakan CBE tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan entitas yang multidireksional. Informasi yang tercatat dalam data pergerakan CBE dicatat setiap 25 \textit{frame} per detik. Rekaman video pergerakan pada data pergerakan CBE berjalan dalam 25 \textit{frame} per detik. Gambar \ref{bab6:contoh-cbe} menunjukkan cuplikan dari rekaman video data pergerakan CBE.
-    
-    
+    Data pergerakan CBE diambil dari pengamatan pergerakan pejalan kaki multidireksional di luar sebuah gedung universitas~\cite{solera:06:range-reference}. Data pergerakan CBE memiliki tingkat kepadatan pejalan kaki menengah, namun data pergerakan CBE tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan entitas yang multidireksional. Informasi yang tercatat dalam data pergerakan CBE dicatat setiap 25 \textit{frame} per detik. Rekaman video pergerakan pada data pergerakan CBE berjalan dalam 25 \textit{frame} per detik. Gambar~\ref{bab6:contoh-cbe} menunjukkan cuplikan dari rekaman video data pergerakan CBE.
 \end{enumerate}
 
-Seluruh informasi yang terdapat dalam data pergerakan disajikan dalam bentuk berkas teks yang merupakan hasil ekstraksi terhadap lintasan-lintasan yang terdapat dalam rekaman video. Hasil ekstraksi lintasan dari rekaman video pergerakan kemudian diterjemahkan ke dalam ruang gerak $\mathbb{R}^2$ dengan mengalikan hasil terjemahan mentah dengan \textit{homography matrix}.
+Seluruh informasi yang terdapat dalam data pergerakan disajikan dalam bentuk berkas teks yang merupakan hasil ekstraksi terhadap lintasan-lintasan yang terdapat dalam rekaman video. Hasil ekstraksi lintasan dari rekaman video pergerakan kemudian diterjemahkan ke dalam ruang gerak $\mathbb{R}^2$ dengan mengalikan hasil terjemahan mentah dengan matriks homografi.
 
 Dalam seluruh data pergerakan yang digunakan dalam proses pengujian, terdapat hasil identifikasi rombongan yang dilakukan secara manual oleh manusia yang disimpan dalam bentuk berkas teks. Hasil identifikasi tersebut menyimpan informasi mengenai seluruh rombongan yang teridentifikasi oleh manusia dalam satu baris. Setiap rombongan menyimpan informasi keanggotaan dalam bentuk kumpulan nomor identitas anggota dari rombongan yang dimaksud sesuai dengan yang tertera pada data pergerakan. Hasil identifikasi rombongan yang dilakukan oleh manusia tidak menyimpan durasi rombongan. Nantinya, hasil identifikasi tersebut akan digunakan pada proses pengujian perangkat lunak dengan membandingkan hasil identifikasi yang dilakukan oleh manusia dengan hasil identifikasi yang dihasilkan oleh perangkat lunak.
 
-Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan yang digunakan pada proses pengujian algoritma identifikasi rombongan. Nilai $g$ menunjukkan jumlah rombongan yang teridentifikasi secara manual oleh manusia. Nilai $G$ menunjukkan rentang jumlah anggota rombongan yang teridentifikasi secara manual oleh manusia.
+Tabel~\ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan yang digunakan pada proses pengujian algoritma identifikasi rombongan. Nilai $g$ menunjukkan jumlah rombongan yang teridentifikasi secara manual oleh manusia. Nilai $G$ menunjukkan rentang jumlah anggota rombongan yang teridentifikasi secara manual oleh manusia.
 
 \begin{table}[h]
     \centering
@@ -63,7 +61,7 @@ Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan y
         Durasi Video & 08:39 & 05:00 & 03:36 \\
         FPS & 2.5 & 8 & 25 \\
         Jumlah Entitas & 360 & 630 & 434 \\
-        Arah Pergerakan & Bidireksional & Bidireksional & Multidireksional \\
+        Arah Pergerakan & Dua arah & Dua arah & Multi arah \\
         Jumlah \textit{Frame} & 1480 & 2400 & 901 \\
         $g$ & 58 & 207 & 115 \\
         $G$ & 2--3 & 2--7 & 2--4 \\
@@ -72,12 +70,30 @@ Tabel \ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan y
     \label{bab6:metadata-pergerakan}
 \end{table}
 
+\begin{figure}[b!]
+    \centering
+    \captionsetup{width=.65\textwidth}
+    \includegraphics[width=0.55\textwidth]{Gambar/bab6:dua-arah.pdf}
+    \caption[Pergerakan dua arah]{Pergerakan dua arah pada data pergerakan VEIIG}
+    \label{bab6:dua-arah}
+\end{figure}
+
+Aspek menarik yang perlu diperhatikan dari data pergerakan yang digunakan adalah sifat dari arah pergerakan entitas dalam data pergerakan. Terdapat dua jenis sifat arah pergerakan, yaitu dua arah dan multi arah. Pada data pergerakan dua arah, entitas yang bergerak hanya sepasang titik masuk dan titik keluar. Entitas yang bergerak hanya akan masuk dan keluar dari rekaman video pergerakan dari pasangan titik tersebut. Pada data pergerakan multi arah, terdapat lebih dari satu pasang titik masuk dan titik keluar entitas pada rekaman video pergerakan. Aspek tersebut tentunya akan mempersulit proses penentuan kedekatan spasial antar entitas yang menjadi dasar utama dalam penentuan keanggotaan rombongan. Gambar~\ref{bab6:dua-arah} dan Gambar~\ref{bab6:multi-arah} menunjukkan perbedaan antara pergerakan dua arah dan multi arah pada data pergerakan yang digunakan.
+
+\begin{figure}[t!]
+    \centering
+    \captionsetup{width=.65\textwidth}
+    \includegraphics[width=0.65\textwidth]{Gambar/bab6:multi-arah.pdf}
+    \caption[Pergerakan multi arah]{Pergerakan multi arah pada data pergerakan CBE}
+    \label{bab6:multi-arah}
+\end{figure}
+
 \section{Pengujian Kuantitatif}
 \label{sec:quantitative}
 
 Dalam pengujian kuantitatif, perangkat lunak akan melakukan proses identifikasi rombongan pada kedua sumber data pergerakan menggunakan parameter identifikasi yang bervariasi. Pengaruh parameter identifikasi yang diuji adalah jumlah entitas minimum $m$, interval waktu minimum $k$, jarak entitas maksimum $r$, dan perbedaan sudut maksimum antar entitas $\vartheta$. 
 
-Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak dengan hasil identifikasi yang dilakukan manusia diukur menggunakan nilai \textit{F1 score}. \textit{F1 score} merupakan nilai \textit{harmonic mean} dari \textit{precision} dan \textit{recall} yang dihitung menggunakan rumus $F1 = 2 \cdot \frac{P \cdot R}{P + R}$. Sebagai catatan, proses pengujian pada skripsi ini menghindari penggunaan istilah 'ketepatan' dan 'kebenaran'. Hal tersebut disebabkan oleh tidak adanya acuan mutlak yang dapat digunakan untuk mengukur kebenaran identifikasi \cite{wiratma:software}. Tabel \ref{bab6:parameter} menunjukkan parameter-parameter identifikasi rombongan yang akan digunakan pada proses pengujian hasil identifikasi rombongan.
+Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak dengan hasil identifikasi yang dilakukan manusia diukur menggunakan nilai \textit{F1 score}. Sebagai catatan, proses pengujian pada skripsi ini menghindari penggunaan istilah 'ketepatan' dan 'kebenaran'. Hal tersebut disebabkan oleh tidak adanya acuan mutlak yang dapat digunakan untuk mengukur kebenaran identifikasi~\cite{wiratma:software}. Tabel~\ref{bab6:parameter} menunjukkan parameter-parameter identifikasi rombongan yang akan digunakan pada proses pengujian hasil identifikasi rombongan.
 
 \begin{table}[h]
     \centering
@@ -90,38 +106,29 @@ Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak deng
         $k$ & \{7.2, 8.9, 10.5\} & \{17, 38, 58\} & \{36, 57, 78\} \\
         $r$ & \{1, 1.24\} & \{0.8, 1\} & \{1.22, 1.52\} \\
         $\vartheta$ & \{$\frac{\pi}{32}$, $\frac{\pi}{64}$\} & \{$\frac{\pi}{32}$, $\frac{\pi}{64}$\} & \{$\frac{\pi}{32}$, $\frac{\pi}{64}$\} \\
-        $n$ & 1 & 2 & 1 \\
+        $n$ & 1.28 & 1.69 & 1.07 \\
         \hline
     \end{tabular}
     
     \label{bab6:parameter}
 \end{table}
 
-Untuk setiap data pergerakan yang diuji, jumlah entitas minimum $m$ ditetapkan dengan nilai $2$, sesuai dengan jumlah anggota minimum dari hasil identifikasi yang dilakukan oleh manusia. Nilai $r$ yang diuji ditentukan dari densitas rombongan dari sumber data pergerakan \cite{solera:06:range-reference} dan teori jarak personal berdasarkan teori proksemik \cite{hall:06:proxemic}. Nilai $\vartheta$ yang digunakan ditentukan secara intuitif dengan mengamati deviasi sudut yang umum ketika manusia bergerak. Nilai jumlah kedekatan minimum $n$ ditentukan berdasarkan setengah dari jumlah anggota rata-rata yang terdapat pada data pergerakan berdasarkan hasil identifikasi manusia. Terakhir, nilai $k$ yang diuji diambil dari durasi rombongan paling singkat dari seluruh rombongan berdasarkan hasil identifikasi yang dilakukan oleh manusia. Durasi rombongan dihitung ketika seluruh anggota rombongan muncul pada video pergerakan. Dua nilai $k$ lainnya diambil dari durasi rata-rata rombongan $\delta$ dan standar deviasi durasi rombongan $\sigma$, yaitu $\delta - \sigma$ dan $\delta - \frac{1}{2}\sigma$ \cite{wiratma:software}.
+Untuk setiap data pergerakan yang diuji, jumlah entitas minimum $m$ ditetapkan dengan nilai $2$, sesuai dengan jumlah anggota minimum dari hasil identifikasi yang dilakukan oleh manusia. Nilai $r$ yang digunakan ditentukan dari densitas rombongan dari setiap sumber data pergerakan~\cite{solera:06:range-reference} yang telah dihitung pada penelitian yang dilakukan oleh Lionov Wiratma~\cite{wiratma:software} dan jarak ruang sosial berdasarkan teori proksemik yang dibahas pada Subbab~\ref{sec:proxemic}. Nilai $\vartheta$ yang digunakan ditentukan secara intuitif dengan mengamati deviasi sudut yang umum ketika manusia bergerak. Nilai jumlah kedekatan minimum $n$ ditentukan berdasarkan setengah dari jumlah anggota rata-rata yang terdapat pada data pergerakan berdasarkan hasil identifikasi manusia. Terakhir, nilai $k$ yang diuji diambil dari durasi rombongan paling singkat dari seluruh rombongan berdasarkan hasil identifikasi yang dilakukan oleh manusia. Durasi rombongan dihitung ketika seluruh anggota rombongan muncul pada video pergerakan. Dua nilai $k$ lainnya diambil dari durasi rata-rata rombongan $\delta$ dan standar deviasi durasi rombongan $\sigma$, yaitu $\delta - \sigma$ dan $\delta - \frac{1}{2}\sigma$~\cite{wiratma:software}. Nilai kedekatan minimum $n$ yang digunakan sebagai parameter identifikasi didapatkan dari jumlah rata-rata anggota rombongan yang teridentifikasi oleh manusia pada hasil identifikasi acuan yang dibagi $2$. Pada proses pengujian, nilai $n$ yang digunakan merupakan pembulatan dari nilai $n$ sesungguhnya. 
 
-Pengujian efektivitas algoritma pengurangan redundansi dilakukan dengan membandingkan dua hasil pengujian identifikasi rombongan untuk setiap data pergerakan yang diuji. Pengujian pertama dilakukan dengan mengidentifikasi rombongan menggunakan algoritma identifikasi rombongan ditambah dengan upaya peningkatan kualitas hasil identifikasi menggunakan algoritma pengurangan redundansi rombongan yang ditunjukkan melalui Algoritma \ref{bab3:redundansi}. Pengujian kedua dilakukan dengan mengidentifikasi rombongan menggunakan algoritma identifikasi tanpa adanya upaya pengurangan redundansi pada hasil identifikasi rombongan.
+Pengujian efektivitas algoritma pengurangan redundansi dilakukan dengan membandingkan dua hasil pengujian identifikasi rombongan untuk setiap data pergerakan yang diuji. Pengujian pertama dilakukan dengan mengidentifikasi rombongan menggunakan algoritma identifikasi rombongan ditambah dengan upaya peningkatan kualitas hasil identifikasi menggunakan algoritma pengurangan redundansi rombongan yang ditunjukkan melalui Algoritma~\ref{bab3:redundansi}. Pengujian kedua dilakukan dengan mengidentifikasi rombongan menggunakan algoritma identifikasi tanpa adanya upaya pengurangan redundansi pada hasil identifikasi rombongan.
 
 \section{Pengujian Kualitatif}
 \label{sec:qualitative}
 
-Dalam pengujian kualitatif, hasil identifikasi rombongan yang dihasilkan akan divisualisasikan secara langsung pada lintasan yang dilalui pejalan kaki pada video rekaman sumber data pergerakan. Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar \ref{bab6:representasi-entitas}. Kepala menunjukkan posisi entitas saat ini. Ekor menunjukkan urutan posisi-posisi sebelumnya yang ditempuh oleh entitas. ID menunjukkan nomor identitas unik yang digunakan untuk membedakan satu entitas dengan entitas lainnya.
+Dalam pengujian kualitatif, hasil identifikasi rombongan yang dihasilkan akan divisualisasikan secara langsung pada lintasan yang dilalui pejalan kaki pada video rekaman sumber data pergerakan. Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar~\ref{bab2:entitas}. Informasi mengenai warna dan bentuk figur yang digunakan untuk merepresentasikan entitas dapat dilihat melalui Subbab~\ref{subsec:qualitative-theory}.
 
-Keanggotaan entitas pada sebuah rombongan akan ditunjukkan melalui warna kepala dan ekor dari entitas. Warna kepala entitas merepresentasikan keanggotaan entitas yang dihasilkan oleh perangkat lunak. Warna ekor entitas merepresentasikan keanggotaan entitas yang ditunjukkan oleh hasil identifikasi yang dilakukan oleh manusia. Entitas yang tergabung dalam rombongan yang sama akan memiliki warna kepala dan ekor yang sama. Entitas yang tidak tergabung dalam rombongan manapun akan memiliki kepala dan ekor yang berwarna putih. Hal yang patut menjadi perhatian adalah warna yang digunakan untuk merepresentasikan sebuah rombongan akan diambil secara acak. Oleh karena itu, warna kepala dan ekor dapat berbeda walaupun hasil identifikasi manusia dan hasil identifikasi perangkat lunak menyatakan hasil yang sama. Selain itu, entitas yang tergabung dalam 2 atau lebih rombongan akan memiliki variasi warna kepala entitas sejumlah rombongan di mana entitas yang dimaksud tergabung sebagai anggota rombongan.
+Pada penelitian ini, beberapa hasil visualisasi yang menarik untuk dibahas akan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar~\ref{bab6:contoh-visualisasi}. Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak pada video rekaman pergerakan pejalan kaki dilakukan dengan bantuan perangkat lunak visualisasi yang dibuat oleh Lionov Wiratma dan Maurice Marx~\cite{wiratma:software}. Perangkat lunak tersebut menerima masukan berupa rekaman video pergerakan, rekaman data lintasan, hasil identifikasi manusia, dan hasil identifikasi dari perangkat lunak identifikasi rombongan. Perangkat lunak visualisasi kemudian akan menghasilkan video rekaman sumber data yang telah dimodifikasi di mana seluruh entitas yang terdapat dalam video rekaman asli akan ditandai dengan figur yang ditunjukkan melalui Gambar~\ref{bab2:entitas}.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.3\textwidth]{Gambar/bab6:entitas.pdf}
-    \caption{Representasi entitas pada pengujian kualitatif}
-    \label{bab6:representasi-entitas}
-\end{figure}
-
-Pada penelitian ini, beberapa hasil visualisasi yang menarik untuk dibahas akan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar \ref{bab6:contoh-visualisasi}. Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak pada video rekaman pergerakan pejalan kaki dilakukan dengan bantuan perangkat lunak visualisasi yang dibuat oleh Lionov Wiratma dan Maurice Marx \cite{wiratma:software}. Perangkat lunak tersebut menerima masukan berupa rekaman video pergerakan, rekaman data lintasan, hasil identifikasi manusia, dan hasil identifikasi dari perangkat lunak identifikasi rombongan. Perangkat lunak visualisasi kemudian akan menghasilkan video rekaman sumber data yang telah dimodifikasi di mana seluruh entitas yang terdapat dalam video rekaman asli akan ditandai dengan figur yang ditunjukkan melalui Gambar \ref{bab6:representasi-entitas}. 
-
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \captionsetup{width=0.85\textwidth}
-    \includegraphics[width=0.825\textwidth]{Gambar/bab6:contoh-visualisasi.pdf}
-    \caption[Contoh hasil visualisasi rombongan]{Contoh hasil visualisasi dari hasil identifikasi rombongan pada video rekaman data pergerakan pejalan kaki}
+    \includegraphics[width=0.625\textwidth]{Gambar/bab6:contoh-visualisasi.pdf}
+    \caption[Contoh hasil visualisasi rombongan]{Contoh hasil visualisasi yang dihasilkan perangkat lunak visualisasi dari hasil identifikasi rombongan pada video rekaman data pergerakan pejalan kaki}
     \label{bab6:contoh-visualisasi}
 \end{figure}
 
@@ -136,7 +143,7 @@ Bagian ini akan menyajikan hasil pengujian pada setiap sumber data pergerakan ya
 \subsubsection{Hasil Pengujian Kuantitatif}
 \label{subsubsec:eth-quantitative}
 
-Pada data BIWI ETH yang memiliki tingkat kepadatan pejalan kaki yang rendah, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{precision} yang cukup rendah dan nilai \textit{recall} yang cukup tinggi seperti yang ditunjukkan melalui Tabel \ref{bab6:seq-eth-numbers}. Nilai \textit{precision} yang cukup rendah menandakan bahwa algoritma identifikasi rombongan mengidentifikasi beberapa rombongan yang tidak terdapat pada hasil identifikasi manusia. Nilai \textit{recall} yang cukup tinggi menandakan bahwa algoritma identifikasi rombongan mampu
+Pada data BIWI ETH yang memiliki tingkat kepadatan pejalan kaki yang rendah, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{precision} yang cukup rendah dan nilai \textit{recall} yang cukup tinggi seperti yang ditunjukkan melalui Tabel~\ref{bab6:seq-eth-numbers}. Nilai \textit{precision} yang cukup rendah menandakan bahwa algoritma identifikasi rombongan mengidentifikasi beberapa rombongan yang tidak terdapat pada hasil identifikasi manusia. Hal tersebut disebabkan oleh hasil identifikasi manusia di mana satu entitas hanya dapat tergabung pada satu rombongan. Nilai \textit{recall} yang cukup tinggi menandakan bahwa algoritma identifikasi rombongan mampu
 mengidentifikasi cukup banyak rombongan yang relevan dengan hasil identifikasi manusia.
 
 \begin{table}[h]
@@ -146,18 +153,18 @@ mengidentifikasi cukup banyak rombongan yang relevan dengan hasil identifikasi m
 \begin{tabular}{|l|l|c|c|c|}
 \hline
 \multicolumn{2}{|l|}{}                                                                                         & Precision & Recall & F1 Score \\ \hline \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 7.2$\\ $r = 1$\end{tabular}}     & $\vartheta = \frac{\pi}{32}$ & 0.342     & 0.631  & 0.443    \\ \cline{2-5} 
-                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.373     & 0.631  & 0.469    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 7.2$\\ $r = 1.24$\end{tabular}}  & $\vartheta = \frac{\pi}{32}$ & 0.350     & 0.754  & 0.478    \\ \cline{2-5} 
-                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.320     & 0.723  & 0.443    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 8.9$\\ $r = 1$\end{tabular}}     & $\vartheta = \frac{\pi}{32}$ & 0.348     & 0.708  & 0.467    \\ \cline{2-5} 
-                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.351     & 0.708  & 0.469    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 8.9$\\ $r = 1.24$\end{tabular}}  & $\vartheta = \frac{\pi}{32}$ & 0.325     & 0.785  & 0.459    \\ \cline{2-5} 
-                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.296     & 0.769  & 0.427    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 10.5$\\ $r = 1$\end{tabular}}    & $\vartheta = \frac{\pi}{32}$ & 0.368     & 0.646  & 0.469    \\ \cline{2-5} 
-                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.377     & 0.662  & 0.480    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 10.5$\\ $r = 1.24$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.338     & 0.769  & 0.469    \\ \cline{2-5} 
-                                                                                & $\vartheta = \frac{\pi}{64}$ & 0.329     & 0.754  & 0.458    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 7.2$\\ $r = 1$\end{tabular}}     & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.342     & 0.631  & 0.443    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.373     & 0.631  & 0.469    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 7.2$\\ $r = 1.24$\end{tabular}}  & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.350     & 0.754  & 0.478    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.320     & 0.723  & 0.443    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 8.9$\\ $r = 1$\end{tabular}}     & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.348     & 0.708  & 0.467    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.351     & 0.708  & 0.469    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 8.9$\\ $r = 1.24$\end{tabular}}  & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.325     & 0.785  & 0.459    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.296     & 0.769  & 0.427    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 10.5$\\ $r = 1$\end{tabular}}    & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.368     & 0.646  & 0.469    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.377     & 0.662  & 0.480    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 10.5$\\ $r = 1.24$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.338     & 0.769  & 0.469    \\ \cline{2-5} 
+                                                                                & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.329     & 0.754  & 0.458    \\ \hline
 \end{tabular}
 
 \label{bab6:seq-eth-numbers}
@@ -169,75 +176,76 @@ Peningkatan terhadap nilai $r$ berdampak pada peningkatan nilai \textit{recall} 
 
 Memperketat syarat kedekatan spasial dengan memperkecil nilai $\vartheta$ memberikan dampak positif peningkatan nilai \textit{precision} dan \textit{F1 score} pada $r = 1$. Namun hal tersebut berdampak negatif pada $r = 1.24$, di mana menambah nilai $r$ menyebabkan penurunan nilai \textit{precision} dan \textit{F1 score} untuk setiap nilai $k$ yang diuji. Penurunan nilai \textit{precision} disebabkan oleh adanya subrombongan baru yang terpisah dari rombongan lain akibat salah satu entitasnya tidak memenuhi syarat perbedaan sudut maksimum. Subrombongan tersebut tidak terdapat pada hasil identifikasi manusia, sehingga adanya penambahan rombongan baru menambah nilai \textit{false positive} dari hasil identifikasi rombongan yang dilakukan oleh perangkat lunak.
 
-\begin{table}[b!]
+Peningkatan terhadap nilai $k$ berdampak pada peningkatan nilai \textit{F1 score} secara umum pada seluruh kombinasi nilai $r$ dan $\vartheta$. Selain peningkatan terhadap nilai \textit{F1 score}, peningkatan terhadap nilai $k$ juga meningkatkan nilai \textit{precision} pada $r = 1$. Sayangnya, peningkatkan tersebut berlaku sebaliknya pada $r = 1.24$ karena adanya penurunan nilai \textit{precision} pada $k = 8.9$ dan meningkat kembali pada $k = 10.5$. Nilai \textit{recall} meningkat pada $r = 1$ untuk $k = 8.9$ dan kembali menurun untuk $k = 10.5$. Perubahan terhadap nilai $k$ memiliki pengaruh yang sangat kecil pada $r = 1.24$.
+
+
+\begin{table}[h!]
 \centering
 \captionsetup{width=0.6\textwidth}
 \caption{Hasil pengujian kuantitatif pada data pergerakan BIWI ETH tanpa pengurangan redundansi rombongan}
 \begin{tabular}{|l|l|c|c|c|}
 \hline
 \multicolumn{2}{|l|}{}                                                                                          & Precision & Recall & F1 Score \\ \hline \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 7.2$\\ $r = 1$\end{tabular}}     & $\vartheta = \frac{\pi}{32}$ & 0.291     & 0.631  & 0.398    \\ \cline{2-5} 
-                                                                                 & $\vartheta = \frac{\pi}{64}$ & 0.318     & 0.631  & 0.423    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 7.2$\\ $r = 1.24$\end{tabular}}  & $\vartheta = \frac{\pi}{32}$ & 0.292     & 0.754  & 0.421    \\ \cline{2-5} 
-                                                                                 & $\vartheta = \frac{\pi}{64}$ & 0.272     & 0.723  & 0.395    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 8.9$\\ $r = 1$\end{tabular}}     & $\vartheta = \frac{\pi}{32}$ & 0.289     & 0.708  & 0.411    \\ \cline{2-5} 
-                                                                                 & $\vartheta = \frac{\pi}{64}$ & 0.297     & 0.708  & 0.418    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 8.9$\\ $r = 1.24$\end{tabular}}  & $\vartheta = \frac{\pi}{32}$ & 0.262     & 0.785  & 0.392    \\ \cline{2-5} 
-                                                                                 & $\vartheta = \frac{\pi}{64}$ & 0.250     & 0.769  & 0.377    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 10.5$\\ $r = 1$\end{tabular}}    & $\vartheta = \frac{\pi}{32}$ & 0.307     & 0.646  & 0.416    \\ \cline{2-5} 
-                                                                                 & $\vartheta = \frac{\pi}{64}$ & 0.339     & 0.662  & 0.448    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 10.5$\\ $r = 1.24$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.265     & 0.769  & 0.394    \\ \cline{2-5} 
-                                                                                 & $\vartheta = \frac{\pi}{64}$ & 0.271     & 0.754  & 0.398    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 7.2$\\ $r = 1$\end{tabular}}     & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.291     & 0.631  & 0.398    \\ \cline{2-5} 
+                                                                                 & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.318     & 0.631  & 0.423    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 7.2$\\ $r = 1.24$\end{tabular}}  & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.292     & 0.754  & 0.421    \\ \cline{2-5} 
+                                                                                 & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.272     & 0.723  & 0.395    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 8.9$\\ $r = 1$\end{tabular}}     & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.289     & 0.708  & 0.411    \\ \cline{2-5} 
+                                                                                 & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.297     & 0.708  & 0.418    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 8.9$\\ $r = 1.24$\end{tabular}}  & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.262     & 0.785  & 0.392    \\ \cline{2-5} 
+                                                                                 & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.250     & 0.769  & 0.377    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 10.5$\\ $r = 1$\end{tabular}}    & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.307     & 0.646  & 0.416    \\ \cline{2-5} 
+                                                                                 & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.339     & 0.662  & 0.448    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 10.5$\\ $r = 1.24$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.265     & 0.769  & 0.394    \\ \cline{2-5} 
+                                                                                 & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.271     & 0.754  & 0.398    \\ \hline
 \end{tabular}
 \label{bab6:seq-eth-redundant}
 \end{table}
 
-Peningkatan terhadap nilai $k$ berdampak pada peningkatan nilai \textit{F1 score} secara umum pada seluruh kombinasi nilai $r$ dan $\vartheta$. Selain peningkatan terhadap nilai \textit{F1 score}, peningkatan terhadap nilai $k$ juga meningkatkan nilai \textit{precision} pada $r = 1$. Sayangnya, peningkatkan tersebut berlaku sebaliknya pada $r = 1.24$ karena adanya penurunan nilai \textit{precision} pada $k = 8.9$ dan meningkat kembali pada $k = 10.5$. Nilai \textit{recall} meningkat pada $r = 1$ untuk $k = 8.9$ dan kembali menurun untuk $k = 10.5$. Perubahan terhadap nilai $k$ memiliki pengaruh yang sangat kecil pada $r = 1.24$.
-
-Upaya pengurangan redundansi rombongan menggunakan Algoritma \ref{bab3:redundansi} membawa dampak positif bagi hasil identifikasi pada data pergerakan BIWI ETH. Hal tersebut dapat dilihat melalui evaluasi hasil identifikasi rombongan tanpa pengurangan redundansi yang ditunjukkan melalui Tabel \ref{bab6:seq-eth-redundant}. Tanpa adanya upaya pengurangan redundansi rombongan, algoritma identifikasi menghasilkan terlalu banyak rombongan redundan yang tidak terdapat pada hasil identifikasi manusia. Rombongan-rombongan redundan tersebut menyebabkan penurunan terhadap nilai \textit{precision} dan \textit{F1 score} secara keseluruhan tanpa mempengaruhi nilai \textit{recall} sedikitpun bila dibandingkan dengan hasil identifikasi rombongan dengan pengurangan redundansi rombongan.
+Upaya pengurangan redundansi rombongan menggunakan Algoritma~\ref{bab3:redundansi} membawa dampak positif bagi hasil identifikasi pada data pergerakan BIWI ETH. Hal tersebut dapat dilihat melalui evaluasi hasil identifikasi rombongan tanpa pengurangan redundansi yang ditunjukkan melalui Tabel~\ref{bab6:seq-eth-redundant}. Tanpa adanya upaya pengurangan redundansi rombongan, algoritma identifikasi menghasilkan terlalu banyak rombongan redundan yang tidak terdapat pada hasil identifikasi manusia. Rombongan-rombongan redundan tersebut menyebabkan penurunan terhadap nilai \textit{precision} dan \textit{F1 score} secara keseluruhan tanpa mempengaruhi nilai \textit{recall} sedikitpun bila dibandingkan dengan hasil identifikasi rombongan dengan pengurangan redundansi rombongan.
 
 \subsubsection{Hasil Pengujian Kualitatif}
 \label{subsubsec:eth-qualitative}
 
-Hasil pengujian kualitatif melalui visualisasi pada data BIWI ETH menunjukkan alasan dari tingginya nilai \textit{false positive} pada hasil identifikasi perangkat lunak yang ditunjukkan melalui Gambar \ref{bab6:masalah-eth}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat banyak subrombongan yang diidentifikasi sebagai rombongan oleh perangkat lunak, di mana subrombongan-subrombongan tersebut tidak terdapat pada hasil identifikasi yang dilakukan oleh manusia. Hal yang sama terjadi pada untuk setiap nilai $k$ yang diuji.
+Hasil pengujian kualitatif melalui visualisasi pada data BIWI ETH menunjukkan alasan dari tingginya nilai \textit{false positive} pada hasil identifikasi perangkat lunak yang ditunjukkan melalui Gambar~\ref{bab6:masalah-eth}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat banyak subrombongan yang diidentifikasi sebagai rombongan oleh perangkat lunak, di mana subrombongan-subrombongan tersebut tidak terdapat pada hasil identifikasi yang dilakukan oleh manusia. Hal yang sama terjadi pada untuk setiap nilai $k$ yang diuji.
+
+Mengurangi nilai $r$ dan $\vartheta$ sedikit mengurangi jumlah subrombongan redundan yang teridentifikasi, namun hal tersebut tidak cukup untuk mengurangi nilai \textit{false positive} dari hasil identifikasi perangkat lunak secara signifikan. Selain itu, memperketat syarat kedekatan spasial membuat keanggotaan rombongan menjadi terputus yang dapat dilihat melalui Gambar~\ref{bab6:masalah-syarat-ketat-eth}. Pada gambar tersebut, dapat dilihat bahwa entitas bergerak dengan nomor identitas 2 tidak tergabung dalam rombongan yang dibentuk oleh entitas-entitas dengan nomor identitas 3 dan 6.
+
+Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak negatif pada relevansi hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar~\ref{bab6:masalah-eth-n}. Pada gambar tersebut, dapat dilihat bahwa entitas 44 tergabung sebagai anggota dari rombongan yang dibentuk oleh entitas 40, 41, dan 42 walaupun memiliki jarak yang jauh. Keanggotaan tersebut disebabkan oleh nilai kedekatan minimum $n = 1$ yang dipenuhi oleh entitas 43 yang cukup dekat dengan entitas 41. Keanggotaan entitas 43 menyebabkan entitas 44 terhubung dengan entitas 40, 41, dan 42 melalui entitas 43. Hal tersebut tidak relevan dengan hasil identifikasi manusia yang menganggap entitas 44 terlalu jauh dengan entitas 40, 41, dan 42 sehingga entitas 44 tidak tergabung dalam rombongan manapun.
 
 \begin{figure}[h]
     \centering
     \captionsetup{width=.65\textwidth}
     \begin{subfigure}[t]{0.275\textwidth}
         \centering
-        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-eth-1.pdf}
+        \includegraphics[height=5cm]{Gambar/bab6:masalah-eth-1.pdf}
     \end{subfigure}
     \begin{subfigure}[t]{0.275\textwidth}
         \centering
-        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-eth-2.pdf}
+        \includegraphics[height=5cm]{Gambar/bab6:masalah-eth-2.pdf}
     \end{subfigure}
     \caption[Subrombongan pada data BIWI ETH]{Banyaknya subrombongan yang dihasilkan oleh perangkat lunak menyebabkan kenaikan nilai \textit{false positive} dari hasil identifikasi pada data pergerakan BIWI ETH}
     \label{bab6:masalah-eth}
 \end{figure}
 
-Mengurangi nilai $r$ dan $\vartheta$ sedikit mengurangi jumlah subrombongan redundan yang teridentifikasi, namun hal tersebut tidak cukup untuk mengurangi nilai \textit{false positive} dari hasil identifikasi perangkat lunak secara signifikan. Selain itu, memperketat syarat kedekatan spasial membuat keanggotaan rombongan menjadi terputus yang dapat dilihat melalui Gambar \ref{bab6:masalah-syarat-ketat-eth}. Pada gambar tersebut, dapat dilihat bahwa entitas bergerak dengan nomor identitas 2 tidak tergabung dalam rombongan yang dibentuk oleh entitas-entitas dengan nomor identitas 3 dan 6.
-
 \begin{figure}[h]
     \centering
     \captionsetup{width=0.6\textwidth}
-    \includegraphics[height=4cm]{Gambar/bab6:masalah-eth-ketat.pdf}
+    \includegraphics[height=3cm]{Gambar/bab6:masalah-eth-ketat.pdf}
     \caption[Dampak ketatnya syarat kedekatan spasial pada data ETH]{Memperketat syarat kedekatan spasial membuat entitas dengan nomor identitas 2 keluar dari rombongan yang dibentuk oleh entitas 2, 3, dan 6}
     \label{bab6:masalah-syarat-ketat-eth}
 \end{figure}
 
-Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak negatif pada relevansi hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar \ref{bab6:masalah-eth-n}. Pada gambar tersebut, dapat dilihat bahwa entitas 44 tergabung sebagai anggota dari rombongan yang dibentuk oleh entitas 40, 41, dan 42 walaupun memiliki jarak yang jauh. Keanggotaan tersebut disebabkan oleh nilai kedekatan minimum $n = 1$ yang dipenuhi oleh entitas 43 yang cukup dekat dengan entitas 41. Keanggotaan entitas 43 menyebabkan entitas 44 terhubung dengan entitas 40, 41, dan 42 melalui entitas 43. Hal tersebut tidak relevan dengan hasil identifikasi manusia yang menganggap entitas 44 terlalu jauh dengan entitas 40, 41, dan 42 sehingga entitas 44 tidak tergabung dalam rombongan manapun.
-
-\begin{figure}[h]
+\begin{figure}[b!]
     \centering
     \captionsetup{width=.6\textwidth}
-    \begin{subfigure}[t]{0.175\textwidth}
+    \begin{subfigure}[h]{0.15\textwidth}
         \centering
-        \includegraphics[height=8.5cm]{Gambar/bab6:masalah-eth-n.pdf}
+        \includegraphics[height=7cm]{Gambar/bab6:masalah-eth-n.pdf}
     \end{subfigure}
-    \begin{subfigure}[t]{0.175\textwidth}
+    \begin{subfigure}[h]{0.15\textwidth}
         \centering
-        \includegraphics[height=8.5cm]{Gambar/bab6:masalah-eth-n-2.pdf}
+        \includegraphics[height=7cm]{Gambar/bab6:masalah-eth-n-2.pdf}
     \end{subfigure}
     \caption[Masalah nilai $n$ pada data BIWI ETH]{Nilai kedekatan minimum $n = 1$ membuat entitas dengan nomor identitas 44 tergabung sebagai anggota dari rombongan yang berada jauh di depan}
     \label{bab6:masalah-eth-n}
@@ -249,7 +257,7 @@ Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak 
 \subsubsection{Hasil Pengujian Kuantitatif}
 \label{subsubsec:veiig-quantitative}
 
-Pada data VEIIG yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dengan kecepatan perubahan yang dinamis, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{recall} yang tinggi disertai dengan nilai \textit{precision} yang cenderung rendah yang dapat dilihat melalui Tabel \ref{bab6:gveii-numbers}. Di satu sisi, nilai \textit{recall} yang tinggi menandakan bahwa algoritma identifikasi rombongan mampu mengidentifikasi sebagian besar rombongan yang juga diidentifikasi oleh manusia. Di sisi lain, nilai \textit{precision} yang cenderung rendah menandakan bahwa algoritma identifikasi rombongan menghasilkan terlalu banyak pergerakan kolektif yang diidentifikasi sebagai rombongan yang berdampak secara langsung pada kenaikan nilai \textit{false positive}.
+Pada data VEIIG yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dengan kecepatan perubahan yang dinamis, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{recall} yang tinggi disertai dengan nilai \textit{precision} yang cenderung rendah yang dapat dilihat melalui Tabel~\ref{bab6:gveii-numbers}. Di satu sisi, nilai \textit{recall} yang tinggi menandakan bahwa algoritma identifikasi rombongan mampu mengidentifikasi sebagian besar rombongan yang juga diidentifikasi oleh manusia. Di sisi lain, nilai \textit{precision} yang cenderung rendah menandakan bahwa algoritma identifikasi rombongan menghasilkan terlalu banyak pergerakan kolektif yang diidentifikasi sebagai rombongan yang berdampak secara langsung pada kenaikan nilai \textit{false positive}. Salah satu faktor yang menyebabkan rendahnya nilai \textit{precision} dari hasil identifikasi perangkat lunak adalah sifat dari hasil identifikasi manusia di mana satu entitas hanya dapat tergabung pada satu rombongan, di mana hal tersebut mengakibatkan peningkatan nilai \textit{false positive}.
 
 \begin{table}[h]
     \centering
@@ -258,18 +266,18 @@ Pada data VEIIG yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi 
 \begin{tabular}{|l|l|c|c|c|}
 \hline
 \multicolumn{2}{|l|}{}                                                                                       & Precision & Recall & F1 Score \\ \hline \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.219     & 0.894  & 0.351    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.323     & 0.778  & 0.457    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.309     & 0.812  & 0.447    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.235     & 0.855  & 0.369    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.268     & 0.778  & 0.399    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.290     & 0.773  & 0.422    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.216     & 0.855  & 0.345    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.225     & 0.826  & 0.354    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.262     & 0.739  & 0.387    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.291     & 0.729  & 0.416    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.230     & 0.802  & 0.357    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.245     & 0.797  & 0.375    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.219     & 0.894  & 0.351    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.323     & 0.778  & 0.457    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.309     & 0.812  & 0.447    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.235     & 0.855  & 0.369    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.268     & 0.778  & 0.399    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.290     & 0.773  & 0.422    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.216     & 0.855  & 0.345    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.225     & 0.826  & 0.354    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.262     & 0.739  & 0.387    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.291     & 0.729  & 0.416    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.230     & 0.802  & 0.357    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.245     & 0.797  & 0.375    \\ \hline
 \end{tabular}
    \label{bab6:gveii-numbers}
 \end{table}
@@ -289,85 +297,85 @@ Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \text
 \begin{tabular}{|l|l|c|c|c|}
 \hline
 \multicolumn{2}{|l|}{}                                                                                       & Precision & Recall & F1 Score \\ \hline \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.261     & 0.932  & 0.408    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.282     & 0.903  & 0.403    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.165     & 0.966  & 0.281    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.181     & 0.937  & 0.304    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.237     & 0.889  & 0.375    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.256     & 0.874  & 0.396    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.168     & 0.932  & 0.285    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.189     & 0.923  & 0.313    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.252     & 0.841  & 0.388    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.277     & 0.841  & 0.417    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ & 0.252     & 0.841  & 0.388    \\ \cline{2-5} 
-                                                                              & $\vartheta = \frac{\pi}{64}$ & 0.212     & 0.879  & 0.342    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.261     & 0.932  & 0.408    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.282     & 0.903  & 0.403    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 17$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.165     & 0.966  & 0.281    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.181     & 0.937  & 0.304    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.237     & 0.889  & 0.375    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.256     & 0.874  & 0.396    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 38$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.168     & 0.932  & 0.285    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.189     & 0.923  & 0.313    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 0.8$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.252     & 0.841  & 0.388    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.277     & 0.841  & 0.417    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 58$\\ $r = 1$\end{tabular}}   & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.252     & 0.841  & 0.388    \\ \cline{2-5} 
+                                                                              & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.212     & 0.879  & 0.342    \\ \hline
 \end{tabular}
 \label{bab6:gveii-redundant}
 \end{table}
 
-\clearpage
-
-Pengaruh pengunaan algoritma identifikasi rombongan pada data pergerakan VEIIG menghasilkan kenaikan pada nilai \textit{F1 score} secara keseluruhan yang dapat dilihat melalui perbandingan Tabel \ref{bab6:gveii-numbers} dan Tabel \ref{bab6:gveii-redundant} yang menyajikan hasil pengujian kuantitatif tanpa upaya pengurangan redundansi rombongan. Penurunan terhadap nilai \textit{F1 score} disertai penurunan nilai \textit{precision} yang disebabkan oleh banyaknya rombongan redundan yang meningkatkan nilai \textit{false positive}. Namun, algoritma pengurangan redundansi rombongan berdampak pada penurunan nilai \textit{recall} pada seluruh kombinasi nilai $k$, $r$, dan $\vartheta$ yang digunakan. Hal tersebut disebabkan oleh algoritma pengurangan redundansi menghapus beberapa rombongan-rombongan yang relevan dengan hasil identifikasi yang dilakukan oleh manusia yang berdampak pada kenaikan nilai \textit{false negative}, khususnya pada data pergerakan VEIIG yang memiliki jumlah rombongan relevan pada hasil identifikasi manusia yang jauh lebih banyak dibandingkan dengan data pergerakan BIWI ETH maupun CBE.
+Pengaruh pengunaan algoritma identifikasi rombongan pada data pergerakan VEIIG menghasilkan kenaikan pada nilai \textit{F1 score} secara keseluruhan yang dapat dilihat melalui perbandingan Tabel~\ref{bab6:gveii-numbers} dan Tabel~\ref{bab6:gveii-redundant} yang menyajikan hasil pengujian kuantitatif tanpa upaya pengurangan redundansi rombongan. Penurunan terhadap nilai \textit{F1 score} disertai penurunan nilai \textit{precision} yang disebabkan oleh banyaknya rombongan redundan yang meningkatkan nilai \textit{false positive}. Namun, algoritma pengurangan redundansi rombongan berdampak pada penurunan nilai \textit{recall} pada seluruh kombinasi nilai $k$, $r$, dan $\vartheta$ yang digunakan. Hal tersebut disebabkan oleh algoritma pengurangan redundansi menghapus beberapa rombongan-rombongan yang relevan dengan hasil identifikasi yang dilakukan oleh manusia yang berdampak pada kenaikan nilai \textit{false negative}, khususnya pada data pergerakan VEIIG yang memiliki jumlah rombongan relevan pada hasil identifikasi manusia yang jauh lebih banyak dibandingkan dengan data pergerakan BIWI ETH maupun CBE.
 
 \subsubsection{Hasil Pengujian Kualitatif}
 \label{subsubsec:veiig-qualitative}
 
-Hasil pengujian kualitatif melalui visualisasi pada data VEIIG menunjukkan alasan dari nilai \textit{precision} yang cukup rendah dari hasil identifikasi rombongan yang ditunjukkan melalui Gambar \ref{bab6:masalah-veiig-arah}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat rombongan yang tidak teridentifikasi dan ada anggota rombongan yang tidak tergabung dalam rombongan yang terbentuk. Hal tersebut disebabkan oleh nilai perbedaan sudut maksimum yang terlalu ketat dan kaku sehingga anggota rombongan tidak memenuhi syarat kedekatan spasial.
-
-Melalui proses analisis terhadap cara kerja algoritma, kekakuan pada masalah perbedaan arah maksimum berasal dari algoritma identifikasi rombongan. Berdasarkan algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma \ref{bab3:algoritma-identifikasi}, beda arah antar entitas dihitung sepanjang durasi interval waktu minimum rombongan. Dapat dikatakan bahwa setiap anggota rombongan hanya dapat memiliki beda arah yang sangat minim dalam durasi interval waktu yang cukup lama. Syarat tersebut dapat menyebabkan rombongan tidak teridentifikasi oleh algoritma apabila terdapat entitas yang melakukan perubahan arah yang kecil dengan frekuensi yang cukup tinggi.
+Hasil pengujian kualitatif melalui visualisasi pada data VEIIG menunjukkan alasan dari nilai \textit{precision} yang cukup rendah dari hasil identifikasi rombongan yang ditunjukkan melalui Gambar~\ref{bab6:masalah-veiig-arah}. 
 
 \begin{figure}[b!]
     \centering
-    \captionsetup{width=.75\textwidth}
-    \begin{subfigure}[b]{0.25\textwidth}
+    \captionsetup{width=.65\textwidth}
+    \begin{subfigure}[b]{0.225\textwidth}
         \centering
-        \includegraphics[height=6.5cm]{Gambar/bab6:masalah-veiig-arah-1.pdf}
+        \includegraphics[height=6cm]{Gambar/bab6:masalah-veiig-arah-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.25\textwidth}
+    \begin{subfigure}[b]{0.225\textwidth}
         \centering
-        \includegraphics[height=6.5cm]{Gambar/bab6:masalah-veiig-arah-2.pdf}
+        \includegraphics[height=6cm]{Gambar/bab6:masalah-veiig-arah-2.pdf}
     \end{subfigure}
     \caption[Masalah perbedaan arah maksimum pada data VEIIG]{Syarat kedekatakan spasial dengan perbedaan arah maksimum yang terlalu ketat dan kaku mengakibatkan rombongan dan anggota rombongan tidak teridentifikasi}
     \label{bab6:masalah-veiig-arah}
 \end{figure}
 
-Masalah lain yang dimiliki oleh perangkat lunak identifikasi rombongan ditunjukkan oleh Gambar \ref{bab6:masalah-rintangan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah rombongan yang diwakili oleh warna biru yang memiliki dua buah anggota. Pada saat tertentu, kedua anggota bergerak menuju arah yang berbeda selama kurun waktu yang minim untuk menghindari rintangan yang ada di depan rombongan tersebut. Dalam kurun waktu yang singkat, kedua entitas tersebut bertemu kembali pada satu titik dan kembali melanjutkan pergerakan bersama menuju arah yang sama. Upaya untuk menghindari rintangan menyebabkan rombongan tidak teridentifikasi selama kedua entitas berpisah. Hal tersebut kembali disebabkan oleh ketatnya syarat perbedaan arah yang tidak dapat mentoleransi adanya perubahan arah yang lebih tinggi dari parameter $\vartheta$ dalam rentang waktu sekecil apapun selama proses identifikasi rombongan berlangsung.
+Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat rombongan yang tidak teridentifikasi dan ada anggota rombongan yang tidak tergabung dalam rombongan yang terbentuk. Hal tersebut disebabkan oleh nilai perbedaan sudut maksimum yang terlalu ketat dan kaku sehingga anggota rombongan tidak memenuhi syarat kedekatan spasial.
 
-Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap penggunaan algoritma \textit{dynamic time warping} sebagai solusi untuk menyelesaikan masalah perbedaan kecepatan yang ditunjukkan melalui Gambar \ref{bab6:solusi-beda-kecepatan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah anggota rombongan yang memiliki jarak yang cukup jauh dengan anggota lain. Anggota yang memimpin kemudian menunggu anggota lain menyusul dan kembali melakukan pergerakan bersama kembali. Melalui hasil visualisasi, dapat dilihat bahwa perangkat lunak dapat mengidentifikasi rombongan tersebut sejak awal dengan baik.
+Melalui proses analisis terhadap cara kerja algoritma, kekakuan pada masalah perbedaan arah maksimum berasal dari algoritma identifikasi rombongan. Berdasarkan algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma~\ref{bab3:algoritma-identifikasi}, beda arah antar entitas dihitung sepanjang durasi interval waktu minimum rombongan. Dapat dikatakan bahwa setiap anggota rombongan hanya dapat memiliki beda arah yang sangat minim dalam durasi interval waktu yang cukup lama. Syarat tersebut dapat menyebabkan rombongan tidak teridentifikasi oleh algoritma apabila terdapat entitas yang melakukan perubahan arah yang kecil dengan frekuensi yang cukup tinggi.
 
-\begin{figure}[t!]
+\begin{figure}[h!]
     \centering
     \captionsetup{width=.8\textwidth}
     \begin{subfigure}[t]{0.25\textwidth}
         \centering
-        \includegraphics[height=6.25cm]{Gambar/bab6:masalah-veiig-batu-1.pdf}
+        \includegraphics[height=5.75cm]{Gambar/bab6:masalah-veiig-batu-1.pdf}
     \end{subfigure}
     \begin{subfigure}[t]{0.275\textwidth}
         \centering
-        \includegraphics[height=6.25cm]{Gambar/bab6:masalah-veiig-batu-2.pdf}
+        \includegraphics[height=5.75cm]{Gambar/bab6:masalah-veiig-batu-2.pdf}
     \end{subfigure}
     \begin{subfigure}[t]{0.25\textwidth}
         \centering
-        \includegraphics[height=6.25cm]{Gambar/bab6:masalah-veiig-batu-3.pdf}
+        \includegraphics[height=5.75cm]{Gambar/bab6:masalah-veiig-batu-3.pdf}
     \end{subfigure}
     \caption[Masalah menghindari rintangan]{Usaha untuk menghindari rintangan menyebabkan durasi rombongan terputus selama beberapa saat walaupun perbedaan arah antar entitas yang cukup minim serta jarak antar entitas yang masih cukup dekat}
     \label{bab6:masalah-rintangan-veiig}
 \end{figure}
 
-\begin{figure}[t!]
+\begin{figure}[h]
     \centering
     \captionsetup{width=.7\textwidth}
-    \begin{subfigure}[b]{0.265\textwidth}
+    \begin{subfigure}[h]{0.235\textwidth}
         \centering
-        \includegraphics[height=8cm]{Gambar/bab6:solusi-kecepatan-veiig-1.pdf}
+        \includegraphics[height=7cm]{Gambar/bab6:solusi-kecepatan-veiig-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.265\textwidth}
+    \begin{subfigure}[h]{0.235\textwidth}
         \centering
-        \includegraphics[height=8cm]{Gambar/bab6:solusi-kecepatan-veiig-2.pdf}
+        \includegraphics[height=7cm]{Gambar/bab6:solusi-kecepatan-veiig-2.pdf}
     \end{subfigure}
     \caption[Penyelesaian masalah beda kecepatan pada data VEIIG]{Perbedaan kecepatan entitas yang menyebabkan salah satu anggota rombongan memimpin dapat diidentifikasi dengan baik oleh perangkat lunak}
     \label{bab6:solusi-beda-kecepatan-veiig}
 \end{figure}
+
+Masalah lain yang dimiliki oleh perangkat lunak identifikasi rombongan ditunjukkan oleh Gambar~\ref{bab6:masalah-rintangan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah rombongan yang diwakili oleh warna biru yang memiliki dua buah anggota. Pada saat tertentu, kedua anggota bergerak menuju arah yang berbeda selama kurun waktu yang minim untuk menghindari rintangan yang ada di depan rombongan tersebut. Dalam kurun waktu yang singkat, kedua entitas tersebut bertemu kembali pada satu titik dan kembali melanjutkan pergerakan bersama menuju arah yang sama. Upaya untuk menghindari rintangan menyebabkan rombongan tidak teridentifikasi selama kedua entitas berpisah. Hal tersebut kembali disebabkan oleh ketatnya syarat perbedaan arah yang tidak dapat mentoleransi adanya perubahan arah yang lebih tinggi dari parameter $\vartheta$ dalam rentang waktu sekecil apapun selama proses identifikasi rombongan berlangsung.
+
+Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap penggunaan algoritma \textit{dynamic time warping} sebagai solusi untuk menyelesaikan masalah perbedaan kecepatan yang ditunjukkan melalui Gambar~\ref{bab6:solusi-beda-kecepatan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah anggota rombongan yang memiliki jarak yang cukup jauh dengan anggota lain. Anggota yang memimpin kemudian menunggu anggota lain menyusul dan kembali melakukan pergerakan bersama kembali. Melalui hasil visualisasi, dapat dilihat bahwa perangkat lunak dapat mengidentifikasi rombongan tersebut sejak awal dengan baik.
 
 \subsection{Hasil Pengujian CBE}
 \label{subsec:cbe-result}
@@ -375,7 +383,7 @@ Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap peng
 \subsubsection{Hasil Pengujian Kuantitatif}
 \label{subsubsec:cbe-quantitative}
 
-Pada data CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan yang multidireksional, hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak menghasilkan nilai \textit{recall} yang sangat rendah disertai dengan nilai \textit{precision} yang cukup tinggi yang dapat dilihat melalui Tabel \ref{bab6:cbe-numbers}. Dari hasil tersebut, dapat dikatakan bahwa algoritma identifikasi rombongan menunjukkan gejala \textit{overestimation}.
+Pada data CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan yang multidireksional, hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak menghasilkan nilai \textit{recall} yang sangat rendah disertai dengan nilai \textit{precision} yang cukup tinggi yang dapat dilihat melalui Tabel~\ref{bab6:cbe-numbers}. Dari hasil tersebut, dapat dikatakan bahwa algoritma identifikasi rombongan menunjukkan gejala \textit{overestimation}.
 
 \begin{table}[h]
 \centering
@@ -384,18 +392,18 @@ Pada data CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi se
 \begin{tabular}{|l|l|c|c|c|}
 \hline
 \multicolumn{2}{|l|}{}                                                                                        & Precision & Recall & F1 Score \\ \hline \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.342     & 0.178  & 0.234    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.369     & 0.165  & 0.228    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.376     & 0.283  & 0.323    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.383     & 0.270  & 0.316    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.391     & 0.109  & 0.170    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.404     & 0.100  & 0.160    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.392     & 0.165  & 0.232    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.430     & 0.161  & 0.234    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.400     & 0.069  & 0.119    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.410     & 0.069  & 0.119    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.434     & 0.100  & 0.163    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.407     & 0.095  & 0.155    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.342     & 0.178  & 0.234    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.369     & 0.165  & 0.228    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.376     & 0.283  & 0.323    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.383     & 0.270  & 0.316    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.391     & 0.109  & 0.170    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.404     & 0.100  & 0.160    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.392     & 0.165  & 0.232    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.430     & 0.161  & 0.234    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.400     & 0.069  & 0.119    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.410     & 0.069  & 0.119    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.434     & 0.100  & 0.163    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.407     & 0.095  & 0.155    \\ \hline
 \end{tabular}
 
 \label{bab6:cbe-numbers}
@@ -411,8 +419,6 @@ Nilai beda sudut maksimum $\vartheta$ memiliki peranan yang cukup besar terhadap
 
 Meningkatkan nilai durasi interval minimum $k$ menyebabkan peningkatan nilai \textit{precision} pada hasil identifikasi perangkat lunak, namun mengurangi nilai \textit{recall} secara drastis. Hal tersebut disebabkan oleh banyaknya durasi pergerakan kolektif yang dianggap tidak cukup lama agar dapat diidentifikasi sebagai sebuah rombongan sehingga menyebabkan kenaikan nilai \textit{false negative}. 
 
-Penggunaan algoritma pengurangan redundansi rombongan membawa dampak positif pada relevansi hasil identifikasi rombongan pada data pergerakan CBE. Hal tersebut dapat dilihat melalui perbandingan Tabel \ref{bab6:cbe-numbers} dan Tabel \ref{bab6:cbe-redundant} yang menyajikan hasil pengujian kuantitatif dari hasil identifikasi rombongan tanpa adanya upaya pengurangan redundansi rombongan. Tanpa adanya upaya pengurangan redundansi rombongan, algoritma identifikasi menghasilkan terlalubanyak rombongan redundan yang tidak terdapat pada hasil identifikasi manusia. Rombongan-rombongan redundan tersebut menyebabkan penurunan terhadap nilai \textit{precision} dan \textit{F1 score} secara keseluruhan tanpa mempengaruhi nilai \textit{recall} sedikitpun bila dibandingkan dengan hasil identifikasi rombongan dengan pengurangan redundansi rombongan. Perubahan tersebut konsisten untuk setiap kombinasi nilai $r$, $k$, dan $\vartheta$ yang diuji.
-
 \begin{table}[h]
 \centering
 \captionsetup{width=0.6\textwidth}
@@ -420,28 +426,32 @@ Penggunaan algoritma pengurangan redundansi rombongan membawa dampak positif pad
 \begin{tabular}{|l|l|c|c|c|}
 \hline
 \multicolumn{2}{|l|}{}                                                                                        & Precision & Recall & F1 Score \\ \hline \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.351     & 0.178  & 0.228    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.345     & 0.165  & 0.224    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.344     & 0.283  & 0.310    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.363     & 0.270  & 0.309    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.379     & 0.109  & 0.169    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.390     & 0.100  & 0.159    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.365     & 0.165  & 0.228    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.407     & 0.161  & 0.231    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.390     & 0.069  & 0.118    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.400     & 0.069  & 0.119    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ & 0.397     & 0.100  & 0.160    \\ \cline{2-5} 
-                                                                               & $\vartheta = \frac{\pi}{64}$ & 0.393     & 0.095  & 0.154    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.351     & 0.178  & 0.228    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.345     & 0.165  & 0.224    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 36$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.344     & 0.283  & 0.310    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.363     & 0.270  & 0.309    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.379     & 0.109  & 0.169    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.390     & 0.100  & 0.159    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 57$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.365     & 0.165  & 0.228    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.407     & 0.161  & 0.231    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.22$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.390     & 0.069  & 0.118    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.400     & 0.069  & 0.119    \\ \hline
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}$k = 78$\\ $r = 1.52$\end{tabular}} & $\vartheta = \frac{\pi}{32}$ \vspace{0.5pt} & 0.397     & 0.100  & 0.160    \\ \cline{2-5} 
+                                                                               & $\vartheta = \frac{\pi}{64}$ \vspace{0.5pt} & 0.393     & 0.095  & 0.154    \\ \hline
 \end{tabular}
 \label{bab6:cbe-redundant}
 \end{table}
 
+Penggunaan algoritma pengurangan redundansi rombongan membawa dampak positif pada relevansi hasil identifikasi rombongan pada data pergerakan CBE. Hal tersebut dapat dilihat melalui perbandingan Tabel~\ref{bab6:cbe-numbers} dan Tabel~\ref{bab6:cbe-redundant} yang menyajikan hasil pengujian kuantitatif dari hasil identifikasi rombongan tanpa adanya upaya pengurangan redundansi rombongan. Tanpa adanya upaya pengurangan redundansi rombongan, algoritma identifikasi menghasilkan terlalubanyak rombongan redundan yang tidak terdapat pada hasil identifikasi manusia. Rombongan-rombongan redundan tersebut menyebabkan penurunan terhadap nilai \textit{precision} dan \textit{F1 score} secara keseluruhan tanpa mempengaruhi nilai \textit{recall} sedikitpun bila dibandingkan dengan hasil identifikasi rombongan dengan pengurangan redundansi rombongan. Perubahan tersebut konsisten untuk setiap kombinasi nilai $r$, $k$, dan $\vartheta$ yang diuji.
+
 \subsubsection{Hasil Pengujian Kualitatif}
 \label{subsub:sec:cbe-qualitative}
 
-Hasil pengujian kualitatif melalui visualisasi pada data CBE menunjukkan alasan dari tingginya nilai \textit{false negative} dari hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar \ref{bab6:masalah-cbe}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat beberapa rombongan yang tidak teridentifikasi oleh perangkat lunak identifikasi rombongan, namun teridentifikasi sebagai rombongan pada hasil identifikasi manusia. Hal tersebut disebabkan cara perhitungan beda sudut maksimum antar anggota rombongan.
+Hasil pengujian kualitatif melalui visualisasi pada data CBE menunjukkan alasan dari tingginya nilai \textit{false negative} dari hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar~\ref{bab6:masalah-cbe}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat beberapa rombongan yang tidak teridentifikasi oleh perangkat lunak identifikasi rombongan, namun teridentifikasi sebagai rombongan pada hasil identifikasi manusia. Hal tersebut disebabkan cara perhitungan beda sudut maksimum antar anggota rombongan.
 
-\begin{figure}[b]
+Melalui gambar-gambar tersebut, dapat dikatakan bahwa algoritma identifikasi rombongan memiliki masalah yang sama tentang nilai perbedaan arah maksimum yang terlalu ketat seperti yang ditunjukkan oleh hasil pengujian kualitatif pada data pergerakan VEIIG. Pada data pergerakan CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dan pergerakan entitas yang multidireksional, cara perhitungan beda arah tersebut berdampak pada peningkatkan nilai \textit{false negative} pada hasil identifikasi rombongan yang dilakukan oleh perangkat lunak. Peningkatan nilai \textit{false negative} disebabkan oleh frekuensi perubahan beda arah yang cukup tinggi, sehingga perangkat lunak menganggap bahwa rombongan tersebut tidak memenuhi syarat perbedaan arah maksimum antar entitas. Tingginya nilai \textit{false negative} berdampak pada penurunan nilai \textit{recall} yang ditunjukkan melalui hasil pengujian kuantitatif pada bagian sebelumnya.
+
+\begin{figure}[h]
     \centering
     \captionsetup{width=.75\textwidth}
     \begin{subfigure}[h]{0.275\textwidth}
@@ -460,9 +470,7 @@ Hasil pengujian kualitatif melalui visualisasi pada data CBE menunjukkan alasan 
     \label{bab6:masalah-cbe}
 \end{figure}
 
-Melalui gambar-gambar tersebut, dapat dikatakan bahwa algoritma identifikasi rombongan memiliki masalah yang sama tentang nilai perbedaan arah maksimum yang terlalu ketat seperti yang ditunjukkan oleh hasil pengujian kualitatif pada data pergerakan VEIIG. Pada data pergerakan CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dan pergerakan entitas yang multidireksional, cara perhitungan beda arah tersebut berdampak pada peningkatkan nilai \textit{false negative} pada hasil identifikasi rombongan yang dilakukan oleh perangkat lunak. Peningkatan nilai \textit{false negative} disebabkan oleh frekuensi perubahan beda arah yang cukup tinggi, sehingga perangkat lunak menganggap bahwa rombongan tersebut tidak memenuhi syarat perbedaan arah maksimum antar entitas. Tingginya nilai \textit{false negative} berdampak pada penurunan nilai \textit{recall} yang ditunjukkan melalui hasil pengujian kuantitatif pada bagian sebelumnya.
-
-Bukti penyelesaian masalah perbedaan kecepatan dapat dilihat melalui hasil visualisasi rombongan yang ditunjukkan melalui Gambar \ref{bab6:solusi-beda-kecepatan}. Pada gambar tersebut, terdapat sebuah entitas yang memiliki nomor identitas 104 yang menunggu dua buah entitas yaitu entitas 64 dan 65 pada satu tempat. Setelah entitas 64 dan 65 menyusul entitas 104, mereka bertiga melanjutkan pergerakan bersama. Melalui hasil visualisasi, dapat dilihat bahwa entitas 104 dapat teridentifikasi dari semula sebagai anggota dari rombongan bersama dengan entitas 65. Dapat dikatakan bahwa perbedaan kecepatan tidak menjadi masalah yang dimiliki oleh algoritma identifikasi rombongan.
+Bukti penyelesaian masalah perbedaan kecepatan dapat dilihat melalui hasil visualisasi rombongan yang ditunjukkan melalui Gambar~\ref{bab6:solusi-beda-kecepatan}. Pada gambar tersebut, terdapat sebuah entitas yang memiliki nomor identitas 104 yang menunggu dua buah entitas yaitu entitas 64 dan 65 pada satu tempat. Setelah entitas 64 dan 65 menyusul entitas 104, mereka bertiga melanjutkan pergerakan bersama. Melalui hasil visualisasi, dapat dilihat bahwa entitas 104 dapat teridentifikasi dari semula sebagai anggota dari rombongan bersama dengan entitas 65. Dapat dikatakan bahwa perbedaan kecepatan tidak menjadi masalah yang dimiliki oleh algoritma identifikasi rombongan.
 
 \begin{figure}[h]
     \centering
