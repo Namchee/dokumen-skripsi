@@ -24,7 +24,7 @@ Berdasarkan tiga kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memil
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.65\textwidth]{Gambar/bab4:dfd-level-0.pdf}
+    \includegraphics[width=0.75\textwidth]{Gambar/bab4:dfd-level-0.pdf}
     \caption{Diagram konteks}
     \label{bab4:context-diagram}
 \end{figure}
@@ -34,13 +34,13 @@ Berdasarkan tiga kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memil
 \begin{enumerate}
     \item \textbf{Modul I/O}
     
-    Modul I/O merupakan modul yang berfungsi untuk membaca masukan pengguna dan mencetak hasil identifikasi rombongan yang dihasilkan oleh modul rombongan. Terdapat dua proses yang akan dikerjakan oleh modul I/O, yaitu proses penerjemahan masukan pengguna dan proses pembuatan berkas hasil identifikasi rombongan. 
+    Modul I/O merupakan modul yang berfungsi untuk membaca masukan pengguna dan mencetak hasil identifikasi rombongan yang dihasilkan oleh modul rombongan. Terdapat dua proses yang akan dikerjakan oleh modul I/O, yaitu proses penerjemahan masukan pengguna dan proses pembuatan berkas hasil identifikasi rombongan.
+    
+    \clearpage
     
     \item \textbf{Modul Penerjemah}
     
     Modul penerjemah merupakan modul yang berfungsi untuk menerjemahkan berkas masukan data pejalan kaki menjadi data yang dapat dipahami dan digunakan oleh perangkat lunak. Terdapat tiga proses yang akan dikerjakan oleh modul penerjemah, yaitu proses penerjemahan data pergerakan, proses penerjemahan parameter identifikasi, dan proses penerjemahan hasil identifikasi rombongan yang dilakukan oleh manusia.
-    
-    \clearpage
     
     \item \textbf{Modul Rombongan}
     
@@ -59,7 +59,7 @@ Interaksi antar kelima modul tersebut serta proses-proses yang dilalui selama pe
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{Gambar/bab4:dfd-level-1.pdf}
+    \includegraphics[width=0.95\textwidth]{Gambar/bab4:dfd-level-1.pdf}
     \caption{Diagram alir data tingkat pertama}
     \label{bab4:dfd-level-1}
 \end{figure}
@@ -71,8 +71,6 @@ Interaksi antar kelima modul tersebut serta proses-proses yang dilalui selama pe
 \label{sec:input}
 
 Data pergerakan pejalan kaki akan disimpan dalam sebuah berkas teks dengan format \texttt{.txt} dengan \textit{encoding} UTF-8. Berkas tersebut menyimpan informasi dari seluruh entitas yang tercatat dalam data pergerakan pejalan kaki. Berkas tersebut merupakan hasil ekstraksi dari informasi yang terdapat dalam sebuah video rekaman pergerakan pejalan kaki.
-
-\clearpage
 
 Informasi yang terdapat dalam data pejalan kaki disimpan dalam bentuk \textit{frame} yang telah diekstrak dari video rekaman pergerakan pejalan kaki. Sebuah \textit{frame} mengandung informasi dalam bentuk \texttt{<nomor-frame> <nomor-identitas> <posisi-x> <posisi-y>} yang ditulis dalam satu baris pada berkas teks. Nilai tambahan lainnya yang terdapat dalam berkas teks akan dihiraukan oleh perangkat lunak.
 
@@ -125,7 +123,7 @@ Modul I/O bertanggung jawab untuk melaksanakan dua proses berikut:
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-input.pdf}
+        \includegraphics[width=0.975\textwidth]{Gambar/bab4:flowchart-input.pdf}
         \caption{Diagram alir proses validasi masukan}
         \label{bab4:flowchart-input}
     \end{figure}
@@ -165,7 +163,7 @@ Modul penerjemah bertanggung jawab untuk melaksanakan tiga proses berikut:
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-penerjemah.pdf}
+        \includegraphics[width=0.9\textwidth]{Gambar/bab4:flowchart-penerjemah.pdf}
         \caption{Diagram alir proses penerjemahan data pergerakan}
         \label{bab4:flowchart-penerjemah}
     \end{figure}
@@ -176,15 +174,13 @@ Modul penerjemah bertanggung jawab untuk melaksanakan tiga proses berikut:
     
     Terdapat dua nilai yang akan diproses oleh fungsi ini, yaitu $k$ dan $\vartheta$. Nilai $k$ akan diterjemahkan menjadi satuan \textit{frame}. Nilai dari $\vartheta$ akan diterjemahkan menjadi nilai \textit{cosinus} dari sudut tersebut. Parameter-parameter lainnya tidak akan melalui proses lanjutan apapun dan akan langsung diteruskan pada modul rombongan.
     
-    \clearpage
-    
     \item \textbf{Penerjemahan Hasil Identifikasi Manusia}
     
     Sebelum hasil identifikasi rombongan pada data pejalan kaki diuji melalui pengujian kualitatif dan kuantitatif yang dilakukan oleh modul evaluasi, perangkat lunak memerlukan hasil identifikasi manusia yang dijadikan sebagai acuan. Data hasil identifikasi acuan yang disimpan dalam berkas teks akan diterjemahkan menjadi bentuk yang dapat dimengerti oleh perangkat lunak sehingga dapat digunakan pada proses evaluasi hasil identifikasi rombongan. Gambar~\ref{bab4:flowchart-manusia} menunjukkan diagram alir dari proses penerjemahan hasil identifikasi manusia.
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-manusia.pdf}
+        \includegraphics[width=0.9\textwidth]{Gambar/bab4:flowchart-manusia.pdf}
         \caption{Diagram alir proses penerjemahan hasil identifikasi manusia}
         \label{bab4:flowchart-manusia}
     \end{figure}

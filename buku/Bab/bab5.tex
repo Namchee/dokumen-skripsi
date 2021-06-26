@@ -39,9 +39,7 @@ Modul penerjemah diimplementasikan dalam berkas \texttt{parser.cpp} yang dapat d
     
     Fungsi ini bertugas untuk menerjemahkan data pergerakan pejalan kaki dari berkas teks menjadi struktur data komposit bernama \texttt{MovementData} yang membungkus kumpulan \texttt{Entity} dan kumpulan nilai \textit{frame} yang muncul pada data pergerakan. Pembuatan struktur data tersebut didasarkan oleh kebutuhan akan pencatatan durasi rombongan yang dibutuhkan oleh modul I/O.
     
-    Seperti yang sudah dibahas pada rancangan perangkat lunak, perlu ditetapkan sebuah \textit{anchor value} yang berfungsi untuk menandakan kemunculan entitas pada sebuah \textit{frame}. Pada skripsi ini, \textit{anchor value} yang dipilih adalah nilai \texttt{NaN}. Nilai \texttt{NaN} dipilih untuk menghindari \textit{false negative} yang dapat disebabkan oleh nilai posisi yang variatif.
-
-    Nilai \texttt{NaN} sebagai posisi dari sebuah entitas pada titik waktu $x$ menyatakan bahwa entitas tersebut tidak terekam pada titik waktu $x$, sehingga pemeriksaan kedekatan spasial dari entitas tersebut dengan entitas lain dapat dilewatkan. Hal tersebut akan meningkatkan efisiensi algoritma identifikasi rombongan dengan tidak melakukan perhitungan yang tidak perlu dilakukan. 
+    Seperti yang sudah dibahas pada rancangan perangkat lunak, perlu ditetapkan sebuah \textit{anchor value} yang berfungsi untuk menandakan kemunculan entitas pada sebuah \textit{frame}. Pada skripsi ini, \textit{anchor value} yang dipilih adalah nilai \texttt{NaN}. Nilai \texttt{NaN} dipilih untuk menghindari \textit{false negative} yang dapat disebabkan oleh nilai posisi yang variatif. Nilai \texttt{NaN} sebagai posisi dari sebuah entitas pada titik waktu $x$ menyatakan bahwa entitas tersebut tidak terekam pada titik waktu $x$, sehingga pemeriksaan kedekatan spasial dari entitas tersebut dengan entitas lain dapat dilewatkan. Hal tersebut akan meningkatkan efisiensi algoritma identifikasi rombongan dengan tidak melakukan perhitungan yang tidak perlu dilakukan. 
     
     \item \texttt{parse\_arguments}
     
@@ -90,14 +88,8 @@ Fungsi untuk menghitung jarak \textit{dynamic time warping} akan diimplementasik
 
 Melalui proses analisis singkat terhadap kebutuhan, rancangan, serta implementasi modul penerjemah, efisiensi algoritma perhitungan jarak \textit{dynamic time warping} antara dua buah lintasan dapat ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila posisi dari salah satu sublintasan dari entitas yang diperiksa pada sebuah dimensi bernilai \texttt{NaN}. Kode~\ref{bab5:dtw} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_dtw\_distance}.
 
-Fungsi untuk menghitung nilai \textit{cosine similarity} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_cosine\_similarity} yang merupakan implementasi konkrit dari Rumus~\ref{bab2:cosine-similarity}. Sama seperti fungsi \texttt{calculate\_dtw\_distance}, efisiensi perhitungan nilai \textit{cosine similarity} ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila nilai dari salah satu dimensi dalam vektor dari entitas yang diperiksa bernilai \texttt{NaN}. Kode~\ref{bab5:cosine-similarity} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_cosine\_similarity}.
-
-\section{Modul Evaluasi}
-\label{sec:impl-eval}
-
-Modul evaluasi diimplementasikan dalam berkas \texttt{eval.cpp} yang dapat dilihat melalui Lampiran~\ref{lamp:module-eval}. Modul ini memiliki satu fungsi utama bernama \texttt{calculate\_score} yang menerima rombongan yang teridentifikasi melalui algoritma dan rombongan yang berasal dari hasil identifikasi yang dilakukan secara manual oleh manusia. Fungsi tersebut mengembalikan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari evaluasi kuantitatif dari hasil identifikasi rombongan. Untuk memenuhi kebutuhan akan pengembalian 3 nilai sekaligus, dibuat sebuah struktur data baru bernama \texttt{Score} yang akan dikembalikan oleh fungsi \texttt{calculate\_score}.
-
 \clearpage
+
 
 \begin{lstlisting}[language=C++, caption=Implementasi fungsi \texttt{calculate\_dtw\_distance}, label={bab5:dtw}]
     double calculate_dtw_distance(
@@ -105,9 +97,7 @@ Modul evaluasi diimplementasikan dalam berkas \texttt{eval.cpp} yang dapat dilih
         const std::vector<std::vector<double> >& b
     ) {
         if (a.size() == 0 || b.size() == 0) {
-            throw std::invalid_argument(
-                "Both trajectories must not be empty."
-            );
+            throw std::invalid_argument("Both trajectories must not be empty.");
         }
 
         const size_t x_lim = a.size() + 1;
@@ -152,6 +142,13 @@ Modul evaluasi diimplementasikan dalam berkas \texttt{eval.cpp} yang dapat dilih
     }
 \end{lstlisting}
 
+Fungsi untuk menghitung nilai \textit{cosine similarity} akan diimplementasikan dalam fungsi bernama \texttt{calculate\_cosine\_similarity} yang merupakan implementasi konkrit dari Rumus~\ref{bab2:cosine-similarity}. Sama seperti fungsi \texttt{calculate\_dtw\_distance}, efisiensi perhitungan nilai \textit{cosine similarity} ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila nilai dari salah satu dimensi dalam vektor dari entitas yang diperiksa bernilai \texttt{NaN}. Kode~\ref{bab5:cosine-similarity} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_cosine\_similarity}.
+
+\section{Modul Evaluasi}
+\label{sec:impl-eval}
+
+Modul evaluasi diimplementasikan dalam berkas \texttt{eval.cpp} yang dapat dilihat melalui Lampiran~\ref{lamp:module-eval}. Modul ini memiliki satu fungsi utama bernama \texttt{calculate\_score} yang menerima rombongan yang teridentifikasi melalui algoritma dan rombongan yang berasal dari hasil identifikasi yang dilakukan secara manual oleh manusia. Fungsi tersebut mengembalikan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari evaluasi kuantitatif dari hasil identifikasi rombongan. Untuk memenuhi kebutuhan akan pengembalian 3 nilai sekaligus, dibuat sebuah struktur data baru bernama \texttt{Score} yang akan dikembalikan oleh fungsi \texttt{calculate\_score}.
+
 \begin{lstlisting}[language=C++, caption=Implementasi fungsi \texttt{calculate\_cosine\_similarity}, label={bab5:cosine-similarity}]
     double calculate_cosine_similarity(
         const std::vector<double>& a,
@@ -184,8 +181,6 @@ Modul evaluasi diimplementasikan dalam berkas \texttt{eval.cpp} yang dapat dilih
         return dot_product / (len_a * len_b);
     }
 \end{lstlisting}
-
-\newpage
 
 \section{Struktur Data}
 \label{sec:impl-struct}

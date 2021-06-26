@@ -78,7 +78,7 @@ Untuk menangani data lintasan dengan jumlah sampel yang sedikit, data lintasan d
 \begin{figure}[h]
     \centering
     \captionsetup{width=0.7\textwidth}
-    \includegraphics[width=0.6\textwidth]{Gambar/bab2:interpolasi-lintasan.pdf}
+    \includegraphics[width=0.65\textwidth]{Gambar/bab2:interpolasi-lintasan.pdf}
     \caption[Interpolasi lintasan]{Upaya interpolasi linear pada sebuah data lintasan. Kurva abu-abu menunjukkan bentuk lintasan yang sesungguhnya. Titik-titik merah merupakan hasil dari interpolasi linear pada lintasan. Titik-titik hasil interpolasi kemudian dihubungkan dan membentuk lintasan yang semirip mungkin dengan lintasan sesungguhnya}
     \label{bab2:interpolasi-lintasan}
 \end{figure}
@@ -269,7 +269,7 @@ Terdapat dua keunggulan yang dimiliki oleh \textit{dynamic time warping} dibandi
 
 Dua keunggulan tersebut diperoleh dari cara perbandingan jarak pada perhitungan jarak \textit{dynamic time warping} yang dilakukan secara non-linear, di mana posisi entitas $a$ pada titik waktu $t_x$ dapat dipasangkan dengan posisi entitas $b$ pada titik waktu lain selain $t_x$. Perbandingan tersebut sangat berbeda dengan cara-cara penghitungan kemiripan lintasan lainnya yang dilakukan secara linear untuk setiap titik waktu yang tercatat, di mana posisi entitas $a$ pada titik waktu $t_x$ akan selalu dipasangkan dengan posisi entitas $b$ pada titik waktu $t_x$. Gambar~\ref{bab2:dtw-euclidean} menunjukkan perbandingan data lintasan secara non-linear yang dilakukan oleh algoritma \textit{dynamic time warping} dan perbandingan data lintasan secara linear yang dilakukan pada perhitungan jarak \textit{euclidean}.
 
-\begin{figure}[t]
+\begin{figure}[b]
     \centering
     \begin{subfigure}[h]{0.435\textwidth}
         \centering
@@ -304,25 +304,25 @@ Jarak \textit{dynamic time warping} antara dua buah lintasan dihitung dengan car
 
 \begin{figure}[h]
     \centering
-    \begin{subfigure}[ht]{0.225\textwidth}
+    \begin{subfigure}[ht]{0.23\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:valid.pdf}
         \caption{Jalur kesejajaran yang valid.}
         \label{bab2:valid}
     \end{subfigure}
-    \begin{subfigure}[ht]{0.225\textwidth}
+    \begin{subfigure}[ht]{0.23\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:boundary.pdf}
         \caption{Pelanggaran syarat \textit{boundary}, $p_1 \neq (1, 1)$.}
         \label{bab2:boundary}
     \end{subfigure}
-    \begin{subfigure}[ht]{0.225\textwidth}
+    \begin{subfigure}[ht]{0.23\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:monotonicity.pdf}
         \caption{Pelanggaran syarat monotonik, $x_3 < x_4$.}
         \label{bab2:monotonicity}
     \end{subfigure}
-    \begin{subfigure}[h]{0.225\textwidth}
+    \begin{subfigure}[h]{0.23\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:step-size.pdf}
         \caption{Pelanggaran syarat \textit{step-size}, $y_6$ dilewatkan.}
@@ -475,14 +475,14 @@ Selain \textit{dot product} dari kedua lintasan tersebut, panjang dari masing-ma
 
 Dengan menggunakan Rumus~\ref{bab2:cosine-similarity}, maka nilai \textit{cosine similarity} antara lintasan $a$ dan $b$ adalah sebesar $0.49$ yang didapatkan melalui perhitungan berikut:
 
-\vspace{-7.5pt}
-
 \begin{align*}
     \cos (a, b) & = \frac{x \cdot y}{\|x\| \|y\|} \\
     & = \frac{ \sum_{i=1}^{n}{x_i y_i}}{ \sqrt{\sum_{i=1}^{n}{(x_i)^2}} \sqrt{\sum_{i=1}^{n}{(y_i)^2}}} \\
     & = \frac{3}{6.16 \times 1} \\
     & \approx 0.49
 \end{align*}
+
+\vspace{-10pt}
 
 \section{Pergerakan Kolektif}
 \label{sec:collective-movement}
@@ -504,28 +504,28 @@ Identifikasi terhadap pola pergerakan kolektif dapat diaplikasikan pada berbagai
     
     Atribut spasial menyatakan lokasi entitas yang bergerak relatif terhadap ruang gerak entitas. Biasanya, manusia akan menganggap dua buah entitas bergerak bersama apabila kedua entitas tersebut dekat secara spasial. Salah satu cara sederhana yang sering digunakan untuk mengukur kedekatan spasial dari dua buah entitas adalah dengan menetapkan sebuah konstanta $\varepsilon > 0$ \iffalse \lionov{pake varepsilon ($\varepsilon$)} \fi sebagai batas jarak maksimum antara kedua entitas supaya dapat dikatakan dekat secara spasial. Cara tersebut dapat diperluas untuk dapat digunakan pada identifikasi pergerakan kolektif, misalnya dengan mengharuskan setiap pasang anggota pergerakan kolektif untuk memiliki jarak di bawah $\varepsilon$ setiap waktu.
     
+    Selain menggunakan sebuah konstanta yang menyatakan jarak maksimum, terdapat cara-cara lain untuk menentukan kedekatan dua buah entitas seperti menggunakan sebuah cakram dengan radius $\epsilon$ di mana seluruh anggota pergerakan kolektif harus masuk dalam diameter dari cakram tersebut~\cite{gudmundsson:flock}. Jarak maksimum juga dapat dihitung secara relatif, di mana terdapat entitas lain dapat digunakan sebagai perantara dari dua buah entitas yang dikatakan dekat. Sebagai contoh, dua entitas $a$ dan $b$ dikatakan dekat pada titik waktu $t$ apabila terdapat sebuah entitas $c$ di mana $d\textsubscript{ac}(t) \leq \varepsilon$ dan $d\textsubscript{bc}(t) \leq \varepsilon$ walaupun $d\textsubscript{ab}(t) > \varepsilon$. \iffalse \lionov{harus didefinisikan dulu sebelumnya kalo $d_{ac}(t)$ itu menyatakan jarak $a$ dan $c$ pada waktu $t$} \cristopher{udah di bagian~\ref{sec:kemiripan} ko} \fi Gambar~\ref{bab2:spasial} menunjukkan cara-cara untuk menentukan kedekatan spasial antar entitas.
+    
     \begin{figure}[h]
         \centering
-        \begin{subfigure}[h]{0.25\textwidth}
+        \begin{subfigure}[h]{0.265\textwidth}
             \centering
             \includegraphics[width=\textwidth]{Gambar/bab2:spatial-euclidean.pdf}
             \caption{Jarak \textit{euclidean}}
         \end{subfigure} \hspace{0.5cm}
-        \begin{subfigure}[h]{0.25\textwidth}
+        \begin{subfigure}[h]{0.265\textwidth}
             \centering
             \includegraphics[width=\textwidth]{Gambar/bab2:disc.pdf}
             \caption{Cakram \textit{(disc)}}
         \end{subfigure} \hspace{0.5cm}
-        \begin{subfigure}[h]{0.25\textwidth}
+        \begin{subfigure}[h]{0.265\textwidth}
             \centering
-            \includegraphics[height=3.625cm]{Gambar/bab2:intermediate.pdf}
+            \includegraphics[height=3.7cm]{Gambar/bab2:intermediate.pdf}
             \caption{Entitas perantara}
         \end{subfigure}
         \caption[Pengukuran kedekatan spasial]{Berbagai macam cara pengukuran kedekatan spasial}
         \label{bab2:spasial}
     \end{figure}
-    
-    Selain menggunakan sebuah konstanta yang menyatakan jarak maksimum, terdapat cara-cara lain untuk menentukan kedekatan dua buah entitas seperti menggunakan sebuah cakram dengan radius $\epsilon$ di mana seluruh anggota pergerakan kolektif harus masuk dalam diameter dari cakram tersebut~\cite{gudmundsson:flock}. Jarak maksimum juga dapat dihitung secara relatif, di mana terdapat entitas lain dapat digunakan sebagai perantara dari dua buah entitas yang dikatakan dekat. Sebagai contoh, dua entitas $a$ dan $b$ dikatakan dekat pada titik waktu $t$ apabila terdapat sebuah entitas $c$ di mana $d\textsubscript{ac}(t) \leq \varepsilon$ dan $d\textsubscript{bc}(t) \leq \varepsilon$ walaupun $d\textsubscript{ab}(t) > \varepsilon$. \iffalse \lionov{harus didefinisikan dulu sebelumnya kalo $d_{ac}(t)$ itu menyatakan jarak $a$ dan $c$ pada waktu $t$} \cristopher{udah di bagian~\ref{sec:kemiripan} ko} \fi Gambar~\ref{bab2:spasial} menunjukkan cara-cara untuk menentukan kedekatan spasial antar entitas.
     
     \item \textbf{\textit{Size}} \iffalse \lionov{kayaknya ini jangan pake ``ukuran'', nanti sama dengan measure, pake {\it size} ato langung aja jumlah minimumentitas } \fi
     
@@ -540,6 +540,8 @@ Identifikasi terhadap pola pergerakan kolektif dapat diaplikasikan pada berbagai
 
 Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kolektif menjadi topik penelitian yang hangat pada bidang komputasi geometri. Hal tersebut memunculkan berbagai definisi formal untuk sebuah pola pergerakan kolektif seperti:
 
+\clearpage
+
 \begin{itemize}
     \item \textbf{Flock}
     
@@ -548,19 +550,19 @@ Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kol
     \begin{figure}[h]
         \centering
         \captionsetup{width=0.75\textwidth}
-        \includegraphics[width=0.65\textwidth]{Gambar/bab2:flock.pdf}
+        \includegraphics[width=0.75\textwidth]{Gambar/bab2:flock.pdf}
         \caption[Sebuah \textit{flock}]{Entitas-entitas berwarna biru yang membentuk sebuah \textit{flock} dengan $m = 3$ dan $k = 3$. Lingkaran kuning menunjukkan cakram yang memiliki radius $r$ yang berisi seluruh anggota \textit{flock}}
         \label{bab2:flock}
     \end{figure}
     
-    \begin{figure}[h]
-        \centering
-        \captionsetup{width=0.75\textwidth}
-        \includegraphics[width=\textwidth]{Gambar/bab2:group.pdf}
-        \caption[Sebuah \textit{group}]{Entitas-entitas berwarna merah yang membentuk sebuah \textit{group} dengan $m = 3$ dan $k = 3$. Salah satu entitas merah yang terletak di paling bawah terhubung secara relatif dengan entitas-entitas merah lainnya melalui entitas-entitas biru.}
-        \label{bab2:group}
-    \end{figure}
-    
+\begin{figure}[h]
+    \centering
+    \captionsetup{width=0.75\textwidth}
+    \includegraphics[width=0.95\textwidth]{Gambar/bab2:group.pdf}
+    \caption[Sebuah \textit{group}]{Entitas-entitas berwarna merah yang membentuk sebuah \textit{group} dengan $m = 3$ dan $k = 3$. Salah satu entitas merah yang terletak di paling bawah terhubung secara relatif dengan entitas-entitas merah lainnya melalui entitas-entitas biru.}
+    \label{bab2:group}
+\end{figure}
+
     \item \textbf{Group}
     
     Diberikan sebuah himpunan entitas $\mathcal{X}$, jumlah entitas minimum $m$, interval waktu minimum $k$, dan jarak maksimum antar entitas $r$. Sebuah \textit{group} yang ditunjukkan melalui Gambar~\ref{bab2:group} merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang terbentuk pada interval waktu $I$ dan memenuhi syarat-syarat berikut:
@@ -571,6 +573,7 @@ Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kol
         \item Setiap pasang entitas $x, y$ di mana $x, y \in \mathcal{G}$ secara relatif pada $\mathcal{X}$ untuk setiap satuan waktu pada interval waktu $I$ dengan jarak maksimum antar entitas adalah sepanjang $r$.
     \end{enumerate}
 \end{itemize}
+
 
 Selain kedua definisi di atas, terdapat definisi-definisi lain seperti \textit{convoy}~\cite{jeung:convoys}, \textit{herd}~\cite{huang:02:herd}, \textit{swarm}~\cite{li:swarm}, \textit{gathering}~\cite{zheng:02:gatherings}, dan masih banyak definisi formal lainnya. Seluruh definisi formal yang sudah dibuat selalu bergantung pada setidaknya tiga ukuran lintasan: \textit{size}, kedekatan spasial, dan parameter temporal. Walaupun kebanyak definisi formal yang sudah dibuat untuk data lintasan yang bersifat diskrit, terdapat definisi formal pergerakan kolektif yang dapat menangani data lintasan yang bersifat kontinu seperti \textit{group}~\cite{buchin:group}.
 
@@ -601,8 +604,6 @@ Proksemik merupakan sebuah studi yang mempelajari pengaruh penggunaan ruang sosi
 
 Gambar~\ref{bab2:proksemik} menunjukkan keempat ruang proksemik yang dimiliki oleh seorang individu.
 
-\vspace{10pt}
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.65\textwidth]{Gambar/bab2:proksemik.pdf}
@@ -610,19 +611,17 @@ Gambar~\ref{bab2:proksemik} menunjukkan keempat ruang proksemik yang dimiliki ol
     \label{bab2:proksemik}
 \end{figure}
 
-\vspace{10pt}
-
 \section{Evaluasi Definisi Pergerakan Kolektif}
 \label{sec:eval-theory}
 
-Terdapat dua metode pengujian yang dapat digunakan untuk menguji definisi dari pergerakan kolektif, yaitu pengujian kuantitatif dan kualitatif.
+Terdapat dua cara yang dapat digunakan untuk melakukan evaluasi terhadap definisi dari pergerakan kolektif, yaitu secara kuantitatif dan kualitatif.
 
-\subsection{Pengujian Kuantitatif Definisi Pergerakan Kolektif}
+\subsection{Evaluasi Kuantitatif Definisi Pergerakan Kolektif}
 \label{subsec:quantitative-theory}
 
-Pengujian kuantitatif terhadap sebuah definisi pergerakan kolektif dilakukan dengan menguji relevansi hasil identifikasi pergerakan kolektif yang sesuai dengan definisi formal dengan sebuah hasil identifikasi yang dijadikan sebagai pembanding. Sebuah pergerakan kolektif pada hasil identifikasi akan dianggap relevan apabila pergerakan kolektif tersebut juga teridentifikasi pada hasil identifikasi yang dijadikan sebagai pembanding. Hasil identifikasi yang dijadikan pembanding biasanya berasal dari hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia  secara manual pada data pergerakan yang sama. Salah satu cara yang dapat digunakan untuk mengukur relevansi hasil identifikasi adalah melalui klasifikasi biner yang melibatkan nilai \textit{true positive}, \textit{false positive}, \textit{false negative}, dan \textit{true negative}. Hubungan antara keempat nilai tersebut ditunjukkan melalui \textit{confusion matrix} pada Tabel~\ref{bab2:confusion}.
+Evaluasi kuantitatif terhadap sebuah definisi pergerakan kolektif dilakukan dengan menguji relevansi hasil identifikasi pergerakan kolektif yang sesuai dengan definisi formal dengan sebuah hasil identifikasi yang dijadikan sebagai pembanding. Sebuah pergerakan kolektif pada hasil identifikasi akan dianggap relevan apabila pergerakan kolektif tersebut juga teridentifikasi pada hasil identifikasi yang dijadikan sebagai pembanding. Hasil identifikasi yang dijadikan pembanding biasanya berasal dari hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia  secara manual pada data pergerakan yang sama. Salah satu cara yang dapat digunakan untuk mengukur relevansi hasil identifikasi adalah melalui klasifikasi biner yang melibatkan nilai \textit{true positive}, \textit{false positive}, \textit{false negative}, dan \textit{true negative}. Hubungan antara keempat nilai tersebut ditunjukkan melalui \textit{confusion matrix} pada Tabel~\ref{bab2:confusion}.
 
-\begin{table}[t]
+\begin{table}[h]
     \centering
     \caption{\textit{Confusion matrix} pada klasifikasi biner}
     \begin{tabular}{|c|c|c|}
@@ -635,25 +634,29 @@ Pengujian kuantitatif terhadap sebuah definisi pergerakan kolektif dilakukan den
     \label{bab2:confusion}
 \end{table}
 
-Nilai-nilai tersebut dapat diolah lebih lanjut menjadi nilai \textit{precision}, \textit{recall}, dan \textit{F measure}~\cite{manning:02:ir}. Nilai \textit{precision} merupakan rasio dari pergerakan kolektif yang relevan pada seluruh pergerakan kolektif yang berhasil teridentifikasi. Nilai \textit{recall} merupakan rasio dari pergerakan kolektif relevan yang teridentifikasi. \textit{F measure} merupakan relevansi dari hasil pengujian yang dilakukan melalui perhitungan nilai \textit{precision} dan \textit{recall}. Salah satu nilai \textit{F measure} yang dapat digunakan adalah \textit{F1 score} yang merupakan \textit{harmonic mean} dari nilai \textit{precision} dan \textit{recall}. Nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dapat dihitung menggunakan rumus-rumus berikut:
+Nilai-nilai tersebut dapat diolah lebih lanjut menjadi nilai \textit{precision}, \textit{recall}, dan \textit{F measure}~\cite{manning:02:ir}. Nilai \textit{precision} merupakan rasio dari pergerakan kolektif yang relevan pada seluruh pergerakan kolektif yang berhasil teridentifikasi. Nilai \textit{recall} merupakan rasio dari pergerakan kolektif relevan yang teridentifikasi. \textit{F measure} merupakan relevansi dari hasil identifikasi pergerakan kolektif yang didapatkan melalui perhitungan nilai \textit{precision} dan \textit{recall}. Salah satu nilai \textit{F measure} yang dapat digunakan adalah \textit{F1 score} yang merupakan \textit{harmonic mean} dari nilai \textit{precision} dan \textit{recall}. Nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dapat dihitung menggunakan rumus-rumus berikut:
 
 \begin{align*}
     P\;(precision) & = \frac{t_p}{t_p + f_p} & R\;(recall) & = \frac{t_p}{t_p + t_n} & F_1\;Score & = 2 \cdot \frac{P \cdot R}{P + R}
 \end{align*}
 
-\subsection{Pengujian Kualitatif Definisi Pergerakan Kolektif}
+\subsection{Evaluasi Kualitatif Definisi Pergerakan Kolektif}
 \label{subsec:qualitative-theory}
 
-Pengujian kualitatif terhadap sebuah definisi pergerakan kolektif dilakukan dengan memvisualisasikan hasil identifikasi pergerakan kolektif pada rekaman video pergerakan yang menjadi sumber data pergerakan. Melalui visualisasi pergerakan kolektif, peneliti dapat mengamati keanggotaan entitas bergerak dalam pergerakan kolektif dan durasi pergerakan kolektif secara langsung seakan peneliti pengamatan pergerakan secara nyata. Gambar~\ref{bab2:visualization} menunjukkan contoh visualisasi identifikasi pergerakan kolektif pada rekaman video pergerakan dunia nyata.
+Evaluasi kualitatif terhadap sebuah definisi pergerakan kolektif dilakukan dengan memvisualisasikan hasil identifikasi pergerakan kolektif pada rekaman video pergerakan yang menjadi sumber data pergerakan. Melalui visualisasi pergerakan kolektif, peneliti dapat mengamati keanggotaan entitas bergerak dalam pergerakan kolektif dan durasi pergerakan kolektif secara langsung seakan peneliti pengamatan pergerakan secara nyata. Gambar~\ref{bab2:visualization} menunjukkan contoh visualisasi identifikasi pergerakan kolektif pada rekaman video pergerakan dunia nyata.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.95\textwidth]{Gambar/bab2:contoh-visualisasi.pdf}
+    \includegraphics[width=\textwidth]{Gambar/bab2:contoh-visualisasi.pdf}
     \caption[Contoh visualisasi pergerakan kolektif]{Contoh visualisasi pergerakan kolektif pada rekaman video pergerakan}
     \label{bab2:visualization}
 \end{figure}
 
 Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar~\ref{bab2:entitas}. Kepala menunjukkan posisi entitas saat ini. Ekor menunjukkan urutan posisi-posisi sebelumnya yang ditempuh oleh entitas. ID menunjukkan nomor identitas unik yang digunakan untuk membedakan satu entitas dengan entitas lainnya.
+
+\clearpage
+
+Keanggotaan entitas pada sebuah pergerakan kolektif akan ditunjukkan melalui warna kepala dan ekor dari entitas. Warna kepala entitas merepresentasikan keanggotaan entitas yang diidentifikasi oleh definisi pergerakan kolektif. Warna ekor entitas merepresentasikan keanggotaan entitas yang ditunjukkan oleh hasil identifikasi yang dilakukan oleh manusia. Entitas yang tergabung dalam pergerakan kolektif yang sama akan memiliki warna kepala dan ekor yang sama. Entitas yang tidak tergabung dalam pergerakan kolektif manapun akan memiliki kepala dan ekor yang berwarna putih. Selain itu, entitas yang tergabung dalam dua atau lebih rombongan akan memiliki variasi warna kepala entitas sejumlah rombongan di mana entitas yang dimaksud tergabung sebagai anggota rombongan. Gambar~\ref{bab2:contoh-visualisasi-entitas} menunjukkan contoh visualisasi entitas yang dapat terjadi dalam visualisasi hasil identifikasi pergerakan kolektif pada rekaman video pergerakan.
 
 \begin{figure}[t]
     \centering
@@ -661,8 +664,6 @@ Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan sepe
     \caption{Representasi entitas pada video rekaman pergerakan}
     \label{bab2:entitas}
 \end{figure}
-
-Keanggotaan entitas pada sebuah pergerakan kolektif akan ditunjukkan melalui warna kepala dan ekor dari entitas. Warna kepala entitas merepresentasikan keanggotaan entitas yang diidentifikasi oleh definisi pergerakan kolektif. Warna ekor entitas merepresentasikan keanggotaan entitas yang ditunjukkan oleh hasil identifikasi yang dilakukan oleh manusia. Entitas yang tergabung dalam pergerakan kolektif yang sama akan memiliki warna kepala dan ekor yang sama. Entitas yang tidak tergabung dalam pergerakan kolektif manapun akan memiliki kepala dan ekor yang berwarna putih. Selain itu, entitas yang tergabung dalam dua atau lebih rombongan akan memiliki variasi warna kepala entitas sejumlah rombongan di mana entitas yang dimaksud tergabung sebagai anggota rombongan. Gambar~\ref{bab2:contoh-visualisasi-entitas} menunjukkan contoh visualisasi entitas yang dapat terjadi dalam visualisasi hasil identifikasi pergerakan kolektif pada rekaman video pergerakan.
 
 \begin{figure}[h]
     \centering
