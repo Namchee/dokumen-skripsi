@@ -1,0 +1,66 @@
+\chapter{Kesimpulan dan Saran}
+\label{chap:kesimpulan}
+
+Bab ini akan membahas mengenai pencapaian tujuan penelitian berdasarkan proses-proses yang dilalui dan hasil dari penelitian. Bab ini juga akan akan membahas mengenai uraian mengenai jawaban dari masalah yang hendak diselesaikan oleh penelitian ini. Terakhir, bab ini akan membahas mengenai topik penelitian lanjutan yang dapat dikembangkan berkaitan dengan penelitian ini.
+
+\section{Pencapaian Tujuan Penelitian}
+\label{sec:pencapaian-tujuan}
+
+Seperti yang sudah dijabarkan pada Subbab~\ref{sec:tujuan}, tujuan dari penelitian ini adalah:
+
+\begin{enumerate}
+    \item \textbf{Membuat definisi pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pada kasus perbedaan arah dan kecepatan}
+    
+    Subbab~\ref{subsec:beda-arah} telah menjelaskan tentang masalah perbedaan arah yang dapat terjadi selama proses identifikasi pergerakan kolektif. Melalui analisis terhadap ukuran-ukuran yang terdapat pada data lintasan, diusulkan pemanfaatan ukuran arah lintasan untuk menyelesaikan masalah perbedaan arah pada proses identifikasi rombongan.
+    
+    Subbab~\ref{subsec:beda-kecepatan} telah menjelaskan mengenai masalah perbedaan kecepatan yang dapat terjadi selama proses identifikasi pergerakan kolektif. Melalui analisis terhadap cara pengukuran kemiripan lintasan pada Subbab~\ref{sec:kemiripan}, diusulkan penggunaan algoritma \textit{dynamic time warping} untuk menyelesaikan masalah perbedaan kecepatan pada proses identifikasi rombongan.
+    
+    Berdasarkan dua usulan penyelesaian tersebut, dibuatlah sebuah definisi pergerakan kolektif baru bernama rombongan yang dinyatakan pada Subbab~\ref{sec:definisi}.
+    
+    \item \textbf{Membuat dan mengimplementasikan algoritma yang dapat mengidentifikasi kelompok pergerakan kolektif yang sesuai dengan definisi formal yang telah dibuat}
+    
+    Algoritma identifikasi pergerakan kolektif yang sesuai dengan definisi formal rombongan dapat dilihat melalui Algoritma~\ref{bab3:algoritma-identifikasi} yang dijabarkan melalui subbab~\ref{sec:algoritma}. Cara kerja algoritma identifikasi rombongan dapat dilihat melalui Subbab~\ref{sec:algorithm-example}. Karena cara kerja algoritma identifikasi rombongan yang dapat menghasilkan banyak rombongan yang redundan, dibuatlah sebuah algoritma pengurangan redundansi yang dapat dilihat melalui Algoritma~\ref{bab3:redundansi}.
+    
+    Rancangan perangkat lunak identifikasi rombongan dibahas pada Bab~\ref{chap:perancangan}. Bab tersebut memuat pertimbangan-pertimbangan serta rencana alur kerja perangkat lunak identifikasi rombongan. Detil implementasi perangkat lunak dibahas melalui Bab~\ref{chap:implementasi}.
+    
+    \item \textbf{Melakukan evaluasi terhadap efektivitas dari definisi formal pergerakan kolektif yang sudah dibuat secara kuantitatif dan kualitatif}
+    
+    Evaluasi terhadap definisi rombongan dilakukan melalui eksperimen terhadap data pergerakan dunia nyata dan melakukan evaluasi terhadap hasil eksperimen. Evaluasi secara kualitatif dilakukan melalui analisis terhadap visualisasi hasil identifikasi pejalan kaki. Evaluasi secara kuantitatif dilakukan melalui perbandingan hasil identifikasi manusia dan hasil identifikasi yang dihasilkan perangkat lunak dengan menghitung nilai \textit{precision}, \textit{recall}, dan \textit{F1 score}.
+    
+    Evaluasi terhadap hasil eksperimen secara kuantitatif menunjukkan bahwa upaya identifikasi pergerakan kolektif yang sesuai dengan definisi rombongan memiliki nilai \textit{precision} yang cukup rendah dan nilai \textit{recall} yang tinggi pada data pergerakan bidireksional. Eksperimen pada data pergerakan multidireksional menghasilkan nilai \textit{precision} yang cukup tinggi namun disertai dengan nilai \textit{recall} yang rendah. Memperketat syarat perbedaan arah maksimum meningkatkan nilai \textit{F1 score} secara konsisten pada setiap data pergerakan yang digunakan.
+    
+    Evaluasi terhadap hasil eksperimen secara kualitatif menunjukkan masalah-masalah yang dialami oleh definisi rombongan. Masalah utama yang dialami pada proses identifikasi rombongan yang sesuai dengan definisi rombongan adalah perhitungan perbedaan arah yang terlalu ketat dan kaku sehingga menyebabkan rombongan tidak teridentifikasi apabila terdapat perubahan arah sekecil apapun. Terlepas dari masalah tersebut, evaluasi kualitatif menunjukkan bahwa definisi rombongan dapat mengidentifikasi rombongan yang memiliki kasus perbedaan kecepatan dengan baik.
+    
+    Penggunaan algoritma pengurangan redundansi rombongan meningkatkan nilai relevansi pada data pergerakan yang memiliki jumlah rombongan relevan yang sedikit dan sedang pada setiap kombinasi parameter yang digunakan. Namun, penggunaan algoritma pengurangan redundansi peningkatan atau penurunan nilai yang variatif pada data pergerakan yang memiliki jumlah rombongan relevan yang banyak di mana perubahan nilai bergantung pada parameter identifikasi yang digunakan.
+\end{enumerate}
+
+Berdasarkan jawaban-jawaban di atas, dapat disimpulkan bahwa tujuan penelitian yang telah dijabarkan sebelumnya dapat dicapai seluruhnya. Dengan demikian, dapat dibuat sebuah penjabaran akan jawaban dari masalah-masalah yang hendak dipecahkan oleh penelitian ini.
+
+\section{Jawaban Atas Masalah Penelitian}
+\label{sec:jawaban-masalah}
+
+Seperti yang sudah disebutkan melalui Subbab~\ref{sec:rumusan}, masalah utama yang hendak dipecahkan oleh skripsi ini adalah \textit{seperti apakah definisi pergerakan kolektif yang dapat mengatasi masalah identifikasi pada data pergerakan yang memiliki kasus perbedaan arah dan kecepatan}. Pemecahan masalah tersebut dilakukan dengan melakukan studi pustaka mengenai ukuran-ukuran yang terdapat dalam sebuah data lintasan. Studi pustaka mengenai lintasan dibahas secara detil melalui Bab~\ref{chap:teori}.
+
+Detil dari masalah perbedaan arah dan kecepatan dibahas pada Bab~\ref{chap:analisis}. Melalui pembahasan yang dilakukan di bab tersebut, diketahui bahwa arah lintasan dapat digunakan untuk memecahkan masalah perbedaan arah entitas. Untuk mengatasi masalah perbedaan kecepatan entitas, digunakan algoritma \textit{dynamic time warping} sebagai pengganti dari penggunaan \textit{euclidean distance} untuk mengukur jarak antara dua buah entitas. Dari usulan solusi untuk memecahkan masalah beda arah dan kecepatan, lahirlah sebuah definisi pergerakan kolektif baru bernama rombongan. Setelah definisi rombongan rampung, dibuatlah sebuah algoritma yang mampu mengidentifikasi rombongan sesuai dengan definisi tersebut. Algoritma identifikasi rombongan dapat dilihat melalui Subbab~\ref{sec:algoritma} beserta cara kerja algoritma yang dapat dilihat melalui Subbab~\ref{sec:algorithm-example}. Algoritma identifikasi rombongan kemudian dirancang dan diimplementasikan menjadi sebuah perangkat lunak.
+
+Untuk melakukan evaluasi pada definisi pergerakan kolektif baru yang dibuat, dilakukan eksperimen terhadap beberapa data pergerakan dunia nyata dan evaluasi terhadap hasil eksperimen yang dilakukan. Evaluasi secara kuantitatif dilakukan dengan menghitung relevansi hasil identifikasi perangkat lunak dengan hasil identifikasi yang dilakukan oleh manusia melalui nilai \textit{precision}, \textit{recall}, dan \textit{F1 score}. Evaluasi secara kualitatif dilakukan melalui pengamatan terhadap hasil visualisasi rombongan pada rekaman video pejalan kaki. Untuk membantu kebutuhan akan visualisasi hasil identifikasi pergerakan kolektif, digunakan sebuah perangkat lunak lain yang merupakan perangkat lunak diluar lingkup pengerjaan penelitian ini. Perangkat lunak visualisasi akan menghasilkan video rekaman yang telah dimodifikasi sehingga setiap rombongan yang teridentifikasi ditandai menggunakan model warna.
+
+Evaluasi secara kuantitatif menunjukkan peningkatan nilai relevansi hasil identifikasi perangkat lunak apabila syarat perbedaan arah diperketat secara konsisten untuk setiap data pergerakan yang digunakan. Evaluasi secara kuantitatif juga menunjukkan pengaruh parameter lain pada relevansi hasil identifikasi perangkat lunak seperti parameter jarak \textit{dynamic time warping} maksimum dan durasi interval waktu minimum. Secara keseluruhan, hasil identifikasi perangkat lunak memiliki nilai \textit{precision} yang cukup rendah. Salah satu faktor yang menyebabkan rendahnya nilai \textit{precision} adalah sifat dari hasil identifikasi manusia di mana satu entitas hanya dapat tergabung pada satu rombongan. Sifat tersebut sesuai bila digunakan pada \textit{clustering}, namun tidak cocok digunakan pada identifikasi pergerakan kolektif di mana satu entitas bergerak dapat tergabung pada lebih dari satu rombongan sekaligus. Hal tersebut menyebabkan peningkatan nilai \textit{false positive} yang mengakibatkan penurunan nilai \textit{precision}. Visualisasi terhadap hasil eksperimen menunjukkan masalah ketatnya syarat perbedaan arah yang menyebabkan banyaknya rombongan yang gagal teridentifikasi dan menyebabkan banyak identifikasi subrombongan yang tidak relevan. Terlepas dari masalah tersebut, evaluasi kualitatif menunjukkan bahwa definisi rombongan dapat mengatasi masalah perbedaan kecepatan. Bukti dari penyelesaian tersebut dapat dilihat pada visualisasi hasil identifikasi perangkat lunak yang menunjukkan bahwa rombongan yang memiliki anggota dengan kecepatan yang berbeda dapat diidentifikasi dengan baik dan sedini mungkin.
+
+Eksperimen untuk mengukur efektivitas algoritma pengurangan redundansi rombongan dalam meningkatkan relevansi hasil identifikasi rombongan menunjukkan tanda positif pada data-data pergerakan yang memiliki jumlah rombongan relevan yang sedikit dan sedang pada hasil identifikasi manusia, di mana penggunaan algoritma pengurangan redundansi meningkatkan nilai \textit{precision} dan \textit{F1 score} tanpa mengurangi nilai \textit{recall} sedikitpun. Namun pada data pergerakan lain yang memiliki jumlah rombongan relevan yang banyak pada hasil identifikasi manusia, penggunaan algoritma pengurangan redundansi memiliki pengaruh yang lebih variatif pada nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} dari hasil identifikasi perangkat lunak pada variasi nilai parameter identifikasi yang digunakan. Pengaruh tersebut dapat berupa peningkatan atau penurunan nilai \textit{precision}, \textit{recall}, atau \textit{F1 score}.
+
+\section{Saran Penelitian Lanjutan}
+\label{sec:saran}
+
+Berdasarkan proses dan hasil penelitian, terdapat beberapa poin-poin menarik yang dapat dijadikan sebagai bahan penelitian lanjutan mengenai pola pergerakan kolektif rombongan. Berikut merupakan poin-poin yang dianggap dapat menjadi bahan penelitian lanjutan:
+
+\begin{enumerate}
+    \item Melakukan eksperimen lanjutan pada lebih banyak sampel data pergerakan, khususnya pada sampel-sampel yang memiliki tingkat kepadatan entitas yang variatif, memiliki pola pergerakan yang tidak umum seperti adanya perubahan kecepatan dan arah yang ekstrim, serta pada data pergerakan di mana entitas yang diamati bukan manusia.
+    \item Meningkatkan kualitas hasil identifikasi pergerakan kolektif yang digunakan sebagai acuan untuk mengukur kualitas definisi pergerakan kolektif seperti memperbolehkan entitas untuk tergabung dalam lebih dari satu rombongan dan menambahkan durasi rombongan pada hasil identifikasi manusia.
+    \item Melakukan eksperimen mengenai pengaruh parameter identifikasi lainnya seperti jumlah entitas minimum $m$ dan jumlah kedekatan minimum $n$.
+    \item Melakukan optimisasi terhadap kompleksitas algoritma identifikasi rombongan.
+    \item Meningkatkan fleksibilitas perhitungan perbedaan arah agar dapat mengatasi masalah perbedaan arah yang kecil dengan frekuensi yang tinggi.
+    \item Meningkatkan kualitas pengurangan redundansi agar tidak menghapus rombongan relevan pada data pergerakan yang memiliki jumlah anggota relevan yang banyak.
+    \item Mengurangi redundansi yang terdapat algoritma identifikasi rombongan sehingga perangkat lunak tidak membutuhkan algoritma tambahan untuk mengurangi redundansi hasil identifikasi.
+    \item Mengimplementasikan pemrosesan paralel pada proses identifikasi rombongan.
+\end{enumerate}

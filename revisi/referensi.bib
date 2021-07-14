@@ -1,0 +1,1041 @@
+%_____________________________________________________________________________
+%=============================================================================
+% referensi.bib v2 (03-10-2016) dibuat oleh Lionov - Informatika FTIS UNPAR
+% 
+% Ini adalah file referensi (referensi.bib), berisi petunjuk singkat membuat
+% referensi dan dipergunakan untuk menyimpan data referensi yang digunakan di
+% buku skripsi
+%
+% Sejak template skripsi versi 11, style bibliography yang digunakan adalah 
+% "computer journal" (cj). Perubahan ini disebabkan karena penulisan 
+% nama penulis pada style sebelumnya (ieeetr) tidak sesuai dengan kaidah 
+% penulisan Bahasa Indonesia, tetapi sekaligus ingin mempertahankan penggunaan
+% angka untuk merujuk dan urutan item di referensi sesuai dengan kemunculan
+% di teks skripsi.
+% Untuk menggunakan style "cj", anda membutuhkan file "compj.bst" yang sudah
+% disertakan di dalam Template Skripsi FTIS
+%
+% File compj.bst tersebut merupakan file resmi yang digunakan oleh Computer 
+% Journal yang diterbitkan Oxford University di Inggris, kemudian dilakukan 
+% cukup banyak penyesuaian untuk digunakan di FTIS UNPAR, oleh sebab itu
+% ada kemungkinan terjadi warning/error jika isi file ini digunakan untuk
+% mencetak daftar referensi dengan menggunakan style yang lain
+%
+% Jika anda menemui kesulitan dalam menuliskan referensi (karena tidak 
+% terdapat pada contoh yang diberikan), anda dapat bertanya via email ke 
+% lionov(at)gmail.com atau lionov(at)unpar.ac.id
+%
+% Versi 2 (03-10-2016):
+%	- Penjelasan umum dan 12 jenis penulisan referensi
+%_____________________________________________________________________________
+%=============================================================================
+
+%_____________________________________________________________________________
+%=============================================================================
+% Panduan singkat penulisan isi referensi.bib untuk Template Skripsi FTIS
+%
+% Dalam file ini akan diberikan contoh cara penulisan dari 10 jenis sumber 
+% yang umum digunakan. 
+% Untuk keseluruhan penulisan nama penulis, gunakan format nama lengkap yang 
+% dipisahkan dengan kata "and" (jika terdapat beberapa orang penulis)
+% 	Contoh : John Doe and Jack Doe and Jane Doe
+% jika perlu, gunakan tanda kurung untuk nama-nama tertentu untuk memisahkan 
+% nama depan dengan nama keluarga agar lebih tepat
+% 	Contoh : John {van Doe} and Jack {von Doe}
+% atau, gunakan tanda koma yang memisahkan nama dan nama keluarga (ditulis 
+% terbalik)
+% 	Contoh : Doe, John and von Doe, Jack and Doe, Jane
+%
+% Secara umum, data untuk bibtex dapat ditemukan secara otomatis di internet
+% Misalkan untuk buku, carilah dengam mesin pencari, nama buku dengan tambahan 
+% "bibtex". Hal serupa dapat digunakan untuk mencari paper/artikel.
+%
+% Bahan kuliah (dalam bentuk slide/lecture notes) tidak dianjurkan digunakan 
+% sebagai referensi, karena biasanya isinya mengacu ke suatu buku wajib di 
+% kuliah tersebut. Jadi lebih baik mencantumkan buku wajib tersebut sebagai 
+% referensi.
+%
+% Khusus untuk mahasiswa/i prodi informatika, banyak paper/buku dapat diunduh 
+% bibtexnya dari dblp atau acm.org. Jika anda mendapatkan bib dari hasil unduh 
+% tersebut, mohon informasi yang diisi disesuaikan dengan petunjuk yang ada 
+% sehingga hasil referensi anda tetap rapi.
+%
+% Mohon tidak menuliskan "et al.", karena akan diduga dihasilkan oleh 
+% template ini, padahal tidak demikian. Gunakan "dkk" bila sangat terpaksa. 
+% Lebih baik tuliskan semua nama penulis untuk menghargai mereka. 
+% Tentu jika jumlahnya masuk akal, maksimal sekitar 10 orang. 
+%_____________________________________________________________________________
+%=============================================================================
+%
+%_____________________________________________________________________________
+%=============================================================================
+% Contoh penulisan referensi:
+% 	1. Buku
+%	Field yang wajib ada:
+%		1. author		: penulis
+%		2. title 		: judul
+%		3. edition		: edisi (OPSIONAL, kosongkan entri ini jika buku tersebut merupakan edisi pertama)
+%		4. year			: tahun terbit buku
+%		5. publisher	: penerbit
+%		6. address		: kota lokasi penerbit
+%
+%	Contoh hasil di Daftar Referensi: 
+%	de Berg, M., Cheong, O., van Kreveld, M. J., dan Overmars, M. (2008) Computational Geometry: Algorithms and Applications, 3rd edition. Springer-Verlag, Berlin.
+%
+%	Contoh penulisan di file bib:
+
+@book{longley:02:gis,
+    author={Longley, Paul A. and Goodchild, Michael F. and Maguire, David J. and Rhind, David W.},
+    title={Geographic Information Science and Systems},
+    year={2015},
+    isbn={1118676955},
+    publisher={Wiley Publishing},
+    edition={4th},
+    address={Hoboken, New Jersey}
+}
+
+@book{szeliski:02:homography,
+    author    = {Richard Szeliski},
+    title     = {Computer Vision - Algorithms and Applications},
+    series    = {Texts in Computer Science},
+    publisher = {Springer},
+    year      = {2011},
+    url       = {https://doi.org/10.1007/978-1-84882-935-0},
+    doi       = {10.1007/978-1-84882-935-0},
+    isbn      = {978-1-84882-934-3},
+    timestamp = {Thu, 13 Aug 2020 18:43:25 +0200},
+    biburl    = {https://dblp.org/rec/series/txcs/Szeliski11.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org},
+    address = {London; New York}
+}
+
+@book{manning:02:ir,
+    author    = {Christopher D. Manning and
+               Prabhakar Raghavan and
+               Hinrich Sch{\"{u}}tze},
+    title     = {Introduction to information retrieval},
+    publisher = {Cambridge University Press},
+    year      = {2008},
+    url       = {https://nlp.stanford.edu/IR-book/pdf/irbookprint.pdf},
+    doi       = {10.1017/CBO9780511809071},
+    isbn      = {978-0-521-86571-5},
+    timestamp = {Thu, 12 Mar 2020 11:24:04 +0100},
+    biburl    = {https://dblp.org/rec/books/daglib/0021593.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org},
+    address = {Cambridge, UK},
+}
+
+@book{hall:06:proxemic,
+    title={The Hidden Dimension},
+    author={Hall, E.T.},
+    edition={},
+    isbn={9780844665528},
+    year={1992},
+    publisher={Anchor Books},
+    address={New York, New York State}
+}
+
+%	2. Bab di dalam buku.
+%	Di bagian ini, buku merupakan kumpulan bab dari pengarang-pengarang yang berbeda.
+%	Buku tersebut tidak memiliki pengarang, tetapi editor. Pengarang hanya menulis satu 
+%	(atau beberapa) bab yang menjadi bagian dari buku tersebut.
+%
+%	Field yang wajib ada:
+%		1. author		: penulis bab
+%		2. title 		: judul bab
+%		3. editor		: editor buku
+%		4. booktitle	: judul buku
+%		5. edition		: edisi
+%		6. year			: tahun terbit buku
+%		7. publisher	: penerbit
+%		8. address		: kota lokasi penerbit
+%
+%	Contoh hasil di Daftar Referensi: 
+%	van Kreveld, M. J. (2004) Geographic information systems. Bagian dari Goodman, J. E. dan O'Rourke, J. (ed.), Handbook of Discrete and Computational Geometry. Chapman & Hall/CRC, Boca Raton.
+%
+%	Pada contoh di atas, van Kreveld, M. J. adalah penulis bab dengan judul "Geographic information systems". 
+%	Bab tersebut ada di dalam buku "Handbook of Discrete and Computational Geometry" dengan editor Goodman, J. E. dan O'Rourke, J.
+%	
+%	Catatan: Jika bab pada buku tersebut tidak memiliki judul, gunakan inbook (awali dgn tanda (at)). 
+%	Perbedaannya hanya mengganti "title" dengan "chapter" , yang kemudian diisi dengan nomor bab
+%
+%	Contoh penulisan di file bib:
+
+%	3. Artikel dari jurnal
+%	Artikel (atau paper) yang berasal dari jurnal ilmiah. 
+%
+%	Field yang wajib ada:
+%		1. author		: penulis
+%		2. title 		: judul artikel
+%		3. journal		: nama jurnal
+%		4. volume		: volume jurnal
+%		5. pages		: halaman awal dan akhir dari artikel pd buku jurnal
+%		6. year			: tahun terbit jurnal
+%
+%	Contoh hasil di Daftar Referensi:   
+%	Buchin, K., Buchin, M., van Kreveld, M. J., L�ffler, M., Silveira, R. I., Wenk, C., dan Wiratma, L. (2013) Median trajectories. Algorithmica, 66, 595-614. 
+%
+%	Contoh penulisan di file bib:
+
+@article{diann:01:movement-analysis,
+    author    = {Diann J. Prosser and
+               Eric C. Palm and
+               John Y. Takekawa and
+               Delong Zhao and
+               Xiangming Xiao and
+               Peng Li and
+               Ying Liu and
+               Scott H. Newman},
+    title     = {Movement analysis of free-grazing domestic ducks in Poyang Lake, China:
+               a disease connection},
+    journal   = {Int. J. Geogr. Inf. Sci.},
+    volume    = {30},
+    number    = {5},
+    pages     = {869--880},
+    year      = {2016},
+    url       = {https://doi.org/10.1080/13658816.2015.1065496},
+    doi       = {10.1080/13658816.2015.1065496},
+    timestamp = {Mon, 26 Oct 2020 08:46:50 +0100},
+    biburl    = {https://dblp.org/rec/journals/gis/ProsserPTZXLLN16.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{waser:01:mangabey,
+    author = {Waser, Peter},
+    year = {2008},
+    month = {04},
+    pages = {249 -- 263},
+    title = {Monthly variations in feeding and activity patterns of the mangabey, Cercocebus albigena (Lydekker)},
+    volume = {13},
+    journal = {African Journal of Ecology},
+    doi = {10.1111/j.1365-2028.1975.tb00138.x}
+}
+
+@article{velden:01:cranes,
+    author = {van Velden, Julia and Altwegg, Res and Shaw, Kevin and Ryan, Peter},
+    year = {2016},
+    month = {11},
+    pages = {1-11},
+    title = {Movement patterns and survival estimates of Blue Cranes in the Western Cape},
+    volume = {88},
+    journal = {Ostrich},
+    doi = {10.2989/00306525.2016.1224782}
+}
+
+@article{carter:argos,
+    author = {Dimitrios Carter and Kimberley Bennett and Clare Embling and Phil Hosegood and Debbie Russell},
+    year = {2016},
+    month = {10},
+    pages = {},
+    title = {Navigating uncertain waters: A critical review of inferring foraging behaviour from location and dive data in pinnipeds},
+    volume = {4},
+    journal = {Movement Ecology},
+    doi = {10.1186/s40462-016-0090-9}
+}
+
+@article{makris:01:security,
+    author    = {Dimitrios Makris and
+               Tim Ellis},
+    title     = {Path detection in video surveillance},
+    journal   = {Image Vis. Comput.},
+    volume    = {20},
+    number    = {12},
+    pages     = {895--903},
+    year      = {2002},
+    url       = {https://doi.org/10.1016/S0262-8856(02)00098-7},
+    doi       = {10.1016/S0262-8856(02)00098-7},
+    timestamp = {Sun, 21 Jun 2020 17:41:40 +0200},
+    biburl    = {https://dblp.org/rec/journals/ivc/MakrisE02.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{safi:speed,
+    author = {Safi, Kamran and Kranstauber, Bart and Weinzierl, Rolf and Griffin, Larry and Rees, Eileen and Cabot, David and Cruz, Sebastián and Proaño, Carolina and Takekawa, John and Newman, Scott and Waldenström, Jonas and Bengtsson, Daniel and Kays, Roland and Wikelski, Martin and Bohrer, Gil},
+    year = {2013},
+    month = {07},
+    pages = {},
+    title = {Flying with the wind: Scale dependency of speed and direction measurements in modelling wind support in avian flight},
+    volume = {1},
+    journal = {Movement Ecology},
+    doi = {10.1186/2051-3933-1-4}
+}
+
+@article{jeung:convoys,
+  author    = {Hoyoung Jeung and
+               Man Lung Yiu and
+               Xiaofang Zhou and
+               Christian S. Jensen and
+               Heng Tao Shen},
+  title     = {Discovery of convoys in trajectory databases},
+  journal   = {Proc. {VLDB} Endow.},
+  volume    = {1},
+  number    = {1},
+  pages     = {1068--1080},
+  year      = {2008},
+  url       = {http://www.vldb.org/pvldb/vol1/1453971.pdf},
+  doi       = {10.14778/1453856.1453971},
+  timestamp = {Sat, 25 Apr 2020 13:59:34 +0200},
+  biburl    = {https://dblp.org/rec/journals/pvldb/JeungYZJS08.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{yida:group,
+    author    = {Yida Wang and
+               Ee{-}Peng Lim and
+               San{-}Yih Hwang},
+    title     = {Efficient mining of group patterns from user movement data},
+    journal   = {Data Knowl. Eng.},
+    volume    = {57},
+    number    = {3},
+    pages     = {240--282},
+    year      = {2006},
+    url       = {https://doi.org/10.1016/j.datak.2005.04.006},
+    doi       = {10.1016/j.datak.2005.04.006},
+    timestamp = {Fri, 30 Nov 2018 13:23:44 +0100},
+    biburl    = {https://dblp.org/rec/journals/dke/WangLH06.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{su:02:euclidean,
+  author    = {Han Su and
+               Shuncheng Liu and
+               Bolong Zheng and
+               Xiaofang Zhou and
+               Kai Zheng},
+  title     = {A survey of trajectory distance measures and performance evaluation},
+  journal   = {{VLDB} J.},
+  volume    = {29},
+  number    = {1},
+  pages     = {3--32},
+  year      = {2020},
+  url       = {https://doi.org/10.1007/s00778-019-00574-9},
+  doi       = {10.1007/s00778-019-00574-9},
+  timestamp = {Fri, 09 Apr 2021 18:25:51 +0200},
+  biburl    = {https://dblp.org/rec/journals/vldb/SuLZZZ20.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{senin:02:dtw,
+  title={Dynamic time warping algorithm review},
+  author={Senin, Pavel},
+  journal={Information and Computer Science Department University of Hawaii at Manoa Honolulu, USA},
+  volume={855},
+  number={1-23},
+  pages={40},
+  year={2008},
+  publisher={Citeseer}
+}
+
+@article{sitikhu:cosine-similarity,
+  author    = {Pinky Sitikhu and
+               Kritish Pahi and
+               Pujan Thapa and
+               Subarna Shakya},
+  title     = {A Comparison of Semantic Similarity Methods for Maximum Human Interpretability},
+  journal   = {CoRR},
+  volume    = {abs/1910.09129},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1910.09129},
+  archivePrefix = {arXiv},
+  eprint    = {1910.09129},
+  timestamp = {Tue, 22 Oct 2019 18:17:16 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1910-09129.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{tremblay:02:curvilinear,
+	author = {Tremblay, Yann and Shaffer, Scott A. and Fowler, Shannon L. and Kuhn, Carey E. and McDonald, Birgitte I. and Weise, Michael J. and Bost, Charle-Andr{\'e} and Weimerskirch, Henri and Crocker, Daniel E. and Goebel, Michael E. and Costa, Daniel P.},
+	title = {Interpolation of animal tracking data in a fluid environment},
+	volume = {209},
+	number = {1},
+	pages = {128--140},
+	year = {2006},
+	doi = {10.1242/jeb.01970},
+	publisher = {The Company of Biologists Ltd},
+	issn = {0022-0949},
+	URL = {https://jeb.biologists.org/content/209/1/128},
+	eprint = {https://jeb.biologists.org/content/209/1/128.full.pdf},
+	journal = {Journal of Experimental Biology}
+}
+
+@article{wentz:02:constrained-random-walk,
+    author    = {Elizabeth A. Wentz and
+               Aimee F. Campbell and
+               Robert Houston},
+    title     = {A comparison of two methods to create tracks of moving objects: linear
+               weighted distance and constrained random walk},
+    journal   = {Int. J. Geogr. Inf. Sci.},
+    volume    = {17},
+    number    = {7},
+    pages     = {623--645},
+    year      = {2003},
+    url       = {https://doi.org/10.1080/1365881031000135492},
+    doi       = {10.1080/1365881031000135492},
+    timestamp = {Tue, 12 May 2020 16:49:44 +0200},
+    biburl    = {https://dblp.org/rec/journals/gis/WentzCH03.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{stickel:02:turtle,
+    author = {Stickel, Lucille F.},
+    title = {Populations and Home Range Relationships of the Box Turtle, Terrapene c. carolina (Linnaeus)},
+    journal = {Ecological Monographs},
+    volume = {20},
+    number = {4},
+    pages = {351-378},
+    doi = {https://doi.org/10.2307/1943570},
+    url = {https://esajournals.onlinelibrary.wiley.com/doi/abs/10.2307/1943570},
+    eprint = {https://esajournals.onlinelibrary.wiley.com/doi/pdf/10.2307/1943570},
+    year = {1950}
+}
+
+@article{velden:02:cranes,
+    author = {van Velden, Julia L. and Altwegg, Res and Shaw, Kevin and Ryan, Peter G.},
+    title = {Movement patterns and survival estimates of Blue Cranes in the Western Cape},
+    journal = {Ostrich},
+    volume = {88},
+    number = {1},
+    pages = {33-43},
+    year  = {2017},
+    publisher = {Taylor & Francis},
+    doi = {10.2989/00306525.2016.1224782},
+    URL = { 
+        https://doi.org/10.2989/00306525.2016.1224782
+    },
+    eprint = { 
+        https://doi.org/10.2989/00306525.2016.1224782
+    }
+}
+
+@article{lee:01:clustering,
+    author = {Lee, Jae-Gil and Han, Jiawei and Li, Xiaolei and Gonzalez, Hector},
+    title = {TraClass: Trajectory Classification Using Hierarchical Region-Based and Trajectory-Based Clustering},
+    year = {2008},
+    issue_date = {August 2008},
+    publisher = {VLDB Endowment},
+    volume = {1},
+    number = {1},
+    issn = {2150-8097},
+    url = {https://doi.org/10.14778/1453856.1453972},
+    doi = {10.14778/1453856.1453972},
+    journal = {Proc. VLDB Endow.},
+    month = {August},
+    pages = {1081–1094},
+    numpages = {14}
+}
+
+@article{rote:01:hausdorff,
+    author = {Rote, G\"{u}nter},
+    title = {Computing the Minimum Hausdorff Distance between Two Point Sets on a Line under Translation},    
+    year = {1991},
+    issue_date = {May 7, 1991},
+    publisher = {Elsevier North-Holland, Inc.},
+    address = {USA},
+    volume = {38},
+    number = {3},
+    issn = {0020-0190},
+    url = {https://doi.org/10.1016/0020-0190(91)90233-8},
+    doi = {10.1016/0020-0190(91)90233-8},
+    journal = {Inf. Process. Lett.},
+    month = {May},
+    pages = {123–127},
+    numpages = {5}
+}
+
+@article{alt:01:frechet,
+    author = {Alt, Helmut and Godau, Michael},
+    title = {Computing the Fr\'{e}chet Distance Between Two Polygonal Curves},
+    journal = {International Journal of Computational Geometry \& Applications},
+    volume = {05},
+    number = {01n02},
+    pages = {75-91},
+    year = {1995},
+    doi = {10.1142/S0218195995000064},  
+    URL = { 
+        https://doi.org/10.1142/S0218195995000064
+    },
+    eprint = { 
+        https://doi.org/10.1142/S0218195995000064
+    }
+}
+
+@article{muller:dtw,
+    author = {M\"{u}ller, Meinard},
+    year = {2007},
+    month = {01},
+    pages = {69-84},
+    title = {Dynamic time warping},
+    volume = {2},
+    journal = {Information Retrieval for Music and Motion},
+    doi = {10.1007/978-3-540-74048-3_4}
+}
+
+@article{myers:02:speech-recognition, 
+    author={C. Myers and L. Rabiner and A. Rosenberg},  journal={IEEE Transactions on Acoustics, Speech, and Signal Processing},
+    title={Performance tradeoffs in dynamic time warping algorithms for isolated word recognition},
+    year={1980},
+    volume={28},
+    number={6}, 
+    pages={623-635},
+    doi={10.1109/TASSP.1980.1163491}
+}
+
+@article{efrat:02:handwriting,
+    author = {Efrat, Alon and Fan, Quanfu and Venkatasubramanian, Suresh},    
+    year = {2007},
+    month = {04},
+    pages = {203-216},
+    title = {Curve Matching, Time Warping, and Light Fields: New Algorithms for Computing Similarity between Curves},
+    volume = {27},
+    journal = {Journal of Mathematical Imaging and Vision},
+    doi = {10.1007/s10851-006-0647-0}
+}
+
+@article{muller:02:computer-vision,
+    author = {M\"{u}ller, Meinard},
+    year = {2007},
+    month = {01},
+    pages = {211-226},
+    title = {DTW-Based Motion Comparison and Retrieval},
+    isbn = {978-3-540-74047-6},
+    journal = {Information Retrieval for Music and Motion},
+    volume = {1},
+    doi = {10.1007/978-3-540-74048-3_10}
+}
+
+@article{colles:02:chicken,
+    author = {Colles, Frances and Cain, Russell and Nickson, Thomas and Smith, Adrian and Roberts, Stephen and Maiden, Martin and Lunn, Daniel and Dawkins, Marian},
+    year = {2016},
+    month = {01},
+    pages = {20152323},
+    title = {Monitoring chicken flock behavior provides early warning of infection by human pathogen Campylobacter},
+    volume = {283},
+    journal = {Proceedings of the Royal Society B: Biological Sciences},
+    doi = {10.1098/rspb.2015.2323}
+}
+
+@article{li:swarm,
+    author = {Li, Zhenhui and Ding, Bolin and Han, Jiawei and Kays, Roland},
+    title = {Swarm: Mining Relaxed Temporal Moving Object Clusters},
+    year = {2010},
+    issue_date = {September 2010},
+    publisher = {VLDB Endowment},
+    volume = {3},
+    number = {1–2},
+    issn = {2150-8097},
+    url = {https://doi.org/10.14778/1920841.1920934},
+    doi = {10.14778/1920841.1920934},
+    journal = {Proc. VLDB Endow.},
+    month = {September},
+    pages = {723–734},
+    numpages = {12}
+}
+
+@article{zheng:02:gatherings,
+    author = {Zheng, Kai and Zheng, Yu and Yuan, Nicholas and Shang, Shuo and Zhou, Xiaofang},
+    year = {2014},
+    month = {08},
+    pages = {1974-1988},
+    title = {Online Discovery of Gathering Patterns over Trajectories},
+    volume = {26},
+    journal = {Knowledge and Data Engineering, IEEE Transactions on},
+    doi = {10.1109/TKDE.2013.160}
+}
+
+@article{salvador:02:fast-dtw,
+    author    = {Stan Salvador and
+               Philip Chan},
+    title     = {Toward accurate dynamic time warping in linear time and space},
+    journal   = {Intell. Data Anal.},
+    volume    = {11},
+    number    = {5},
+    pages     = {561--580},
+    year      = {2007},
+    url       = {http://content.iospress.com/articles/intelligent-data-analysis/ida00303},
+    timestamp = {Thu, 16 Aug 2018 14:23:35 +0200},
+    biburl    = {https://dblp.org/rec/journals/ida/SalvadorC07.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{ralf:03:sliding-window,
+    author    = {Ralf{-}Peter Mundani and
+               J{\'{e}}r{\^{o}}me Frisch and
+               Vasco Varduhn and
+               Ernst Rank},
+    title     = {A sliding window technique for interactive high-performance computing
+               scenarios},
+    journal   = {Adv. Eng. Softw.},
+    volume    = {84},
+    pages     = {21--30},
+    year      = {2015},
+    url       = {https://doi.org/10.1016/j.advengsoft.2015.02.003},
+    doi       = {10.1016/j.advengsoft.2015.02.003},
+    timestamp = {Mon, 26 Oct 2020 08:46:14 +0100},
+    biburl    = {https://dblp.org/rec/journals/aes/MundaniFVR15.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{bandini:gveii,
+    author    = {Stefania Bandini and
+               Andrea Gorrini and
+               Giuseppe Vizzari},
+    title     = {Towards an integrated approach to crowd analysis and crowd synthesis:
+               {A} case study and first results},
+    journal   = {Pattern Recognit. Lett.},
+    volume    = {44},
+    pages     = {16--29},
+    year      = {2014},
+    url       = {https://doi.org/10.1016/j.patrec.2013.10.003},
+    doi       = {10.1016/j.patrec.2013.10.003},
+    timestamp = {Sat, 22 Feb 2020 19:30:25 +0100},
+    biburl    = {https://dblp.org/rec/journals/prl/BandiniGV14.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{solera:06:range-reference,
+    author    = {Francesco Solera and
+               Simone Calderara and
+               Rita Cucchiara},
+    title     = {Socially Constrained Structural Learning for Groups Detection in Crowd},
+    journal   = {{IEEE} Trans. Pattern Anal. Mach. Intell.},
+    volume    = {38},
+    number    = {5},
+    pages     = {995--1008},
+    year      = {2016},
+    url       = {https://doi.org/10.1109/TPAMI.2015.2470658},
+    doi       = {10.1109/TPAMI.2015.2470658},
+    timestamp = {Wed, 14 Nov 2018 10:51:25 +0100},
+    biburl    = {https://dblp.org/rec/journals/pami/SoleraCC16.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+%	4. Artikel dari prosiding seminar/konferensi
+%	Artikel (atau paper) yang berasal dari prosiding seminar/konferensi ilmiah. 
+%
+%	Field yang wajib ada:
+%		1. author		: penulis
+%		2. title 		: judul artikel
+%		3. pages		: halaman awal dan akhir dari artikel pd prosiding
+%		4. booktitle	: nama prosiding
+%		5. year			: tahun diadakannya seminar/konferensi
+%		6. month		: tanggal awal-akhir dan bulan diadakannya seminar/konferensi
+%		7. address		: tempat (kota dan negara tempat diadakannya seminar/konferensi)
+%		8. publisher	: penerbit, disertai dengan lokasi penerbit (kota) !!
+%
+%		Note : penulisan month HARUS SETELAH year !
+%
+%	Contoh hasil di Daftar Referensi: 
+%	van Kreveld, M. J. dan Wiratma, L. (2011) Median trajectories using well-visited regions and shortest paths. Proceedings of the 19th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems, Chicago, USA, 1-4 November, pp. 241-250. ACM, New York.
+%
+%	Contoh penulisan di file bib:
+
+@inproceedings{cao:flock,
+    author = {Cao, Yang and Zhu, Jia and Gao, Fang},
+    booktitle = {Web Technologies and Application},
+    year = {2016},
+    month = {09},
+    pages = {310-321},
+    title = {An Algorithm for Mining Moving Flock Patterns from Pedestrian Trajectories},
+    publisher = {Springer},
+    address = {New York},
+    isbn = {978-3-319-45834-2},
+    doi = {10.1007/978-3-319-45835-9_27}
+}
+
+@inproceedings{gudmundsson:flock,
+    author = {Gudmundsson, Joachim and van Kreveld, Marc},
+    title = {Computing Longest Duration Flocks in Trajectory Data},
+    month = {November},
+    year = {2006},
+    isbn = {1595935290},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/1183471.1183479},
+    doi = {10.1145/1183471.1183479},
+    booktitle = {Proceedings of the 14th Annual ACM International Symposium on Advances in Geographic Information Systems},
+    pages = {35–42},
+    numpages = {8},
+    keywords = {moving objects, geometric algorithms, spatio-temporal patterns, approximation algorithms},
+    location = {Arlington, Virginia, USA},
+    series = {GIS '06}
+}
+
+@inproceedings{buchin:group,
+    author = {Buchin, Kevin and Buchin, Maike and Kreveld, Marc and Speckmann, Bettina and Staals, Frank},
+    booktitle = {Algorithm and Data Structure},
+    year = {2013},
+    month = {03},
+    pages = {219-230},
+    publisher = {Springer},
+    address = {New York},
+    title = {Trajectory Grouping Structure},
+    isbn = {978-3-642-40103-9},
+    doi = {10.1007/978-3-642-40104-6_19}
+}
+
+@inproceedings{shamos:02:computational-geometry,
+    author = {Shamos, Michael Ian},
+    title = {Geometric Complexity},
+    year = {1975},
+    isbn = {9781450374194},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/800116.803772},
+    doi = {10.1145/800116.803772},
+    booktitle = {Proceedings of the Seventh Annual ACM Symposium on Theory of Computing},
+    pages = {224–233},
+    month = {May},
+    numpages = {10},
+    location = {Albuquerque, New Mexico, USA},
+    series = {STOC '75}
+}
+
+@inproceedings{mann:01:segmentation,
+    author = {Mann, Richard and Jepson, Allan D. and El-Maraghi, Thomas},
+    title = {Trajectory Segmentation Using Dynamic Programming},
+    year = {2002},
+    isbn = {076951695X},
+    publisher = {IEEE Computer Society},
+    address = {USA},
+    booktitle = {Proceedings of the 16 Th International Conference on Pattern Recognition (ICPR'02) Volume 1 - Volume 1},
+    pages = {10331},
+    month = {August},
+    numpages = {1},
+    series = {ICPR '02}
+}
+
+@inproceedings{corradini:02:gesture,
+    author = {Corradini, Andrea},
+    year = {2001},
+    month = {02},
+    pages = {82 - 89},
+    title = {Dynamic time warping for off-line recognition of a small gesture vocabulary},
+    booktitle = {Proceedings IEEE ICCV Workshop on Recognition, Analysis, and Tracking of Faces and Gestures in Real-Time Systems},
+    address = {New York},
+    publisher = {IEEE},
+    isbn = {0-7695-1074-4},
+    journal = {Recognition, Analysis and Tracking of Faces and Gestures in Real-time Systems (RATFG-RTS)},
+    doi = {10.1109/RATFG.2001.938914}
+}
+
+@inproceedings{huang:02:herd,
+    author = {Huang, Yan and Chen, Cai and Dong, Pinliang},
+    year = {2008},
+    month = {09},
+    pages = {90-105},
+    title = {Modeling Herds and Their Evolvements from Trajectory Data},
+    booktitle = {Geographic Information Science},
+    publisher = {Springer},
+    address = {Berlin},
+    isbn = {978-3-540-87472-0},
+    doi = {10.1007/978-3-540-87473-7_6}
+}
+
+@inproceedings{ghazi:02:sparse-dtw,
+  author    = {Ghazi Al{-}Naymat and
+               Sanjay Chawla and
+               Javid Taheri},
+  editor    = {Paul J. Kennedy and
+               Kok{-}Leong Ong and
+               Peter Christen},
+  title     = {SparseDTW: {A} Novel Approach to Speed up Dynamic Time Warping},
+  booktitle = {Eighth Australasian Data Mining Conference, AusDM 2009, Melbourne,
+               Australia, December 2009},
+  series    = {{CRPIT}},
+  volume    = {101},
+  pages     = {117--128},
+  publisher = {Australian Computer Society},
+  year      = {2009},
+  url       = {http://crpit.scem.westernsydney.edu.au/abstracts/CRPITV101Al-Naymat.html},
+  timestamp = {Thu, 25 Jul 2019 14:09:43 +0200},
+  biburl    = {https://dblp.org/rec/conf/ausdm/Al-NaymatCT09.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{diego:02:pruned-dtw,
+    author    = {Diego Furtado Silva and
+               Gustavo E. A. P. A. Batista},
+    editor    = {Sanjay Chawla Venkatasubramanian and
+               Wagner Meira Jr.},
+    title     = {Speeding Up All-Pairwise Dynamic Time Warping Matrix Calculation},
+    booktitle = {Proceedings of the 2016 {SIAM} International Conference on Data Mining,
+               Miami, Florida, USA, May 5-7, 2016},
+    address   = {USA},
+    month     = {March},
+    pages     = {837--845},
+    publisher = {{SIAM}},
+    year      = {2016},
+    url       = {https://doi.org/10.1137/1.9781611974348.94},
+    doi       = {10.1137/1.9781611974348.94},
+    timestamp = {Wed, 17 May 2017 14:24:53 +0200},
+    biburl    = {https://dblp.org/rec/conf/sdm/SilvaB16.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{pellegrini:eth,
+    author    = {Stefano Pellegrini and
+               Andreas Ess and
+               Konrad Schindler and
+               Luc Van Gool},
+    title     = {You\'ll never walk alone: Modeling social behavior for multi-target tracking},
+    booktitle = {{IEEE} 12th International Conference on Computer Vision, {ICCV} 2009,
+               Kyoto, Japan, September 27 - October 4, 2009},
+    address   = {Kyoto, Japan},
+    pages     = {261--268},
+    publisher = {{IEEE} Computer Society},
+    month     = {October},
+    year      = {2009},
+    url       = {https://doi.org/10.1109/ICCV.2009.5459260},
+    doi       = {10.1109/ICCV.2009.5459260},
+    timestamp = {Wed, 16 Oct 2019 14:14:51 +0200},
+    biburl    = {https://dblp.org/rec/conf/iccv/PellegriniESG09.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{wiratma:software,
+    author    = {Lionov Wiratma and
+               Marc J. van Kreveld and
+               Maarten L{\"{o}}ffler and
+               Frank Staals},
+    editor    = {Farnoush Banaei Kashani and
+               Goce Trajcevski and
+               Ralf Hartmut G{\"{u}}ting and
+               Lars Kulik and
+               Shawn D. Newsam},
+    title     = {An Experimental Evaluation of Grouping Definitions for Moving Entities},
+    booktitle = {Proceedings of the 27th {ACM} {SIGSPATIAL} International Conference
+               on Advances in Geographic Information Systems, {SIGSPATIAL} 2019,
+               Chicago, IL, USA, November 5-8, 2019},
+    pages     = {89--98},
+    publisher = {{ACM}},
+    month     = {November},
+    year      = {2019},
+    address   = {Chicago, USA},
+    url       = {https://doi.org/10.1145/3347146.3359346},
+    doi       = {10.1145/3347146.3359346},
+    timestamp = {Fri, 09 Apr 2021 18:47:00 +0200},
+    biburl    = {https://dblp.org/rec/conf/gis/WiratmaKLS19.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+%	5. Skripsi/Thesis/Disertasi
+%	Skripsi S1, Thesis S2 atau Disertasi S3. 
+%
+%	Field yang wajib ada:
+%		1. author		: penulis
+%		2. title 		: judul 
+%		3. year			: tahun diselesaikan
+%		4. school		: universitas tempat penulis menyelesaikannya
+%		5. address		: lokasi universitas (negara)
+%
+%	Untuk menuliskan skripsi/thesis/disertasi, digunakan item bib yg berbeda, gunakan :
+%	(at)undergraduatethesis : Skripsi S1
+%   (at)masterthesis 		: Thesis S2
+%   (at)phdthesis			: Disertasi S3
+%
+%	Contoh hasil di Daftar Referensi: 
+%	- Lionov (2002) Animasi algoritma sweepline untuk membangun diagram voronoi. Skripsi. Universitas Katolik Parahyangan, Indonesia.
+%	- Wiratma, L. (2010) Following the majority: A new algorithm for computing a median trajectory. Thesis. Utrecht University, The Netherlands.
+%	- Wiratma, L. (2022) Coming Not Too Soon, Later, Delay, Someday, Hopefully. Disertasi. Utrecht University, The Netherlands.
+%
+%	Contoh penulisan di file bib:
+
+@phdthesis{wiratma:trajectory,
+    author    = {Lionov Wiratma},
+    title     = {Computations and Measures of Collective Movement Patterns Based on Trajectory Data},
+    school    = {Utrecht University, Netherlands},
+    year      = {2019},
+    url       = {http://dspace.library.uu.nl/handle/1874/388606},
+    timestamp = {Tue, 09 Jun 2020 14:28:14 +0200},
+    biburl    = {https://dblp.org/rec/phd/basesearch/Wiratma19.bib},
+    bibsource = {dblp computer science bibliography, https://dblp.org},
+    address = {Netherlands}
+}
+
+%	6. Technical/Scientific Report
+%	Pada umumnya, Technicalreport adalah laporan hasil penelitian ilmiah yang tidak diterbitkan ke dalam prosiding ataupun jurnal. 
+%	Technical report memiliki penomoran resmi karena diakui oleh universitas/organisasi, penomoran ini biasanya yang membedakan antara 
+%	technical report dengan lecture notes
+%
+%	Field yang wajib ada:
+%		1. author		: penulis
+%		2. title 		: judul 
+%		3. number		: nomor laporan
+%		4. year			: tahun diterbitkan
+%		5. institution	: universitas/organisasi penerbit laporan 
+%		6. address		: lokasi universitas (negara)
+%
+%	Contoh hasil di Daftar Referensi:
+% 	van Kreveld, M., van Lankveld, T., and Veltkamp, R. (2013) Watertight scenes from urban lidar and planar surfaces. Technical Report UU-CS-2013-007. Utrecht University, The Netherlands,
+%
+%	Contoh penulisan di file bib:
+
+%	7. RFC (Request For Comments)
+%
+%	RFC (Request for Comments) adalah publikasi dari Internet Engineering Task Force (IETF) and the Internet Society (ISOC), organisasi(?)
+%	yang merilis standar-standar yang berkaitan dengan internet.
+%
+%	Field yang wajib ada:
+%		1. author		: penulis
+%		2. title 		: judul 
+%		3. number		: nomor RFC 
+%		4. year			: tahun diterbitkan
+%
+%	Catatan: terdapat website yang dapat menghasilkan secara otomatis entry bibtex jika anda mengetahui nomor RFC-nya
+%
+%	Contoh hasil di Daftar Referensi: 
+%	 Rekhter, Y. dan Li, T. (1994) A border gateway protocol 4 (bgp-4). RFC 1654. RFC Editor, http://www.rfc-editor.org.
+%
+%	Contoh penulisan di file bib:
+
+%	8. Technical Documentation/Technical Manual
+%
+%	Technical Documentation adalah jenis dokumen yang mendeskripsikan kegunaan, arsitektur dan cara menggunakan sebuah produk.
+%	Produk di sini dalam artian yang luas, jadi dapat saja berupa suatu proses maupun sistem.
+%	Contoh dokumen dalam kategori ini misalnya dokumen mengenai standar (mis: Unicode) atau dokumen API.
+%
+%	Field yang wajib ada:
+%		1. number		: nomor seri manual
+%		2. title 		: judul 
+%		3. year			: tahun diterbitkan
+%		4. organization	: nama organisasi/perusahaan/kelompok yang menerbitkan, bisa juga diisi dgn para penulis
+%		5. address 		: lokasi dari organisasi yang menerbitkan (kota dan negara) 
+%	
+%	Contoh hasil di Daftar Referensi:
+%	- ITU-T. Z.500 (1997) Framework on formal methods in conformance testing. International Telecommunications Union, Geneva, Switzerland. 
+%	- Version 9.0.0 (2016) The Unicode Standard. The Unicode Consortium. Mountain View, USA. 
+%	- Version 7.0 Nougat (2016) Android API Reference Manual. Google dan Open Handset Alliance. Mountain View, USA.
+%	Contoh penulisan di file bib:
+
+@manual{Z.500,
+	number 		= {ITU-T Z.500},
+	title 		= {Framework on formal methods in conformance testing},
+	year 		= {1997},
+	organization= {International Telecommunications Union},	
+	address 	= {Geneva, Switzerland},
+}
+
+@manual{unicode:16:stdv9,
+	number 		= {Version 9.0.0},
+	title 		= {The Unicode Standard},
+	year 		= {2016},
+	organization= {The Unicode Consortium},	
+	address 	= {Mountain View, USA},
+}
+
+@manual{google:16:and7,
+	number 		= {Version 7.0 Nougat},
+	title 		= {Android API Reference Manual},
+	year 		= {2016},
+	organization= {Google dan Open Handset Alliance},	
+	address 	= {Mountain View, USA},
+}
+
+%	9. Paten
+%
+%	Paten adalah hak eksklusif yang diberikan kepada penemu.
+%
+%	Field yang wajib ada:
+%		1. author		: nama penemu paten 
+%		2. title 		: judul 
+%		3. number		: nomor paten
+%		4. year			: tahun dipatenkan
+%		5. organization	: diisi dengan badan yang memberikan paten
+%		6. address 		: lokasi dari organisasi yang memberikan paten (kota dan negara)
+%	
+%	Contoh hasil di Daftar Referensi:
+%	 Webb, R., Daruca, O., dan Alfadian, P. (2012) Method of optimizing a text massage communication between a server and a secure element. Paten no. EP2479956 (A1). European Patent Organisation. Munich, Germany.
+%
+%	Contoh penulisan di file bib:
+
+@patent{webb:12:comm,
+	author		= {Ronaldo Webb and Olga Daruca and Pascal Alfadian},
+	title 		= {Method of optimizing a text massage communication between a server and a secure element},
+	number		= {EP2479956 (A1)},
+	year 		= {2012},
+	organization= {European Patent Organisation},	
+	address 	= {Munich, Germany},
+}
+
+%	10. Unpublished
+%
+%	TIDAK DIANJURKAN UNTUK DIGUNAKAN, KONSULTASIKAN DENGAN PEMBIMBING MASING-MASING
+%	(karena selalu ada referensi lain yang lebih baik)
+%
+%	Unpublished adalah dokumen yang tidak dipublikasikan dan seringkali tidak melalui proses seperti layaknya buku/artikel di jurnal.
+%	Contoh dokumen dalam kategori ini misalnya catatan kuliah (lecture note), laporan tugas kuliah, dll
+%	Skripsi/Thesis/Disertasi sebetulnya masuk dalam kategori ini, tetapi dalam template ini, mereka dipisahkan menjadi kategori tersendiri
+%
+%	Field yang wajib ada:
+%		1. author		: nama penulis
+%		2. title 		: judul 
+%		3. year			: tahun penulisan 
+%		4. note 		: penjelasan jenis dokumen
+%		5. url			: (OPSIONAL) jika dokumen didapat dari internet, tuliskan alamat url-nya
+%		6. access		: (OPSIONAL) dan kapan dokumen tersebut diakses 
+%	
+%	Contoh hasil di Daftar Referensi:
+%	- Wiratma, L. (2009) Median trajectory. Report of GMT Experimentation Project at Utrecht University.
+%	- Lionov (2011) Polymorphism pada C++. Catatan kuliah AKS341 Pemrograman Sistem di Universitas Katolik Parahyangan, Bandung. http://tinyurl.com/lionov. 30 September 2016.
+%
+%	Contoh penulisan di file bib:
+
+%	11. Halaman Web 
+%
+%	TIDAK DIANJURKAN UNTUK DIGUNAKAN, KONSULTASIKAN DENGAN PEMBIMBING MASING-MASING
+%	(karena informasi yang beredar begitu saja di internet, bisa saja tidak akurat)
+%
+%	!!! KHUSUS MAHASISWA TEKNIK INFORMATIKA: DILARANG MENGGUNAKAN INI, GUNAKAN FOOTNOTE !!!!!
+$
+%	Halaman web, tidak perlu penjelasan. 
+%
+%	Field yang wajib ada:
+%		1. author		: nama penulis
+%		2. title 		: judul halaman web atau judul dari isi tulisan 
+%		3. year			: tahun penulisan  
+%		4. url			: tuliskan url dari halaman web tersebut, penulisan mengikuti contoh yang disediakan
+%		5. access		: kapan terakhir kali anda mengakses halaman tersebut, penulisan mengikuti contoh
+%
+%	Contoh hasil di Daftar Referensi:
+%	Erickson, J. (2003) CG models of computation? http://www.computational-geometry.org/mailing-lists/compgeom-announce/2003-December/000852.html. 30 September 2016.
+%
+%	Contoh penulisan di file bib:
+
+@web{erickson:03:cgmodel,
+	author 		= {Jeff Erickson},
+	title 		= {{CG} models of computation?},
+	year 		= {2003},
+	url 		= {http://www.computational-geometry.org/mailing-lists/compgeom-announce/2003-December/000852.html},
+	access 		= {30 September 2016},
+}
+
+%	12. Lain-lain
+%
+%	TIDAK DIANJURKAN UNTUK DIGUNAKAN, KONSULTASIKAN DENGAN PEMBIMBING MASING-MASING
+$
+%	Untuk yang tidak masuk kategori di atas, misalnya artikel di koran atau majalah. 
+%	Konsultasikan dengan pembimbing masing-masing, apakah perlu diletakkan di Daftar Referensi atau cukup untuk dijadikan footnote.
+%	Jika anda menjumpai kasus tersebut, sangat diharapkan bantuannya untuk memperbaharui template ini dengan cara
+%	memberitahukannya via email ke lionov(at)unpar.ac.id 
+%
+%	Field yang wajib ada :
+%		1. author		: nama penulis
+%		2. title 		: judul 
+%		3. year			: tahun penulisan  
+%		4. howpublished : paparkan bagaimana referensi ini dipublikasi 
+%		5. note			: (OPSIONAL) keterangan lain yang diperlukan
+%	
+%	Contoh hasil di Daftar Referensi:
+%
+%
+%	Contoh penulisan di file bib:
+
+@misc{agung:12:tango,
+	author 			= {AGUNG},
+	title 			= {Menjajal Tango 12},
+	year 			= {2012},
+	howpublished	= {Majalah HAI no 02, Januari 2012},
+	note			= {},
+}
+%_____________________________________________________________________________
+%=============================================================================

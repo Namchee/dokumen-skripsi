@@ -1,0 +1,1144 @@
+%versi 3 (18-12-2016)
+\chapter{Kode Program}
+\label{lamp:A}
+
+%terdapat 2 cara untuk memasukkan kode program
+% 1. menggunakan perintah \lstinputlisting (kode program ditempatkan di folder yang sama dengan file ini)
+% 2. menggunakan environment lstlisting (kode program dituliskan di dalam file ini)
+% Perhatikan contoh yang diberikan!!
+%
+% untuk keduanya, ada parameter yang harus diisi:
+% - language: bahasa dari kode program (pilihan: Java, C, C++, PHP, Matlab, C#, HTML, R, Python, SQL, dll)
+% - caption: nama file dari kode program yang akan ditampilkan di dokumen akhir
+%
+% Perhatian: Abaikan warning tentang textasteriskcentered!!
+%
+
+\begin{lstlisting}[language=C++, caption=Implementasi modul \texttt{rombongan.cpp}, label={lamp:module-rombongan}]
+#include "rombongan.h"
+#include "spatial.h"
+#include "entity.h"
+#include "utils.h"
+#include "io.h"
+#include "parser.h"
+#include <cmath>
+#include <vector>
+#include <set>
+#include <unordered_map>
+#include <algorithm>
+#include <iostream>
+#include <map>
+
+typedef std::unordered_map<unsigned int, std::vector<std::vector<double> > > trajectory_map;
+typedef std::unordered_map<unsigned int, std::vector<double> > direction_map;
+typedef std::map<std::vector<unsigned int>, std::vector<std::pair<unsigned int, unsigned int> > > rombongan_lifespan;
+
+/**
+ * Determine is a list is a imperfect sublist of another.
+ *
+ * @param a - first list
+ * @param b - second list
+ * @return `true` if a list is a imperfect sublist of another,
+ * `false` otherwise
+ */
+bool is_sublist(
+    const std::vector<unsigned int>& a,
+    const std::vector<unsigned int>& b
+) {
+    std::set<unsigned int> temp_container;
+    temp_container.insert(a.begin(), a.end());
+    temp_container.insert(b.begin(), b.end());
+
+    return a.size() != b.size() &&
+        (
+            temp_container.size() == a.size() ||
+            temp_container.size() == b.size()
+        );
+}
+
+/**
+ * Determine if an entity is present on a time interval
+ * 
+ * @param target_entity - target entity
+ * @param interval - time interval
+ * 
+ * @return `true` if target is present in all timestamps,
+ * `false` otherwise.
+ */
+bool on_interval(
+    const Entity& target_entity,
+    const std::pair<unsigned int, unsigned int>& interval
+) {
+    std::vector<std::vector<double> > trajectory = {
+        target_entity.trajectories.begin() + interval.first,
+        target_entity.trajectories.begin() + interval.second
+    };
+
+    for (size_t t_itr = 0; t_itr < trajectory.size(); t_itr++) {
+        if (std::isnan(trajectory[t_itr][0])) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Merge similar duration from child to parent, a.k.a deleting it
+ * 
+ * @param parent parent duration
+ * @param child child duration
+ */
+void deduplicate_duration(
+    std::vector<std::pair<unsigned int, unsigned int> >& parent,
+    std::vector<std::pair<unsigned int, unsigned int> >& child
+) {
+    std::vector<std::pair<unsigned int, unsigned int> > deleted;
+
+    for (size_t parent_itr = 0; parent_itr < parent.size(); parent_itr++) {
+        std::pair<unsigned int, unsigned int> parent_duration = parent[parent_itr];
+
+        for (size_t child_itr = 0; child_itr < child.size(); child_itr++) {
+            std::pair<unsigned int, unsigned int> child_duration = child[child_itr];
+
+            if (
+                (parent_duration == child_duration) ||
+                (child_duration.first > parent_duration.first && child_duration.second < parent_duration.second)
+            ) {
+                deleted.push_back(child_duration);
+            }
+        }
+    }
+
+    for (size_t del_itr = 0; del_itr < deleted.size() && child.size() > 0; del_itr++) {
+        auto position = std::find(
+            child.begin(),
+            child.end(),
+            deleted[del_itr]
+        );
+
+        if (position != child.end()) {
+            child.erase(position);
+        }
+    }
+}
+
+/**
+ * Clean rombongan identification result by merging
+ * sub-rombongan into parent rombongan.
+ * 
+ * @param raw_result raw idenfication result
+ *
+ * @return cleaned identification result
+ */
+std::vector<Rombongan> deduplicate(
+    std::vector<Rombongan>& raw_result
+) {
+    if (raw_result.size() == 0) {
+        return raw_result;
+    }
+
+    std::sort(raw_result.begin(), raw_result.end());
+
+    for (size_t curr_itr = 0; curr_itr < raw_result.size() - 1; curr_itr++) {
+        if (raw_result[curr_itr].duration.size() == 0) {
+            continue;
+        }
+
+        for (size_t other_itr = curr_itr + 1; other_itr < raw_result.size(); other_itr++) {
+            if (raw_result[other_itr].duration.size() == 0) {
+                continue;
+            }
+
+            if (
+                is_sublist(raw_result[curr_itr].members, raw_result[other_itr].members)
+            ) {
+                deduplicate_duration(
+                    raw_result[curr_itr].duration,
+                    raw_result[other_itr].duration
+                );
+
+                
+            }
+        }
+    }
+
+    std::vector<Rombongan> clean_result;
+
+    for (auto member: raw_result) {
+        if (member.duration.size() > 0) {
+            clean_result.push_back(member);
+        }
+    }
+
+    sort(
+        clean_result.begin(),
+        clean_result.end(),
+        [](const Rombongan& a, const Rombongan& b) -> bool {
+            return a.duration[0].first < b.duration[0].first;
+        }
+    );
+
+    return clean_result;
+}
+
+
+/**
+ * Get sub trajectories from all entities for a time interval
+ * 
+ * @param entities input entities
+ * @param interval time interval
+ */
+trajectory_map get_sub_trajectories(
+    const std::vector<Entity>& entities,
+    const std::pair<unsigned int, unsigned int>& interval
+) {
+    trajectory_map sub_trajectories;
+
+    for (size_t itr = 0; itr < entities.size(); itr++) {
+        Entity curr = entities[itr];
+
+        sub_trajectories[curr.id] = {
+            curr.trajectories.begin() + interval.first,
+            curr.trajectories.begin() + interval.second
+        };
+    }
+
+    return sub_trajectories;
+}
+
+/**
+ * Get directional vectors for all entities in a time interval
+ * 
+ * @param entities list of entities
+ * @param interval time interval
+ */
+direction_map get_directional_vectors(
+    const std::vector<Entity>& entities,
+    const std::pair<unsigned int, unsigned int>& interval
+) {
+    unsigned int dimension = entities[0].trajectories[0].size();
+
+    direction_map directional_vectors;
+
+    for (size_t itr = 0; itr < entities.size(); itr++) {
+        Entity curr = entities[itr];
+        std::vector<double> end_pos = curr.trajectories[interval.second - 1];
+        std::vector<double> start_pos = curr.trajectories[interval.first];
+
+        for (size_t curr_dimension = 0; curr_dimension < dimension; curr_dimension++) {
+            directional_vectors[curr.id].push_back(
+                end_pos[curr_dimension] - start_pos[curr_dimension]
+            );
+        }
+    }
+
+    return directional_vectors;
+}
+
+/**
+ * Extends a rombongan duration
+ * 
+ * @param groups list of possible rombongan
+ * @param other tested entity
+ * @param sub_trajectories List of sub trajectories for the current time interval
+ * @param direction_vector List of directional vectors for the current time interval
+ * @param params Identification parameters
+ */
+void extend_current_rombongan(
+    std::vector<std::vector<unsigned int> >& groups,
+    const Entity& other,
+    trajectory_map& sub_trajectories,
+    direction_map& direction_vector,
+    const Parameter& params
+) {
+    double r = params.r;
+    double cs = params.cs;
+    unsigned int m = params.m;
+
+    for (size_t groups_itr = 0; groups_itr < groups.size(); groups_itr++) {
+        unsigned int similarity_count = 0;
+        unsigned int limit = params.c == 0 ? groups[groups_itr].size() : params.c;
+
+        for (size_t member_itr = 0; member_itr < groups[groups_itr].size() && similarity_count < limit; member_itr++) {
+            unsigned int member_id = groups[groups_itr][member_itr];
+
+            if (member_id == other.id) {
+                continue;
+            }
+        
+            double dtw_distance = calculate_dtw_distance(
+                sub_trajectories[other.id],
+                sub_trajectories[member_id]
+            );
+
+            double cosine_similarity = calculate_cosine_similarity(
+                direction_vector[other.id],
+                direction_vector[member_id]
+            );
+
+            // make sure that the distance is not zero to avoid
+            // similarity checking when two entities
+            // doesn't appear in the current timeframe.
+            similarity_count += !std::isnan(dtw_distance) &&
+                dtw_distance <= r &&
+                cosine_similarity >= cs;
+        }
+
+        if (similarity_count >= limit) {
+            groups[groups_itr].push_back(other.id);
+        }
+    }
+}
+
+/**
+ * Extend identified rombongan duration by either appending
+ * or replacing duration pairs
+ * 
+ * @param groups - list of identified rombongan
+ * @param current_groups - list of newly identified rombongan
+ * @param interval - time interval
+ */
+void extend_rombongan_duration(
+    rombongan_lifespan& groups,
+    std::vector<std::vector<unsigned int> >& current_groups,
+    const std::pair<unsigned int, unsigned int>& interval
+) {
+    unsigned int start = interval.first;
+    unsigned int end = interval.second;
+
+    for (std::vector<unsigned int> group: current_groups) {
+        std::vector<std::pair<unsigned int, unsigned int> > time_list = groups[group];
+
+        if (
+            time_list.size() == 0 ||
+            start == 0 ||
+            (end - 1) != time_list[time_list.size() - 1].second
+        ) {
+            groups[group].push_back({ start, end });
+        } else {
+            groups[group][time_list.size() - 1] = { 
+                groups[group][time_list.size() - 1].first,
+                end
+            };
+        }
+    }
+}
+
+/**
+ * Determine if a rombongan candidate is not a subrombongan
+ * of another
+ * 
+ * @param candidate - candidate rombongan
+ * @param groups - list of identified rombongan
+ * 
+ * @return `true` if candidate is not a subrombongan,
+ * `false` otherwise
+ */
+bool is_new_rombongan(
+    const std::vector<unsigned int>& candidate,
+    const std::vector<std::vector<unsigned int> >& groups
+) {
+    for (size_t group_itr = 0; group_itr < groups.size(); group_itr++) {
+        if (
+            groups[group_itr].size() > candidate.size() &&
+            is_sublist(groups[group_itr], candidate)
+        ) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Identify rombongan from a set of moving entities.
+ * 
+ * @param entities - list of moving entities in two-dimensional space
+ */
+std::vector<Rombongan> identify_rombongan(
+    const std::vector<Entity>& entities,
+    const Parameter& params
+) {
+    unsigned int m = params.m;
+    unsigned int k = params.k;
+    double r = params.r;
+    double cs = params.cs;
+
+    rombongan_lifespan rombongan_list;
+    
+    unsigned int frame_count = entities[0].trajectories.size();
+
+    for (size_t end = k; end < frame_count; end++) {
+        unsigned int start = end - k;
+
+        std::vector<std::vector<unsigned int> > current_rombongan;
+
+        trajectory_map sub_trajectories = get_sub_trajectories(
+            entities,
+            { start, end }
+        );
+        direction_map direction_vector = get_directional_vectors(
+            entities,
+            { start, end }
+        );
+
+        for (size_t curr_itr = 0; curr_itr < entities.size() - 1; curr_itr++) {
+            Entity curr = entities[curr_itr];
+
+            if (!on_interval(curr, { start, end })) {
+                continue;
+            }
+
+            std::vector<std::vector<unsigned int> > group_ids;
+
+            for (size_t other_itr = curr_itr + 1; other_itr < entities.size(); other_itr++) {
+                Entity other = entities[other_itr];
+
+                if (!on_interval(other, { start, end })) {
+                    continue;
+                }
+
+                extend_current_rombongan(
+                    group_ids,
+                    other,
+                    sub_trajectories,
+                    direction_vector,
+                    params
+                );
+
+                // can entity `curr` create a subgroup with `other`?
+                double dtw_distance = calculate_dtw_distance(
+                    sub_trajectories[other.id],
+                    sub_trajectories[curr.id]
+                );
+
+                double cosine_similarity = calculate_cosine_similarity(
+                    direction_vector[other.id],
+                    direction_vector[curr.id]
+                );
+
+                if (
+                    !std::isnan(dtw_distance) &&
+                    dtw_distance <= r &&
+                    cosine_similarity >= cs &&
+                    is_new_rombongan({ curr.id, other.id }, group_ids)
+                ) {
+                    group_ids.push_back({ curr.id, other.id });
+                }
+            }
+
+            for (size_t itr_group = 0; itr_group < group_ids.size(); itr_group++) {
+                if (group_ids[itr_group].size() >= m) {
+                    current_rombongan.push_back(group_ids[itr_group]);
+                }
+            }
+        }
+
+        if (current_rombongan.size() > 0) {
+            extend_rombongan_duration(
+                rombongan_list,
+                current_rombongan,
+                { start, end }
+            );
+        }
+
+        std::cout << "Finished processing range ";
+        std::cout << "[" << start << ", " << end << "]" << std::endl;
+    }
+
+    std::vector<Rombongan> raw_result;
+
+    for (auto const& [group, duration]: rombongan_list) {
+        raw_result.push_back({
+            group,
+            duration
+        });
+    }
+
+    return params.redundant ? raw_result : deduplicate(raw_result);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=C++, caption=Implementasi 
+modul \texttt{spatial.cpp},label={lamp:module-spatial}]
+#include <vector>
+#include <limits>
+#include <cmath>
+#include <algorithm>
+#include <stdexcept>
+
+/**
+ * Calculate the euclidean distance between two points in
+ * n-dimensional space.
+ * 
+ * @param a the first point
+ * @param b the second point
+ * @return Euclidean distance between two points `a` and `b`
+ */
+double calculate_euclidean_distance(
+    const std::vector<double> &a,
+    const std::vector<double> &b
+) {
+    if (a.size() != b.size()) {
+        throw std::invalid_argument(
+            "Both trajectories must reside in the same dimensional space."
+        );
+    }
+
+    double distance = 0.0;
+
+    for (size_t it = 0; it < a.size(); it++) {
+        // return immediately when one of the position is not recorded
+        if (std::isnan(a[it]) || std::isnan(b[it])) {
+            return std::nan("");
+        }
+
+        distance += pow(a[it] - b[it], 2);
+    }
+
+    return sqrt(distance);
+}
+
+/**
+ * Calculate dynamic time warping distance between two distinct
+ * trajectories.
+ * 
+ * @param a the first trajectory
+ * @param b the second trajectory
+ * @return Dynamic time warping distance between two trajectories
+ * `a` and `b`
+ */
+double calculate_dtw_distance(
+    const std::vector<std::vector<double> >& a,
+    const std::vector<std::vector<double> >& b
+) {
+    if (a.size() == 0 || b.size() == 0) {
+        throw std::invalid_argument("Both trajectories must not be empty.");
+    }
+
+    // create a 2-dimensional array to store the DTW distances
+    const size_t x_lim = a.size() + 1;
+    const size_t y_lim = b.size() + 1;
+    double dtw[x_lim][y_lim];
+
+    // initialize all illegal first pairings with infinity
+    for (size_t i = 0; i < x_lim; i++) {
+        dtw[i][0] = std::numeric_limits<double>::max();        
+    }
+
+    for (size_t i = 0; i < y_lim; i++) {
+        dtw[0][i] = std::numeric_limits<double>::max();
+    }
+
+    // Pair the first point of `a` with the first point of `b`
+    dtw[0][0] = 0;
+
+    // Calculate DTW distance
+    for (size_t i = 1; i < x_lim; i++) {
+        for (size_t j = 1; j < y_lim; j++) {
+            double cost = calculate_euclidean_distance(
+                a[i - 1],
+                b[j - 1]
+            );
+
+            // return immediately when trajectory isn't recorded
+            if (std::isnan(cost)) {
+                return std::nan("");
+            }
+
+            double min = std::min(
+                dtw[i - 1][j],
+                std::min(
+                    dtw[i][j - 1],
+                    dtw[i - 1][j - 1]
+                )
+            );
+
+            dtw[i][j] = cost + min;
+        }
+    }
+
+    return dtw[a.size()][b.size()];
+}
+
+/**
+ * Calculate cosine similarity between two n-dimensional vector.
+ * 
+ * @param a - the first vector
+ * @param b - the second vector
+ * @return 
+ */
+double calculate_cosine_similarity(
+    const std::vector<double>& a,
+    const std::vector<double>& b
+) {
+    // sanity check
+    if (a.size() != b.size()) {
+        throw std::invalid_argument(
+            "Both vector must reside in the same dimensional space."
+        );
+    }
+
+    double len_a = 0.0;
+    double len_b = 0.0;
+    double dot_product = 0.0;
+
+    for (size_t itr = 0; itr < a.size(); itr++) {
+        // return immediately when one of the position is not recorded
+        if (std::isnan(a[itr]) || std::isnan(b[itr])) {
+            return std::nan("");
+        }
+
+        dot_product += a[itr] * b[itr];
+
+        len_a += pow(a[itr], 2);
+        len_b += pow(b[itr], 2);
+    }
+
+    len_a = sqrt(len_a);
+    len_b = sqrt(len_b);
+
+    return dot_product / (len_a * len_b);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=C++, caption=Implementasi 
+modul \texttt{parser.cpp},label={lamp:module-parser}]
+#include "entity.h"
+#include "io.h"
+#include "parser.h"
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <unordered_set>
+#include <unordered_map>
+#include <filesystem>
+#include <map>
+#include <stdexcept>
+
+// PI hack
+const double PI = std::acos(-1);
+
+typedef std::map<double, std::unordered_map<unsigned int, std::vector<double> > > frame_to_entity;
+typedef std::unordered_map<unsigned int, std::vector<std::vector<double> > > entity_to_frame;
+
+/**
+ * Parse data from a text file and return it as list of moving
+ * entities
+ * 
+ * @param name Name of the file to be read from
+ * @param path File path to read from
+ * @return List of moving entities with their trajectories
+ */
+MovementData parse_data(
+    const std::string& name,
+    const std::string& path
+) {
+    std::ifstream file;
+    std::string line;
+
+    double frame_time, id, x_pos, y_pos;
+
+    auto filepath = (std::filesystem::path(path) / "input" / name)
+        .make_preferred()
+        .replace_extension(".txt");
+
+    std::cout << "Attempting to read source data from: ";
+    std::cout << filepath.string() << std::endl; 
+
+    file.open(filepath);
+
+    if (!file) {
+        throw std::invalid_argument("Source data doesn't exist!");
+    }
+
+    std::unordered_set<unsigned int> id_frame;
+    std::unordered_set<unsigned int> id_list;
+
+    frame_to_entity data_map;
+    entity_to_frame trajectory_map;
+
+    while (std::getline(file, line)) {
+        std::istringstream line_stream(line);
+
+        line_stream >> frame_time >> id >> x_pos >> y_pos >> y_pos;
+
+        id_list.insert(id);
+
+        data_map[frame_time][id] = { x_pos, y_pos }; 
+    }
+
+    file.close();
+
+    std::vector<double> frames;
+
+    for (auto const& [frame, position]: data_map) {
+        frames.push_back(frame);
+    
+        for (auto const& [id, plane]: position) {
+            trajectory_map[id].push_back(
+                plane  
+            );
+
+            id_frame.insert(id);
+        }
+
+        for (auto const id: id_list) {
+            if (id_frame.find(id) == id_frame.end()) {
+                trajectory_map[id].push_back({ std::nan(""), std::nan("") });
+            }
+        }
+
+        id_frame.clear();
+    }
+
+    std::vector<Entity> entities;
+
+    for (auto const& [id, frame]: trajectory_map) {
+        entities.push_back(
+            { id, frame }
+        );
+    }
+
+    // make sure that entities are sorted to prevent random pairings
+    sort(entities.begin(), entities.end());
+
+    return {
+        entities,
+        frames
+    };
+}
+
+/**
+ * Parse rombongan identification parameters from input
+ * arguments
+ * 
+ * @param args input arguments
+ * @return rombongan identification parameters
+ */
+Parameter parse_arguments(
+    const Arguments& args
+) {
+    Parameter params;
+
+    params.m = args.entities;
+    params.c = args.closeness;
+    params.k = std::ceil(args.interval);
+    params.r = args.range * args.interval;
+    params.cs = cos(args.angle * PI / 180);
+    params.redundant = args.redundant;
+
+    return params;
+}
+
+/**
+ * Parse expected result from a text file and return it
+ * as an array of entity id
+ * 
+ * @param name expected result filename
+ * @param path expected result filepath
+ * 
+ * @return list of groups, which is a list of id
+ */
+std::vector<std::vector<unsigned int> > parse_expected_result(
+    const std::string& name,
+    const std::string& path
+) {
+    std::ifstream file;
+    std::string line;
+    unsigned int bucket;
+
+    double frame_time, id, x_pos, y_pos;
+
+    auto filepath = (std::filesystem::path(path) / "result" / name)
+        .make_preferred()
+        .replace_extension(".txt");
+
+    std::cout << "Attempting to read expected results from: ";
+    std::cout << filepath.string() << std::endl; 
+
+    file.open(filepath);
+
+    if (!file) {
+        throw std::invalid_argument("Expected result doesn't exist!");
+    }
+
+    std::vector<std::vector<unsigned int> > expected_result;
+
+    while (std::getline(file, line)) {
+        std::vector<unsigned int> group;
+
+        std::istringstream line_stream(line);
+
+        while (line_stream >> bucket) {
+            group.push_back(bucket);
+        }
+
+        // sort the ids to make sure that default
+        // comparator function work.
+        sort(group.begin(), group.end());
+
+        expected_result.push_back(group);
+    }
+
+    return expected_result;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=C++, caption=Implementasi 
+modul \texttt{io.cpp},label={lamp:module-io}]
+#include "io.h"
+#include "eval.h"
+#include "utils.h"
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <iterator>
+#include <filesystem>
+#include <stdexcept>
+#include <argparse/argparse.hpp>
+
+/**
+ * Parse user inputs from command-line arguments.
+ * 
+ * @param argc arguments count
+ * @param argv actual arguments
+ * 
+ * @return list of parsed arguments.
+ */
+Arguments read_arguments(int argc, char *argv[]) {
+    argparse::ArgumentParser program("rombongan");
+
+    program.add_argument("data")
+        .help("Nama berkas text dari sumber data yang ingin digunakan")
+        .required();
+
+    program.add_argument("entities")
+        .help("Jumlah entitas minimum anggota rombongan")
+        .required()
+        .action([](const std::string &value) { return std::stoi(value); });
+    
+    program.add_argument("interval")
+        .help("Interval waktu minimum pergerakan bersama secara konsekutif dalam satuan frame")
+        .required()
+        .action([](const std::string &value) { return std::stod(value); });
+
+    program.add_argument("range")
+        .help("Jarak entitas maksimum antar anggota rombongan dalam satu waktu")
+        .required()
+        .action([](const std::string &value) { return std::stod(value); });
+
+    program.add_argument("angle")
+        .help("Beda sudut maksimum antar entitas dalam rombongan dalam derajat")
+        .required()
+        .action([](const std::string &value) { return std::stod(value); });
+    
+    program.add_argument("closeness")
+        .help("Jumlah entitas minimum yang dekat agar dapat tergabung dalam rombongan")
+        .required()
+        .action([](const std::string &value) { return std::stoi(value); });
+
+    program.add_argument("-p", "--path")
+        .help("Direktori sumber data lintasan. Relatif terhadap direktori saat ini.")
+        .default_value(
+            (std::filesystem::current_path() / "data")
+                .make_preferred()
+                .string()
+        )
+        .action([](const std::string &value) {
+            return (std::filesystem::current_path() / value)
+                .make_preferred()
+                .string();
+        });
+
+    program.add_argument("-r", "--redundant")
+        .help("Menentukan apakah rombongan redundan disimpan atau tidak")
+        .default_value(false)
+        .implicit_value(true);
+
+    try {
+        program.parse_args(argc, argv);
+    } catch (const std::runtime_error &err) {
+        std::cout << err.what() << "\n";
+        std::cout << program;
+        exit(0);
+    }
+
+    auto data = program.get<std::string>("data");
+    auto entities = program.get<int>("entities");
+
+    if (entities < 2) {
+        throw std::invalid_argument(
+            "Jumlah entitas minimum harus lebih besar dari 1."
+        );
+    }
+
+    auto interval = program.get<double>("interval");
+
+    if (interval < 0) {
+        throw std::invalid_argument(
+            "Durasi pergerakan bersama harus merupakan bilangan positif 1."
+        );
+    }
+
+    auto range = program.get<double>("range");
+
+    if (range <= 0.0f) {
+        throw std::invalid_argument(
+            "Jarak entitas maksimum harus merupakan bilangan positif."
+        );
+    }
+
+    auto angle = program.get<double>("angle");
+
+    auto closeness = program.get<int>("closeness");
+
+    if (closeness < 0) {
+        throw std::invalid_argument(
+            "Jumlah entitas minimum yang dekat harus merupakan bilangan tak negatif"
+        );
+    }
+
+    auto path = program.get<std::string>("-p");
+    auto redundancy = program.get<bool>("-r");
+
+    Arguments p;
+
+    p.source = data;
+    p.entities = entities;
+    p.closeness = closeness;
+    p.interval = interval;
+    p.range = range;
+    p.angle = angle;
+    p.path = path;
+    p.redundant = redundancy;
+
+    return p;
+}
+
+/**
+ * Write rombongan identification result into a text file.
+ * 
+ * @param result rombongan identification result
+ * @param frames frame list
+ * @param params arguments passed to the program
+ * @param score predicition score
+ */
+void write_result(
+    const std::vector<Rombongan>& result,
+    const std::vector<double>& frames,
+    const Arguments& args,
+    const Score& score
+) {
+    std::ofstream file_stream;
+
+    std::filesystem::path dir_path = 
+        (std::filesystem::current_path() / "data" / "output")
+        .make_preferred();
+
+    if (!std::filesystem::exists(dir_path)) {
+        std::filesystem::create_directory(dir_path);
+        std::filesystem::permissions(
+            dir_path,
+            std::filesystem::perms::owner_all |
+            std::filesystem::perms::group_all |
+            std::filesystem::perms::others_read,
+            std::filesystem::perm_options::add
+        );
+    }
+
+    auto now = get_current_time();
+    auto output_filename = args.source + "-" + std::to_string(now);
+
+    auto [precision, recall, f1_score] = score;
+
+    auto output_filepath = (dir_path / output_filename)
+        .make_preferred()
+        .replace_extension(".txt");
+    
+    file_stream.open(
+        output_filepath,
+        std::ofstream::out | std::ofstream::trunc
+    );
+
+    if (file_stream.is_open()) {
+        // write the parameters in csv-like format
+        file_stream << "data, m, k, r, theta, n" << std::endl;
+        file_stream << args.source << ", ";
+        file_stream << args.entities << ", ";
+        file_stream << args.interval << ", ";
+        file_stream << args.range << ", ";
+        file_stream << args.angle << ", ";
+        file_stream << args.closeness;
+        file_stream << std::endl << std::endl;
+
+        std::streamsize ss = std::cout.precision();
+
+        file_stream << "precision, recall, f1_score" << std::endl;
+        file_stream << std::setprecision(3);
+        file_stream << precision << ", ";
+        file_stream << recall << ", ";
+        file_stream << f1_score;
+        file_stream << std::endl << std::endl;
+
+        file_stream << std::setprecision(ss);
+
+        // initialize csv-like header for identification result
+        file_stream << "members, duration" << std::endl;
+
+        for (Rombongan group: result) {
+            std::vector<unsigned int> members = group.members;
+            std::vector<std::pair<unsigned int, unsigned int> > duration = group.duration;
+
+            for (size_t i = 0; i < members.size(); i++) {
+                if (i > 0) {
+                    file_stream << " ";
+                }
+
+                file_stream << members[i];
+            }
+
+            file_stream << ", ";
+
+            for (size_t i = 0; i < duration.size(); i++) {
+                if (i > 0) {
+                    file_stream << " ";
+                }
+
+                double start = frames[duration[i].first];
+                double end = frames[duration[i].second];
+
+                file_stream << start << "-" << end;
+            }
+
+            file_stream << std::endl;
+        }
+
+        file_stream.close();
+
+        std::cout << "Successfully written identification result to ";
+        std::cout << output_filename << ".txt" << std::endl;
+    } else {
+        throw std::runtime_error(
+            "Failed to open output stream due to lack of permissions."
+        );
+    }
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=C++, caption=Implementasi 
+modul \texttt{eval.cpp},label={lamp:module-eval}]
+#include "eval.h"
+#include "rombongan.h"
+#include <vector>
+#include <cmath>
+#include <algorithm>
+
+/**
+ * Find a group in a list of groups
+ * 
+ * @param source source list
+ * @param value target value
+ * 
+ * @return `true` if value exists in source, `false`
+ * otherwise
+ */
+bool find(
+    const std::vector<std::vector<unsigned int> >& source,
+    const std::vector<unsigned int>& value
+) {
+    return std::find(source.begin(), source.end(), value) != source.end();
+}
+
+/**
+ * Calculate precision for the prediciton based on a ground truth
+ * 
+ * 
+ * @param expected_result - ground truth
+ * @param result - predicition
+ * 
+ * @return precision value.
+ */
+double calculate_precision(
+    const std::vector<std::vector<unsigned int> >& expected_result,
+    const std::vector<std::vector<unsigned int> >& result
+) {
+    double tp = 0;
+    double fp = 0;
+
+    for (size_t itr = 0; itr < result.size(); itr++) {
+        find(expected_result, result[itr]) ?
+            tp++ :
+            fp++;
+    }
+
+    double precision = tp / (tp + fp);
+
+    return std::isnan(precision) ? 0 : precision;
+}
+
+/**
+ * Calculate recall for the prediciton based on a ground truth
+ * 
+ * @param expected_result - ground truth
+ * @param result - predicition
+ * 
+ * @return recall value.
+ */
+double calculate_recall(
+    const std::vector<std::vector<unsigned int> >& expected_result,
+    const std::vector<std::vector<unsigned int> >& result
+) {
+    double tp = 0;
+    double fn = 0;
+
+    for (size_t itr = 0; itr < expected_result.size(); itr++) {
+        find(result, expected_result[itr]) ?
+            tp++ :
+            fn++;
+    }
+
+    double recall = tp / (tp + fn);
+
+    return std::isnan(recall) ? 0 : recall;
+}
+
+/**
+ * Calculate f1 score for the prediciton based on a ground truth
+ * 
+ * @param expected_result - ground truth
+ * @param result - predicition
+ * 
+ * @return evaluation result, including precision, recall, and F1 score
+ */
+Score calculate_score(
+    const std::vector<std::vector<unsigned int> >& expected_result,
+    const std::vector<Rombongan>& result
+) {
+    std::vector<std::vector<unsigned int> > result_ids;
+
+    for (size_t itr = 0; itr < result.size(); itr++) {
+        result_ids.push_back(result[itr].members);
+    }
+
+    double precision = calculate_precision(expected_result, result_ids);
+    double recall = calculate_recall(expected_result, result_ids);
+    double f1_score = 2 * (precision * recall) / (precision + recall);
+
+    if (std::isnan(f1_score)) {
+        f1_score = 0;
+    }
+
+    return {
+        precision,
+        recall,
+        f1_score
+    };
+}
+\end{lstlisting}
