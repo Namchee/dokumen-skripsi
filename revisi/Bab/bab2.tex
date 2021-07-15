@@ -2,12 +2,12 @@
 \chapter{Landasan Teori}
 \label{chap:teori}
 
-Bab ini akan mengenai mengenai teori-teori dasar mengenai lintasan seperti pemodelan lintasan, sumber data lintasan, dan ukuran-ukuran dalam sebuah lintasan. Selain itu, bab ini juga akan membahas lebih dalam mengenai topik kemiripan lintasan dan dua cara yang dapat digunakan untuk mengukur kemiripan lintasan yaitu \textit{dynamic time warping} dan \textit{cosine similarity}. Selanjutnya, bab ini akan membahas mengenai teori dasar pergerakan kolektif. Terakhir, bab ini akan membahas mengenai evaluasi identifikasi pergerakan kolektif.
+Bab ini akan mengenai mengenai teori-teori dasar mengenai lintasan seperti pemodelan lintasan, sumber data lintasan, dan ukuran-ukuran dalam sebuah lintasan. Selain itu, bab ini juga akan membahas lebih dalam mengenai topik kemiripan lintasan dan dua cara yang dapat digunakan untuk mengukur kemiripan lintasan yaitu \textit{dynamic time warping} dan \textit{cosine similarity}. Selanjutnya, bab ini akan membahas mengenai teori dasar pergerakan kolektif. Terakhir, bab ini akan membahas mengenai evaluasi dari hasil identifikasi pergerakan kolektif.
 
 \section{Lintasan}
 \label{sec:lintasan}
 
-Data pergerakan dari sebuah entitas yang bergerak selalu dideskripsikan sebagai lintasan. Lintasan merupakan sebuah jalur yang dilalui oleh entitas yang bergerak pada ruang gerak selama rentang waktu tertentu~\cite{wiratma:trajectory}. Secara formal, lintasan didefinisikan sebagai kumpulan dari pasangan posisi-waktu $\tau = (p_0, t_0), (p_1, t_1), \ldots, (p_x, t_x)$ yang diurutkan berdasarkan waktu secara menaik. $p_i$ merupakan posisi entitas pada waktu $t_i$, di mana $i, t_i \in \mathbb{N}$ dan $t_0, t_1, \ldots, t_i$ merupakan titik-titik waktu yang konsekutif. Nilai $p_i$ dipengaruhi oleh dimensi dari ruang gerak entitas. Sebagai contoh pada data lintasan untuk ruang gerak dua dimensi, $p_i$ akan bernilai $(x_i, y_i)$ yang menunjukkan posisi entitas relatif terhadap dua sumbu $x$ dan $y$, di mana $x_i, y_i \in \mathbb{R}$. Panjang lintasan merupakan jumlah dari kumpulan posisi-waktu yang tercatat dalam data sebuah lintasan. Sebuah lintasan dapat dibagi-bagi menjadi lintasan-lintasan turunan yang memiliki panjang yang lebih pendek. Hal terserbut bertujuan untuk menyederhanakan proses analisis data lintasan. Pada skripsi ini, lintasan akan dinotasikan sebagai $\tau$.
+Data pergerakan dari sebuah entitas yang bergerak selalu dideskripsikan sebagai lintasan. Lintasan merupakan sebuah jalur yang dilalui oleh entitas yang bergerak pada ruang gerak selama rentang waktu tertentu~\cite{wiratma:trajectory}. Secara formal, lintasan didefinisikan sebagai himpunan dari pasangan posisi-waktu $\tau = \{(p_0, t_0), (p_1, t_1), \ldots, (p_x, t_x)\}$ yang diurutkan berdasarkan waktu secara menaik. $p_i$ merupakan posisi entitas pada waktu $t_i$, di mana $i, t_i \in \mathbb{N}$ dan $t_0, t_1, \ldots, t_i$ merupakan titik-titik waktu yang konsekutif. Nilai $p_i$ dipengaruhi oleh dimensi dari ruang gerak entitas. Sebagai contoh pada data lintasan untuk ruang gerak dua dimensi, $p_i$ akan bernilai $(x_i, y_i)$ yang menunjukkan posisi entitas relatif terhadap dua sumbu $x$ dan $y$, di mana $x_i, y_i \in \mathbb{R}$. Panjang lintasan merupakan jumlah dari kumpulan posisi-waktu yang tercatat dalam data sebuah lintasan. Sebuah lintasan dapat dibagi-bagi menjadi lintasan-lintasan turunan yang memiliki panjang yang lebih pendek. Hal terserbut bertujuan untuk menyederhanakan proses analisis data lintasan. Pada skripsi ini, lintasan akan dinotasikan sebagai $\tau$.
 
 \subsection{Pemodelan Lintasan}
 \label{subsec:pemodelan}
@@ -92,6 +92,13 @@ Terdapat beberapa cara untuk memperoleh data pergerakan entitas tanpa melibatkan
 
 Perkembangan teknologi mendorong pemanfaatan teknologi modern untuk memperoleh data pergerakan yang lebih akurat dibandingkan cara-cara sebelumnya. Saat ini, teknologi satelit menjadi teknologi yang paling sering digunakan untuk memperoleh data pergerakan, seperti sistem Argos-Doppler dan \textit{global positioning system} (GPS) yang lebih populer. Gambar~\ref{bab1:sumber-data} menunjukkan pengambilan data pergerakan menggunakan sistem Agros-Doppler dan \textit{global positioning system}. Terdapat dua komponen utama pada teknologi satelit, yaitu pemancar dan penerima sinyal. Pada sistem Argos-Doppler, pemancar sinyal akan dibawa oleh entitas yang bergerak, sebaliknya pada GPS entitas akan membawa penerima sinyal.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Gambar/bab1:sumber-data.png}
+    \caption[Teknologi pengambilan data lintasan]{Pengambilan data lintasan melalui pemanfaatan teknologi modern~\cite{carter:argos}. Kiri ke kanan: Sistem Argos-Doppler, \textit{Global positioning system} (GPS)}
+    \label{bab1:sumber-data}
+\end{figure}
+
 Selain mengamati pergerakan entitas secara langsung, data pergerakan juga dapat diperoleh melalui pemodelan pada entitas yang bergerak~\cite{wiratma:trajectory}. Berdasarkan model tersebut, pergerakan entitas dapat disimulasikan menggunakan sebuah program komputer. Kelebihan dari cara ini adalah para peneliti dapat mengatur faktor-faktor penting yang nantinya ada dalam data pergerakan yang diperoleh seperti lingkungan tempat terjadinya pergerakan, jumlah entitas yang bergerak, ukuran-ukuran yang terdapat dalam data pergerakan seperti kecepatan dan arah, dan lain sebagainya. 
 
 Pengambilan sampel data pergerakan entitas merupakan bagian dari \textit{Geometric Information System} (GIS), sebuah sistem informasi berbasis komputer yang bertujuan untuk meningkatkan efisiensi dan efektivitas dari segala objek dan kejadian yang terjadi pada ruang geografis dengan mengumpulkan, menyimpan, memproses, menganalisis, serta memvisualisasikan informasi geografis yang diperoleh~\cite{longley:02:gis}.
@@ -134,7 +141,7 @@ Matriks homografi merupakan sebuah matriks homogen dengan dimensi $3 \times 3$ d
 
 Setiap lintasan memiliki atribut-atribut dengan nilai-nilai tertentu yang membedakan sebuah lintasan dengan lintasan-lintasan lainnya. Atribut lintasan dicatat untuk setiap titik waktu yang memungkinkan, sehingga atribut merupakan informasi yang dinamis pada sebuah data lintasan. Salah satu contoh dari atribut yang terdapat pada data lintasan adalah kecepatan, di mana atribut tersebut menunjukkan besar perpindahan tempat yang dilakukan entitas per satuan waktu.
 
-Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat mengolah atribut-atribut tersebut menjadi ukuran lintasan yang memiliki tujuan yang lebih spesifik dibandingkan atribut lintasan. Dapat dikatakan bahwa ukuran lintasan merupakan turunan dari atribut lintasan. Salah satu contoh dari ukuran lintasan yang umum digunakan adalah kecepatan rata-rata, di mana ukuran tersebut merupakan turunan langsung dari atribut kecepatan yang ada pada data lintasan. Dalam merepresentasikan ukuran lintasan, model abstrak lebih sering digunakan daripada model data karena model abstrak lebih sederhana dan memiliki representasi yang lebih bebas dibandingkan model data~\cite{wiratma:trajectory}. Nantinya, segala ukuran yang direpresentasikan menggunakan model abstrak dapat diubah dalam bentuk yang sesuai dengan model data. Ukuran lintasan dapat dibagi menjadi dua kategori, yaitu ukuran yang terdapat pada satu lintasan dan ukuran yang terdapat pada kumpulan lintasan. Berikut merupakan beberapa contoh ukuran yang terdapat dalam data lintasan.
+Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat mengolah atribut-atribut tersebut menjadi ukuran lintasan yang memiliki tujuan yang lebih spesifik dibandingkan atribut lintasan. Dapat dikatakan bahwa ukuran lintasan merupakan turunan dari atribut lintasan. Salah satu contoh dari ukuran lintasan yang umum digunakan adalah kecepatan rata-rata, di mana ukuran tersebut merupakan turunan langsung dari atribut kecepatan yang ada pada data lintasan. Dalam merepresentasikan ukuran lintasan, model abstrak lebih sering digunakan daripada model data karena model abstrak lebih sederhana dan memiliki representasi yang lebih bebas dibandingkan model data~\cite{wiratma:trajectory}. Nantinya, segala ukuran yang direpresentasikan menggunakan model abstrak dapat diubah dalam bentuk yang sesuai dengan model data. Ukuran lintasan dapat dibagi menjadi dua kategori, yaitu ukuran yang terdapat pada satu lintasan dan ukuran yang terdapat pada kumpulan lintasan. Tabel~\ref{bab2:ukuran-arah} sampai Tabel~\ref{bab2:ukuran-jumlah} menunjukkan beberapa contoh ukuran yang terdapat dalam data lintasan.
 
 \begin{table}[h!]
     \centering
@@ -154,6 +161,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
         & Ukuran Untuk & Satu lintasan                    \\
         \hline
     \end{tabular}
+    \label{bab2:ukuran-arah}
 \end{table}
 
 \begin{table}[h!]
@@ -174,6 +182,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
         & Ukuran Untuk & Satu lintasan                    \\
         \hline
     \end{tabular}
+    \label{bab2:ukuran-durasi}
 \end{table}
 
 \begin{table}[h!]
@@ -194,6 +203,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
         & Ukuran Untuk & Satu lintasan                    \\
         \hline
     \end{tabular}
+    \label{bab2:ukuran-kecepatan}
 \end{table}
 
 \begin{table}[h!]
@@ -214,6 +224,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
         & Ukuran Untuk & Satu lintasan                    \\
         \hline
     \end{tabular}
+    \label{bab2:ukuran-kemiripan}
 \end{table}
 
 \begin{table}[h!]
@@ -234,6 +245,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
         & Ukuran Untuk & Kumpulan lintasan                    \\
         \hline
     \end{tabular}
+    \label{bab2:ukuran-jumlah}
 \end{table}
 
 \section{Kemiripan Lintasan}
@@ -249,7 +261,7 @@ Salah satu bagian penting dari kegiatan analisis data lintasan adalah pengukuran
 Dengan mengembangkan perhitungan jarak \textit{euclidean} berdasarkan Rumus~\ref{bab2:euclidean-dasar}, maka jarak \textit{euclidean} antara dua buah lintasan $X$ dan $Y$ dengan panjang lintasan $L$ berdimensi $n$ dapat dihitung menggunakan Rumus~\ref{bab2:euclidean-lintasan}~\cite{su:02:euclidean}.
 
 \begin{equation}
-    d(X, Y) = \frac{\sum_{i=0}^{L} \sqrt{\sum_{j=0}^{n}(x_j - y_j)^2}}{n}
+    d(X, Y) = \frac{\sum_{i=0}^{L} \sqrt{\sum_{j=0}^{n}(x_{ij} - y_{ij})^2}}{n}
     \label{bab2:euclidean-lintasan}
 \end{equation}
 
