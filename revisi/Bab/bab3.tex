@@ -166,11 +166,12 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     
     \Fn{\Rombongan{$\mathcal{X}, m, k, r, \vartheta$, $n$}}{
         $hasil \gets kumpulan\;rombongan\;yang\;teridentifikasi$ \\
-        
-        \For{$(start, end)$ in interval waktu}{
+
+        \For{$end \gets k$ to $panjang\;lintasan\;dari\;entitas\;anggota\;\mathcal{X}$}{
+            $start \gets end - k$ \\
             $collectiveMovements \gets kumpulan\;rombongan\;pada\;interval\;start-end$ \\
             
-            $subTrajectories \gets sub\;lintasan\;dari\;setiap\;entitas\;pada\;interval\;start-end$ \\
+            $subTrajectories \gets sublintasan\;dari\;setiap\;entitas\;pada\;interval\;start-end$ \\
             
             $directionVector \gets vektor\;arah\;dari\;setiap\;entitas\;pada\;interval\;start-end$ \\
             
@@ -250,23 +251,23 @@ Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan
 \section{Contoh Proses Identifikasi Rombongan}
 \label{sec:algorithm-example}
 
-Diberikan sebuah himpunan entitas $\mathcal{X}$ yang bergerak ruang $\mathbb{R}^2$ yang terdiri atas 3 entitas yaitu $a$, $b$, dan $c$ yang ditunjukkan melalui Gambar~\ref{bab3:contoh-algoritma-identifikasi}. Masing-masing dari entitas tersebut menempuh lintasan sebagai berikut:
+Diberikan sebuah himpunan entitas $\mathcal{X}$ yang terdiri atas 3 entitas yaitu $a$, $b$, dan $c$ yang ditunjukkan melalui Gambar~\ref{bab3:contoh-algoritma-identifikasi}. Masing-masing dari entitas tersebut bergerak dalam ruang gerak $\mathbb{R}^2$ dan menempuh lintasan sebagai berikut:
 
 \begin{enumerate}
-    \item $\textbf{a} = \{ 1, 1 \}, \{ 2, 1 \}, \{ 3, 1 \}$
-    \item $\textbf{b} = \{ 3, 2 \}, \{ 2, 2 \}, \{ 1, 2 \}$
-    \item $\textbf{c} = \{ 1, -2 \}, \{ 2, 0 \}, \{ 3, 0 \}$
+    \item $\textbf{a} = \{ ((1, 1), 1), ((2, 1), 2),  ((3, 1), 3) \}$
+    \item $\textbf{b} = \{ ((3, 2), 1), ((2, 2), 2), ((1, 2), 3) \}$
+    \item $\textbf{c} = \{ ((1, -2), 1), ((2, 0), 2), ((3, 0), 3) \}$
 \end{enumerate}
 
 \begin{figure}[t]
     \centering
     \captionsetup{width=0.7\textwidth}
-    \includegraphics[width=0.5\textwidth]{Gambar/bab3:contoh-algoritma-identifikasi.pdf}
+    \includegraphics[width=0.525\textwidth]{Gambar/bab3:contoh-algoritma-identifikasi.pdf}
     \caption[Contoh proses algoritma identifikasi rombongan]{Himpunan entitas $\mathcal{X}$ beserta lintasan yang ditempuh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah.}
     \label{bab3:contoh-algoritma-identifikasi}
 \end{figure}
 
-Lintasan dari sebuah entitas dalam himpunan entitas $\mathcal{X}$ merupakan kumpulan posisi yang terurut berdasarkan waktu secara menaik dalam ruang gerak $\mathbb{R}^2$. Posisi setiap entitas dimulai dari titik waktu $t = 0$. Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3.5$ satuan jarak, syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.5$, dan nilai kedekatan minimum $n$ sebanyak $1$. Langkah-langkah yang diambil untuk mengidentifikasi rombongan pada himpunan entitas $\mathcal{X}$ berdasarkan algoritma identifikasi yang telah dibuat adalah sebagai berikut:
+Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3.5$ satuan jarak, syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.5$, dan nilai kedekatan minimum $n$ sebanyak $1$. Langkah-langkah yang diambil untuk mengidentifikasi rombongan pada himpunan entitas $\mathcal{X}$ berdasarkan algoritma identifikasi pergerakan kolektif yang sesuai dengan definisi rombongan adalah sebagai berikut:
 
 \begin{enumerate}
     \item Menginisialisasi sebuah himpunan untuk menyimpan himpunan rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$.
@@ -289,10 +290,10 @@ Lintasan dari sebuah entitas dalam himpunan entitas $\mathcal{X}$ merupakan kump
         \item Karena sub-himpunan $\mathcal{A}$ memenuhi seluruh syarat pembentukan rombongan di mana $\mathcal{A}$ memiliki 2 anggota yang dekat secara spasial, maka sub-himpunan $\mathcal{A}$ membentuk sebuah rombongan pada interval waktu $[1, 2]$.
     \end{enumerate}
     
-    \clearpage
-    
-    \item Lakukan proses pengurangan redundansi hasil identifikasi dengan menghapus \textit{proper subset} dari setiap rombongan yang teridentifikasi pada interval waktu yang sama. Karena rombongan hasil identifikasi tidak memiliki \textit{proper subset} yang redundan, maka hasil rombongan akan langsung dikembalikan.
+    \item Lakukan proses pengurangan redundansi hasil identifikasi dengan menghapus \textit{proper subset} dari setiap rombongan yang teridentifikasi pada interval waktu yang sama.
 \end{enumerate}
+
+\clearpage
 
 Berdasarkan uraian langkah-langkah algoritma identifikasi, berikut merupakan rombongan-rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$ beserta durasi waktu konsekutif dari masing-masing rombongan yang teridentifikasi:
 
@@ -302,9 +303,9 @@ Berdasarkan uraian langkah-langkah algoritma identifikasi, berikut merupakan rom
     \caption{Hasil identifikasi rombongan pada contoh kasus pergerakan yang ditunjukkan oleh Gambar~\ref{bab3:contoh-algoritma-identifikasi}}
     \begin{tabular}{|c|c|}
         \hline
-        Anggota & Durasi \\
+        Rombongan & Durasi \\
         \hline
-        a, c & $[1, 2]$ \\
+        $\{ a, c \}$ & $[1, 2]$ \\
         \hline
     \end{tabular}
     \label{bab6:contoh-identifikasi-non-redundan}
@@ -316,8 +317,6 @@ Berdasarkan uraian langkah-langkah algoritma identifikasi, berikut merupakan rom
 Salah satu masalah yang terdapat dalam algoritma identifikasi rombongan yang diusulkan adalah redundansi yang terdapat pada rombongan-rombongan yang berhasil diidentifikasi. Redundansi dihasilkan ketika algoritma identifikasi rombongan menghasilkan rombongan $\mathcal{X}$ di mana $\mathcal{X} \subset \mathcal{G}$, $|\mathcal{X}| < |\mathcal{G}|$ pada interval waktu yang sama. Redundansi disebabkan oleh cara kerja algoritma identifikasi yang melakukan pemeriksaan kedekatan spasial pada setiap pasang entitas yang mungkin dalam himpunan entitas yang diberikan.
 
 Sebagai contoh, diberikan sebuah himpunan entitas $\mathcal{M}$ yang memiliki 3 buah anggota $a$, $b$, dan $c$. Redundansi terjadi apabila algoritma identifikasi rombongan menghasilkan rombongan dengan anggota $a$, $b$, $c$ dan rombongan dengan anggota $b$ dan $c$ pada interval waktu $x$ --- $y$. Hal tersebut tentunya menyebabkan penurunan kualitas dari hasil identifikasi rombongan. Untuk mengatasi masalah redundansi hasil, perlu dibuat sebuah algoritma tambahan untuk mengurangi redundansi pada hasil identifikasi rombongan.
-
-Redundansi hasil identifikasi rombongan dapat dikurangi dengan menghapus salah satu durasi dari rombongan $\mathcal{X}$ yang merupakan \textit{proper subset} dari rombongan $\mathcal{G}$ apabila rombongan $\mathcal{X}$ dan $\mathcal{G}$ teridentifikasi pada interval waktu yang sama. Algoritma pengurangan redundansi dapat dilihat melalui Algoritma~\ref{bab3:redundansi}.
 
 \begin{algorithm}[h]
     \caption{Algoritma Pengurangan Redundansi}
@@ -335,14 +334,13 @@ Redundansi hasil identifikasi rombongan dapat dikurangi dengan menghapus salah s
     \KwOutput{Himpunan rombongan yang tidak redundan.}
     
     \Fn{\Redundancy{$\mathcal{R}$}}{
-        $Urutkan\;\mathcal{R}\;secara\;menurun\;berdasarkan\;jumlah\;anggota\;rombongan$ \\
         \For{each rombongan $\mathcal{X}$ in $\mathcal{R}$}{
             \For{each rombongan $\mathcal{Y}$ in $\mathcal{R}$}{
-                \If{$|Y| < |X|$ AND $Y \in X$}{
+                \If{$\mathcal{Y} \subset \mathcal{X}$}{
                     \For{each durasi $a$ in interval waktu $\mathcal{X}$}{
                         \For{each durasi $b$ in interval waktu $\mathcal{Y}$}{
                             \If{$a \subseteq b$}{
-                                $hapus\;durasi\;b\;dari\;\mathcal{Y}$ \\
+                                $Hapus\;durasi\;b\;dari\;\mathcal{Y}$ \\
                             }
                         }
                     }
@@ -359,17 +357,19 @@ Redundansi hasil identifikasi rombongan dapat dikurangi dengan menghapus salah s
     \KwRet{$\mathcal{R}$}
 \end{algorithm}
 
+Redundansi hasil identifikasi rombongan dapat dikurangi dengan menghapus salah satu durasi dari rombongan $\mathcal{X}$ yang merupakan \textit{proper subset} dari rombongan $\mathcal{G}$ apabila rombongan $\mathcal{X}$ dan $\mathcal{G}$ teridentifikasi pada interval waktu yang sama. Algoritma pengurangan redundansi dapat dilihat melalui Algoritma~\ref{bab3:redundansi}.
+
 \section{Contoh Proses Pengurangan Redundansi Rombongan}
 \label{sec:redundancy-example}
 
-Diberikan sebuah himpunan entitas $\mathcal{Y}$ yang terdiri atas 5 entitas yaitu $a$, $b$, $c$, $d$, dan $e$ yang ditunjukkan melalui Gambar~\ref{bab3:contoh-algoritma-redundansi}. Kelima entitas tersebut tercatat memiliki lintasan sebagai berikut:
+Diberikan sebuah himpunan entitas $\mathcal{Y}$ yang terdiri atas 5 entitas yaitu $a$, $b$, $c$, $d$, dan $e$ yang ditunjukkan melalui Gambar~\ref{bab3:contoh-algoritma-redundansi}. Kelima entitas tersebut bergerak dalam ruang gerak $\mathbb{R}^2$ dan menempuh lintasan sebagai berikut:
 
 \begin{enumerate}
-    \item $\textbf{a} = \{ 1, 1 \}, \{ 2, 1 \}, \{ 3, 1 \}, \{ 4, 1\}$
-    \item $\textbf{b} = \{ 3, 2 \}, \{ 2, 2 \}, \{ 1, 2 \}, \{ 0, 2\}$
-    \item $\textbf{c} = \{ 1, -2 \}, \{ 2, 0 \}, \{ 3, 0 \}, \{ 4, 0 \}$
-    \item $\textbf{d} = \{ 2, -2 \}, \{ 3, -0.5 \}, \{ 4, -0.5 \}, \{ 5, -0.5 \}$
-    \item $\textbf{e} = \{ 1, 3 \}, \{ 2, 1.5 \}, \{ 3, 1.5 \}, \{ 4, 1.5 \}$
+    \item $\textbf{a} = \{ ((1, 1), 1), ((2, 1), 2), ((3, 1), 3), ((4, 1), 4) \}$
+    \item $\textbf{b} = \{ ((3, 2), 1), ((2, 2), 2), ((1, 2), 3), ((0, 2), 4) \}$
+    \item $\textbf{c} = \{ ((1, -2), 1), ((2, 0), 2), ((3, 0), 3), ((4, 0), 4) \}$
+    \item $\textbf{d} = \{ ((2, -2), 1), ((3, -0.5), 2), ((4, -0.5), 3), ((5, -0.5), 4) \}$
+    \item $\textbf{e} = \{ ((1, 3), 1), ((2, 1.5), 2), ((3, 1.5), 3), ((4, 1.5), 4) \}$
 \end{enumerate}
 
 Beserta dengan himpunan entitas $\mathcal{Y}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3$ satuan jarak, syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.75$, dan nilai kedekatan minimum $n$ sebanyak $1$.
@@ -382,36 +382,32 @@ Melalui proses identifikasi rombongan menggunakan Algoritma~\ref{bab3:algoritma-
     \caption{Hasil identifikasi rombongan pada contoh kasus pergerakan yang ditunjukkan oleh Gambar~\ref{bab3:contoh-algoritma-redundansi}}
     \begin{tabular}{|c|c|}
         \hline
-        Anggota & Durasi \\
+        Rombongan & Durasi \\
         \hline
-        a, c, d, e & $[1, 3]$ \\
-        c, d, e & $[1, 3]$ \\
-        d, e & $[1, 3]$ \\
+        $\{ a, c, d, e \}$ & $[1, 3]$ \\
+        $\{ c, d, e \}$ & $[1, 3]$ \\
+        $\{ d, e \}$ & $[1, 3]$ \\
         \hline
     \end{tabular}
     \label{bab6:contoh-identifikasi-redundan}
 \end{table}
 
-\begin{figure}[t]
+\begin{figure}[b!]
     \centering
-    \captionsetup{width=0.8\textwidth}
-    \includegraphics[width=0.95\textwidth]{Gambar/bab3:contoh-algoritma-redundansi.pdf}
+    \captionsetup{width=0.7\textwidth}
+    \includegraphics[width=\textwidth]{Gambar/bab3:contoh-algoritma-redundansi.pdf}
     \caption[Contoh proses algoritma pengurangan redundansi]{Himpunan entitas $\mathcal{Y}$ beserta lintasan yang ditempuh oleh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah. Entitas $d$ digambarkan sebagai entitas berwarna hijau. Entitas $e$ digambarkan sebagai entitas berwarna ungu.}
     \label{bab3:contoh-algoritma-redundansi}
 \end{figure}
 
-Analisis singkat terhadap hasil identifikasi rombongan menunjukkan bahwa rombongan dengan anggota $\{ c, d, e \}$ dan $\{ d, e \}$ merupakan rombongan yang redundan. Redundansi tersebut disebabkan oleh hasil identifikasi rombongan yang juga berhasil mengidentifikasi rombongan dengan anggota $\{ a, c, d, e \}$ yang memiliki durasi yang sama persis dengan rombongan dengan anggota $\{ c, d, e \}$ dan $\{ d, e \}$. Oleh karena itu, perlu dilakukan pengurangan redundansi pada hasil identifikasi rombongan untuk meningkatkan kualitas hasil identifikasi rombongan.
-
-\noindent Berikut merupakan langkah-langkah yang diambil pada proses pengurangan redundansi:
+Analisis singkat terhadap hasil identifikasi rombongan menunjukkan bahwa rombongan dengan anggota $\{ c, d, e \}$ dan $\{ d, e \}$ merupakan rombongan yang redundan. Redundansi tersebut disebabkan oleh hasil identifikasi rombongan yang juga berhasil mengidentifikasi rombongan dengan anggota $\{ a, c, d, e \}$ yang memiliki durasi yang sama persis dengan rombongan dengan anggota $\{ c, d, e \}$ dan $\{ d, e \}$. Oleh karena itu, perlu dilakukan pengurangan redundansi pada hasil identifikasi rombongan untuk meningkatkan kualitas hasil identifikasi rombongan. Berikut merupakan langkah-langkah yang diambil pada proses pengurangan redundansi hasil identifikasi rombongan:
 
 \begin{enumerate}
-    \item Buatlah sebuah himpunan pasangan rombongan untuk setiap rombongan yang teridentifikasi.
-    
-    \item Untuk setiap pasang rombongan $\{ \mathcal{X}, \mathcal{Y} \}$, hapuslah durasi waktu $\mathcal{Z}$ yang redundan pada rombongan $\mathcal{Y}$ apabila rombongan $\mathcal{Y}$ merupakan \textit{proper subset} dari rombongan $\mathcal{X}$. Berikut merupakan langkah-langkah dikerjakan pada proses penghapusan durasi rombongan:
+    \item Untuk setiap pasang rombongan $\{ \mathcal{X}, \mathcal{Y} \}$ pada hasil identifikasi rombongan, hapus seluruh durasi waktu yang redundan $\mathcal{Z}$ yang dimiliki rombongan $\mathcal{Y}$ apabila rombongan $\mathcal{Y}$ merupakan \textit{proper subset} dari rombongan $\mathcal{X}$ apabila rombongan $\mathcal{X}$ juga teridentifikasi pada durasi $\mathcal{Z}$. Berikut merupakan langkah-langkah yang dilakukan untuk menghapus durasi rombongan redundan pada setiap rombongan yang berhasil teridentifikasi:
     
     \begin{enumerate}
         \item Rombongan $\{c, d, e\}$ merupakan \textit{proper subset} dari rombongan $\{a, c, d, e\}$, sehingga algoritma pengurangan redundansi akan melakukan penghapusan durasi rombongan $\{c, d, e\}$. Durasi $[1, 3]$ dari rombongan $\{c, d, e\}$ juga tercatat pada rombongan $\{a, c, d, e\}$, oleh karena itu durasi $[1, 3]$ pada rombongan $\{c, d, e\}$ dihapus.
-        \item Rombongan $\{d, e\}$ merupakan \textit{proper subset} dari rombongan $\{a, c, d, e\}$, sehingga algoritma pengurangan redundansi akan melakukan penghapusan durasi rombongan $\{d, e\}$. Durasi $[1, 3]$ dari rombongan $\{d, e\}$ juga tercatat pada rombongan $\{a, c, d, e\}$, oleh karena itu durasi $[1, 3]$ pada rombongan $\{c, d, e\}$ dihapus.
+        \item Rombongan $\{d, e\}$ merupakan \textit{proper subset} dari rombongan $\{a, c, d, e\}$, sehingga algoritma pengurangan redundansi akan melakukan penghapusan durasi rombongan $\{d, e\}$. Durasi $[1, 3]$ dari rombongan $\{d, e\}$ juga tercatat pada rombongan $\{a, c, d, e\}$, oleh karena itu durasi $[1, 3]$ pada rombongan $\{d, e\}$ dihapus.
         \item Karena rombongan $\{c, d, e\}$ dan rombongan $\{d, e\}$ tidak memiliki durasi waktu apapun, maka algoritma pengurangan redundansi tidak melakukan pemeriksaan durasi waktu untuk pasangan $\{ [c, d, e], [d, e] \}$.
     \end{enumerate}
     
