@@ -247,22 +247,21 @@ Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan
 
 Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan memiliki kompleksitas ruang sebesar $O(n^3)$ di mana $n$ merupakan jumlah entitas yang terdapat pada himpunan entitas $\mathcal{X}$. Nilai kompleksitas tersebut didapatkan dari kompleksitas tempat paling signifikan yang digunakan untuk menyimpan $entitySet$ yang terdapat pada baris $8$ pada algoritma identifikasi rombongan. Berdasarkan cara kerja algoritma, $entitySet$ dapat beranggotakan sebanyak $n^2$ himpunan. Masing-masing himpunan dapat memiliki paling banyak sebanyak $n$ entitas. Oleh karena itu, dibutuhkan sebanyak $n^3$ tempat untuk menyimpan $entitySet$.
 
-
 \section{Contoh Proses Identifikasi Rombongan}
 \label{sec:algorithm-example}
 
 Diberikan sebuah himpunan entitas $\mathcal{X}$ yang terdiri atas 3 entitas yaitu $a$, $b$, dan $c$ yang ditunjukkan melalui Gambar~\ref{bab3:contoh-algoritma-identifikasi}. Masing-masing dari entitas tersebut bergerak dalam ruang gerak $\mathbb{R}^2$ dan menempuh lintasan sebagai berikut:
 
 \begin{enumerate}
-    \item $\textbf{a} = \{ ((1, 1), 1), ((2, 1), 2),  ((3, 1), 3) \}$
-    \item $\textbf{b} = \{ ((3, 2), 1), ((2, 2), 2), ((1, 2), 3) \}$
-    \item $\textbf{c} = \{ ((1, -2), 1), ((2, 0), 2), ((3, 0), 3) \}$
+    \item $\textbf{a} = \{ ((1, 2), 1), ((2, 2), 2),  ((3, 2), 3) \}$
+    \item $\textbf{b} = \{ ((3, 1), 1), ((2, 1), 2), ((1, 1), 3) \}$
+    \item $\textbf{c} = \{ ((1, 5), 1), ((2, 3), 2), ((3, 3), 3) \}$
 \end{enumerate}
 
 \begin{figure}[t]
     \centering
     \captionsetup{width=0.7\textwidth}
-    \includegraphics[width=0.525\textwidth]{Gambar/bab3:contoh-algoritma-identifikasi.pdf}
+    \includegraphics[width=0.435\textwidth]{Gambar/bab3:contoh-algoritma-identifikasi.pdf}
     \caption[Contoh proses algoritma identifikasi rombongan]{Himpunan entitas $\mathcal{X}$ beserta lintasan yang ditempuh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah.}
     \label{bab3:contoh-algoritma-identifikasi}
 \end{figure}
@@ -270,8 +269,8 @@ Diberikan sebuah himpunan entitas $\mathcal{X}$ yang terdiri atas 3 entitas yait
 Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3.5$ satuan jarak, syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.5$, dan nilai kedekatan minimum $n$ sebanyak $1$. Langkah-langkah yang diambil untuk mengidentifikasi rombongan pada himpunan entitas $\mathcal{X}$ berdasarkan algoritma identifikasi pergerakan kolektif yang sesuai dengan definisi rombongan adalah sebagai berikut:
 
 \begin{enumerate}
-    \item Menginisialisasi sebuah himpunan untuk menyimpan himpunan rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$.
-    \item Mengidentifikasi seluruh interval waktu konsekutif sepanjang $k$ pada himpunan entitas $\mathcal{X}$. Berdasarkan parameter masukan yaitu $k = 2$, maka interval waktu konsekutif yang memungkinkan adalah $[0, 1]$ dan $[1, 2]$.
+    \item Inisialisasi sebuah himpunan untuk menyimpan himpunan rombongan yang teridentifikasi.
+    \item Cari seluruh interval waktu konsekutif yang mungkin sepanjang $k$ pada himpunan entitas $\mathcal{X}$. Berdasarkan parameter masukan yaitu $k = 2$, maka interval waktu konsekutif yang memungkinkan adalah $[0, 1]$ dan $[1, 2]$.
     \item Lakukan pemeriksaan kedekatan spasial untuk setiap pasang entitas pada interval waktu $[0, 1]$ dengan melakukan perbandingan jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} pada setiap pasang entitas. Langkah-langkah yang dikerjakan adalah sebagai berikut: 
     
     \begin{enumerate}
@@ -293,8 +292,6 @@ Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah enti
     \item Lakukan proses pengurangan redundansi hasil identifikasi dengan menghapus \textit{proper subset} dari setiap rombongan yang teridentifikasi pada interval waktu yang sama.
 \end{enumerate}
 
-\clearpage
-
 Berdasarkan uraian langkah-langkah algoritma identifikasi, berikut merupakan rombongan-rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$ beserta durasi waktu konsekutif dari masing-masing rombongan yang teridentifikasi:
 
 \begin{table}[h]
@@ -315,8 +312,6 @@ Berdasarkan uraian langkah-langkah algoritma identifikasi, berikut merupakan rom
 \label{sec:redundancy}
 
 Salah satu masalah yang terdapat dalam algoritma identifikasi rombongan yang diusulkan adalah redundansi yang terdapat pada rombongan-rombongan yang berhasil diidentifikasi. Redundansi hasil dapat dilihat ketika algoritma identifikasi rombongan menghasilkan rombongan $\mathcal{X}$ di mana $\mathcal{X} \subset \mathcal{G}$, $|\mathcal{X}| < |\mathcal{G}|$ pada interval waktu yang sama. Redundansi disebabkan oleh cara kerja algoritma identifikasi yang tidak mampu untuk menghasilkan rombongan maksimal.
-
-Sebagai contoh, diberikan sebuah himpunan entitas $\mathcal{M}$ yang memiliki 3 buah anggota $a$, $b$, dan $c$. Redundansi terjadi apabila algoritma identifikasi rombongan menghasilkan rombongan dengan anggota $a$, $b$, $c$ dan rombongan dengan anggota $b$ dan $c$ pada interval waktu $x$ --- $y$. Hal tersebut tentunya menyebabkan penurunan kualitas dari hasil identifikasi rombongan. Untuk mengatasi masalah redundansi hasil, perlu dibuat sebuah algoritma tambahan untuk mengurangi redundansi pada hasil identifikasi rombongan, sehingga hasil identifikasi yang dihasilkan oleh algoritma identifikasi dapat menghasilkan rombongan-rombongan maksimal.
 
 \begin{algorithm}[h]
     \caption{Algoritma Pengurangan Redundansi}
@@ -357,6 +352,8 @@ Sebagai contoh, diberikan sebuah himpunan entitas $\mathcal{M}$ yang memiliki 3 
     \KwRet{$\mathcal{R}$}
 \end{algorithm}
 
+Sebagai contoh, diberikan sebuah himpunan entitas $\mathcal{M}$ yang memiliki 3 buah anggota $a$, $b$, dan $c$. Redundansi terjadi apabila algoritma identifikasi rombongan menghasilkan rombongan dengan anggota $a$, $b$, $c$ dan rombongan dengan anggota $b$ dan $c$ pada interval waktu $x$ --- $y$. Hal tersebut tentunya menyebabkan penurunan kualitas dari hasil identifikasi rombongan. Untuk mengatasi masalah redundansi hasil, perlu dibuat sebuah algoritma tambahan untuk mengurangi redundansi pada hasil identifikasi rombongan, sehingga hasil identifikasi yang dihasilkan oleh algoritma identifikasi dapat menghasilkan rombongan-rombongan maksimal.
+
 Redundansi hasil identifikasi rombongan dapat dikurangi dengan menghapus salah satu durasi dari rombongan $\mathcal{X}$ yang merupakan \textit{proper subset} dari rombongan $\mathcal{G}$ apabila rombongan $\mathcal{X}$ dan $\mathcal{G}$ teridentifikasi pada interval waktu yang sama. Algoritma pengurangan redundansi dapat dilihat melalui Algoritma~\ref{bab3:redundansi}.
 
 \section{Contoh Proses Pengurangan Redundansi Rombongan}
@@ -365,11 +362,11 @@ Redundansi hasil identifikasi rombongan dapat dikurangi dengan menghapus salah s
 Diberikan sebuah himpunan entitas $\mathcal{Y}$ yang terdiri atas 5 entitas yaitu $a$, $b$, $c$, $d$, dan $e$ yang ditunjukkan melalui Gambar~\ref{bab3:contoh-algoritma-redundansi}. Kelima entitas tersebut bergerak dalam ruang gerak $\mathbb{R}^2$ dan menempuh lintasan sebagai berikut:
 
 \begin{enumerate}
-    \item $\textbf{a} = \{ ((1, 1), 1), ((2, 1), 2), ((3, 1), 3), ((4, 1), 4) \}$
+    \item $\textbf{a} = \{ ((1, 4), 1), ((2, 4), 2), ((3, 4), 3), ((4, 4), 4) \}$
     \item $\textbf{b} = \{ ((3, 2), 1), ((2, 2), 2), ((1, 2), 3), ((0, 2), 4) \}$
-    \item $\textbf{c} = \{ ((1, -2), 1), ((2, 0), 2), ((3, 0), 3), ((4, 0), 4) \}$
-    \item $\textbf{d} = \{ ((2, -2), 1), ((3, -0.5), 2), ((4, -0.5), 3), ((5, -0.5), 4) \}$
-    \item $\textbf{e} = \{ ((1, 3), 1), ((2, 1.5), 2), ((3, 1.5), 3), ((4, 1.5), 4) \}$
+    \item $\textbf{c} = \{ ((1, 7), 1), ((2, 5), 2), ((3, 5), 3), ((4, 5), 4) \}$
+    \item $\textbf{d} = \{ ((2, 7), 1), ((3, 6), 2), ((4, 6), 3), ((5, 6), 4) \}$
+    \item $\textbf{e} = \{ ((1, 1), 1), ((2, 3), 2), ((3, 3), 3), ((4, 3), 4) \}$
 \end{enumerate}
 
 Beserta dengan himpunan entitas $\mathcal{Y}$, diberikan pula syarat jumlah entitas minimum sebanyak $m = 2$, syarat durasi interval waktu minimum selama $k = 2$, syarat jarak \textit{dynamic time warping} maksimum sepanjang $r = 3$ satuan jarak, syarat nilai \textit{cosine similarity} minimum sebesar $\vartheta = 0.75$, dan nilai kedekatan minimum $n$ sebanyak $1$.
@@ -392,7 +389,7 @@ Melalui proses identifikasi rombongan menggunakan Algoritma~\ref{bab3:algoritma-
     \label{bab6:contoh-identifikasi-redundan}
 \end{table}
 
-\begin{figure}[b!]
+\begin{figure}[t]
     \centering
     \captionsetup{width=0.7\textwidth}
     \includegraphics[width=\textwidth]{Gambar/bab3:contoh-algoritma-redundansi.pdf}
