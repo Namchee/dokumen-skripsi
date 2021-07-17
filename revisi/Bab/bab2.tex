@@ -251,7 +251,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
 \section{Kemiripan Lintasan}
 \label{sec:kemiripan}
 
-Salah satu kegiatan dari analisis data lintasan adalah pengukuran kemiripan antar lintasan. Pengukuran kemiripan lintasan bertujuan untuk menentukan apakah dua buah lintasan memiliki tingkat kemiripan tertentu. Kemiripan lintasan dapat diukur melalui berbagai kriteria seperti lokasi-lokasi yang dikunjungi, kecepatan rata-rata, jarak antarentitas, dan kriteria-kriteria lainnya~\cite{wiratma:trajectory}. Pengukuran kemiripan lintasan dapat digunakan untuk mendahului proses identifikasi pola pergerakan kolektif yang menjadi fokus pada skripsi ini. Selain itu, pengukuran kemiripan lintasan juga dapat digunakan untuk mencari lintasan turunan dengan tingkat kemiripan tertentu dengan lintasan turunan lain dalam satu lintasan utama yang sama. Salah satu ukuran jarak yang dapat digunakan untuk mengukur kemiripan lintasan adalah jarak \textit{euclidean}. Jarak \textit{euclidean} antara dua buah titik $x$ dan $y$ berdimensi $n$ dapat dihitung menggunakan Rumus~\ref{bab2:euclidean-dasar}.
+Salah satu kegiatan dari analisis data lintasan adalah pengukuran kemiripan antar lintasan. Pengukuran kemiripan lintasan bertujuan untuk menentukan apakah dua buah lintasan memiliki tingkat kemiripan tertentu. Kemiripan lintasan dapat diukur melalui berbagai kriteria seperti lokasi-lokasi yang dikunjungi, kecepatan rata-rata, jarak antarentitas, dan kriteria-kriteria lainnya~\cite{wiratma:trajectory}. Pengukuran kemiripan lintasan dapat digunakan untuk mendahului proses identifikasi pergerakan kolektif yang menjadi fokus pada skripsi ini. Selain itu, pengukuran kemiripan lintasan juga dapat digunakan untuk mencari lintasan turunan dengan tingkat kemiripan tertentu dengan lintasan turunan lain dalam satu lintasan utama yang sama. Salah satu ukuran jarak yang dapat digunakan untuk mengukur kemiripan lintasan adalah jarak \textit{euclidean}. Jarak \textit{euclidean} antara dua buah titik $x$ dan $y$ berdimensi $n$ dapat dihitung menggunakan Rumus~\ref{bab2:euclidean-dasar}.
 
 \begin{equation}
     d(x, y) = \sqrt{\sum_{i = 1}^{n}(x_i - y_i)^2}
@@ -351,12 +351,15 @@ Jarak total $c_p$ dari sebuah \textit{warping path} yang valid merupakan akumula
     \label{bab2:warping-path-length}
 \end{equation}
 
-\textit{Warping path} optimal antara dua buah lintasan merupakan \textit{warping path} $p^*$ yang memiliki jarak terkecil di antara semua \textit{warping path} yang valid. Jarak \textit{dynamic time warping} $DTW(X, Y)$ antara dua buah lintasan $X$ dan $Y$ merupakan jarak total dari \textit{warping path} $p^*$. Secara formal, jarak \textit{dynamic time warping} dari dua buah lintasan $X$ dan $Y$ dapat dihitung sebagai berikut:
+\textit{Warping path} optimal antara dua buah lintasan merupakan \textit{warping path} $p^*$ yang memiliki jarak terkecil di antara semua \textit{warping path} yang valid. Jarak \textit{dynamic time warping} $DTW(X, Y)$ antara dua buah lintasan $X$ dan $Y$ merupakan jarak total dari \textit{warping path} $p^*$. Jarak \textit{dynamic time warping} dari dua buah lintasan $X$ dan $Y$ ditunjukkan melalui Rumus~\ref{bab2:rumus-dtw}.
 
-\begin{align*}
-    DTW(X, Y) & = c\textsubscript{$p*$}(X, Y) \\
-    & = min\{c_p(X, Y)\;|\;p\;adalah\;warping\;path\;dari\;lintasan\;(X, Y)\}
-\end{align*}
+\begin{equation}
+    \begin{aligned}
+        DTW(X, Y) & = c\textsubscript{$p*$}(X, Y) \\
+        & = min\{c_p(X, Y)\;|\;p\;adalah\;warping\;path\;dari\;lintasan\;(X, Y)\}
+    \end{aligned}
+    \label{bab2:rumus-dtw}
+\end{equation}
 
 \subsection{Algoritma \textit{Dynamic Time Warping}}
 \label{subsec:algoritma-dtw}
@@ -430,13 +433,13 @@ Menggunakan cara yang sama, jarak total dari \textit{warping path} yang ditunjuk
 
 \begin{figure}[h]
     \centering
-    \begin{subfigure}{0.25\textwidth}
+    \begin{subfigure}{0.185\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:contoh-dtw.pdf}
         \caption{Salah satu \textit{warping path} yang valid untuk lintasan $X$ dan $Y$. $c_p = 8$}
         \label{bab2:warping-path}
     \end{subfigure} \hspace{1cm}
-    \begin{subfigure}{0.25\textwidth}
+    \begin{subfigure}{0.185\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:contoh-dtw-optimal.pdf}
         \caption{\textit{Warping path} yang optimal untuk lintasan $X$ dan $Y$. $c_p = 6$}
@@ -455,11 +458,7 @@ Selain jarak \textit{euclidean} dan jarak \textit{dynamic time warping}, kemirip
     \label{bab2:cosine-similarity}
 \end{equation}
 
-\vspace{10pt}
-
 Nilai yang dihasilkan oleh \textit{cosine similarity} memiliki rentang nilai $[-1, 1]$, di mana \textit{cosine similarity} yang bernilai $-1$ menandakan bahwa kedua lintasan memiliki arah lintasan yang bertolak belakang dan \textit{cosine similarity} yang bernilai $1$ menandakan bahwa kedua lintasan memiliki arah lintasan yang sama persis.
-
-\clearpage
 
 \subsection{Contoh Perhitungan \textit{Cosine Similarity}}
 \label{subsec:contoh-cosine}
@@ -512,9 +511,9 @@ Setelah panjang lintasan diketahui, maka \textit{cosine similarity} dari dua bua
 
 Pergerakan kolektif merupakan sebuah keadaan di mana terdapat dua atau lebih entitas yang bergerak bersama selama kurun waktu tertentu~\cite{wiratma:trajectory}. Identifikasi pergerakan kolektif cukup mirip dengan kegiatan \textit{clustering} lintasan namun pada \textit{clustering}, sebuah lintasan akan diproses secara keseluruhan tanpa dibagi-bagi menjadi lintasan-lintasan turunan yang lebih kecil sedangkan pada identifikasi pergerakan kolektif, lintasan dapat dibagi-bagi menjadi lintasan turunan yang lebih kecil sehingga sebuah entitas dapat tergabung pada lebih dari satu kelompok setiap waktu~\cite{wiratma:trajectory}.
 
-Identifikasi terhadap pola pergerakan kolektif dapat diaplikasikan pada berbagai bidang seperti pada bidang ilmu ternak, peneliti dapat melakukan identifikasi pergerakan kolektif pada ayam-ayam yang terinfeksi bakteri \textit{Campylobacter} yang menyebabkan keracunan makanan pada manusia~\cite{colles:02:chicken}. Pada bidang keamanan, identifikasi pola pergerakan kolektif dapat dimanfaatkan untuk mendeteksi gerak-gerik mencurigakan pada sekelompok orang yang terekam pada kamera pengawas~\cite{makris:01:security}. Pada contoh aplikasi tersebut, identifikasi pergerakan kolektif memunculkan informasi baru yang berguna untuk lebih memahami pergerakan yang dilakukan oleh entitas.
+Identifikasi terhadap pergerakan kolektif dapat diaplikasikan pada berbagai bidang seperti pada bidang ilmu ternak, peneliti dapat melakukan identifikasi pergerakan kolektif pada ayam-ayam yang terinfeksi bakteri \textit{Campylobacter} yang menyebabkan keracunan makanan pada manusia~\cite{colles:02:chicken}. Pada bidang keamanan, identifikasi pergerakan kolektif dapat dimanfaatkan untuk mendeteksi gerak-gerik mencurigakan pada sekelompok orang yang terekam pada kamera pengawas~\cite{makris:01:security}. Pada contoh aplikasi tersebut, identifikasi pergerakan kolektif memunculkan informasi baru yang berguna untuk lebih memahami pergerakan yang dilakukan oleh entitas.
 
-\noindent Terdapat beberapa aspek penting dalam identifikasi pola pergerakan kolektif:
+\noindent Terdapat beberapa aspek penting dalam identifikasi pergerakan kolektif, antara lain:
 
 \begin{itemize}
     \item \textbf{Sifat Data Lintasan}
@@ -550,7 +549,7 @@ Identifikasi terhadap pola pergerakan kolektif dapat diaplikasikan pada berbagai
     
     Selain menggunakan sebuah konstanta yang menyatakan jarak maksimum, terdapat cara-cara lain untuk menentukan kedekatan dua buah entitas seperti menggunakan sebuah cakram dengan radius $\epsilon$ di mana seluruh anggota pergerakan kolektif harus masuk dalam diameter dari cakram tersebut~\cite{gudmundsson:flock}. Jarak maksimum juga dapat dihitung secara relatif, di mana terdapat entitas lain dapat digunakan sebagai perantara dari dua buah entitas yang dikatakan dekat. Sebagai contoh, dua entitas $a$ dan $b$ dikatakan dekat pada titik waktu $t$ apabila terdapat sebuah entitas $c$ di mana $d\textsubscript{ac}(t) \leq \varepsilon$ dan $d\textsubscript{bc}(t) \leq \varepsilon$ walaupun $d\textsubscript{ab}(t) > \varepsilon$. \iffalse \lionov{harus didefinisikan dulu sebelumnya kalo $d_{ac}(t)$ itu menyatakan jarak $a$ dan $c$ pada waktu $t$} \cristopher{udah di bagian~\ref{sec:kemiripan} ko} \fi Gambar~\ref{bab2:spasial} menunjukkan cara-cara untuk menentukan kedekatan spasial antar entitas.
     
-    \item \textbf{\textit{Size}} \iffalse \lionov{kayaknya ini jangan pake ``ukuran'', nanti sama dengan measure, pake {\it size} ato langung aja jumlah minimumentitas } \fi
+    \item \textbf{\textit{Size}}
     
     \textit{Size} menyatakan jumlah entitas minimum yang bergerak bersama agar entitas-entitas tersebut dapat diidentifikasi sebagai sebuah pergerakan kolektif. Walaupun dua buah entitas dapat membentuk sebuah pergerakan kolektif, namun jumlah entitas minimum untuk membentuk sebuah pergerakan kolektif dapat disesuaikan oleh peneliti berdasarkan tujuan dan kebutuhan penelitian~\cite{wiratma:trajectory}. Selain jumlah entitas, peneliti juga harus mempertimbangkan apakah satu entitas dapat tergabung dalam lebih dari satu pergerakan kolektif atau tidak.
     
@@ -558,10 +557,10 @@ Identifikasi terhadap pola pergerakan kolektif dapat diaplikasikan pada berbagai
     
     Durasi menyatakan waktu minimum pergerakan bersama yang dilakukan oleh kumpulan entitas agar dapat dikategorikan sebagai pergerakan kolektif. Salah satu hal yang patut diperhatikan dari atribut durasi adalah sifat kontinuitas dari pergerakan bersama.
     
-    Sifat kontinuitas yang kaku, di mana syarat durasi harus dihitung secara konsekutif, dapat menyebabkan kesalahan identifikasi pola pergerakan kolektif pada kasus di mana ada anggota pergerakan yang secara sementara memisahkan diri untuk bergabung kembali setelah beberapa saat~\cite{wiratma:trajectory}. Untuk mengatasi masalah identifikasi tersebut, sifat kontinuitas dapat dihitung secara kumulatif. Sifat kontinuitas tersebut dapat menghasilkan definisi pergerakan kolektif yang lebih kuat, fleksibel, dan dapat mencakup lebih banyak variasi kasus identifikasi pergerakan kolektif pada kasus pergerakan tertentu.
+    Sifat kontinuitas yang kaku, di mana syarat durasi harus dihitung secara konsekutif, dapat menyebabkan kesalahan identifikasi pergerakan kolektif pada kasus di mana ada anggota pergerakan yang secara sementara memisahkan diri untuk bergabung kembali setelah beberapa saat~\cite{wiratma:trajectory}. Untuk mengatasi masalah identifikasi tersebut, sifat kontinuitas dapat dihitung secara kumulatif. Sifat kontinuitas tersebut dapat menghasilkan definisi pergerakan kolektif yang lebih kuat, fleksibel, dan dapat mencakup lebih banyak variasi kasus identifikasi pergerakan kolektif pada kasus pergerakan tertentu.
 \end{itemize}
 
-Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kolektif menjadi topik penelitian yang hangat pada bidang komputasi geometri. Berikut merupakan beberapa contoh dari definisi formal pergerakan kolektif yang sudah ada:
+Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pergerakan kolektif menjadi topik penelitian yang hangat pada bidang komputasi geometri. Berikut merupakan beberapa contoh dari definisi formal pergerakan kolektif yang sudah ada:
 
 \begin{itemize}
     \item \textbf{Flock}
@@ -571,17 +570,9 @@ Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kol
     \begin{figure}[h]
         \centering
         \captionsetup{width=0.75\textwidth}
-        \includegraphics[width=0.625\textwidth]{Gambar/bab2:flock.pdf}
+        \includegraphics[width=0.6\textwidth]{Gambar/bab2:flock.pdf}
         \caption[Sebuah \textit{flock}]{Entitas-entitas berwarna biru yang membentuk sebuah \textit{flock} dengan $m = 3$ dan $k = 3$. Lingkaran kuning menunjukkan cakram yang memiliki radius $r$ yang berisi seluruh anggota \textit{flock}}
         \label{bab2:flock}
-    \end{figure}
-    
-    \begin{figure}[h]
-        \centering
-        \captionsetup{width=0.75\textwidth}
-        \includegraphics[width=\textwidth]{Gambar/bab2:group.pdf}
-        \caption[Sebuah \textit{group}]{Entitas-entitas berwarna merah yang membentuk sebuah \textit{group} dengan $m = 3$ dan $k = 3$. Salah satu entitas merah yang terletak di paling bawah terhubung secara relatif dengan entitas-entitas merah lainnya melalui entitas-entitas biru.}
-        \label{bab2:group}
     \end{figure}
 
     \item \textbf{Group}
@@ -593,8 +584,15 @@ Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pola pergerakan kol
         \item Interval waktu $I$ memiliki durasi minimal selama $k$.
         \item Setiap pasang entitas $x, y$ di mana $x, y \in \mathcal{G}$ secara relatif pada $\mathcal{X}$ untuk setiap satuan waktu pada interval waktu $I$ dengan jarak maksimum antar entitas adalah sepanjang $r$.
     \end{enumerate}
+    
+    \begin{figure}[h]
+        \centering
+        \captionsetup{width=0.75\textwidth}
+        \includegraphics[width=\textwidth]{Gambar/bab2:group.pdf}
+        \caption[Sebuah \textit{group}]{Entitas-entitas berwarna merah yang membentuk sebuah \textit{group} dengan $m = 3$ dan $k = 3$. Salah satu entitas merah yang terletak di paling bawah terhubung secara relatif dengan entitas-entitas merah lainnya melalui entitas-entitas biru.}
+        \label{bab2:group}
+    \end{figure}
 \end{itemize}
-
 
 Selain kedua definisi di atas, terdapat definisi-definisi lain seperti \textit{convoy}~\cite{jeung:convoys}, \textit{herd}~\cite{huang:02:herd}, \textit{swarm}~\cite{li:swarm}, \textit{gathering}~\cite{zheng:02:gatherings}, dan masih banyak definisi formal lainnya. Seluruh definisi formal yang sudah dibuat selalu bergantung pada setidaknya tiga ukuran lintasan: \textit{size}, kedekatan spasial, dan parameter temporal. Walaupun kebanyak definisi formal yang sudah dibuat untuk data lintasan yang bersifat diskrit, terdapat definisi formal pergerakan kolektif yang dapat menangani data lintasan yang bersifat kontinu seperti \textit{group}~\cite{buchin:group}.
 
@@ -604,8 +602,6 @@ Selain kedua definisi di atas, terdapat definisi-definisi lain seperti \textit{c
 Seperti yang sudah dibahas pada subbab sebelumnya, bagian penting dari identifikasi pergerakan kolektif adalah menentukan jarak kedekatan spasial antar anggota pergerakan kolektif. Penggunaan parameter jarak yang tidak tepat dapat menyebabkan penurunan terhadap kualitas hasil identifikasi pergerakan kolektif. Oleh karena itu, diperlukan analisis mendalam terhadap parameter jarak yang digunakan dalam proses identifikasi rombongan. Salah satu studi yang dapat digunakan untuk menentukan parameter jarak yang tepat adalah proksemik.
 
 Proksemik merupakan sebuah studi yang mempelajari pengaruh penggunaan ruang sosial dan pribadi dari seseorang terhadap proses komunikasi interpersonal. Studi mengenai proksemik mulai dipopulerkan oleh Edward Hall pada tahun 1963~\cite{hall:06:proxemic}. Berdasarkan teori proksemik, terdapat empat buah ruang interpersonal dalam komunikasi manusia, antara lain:
-
-\clearpage
 
 \begin{enumerate}
     \item \textbf{Ruang Intim}
@@ -671,25 +667,25 @@ Nilai-nilai tersebut dapat diolah lebih lanjut menjadi nilai \textit{precision},
 
 Evaluasi kualitatif terhadap sebuah definisi pergerakan kolektif dilakukan dengan memvisualisasikan hasil identifikasi pergerakan kolektif pada rekaman video pergerakan yang menjadi sumber data pergerakan. Melalui visualisasi pergerakan kolektif, peneliti dapat mengamati keanggotaan entitas bergerak dalam pergerakan kolektif dan durasi pergerakan kolektif secara langsung seakan peneliti pengamatan pergerakan secara nyata. Gambar~\ref{bab2:visualization} menunjukkan contoh visualisasi identifikasi pergerakan kolektif pada rekaman video pergerakan dunia nyata.
 
-Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar~\ref{bab2:entitas}. Kepala menunjukkan posisi entitas saat ini. Ekor menunjukkan urutan posisi-posisi sebelumnya yang ditempuh oleh entitas. ID menunjukkan nomor identitas unik yang digunakan untuk membedakan satu entitas dengan entitas lainnya.
-
-\begin{figure}[h]
+\begin{figure}[b!]
     \centering
-    \includegraphics[width=\textwidth]{Gambar/bab2:contoh-visualisasi.pdf}
-    \caption[Contoh visualisasi pergerakan kolektif]{Contoh visualisasi pergerakan kolektif pada rekaman video pergerakan}
-    \label{bab2:visualization}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.35\textwidth]{Gambar/bab2:entitas.pdf}
+    \includegraphics[width=0.3\textwidth]{Gambar/bab2:entitas.pdf}
     \caption{Representasi entitas pada video rekaman pergerakan}
     \label{bab2:entitas}
 \end{figure}
 
+Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar~\ref{bab2:entitas}. Kepala menunjukkan posisi entitas saat ini. Ekor menunjukkan urutan posisi-posisi sebelumnya yang ditempuh oleh entitas. ID menunjukkan nomor identitas unik yang digunakan untuk membedakan satu entitas dengan entitas lainnya.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Gambar/bab2:contoh-visualisasi.pdf}
+    \caption[Contoh visualisasi pergerakan kolektif]{Contoh visualisasi pergerakan kolektif pada rekaman video pergerakan}
+    \label{bab2:visualization}
+\end{figure}
+
 Keanggotaan entitas pada sebuah pergerakan kolektif akan ditunjukkan melalui warna kepala dan ekor dari entitas. Warna kepala entitas merepresentasikan keanggotaan entitas yang diidentifikasi oleh definisi pergerakan kolektif. Warna ekor entitas merepresentasikan keanggotaan entitas yang ditunjukkan oleh hasil identifikasi yang dilakukan oleh manusia. Entitas yang tergabung dalam pergerakan kolektif yang sama akan memiliki warna kepala dan ekor yang sama. Entitas yang tidak tergabung dalam pergerakan kolektif manapun akan memiliki kepala dan ekor yang berwarna putih. Selain itu, entitas yang tergabung dalam dua atau lebih rombongan akan memiliki variasi warna kepala entitas sejumlah rombongan di mana entitas yang dimaksud tergabung sebagai anggota rombongan. Gambar~\ref{bab2:contoh-visualisasi-entitas} menunjukkan contoh visualisasi entitas yang dapat terjadi dalam visualisasi hasil identifikasi pergerakan kolektif pada rekaman video pergerakan.
 
-\begin{figure}[t!]
+\begin{figure}[b!]
     \centering
     \begin{subfigure}[h]{0.3\textwidth}
         \centering
