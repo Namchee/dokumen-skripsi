@@ -48,7 +48,7 @@ Berdasarkan tiga kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memil
 
     \item \textbf{Modul Spasial}
     
-    Modul spasial merupakan modul yang berfungsi untuk melakukan perhitungan kedekatan spasial antar entitas yang nantinya akan digunakan oleh modul rombongan dalam proses identifikasi rombongan. Modul spasial akan memiliki fungsi untuk menghitung jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity}.
+    Modul spasial merupakan modul yang berfungsi untuk melakukan perhitungan kedekatan spasial antar entitas yang nantinya akan digunakan oleh modul rombongan dalam proses identifikasi rombongan. Modul spasial akan memiliki fungsi untuk menghitung jarak \textit{dynamic time warping} dan nilai \textit{cosine similarity} yang akan digunakan pada proses identifikasi rombongan.
     
     \item \textbf{Modul Evaluasi}
     
@@ -119,11 +119,11 @@ Modul I/O bertanggung jawab untuk melaksanakan dua proses berikut:
     
     Apabila masukan yang diberikan oleh pengguna tidak memenuhi seluruh syarat di atas, proses penerjemahan masukan akan menampilkan pesan kesalahan pada pengguna dan menghentikan proses eksekusi perangkat lunak.
     
-    Setelah proses validasi masukan selesai, modul I/O akan mengembalikan masukan pengguna dalam bentuk tipe data komposit tanpa melakukan proses tambahan lainnya. Gambar~\ref{bab4:flowchart-input} menunjukkan diagram alur dari proses validasi masukan yang diberikan oleh pengguna.
+    Setelah proses validasi masukan selesai, modul I/O akan mengembalikan masukan pengguna dalam bentuk tipe data komposit tanpa melakukan proses tambahan lainnya. Gambar~\ref{bab4:flowchart-input} menunjukkan diagram alir dari proses validasi masukan yang diberikan oleh pengguna.
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.975\textwidth]{Gambar/bab4:flowchart-input.pdf}
+        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-input.pdf}
         \caption{Diagram alir proses validasi masukan}
         \label{bab4:flowchart-input}
     \end{figure}
@@ -180,7 +180,7 @@ Modul penerjemah bertanggung jawab untuk melaksanakan tiga proses berikut:
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.9\textwidth]{Gambar/bab4:flowchart-manusia.pdf}
+        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-manusia.pdf}
         \caption{Diagram alir proses penerjemahan hasil identifikasi manusia}
         \label{bab4:flowchart-manusia}
     \end{figure}
@@ -204,7 +204,9 @@ Modul evaluasi merupakan modul yang berfungsi untuk melakukan evaluasi hasil ide
 \section{Struktur Data}
 \label{sec:des-struct}
 
-Untuk mempermudah proses implementasi perangkat lunak, diperlukan beberapa struktur data komposit yang terdiri dari berbagai nilai primitif. Berikut merupakan daftar struktur data komposit yang akan dibuat:
+Untuk mempermudah proses implementasi perangkat lunak, diperlukan beberapa struktur data komposit yang terdiri dari berbagai nilai primitif. Terdapat enam buah struktur data komposit yang akan dibuat, antara lain:
+
+\clearpage
 
 \begin{enumerate}
     \item \textbf{Arguments}
