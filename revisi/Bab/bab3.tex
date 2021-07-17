@@ -35,8 +35,8 @@ Namun, ketiga syarat pembentukan sebuah pergerakan kolektif yang telah disebutka
 
 \begin{figure}[h]
     \centering
-    \captionsetup{width=0.8\textwidth}
-    \includegraphics[width=0.6\textwidth]{Gambar/bab3:beda-arah.pdf}
+    \captionsetup{width=0.75\textwidth}
+    \includegraphics[width=0.5\textwidth]{Gambar/bab3:beda-arah.pdf}
     \caption[Masalah identifikasi pada kasus perbedaan arah]{Upaya identifikasi pergerakan kolektif oleh definisi formal yang telah dibuat sebelumnya dapat menyebabkan entitas berwarna biru tergabung dalam pergerakan kolektif entitas-entitas berwarna merah, walaupun terdapat perbedaan arah yang besar antara kedua lintasan.}
     \label{bab3:masalah-arah}
 \end{figure}
@@ -54,7 +54,7 @@ Dalam pemanfaatan ukuran arah lintasan sebagai syarat baru dalam pengukuran kede
 \begin{figure}[h]
     \centering
     \captionsetup{width=0.8\textwidth}
-    \includegraphics[height=10cm]{Gambar/bab3:beda-arah-lokal.pdf}
+    \includegraphics[height=9.5cm]{Gambar/bab3:beda-arah-lokal.pdf}
     \caption[Masalah identifikasi pada penghitungan arah secara global]{Pada kasus di mana $m = 2$ dan $k = 3$, menghitung arah secara global dapat menyebabkan pergerakan kolektif tidak terbentuk sama sekali karena perbedaan arah akhir yang terlalu ekstrim (ditunjukkan melalui garis putus-putus hijau)}
     \label{bab3:beda-arah-lokal}
 \end{figure}
@@ -75,7 +75,7 @@ Dalam sebuah kasus pergerakan yang digambarkan melalui Gambar~\ref{bab3:masalah-
 \begin{figure}[h]
     \centering
     \captionsetup{width=0.8\textwidth}
-    \includegraphics[width=\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
+    \includegraphics[width=0.85\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
     \caption[Masalah identifikasi pada kasus perbedaan kecepatan]{Pada kasus di mana $m = 3$ dan $t = 3$, perbedaan kecepatan entitas berwarna biru dapat berujung pada perbedaan jarak yang jauh dengan entitas-entitas merah sehingga pergerakan kolektif tidak terbentuk, walaupun entitas tersebut hanya memiliki perbedaan jarak yang jauh dengan entitas lain selama beberapa saat}
     \label{bab3:masalah-kecepatan}
 \end{figure}
@@ -113,9 +113,9 @@ Berkaca dari masalah-masalah pada definisi formal pergerakan kolektif sebelumnya
 
 Dengan mempertimbangkan aspek-aspek di atas dan upaya penyelesaian masalah pada definisi formal pergerakan kolektif yang sudah ada, dapat dibuat sebuah definisi pergerakan kolektif baru bernama rombongan yang secara formal dinyatakan sebagai:
 
-\noindent \textbf{\pergerakankolektif($m$, $k$, $r$, $\vartheta$, $n$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$ yang memiliki jumlah entitas sebanyak $n$, jumlah entitas minimum sebanyak $m$ buah entitas di mana $k \in [2, n]$, interval waktu minimum selama $k$ satuan waktu di mana $k \geq 2$, jarak maksimum antar entitas sepanjang $r$ satuan panjang di mana $r \in \mathbb{R}^+$, dan nilai kemiripan sudut minimum sebesar $\vartheta$ di mana $\vartheta \in [-1, 1]$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$.
+\noindent \textbf{\pergerakankolektif($m$, $k$, $r$, $\vartheta$, $n$)}. Diberikan sebuah himpunan entitas bergerak $\mathcal{X}$ yang memiliki jumlah entitas sebanyak $n$, jumlah entitas minimum sebanyak $m$ buah entitas di mana $m \in [2, n]$, interval waktu minimum selama $k$ satuan waktu di mana $k \geq 2$, jarak maksimum antar entitas sepanjang $r$ satuan panjang di mana $r \in \mathbb{R}^+$, dan nilai kemiripan sudut minimum sebesar $\vartheta$ di mana $\vartheta \in [-1, 1]$. Sebuah entitas bergerak $a \in \mathcal{X}$ dikatakan terhubung dengan entitas bergerak $b \in \mathcal{X}, a \neq b$ sepanjang interval waktu $I$ apabila jarak \textit{dynamic time warping} dari kedua entitas tersebut selama interval waktu $I$ lebih kecil atau sama dengan $r$ dan nilai \textit{cosine similarity} dari kedua entitas tersebut pada interval waktu $I$ lebih besar atau sama dengan $\vartheta$.
 
-Sebuah rombongan pada interval waktu konsekutif $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung dengan setidaknya dengan $n$ anggota lain dari sub himpunan $\mathcal{X}$ selama interval waktu $I$.
+Sebuah rombongan pada interval waktu konsekutif $I$, di mana $I \geq t$, merupakan sebuah sub-himpunan $\mathcal{G} \in \mathcal{X}$ yang memiliki setidaknya $m$ buah entitas dan setiap anggotanya terhubung dengan setidaknya dengan $n$ anggota lain dari sub himpunan $\mathcal{X}$ selama interval waktu $I$. Selanjutnya, rombongan pada $\mathcal{A}$ interval waktu konsekutif $I$ merupakan rombongan maksimal apabila tidak ada interval waktu konsekutif $I' \supset I$ di mana rombongan $\mathcal{A}$ juga teridentifikasi sebagai rombongan dan tidak ada \textit{proper superset} $G' \supset G$ yang juga merupakan rombongan pada interval waktu $I$.
 
 \section{Algoritma Identifikasi Rombongan}
 \label{sec:algoritma}
@@ -314,9 +314,9 @@ Berdasarkan uraian langkah-langkah algoritma identifikasi, berikut merupakan rom
 \section{Redundansi Rombongan}
 \label{sec:redundancy}
 
-Salah satu masalah yang terdapat dalam algoritma identifikasi rombongan yang diusulkan adalah redundansi yang terdapat pada rombongan-rombongan yang berhasil diidentifikasi. Redundansi dihasilkan ketika algoritma identifikasi rombongan menghasilkan rombongan $\mathcal{X}$ di mana $\mathcal{X} \subset \mathcal{G}$, $|\mathcal{X}| < |\mathcal{G}|$ pada interval waktu yang sama. Redundansi disebabkan oleh cara kerja algoritma identifikasi yang melakukan pemeriksaan kedekatan spasial pada setiap pasang entitas yang mungkin dalam himpunan entitas yang diberikan.
+Salah satu masalah yang terdapat dalam algoritma identifikasi rombongan yang diusulkan adalah redundansi yang terdapat pada rombongan-rombongan yang berhasil diidentifikasi. Redundansi hasil dapat dilihat ketika algoritma identifikasi rombongan menghasilkan rombongan $\mathcal{X}$ di mana $\mathcal{X} \subset \mathcal{G}$, $|\mathcal{X}| < |\mathcal{G}|$ pada interval waktu yang sama. Redundansi disebabkan oleh cara kerja algoritma identifikasi yang tidak mampu untuk menghasilkan rombongan maksimal.
 
-Sebagai contoh, diberikan sebuah himpunan entitas $\mathcal{M}$ yang memiliki 3 buah anggota $a$, $b$, dan $c$. Redundansi terjadi apabila algoritma identifikasi rombongan menghasilkan rombongan dengan anggota $a$, $b$, $c$ dan rombongan dengan anggota $b$ dan $c$ pada interval waktu $x$ --- $y$. Hal tersebut tentunya menyebabkan penurunan kualitas dari hasil identifikasi rombongan. Untuk mengatasi masalah redundansi hasil, perlu dibuat sebuah algoritma tambahan untuk mengurangi redundansi pada hasil identifikasi rombongan.
+Sebagai contoh, diberikan sebuah himpunan entitas $\mathcal{M}$ yang memiliki 3 buah anggota $a$, $b$, dan $c$. Redundansi terjadi apabila algoritma identifikasi rombongan menghasilkan rombongan dengan anggota $a$, $b$, $c$ dan rombongan dengan anggota $b$ dan $c$ pada interval waktu $x$ --- $y$. Hal tersebut tentunya menyebabkan penurunan kualitas dari hasil identifikasi rombongan. Untuk mengatasi masalah redundansi hasil, perlu dibuat sebuah algoritma tambahan untuk mengurangi redundansi pada hasil identifikasi rombongan, sehingga hasil identifikasi yang dihasilkan oleh algoritma identifikasi dapat menghasilkan rombongan-rombongan maksimal.
 
 \begin{algorithm}[h]
     \caption{Algoritma Pengurangan Redundansi}
