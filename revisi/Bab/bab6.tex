@@ -15,7 +15,7 @@ Untuk melakukan eksperimen, diperlukan sumber data pejalan kaki dunia nyata yang
     
     \begin{figure}[b!]
         \centering
-        \includegraphics[height=6cm]{Gambar/bab6:contoh-eth.pdf}
+        \includegraphics[height=6.5cm]{Gambar/bab6:contoh-eth.pdf}
         \caption{Cuplikan data pergerakan BIWI ETH}
         \label{bab6:contoh-eth}
     \end{figure}
@@ -70,7 +70,7 @@ Tabel~\ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan y
     \label{bab6:metadata-pergerakan}
 \end{table}
 
-Aspek menarik yang perlu diperhatikan dari data pergerakan yang digunakan adalah sifat dari arah pergerakan entitas dalam data pergerakan. Terdapat dua jenis sifat arah pergerakan, yaitu dua arah dan multi arah. Pada data pergerakan dua arah, entitas yang bergerak hanya sepasang titik masuk dan titik keluar. Entitas yang bergerak hanya akan masuk dan keluar dari rekaman video pergerakan dari pasangan titik tersebut. Pada data pergerakan multi arah, terdapat lebih dari satu pasang titik masuk dan titik keluar entitas pada rekaman video pergerakan. Aspek tersebut tentunya akan mempersulit proses penentuan kedekatan spasial antar entitas yang menjadi dasar utama dalam penentuan keanggotaan rombongan. Gambar~\ref{bab6:dua-arah} dan Gambar~\ref{bab6:multi-arah} menunjukkan perbedaan antara pergerakan dua arah dan multi arah pada data pergerakan yang digunakan.
+Aspek menarik yang perlu diperhatikan dari data pergerakan yang digunakan adalah sifat dari arah pergerakan entitas dalam data pergerakan yang digunakan. Terdapat dua jenis arah pergerakan, yaitu dua arah dan multi arah. Pada pergerakan dua arah seperti yang ditunjukkan melalui Gambar~\ref{bab6:dua-arah}, entitas yang bergerak hanya sepasang titik masuk dan titik keluar. Entitas yang bergerak hanya akan masuk dan keluar dari rekaman video pergerakan dari pasangan titik tersebut. Pada pergerakan multi arah seperti yang ditunjukkan melalui Gambar~\ref{bab6:multi-arah}, terdapat lebih dari satu pasang titik masuk dan titik keluar entitas pada rekaman video pergerakan. Aspek tersebut tentunya akan mempersulit proses penentuan kedekatan spasial antar entitas yang menjadi dasar utama dalam penentuan keanggotaan rombongan.
 
 \begin{figure}[t]
     \centering
@@ -120,9 +120,9 @@ Efektivitas algoritma pengurangan redundansi dinilai dengan membandingkan dua ha
 \section{Evaluasi Kualitatif}
 \label{sec:qualitative}
 
-Pada proses evaluasi secara kualitatif, hasil identifikasi rombongan yang dihasilkan akan divisualisasikan secara langsung pada lintasan yang dilalui pejalan kaki pada video rekaman sumber data pergerakan. Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar~\ref{bab2:entitas}. Informasi mengenai warna dan bentuk figur yang digunakan untuk merepresentasikan entitas dapat dilihat melalui Subbab~\ref{subsec:qualitative-theory}.
+Pada proses evaluasi secara kualitatif, hasil identifikasi rombongan yang dihasilkan akan divisualisasikan secara langsung pada lintasan yang dilalui pejalan kaki pada video rekaman sumber data pergerakan. Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar~\ref{bab2:entitas}. Informasi mengenai warna dan bentuk figur yang digunakan untuk merepresentasikan entitas dapat dilihat melalui Subbab~\ref{subsec:qualitative-theory}. Melalui hasil visualisasi tersebut, akan dicari himpunan pergerakan kolektif di mana anggota-anggotanya memiliki pola pergerakan yang mengandung masalah perbedaan arah dan perbedaan kecepatan. Kualitas dari definisi rombongan akan dinilai melalui tingkat keberhasilan algoritma identifikasi rombongan dalam mengidentifikasi rombongan-rombongan yang sesuai dengan kriteria-kriteria tersebut. Selain itu, evaluasi kualitatif juga akan menyajikan masalah-masalah lain yang dimiliki oleh definisi rombongan yang tidak dapat dilihat melalui evaluasi kuantitatif. Hasil-hasil visualisasi yang sesuai dengan kriteria tersebut serta masalah lain yang terdapat pada definisi rombongan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar~\ref{bab6:contoh-visualisasi}.
 
-Pada penelitian ini, beberapa hasil visualisasi yang menarik untuk dibahas akan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar~\ref{bab6:contoh-visualisasi}. Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak pada video rekaman pergerakan pejalan kaki dilakukan dengan bantuan perangkat lunak visualisasi yang dibuat oleh Wiratma, dkk dan Maurice Marx~\cite{wiratma:software}. Perangkat lunak tersebut menerima masukan berupa rekaman video pergerakan, rekaman data lintasan, hasil identifikasi manusia, dan hasil identifikasi dari perangkat lunak identifikasi rombongan. Perangkat lunak visualisasi kemudian akan menghasilkan video rekaman sumber data yang telah dimodifikasi di mana seluruh entitas yang terdapat dalam video rekaman asli akan ditandai dengan figur yang ditunjukkan melalui Gambar~\ref{bab2:entitas}.
+Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak pada video rekaman pergerakan pejalan kaki dilakukan dengan bantuan perangkat lunak visualisasi yang dibuat oleh Wiratma, dkk dan Maurice Marx~\cite{wiratma:software}. Perangkat lunak tersebut menerima masukan berupa rekaman video pergerakan, rekaman data lintasan, hasil identifikasi manusia, dan hasil identifikasi dari perangkat lunak identifikasi rombongan. Perangkat lunak visualisasi kemudian akan menghasilkan video rekaman sumber data yang telah dimodifikasi di mana seluruh entitas yang terdapat dalam video rekaman asli akan ditandai menggunakan figur yang telah ditunjukkan melalui Gambar~\ref{bab2:entitas}.
 
 \begin{figure}[h!]
     \centering
@@ -177,7 +177,6 @@ Peningkatan terhadap nilai $r$ berdampak pada peningkatan nilai \textit{recall} 
 Memperketat syarat kedekatan spasial dengan memperkecil nilai $\vartheta$ memberikan dampak positif peningkatan nilai \textit{precision} dan \textit{F1 score} pada $r = 1$. Namun hal tersebut berdampak negatif pada $r = 1.24$, di mana menambah nilai $r$ menyebabkan penurunan nilai \textit{precision} dan \textit{F1 score} untuk setiap nilai $k$ yang digunakan. Penurunan nilai \textit{precision} disebabkan oleh adanya subrombongan baru yang terpisah dari rombongan lain akibat salah satu entitasnya tidak memenuhi syarat perbedaan sudut maksimum. Subrombongan tersebut tidak terdapat pada hasil identifikasi manusia, sehingga adanya penambahan rombongan baru menambah nilai \textit{false positive} dari hasil identifikasi rombongan yang dilakukan oleh perangkat lunak.
 
 Peningkatan terhadap nilai $k$ berdampak pada peningkatan nilai \textit{F1 score} secara umum pada seluruh kombinasi nilai $r$ dan $\vartheta$. Selain peningkatan terhadap nilai \textit{F1 score}, peningkatan terhadap nilai $k$ juga meningkatkan nilai \textit{precision} pada $r = 1$. Sayangnya, peningkatkan tersebut berlaku sebaliknya pada $r = 1.24$ karena adanya penurunan nilai \textit{precision} pada $k = 8.9$ dan meningkat kembali pada $k = 10.5$. Nilai \textit{recall} meningkat pada $r = 1$ untuk $k = 8.9$ dan kembali menurun untuk $k = 10.5$. Perubahan terhadap nilai $k$ memiliki pengaruh yang sangat kecil pada $r = 1.24$.
-
 
 \begin{table}[h!]
 \centering
@@ -259,7 +258,9 @@ Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak 
 
 Pada data VEIIG yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi dengan kecepatan perubahan yang dinamis, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{recall} yang tinggi disertai dengan nilai \textit{precision} yang cenderung rendah yang dapat dilihat melalui Tabel~\ref{bab6:gveii-numbers}. Di satu sisi, nilai \textit{recall} yang tinggi menandakan bahwa algoritma identifikasi rombongan mampu mengidentifikasi sebagian besar rombongan yang juga diidentifikasi oleh manusia. Di sisi lain, nilai \textit{precision} yang cenderung rendah menandakan bahwa algoritma identifikasi rombongan menghasilkan terlalu banyak pergerakan kolektif yang diidentifikasi sebagai rombongan yang berdampak secara langsung pada kenaikan nilai \textit{false positive}. Salah satu faktor yang menyebabkan peningkatan nilai \textit{false positive} dari hasil identifikasi perangkat lunak adalah sifat dari hasil identifikasi manusia di mana satu entitas hanya dapat tergabung pada satu rombongan.
 
-\begin{table}[h]
+Variasi dari parameter identifikasi rombongan yang digunakan memiliki pengaruh yang cukup besar pada hasil identifikasi perangkat lunak. Hal tersebut dapat dilihat dari rentang perubahan dari \textit{F1 score} yang dapat mencapai nilai $10.6\%$ yang dipengaruhi oleh perubahan nilai $\vartheta$ yang digunakan dalam proses identifikasi.
+
+\begin{table}[b!]
     \centering
     \captionsetup{width=0.6\textwidth}
 \caption{Nilai relevansi pada data pergerakan VEIIG dengan upaya pengurangan redundansi rombongan}
@@ -281,8 +282,6 @@ Pada data VEIIG yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi 
 \end{tabular}
    \label{bab6:gveii-numbers}
 \end{table}
-
-Variasi dari parameter identifikasi rombongan yang digunakan memiliki pengaruh yang cukup besar pada hasil identifikasi perangkat lunak. Hal tersebut dapat dilihat dari rentang perubahan dari \textit{F1 score} yang dapat mencapai nilai $10.6\%$ yang dipengaruhi oleh perubahan nilai $\vartheta$ yang digunakan dalam proses identifikasi.
 
 Peningkatan nilai $r$ berdampak pada menurunnya nilai \textit{precision} yang diakibatkan oleh banyaknya rombongan tambahan tidak relevan yang dihasilkan. Hal tersebut menyebabkan kenaikan nilai \textit{false positive}. Pengecualian untuk premis tersebut adalah ketika $k = 17$ dan $\vartheta = \frac{\pi}{32}$, di mana nilai \textit{precision} mengalami kenaikan sebanyak 8\%. Hal tersebut disebabkan oleh tingkat kepadatan pejalan kaki pada data VEIIG yang tinggi, sehingga menambah nilai $r$ akan menambah jumlah rombongan tidak relevan yang teridentifikasi.
 
@@ -313,7 +312,7 @@ Menambah durasi minimum rombongan $k$ memberikan dampak negatif pada nilai \text
 \label{bab6:gveii-redundant}
 \end{table}
 
-Pengaruh pengunaan algoritma identifikasi rombongan pada data pergerakan VEIIG menghasilkan kenaikan pada nilai \textit{F1 score} secara keseluruhan yang dapat dilihat melalui perbandingan Tabel~\ref{bab6:gveii-numbers} dan Tabel~\ref{bab6:gveii-redundant} yang menyajikan nilai relevansi dari hasil eksperimen tanpa upaya pengurangan redundansi rombongan. Penurunan terhadap nilai \textit{F1 score} disertai penurunan nilai \textit{precision} yang disebabkan oleh banyaknya rombongan redundan yang meningkatkan nilai \textit{false positive}. Namun, algoritma pengurangan redundansi rombongan berdampak pada penurunan nilai \textit{recall} pada seluruh kombinasi nilai $k$, $r$, dan $\vartheta$ yang digunakan. Hal tersebut disebabkan oleh algoritma pengurangan redundansi menghapus beberapa rombongan-rombongan yang relevan dengan hasil identifikasi yang dilakukan oleh manusia yang berdampak pada kenaikan nilai \textit{false negative}, khususnya pada data pergerakan VEIIG yang memiliki jumlah rombongan relevan pada hasil identifikasi manusia yang jauh lebih banyak dibandingkan dengan data pergerakan BIWI ETH maupun CBE.
+Pengaruh pengunaan algoritma identifikasi rombongan pada data pergerakan VEIIG menghasilkan kenaikan pada nilai \textit{F1 score} secara keseluruhan yang dapat dilihat melalui perbandingan Tabel~\ref{bab6:gveii-numbers} dan Tabel~\ref{bab6:gveii-redundant} yang menyajikan nilai relevansi dari hasil eksperimen tanpa upaya pengurangan redundansi rombongan. Penurunan terhadap nilai \textit{F1 score} disertai penurunan nilai \textit{precision} yang disebabkan oleh banyaknya rombongan redundan yang meningkatkan nilai \textit{false positive}. Namun, algoritma pengurangan redundansi rombongan berdampak pada penurunan nilai \textit{recall} pada seluruh kombinasi nilai $k$, $r$, dan $\vartheta$ yang digunakan. Hal tersebut disebabkan oleh algoritma pengurangan redundansi menghapus beberapa rombongan-rombongan yang relevan dengan hasil identifikasi yang dilakukan oleh manusia yang berdampak pada kenaikan nilai \textit{false negative}, khususnya pada data pergerakan VEIIG yang memiliki jumlah rombongan relevan pada hasil identifikasi manusia yang jauh lebih banyak dibandingkan dengan data pergerakan lainnya yang digunakan seperti pada data pergerakan BIWI ETH maupun CBE.
 
 \subsubsection{Evaluasi Kualitatif}
 \label{subsubsec:veiig-qualitative}
@@ -325,13 +324,13 @@ Melalui proses analisis terhadap cara kerja algoritma, kekakuan pada masalah per
 \begin{figure}[h]
     \centering
     \captionsetup{width=.65\textwidth}
-    \begin{subfigure}[b]{0.225\textwidth}
+    \begin{subfigure}[b]{0.275\textwidth}
         \centering
-        \includegraphics[height=6cm]{Gambar/bab6:masalah-veiig-arah-1.pdf}
+        \includegraphics[height=7cm]{Gambar/bab6:masalah-veiig-arah-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.225\textwidth}
+    \begin{subfigure}[b]{0.275\textwidth}
         \centering
-        \includegraphics[height=6cm]{Gambar/bab6:masalah-veiig-arah-2.pdf}
+        \includegraphics[height=7cm]{Gambar/bab6:masalah-veiig-arah-2.pdf}
     \end{subfigure}
     \caption[Masalah perbedaan arah maksimum pada data VEIIG]{Syarat kedekatakan spasial dengan perbedaan arah maksimum yang terlalu ketat dan kaku mengakibatkan rombongan dan anggota rombongan tidak teridentifikasi}
     \label{bab6:masalah-veiig-arah}
@@ -339,20 +338,20 @@ Melalui proses analisis terhadap cara kerja algoritma, kekakuan pada masalah per
 
 Masalah lain yang dimiliki oleh perangkat lunak identifikasi rombongan ditunjukkan oleh Gambar~\ref{bab6:masalah-rintangan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah rombongan yang diwakili oleh warna biru yang memiliki dua buah anggota. Pada saat tertentu, kedua anggota bergerak menuju arah yang berbeda selama kurun waktu yang minim untuk menghindari rintangan yang ada di depan rombongan tersebut. Dalam kurun waktu yang singkat, kedua entitas tersebut bertemu kembali pada satu titik dan kembali melanjutkan pergerakan bersama menuju arah yang sama. Upaya untuk menghindari rintangan menyebabkan rombongan tidak teridentifikasi selama kedua entitas berpisah. Hal tersebut kembali disebabkan oleh ketatnya syarat perbedaan arah yang tidak dapat mentoleransi adanya perubahan arah yang lebih tinggi dari parameter $\vartheta$ dalam rentang waktu sekecil apapun selama proses identifikasi rombongan berlangsung.
 
-\begin{figure}[h!]
+\begin{figure}[h]
     \centering
     \captionsetup{width=.8\textwidth}
-    \begin{subfigure}[t]{0.25\textwidth}
+    \begin{subfigure}[t]{0.2\textwidth}
         \centering
-        \includegraphics[height=5.75cm]{Gambar/bab6:masalah-veiig-batu-1.pdf}
+        \includegraphics[height=5cm]{Gambar/bab6:masalah-veiig-batu-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[t]{0.275\textwidth}
+    \begin{subfigure}[t]{0.225\textwidth}
         \centering
-        \includegraphics[height=5.75cm]{Gambar/bab6:masalah-veiig-batu-2.pdf}
+        \includegraphics[height=5cm]{Gambar/bab6:masalah-veiig-batu-2.pdf}
     \end{subfigure}
-    \begin{subfigure}[t]{0.25\textwidth}
+    \begin{subfigure}[t]{0.2\textwidth}
         \centering
-        \includegraphics[height=5.75cm]{Gambar/bab6:masalah-veiig-batu-3.pdf}
+        \includegraphics[height=5cm]{Gambar/bab6:masalah-veiig-batu-3.pdf}
     \end{subfigure}
     \caption[Masalah menghindari rintangan]{Usaha untuk menghindari rintangan menyebabkan durasi rombongan terputus selama beberapa saat walaupun perbedaan arah antar entitas yang cukup minim serta jarak antar entitas yang masih cukup dekat}
     \label{bab6:masalah-rintangan-veiig}
@@ -365,11 +364,11 @@ Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap peng
     \captionsetup{width=.7\textwidth}
     \begin{subfigure}[h]{0.235\textwidth}
         \centering
-        \includegraphics[height=7cm]{Gambar/bab6:solusi-kecepatan-veiig-1.pdf}
+        \includegraphics[height=6.75cm]{Gambar/bab6:solusi-kecepatan-veiig-1.pdf}
     \end{subfigure}
     \begin{subfigure}[h]{0.235\textwidth}
         \centering
-        \includegraphics[height=7cm]{Gambar/bab6:solusi-kecepatan-veiig-2.pdf}
+        \includegraphics[height=6.75cm]{Gambar/bab6:solusi-kecepatan-veiig-2.pdf}
     \end{subfigure}
     \caption[Penyelesaian masalah beda kecepatan pada data VEIIG]{Perbedaan kecepatan entitas yang menyebabkan salah satu anggota rombongan memimpin dapat diidentifikasi dengan baik oleh perangkat lunak}
     \label{bab6:solusi-beda-kecepatan-veiig}
@@ -419,7 +418,6 @@ Meningkatkan nilai durasi interval minimum $k$ menyebabkan peningkatan nilai \te
 
 Penggunaan algoritma pengurangan redundansi rombongan membawa dampak positif pada relevansi hasil identifikasi rombongan pada data pergerakan CBE. Hal tersebut dapat dilihat melalui perbandingan Tabel~\ref{bab6:cbe-numbers} dan Tabel~\ref{bab6:cbe-redundant} yang menyajikan nilai relevansi dari hasil eksperimen tanpa adanya upaya pengurangan redundansi rombongan. Tanpa adanya upaya pengurangan redundansi rombongan, algoritma identifikasi menghasilkan terlalubanyak rombongan redundan yang tidak terdapat pada hasil identifikasi manusia. Rombongan-rombongan redundan tersebut menyebabkan penurunan terhadap nilai \textit{precision} dan \textit{F1 score} secara keseluruhan tanpa mempengaruhi nilai \textit{recall} sedikitpun bila dibandingkan dengan hasil identifikasi rombongan dengan pengurangan redundansi rombongan. Perubahan tersebut konsisten untuk setiap kombinasi nilai $r$, $k$, dan $\vartheta$ yang digunakan.
 
-
 \begin{table}[h]
 \centering
 \captionsetup{width=0.6\textwidth}
@@ -442,8 +440,6 @@ Penggunaan algoritma pengurangan redundansi rombongan membawa dampak positif pad
 \end{tabular}
 \label{bab6:cbe-redundant}
 \end{table}
-
-\newpage
 
 \subsubsection{Evaluasi Kualitatif}
 \label{subsub:sec:cbe-qualitative}
