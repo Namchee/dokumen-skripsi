@@ -238,17 +238,19 @@ Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak 
 \begin{figure}[h]
     \centering
     \captionsetup{width=.6\textwidth}
-    \begin{subfigure}[h]{0.2\textwidth}
+    \begin{subfigure}[h]{0.185\textwidth}
         \centering
-        \includegraphics[height=9cm]{Gambar/bab6:masalah-eth-n.pdf}
+        \includegraphics[height=8cm]{Gambar/bab6:masalah-eth-n.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.2\textwidth}
+    \begin{subfigure}[h]{0.185\textwidth}
         \centering
-        \includegraphics[height=9cm]{Gambar/bab6:masalah-eth-n-2.pdf}
+        \includegraphics[height=8cm]{Gambar/bab6:masalah-eth-n-2.pdf}
     \end{subfigure}
     \caption[Masalah nilai $n$ pada data BIWI ETH]{Nilai kedekatan minimum $n = 1$ membuat entitas dengan nomor identitas 44 tergabung sebagai anggota dari rombongan yang berada jauh di depan}
     \label{bab6:masalah-eth-n}
 \end{figure}
+
+Melalui evaluasi kualitatif, dapat dikatakan bahwa definisi rombongan berhasil dalam mengatasi masalah perbedaan arah. Hal tersebut dapat terlihat melalui tidak terbentuknya rombongan di mana anggota-anggotanya memiliki perbedaan arah yang tinggi dalam jarak yang dekat selama rentang waktu yang sudah ditentukan. Pada data pergerakan BIWI ETH, tidak terdapat kasus perbedaan kecepatan yang dapat dianalisis. Hal tersebut menyebabkan keberhasilan rombongan dalam mengatasi masalah perbedaan kecepatan tidak dapat diukur melalui analisis terhadap hasil identifikasi rombongan pada data pergerakan BIWI ETH.
 
 \subsection{Hasil Eksperimen Pada Data VEIIG}
 \label{subsec:veiig-result}
@@ -324,13 +326,13 @@ Melalui proses analisis terhadap cara kerja algoritma, kekakuan pada masalah per
 \begin{figure}[h]
     \centering
     \captionsetup{width=.65\textwidth}
-    \begin{subfigure}[b]{0.275\textwidth}
+    \begin{subfigure}[b]{0.235\textwidth}
         \centering
-        \includegraphics[height=7cm]{Gambar/bab6:masalah-veiig-arah-1.pdf}
+        \includegraphics[height=6cm]{Gambar/bab6:masalah-veiig-arah-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.275\textwidth}
+    \begin{subfigure}[b]{0.235\textwidth}
         \centering
-        \includegraphics[height=7cm]{Gambar/bab6:masalah-veiig-arah-2.pdf}
+        \includegraphics[height=6cm]{Gambar/bab6:masalah-veiig-arah-2.pdf}
     \end{subfigure}
     \caption[Masalah perbedaan arah maksimum pada data VEIIG]{Syarat kedekatakan spasial dengan perbedaan arah maksimum yang terlalu ketat dan kaku mengakibatkan rombongan dan anggota rombongan tidak teridentifikasi}
     \label{bab6:masalah-veiig-arah}
@@ -341,17 +343,17 @@ Masalah lain yang dimiliki oleh perangkat lunak identifikasi rombongan ditunjukk
 \begin{figure}[h]
     \centering
     \captionsetup{width=.8\textwidth}
-    \begin{subfigure}[t]{0.2\textwidth}
+    \begin{subfigure}[t]{0.225\textwidth}
         \centering
-        \includegraphics[height=5cm]{Gambar/bab6:masalah-veiig-batu-1.pdf}
+        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-veiig-batu-1.pdf}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \centering
+        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-veiig-batu-2.pdf}
     \end{subfigure}
     \begin{subfigure}[t]{0.225\textwidth}
         \centering
-        \includegraphics[height=5cm]{Gambar/bab6:masalah-veiig-batu-2.pdf}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.2\textwidth}
-        \centering
-        \includegraphics[height=5cm]{Gambar/bab6:masalah-veiig-batu-3.pdf}
+        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-veiig-batu-3.pdf}
     \end{subfigure}
     \caption[Masalah menghindari rintangan]{Usaha untuk menghindari rintangan menyebabkan durasi rombongan terputus selama beberapa saat walaupun perbedaan arah antar entitas yang cukup minim serta jarak antar entitas yang masih cukup dekat}
     \label{bab6:masalah-rintangan-veiig}
@@ -373,6 +375,8 @@ Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap peng
     \caption[Penyelesaian masalah beda kecepatan pada data VEIIG]{Perbedaan kecepatan entitas yang menyebabkan salah satu anggota rombongan memimpin dapat diidentifikasi dengan baik oleh perangkat lunak}
     \label{bab6:solusi-beda-kecepatan-veiig}
 \end{figure}
+
+Melalui evaluasi kualitatif, dapat dikatakan bahwa definisi rombongan dapat mengatasi masalah perbedaan arah. Hal tersebut dapat terlihat melalui tidak terbentuknya rombongan di mana anggota-anggotanya memiliki perbedaan arah yang tinggi dalam jarak yang dekat selama rentang waktu yang sudah ditentukan. Sayangnya, perhitungan perbedaan arah yang terlalu sensitif menyebabkan beberapa rombongan gagal teridentifikasi pada data pergerakan VEIIG. Walaupun demikian, rombongan-rombongan di mana para anggotanya memiliki perbedaan kecepatan dengan frekuensi yang tinggi dapat diidentifikasi dengan baik, sehingga dapat dikatakan bahwa definisi rombongan mampu mengatasi masalah perbedaan kecepatan dengan baik.
 
 \subsection{Eksperimen Pada Data CBE}
 \label{subsec:cbe-result}
@@ -472,14 +476,18 @@ Bukti penyelesaian masalah perbedaan kecepatan dapat dilihat melalui hasil visua
 \begin{figure}[h]
     \centering
     \captionsetup{width=.85\textwidth}
-    \begin{subfigure}[h]{0.425\textwidth}
+    \begin{subfigure}[h]{0.365\textwidth}
         \centering
-        \includegraphics[height=3.75cm]{Gambar/bab6:beda-kecepatan-1.pdf}
+        \includegraphics[height=3.25cm]{Gambar/bab6:beda-kecepatan-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.45\textwidth}
+    \begin{subfigure}[h]{0.35\textwidth}
         \centering
-        \includegraphics[height=4cm]{Gambar/bab6:beda-kecepatan-2.pdf}
+        \includegraphics[height=3.5cm]{Gambar/bab6:beda-kecepatan-2.pdf}
     \end{subfigure}
     \caption[Penyelesaian masalah beda kecepatan pada data CBE]{Entitas 104 yang menunggu entitas 64 dan 65 pada satu tempat dapat teridentifikasi sebagai anggota rombongan bersamaan dengan entitas 64 dan 65}
     \label{bab6:solusi-beda-kecepatan}
 \end{figure}
+
+Melalui evaluasi kualitatif, dapat dikatakan bahwa definisi rombongan dapat mengatasi masalah perbedaan arah. Hal tersebut dapat terlihat melalui tidak terbentuknya rombongan di mana anggota-anggotanya memiliki perbedaan arah yang tinggi dalam jarak yang dekat selama rentang waktu yang sudah ditentukan. Sayangnya, perhitungan perbedaan arah yang terlalu sensitif menyebabkan banyak rombongan yang memiliki perbedaan arah yang cukup kecil dalam waktu singkat tidak dapat teridentifikasi pada data pergerakan CBE. Masalah tersebut diperparah dengan arah pergerakan entitas multiarah yang menyebabkan banyaknya gerakan berbelok pada beberapa entitas bergerak untuk menghindari rintangan.
+
+Walaupun demikian, hasil evaluasi kualitatif pada data pergerakan CBE menunjukkan bahwa rombongan-rombongan di mana para anggotanya memiliki perbedaan kecepatan dengan frekuensi yang tinggi dapat teridentifikasi dengan baik. Melalui hasil tersebut, dapat dikatakan bahwa definisi rombongan mampu mengatasi masalah perbedaan kecepatan dengan baik.
