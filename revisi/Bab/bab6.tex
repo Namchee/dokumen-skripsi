@@ -122,12 +122,14 @@ Efektivitas algoritma pengurangan redundansi dinilai dengan membandingkan dua ha
 
 Pada proses evaluasi secara kualitatif, hasil identifikasi rombongan yang dihasilkan akan divisualisasikan secara langsung pada lintasan yang dilalui pejalan kaki pada video rekaman sumber data pergerakan. Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan seperti figur yang ditunjukkan melalui Gambar~\ref{bab2:entitas}. Informasi mengenai warna dan bentuk figur yang digunakan untuk merepresentasikan entitas dapat dilihat melalui Subbab~\ref{subsec:qualitative-theory}. Melalui hasil visualisasi tersebut, akan dicari himpunan pergerakan kolektif di mana anggota-anggotanya memiliki pola pergerakan yang mengandung masalah perbedaan arah dan perbedaan kecepatan. Kualitas dari definisi rombongan akan dinilai melalui tingkat keberhasilan algoritma identifikasi rombongan dalam mengidentifikasi rombongan-rombongan yang sesuai dengan kriteria-kriteria tersebut. Selain itu, evaluasi kualitatif juga akan menyajikan masalah-masalah lain yang dimiliki oleh definisi rombongan yang tidak dapat dilihat melalui evaluasi kuantitatif. Hasil-hasil visualisasi yang sesuai dengan kriteria tersebut serta masalah lain yang terdapat pada definisi rombongan disajikan dalam bentuk gambar seperti yang ditunjukkan oleh Gambar~\ref{bab6:contoh-visualisasi}.
 
-Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak pada video rekaman pergerakan pejalan kaki dilakukan dengan bantuan perangkat lunak visualisasi yang dibuat oleh Wiratma, dkk~\cite{wiratma:software} dan Maurice Marx~\cite{marx:software}. Perangkat lunak tersebut menerima masukan berupa rekaman video pergerakan, rekaman data lintasan, hasil identifikasi manusia, dan hasil identifikasi dari perangkat lunak identifikasi rombongan. Perangkat lunak visualisasi kemudian akan menghasilkan video rekaman sumber data yang telah dimodifikasi di mana seluruh entitas yang terdapat dalam video rekaman asli akan ditandai menggunakan figur yang telah ditunjukkan melalui Gambar~\ref{bab2:entitas}.
+Visualisasi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak pada video rekaman pergerakan pejalan kaki dilakukan dengan bantuan perangkat lunak visualisasi yang dibuat oleh Wiratma, dkk~\cite{wiratma:software} dan Maurice Marx\footnotemark[1]. Perangkat lunak tersebut menerima masukan berupa rekaman video pergerakan, rekaman data lintasan, hasil identifikasi manusia, dan hasil identifikasi dari perangkat lunak identifikasi rombongan. Perangkat lunak visualisasi kemudian akan menghasilkan video rekaman sumber data yang telah dimodifikasi di mana seluruh entitas yang terdapat dalam video rekaman asli akan ditandai menggunakan figur yang telah ditunjukkan melalui Gambar~\ref{bab2:entitas}.
+
+\footnotetext[1]{\url{https://github.com/marximus/trackviz}}
 
 \begin{figure}[h!]
     \centering
     \captionsetup{width=0.85\textwidth}
-    \includegraphics[width=0.625\textwidth]{Gambar/bab6:contoh-visualisasi.pdf}
+    \includegraphics[width=0.9\textwidth]{Gambar/bab6:contoh-visualisasi.pdf}
     \caption[Contoh hasil visualisasi rombongan]{Contoh hasil visualisasi yang dihasilkan perangkat lunak visualisasi dari hasil identifikasi rombongan pada video rekaman data pergerakan pejalan kaki}
     \label{bab6:contoh-visualisasi}
 \end{figure}
@@ -176,6 +178,8 @@ Peningkatan terhadap nilai $r$ berdampak pada peningkatan nilai \textit{recall} 
 
 Memperketat syarat kedekatan spasial dengan memperkecil nilai $\vartheta$ memberikan dampak positif peningkatan nilai \textit{precision} dan \textit{F1 score} pada $r = 1$. Namun hal tersebut berdampak negatif pada $r = 1.24$, di mana menambah nilai $r$ menyebabkan penurunan nilai \textit{precision} dan \textit{F1 score} untuk setiap nilai $k$ yang digunakan. Penurunan nilai \textit{precision} disebabkan oleh adanya subrombongan baru yang terpisah dari rombongan lain akibat salah satu entitasnya tidak memenuhi syarat perbedaan sudut maksimum. Subrombongan tersebut tidak terdapat pada hasil identifikasi manusia, sehingga adanya penambahan rombongan baru menambah nilai \textit{false positive} dari hasil identifikasi rombongan yang dilakukan oleh perangkat lunak.
 
+\clearpage
+
 Peningkatan terhadap nilai $k$ berdampak pada peningkatan nilai \textit{F1 score} secara umum pada seluruh kombinasi nilai $r$ dan $\vartheta$. Selain peningkatan terhadap nilai \textit{F1 score}, peningkatan terhadap nilai $k$ juga meningkatkan nilai \textit{precision} pada $r = 1$. Sayangnya, peningkatkan tersebut berlaku sebaliknya pada $r = 1.24$ karena adanya penurunan nilai \textit{precision} pada $k = 8.9$ dan meningkat kembali pada $k = 10.5$. Nilai \textit{recall} meningkat pada $r = 1$ untuk $k = 8.9$ dan kembali menurun untuk $k = 10.5$. Perubahan terhadap nilai $k$ memiliki pengaruh yang sangat kecil pada $r = 1.24$.
 
 \begin{table}[h!]
@@ -206,7 +210,7 @@ Upaya pengurangan redundansi rombongan menggunakan Algoritma~\ref{bab3:redundans
 \subsubsection{Evaluasi Kualitatif}
 \label{subsubsec:eth-qualitative}
 
-Evaluasi secara kualitatif melalui visualisasi dengan menggunakan data pergerakan BIWI ETH menunjukkan alasan dari tingginya nilai \textit{false positive} pada hasil identifikasi perangkat lunak yang ditunjukkan melalui Gambar~\ref{bab6:masalah-eth}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat banyak subrombongan yang diidentifikasi sebagai rombongan oleh perangkat lunak, di mana subrombongan-subrombongan tersebut tidak terdapat pada hasil identifikasi yang dilakukan oleh manusia. Hal yang sama terjadi pada untuk setiap nilai $k$ yang digunakan.
+Evaluasi secara kualitatif melalui visualisasi dengan menggunakan data pergerakan BIWI ETH menunjukkan alasan dari tingginya nilai \textit{false positive} pada hasil identifikasi perangkat lunak yang ditunjukkan melalui Gambar~\ref{bab6:masalah-eth}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat banyak subrombongan yang diidentifikasi sebagai rombongan oleh perangkat lunak, di mana subrombongan-subrombongan tersebut tidak terdapat pada hasil identifikasi yang dilakukan oleh manusia. Hal yang sama terjadi pada untuk setiap nilai $k$ yang digunakan. Pengurangan terhadap nilai $r$ dan $\vartheta$ berdampak sedikit pada penurunan nilai \textit{false positive} dari hasil identifikasi rombongan yang dihasilkan perangkat lunak.
 
 \begin{figure}[h]
     \centering
@@ -223,7 +227,7 @@ Evaluasi secara kualitatif melalui visualisasi dengan menggunakan data pergeraka
     \label{bab6:masalah-eth}
 \end{figure}
 
-Mengurangi nilai $r$ dan $\vartheta$ sedikit mengurangi jumlah subrombongan redundan yang teridentifikasi, namun hal tersebut tidak cukup untuk mengurangi nilai \textit{false positive} dari hasil identifikasi perangkat lunak secara signifikan. Selain itu, memperketat syarat kedekatan spasial membuat keanggotaan rombongan menjadi terputus yang dapat dilihat melalui Gambar~\ref{bab6:masalah-syarat-ketat-eth}. Pada gambar tersebut, dapat dilihat bahwa entitas bergerak dengan nomor identitas 2 tidak tergabung dalam rombongan yang dibentuk oleh entitas-entitas dengan nomor identitas 3 dan 6.
+Memperketat syarat kedekatan spasial membuat keanggotaan rombongan menjadi terputus yang dapat dilihat melalui Gambar~\ref{bab6:masalah-syarat-ketat-eth}. Pada gambar tersebut, dapat dilihat bahwa entitas bergerak dengan nomor identitas 2 tidak tergabung dalam rombongan yang dibentuk oleh entitas 3 dan 6.
 
 \begin{figure}[t]
     \centering
@@ -238,13 +242,13 @@ Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak 
 \begin{figure}[h]
     \centering
     \captionsetup{width=.6\textwidth}
-    \begin{subfigure}[h]{0.185\textwidth}
+    \begin{subfigure}[h]{0.2\textwidth}
         \centering
-        \includegraphics[height=8cm]{Gambar/bab6:masalah-eth-n.pdf}
+        \includegraphics[height=9cm]{Gambar/bab6:masalah-eth-n.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.185\textwidth}
+    \begin{subfigure}[h]{0.2\textwidth}
         \centering
-        \includegraphics[height=8cm]{Gambar/bab6:masalah-eth-n-2.pdf}
+        \includegraphics[height=9cm]{Gambar/bab6:masalah-eth-n-2.pdf}
     \end{subfigure}
     \caption[Masalah nilai $n$ pada data BIWI ETH]{Nilai kedekatan minimum $n = 1$ membuat entitas dengan nomor identitas 44 tergabung sebagai anggota dari rombongan yang berada jauh di depan}
     \label{bab6:masalah-eth-n}
@@ -262,7 +266,9 @@ Pada data VEIIG yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi 
 
 Variasi dari parameter identifikasi rombongan yang digunakan memiliki pengaruh yang cukup besar pada hasil identifikasi perangkat lunak. Hal tersebut dapat dilihat dari rentang perubahan dari \textit{F1 score} yang dapat mencapai nilai $10.6\%$ yang dipengaruhi oleh perubahan nilai $\vartheta$ yang digunakan dalam proses identifikasi.
 
-\begin{table}[b!]
+Peningkatan nilai $r$ berdampak pada menurunnya nilai \textit{precision} yang diakibatkan oleh banyaknya rombongan tambahan tidak relevan yang dihasilkan. Hal tersebut menyebabkan kenaikan nilai \textit{false positive}. Pengecualian untuk premis tersebut adalah ketika $k = 17$ dan $\vartheta = \frac{\pi}{32}$, di mana nilai \textit{precision} mengalami kenaikan sebanyak 8\%. Hal tersebut disebabkan oleh tingkat kepadatan pejalan kaki pada data VEIIG yang tinggi, sehingga menambah nilai $r$ akan menambah jumlah rombongan tidak relevan yang teridentifikasi.
+
+\begin{table}[t]
     \centering
     \captionsetup{width=0.6\textwidth}
 \caption{Nilai relevansi pada data pergerakan VEIIG dengan upaya pengurangan redundansi rombongan}
@@ -284,8 +290,6 @@ Variasi dari parameter identifikasi rombongan yang digunakan memiliki pengaruh y
 \end{tabular}
    \label{bab6:gveii-numbers}
 \end{table}
-
-Peningkatan nilai $r$ berdampak pada menurunnya nilai \textit{precision} yang diakibatkan oleh banyaknya rombongan tambahan tidak relevan yang dihasilkan. Hal tersebut menyebabkan kenaikan nilai \textit{false positive}. Pengecualian untuk premis tersebut adalah ketika $k = 17$ dan $\vartheta = \frac{\pi}{32}$, di mana nilai \textit{precision} mengalami kenaikan sebanyak 8\%. Hal tersebut disebabkan oleh tingkat kepadatan pejalan kaki pada data VEIIG yang tinggi, sehingga menambah nilai $r$ akan menambah jumlah rombongan tidak relevan yang teridentifikasi.
 
 Memperketat syarat kedekatan spasial dengan mengurangi beda sudut maksimum $\vartheta$ berdampak positif pada nilai \textit{precision} yang meningkat. Peningkatan tersebut tidak lepas dari tingkat kepadatan pejalan kaki yang tinggi di mana pada kondisi tersebut, beda sudut menjadi nilai yang sensitif dalam proses identifikasi rombongan. Namun, memperkecil nilai $\vartheta$ akan sedikit memperendah nilai \textit{recall} dari hasil identifikasi. Hal tersebut disebabkan oleh nilai \textit{false negative} yang meningkat.
 
@@ -345,15 +349,15 @@ Masalah lain yang dimiliki oleh perangkat lunak identifikasi rombongan ditunjukk
     \captionsetup{width=.8\textwidth}
     \begin{subfigure}[t]{0.225\textwidth}
         \centering
-        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-veiig-batu-1.pdf}
+        \includegraphics[height=5.625cm]{Gambar/bab6:masalah-veiig-batu-1.pdf}
     \end{subfigure}
     \begin{subfigure}[t]{0.25\textwidth}
         \centering
-        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-veiig-batu-2.pdf}
+        \includegraphics[height=5.625cm]{Gambar/bab6:masalah-veiig-batu-2.pdf}
     \end{subfigure}
     \begin{subfigure}[t]{0.225\textwidth}
         \centering
-        \includegraphics[height=5.5cm]{Gambar/bab6:masalah-veiig-batu-3.pdf}
+        \includegraphics[height=5.625cm]{Gambar/bab6:masalah-veiig-batu-3.pdf}
     \end{subfigure}
     \caption[Masalah menghindari rintangan]{Usaha untuk menghindari rintangan menyebabkan durasi rombongan terputus selama beberapa saat walaupun perbedaan arah antar entitas yang cukup minim serta jarak antar entitas yang masih cukup dekat}
     \label{bab6:masalah-rintangan-veiig}

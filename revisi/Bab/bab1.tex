@@ -116,17 +116,17 @@ Pada kedua contoh tersebut, dapat dilihat bahwa terdapat dua pergerakan kolektif
 \begin{figure}[t]
     \centering
     \captionsetup{width=0.75\textwidth}
-    \begin{subfigure}[h]{0.25\textwidth}
+    \begin{subfigure}[h]{0.225\textwidth}
         \centering
-        \includegraphics[height=7.5cm]{Gambar/bab1:beda-kecepatan-1.pdf}
+        \includegraphics[height=6.5cm]{Gambar/bab1:beda-kecepatan-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.25\textwidth}
+    \begin{subfigure}[h]{0.225\textwidth}
         \centering
-        \includegraphics[height=7.5cm]{Gambar/bab1:beda-kecepatan-2.pdf}
+        \includegraphics[height=6.5cm]{Gambar/bab1:beda-kecepatan-2.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.25\textwidth}
+    \begin{subfigure}[h]{0.225\textwidth}
         \centering
-        \includegraphics[height=7.5cm]{Gambar/bab1:beda-kecepatan-3.pdf}
+        \includegraphics[height=6.5cm]{Gambar/bab1:beda-kecepatan-3.pdf}
     \end{subfigure}
     \caption[Masalah perbedaan kecepatan pada identifikasi pergerakan kolektif]{Adanya perbedaan kecepatan antara anggota-anggota pergerakan kolektif dapat menyebabkan anggota tidak dekat secara spasial sehingga pergerakan kolektif tidak terbentuk}
     \label{bab1:beda-kecepatan}
@@ -134,7 +134,9 @@ Pada kedua contoh tersebut, dapat dilihat bahwa terdapat dua pergerakan kolektif
 
 Masalah kedua adalah adanya perbedaan kecepatan antara anggota-anggota pergerakan kolektif yang ditunjukkan melalui Gambar~\ref{bab1:beda-kecepatan}. Pada gambar-gambar tersebut, terdapat dua buah entitas yang membentuk sebuah pergerakan kolektif. Satu anggota dari pergerakan kolektif bergerak memimpin pergerakan kolektif dengan berjalan mendahului anggota lain. Karena entitas tersebut terus memimpin berjalan dengan menatap ke depan, entitas tersebut secara tidak sadar memiliki kecepatan yang lebih cepat dan meninggalkan anggota lain. Kondisi tersebut menyebabkan entitas yang memimpin memiliki perbedaan jarak yang cukup jauh dengan anggota lain. Setelah beberapa saat, entitas yang memimpin berhenti kemudian menoleh ke belakang untuk memastikan apakah dirinya dan entitas lain masih bergerak secara kolektif. Karena perbedaan jarak yang jauh, entitas yang memimpin memutuskan untuk memperlambat gerakan dan menunggu entitas lainnya untuk menyusul sampai jarak tertentu kemudian menyesuaikan kecepatannya dengan entitas lain untuk kembali bergerak secara kolektif dengan anggota lain. Pada kasus tersebut, definisi-definisi formal pergerakan kolektif yang diamati menghasilkan identifikasi di mana kedua entitas tidak membentuk pergerakan kolektif sama sekali. Hal tersebut disebabkan karena entitas yang memimpin memiliki jarak yang jauh dengan anggota-anggota pergerakan kolektif lainnya selama beberapa saat sehingga syarat kedekatan spasial dan durasi tidak terpenuhi. Hasil tersebut bertentangan dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia, di mana entitas yang memimpin akan selalu tergabung sebagai anggota pergerakan kolektif mengingat kasus serupa lazim terjadi dalam sebuah rombongan pejalan kaki dunia nyata. Dua masalah tersebut mendorong perlunya perluasan ukuran lintasan yang digunakan dalam proses identifikasi terhadap sebuah pergerakan kolektif serta pembuatan definisi formal pergerakan kolektif baru yang mampu mengatasi masalah identifikasi pergerakan kolektif pada kasus-kasus serupa. 
 
-Pada penelitian ini, akan dibuat sebuah definisi formal pergerakan kolektif baru yang akan memperluas ukuran-ukuran penentu yang digunakan untuk mengidentifikasi pergerakan kolektif. Setelah definisi formal selesai dibuat, akan dibuat sebuah algoritma yang mampu mengidentifikasi pergerakan kolektif sesuai dengan definisi formal pergerakan kolektif baru yang dibuat. Algoritma identifikasi akan diimplementasikan menjadi sebuah perangkat lunak menggunakan bahasa pemrograman C++. Setelah perangkat lunak selesai dibuat, akan dilakukan eksperimen pada data pergerakan dunia nyata untuk mengetahui hasil identifikasi pergerakan kolektif yang sesuai dengan definisi pergerakan kolektif baru yang dibuat dan hasilnya akan divisualiasikan dengan menggunakan sebuah model pewarnaan di dalam video rekaman data pejalan kaki. Selanjutnya, hasil identifikasi akan dievaluasi secara kuantitatif menggunakan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} yang dibandingkan dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia dan secara kualitatif melalui analisis terhadap hasil visualisasi pada rekaman video pergerakan pejalan kaki. Visualisasi dilakukan menggunakan bantuan perangkat lunak lain yang dikembangkan oleh Wiratma, dkk~\cite{wiratma:software} dan Maurice Marx~\cite{marx:software}.
+Pada penelitian ini, akan dibuat sebuah definisi formal pergerakan kolektif baru yang akan memperluas ukuran-ukuran penentu yang digunakan untuk mengidentifikasi pergerakan kolektif. Setelah definisi formal selesai dibuat, akan dibuat sebuah algoritma yang mampu mengidentifikasi pergerakan kolektif sesuai dengan definisi formal pergerakan kolektif baru yang dibuat. Algoritma identifikasi akan diimplementasikan menjadi sebuah perangkat lunak menggunakan bahasa pemrograman C++. Setelah perangkat lunak selesai dibuat, akan dilakukan eksperimen pada data pergerakan dunia nyata untuk mengetahui hasil identifikasi pergerakan kolektif yang sesuai dengan definisi pergerakan kolektif baru yang dibuat dan hasilnya akan divisualiasikan dengan menggunakan sebuah model pewarnaan di dalam video rekaman data pejalan kaki. Selanjutnya, hasil identifikasi akan dievaluasi secara kuantitatif menggunakan nilai \textit{precision}, \textit{recall}, dan \textit{F1 score} yang dibandingkan dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia dan secara kualitatif melalui analisis terhadap hasil visualisasi pada rekaman video pergerakan pejalan kaki. Visualisasi dilakukan menggunakan bantuan perangkat lunak lain yang dikembangkan oleh Wiratma, dkk~\cite{wiratma:software} dan Maurice Marx\footnotemark[9].
+
+\footnotetext[9]{\url{https://github.com/marximus/trackviz}}
 
 \section{Rumusan Masalah}
 \label{sec:rumusan}
