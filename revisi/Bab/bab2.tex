@@ -142,7 +142,7 @@ Setiap lintasan memiliki atribut-atribut dengan nilai-nilai tertentu yang membed
 
 Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat mengolah atribut-atribut tersebut menjadi ukuran lintasan yang memiliki tujuan yang lebih spesifik dibandingkan atribut lintasan. Dapat dikatakan bahwa ukuran lintasan merupakan turunan dari atribut lintasan. Salah satu contoh dari ukuran lintasan yang umum digunakan adalah kecepatan rata-rata, di mana ukuran tersebut merupakan turunan langsung dari atribut kecepatan yang ada pada data lintasan. Dalam merepresentasikan ukuran lintasan, model abstrak lebih sering digunakan daripada model data karena model abstrak lebih sederhana dan memiliki representasi yang lebih bebas dibandingkan model data~\cite{wiratma:trajectory}. Untuk selanjutnya, segala ukuran yang direpresentasikan menggunakan model abstrak dapat diubah dalam bentuk yang sesuai dengan model data. Ukuran lintasan dapat dibagi menjadi dua kategori, yaitu ukuran yang terdapat pada satu lintasan dan ukuran yang terdapat pada kumpulan lintasan. Tabel~\ref{bab2:ukuran-arah} sampai Tabel~\ref{bab2:ukuran-jumlah} menunjukkan beberapa contoh ukuran yang dimiliki oleh sebuah lintasan.
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
     \caption{Ukuran lintasan: Arah}
     \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
@@ -163,7 +163,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
     \label{bab2:ukuran-arah}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
     \caption{Ukuran lintasan: Durasi}
     \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
@@ -184,7 +184,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
     \label{bab2:ukuran-durasi}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
     \caption{Ukuran lintasan: Kecepatan}
     \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
@@ -205,7 +205,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
     \label{bab2:ukuran-kecepatan}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
     \caption{Ukuran lintasan: Kemiripan}
     \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
@@ -226,7 +226,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
     \label{bab2:ukuran-kemiripan}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
     \caption{Ukuran lintasan: Jumlah entitas}
     \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
@@ -264,7 +264,7 @@ Dengan mengembangkan perhitungan jarak \textit{euclidean} berdasarkan Rumus~\ref
     \label{bab2:euclidean-lintasan}
 \end{equation}
 
-Pada pembahasan selanjutnya, jarak \textit{euclidean} antara dua buah entitas $a$ dan $b$ pada titik waktu $t$ akan dinyatakan sebagai $d\textsubscript{ab}(t)$. Selain jarak \textit{euclidean}, terdapat ukuran jarak lain yang dapat digunakan untuk menghitung kemiripan lintasan seperti jarak Hausdorff~\cite{rote:01:hausdorff}, jarak Fr\'{e}chet~\cite{alt:01:frechet}, dan \textit{dynamic time warping} (DTW)~\cite{muller:dtw} yang akan menjadi fokus utama dalam skripsi ini. Seluruh ukuran jarak yang telah disebutkan merupakan pengembangan lebih lanjut dari jarak \textit{euclidean} dalam proses perhitungan kemiripan lintasan.
+Pada pembahasan selanjutnya, jarak \textit{euclidean} antara dua buah entitas $a$ dan $b$ pada titik waktu $t$ akan dinyatakan sebagai $d\textsubscript{ab}(t)$. Selain jarak \textit{euclidean}, terdapat ukuran jarak lain yang dapat digunakan untuk menghitung kemiripan lintasan seperti jarak Hausdorff~\cite{rote:01:hausdorff}, jarak Fr\'{e}chet~\cite{alt:01:frechet}, dan \textit{dynamic time warping} (DTW)~\cite{muller:dtw} yang merupakan fokus utama dalam skripsi ini. Seluruh ukuran jarak yang telah disebutkan merupakan pengembangan lanjutan dari jarak \textit{euclidean}.
 
 \section{\textit{Dynamic Time Warping}}
 \label{sec:dtw}
@@ -280,15 +280,15 @@ Terdapat dua keunggulan yang dimiliki oleh \textit{dynamic time warping} dibandi
 
 Dua keunggulan tersebut diperoleh dari cara perbandingan jarak pada perhitungan jarak \textit{dynamic time warping} yang dilakukan secara non-linear, di mana posisi entitas $a$ pada titik waktu $t_x$ dapat dipasangkan dengan posisi entitas $b$ pada titik waktu lain selain $t_x$. Perbandingan tersebut sangat berbeda dengan cara-cara penghitungan kemiripan lintasan lainnya yang dilakukan secara linear untuk setiap titik waktu yang tercatat, di mana posisi entitas $a$ pada titik waktu $t_x$ akan selalu dipasangkan dengan posisi entitas $b$ pada titik waktu $t_x$. Gambar~\ref{bab2:dtw-euclidean} menunjukkan perbandingan data lintasan secara non-linear yang dilakukan oleh algoritma \textit{dynamic time warping} dan perbandingan data lintasan secara linear yang dilakukan pada perhitungan jarak \textit{euclidean}.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \begin{subfigure}[h]{0.45\textwidth}
+    \begin{subfigure}[H]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:euclidean.pdf}
         \caption{Penghitungan kemiripan linear menggunakan jarak \textit{euclidean} (linear)}
         \label{bab2:euclidean}
-    \end{subfigure} \hspace{0.25cm}
-    \begin{subfigure}[h]{0.45\textwidth}
+    \end{subfigure} \hspace{0.5cm}
+    \begin{subfigure}[H]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:dtw.pdf}
         \caption{Penghitungan kemiripan non-linear menggunakan algoritma \textit{dynamic time warping}}
@@ -311,29 +311,27 @@ Jarak \textit{dynamic time warping} antara dua buah lintasan dihitung dengan car
 
 \textit{Warping path} $p = (p_1, p_2, \ldots, p_L)$ untuk dua buah lintasan $X = (x_1, x_2, \ldots, x_N)$ dan $Y = (y_1, y_2, \ldots, y_M)$ dinyatakan dengan memasangkan elemen $x_\ell$ dari lintasan $X$ dengan elemen $y_\ell$ dari lintasan $Y$. Syarat \textit{boundary} mengharuskan elemen pertama dari lintasan $X$ dipasangkan dengan elemen pertama dari lintasan $Y$, begitu juga dengan elemen terakhir dari lintasan $X$ harus dipasangkan dengan elemen terakhir dari lintasan $Y$. Dengan kata lain, kondisi tersebut berlaku untuk seluruh elemen pada lintasan $X$ dan $Y$. Syarat monotonik mengharuskan elemen-elemen pada lintasan diurutkan menaik secara inklusif. Syarat \textit{step size} mengharuskan terjadinya kontinuitas pada pemasangan elemen, tidak ada elemen dari lintasan $X$ dan $Y$ yang tidak digunakan dan tidak ada pasangan duplikat dari seluruh pemasangan elemen dari lintasan $X$ dan $Y$. Gambar~\ref{bab2:dtw-requirements} menunjukkan syarat-syarat dari \textit{warping path} antara dua buah lintasan.
 
-\vspace{10pt}
-
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \begin{subfigure}[ht]{0.23\textwidth}
+    \begin{subfigure}[H]{0.22\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:valid.pdf}
-        \caption{Jalur kesejajaran yang valid.}
+        \caption{Contoh jalur kesejajaran yang valid.}
         \label{bab2:valid}
-    \end{subfigure}
-    \begin{subfigure}[ht]{0.23\textwidth}
+    \end{subfigure} \hspace{2.5pt}
+    \begin{subfigure}[H]{0.22\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:boundary.pdf}
         \caption{Pelanggaran syarat \textit{boundary}, $p_1 \neq (1, 1)$.}
         \label{bab2:boundary}
-    \end{subfigure}
-    \begin{subfigure}[ht]{0.23\textwidth}
+    \end{subfigure} \hspace{2.5pt}
+    \begin{subfigure}[H]{0.22\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:monotonicity.pdf}
         \caption{Pelanggaran syarat monotonik, $x_3 < x_4$.}
         \label{bab2:monotonicity}
-    \end{subfigure}
-    \begin{subfigure}[h]{0.23\textwidth}
+    \end{subfigure} \hspace{2.5pt}
+    \begin{subfigure}[H]{0.22\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:step-size.pdf}
         \caption{Pelanggaran syarat \textit{step-size}, $y_6$ dilewatkan.}
@@ -365,7 +363,11 @@ Jarak total $c_p$ dari sebuah \textit{warping path} yang valid merupakan akumula
 
 Karena proses perhitungan jarak total \textit{warping path} memiliki properti \textit{optimal substructure}, algoritma \textit{dynamic time warping} biasanya diimplementasikan menggunakan prinsip \textit{dynamic time warping} untuk meningkatkan efisiensi algoritma pada proses perhitungan jarak total \textit{warping path}. Algoritma~\ref{bab2:dtw-pseudocode} menunjukkan implementasi standar dari algoritma \textit{dynamic time warping}~\cite{senin:02:dtw}.
 
-\begin{algorithm}[h]
+Pada implementasi di atas, algoritma \textit{dynamic time warping} memiliki kompleksitas waktu dan tempat sebesar $O(MN)$, di mana $M$ merupakan jumlah posisi yang tercatat pada lintasan $X$ dan $N$ merupakan jumlah posisi yang tercatat pada lintasan $Y$. Selain implementasi di atas, terdapat beberapa variasi implementasi untuk algoritma \textit{dynamic time warping} seperti PrunedDTW~\cite{diego:02:pruned-dtw}, SparseDTW~\cite{ghazi:02:sparse-dtw}, FastDTW~\cite{salvador:02:fast-dtw}, dan berbagai variasi implementasi lainnya.
+
+\clearpage
+
+\begin{algorithm}[t]
     \caption{Algoritma \textit{Dynamic Time Warping}}
     \SetKwInput{KwInput}{Input}                % Set the Input
     \SetKwInput{KwOutput}{Output}              % set the Output
@@ -399,8 +401,6 @@ Karena proses perhitungan jarak total \textit{warping path} memiliki properti \t
         \KwRet{$DTW[n, m]$}
     }
 \end{algorithm}
-
-Pada implementasi di atas, algoritma \textit{dynamic time warping} memiliki kompleksitas waktu dan tempat sebesar $O(MN)$, di mana $M$ merupakan jumlah posisi yang tercatat pada lintasan $X$ dan $N$ merupakan jumlah posisi yang tercatat pada lintasan $Y$. Selain implementasi di atas, terdapat beberapa variasi implementasi untuk algoritma \textit{dynamic time warping} seperti PrunedDTW~\cite{diego:02:pruned-dtw}, SparseDTW~\cite{ghazi:02:sparse-dtw}, FastDTW~\cite{salvador:02:fast-dtw}, dan berbagai variasi implementasi lainnya.
 
 \subsection{Contoh Perhitungan \textit{Dynamic Time Warping}}
 \label{subsec:contoh-dtw}
