@@ -33,7 +33,7 @@ Berdasarkan syarat-syarat pembentukan pergerakan kolektif, sebuah entitas akan t
 
 Namun, ketiga syarat pembentukan sebuah pergerakan kolektif yang telah disebutkan di atas tidak cukup untuk mengatasi masalah dalam upaya identifikasi pergerakan kolektif dalam sebuah data pergerakan di mana terdapat dua pihak yang bergerak berlawanan arah dan berpapasan dalam jarak dekat dan dalam waktu yang cukup lama. Kasus tersebut dapat menyebabkan upaya identifikasi yang berlandaskan definisi-definisi pergerakan kolektif yang sudah ada akan menghasilkan identifikasi di mana kedua pihak yang bergerak berlawanan arah tergabung dalam satu pergerakan kolektif selama kedua pihak tersebut bergerak berpapasan. Hal tersebut disebabkan karena syarat kedekatan spasial dan durasi temporal yang terpenuhi selama kedua pihak berpapasan dalam jarak dekat dan waktu yang cukup lama.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=0.75\textwidth}
     \includegraphics[width=0.5\textwidth]{Gambar/bab3:beda-arah.pdf}
@@ -51,7 +51,7 @@ Berdasarkan upaya penyelesaian tersebut, maka syarat kedekatan spasial dalam sya
 
 Dalam pemanfaatan ukuran arah lintasan sebagai syarat baru dalam pengukuran kedekatan spasial antara dua buah entitas, hal penting yang tidak boleh dilupakan adalah cara menghitung arah lintasan dari entitas yang bergerak. Secara umum, terdapat dua cara pandang untuk menghitung arah lintasan. Cara pandang pertama adalah dengan memandang arah lintasan secara global. Dalam cara pandang global, arah lintasan akan dihitung berdasarkan perbedaan arah pada awal dan akhir pergerakan entitas. Cara pandang tersebut dapat bermasalah ketika digunakan untuk mengukur kemiripan lintasan pada dua lintasan yang memiliki perbedaan arah akhir yang drastis. Dalam sebuah kasus yang ditunjukkan melalui Gambar~\ref{bab3:beda-arah-lokal}, diberikan dua buah entitas bergerak $a$ yang ditunjukkan sebagai entitas berwarna merah dan $b$ yang ditunjukkan sebagai entitas berwarna biru, jumlah entitas minimum $m$ sebanyak $2$, dan durasi waktu minimum $I$ selama $3$ satuan waktu. Apabila arah lintasan dipandang secara global, maka entitas $a$ dan entitas $b$ tidak dapat membentuk sebuah pergerakan kolektif karena memiliki perbedaan arah yang ekstrim. Hasil identifikasi tersebut bertentangan dengan hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia, di mana entitas $a$ dan $b$ membentuk sebuah pergerakan kolektif selama rentang waktu $t_1$ -- $t_3$.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=0.8\textwidth}
     \includegraphics[height=9.5cm]{Gambar/bab3:beda-arah-lokal.pdf}
@@ -72,7 +72,7 @@ Sayangnya, syarat-syarat kedekatan spasial yang selama ini digunakan oleh berbag
     
 Dalam sebuah kasus pergerakan yang digambarkan melalui Gambar~\ref{bab3:masalah-kecepatan}, diberikan sebuah pergerakan kolektif $\mathcal{X}$ yang terdiri dari $3$ anggota $a$, $b$, dan $c$ yang masing-masing digambarkan dengan warna biru, kuning, dan merah, jumlah entitas minimum $m$ sebanyak $3$ entitas, dan durasi waktu minimum selama $3$ satuan waktu. Entitas $a$ dan $b$ bergerak bersama dengan kecepatan yang konstan sejak semula, sedangkan entitas $c$ bergerak lebih cepat dan meninggalkan kedua entitas tersebut sampai pada titik tertentu. Entitas $c$ kemudian berhenti, menoleh ke belakang untuk memeriksa jarak antara dirinya sendiri dengan anggota lainnya, dan memutuskan untuk menunggu kedua entitas lainnya untuk menyusul pada suatu titik. Setelah kedua entitas tersebut berhasil menyusul, ketiga entitas tersebut melanjutkan bergerak bersama pada kecepatan yang konstan. Pada kasus tersebut, perbedaan kecepatan antara entitas $c$ dan dua entitas lainnya tentunya akan menyebabkan bertambahnya perbedaan jarak antar entitas, di mana hal tersebut dapat menyebabkan entitas $c$ tidak memenuhi syarat perbedaan jarak dan durasi waktu minimum agar teridentifikasi sebagai anggota suatu pergerakan kolektif. Hasil identifikasi tersebut tidak sesuai dengan hasil identifikasi yang dilakukan oleh manusia, di mana entitas $c$ tetap akan tergabung dalam kelompok pergerakan kolektif bersama entitas $a$ dan $b$, walaupun memiliki entitas $c$ memiliki perbedaan jarak yang cukup jauh dengan entitas $a$ dan $b$ selama beberapa saat.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=0.8\textwidth}
     \includegraphics[width=0.85\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
@@ -139,7 +139,7 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
     \item Kembalikan himpunan $\mathcal{R}$ sebagai hasil. Pada tahap ini, himpunan $\mathcal{R}$ akan berisi kumpulan rombongan yang terbentuk pada setiap interval waktu konsekutif $I$ yang memiliki panjang durasi minimum sebesar $k$ satuan waktu.
 \end{enumerate}
 
-\begin{algorithm}[H]
+\begin{algorithm}[htbp]
     \setstretch{1.0}
     \caption{Algoritma Identifikasi Rombongan}
     \SetKwInput{KwInput}{Input}                % Set the Input
@@ -169,11 +169,11 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
 
         \For{$end \gets k$ to $panjang\;lintasan\;dari\;entitas\;anggota\;\mathcal{X}$}{
             $start \gets end - k$ \\
-            $collectiveMovements \gets kumpulan\;rombongan\;pada\;interval\;start-end$ \\
+            $collectiveMovements \gets rombongan\;pada\;interval\;start-end$ \\
             
-            $subTrajectories \gets sublintasan\;dari\;setiap\;entitas\;pada\;interval\;start-end$ \\
+            $subTrajectories \gets sublintasan\;entitas\;pada\;interval\;start-end$ \\
             
-            $directionVector \gets vektor\;arah\;dari\;setiap\;entitas\;pada\;interval\;start-end$ \\
+            $directionVector \gets vektor\;arah\;entitas\;pada\;interval\;start-end$ \\
             
             \For{each entitas $a$ in $\mathcal{X}$}{
                 $entitySet \gets himpunan\;pergerakan\;kolektif\;yang\;beranggotakan\;a$ \\
@@ -184,10 +184,10 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
                         $closeness \gets 0$ \\
                         
                         \For{each entitas $d$ in $c$}{
-                            $dtwC \gets jarak\;DTW\;dari\;b\;dan\;d\;pada\;interval\;start-end$ \\
-                            $cosineC \gets cosine\;similarity\;dari\;b\;dan\;d\;pada\;interval\;start-end$ \\
+                            $dtwSub \gets jarak\;DTW\;dari\;b\;dan\;d\;pada\;interval\;start-end$ \\
+                            $cosSub \gets nilai\;cosinus\;dari\;b\;dan\;d\;pada\;interval\;start-end$ \\
                     
-                            \If{$b \neq d$ AND $dtwC \leq r$ AND $cosineC \geq \vartheta$}{
+                            \If{$b \neq d$ AND $dtwSub \leq r$ AND $cosSub \geq \vartheta$}{
                                 $closeness \gets closeness + 1$
                             }
                         }
@@ -198,9 +198,9 @@ Diberikan himpunan entitas yang bergerak $\mathcal{X}$, jumlah entitas minimum s
                     }
                     
                     $dtw \gets jarak\;DTW\;dari\;a\;dan\;b\;pada\;interval\;start-end$ \\
-                    $cosine \gets cosine\;similarity\;dari\;a\;dan\;b\;pada\;interval\;start-end$ \\
+                    $cos \gets nilai\;cosinus\;dari\;a\;dan\;b\;pada\;interval\;start-end$ \\
                     
-                    \If{$dtw \leq r$ AND $cosine \geq \vartheta$}{
+                    \If{$dtw \leq r$ AND $cos \geq \vartheta$}{
                         $newGroup \gets [a, b]$ \\
                         $tambahkan\;newGroup\;pada\;entitySet$
                     }
@@ -294,7 +294,7 @@ Beserta dengan himpunan entitas $\mathcal{X}$, diberikan pula syarat jumlah enti
 
 Berdasarkan uraian langkah-langkah algoritma identifikasi, berikut merupakan rombongan-rombongan yang teridentifikasi pada himpunan entitas $\mathcal{X}$ beserta durasi waktu konsekutif dari masing-masing rombongan yang teridentifikasi:
 
-\begin{table}[h]
+\begin{table}[htbp]
     \centering
     \captionsetup{width=0.6\textwidth}
     \caption{Hasil identifikasi rombongan pada contoh kasus pergerakan yang ditunjukkan oleh Gambar~\ref{bab3:contoh-algoritma-identifikasi}}
@@ -313,7 +313,7 @@ Berdasarkan uraian langkah-langkah algoritma identifikasi, berikut merupakan rom
 
 Salah satu masalah yang terdapat dalam algoritma identifikasi rombongan yang diusulkan adalah redundansi yang terdapat pada rombongan-rombongan yang berhasil diidentifikasi. Redundansi hasil dapat dilihat ketika algoritma identifikasi rombongan menghasilkan rombongan $\mathcal{X}$ di mana $\mathcal{X} \subset \mathcal{G}$, $|\mathcal{X}| < |\mathcal{G}|$ pada interval waktu yang sama. Redundansi disebabkan oleh cara kerja algoritma identifikasi yang tidak mampu untuk menghasilkan rombongan maksimal.
 
-\begin{algorithm}[h]
+\begin{algorithm}[htbp]
     \caption{Algoritma Pengurangan Redundansi}
     \SetKwInput{KwInput}{Input}                % Set the Input
     \SetKwInput{KwOutput}{Output}              % set the Output
@@ -373,7 +373,7 @@ Beserta dengan himpunan entitas $\mathcal{Y}$, diberikan pula syarat jumlah enti
 
 Melalui proses identifikasi rombongan menggunakan Algoritma~\ref{bab3:algoritma-identifikasi}, terdapat beberapa pergerakan kolektif yang berhasil diidentifikasi sebagai rombongan pada himpunan entitas $\mathcal{Y}$. Tabel~\ref{bab6:contoh-identifikasi-redundan} menunjukkan rombongan-rombongan yang teridentifikasi pada himpunan entitas $\mathcal{Y}$ beserta durasi waktu konsekutif dari masing-masing rombongan yang teridentifikasi.
 
-\begin{table}[h]
+\begin{table}[htbp]
     \centering
     \captionsetup{width=0.6\textwidth}
     \caption{Hasil identifikasi rombongan pada contoh kasus pergerakan yang ditunjukkan oleh Gambar~\ref{bab3:contoh-algoritma-redundansi}}
@@ -419,7 +419,7 @@ Analisis singkat terhadap hasil identifikasi rombongan menunjukkan bahwa rombong
 
 Melalui proses pengurangan redundansi rombongan, rombongan-rombongan yang redundan dihapus dari hasil identifikasi rombongan. Berikut merupakan hasil akhir identifikasi rombongan beserta dengan durasi yang masing-masing rombongan yang teridentifikasi:
 
-\begin{table}[h]
+\begin{table}[htbp]
     \centering
     \captionsetup{width=0.75\textwidth}
     \caption{Hasil identifikasi rombongan pada contoh kasus Subbab~\ref{sec:redundancy-example} setelah rombongan yang redundan dihapus}

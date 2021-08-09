@@ -26,7 +26,7 @@ Untuk melakukan eksperimen, diperlukan sumber data pejalan kaki dunia nyata yang
     
     Untuk mempermudah proses eksperimen, data pergerakan VEIIG yang digunakan dalam eksperimen pada penelitian ini akan dipotong menjadi data pergerakan yang berdurasi sepanjang 5 menit.
     
-    \begin{figure}[h]
+    \begin{figure}[htbp]
         \centering
         \includegraphics[width=0.75\textwidth]{Gambar/bab6:contoh-gveii.pdf}
         \caption{Cuplikan data pergerakan VEIIG}
@@ -51,7 +51,7 @@ Dalam seluruh data pergerakan yang digunakan selama eksperimen, terdapat hasil i
 
 Tabel~\ref{bab6:metadata-pergerakan} menunjukkan metadata dari data pergerakan yang digunakan pada proses eksperimen. Nilai $g$ menunjukkan jumlah rombongan yang teridentifikasi secara manual oleh manusia. Nilai $G$ menunjukkan rentang jumlah anggota rombongan yang teridentifikasi secara manual oleh manusia.
 
-\begin{table}[h]
+\begin{table}[htbp]
     \centering
     \caption[Metadata sumber data pergerakan]{Informasi metadata dari data pergerakan yang digunakan pada proses eksperimen}
     \begin{tabular}{p{3cm} p{2.5cm} p{2.5cm} p{3cm}}
@@ -95,7 +95,7 @@ Pada proses evaluasi secara kuantitatif, perangkat lunak akan melakukan proses i
 
 Relevansi hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak dengan hasil identifikasi yang dilakukan manusia diukur menggunakan nilai \textit{F1 score}. Sebagai catatan, proses eksperimen yang dilakukan pada skripsi ini menghindari penggunaan istilah `ketepatan' dan `kebenaran'. Hal tersebut disebabkan oleh tidak adanya acuan mutlak yang dapat digunakan untuk mengukur kebenaran identifikasi~\cite{wiratma:software}. Tabel~\ref{bab6:parameter} menunjukkan parameter-parameter identifikasi rombongan yang akan digunakan dalam eksperimen pada setiap data pergerakan yang digunakan.
 
-\begin{table}[h]
+\begin{table}[htbp]
     \centering
     \caption[Parameter identifikasi rombongan]{Parameter identifikasi rombongan yang digunakan pada eksperimen}
     \begin{tabular}{p{1cm} p{2.5cm} p{2.5cm} p{2.5cm}}
@@ -148,7 +148,7 @@ Bagian ini akan menyajikan hasil eksperimen pada setiap sumber data pergerakan y
 Pada data BIWI ETH yang memiliki tingkat kepadatan pejalan kaki yang rendah, hasil identifikasi yang dihasilkan oleh perangkat lunak memiliki nilai \textit{precision} yang cukup rendah dan nilai \textit{recall} yang cukup tinggi seperti yang ditunjukkan melalui Tabel~\ref{bab6:seq-eth-numbers}. Nilai \textit{precision} yang cukup rendah menandakan bahwa algoritma identifikasi rombongan mengidentifikasi beberapa rombongan yang tidak terdapat pada hasil identifikasi manusia. Hal tersebut disebabkan oleh hasil identifikasi manusia di mana satu entitas hanya dapat tergabung pada satu rombongan. Nilai \textit{recall} yang cukup tinggi menandakan bahwa algoritma identifikasi rombongan mampu
 mengidentifikasi cukup banyak rombongan yang relevan dengan hasil identifikasi manusia.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering
 \captionsetup{width=0.6\textwidth}
 \caption{Nilai relevansi pada data pergerakan BIWI ETH dengan pengurangan redundansi rombongan}
@@ -212,7 +212,7 @@ Upaya pengurangan redundansi rombongan menggunakan Algoritma~\ref{bab3:redundans
 
 Evaluasi secara kualitatif melalui visualisasi dengan menggunakan data pergerakan BIWI ETH menunjukkan alasan dari tingginya nilai \textit{false positive} pada hasil identifikasi perangkat lunak yang ditunjukkan melalui Gambar~\ref{bab6:masalah-eth}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat banyak subrombongan yang diidentifikasi sebagai rombongan oleh perangkat lunak, di mana subrombongan-subrombongan tersebut tidak terdapat pada hasil identifikasi yang dilakukan oleh manusia. Hal yang sama terjadi pada untuk setiap nilai $k$ yang digunakan. Pengurangan terhadap nilai $r$ dan $\vartheta$ berdampak sedikit pada penurunan nilai \textit{false positive} dari hasil identifikasi rombongan yang dihasilkan perangkat lunak.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=.65\textwidth}
     \begin{subfigure}[t]{0.275\textwidth}
@@ -239,14 +239,14 @@ Memperketat syarat kedekatan spasial membuat keanggotaan rombongan menjadi terpu
 
 Syarat jumlah kedekatan minimum dengan anggota rombongan lainnya membawa dampak negatif pada relevansi hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar~\ref{bab6:masalah-eth-n}. Pada gambar tersebut, dapat dilihat bahwa entitas 44 tergabung sebagai anggota dari rombongan yang dibentuk oleh entitas 40, 41, dan 42 walaupun memiliki jarak yang jauh. Keanggotaan tersebut disebabkan oleh nilai kedekatan minimum $n = 1$ yang dipenuhi oleh entitas 43 yang cukup dekat dengan entitas 41. Keanggotaan entitas 43 menyebabkan entitas 44 terhubung dengan entitas 40, 41, dan 42 melalui entitas 43. Hal tersebut tidak relevan dengan hasil identifikasi manusia yang menganggap entitas 44 terlalu jauh dengan entitas 40, 41, dan 42 sehingga entitas 44 tidak tergabung dalam rombongan manapun.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=.6\textwidth}
-    \begin{subfigure}[h]{0.2\textwidth}
+    \begin{subfigure}[htbp]{0.2\textwidth}
         \centering
         \includegraphics[height=9cm]{Gambar/bab6:masalah-eth-n.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.2\textwidth}
+    \begin{subfigure}[htbp]{0.2\textwidth}
         \centering
         \includegraphics[height=9cm]{Gambar/bab6:masalah-eth-n-2.pdf}
     \end{subfigure}
@@ -327,7 +327,7 @@ Evaluasi kualitatif melalui visualisasi pada data VEIIG menunjukkan alasan dari 
 
 Melalui proses analisis terhadap cara kerja algoritma, kekakuan pada masalah perbedaan arah maksimum berasal dari algoritma identifikasi rombongan. Berdasarkan algoritma identifikasi rombongan yang ditunjukkan melalui Algoritma~\ref{bab3:algoritma-identifikasi}, beda arah antar entitas dihitung sepanjang durasi interval waktu minimum rombongan. Dapat dikatakan bahwa setiap anggota rombongan hanya dapat memiliki beda arah yang sangat minim dalam durasi interval waktu yang cukup lama. Syarat tersebut dapat menyebabkan rombongan tidak teridentifikasi oleh algoritma apabila terdapat entitas yang melakukan perubahan arah yang kecil dengan frekuensi yang cukup tinggi.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=.65\textwidth}
     \begin{subfigure}[b]{0.235\textwidth}
@@ -344,7 +344,7 @@ Melalui proses analisis terhadap cara kerja algoritma, kekakuan pada masalah per
 
 Masalah lain yang dimiliki oleh perangkat lunak identifikasi rombongan ditunjukkan oleh Gambar~\ref{bab6:masalah-rintangan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah rombongan yang diwakili oleh warna biru yang memiliki dua buah anggota. Pada saat tertentu, kedua anggota bergerak menuju arah yang berbeda selama kurun waktu yang minim untuk menghindari rintangan yang ada di depan rombongan tersebut. Dalam kurun waktu yang singkat, kedua entitas tersebut bertemu kembali pada satu titik dan kembali melanjutkan pergerakan bersama menuju arah yang sama. Upaya untuk menghindari rintangan menyebabkan rombongan tidak teridentifikasi selama kedua entitas berpisah. Hal tersebut kembali disebabkan oleh ketatnya syarat perbedaan arah yang tidak dapat mentoleransi adanya perubahan arah yang lebih tinggi dari parameter $\vartheta$ dalam rentang waktu sekecil apapun selama proses identifikasi rombongan berlangsung.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=.8\textwidth}
     \begin{subfigure}[t]{0.225\textwidth}
@@ -365,14 +365,14 @@ Masalah lain yang dimiliki oleh perangkat lunak identifikasi rombongan ditunjukk
 
 Visualisasi hasil identifikasi rombongan memberikan dampak positif terhadap penggunaan algoritma \textit{dynamic time warping} sebagai solusi untuk menyelesaikan masalah perbedaan kecepatan yang ditunjukkan melalui Gambar~\ref{bab6:solusi-beda-kecepatan-veiig}. Pada gambar-gambar tersebut, dapat dilihat bahwa terdapat sebuah anggota rombongan yang memiliki jarak yang cukup jauh dengan anggota lain. Anggota yang memimpin kemudian menunggu anggota lain menyusul dan kembali melakukan pergerakan bersama kembali. Melalui hasil visualisasi, dapat dilihat bahwa perangkat lunak dapat mengidentifikasi rombongan tersebut sejak awal dengan baik.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=.7\textwidth}
-    \begin{subfigure}[h]{0.235\textwidth}
+    \begin{subfigure}[htbp]{0.235\textwidth}
         \centering
         \includegraphics[height=6.75cm]{Gambar/bab6:solusi-kecepatan-veiig-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.235\textwidth}
+    \begin{subfigure}[htbp]{0.235\textwidth}
         \centering
         \includegraphics[height=6.75cm]{Gambar/bab6:solusi-kecepatan-veiig-2.pdf}
     \end{subfigure}
@@ -390,7 +390,7 @@ Melalui evaluasi kualitatif, dapat dikatakan bahwa definisi rombongan dapat meng
 
 Pada data CBE yang memiliki tingkat kepadatan pergerakan kolektif yang tinggi serta arah pergerakan yang multidireksional, hasil identifikasi rombongan yang dihasilkan oleh perangkat lunak menghasilkan nilai \textit{recall} yang sangat rendah disertai dengan nilai \textit{precision} yang cukup tinggi yang dapat dilihat melalui Tabel~\ref{bab6:cbe-numbers}. Dari hasil tersebut, dapat dikatakan bahwa algoritma identifikasi rombongan menunjukkan gejala \textit{overestimation}.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering
 \captionsetup{width=0.6\textwidth}
 \caption{Nilai relevansi pada data pergerakan CBE dengan upaya pengurangan redundansi rombongan}
@@ -426,7 +426,7 @@ Meningkatkan nilai durasi interval minimum $k$ menyebabkan peningkatan nilai \te
 
 Penggunaan algoritma pengurangan redundansi rombongan membawa dampak positif pada relevansi hasil identifikasi rombongan pada data pergerakan CBE. Hal tersebut dapat dilihat melalui perbandingan Tabel~\ref{bab6:cbe-numbers} dan Tabel~\ref{bab6:cbe-redundant} yang menyajikan nilai relevansi dari hasil eksperimen tanpa adanya upaya pengurangan redundansi rombongan. Tanpa adanya upaya pengurangan redundansi rombongan, algoritma identifikasi menghasilkan terlalubanyak rombongan redundan yang tidak terdapat pada hasil identifikasi manusia. Rombongan-rombongan redundan tersebut menyebabkan penurunan terhadap nilai \textit{precision} dan \textit{F1 score} secara keseluruhan tanpa mempengaruhi nilai \textit{recall} sedikitpun bila dibandingkan dengan hasil identifikasi rombongan dengan pengurangan redundansi rombongan. Perubahan tersebut konsisten untuk setiap kombinasi nilai $r$, $k$, dan $\vartheta$ yang digunakan.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering
 \captionsetup{width=0.6\textwidth}
 \caption{Nilai relevansi pada data pergerakan CBE tanpa proses pengurangan redundansi rombongan}
@@ -454,18 +454,18 @@ Penggunaan algoritma pengurangan redundansi rombongan membawa dampak positif pad
 
 Evaluasi kualitatif melalui visualisasi pada data CBE menunjukkan alasan dari tingginya nilai \textit{false negative} dari hasil identifikasi perangkat lunak yang dapat dilihat melalui Gambar~\ref{bab6:masalah-cbe}. Melalui gambar-gambar tersebut, dapat dilihat bahwa terdapat beberapa rombongan yang tidak teridentifikasi oleh perangkat lunak identifikasi rombongan, namun teridentifikasi sebagai rombongan pada hasil identifikasi manusia. Hal tersebut disebabkan cara perhitungan beda sudut maksimum antar anggota rombongan.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=.75\textwidth}
-    \begin{subfigure}[h]{0.275\textwidth}
+    \begin{subfigure}[htbp]{0.275\textwidth}
         \centering
         \includegraphics[height=6cm]{Gambar/bab6:masalah-cbe-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.275\textwidth}
+    \begin{subfigure}[htbp]{0.275\textwidth}
         \centering
         \includegraphics[height=6cm]{Gambar/bab6:masalah-cbe-2.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.275\textwidth}
+    \begin{subfigure}[htbp]{0.275\textwidth}
         \centering
         \includegraphics[height=6cm]{Gambar/bab6:masalah-cbe-3.pdf}
     \end{subfigure}
@@ -477,14 +477,14 @@ Melalui gambar-gambar tersebut, dapat dikatakan bahwa algoritma identifikasi rom
 
 Bukti penyelesaian masalah perbedaan kecepatan dapat dilihat melalui hasil visualisasi rombongan yang ditunjukkan melalui Gambar~\ref{bab6:solusi-beda-kecepatan}. Pada gambar tersebut, terdapat sebuah entitas yang memiliki nomor identitas 104 yang menunggu dua buah entitas yaitu entitas 64 dan 65 pada satu tempat. Setelah entitas 64 dan 65 menyusul entitas 104, mereka bertiga melanjutkan pergerakan bersama. Melalui hasil visualisasi, dapat dilihat bahwa entitas 104 dapat teridentifikasi dari semula sebagai anggota dari rombongan bersama dengan entitas 65. Dapat dikatakan bahwa perbedaan kecepatan tidak menjadi masalah yang dimiliki oleh algoritma identifikasi rombongan.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=.85\textwidth}
-    \begin{subfigure}[h]{0.365\textwidth}
+    \begin{subfigure}[htbp]{0.365\textwidth}
         \centering
         \includegraphics[height=3.25cm]{Gambar/bab6:beda-kecepatan-1.pdf}
     \end{subfigure}
-    \begin{subfigure}[h]{0.35\textwidth}
+    \begin{subfigure}[htbp]{0.35\textwidth}
         \centering
         \includegraphics[height=3.5cm]{Gambar/bab6:beda-kecepatan-2.pdf}
     \end{subfigure}
