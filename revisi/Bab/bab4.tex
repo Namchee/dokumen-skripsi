@@ -18,7 +18,7 @@ Berdasarkan tiga kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memil
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.75\textwidth]{Gambar/bab4:dfd-level-0.pdf}
+    \includegraphics[width=0.7\textwidth]{Gambar/bab4:dfd-level-0.pdf}
     \caption{Diagram konteks}
     \label{bab4:context-diagram}
 \end{figure}
@@ -59,14 +59,7 @@ Berdasarkan tiga kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memil
 
 \noindent Hubungan antara keenam proses tersebut serta aliran data antara proses-proses yang berjalan ditunjukkan melalui diagram alir data tingkat pertama yang ditunjukkan melalui Gambar~\ref{bab4:dfd-level-1}.
 
-\clearpage
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=\textwidth]{Gambar/bab4:dfd-level-1.pdf}
-    \caption{Diagram alir data tingkat pertama}
-    \label{bab4:dfd-level-1}
-\end{figure}
 
 \noindent Keenam proses tersebut akan diimplementasikan menjadi lima modul berikut:
 
@@ -82,6 +75,8 @@ Berdasarkan tiga kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memil
     \item \textbf{Modul Rombongan}
     
     Modul rombongan merupakan modul yang berfungsi untuk mengidentifikasi kumpulan rombongan yang terbentuk dalam data pergerakan pejalan kaki yang sudah diterjemahkan oleh modul penerjemah. Terdapat satu proses yang akan dikerjakan oleh modul rombongan, yaitu proses identifikasi rombongan.
+    
+    \clearpage
 
     \item \textbf{Modul Spasial}
     
@@ -93,6 +88,13 @@ Berdasarkan tiga kebutuhan tersebut, diputuskan bahwa perangkat lunak akan memil
     
     Modul evaluasi merupakan modul yang berfungsi untuk melakukan evaluasi terhadap algoritma identifikasi rombongan yang dilakukan oleh modul rombongan. Evaluasi dilakukan dengan membandingkan hasil identifikasi rombongan dengan hasil identifikasi rombongan yang dilakukan oleh manusia pada data pergerakan yang sama. Terdapat satu proses yang dilakukan oleh modul evaluasi, yaitu evaluasi hasil identifikasi.
 \end{enumerate}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{Gambar/bab4:dfd-level-1.pdf}
+    \caption{Diagram alir data tingkat pertama}
+    \label{bab4:dfd-level-1}
+\end{figure}
 
 \section{Spesifikasi Input dan Output}
 \label{sec:input-output}
@@ -153,9 +155,7 @@ Modul I/O bertanggung jawab untuk melaksanakan dua proses berikut:
     
     Selain masukan-masukan wajib di atas, modul ini mampu menerima dua masukan tambahan dari pengguna berupa \texttt{path} dan \texttt{redundant} yang dapat diberikan menggunakan \textit{flag}. Masukan \texttt{path} merupakan menentukan direktori tempat data pergerakan disimpan. Masukan \texttt{redundant} menentukan penggunaan algoritma pengurangan redundansi rombongan setelah algoritma identifikasi rombongan selesai melakukan identifikasi.
     
-    \clearpage
-    
-    \begin{figure}[t]
+    \begin{figure}[htbp]
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-input.pdf}
         \caption{Diagram alir proses validasi masukan}
@@ -195,7 +195,7 @@ Modul penerjemah bertanggung jawab untuk melaksanakan tiga proses berikut:
     
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=0.935\textwidth]{Gambar/bab4:flowchart-penerjemah.pdf}
+        \includegraphics[width=\textwidth]{Gambar/bab4:flowchart-penerjemah.pdf}
         \caption{Diagram alir proses penerjemahan data pergerakan}
         \label{bab4:flowchart-penerjemah}
     \end{figure}

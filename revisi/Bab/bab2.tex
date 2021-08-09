@@ -46,13 +46,13 @@ Pada skripsi ini, entitas yang diamati akan bergerak dalam ruang \textit{euclide
 
 \begin{figure}[b!]
     \centering
-    \begin{subfigure}[h]{0.325\textwidth}
+    \begin{subfigure}[htbp]{0.325\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:dua-dimensi.pdf}
         \caption{Ruang \textit{euclidean} dua dimensi}
         \label{bab2:dua-dimensi}
     \end{subfigure} \hspace{1.25cm}
-    \begin{subfigure}[h]{0.325\textwidth}
+    \begin{subfigure}[htbp]{0.325\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:tiga-dimensi.pdf}
         \caption{Ruang \textit{euclidean} tiga dimensi}
@@ -69,7 +69,7 @@ Keterbatasan teknologi yang digunakan untuk memperoleh data lintasan menyebabkan
 
 Untuk menangani data lintasan dengan jumlah sampel yang sedikit, data lintasan dapat diinterpolasi untuk mengetahui posisi dan waktu antara sampel posisi-waktu yang tersedia. Terdapat beberapa jenis interpolasi yang umum digunakan untuk menginterpolasi data lintasan seperti interpolasi linear~\cite{wiratma:trajectory}, interpolasi menggunakan kurva \textit{curvilinear} seperti kurva \textit{Bezier}~\cite{tremblay:02:curvilinear}, \textit{constrained random walk}~\cite{wentz:02:constrained-random-walk}, dan masih banyak lagi. Gambar~\ref{bab2:interpolasi-lintasan} menunjukkan pengaplikasian interpolasi linear untuk meningkatkan akurasi pada sebuah data lintasan.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \captionsetup{width=0.7\textwidth}
     \includegraphics[width=0.6\textwidth]{Gambar/bab2:interpolasi-lintasan.pdf}
@@ -86,7 +86,7 @@ Terdapat beberapa cara untuk memperoleh data pergerakan entitas tanpa melibatkan
 
 Perkembangan teknologi mendorong pemanfaatan teknologi modern untuk memperoleh data pergerakan yang lebih akurat dibandingkan cara-cara sebelumnya. Saat ini, teknologi satelit menjadi teknologi yang paling sering digunakan untuk memperoleh data pergerakan, seperti sistem Argos-Doppler dan \textit{global positioning system} (GPS) yang lebih populer. Gambar~\ref{bab2:sumber-data} menunjukkan pengambilan data pergerakan menggunakan sistem Agros-Doppler dan \textit{global positioning system}. Terdapat dua komponen utama pada teknologi satelit, yaitu pemancar dan penerima sinyal. Pada sistem Argos-Doppler, pemancar sinyal akan dibawa oleh entitas yang bergerak, sebaliknya pada GPS entitas akan membawa penerima sinyal. Kedua sistem tersebut akan menghasilkan data pergerakan yang dicatat dalam bentuk video rekaman pergerakan dalam dimensi ruang gerak $\mathbb{R}^3$.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{Gambar/bab1:sumber-data.png}
     \caption[Teknologi pengambilan data lintasan]{Pengambilan data lintasan melalui pemanfaatan teknologi modern~\cite{carter:argos}. Kiri ke kanan: Sistem Argos-Doppler, \textit{Global positioning system} (GPS)}
@@ -142,7 +142,7 @@ Setiap lintasan memiliki atribut-atribut dengan nilai-nilai tertentu yang membed
 
 Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat mengolah atribut-atribut tersebut menjadi ukuran lintasan yang memiliki tujuan yang lebih spesifik dibandingkan atribut lintasan. Dapat dikatakan bahwa ukuran lintasan merupakan turunan dari atribut lintasan. Salah satu contoh dari ukuran lintasan yang umum digunakan adalah kecepatan rata-rata, di mana ukuran tersebut merupakan turunan langsung dari atribut kecepatan yang ada pada data lintasan. Dalam merepresentasikan ukuran lintasan, model abstrak lebih sering digunakan daripada model data karena model abstrak lebih sederhana dan memiliki representasi yang lebih bebas dibandingkan model data~\cite{wiratma:trajectory}. Untuk selanjutnya, segala ukuran yang direpresentasikan menggunakan model abstrak dapat diubah dalam bentuk yang sesuai dengan model data. Ukuran lintasan dapat dibagi menjadi dua kategori, yaitu ukuran yang terdapat pada satu lintasan dan ukuran yang terdapat pada kumpulan lintasan. Tabel~\ref{bab2:ukuran-arah} sampai Tabel~\ref{bab2:ukuran-jumlah} menunjukkan beberapa contoh ukuran yang dimiliki oleh sebuah lintasan.
 
-\begin{table}[H]
+\begin{table}[htbp]
     \centering
     \caption{Ukuran lintasan: Arah}
     \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
@@ -163,7 +163,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
     \label{bab2:ukuran-arah}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
     \centering
     \caption{Ukuran lintasan: Durasi}
     \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
@@ -184,7 +184,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
     \label{bab2:ukuran-durasi}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
     \centering
     \caption{Ukuran lintasan: Kecepatan}
     \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
@@ -205,7 +205,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
     \label{bab2:ukuran-kecepatan}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
     \centering
     \caption{Ukuran lintasan: Kemiripan}
     \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
@@ -226,7 +226,7 @@ Dari atribut-atribut yang disediakan oleh data lintasan, para peneliti dapat men
     \label{bab2:ukuran-kemiripan}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
     \centering
     \caption{Ukuran lintasan: Jumlah entitas}
     \begin{tabular}{|m{4cm}|l|p{8.5cm}|} 
@@ -280,15 +280,15 @@ Terdapat dua keunggulan yang dimiliki oleh \textit{dynamic time warping} dibandi
 
 Dua keunggulan tersebut diperoleh dari cara perbandingan jarak pada perhitungan jarak \textit{dynamic time warping} yang dilakukan secara non-linear, di mana posisi entitas $a$ pada titik waktu $t_x$ dapat dipasangkan dengan posisi entitas $b$ pada titik waktu lain selain $t_x$. Perbandingan tersebut sangat berbeda dengan cara-cara penghitungan kemiripan lintasan lainnya yang dilakukan secara linear untuk setiap titik waktu yang tercatat, di mana posisi entitas $a$ pada titik waktu $t_x$ akan selalu dipasangkan dengan posisi entitas $b$ pada titik waktu $t_x$. Gambar~\ref{bab2:dtw-euclidean} menunjukkan perbandingan data lintasan secara non-linear yang dilakukan oleh algoritma \textit{dynamic time warping} dan perbandingan data lintasan secara linear yang dilakukan pada perhitungan jarak \textit{euclidean}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \begin{subfigure}[H]{0.45\textwidth}
+    \begin{subfigure}[htbp]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:euclidean.pdf}
         \caption{Penghitungan kemiripan linear menggunakan jarak \textit{euclidean} (linear)}
         \label{bab2:euclidean}
     \end{subfigure} \hspace{0.5cm}
-    \begin{subfigure}[H]{0.45\textwidth}
+    \begin{subfigure}[htbp]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:dtw.pdf}
         \caption{Penghitungan kemiripan non-linear menggunakan algoritma \textit{dynamic time warping}}
@@ -313,25 +313,25 @@ Jarak \textit{dynamic time warping} antara dua buah lintasan dihitung dengan car
 
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[H]{0.22\textwidth}
+    \begin{subfigure}[htbp]{0.22\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:valid.pdf}
         \caption{Contoh jalur kesejajaran yang valid.}
         \label{bab2:valid}
     \end{subfigure} \hspace{2.5pt}
-    \begin{subfigure}[H]{0.22\textwidth}
+    \begin{subfigure}[htbp]{0.22\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:boundary.pdf}
         \caption{Pelanggaran syarat \textit{boundary}, $p_1 \neq (1, 1)$.}
         \label{bab2:boundary}
     \end{subfigure} \hspace{2.5pt}
-    \begin{subfigure}[H]{0.22\textwidth}
+    \begin{subfigure}[htbp]{0.22\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:monotonicity.pdf}
         \caption{Pelanggaran syarat monotonik, $x_3 < x_4$.}
         \label{bab2:monotonicity}
     \end{subfigure} \hspace{2.5pt}
-    \begin{subfigure}[H]{0.22\textwidth}
+    \begin{subfigure}[htbp]{0.22\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:step-size.pdf}
         \caption{Pelanggaran syarat \textit{step-size}, $y_6$ dilewatkan.}
@@ -426,19 +426,17 @@ Setelah seluruh \textit{warping path} yang valid untuk kedua lintasan tersebut b
     \label{bab2:perhitungan-warping-path}
 \end{equation}
 
-\clearpage
-
 Menggunakan cara yang sama, jarak total dari \textit{warping path} yang ditunjukkan melalui Gambar~\ref{bab2:warping-path-optimal} adalah sebesar $6$ satuan jarak. Setelah seluruh jarak \textit{warping path} yang valid berhasil dihitung, langkah terakhir yang perlu dilakukan untuk menghitung jarak \textit{dynamic time warping} dari kedua lintasan adalah mencari \textit{warping path} yang optimal, yaitu \textit{warping path} yang memiliki jarak total yang paling minimum. \textit{Warping path} yang optimal untuk kedua lintasan tersebut ditunjukkan melalui Gambar~\ref{bab2:warping-path-optimal}. Berdasarkan informasi tersebut, dapat disimpulkan bahwa jarak \textit{dynamic time warping} dari dua buah lintasan $X$ dan $Y$ adalah sebesar $6$ satuan jarak.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \begin{subfigure}{0.185\textwidth}
+    \begin{subfigure}{0.225\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:contoh-dtw.pdf}
         \caption{Salah satu \textit{warping path} yang valid untuk lintasan $X$ dan $Y$. $c_p = 8$}
         \label{bab2:warping-path}
-    \end{subfigure} \hspace{1cm}
-    \begin{subfigure}{0.185\textwidth}
+    \end{subfigure} \hspace{0.5cm}
+    \begin{subfigure}{0.225\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:contoh-dtw-optimal.pdf}
         \caption{\textit{Warping path} yang optimal untuk lintasan $X$ dan $Y$. $c_p = 6$}
@@ -524,19 +522,19 @@ Identifikasi terhadap pergerakan kolektif dapat diaplikasikan pada berbagai bida
     
     Atribut spasial menyatakan lokasi entitas yang bergerak relatif terhadap ruang gerak entitas. Biasanya, manusia akan menganggap dua buah entitas bergerak bersama apabila kedua entitas tersebut dekat secara spasial. Salah satu cara sederhana yang sering digunakan untuk mengukur kedekatan spasial dari dua buah entitas adalah dengan menetapkan sebuah konstanta $\varepsilon > 0$ \iffalse \lionov{pake varepsilon ($\varepsilon$)} \fi sebagai batas jarak maksimum antara kedua entitas supaya dapat dikatakan dekat secara spasial. Cara tersebut dapat diperluas untuk dapat digunakan pada identifikasi pergerakan kolektif, misalnya dengan mengharuskan setiap pasang anggota pergerakan kolektif untuk memiliki jarak di bawah $\varepsilon$ setiap waktu.
     
-    \begin{figure}[h]
+    \begin{figure}[htbp]
         \centering
-        \begin{subfigure}[h]{0.225\textwidth}
+        \begin{subfigure}[htbp]{0.225\textwidth}
             \centering
             \includegraphics[width=\textwidth]{Gambar/bab2:spatial-euclidean.pdf}
             \caption{Jarak \textit{euclidean}}
         \end{subfigure} \hspace{0.5cm}
-        \begin{subfigure}[h]{0.225\textwidth}
+        \begin{subfigure}[htbp]{0.225\textwidth}
             \centering
             \includegraphics[width=\textwidth]{Gambar/bab2:disc.pdf}
             \caption{Cakram \textit{(disc)}}
         \end{subfigure} \hspace{0.5cm}
-        \begin{subfigure}[h]{0.225\textwidth}
+        \begin{subfigure}[htbp]{0.225\textwidth}
             \centering
             \includegraphics[height=3.5cm]{Gambar/bab2:intermediate.pdf}
             \caption{Entitas perantara}
@@ -565,7 +563,7 @@ Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pergerakan kolektif
     
     Diberikan sebuah himpunan lintasan dari $n$ buah entitas yang masing-masing terdiri dari $\gamma$ segmen garis, jumlah entitas minimum $m$, interval waktu minimum $k$, dan jarak maksimum antar entitas $r$. Sebuah \textit{flock} pada interval waktu konsekutif $I\;(I \geq k)$ merupakan sebuah pergerakan kolektif yang terdiri dari setidaknya $m$ buah entitas dan untuk setiap satuan waktu pada interval waktu $I$, terdapat sebuah cakram (\textit{disc}) dengan radius $r$ di mana seluruh entitas memiliki jarak kurang dari $r$ ke titik pusat cakram~\cite{gudmundsson:flock}. Gambar~\ref{bab2:flock} menunjukkan pemodelan sederhana dari sebuah \textit{flock}.
     
-    \begin{figure}[h]
+    \begin{figure}[htbp]
         \centering
         \captionsetup{width=0.75\textwidth}
         \includegraphics[width=0.6\textwidth]{Gambar/bab2:flock.pdf}
@@ -583,10 +581,10 @@ Karena dapat dimanfaatkan pada berbagai bidang, identifikasi pergerakan kolektif
         \item Setiap pasang entitas $x, y$ di mana $x, y \in \mathcal{G}$ secara relatif pada $\mathcal{X}$ untuk setiap satuan waktu pada interval waktu $I$ dengan jarak maksimum antar entitas adalah sepanjang $r$.
     \end{enumerate}
     
-    \begin{figure}[h]
+    \begin{figure}[htbp]
         \centering
         \captionsetup{width=0.75\textwidth}
-        \includegraphics[width=\textwidth]{Gambar/bab2:group.pdf}
+        \includegraphics[width=0.9\textwidth]{Gambar/bab2:group.pdf}
         \caption[Sebuah \textit{group}]{Entitas-entitas berwarna merah yang membentuk sebuah \textit{group} dengan $m = 3$ dan $k = 3$. Salah satu entitas merah yang terletak di paling bawah terhubung secara relatif dengan entitas-entitas merah lainnya melalui entitas-entitas biru.}
         \label{bab2:group}
     \end{figure}
@@ -621,9 +619,9 @@ Proksemik merupakan sebuah studi yang mempelajari pengaruh penggunaan ruang sosi
 
 Gambar~\ref{bab2:proksemik} menunjukkan keempat ruang proksemik yang dimiliki oleh seorang individu.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{Gambar/bab2:proksemik.pdf}
+    \includegraphics[width=0.45\textwidth]{Gambar/bab2:proksemik.pdf}
     \caption{Empat ruang proksemik yang dimiliki individu dalam interaksi interpersonal}
     \label{bab2:proksemik}
 \end{figure}
@@ -638,7 +636,7 @@ Terdapat dua cara yang dapat digunakan untuk melakukan evaluasi terhadap definis
 
 Evaluasi kuantitatif terhadap sebuah definisi pergerakan kolektif dilakukan dengan menguji relevansi hasil identifikasi pergerakan kolektif yang sesuai dengan definisi formal dengan sebuah hasil identifikasi yang dijadikan sebagai pembanding. Sebuah pergerakan kolektif pada hasil identifikasi akan dianggap relevan apabila pergerakan kolektif tersebut juga teridentifikasi pada hasil identifikasi yang dijadikan sebagai pembanding. Hasil identifikasi yang dijadikan pembanding biasanya berasal dari hasil identifikasi pergerakan kolektif yang dilakukan oleh manusia  secara manual pada data pergerakan yang sama. Salah satu cara yang dapat digunakan untuk mengukur relevansi hasil identifikasi adalah melalui klasifikasi biner yang melibatkan nilai \textit{true positive}, \textit{false positive}, \textit{false negative}, dan \textit{true negative}. Hubungan antara keempat nilai tersebut ditunjukkan melalui \textit{confusion matrix} pada Tabel~\ref{bab2:confusion}.
 
-\begin{table}[h]
+\begin{table}[htbp]
     \centering
     \caption{\textit{Confusion matrix} pada klasifikasi biner}
     \begin{tabular}{|c|c|c|}
@@ -676,7 +674,7 @@ Entitas bergerak yang tercatat dalam data pergerakan akan direpresentasikan sepe
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.6\textwidth]{Gambar/bab2:contoh-visualisasi.pdf}
+    \includegraphics[width=0.7\textwidth]{Gambar/bab2:contoh-visualisasi.pdf}
     \caption[Contoh visualisasi pergerakan kolektif]{Contoh visualisasi pergerakan kolektif pada rekaman video pergerakan}
     \label{bab2:visualization}
 \end{figure}
@@ -685,17 +683,17 @@ Keanggotaan entitas pada sebuah pergerakan kolektif akan ditunjukkan melalui war
 
 \begin{figure}[b!]
     \centering
-    \begin{subfigure}[h]{0.3\textwidth}
+    \begin{subfigure}[htbp]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:contoh-entitas-1.pdf}
         \caption{Hasil identifikasi manusia = $\{4, 6, 7\}$ \\ Hasil identifikasi definisi pergerakan kolektif = $\{\}$}
     \end{subfigure} \hspace{0.25cm}
-    \begin{subfigure}[h]{0.3\textwidth}
+    \begin{subfigure}[htbp]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:contoh-entitas-2.pdf}
         \caption{Hasil identifikasi manusia = $\{4, 6, 7\}$ \\ Hasil identifikasi definisi pergerakan kolektif = $\{4, 6\}$}
     \end{subfigure} \hspace{0.25cm}
-    \begin{subfigure}[h]{0.3\textwidth}
+    \begin{subfigure}[htbp]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Gambar/bab2:contoh-entitas-3.pdf}
         \caption{Hasil identifikasi manusia = $\{4, 6, 7\}$ \\ Hasil identifikasi definisi pergerakan kolektif = $\{\{4, 6\}, \{6, 7\}\}$}

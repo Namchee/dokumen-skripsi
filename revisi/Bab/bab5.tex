@@ -67,9 +67,7 @@ Fungsi untuk menghitung jarak \textit{dynamic time warping} akan diimplementasik
         const std::vector<double> &b
     ) {
         if (a.size() != b.size()) {
-            throw std::invalid_argument(
-                "Both trajectories must reside in the same dimensional space."
-            );
+            throw std::invalid_argument("Both trajectories must reside in the same dimensional space.");
         }
 
         double distance = 0.0;
@@ -88,9 +86,6 @@ Fungsi untuk menghitung jarak \textit{dynamic time warping} akan diimplementasik
 
 Melalui proses analisis singkat terhadap kebutuhan, rancangan, serta implementasi modul penerjemah, efisiensi algoritma perhitungan jarak \textit{dynamic time warping} antara dua buah lintasan dapat ditingkatkan dengan mengakhiri proses perhitungan lebih dini apabila posisi dari salah satu sublintasan dari entitas yang diperiksa pada sebuah dimensi bernilai \texttt{NaN}. Kode~\ref{bab5:dtw} menunjukkan kode perangkat lunak untuk fungsi \texttt{calculate\_dtw\_distance}.
 
-\clearpage
-
-
 \begin{lstlisting}[language=C++, caption=Implementasi fungsi \texttt{calculate\_dtw\_distance}, label={bab5:dtw}]
     double calculate_dtw_distance(
         const std::vector<std::vector<double> >& a,
@@ -102,17 +97,14 @@ Melalui proses analisis singkat terhadap kebutuhan, rancangan, serta implementas
 
         const size_t x_lim = a.size() + 1;
         const size_t y_lim = b.size() + 1;
-
-        double dtw[x_lim][y_lim];
         
+        double dtw[x_lim][y_lim];
         for (size_t i = 0; i < x_lim; i++) {
             dtw[i][0] = std::numeric_limits<double>::max();
         }
-
         for (size_t i = 0; i < y_lim; i++) {
             dtw[0][i] = std::numeric_limits<double>::max();
         }
-
         dtw[0][0] = 0;
 
         for (size_t i = 1; i < x_lim; i++) {

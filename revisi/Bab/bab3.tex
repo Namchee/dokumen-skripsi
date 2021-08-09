@@ -36,7 +36,7 @@ Namun, ketiga syarat pembentukan sebuah pergerakan kolektif yang telah disebutka
 \begin{figure}[htbp]
     \centering
     \captionsetup{width=0.75\textwidth}
-    \includegraphics[width=0.5\textwidth]{Gambar/bab3:beda-arah.pdf}
+    \includegraphics[width=0.7\textwidth]{Gambar/bab3:beda-arah.pdf}
     \caption[Masalah identifikasi pada kasus perbedaan arah]{Upaya identifikasi pergerakan kolektif oleh definisi formal yang telah dibuat sebelumnya dapat menyebabkan entitas berwarna biru tergabung dalam pergerakan kolektif entitas-entitas berwarna merah, walaupun terdapat perbedaan arah yang besar antara kedua lintasan.}
     \label{bab3:masalah-arah}
 \end{figure}
@@ -75,7 +75,7 @@ Dalam sebuah kasus pergerakan yang digambarkan melalui Gambar~\ref{bab3:masalah-
 \begin{figure}[htbp]
     \centering
     \captionsetup{width=0.8\textwidth}
-    \includegraphics[width=0.85\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
+    \includegraphics[width=\textwidth]{Gambar/bab3:beda-kecepatan.pdf}
     \caption[Masalah identifikasi pada kasus perbedaan kecepatan]{Pada kasus di mana $m = 3$ dan $t = 3$, perbedaan kecepatan entitas berwarna biru dapat berujung pada perbedaan jarak yang jauh dengan entitas-entitas merah sehingga pergerakan kolektif tidak terbentuk, walaupun entitas tersebut hanya memiliki perbedaan jarak yang jauh dengan entitas lain selama beberapa saat}
     \label{bab3:masalah-kecepatan}
 \end{figure}
@@ -234,12 +234,12 @@ Terdapat dua jenis kompleksitas yang dimiliki oleh sebuah algoritma, yaitu kompl
 Melalui proses analisis kompleksitas algoritma, algoritma identifikasi rombongan yang diusulkan memiliki kompleksitas waktu sebesar $O((t - k)n^5k^2)$ di mana $n$ merupakan jumlah entitas pada $\mathcal{X}$ dan $t$ merupakan panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$. Nilai kompleksitas tersebut didapatkan melalui perhitungan berikut:
 
 \begin{enumerate}
-    \item Pada baris $3$, algoritma identifikasi akan menghitung untuk seluruh interval waktu konsekutif sepanjang $k$ satuan waktu yang dapat terbentuk. Proses tersebut memiliki kompleksitas waktu sebesar $O(t - k)$ di mana nilai tersebut diperoleh dengan menghitung jumlah interval waktu konsekutif yang mungkin dibuat. Jumlah interval waktu konsekutif yang dapat dibuat merupakan selisih dari panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$ dan durasi waktu konsekutif minimum untuk membentuk sebuah rombongan.
-    \item Pada baris $7$, algoritma identifikasi akan mengevaluasi setiap entitas yang terdapat pada $\mathcal{X}$. Proses tersebut memiliki kompleksitas waktu sebesar $O(n)$.
-    \item Pada baris $9$, algoritma identifikasi akan mengevaluasi setiap entitas yang terdapat pada $\mathcal{X}$ selain entitas yang dirujuk oleh proses pada baris $7$. Proses tersebut memiliki kompleksitas waktu sebesar $O(n)$.
-    \item Pada baris $10$, algoritma identifikasi akan mengevaluasi kedekatan spasial entitas yang dirujuk pada baris $9$ dengan seluruh himpunan entitas yang terdapat pada $\mathcal{C}$. Berdasarkan cara kerja algoritma, himpunan entitas $\mathcal{C}$ dapat memiliki sebanyak $n^2$ anggota. Sehingga proses evaluasi akan memiliki kompleksitas waktu sebesar $O(n^2)$.
-    \item Pada baris $12$, algoritma identifikasi akan menguji kedekatan spasial dari entitas yang dirujuk pada baris $9$ dengan setiap anggota dari salah satu anggota dari himpunan entitas $\mathcal{C}$. Berdasarkan cara kerja algoritma, sebuah himpunan entitas yang terdapat pada $\mathcal{C}$ dapat memiliki anggota sebanyak $n$ entitas. Sehingga proses pengujian kedekatan spasial akan memiliki kompleksitas waktu sebesar $O(n)$.
-    \item Pada baris $13$, algoritma identifikasi akan melakukan perhitungan jarak \textit{dynamic time warping} yang memiliki kompleksitas waktu sebesar $O(k^2)$. Kompleksitas tersebut didapatkan dari hasil perkalian panjang dua sublintasan yang dihitung yang masing-masing memiliki panjang sebesar $k$. Pada titik ini, algoritma identifikasi akan memiliki nilai kompleksitas tertinggi selama proses identifikasi berlangsung.
+    \item Pada baris $3$, algoritma identifikasi akan menghitung seluruh interval waktu konsekutif sepanjang $k$ satuan waktu yang dapat terbentuk. Proses tersebut memiliki kompleksitas waktu sebesar $O(t - k)$. Jumlah interval waktu konsekutif yang dapat dibuat merupakan selisih dari panjang interval waktu terpanjang dari entitas anggota $\mathcal{X}$ dan durasi waktu konsekutif minimum untuk membentuk sebuah rombongan.
+    \item Pada baris $8$, algoritma identifikasi akan mengevaluasi setiap entitas yang terdapat pada $\mathcal{X}$. Proses tersebut memiliki kompleksitas waktu sebesar $O(n)$.
+    \item Pada baris $10$, algoritma identifikasi akan mengevaluasi setiap entitas yang terdapat pada $\mathcal{X}$ selain entitas yang dirujuk oleh proses pada baris $7$. Proses tersebut memiliki kompleksitas waktu sebesar $O(n)$.
+    \item Pada baris $11$, algoritma identifikasi akan mengevaluasi kedekatan spasial entitas yang dirujuk pada baris $9$ dengan seluruh himpunan entitas yang terdapat pada $\mathcal{C}$. Berdasarkan cara kerja algoritma, himpunan entitas $\mathcal{C}$ dapat memiliki sebanyak $n^2$ anggota. Sehingga proses evaluasi akan memiliki kompleksitas waktu sebesar $O(n^2)$.
+    \item Pada baris $13$, algoritma identifikasi akan menguji kedekatan spasial dari entitas yang dirujuk pada baris $9$ dengan setiap anggota dari salah satu anggota dari himpunan entitas $\mathcal{C}$. Berdasarkan cara kerja algoritma, sebuah himpunan entitas yang terdapat pada $\mathcal{C}$ dapat memiliki anggota sebanyak $n$ entitas. Sehingga proses pengujian kedekatan spasial akan memiliki kompleksitas waktu sebesar $O(n)$.
+    \item Pada baris $14$, algoritma identifikasi akan melakukan perhitungan jarak \textit{dynamic time warping} yang memiliki kompleksitas waktu sebesar $O(k^2)$. Kompleksitas tersebut didapatkan dari hasil perkalian panjang dua sublintasan yang dihitung yang masing-masing memiliki panjang sebesar $k$. Pada titik ini, algoritma identifikasi akan memiliki nilai kompleksitas tertinggi selama proses identifikasi berlangsung.
 \end{enumerate}
 
 \subsection{Kompleksitas Tempat Algoritma Identifikasi Rombongan}
@@ -261,7 +261,7 @@ Diberikan sebuah himpunan entitas $\mathcal{X}$ yang terdiri atas 3 entitas yait
 \begin{figure}[t]
     \centering
     \captionsetup{width=0.7\textwidth}
-    \includegraphics[width=0.435\textwidth]{Gambar/bab3:contoh-algoritma-identifikasi.pdf}
+    \includegraphics[width=0.425\textwidth]{Gambar/bab3:contoh-algoritma-identifikasi.pdf}
     \caption[Contoh proses algoritma identifikasi rombongan]{Himpunan entitas $\mathcal{X}$ beserta lintasan yang ditempuh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah.}
     \label{bab3:contoh-algoritma-identifikasi}
 \end{figure}
@@ -373,6 +373,14 @@ Beserta dengan himpunan entitas $\mathcal{Y}$, diberikan pula syarat jumlah enti
 
 Melalui proses identifikasi rombongan menggunakan Algoritma~\ref{bab3:algoritma-identifikasi}, terdapat beberapa pergerakan kolektif yang berhasil diidentifikasi sebagai rombongan pada himpunan entitas $\mathcal{Y}$. Tabel~\ref{bab6:contoh-identifikasi-redundan} menunjukkan rombongan-rombongan yang teridentifikasi pada himpunan entitas $\mathcal{Y}$ beserta durasi waktu konsekutif dari masing-masing rombongan yang teridentifikasi.
 
+\begin{figure}[t]
+    \centering
+    \captionsetup{width=0.7\textwidth}
+    \includegraphics[width=0.75\textwidth]{Gambar/bab3:contoh-algoritma-redundansi.pdf}
+    \caption[Contoh proses algoritma pengurangan redundansi]{Himpunan entitas $\mathcal{Y}$ beserta lintasan yang ditempuh oleh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah. Entitas $d$ digambarkan sebagai entitas berwarna hijau. Entitas $e$ digambarkan sebagai entitas berwarna ungu.}
+    \label{bab3:contoh-algoritma-redundansi}
+\end{figure}
+
 \begin{table}[htbp]
     \centering
     \captionsetup{width=0.6\textwidth}
@@ -388,14 +396,6 @@ Melalui proses identifikasi rombongan menggunakan Algoritma~\ref{bab3:algoritma-
     \end{tabular}
     \label{bab6:contoh-identifikasi-redundan}
 \end{table}
-
-\begin{figure}[t]
-    \centering
-    \captionsetup{width=0.7\textwidth}
-    \includegraphics[width=\textwidth]{Gambar/bab3:contoh-algoritma-redundansi.pdf}
-    \caption[Contoh proses algoritma pengurangan redundansi]{Himpunan entitas $\mathcal{Y}$ beserta lintasan yang ditempuh oleh masing-masing anggota. Entitas $a$ digambarkan sebagai entitas berwarna kuning. Entitas $b$ digambarkan sebagai entitas berwarna biru. Entitas $c$ digambarkan sebagai entitas berwarna merah. Entitas $d$ digambarkan sebagai entitas berwarna hijau. Entitas $e$ digambarkan sebagai entitas berwarna ungu.}
-    \label{bab3:contoh-algoritma-redundansi}
-\end{figure}
 
 Analisis singkat terhadap hasil identifikasi rombongan menunjukkan bahwa rombongan dengan anggota $\{ c, d, e \}$ dan $\{ d, e \}$ merupakan rombongan yang redundan. Redundansi tersebut disebabkan oleh hasil identifikasi rombongan yang juga berhasil mengidentifikasi rombongan dengan anggota $\{ a, c, d, e \}$ yang memiliki durasi yang sama persis dengan rombongan dengan anggota $\{ c, d, e \}$ dan $\{ d, e \}$. Oleh karena itu, perlu dilakukan pengurangan redundansi pada hasil identifikasi rombongan untuk meningkatkan kualitas hasil identifikasi rombongan. Berikut merupakan langkah-langkah yang diambil pada proses pengurangan redundansi hasil identifikasi rombongan:
 
